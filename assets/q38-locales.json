@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,218 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Wahre Taqwā – ʿUmar ibn ʿAbd al-ʿAzīz – DAR AL TAWḤĪD": {
+   "ar": "التقوى الحقيقية – عمر بن عبد العزيز – DAR AL TAWḤĪD",
+   "en": "True taqwā – ʿUmar ibn ʿAbd al-ʿAzīz – DAR AL TAWḤĪD",
+   "tr": "Gerçek takva – ʿUmar ibn ʿAbd al-ʿAzīz – DAR AL TAWḤĪD",
+   "ku": "Teqwaya rast – ʿUmar ibn ʿAbd al-ʿAzīz – DAR AL TAWḤĪD",
+   "ckb": "تەقوای ڕاستەقینە – عومەر کوڕی عەبدولعەزیز – DAR AL TAWḤĪD",
+   "bs": "Istinska takva – ʿUmar ibn ʿAbd al-ʿAzīz – DAR AL TAWḤĪD",
+   "fr": "La vraie taqwā – ʿUmar ibn ʿAbd al-ʿAzīz – DAR AL TAWḤĪD",
+   "es": "La verdadera taqwa – ʿUmar ibn ʿAbd al-ʿAzīz – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah &amp; Āthār": {
+   "ar": "إسهامات وفق القرآن والسنة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the āthār",
+   "tr": "Qurʾān, Sunnah ve âsâra göre katkılar",
+   "ku": "Beşdarî li gorî Qurʾān, Sunnah û eseran",
+   "ckb": "بەشدارییەکان بەپێی قورئان، سوننەت و ئاسار",
+   "bs": "Prilozi prema Qurʾānu, Sunnahu i asarima",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les athâr",
+   "es": "Aportes según el Qurʾān, la Sunnah y los atares"
+  },
+  "Āṯār · Taqwā · Pflichten · Tazkiyah": {
+   "ar": "آثار · تقوى · واجبات · تزكية",
+   "en": "Āthār · Taqwā · Duties · Tazkiyah",
+   "tr": "Âsâr · Takva · Vecibeler · Tezkiye",
+   "ku": "Eser · Teqwa · Erk · Tezkiye",
+   "ckb": "ئاسار · تەقوا · ئەرکەکان · تەزکیە",
+   "bs": "Asari · Takva · Obaveze · Tezkija",
+   "fr": "Athâr · Taqwā · Obligations · Tazkiya",
+   "es": "Atares · Taqwa · Deberes · Tazkiya"
+  },
+  "Wahre Taqwā – mehr als Fasten und Nachtgebet": {
+   "ar": "التقوى الحقيقية – أكثر من الصيام وقيام الليل",
+   "en": "True taqwā – more than fasting and the night prayer",
+   "tr": "Gerçek takva – oruç ve gece namazından daha fazlası",
+   "ku": "Teqwaya rast – ji rojî û nimêja şevê zêdetir",
+   "ckb": "تەقوای ڕاستەقینە – زیاتر لە ڕۆژوو و نوێژی شەو",
+   "bs": "Istinska takva – više od posta i noćnog namaza",
+   "fr": "La vraie taqwā – davantage que le jeûne et la prière de la nuit",
+   "es": "La verdadera taqwa: más que el ayuno y la oración nocturna"
+  },
+  "„Taqwā gegenüber Allah besteht nicht darin, tagsüber zu fasten und nachts zu beten, während man dazwischen Verfehlungen begeht. Vielmehr besteht Taqwā darin, das zu unterlassen, was Allah verboten hat, und das zu erfüllen, was Allah zur Pflicht gemacht hat. Wem darüber hinaus weiteres Gutes gewährt wird, für den ist es Gutes, das zu weiterem Guten hinzukommt.“": {
+   "ar": "«ليست تقوى الله أن يصوم الإنسان النهار ويقوم الليل ثم يخالط ذلك بالزلّات. وإنما التقوى أن يترك ما حرّم الله وأن يؤدي ما أوجب الله. ومن أُعطي فوق ذلك خيرًا فهو خير يُضاف إلى خير.»",
+   "en": "“Taqwā toward Allah does not consist in fasting by day and praying at night while committing wrongs in between. Rather, taqwā consists in leaving what Allah has forbidden and fulfilling what Allah has made obligatory. Whoever is granted further good beyond that, for him it is good added to further good.”",
+   "tr": "“Allah’a karşı takva, gündüz oruç tutup gece namaz kılmak ve arada hatalar işlemek değildir. Takva, Allah’ın haram kıldığını terk etmek ve Allah’ın farz kıldığını yerine getirmektir. Bunun ötesinde kendisine başka bir iyilik verilen kimse için o, iyiliğe eklenen bir iyiliktir.”",
+   "ku": "“Teqwa li hemberî Allah ne ew e ku mirov bi roj rojî bigire û bi şev nimêj bike, di navberê de jî xeletiyan bike. Belê teqwa ew e ku mirov dev ji tiştê ku Allah heram kiriye berde û tiştê ku Allah ferz kiriye pêk bîne. Yê ku ji bilî vê xêreke din jê re were dayîn, ew xêrek e ku li xêreke din zêde dibe.”",
+   "ckb": "«تەقوا بەرامبەر خوا ئەوە نییە مرۆڤ ڕۆژ ڕۆژوو بگرێت و شەو نوێژ بکات، لە نێوانیشدا هەڵە بکات. بەڵکو تەقوا ئەوەیە واز لەوە بهێنێت کە خوا حەرامی کردووە، و ئەوە جێبەجێ بکات کە خوا فەرز کردووە. ئەوەی لەسەر ئەمە خێرێکی دیکەی پێ بدرێت، ئەو خێرێکە کە بۆ خێرێکی دیکە زیاد دەبێت.»",
+   "bs": "“Takva prema Allahu nije u tome da čovjek danju posti i noću klanja, a između toga čini prijestupe. Takva je u tome da ostavi ono što je Allah zabranio i ispuni ono što je Allah učinio obaveznim. Kome se povrh toga dadne još dobra, njemu je to dobro koje se pridružuje drugom dobru.”",
+   "fr": "« La taqwā envers Allah ne consiste pas à jeûner le jour et à prier la nuit tout en commettant des fautes entre les deux. La taqwā consiste plutôt à délaisser ce qu’Allah a interdit et à accomplir ce qu’Allah a rendu obligatoire. Celui à qui, en plus, un autre bien est accordé, ce bien s’ajoute à un autre bien. »",
+   "es": "“La taqwa hacia Allah no consiste en ayunar de día y rezar de noche mientras se cometen faltas entre tanto. La taqwa consiste en dejar lo que Allah ha prohibido y cumplir lo que Allah ha hecho obligatorio. A quien, además, se le concede otro bien, ese es un bien que se añade a otro bien.”"
+  },
+  "ʿUmar ibn ʿAbd al-ʿAzīz رحمه الله": {
+   "ar": "عمر بن عبد العزيز رحمه الله",
+   "en": "ʿUmar ibn ʿAbd al-ʿAzīz رحمه الله",
+   "tr": "ʿUmar ibn ʿAbd al-ʿAzīz رحمه الله",
+   "ku": "ʿUmar ibn ʿAbd al-ʿAzīz رحمه الله",
+   "ckb": "عومەر کوڕی عەبدولعەزیز رحمه الله",
+   "bs": "ʿUmar ibn ʿAbd al-ʿAzīz رحمه الله",
+   "fr": "ʿUmar ibn ʿAbd al-ʿAzīz رحمه الله",
+   "es": "ʿUmar ibn ʿAbd al-ʿAzīz رحمه الله"
+  },
+  "al-Mizzī, Tahḏīb al-Kamāl fī Asmāʾ ar-Riǧāl, Bd. 21, S. 445, Biographie Nr. 4277.": {
+   "ar": "المزي، تهذيب الكمال في أسماء الرجال، المجلد 21، ص 445، الترجمة رقم 4277.",
+   "en": "al-Mizzī, Tahḏīb al-Kamāl fī Asmāʾ ar-Riǧāl, vol. 21, p. 445, biography no. 4277.",
+   "tr": "al-Mizzī, Tahḏīb al-Kamāl fī Asmāʾ ar-Riǧāl, cilt 21, s. 445, biyografi no. 4277.",
+   "ku": "al-Mizzī, Tahḏīb al-Kamāl fī Asmāʾ ar-Riǧāl, cild 21, rûpel 445, jînenîgarî hejmar 4277.",
+   "ckb": "مزی، تهذيب الكمال في أسماء الرجال، بەرگی 21، لاپەڕە 445، ژیاننامەی ژمارە 4277.",
+   "bs": "al-Mizzī, Tahḏīb al-Kamāl fī Asmāʾ ar-Riǧāl, sv. 21, str. 445, biografija br. 4277.",
+   "fr": "al-Mizzī, Tahḏīb al-Kamāl fī Asmāʾ ar-Riǧāl, vol. 21, p. 445, biographie n° 4277.",
+   "es": "al-Mizzī, Tahḏīb al-Kamāl fī Asmāʾ ar-Riǧāl, vol. 21, p. 445, biografía n.º 4277."
+  },
+  "Athar eines Tābiʿī, kein prophetischer Ḥadīṯ. Die Kette ist nicht verbunden: ʿAbd ar-Raḥmān ibn Maysarah wurde 118 n. H. geboren, ʿUmar starb 101 n. H.": {
+   "ar": "أثر تابعي، وليس حديثًا نبويًا. السلسلة غير متصلة: وُلد عبد الرحمن بن ميسرة سنة 118 هـ، وتوفي عمر سنة 101 هـ.",
+   "en": "An athar of a Tābiʿī, not a prophetic ḥadīth. The chain is not connected: ʿAbd ar-Raḥmān ibn Maysarah was born in 118 AH, and ʿUmar died in 101 AH.",
+   "tr": "Bir tâbiînin eseri; peygamberî bir hadis değildir. Zincir muttasıl değildir: ʿAbd ar-Raḥmān ibn Maysarah 118 H.’de doğmuş, ʿUmar 101 H.’de vefat etmiştir.",
+   "ku": "Esera tabiîyekî ye, ne hedîseke pêxemberî ye. Zincîre ne girêdayî ye: ʿAbd ar-Raḥmān ibn Maysarah di 118 h. de ji dayik bûye, ʿUmar di 101 h. de wefat kiriye.",
+   "ckb": "ئاساری تابعییەکە، حەدیسێکی پێغەمبەرانە نییە. زنجیرەکە پێکەوەبەستراو نییە: عەبدولڕەحمان کوڕی مەیسەرە لە ساڵی 118ی کۆچیدا لەدایک بووە، عومەر لە ساڵی 101ی کۆچیدا کۆچی دوایی کردووە.",
+   "bs": "Asar jednog tabi'ina, nije vjerovjesnički hadis. Lanac nije spojen: ʿAbd ar-Raḥmān ibn Maysarah rođen je 118. h., a ʿUmar je umro 101. h.",
+   "fr": "Athar d’un tâbiʿī, non un hadith prophétique. La chaîne n’est pas continue : ʿAbd ar-Raḥmān ibn Maysarah est né en 118 H., et ʿUmar est mort en 101 H.",
+   "es": "Un atar de un tabiʿí, no un hadiz profético. La cadena no está conectada: ʿAbd ar-Raḥmān ibn Maysarah nació en el 118 H., y ʿUmar murió en el 101 H."
+  },
+  "Arabischer Originalwortlaut und Nachweise": {
+   "ar": "اللفظ العربي الأصلي والشواهد",
+   "en": "Arabic original wording and references",
+   "tr": "Arapça özgün lafız ve deliller",
+   "ku": "Gotina erebî ya resen û belge",
+   "ckb": "دەقی عەرەبیی ڕەسەن و بەڵگەکان",
+   "bs": "Arapski izvorni tekst i dokazi",
+   "fr": "Texte arabe original et références",
+   "es": "Texto árabe original y referencias"
+  },
+  "Al-Mizzī überliefert die Aussage über ʿAbdullāh ibn Wahb von ʿAbd ar-Raḥmān ibn Maysarah al-Ḥaḍramī. Der Wortlaut zeigt, dass Pflichten und Verbote den Maßstab bilden und weitere gute Taten darauf aufbauen.": {
+   "ar": "يروي المزي القول عن عبد الله بن وهب عن عبد الرحمن بن ميسرة الحضرمي. ويدل اللفظ على أن الواجبات والمحرّمات هي الميزان، وأن الأعمال الصالحة الزائدة تُبنى عليها.",
+   "en": "Al-Mizzī transmits the statement through ʿAbdullāh ibn Wahb from ʿAbd ar-Raḥmān ibn Maysarah al-Ḥaḍramī. The wording shows that duties and prohibitions form the measure, and that further good deeds are built upon them.",
+   "tr": "Al-Mizzī bu sözü ʿAbdullāh ibn Wahb yoluyla ʿAbd ar-Raḥmān ibn Maysarah al-Ḥaḍramī’den nakleder. Lafız, farzların ve haramların ölçüyü oluşturduğunu ve diğer iyi amellerin bunun üzerine kurulduğunu gösterir.",
+   "ku": "Al-Mizzī gotinê bi rêya ʿAbdullāh ibn Wahb ji ʿAbd ar-Raḥmān ibn Maysarah al-Ḥaḍramī radigihîne. Gotin nîşan dide ku erk û heram pîvanê pêk tînin û kirinên baş ên din li ser wan tên avakirin.",
+   "ckb": "مزی قسەکە لە ڕێگەی عەبدوڵڵا کوڕی وەهب لە عەبدولڕەحمان کوڕی مەیسەرەی حەزرەمی دەگێڕێتەوە. دەقەکە نیشان دەدات کە ئەرک و قەدەغەکان پێوەرن و کردەوە چاکەکانی دیکە لەسەر ئەوان بنیات دەنرێن.",
+   "bs": "Al-Mizzī prenosi iskaz preko ʿAbdullāha ibn Wahba od ʿAbd ar-Raḥmāna ibn Maysaraha al-Ḥaḍramīja. Tekst pokazuje da obaveze i zabrane čine mjerilo, a da se dalja dobra djela na to nadograđuju.",
+   "fr": "Al-Mizzī rapporte la parole par ʿAbdullāh ibn Wahb, de ʿAbd ar-Raḥmān ibn Maysarah al-Ḥaḍramī. La formulation montre que les obligations et les interdits constituent la mesure, et que les autres bonnes œuvres s’édifient sur eux.",
+   "es": "Al-Mizzī transmite la declaración por ʿAbdullāh ibn Wahb, de ʿAbd ar-Raḥmān ibn Maysarah al-Ḥaḍramī. El texto muestra que los deberes y las prohibiciones son la medida, y que las demás buenas obras se edifican sobre ellos."
+  },
+  "Islamweb · Tahḏīb al-Kamāl, 21/445": {
+   "ar": "إسلام ويب · تهذيب الكمال، 21/445",
+   "en": "Islamweb · Tahḏīb al-Kamāl, 21/445",
+   "tr": "Islamweb · Tahḏīb al-Kamāl, 21/445",
+   "ku": "Islamweb · Tahḏīb al-Kamāl, 21/445",
+   "ckb": "ئیسلامویب · تهذيب الكمال، 21/445",
+   "bs": "Islamweb · Tahḏīb al-Kamāl, 21/445",
+   "fr": "Islamweb · Tahḏīb al-Kamāl, 21/445",
+   "es": "Islamweb · Tahḏīb al-Kamāl, 21/445"
+  },
+  "Arabischer Originalwortlaut mit Textmarkierung": {
+   "ar": "اللفظ العربي الأصلي مع تحديد النص",
+   "en": "Arabic original wording with a text marker",
+   "tr": "Metin işaretli Arapça özgün lafız",
+   "ku": "Gotina erebî ya resen bi nîşankirina nivîsê",
+   "ckb": "دەقی عەرەبیی ڕەسەن لەگەڵ دیاریکردنی دەق",
+   "bs": "Arapski izvorni tekst s označenim odlomkom",
+   "fr": "Texte arabe original avec marquage",
+   "es": "Texto árabe original con marcado"
+  },
+  "Islamweb · as-Suyūṭī, ad-Durr al-Manṯūr": {
+   "ar": "إسلام ويب · السيوطي، الدر المنثور",
+   "en": "Islamweb · as-Suyūṭī, ad-Durr al-Manṯūr",
+   "tr": "Islamweb · as-Suyūṭī, ad-Durr al-Manṯūr",
+   "ku": "Islamweb · as-Suyūṭī, ad-Durr al-Manṯūr",
+   "ckb": "ئیسلامویب · سیوطی، الدر المنثور",
+   "bs": "Islamweb · as-Suyūṭī, ad-Durr al-Manṯūr",
+   "fr": "Islamweb · as-Suyūṭī, ad-Durr al-Manṯūr",
+   "es": "Islamweb · as-Suyūṭī, ad-Durr al-Manṯūr"
+  },
+  "Weiterer klassischer Textnachweis mit Textmarkierung": {
+   "ar": "شاهد نصي كلاسيكي آخر مع تحديد النص",
+   "en": "A further classical text reference with a text marker",
+   "tr": "Metin işaretli başka bir klasik metin delili",
+   "ku": "Belgeya nivîsê ya klasîk a din bi nîşankirinê",
+   "ckb": "بەڵگەی دەقی کلاسیکی دیکە لەگەڵ دیاریکردنی دەق",
+   "bs": "Daljnji klasični tekstualni dokaz s označenim odlomkom",
+   "fr": "Autre référence textuelle classique avec marquage",
+   "es": "Otra referencia textual clásica con marcado"
+  },
+  "PDF / Scan · Tahḏīb al-Kamāl, Band 21": {
+   "ar": "PDF / نسخة ممسوحة · تهذيب الكمال، المجلد 21",
+   "en": "PDF / scan · Tahḏīb al-Kamāl, volume 21",
+   "tr": "PDF / tarama · Tahḏīb al-Kamāl, cilt 21",
+   "ku": "PDF / sken · Tahḏīb al-Kamāl, cild 21",
+   "ckb": "PDF / سکان · تهذيب الكمال، بەرگی 21",
+   "bs": "PDF / sken · Tahḏīb al-Kamāl, svezak 21",
+   "fr": "PDF / scan · Tahḏīb al-Kamāl, volume 21",
+   "es": "PDF / escaneo · Tahḏīb al-Kamāl, volumen 21"
+  },
+  "Originalscan der Buchausgabe; PDF-Seitenzahl nicht verifiziert": {
+   "ar": "المسح الأصلي لطبعة الكتاب؛ رقم صفحة ملف PDF غير متحقق منه.",
+   "en": "Original scan of the printed edition; the PDF page number is not verified.",
+   "tr": "Kitap baskısının özgün taraması; PDF sayfa numarası doğrulanmamıştır.",
+   "ku": "Skena resen a çapa pirtûkê; hejmara rûpela PDF’ê nehatiye piştrastkirin.",
+   "ckb": "سکانە ڕەسەنەکەی چاپی کتێبەکە؛ ژمارەی لاپەڕەی PDF پشتڕاست نەکراوەتەوە.",
+   "bs": "Izvorni sken izdanja knjige; broj PDF-stranice nije provjeren.",
+   "fr": "Scan original de l’édition imprimée ; le numéro de page du PDF n’est pas vérifié.",
+   "es": "Escaneo original de la edición impresa; el número de página del PDF no está verificado."
+  },
+  "Islamweb · Biographie des Überlieferers": {
+   "ar": "إسلام ويب · ترجمة الراوي",
+   "en": "Islamweb · biography of the transmitter",
+   "tr": "Islamweb · râvinin biyografisi",
+   "ku": "Islamweb · jînenîgariya ragihander",
+   "ckb": "ئیسلامویب · ژیاننامەی گێڕەرەوە",
+   "bs": "Islamweb · biografija prenositelja",
+   "fr": "Islamweb · biographie du transmetteur",
+   "es": "Islamweb · biografía del transmisor"
+  },
+  "ʿAbd ar-Raḥmān ibn Maysarah: Geburtsjahr 118 n. H., mit Textmarkierung": {
+   "ar": "عبد الرحمن بن ميسرة: سنة المولد 118 هـ، مع تحديد النص",
+   "en": "ʿAbd ar-Raḥmān ibn Maysarah: year of birth 118 AH, with a text marker",
+   "tr": "ʿAbd ar-Raḥmān ibn Maysarah: doğum yılı 118 H., metin işaretli",
+   "ku": "ʿAbd ar-Raḥmān ibn Maysarah: sala jidayikbûnê 118 h., bi nîşankirina nivîsê",
+   "ckb": "عەبدولڕەحمان کوڕی مەیسەرە: ساڵی لەدایکبوون 118ی کۆچی، لەگەڵ دیاریکردنی دەق",
+   "bs": "ʿAbd ar-Raḥmān ibn Maysarah: godina rođenja 118. h., s označenim tekstom",
+   "fr": "ʿAbd ar-Raḥmān ibn Maysarah : année de naissance 118 H., avec marquage du texte",
+   "es": "ʿAbd ar-Raḥmān ibn Maysarah: año de nacimiento 118 H., con marcado del texto"
+  },
+  "Der überlieferte Athar ist in": {
+   "ar": "الأثر المروي وارد في",
+   "en": "The transmitted athar is found in",
+   "tr": "Nakledilen eser şurada yer alır",
+   "ku": "Esera ragihandî di vir de ye",
+   "ckb": "ئاسارە گێڕدراوەکە لەم شوێنەدایە",
+   "bs": "Preneseni asar nalazi se u",
+   "fr": "L’athar transmis se trouve dans",
+   "es": "El atar transmitido se encuentra en"
+  },
+  ", Band 21, Seite 445, belegt; er ist kein prophetischer Ḥadīṯ. Ein nachgewiesener Wortlaut ist nicht automatisch eine abschließend als ṣaḥīḥ eingestufte Kette.": {
+   "ar": "، المجلد 21، الصفحة 445؛ وهو ليس حديثًا نبويًا. وثبوت لفظ ليس تلقائيًا سلسلة حُكم عليها حكمًا ختاميًا بأنها صحيحة.",
+   "en": ", volume 21, page 445; it is not a prophetic ḥadīth. A demonstrated wording is not automatically a chain finally graded as ṣaḥīḥ.",
+   "tr": ", cilt 21, sayfa 445; o, peygamberî bir hadis değildir. Sabit bir lafız, kendiliğinden nihai olarak sahih diye derecelenmiş bir zincir değildir.",
+   "ku": ", cild 21, rûpel 445; ew ne hedîseke pêxemberî ye. Gotineke isbatkirî bi xwe zincîreke ku dawî wek sehîh hatiye nirxandin nîne.",
+   "ckb": "، بەرگی 21، لاپەڕە 445؛ ئەمە حەدیسێکی پێغەمبەرانە نییە. دەقێکی سەلمێنراو خۆکار زنجیرەیەک نییە کە بە کۆتایی وەک سەحیح هەڵسەنگێنرابێت.",
+   "bs": ", svezak 21, stranica 445; to nije vjerovjesnički hadis. Dokazan tekst nije automatski lanac koji je konačno ocijenjen kao sahih.",
+   "fr": ", volume 21, page 445 ; ce n’est pas un hadith prophétique. Un libellé attesté n’est pas automatiquement une chaîne jugée de façon finale comme ṣaḥīḥ.",
+   "es": ", volumen 21, página 445; no es un hadiz profético. Un texto demostrado no es automáticamente una cadena clasificada de forma definitiva como ṣaḥīḥ."
+  },
+  "Wahre Taqwā zeigt sich im Meiden von Allahs Verboten und Erfüllen Seiner Pflichten. Freiwillige Gottesdienste ergänzen diesen Gehorsam, ersetzen ihn aber nicht.": {
+   "ar": "تظهر التقوى الحقيقية في اجتناب ما حرّم الله وأداء فرائضه. والعبادات التطوعية تكمّل هذه الطاعة ولا تغني عنها.",
+   "en": "True taqwā is shown in avoiding what Allah has forbidden and in fulfilling His duties. Voluntary acts of worship complete this obedience; they do not replace it.",
+   "tr": "Gerçek takva, Allah’ın haramlarından kaçınmak ve farzlarını yerine getirmekle görünür. Nâfile ibadetler bu itaati tamamlar, onun yerini tutmaz.",
+   "ku": "Teqwaya rast di dûrxistina heramên Allah û pêkanîna ferzên Wî de xuya dibe. Îbadetên dilxwazî vê guhdariyê temam dikin, lê şûna wê nagirin.",
+   "ckb": "تەقوای ڕاستەقینە لە دوورکەوتنەوە لە حەرامەکانی خوا و جێبەجێکردنی فەرزەکانی دەردەکەوێت. عیبادەتی خۆبەخشانە ئەم گوێڕایەڵییە تەواو دەکەن، جێگەی ناگرنەوە.",
+   "bs": "Istinska takva pokazuje se u klonjenju onoga što je Allah zabranio i u ispunjavanju Njegovih obaveza. Dobrovoljni ibadeti dopunjuju ovu pokornost, ali je ne zamjenjuju.",
+   "fr": "La vraie taqwā se montre en évitant ce qu’Allah a interdit et en accomplissant Ses obligations. Les actes d’adoration surérogatoires complètent cette obéissance ; ils ne la remplacent pas.",
+   "es": "La verdadera taqwa se muestra al evitar lo que Allah ha prohibido y al cumplir Sus deberes. Los actos voluntarios de adoración completan esta obediencia, pero no la sustituyen."
   }
  }
 }

@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,338 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Muṭarrif ibn ʿAbdillāh – Die Gefahr nach der guten Tat – DAR AL TAWḤĪD": {
+   "ar": "Muṭarrif ibn ʿAbdillāh – الخطر بعد العمل الصالح – DAR AL TAWḤĪD",
+   "en": "Muṭarrif ibn ʿAbdillāh – The danger after the good deed – DAR AL TAWḤĪD",
+   "tr": "Muṭarrif ibn ʿAbdillāh – İyi amelden sonraki tehlike – DAR AL TAWḤĪD",
+   "ku": "Muṭarrif ibn ʿAbdillāh – Metirsî piştî kiryara baş – DAR AL TAWḤĪD",
+   "ckb": "Muṭarrif ibn ʿAbdillāh – مەترسی دوای کردەوەی باش – DAR AL TAWḤĪD",
+   "bs": "Muṭarrif ibn ʿAbdillāh – Opasnost nakon dobrog djela – DAR AL TAWḤĪD",
+   "fr": "Muṭarrif ibn ʿAbdillāh – Le danger après la bonne action – DAR AL TAWḤĪD",
+   "es": "Muṭarrif ibn ʿAbdillāh – El peligro después de la buena obra – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "مساهمات وفق القرآن والسنة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre katkılar",
+   "ku": "Beşdarî li gor Qurʾān, Sunnah û Āthār",
+   "ckb": "بەشدارییەکان بەپێی القرآن و السنة و الآثار",
+   "bs": "Prilozi prema Qurʾānu, Sunni i Āthāru",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Contribuciones según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Ikhlāṣ · ʿUjb · Tazkiyah · Salaf": {
+   "ar": "Ikhlāṣ · ʿUjb · Tazkiyah · Salaf",
+   "en": "Ikhlāṣ · ʿUjb · Tazkiyah · Salaf",
+   "tr": "Ikhlāṣ · ʿUjb · Tazkiyah · Salaf",
+   "ku": "Ikhlāṣ · ʿUjb · Tazkiyah · Salaf",
+   "ckb": "Ikhlāṣ · ʿUjb · Tazkiyah · Salaf",
+   "bs": "Ikhlāṣ · ʿUjb · Tazkiyah · Salaf",
+   "fr": "Ikhlāṣ · ʿUjb · Tazkiyah · Salaf",
+   "es": "Ikhlāṣ · ʿUjb · Tazkiyah · Salaf"
+  },
+  "Die Gefahr nach der guten Tat": {
+   "ar": "الخطر بعد العمل الصالح",
+   "en": "The danger after the good deed",
+   "tr": "İyi amelden sonraki tehlike",
+   "ku": "Metirsî piştî kiryara baş",
+   "ckb": "مەترسی دوای کردەوەی باش",
+   "bs": "Opasnost nakon dobrog djela",
+   "fr": "Le danger après la bonne action",
+   "es": "El peligro después de la buena obra"
+  },
+  "„Dass ich die Nacht schlafend verbringe und am Morgen bereue, ist mir lieber, als dass ich die Nacht im Gebet stehend verbringe und am Morgen selbstgefällig bin.“": {
+   "ar": "«أن أبيت الليل نائمًا وأصبح تائبًا أحبّ إليّ من أن أبيت الليل قائمًا في الصلاة وأصبح معجبًا بنفسي.»",
+   "en": "“That I spend the night sleeping and repent in the morning is dearer to me than that I spend the night standing in prayer and be self-satisfied in the morning.”",
+   "tr": "“Geceyi uyuyarak geçirip sabah tövbe etmem, geceyi namazda ayakta geçirip sabah kendimi beğenmiş olmamdan bana daha sevimlidir.”",
+   "ku": "“Ku ez şevê di xew de derbas bikim û sibehê tobe bikim, ji min re xweştir e ji ku ez şevê di nimêjê de li ser piyan derbas bikim û sibehê bi xwe razî bim.”",
+   "ckb": "«ئەوەی شەو بە خەوتن بەسەر بەرم و بەیانی تۆبە بکەم، لای من خۆشترە لەوەی شەو بە وەستان لە نوێژدا بەسەر بەرم و بەیانی خۆبەدڵ بم.»",
+   "bs": "“Da noć provedem spavajući i ujutro se pokajem draže mi je nego da noć provedem stojeći u namazu i ujutro budem samodopadljiv.”",
+   "fr": "« Que je passe la nuit à dormir et que je me repente au matin m’est plus cher que de passer la nuit debout en prière et d’être suffisant au matin. »",
+   "es": "“Que pase la noche durmiendo y por la mañana me arrepienta me es más querido que pasar la noche de pie en la oración y por la mañana estar satisfecho de mí mismo.”"
+  },
+  "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله": {
+   "ar": "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله",
+   "en": "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله",
+   "tr": "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله",
+   "ku": "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله",
+   "ckb": "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله",
+   "bs": "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله",
+   "fr": "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله",
+   "es": "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله"
+  },
+  "Warnung vor ʿUjb, Selbstgefälligkeit nach der ʿIbādah und falscher Sicherheit durch äußere Taten.": {
+   "ar": "تحذير من ʿUjb، والإعجاب بالنفس بعد العبادة، والأمن الكاذب بالأعمال الظاهرة.",
+   "en": "Warning against ʿUjb, self-satisfaction after the ʿIbādah, and false security through outward deeds.",
+   "tr": "ʿUjb’a, ʿIbādah’tan sonra kendini beğenmeye ve dış amellerle sahte güvene karşı uyarı.",
+   "ku": "Hişyarî ji ʿUjb, ji razîbûna bi xwe piştî ʿIbādah û ji ewlehiya derew bi kiryarên derve.",
+   "ckb": "ئاگاداری لە ʿUjb، خۆبەدڵی دوای ʿIbādah، و دڵنیایی درۆینە بە کردەوە دەرەکییەکان.",
+   "bs": "Upozorenje od ʿUjba, samodopadljivosti nakon ʿIbādaha i lažne sigurnosti vanjskim djelima.",
+   "fr": "Mise en garde contre le ʿUjb, la suffisance après la ʿIbādah et la fausse sécurité par les actes extérieurs.",
+   "es": "Advertencia contra el ʿUjb, la autocomplacencia después de la ʿIbādah y la falsa seguridad por obras exteriores."
+  },
+  ", Bd. 2, S. 200; adh-Dhahabī,": {
+   "ar": "، ج 2، ص 200؛ adh-Dhahabī،",
+   "en": ", vol. 2, p. 200; adh-Dhahabī,",
+   "tr": ", c. 2, s. 200; adh-Dhahabī,",
+   "ku": ", berg 2, r. 200; adh-Dhahabī,",
+   "ckb": "، بەرگ 2، لاپەڕە 200؛ adh-Dhahabī،",
+   "bs": ", sv. 2, str. 200; adh-Dhahabī,",
+   "fr": ", vol. 2, p. 200 ; adh-Dhahabī,",
+   "es": ", vol. 2, p. 200; adh-Dhahabī,"
+  },
+  ", Bd. 4, S. 190; Ibn Qutaybah,": {
+   "ar": "، ج 4، ص 190؛ Ibn Qutaybah،",
+   "en": ", vol. 4, p. 190; Ibn Qutaybah,",
+   "tr": ", c. 4, s. 190; Ibn Qutaybah,",
+   "ku": ", berg 4, r. 190; Ibn Qutaybah,",
+   "ckb": "، بەرگ 4، لاپەڕە 190؛ Ibn Qutaybah،",
+   "bs": ", sv. 4, str. 190; Ibn Qutaybah,",
+   "fr": ", vol. 4, p. 190 ; Ibn Qutaybah,",
+   "es": ", vol. 4, p. 190; Ibn Qutaybah,"
+  },
+  "Aussage von Muṭarrif ibn ʿAbdillāh": {
+   "ar": "قول Muṭarrif ibn ʿAbdillāh",
+   "en": "Statement of Muṭarrif ibn ʿAbdillāh",
+   "tr": "Muṭarrif ibn ʿAbdillāh’ın sözü",
+   "ku": "Gotina Muṭarrif ibn ʿAbdillāh",
+   "ckb": "وتەی Muṭarrif ibn ʿAbdillāh",
+   "bs": "Izjava Muṭarrif ibn ʿAbdillāha",
+   "fr": "Parole de Muṭarrif ibn ʿAbdillāh",
+   "es": "Afirmación de Muṭarrif ibn ʿAbdillāh"
+  },
+  "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله sagte:": {
+   "ar": "قال Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله:",
+   "en": "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله said:",
+   "tr": "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله dedi:",
+   "ku": "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله got:",
+   "ckb": "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله گوتی:",
+   "bs": "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله reče:",
+   "fr": "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله dit :",
+   "es": "Muṭarrif ibn ʿAbdillāh ibn ash-Shikhkhīr رحمه الله dijo:"
+  },
+  ", ist mir lieber, als dass ich die Nacht": {
+   "ar": "، أحبّ إليّ من أن أبيت الليل",
+   "en": ", is dearer to me than that I spend the night",
+   "tr": ", bana daha sevimlidir geceyi",
+   "ku": ", ji min re xweştir e ji ku ez şevê",
+   "ckb": "، لای من خۆشترە لەوەی شەو",
+   "bs": ", draže mi je nego da noć",
+   "fr": ", m’est plus cher que de passer la nuit",
+   "es": ", me es más querido que pasar la noche"
+  },
+  ", Aḫbār Muṭarrif ibn ash-Shikhkhīr, S. 238, Nr. 1342; Ibn al-Mubārak,": {
+   "ar": "، Aḫbār Muṭarrif ibn ash-Shikhkhīr، ص 238، رقم 1342؛ Ibn al-Mubārak،",
+   "en": ", Aḫbār Muṭarrif ibn ash-Shikhkhīr, p. 238, no. 1342; Ibn al-Mubārak,",
+   "tr": ", Aḫbār Muṭarrif ibn ash-Shikhkhīr, s. 238, no. 1342; Ibn al-Mubārak,",
+   "ku": ", Aḫbār Muṭarrif ibn ash-Shikhkhīr, r. 238, hejmar 1342; Ibn al-Mubārak,",
+   "ckb": "، Aḫbār Muṭarrif ibn ash-Shikhkhīr، لاپەڕە 238، ژمارە 1342؛ Ibn al-Mubārak،",
+   "bs": ", Aḫbār Muṭarrif ibn ash-Shikhkhīr, str. 238, br. 1342; Ibn al-Mubārak,",
+   "fr": ", Aḫbār Muṭarrif ibn ash-Shikhkhīr, p. 238, n° 1342 ; Ibn al-Mubārak,",
+   "es": ", Aḫbār Muṭarrif ibn ash-Shikhkhīr, p. 238, n.º 1342; Ibn al-Mubārak,"
+  },
+  ", Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb, S. 151, Nr. 448; Abū Nuʿaym,": {
+   "ar": "، Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb، ص 151، رقم 448؛ Abū Nuʿaym،",
+   "en": ", Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb, p. 151, no. 448; Abū Nuʿaym,",
+   "tr": ", Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb, s. 151, no. 448; Abū Nuʿaym,",
+   "ku": ", Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb, r. 151, hejmar 448; Abū Nuʿaym,",
+   "ckb": "، Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb، لاپەڕە 151، ژمارە 448؛ Abū Nuʿaym،",
+   "bs": ", Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb, str. 151, br. 448; Abū Nuʿaym,",
+   "fr": ", Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb, p. 151, n° 448 ; Abū Nuʿaym,",
+   "es": ", Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb, p. 151, n.º 448; Abū Nuʿaym,"
+  },
+  ", Abschnitt über al-ʿUjb.": {
+   "ar": "، القسم عن al-ʿUjb.",
+   "en": ", section on al-ʿUjb.",
+   "tr": ", al-ʿUjb hakkında bölüm.",
+   "ku": ", beş der barê al-ʿUjb.",
+   "ckb": "، بەشی دەربارەی al-ʿUjb.",
+   "bs": ", odjeljak o al-ʿUjb.",
+   "fr": ", section sur al-ʿUjb.",
+   "es": ", sección sobre al-ʿUjb."
+  },
+  "Direkte Quellenstellen öffnen": {
+   "ar": "افتح مواضع المصادر المباشرة",
+   "en": "Open the direct source passages",
+   "tr": "Doğrudan kaynak yerlerini aç",
+   "ku": "Cihên jêderê yên rasterast veke",
+   "ckb": "شوێنە ڕاستەوخۆکانی سەرچاوە بکەرەوە",
+   "bs": "Otvori izravna mjesta izvora",
+   "fr": "Ouvrir les passages directs des sources",
+   "es": "Abrir los lugares directos de las fuentes"
+  },
+  "Jeder Nachweis führt zur passenden Textstelle der Aussage. In den Einträgen stehen Werk, Band, Seite oder Nummer, damit die Fundstelle direkt nachvollziehbar ist.": {
+   "ar": "كل إثبات يؤدي إلى موضع النص المناسب للقول. في المدخلات يقف العمل أو المجلد أو الصفحة أو الرقم، حتى يكون موضع الورود قابلًا للتتبع مباشرة.",
+   "en": "Every proof leads to the fitting text passage of the statement. In the entries stand the work, the volume, the page or the number, so that the source location can be followed directly.",
+   "tr": "Her delil, sözün uygun metin yerine götürür. Kayıtlarda eser, cilt, sayfa veya numara durur ki geçtiği yer doğrudan izlenebilsin.",
+   "ku": "Her delîl dibe cihê tekstê yê guncaw ê gotinê. Di têketinan de berhem, berg, rûpel an hejmar radiwestin, da ku cihê jêderê rasterast were şopandin.",
+   "ckb": "هەر بەڵگەیەک دەچێتە شوێنی دەقی گونجاوی وتەکە. لە تۆمارەکاندا بەرهەم، بەرگ، لاپەڕە یان ژمارە دەوەستێت، تا شوێنی سەرچاوە ڕاستەوخۆ بشوێندرێت.",
+   "bs": "Svaki dokaz vodi na odgovarajuće mjesto teksta izjave. U unosima stoje djelo, svezak, stranica ili broj, da se mjesto navođenja može izravno pratiti.",
+   "fr": "Chaque preuve mène au passage de texte qui convient à la parole. Dans les entrées figurent l’ouvrage, le volume, la page ou le numéro, afin que le lieu de la source puisse être suivi directement.",
+   "es": "Cada prueba lleva al pasaje de texto adecuado de la afirmación. En las entradas están la obra, el volumen, la página o el número, para que el lugar de la fuente se pueda seguir directamente."
+  },
+  "Aḥmad ibn Ḥanbal – az-Zuhd": {
+   "ar": "Aḥmad ibn Ḥanbal – az-Zuhd",
+   "en": "Aḥmad ibn Ḥanbal – az-Zuhd",
+   "tr": "Aḥmad ibn Ḥanbal – az-Zuhd",
+   "ku": "Aḥmad ibn Ḥanbal – az-Zuhd",
+   "ckb": "Aḥmad ibn Ḥanbal – az-Zuhd",
+   "bs": "Aḥmad ibn Ḥanbal – az-Zuhd",
+   "fr": "Aḥmad ibn Ḥanbal – az-Zuhd",
+   "es": "Aḥmad ibn Ḥanbal – az-Zuhd"
+  },
+  "Aḫbār Muṭarrif ibn ash-Shikhkhīr · S. 238, Nr. 1342": {
+   "ar": "Aḫbār Muṭarrif ibn ash-Shikhkhīr · ص 238، رقم 1342",
+   "en": "Aḫbār Muṭarrif ibn ash-Shikhkhīr · p. 238, no. 1342",
+   "tr": "Aḫbār Muṭarrif ibn ash-Shikhkhīr · s. 238, no. 1342",
+   "ku": "Aḫbār Muṭarrif ibn ash-Shikhkhīr · r. 238, hejmar 1342",
+   "ckb": "Aḫbār Muṭarrif ibn ash-Shikhkhīr · لاپەڕە 238، ژمارە 1342",
+   "bs": "Aḫbār Muṭarrif ibn ash-Shikhkhīr · str. 238, br. 1342",
+   "fr": "Aḫbār Muṭarrif ibn ash-Shikhkhīr · p. 238, n° 1342",
+   "es": "Aḫbār Muṭarrif ibn ash-Shikhkhīr · p. 238, n.º 1342"
+  },
+  "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq": {
+   "ar": "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq",
+   "en": "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq",
+   "tr": "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq",
+   "ku": "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq",
+   "ckb": "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq",
+   "bs": "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq",
+   "fr": "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq",
+   "es": "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq"
+  },
+  "Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb · S. 151, Nr. 448": {
+   "ar": "Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb · ص 151، رقم 448",
+   "en": "Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb · p. 151, no. 448",
+   "tr": "Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb · s. 151, no. 448",
+   "ku": "Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb · r. 151, hejmar 448",
+   "ckb": "Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb · لاپەڕە 151، ژمارە 448",
+   "bs": "Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb · str. 151, br. 448",
+   "fr": "Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb · p. 151, n° 448",
+   "es": "Bāb Dhamm ar-Riyāʾ wa-l-ʿUjb · p. 151, n.º 448"
+  },
+  "Abū Nuʿaym – Ḥilyat al-Awliyāʾ": {
+   "ar": "Abū Nuʿaym – Ḥilyat al-Awliyāʾ",
+   "en": "Abū Nuʿaym – Ḥilyat al-Awliyāʾ",
+   "tr": "Abū Nuʿaym – Ḥilyat al-Awliyāʾ",
+   "ku": "Abū Nuʿaym – Ḥilyat al-Awliyāʾ",
+   "ckb": "Abū Nuʿaym – Ḥilyat al-Awliyāʾ",
+   "bs": "Abū Nuʿaym – Ḥilyat al-Awliyāʾ",
+   "fr": "Abū Nuʿaym – Ḥilyat al-Awliyāʾ",
+   "es": "Abū Nuʿaym – Ḥilyat al-Awliyāʾ"
+  },
+  "Biographie von Muṭarrif · Bd. 2, S. 200": {
+   "ar": "سيرة Muṭarrif · ج 2، ص 200",
+   "en": "Biography of Muṭarrif · vol. 2, p. 200",
+   "tr": "Muṭarrif biyografisi · c. 2, s. 200",
+   "ku": "Jînenîgariya Muṭarrif · berg 2, r. 200",
+   "ckb": "ژیاننامەی Muṭarrif · بەرگ 2، لاپەڕە 200",
+   "bs": "Biografija Muṭarrifa · sv. 2, str. 200",
+   "fr": "Biographie de Muṭarrif · vol. 2, p. 200",
+   "es": "Biografía de Muṭarrif · vol. 2, p. 200"
+  },
+  "adh-Dhahabī – Siyar Aʿlām an-Nubalāʾ": {
+   "ar": "adh-Dhahabī – Siyar Aʿlām an-Nubalāʾ",
+   "en": "adh-Dhahabī – Siyar Aʿlām an-Nubalāʾ",
+   "tr": "adh-Dhahabī – Siyar Aʿlām an-Nubalāʾ",
+   "ku": "adh-Dhahabī – Siyar Aʿlām an-Nubalāʾ",
+   "ckb": "adh-Dhahabī – Siyar Aʿlām an-Nubalāʾ",
+   "bs": "adh-Dhahabī – Siyar Aʿlām an-Nubalāʾ",
+   "fr": "adh-Dhahabī – Siyar Aʿlām an-Nubalāʾ",
+   "es": "adh-Dhahabī – Siyar Aʿlām an-Nubalāʾ"
+  },
+  "Biographie von Muṭarrif · Bd. 4, S. 190": {
+   "ar": "سيرة Muṭarrif · ج 4، ص 190",
+   "en": "Biography of Muṭarrif · vol. 4, p. 190",
+   "tr": "Muṭarrif biyografisi · c. 4, s. 190",
+   "ku": "Jînenîgariya Muṭarrif · berg 4, r. 190",
+   "ckb": "ژیاننامەی Muṭarrif · بەرگ 4، لاپەڕە 190",
+   "bs": "Biografija Muṭarrifa · sv. 4, str. 190",
+   "fr": "Biographie de Muṭarrif · vol. 4, p. 190",
+   "es": "Biografía de Muṭarrif · vol. 4, p. 190"
+  },
+  "Dorar – Mawsūʿat al-Akhlāq": {
+   "ar": "Dorar – Mawsūʿat al-Akhlāq",
+   "en": "Dorar – Mawsūʿat al-Akhlāq",
+   "tr": "Dorar – Mawsūʿat al-Akhlāq",
+   "ku": "Dorar – Mawsūʿat al-Akhlāq",
+   "ckb": "Dorar – Mawsūʿat al-Akhlāq",
+   "bs": "Dorar – Mawsūʿat al-Akhlāq",
+   "fr": "Dorar – Mawsūʿat al-Akhlāq",
+   "es": "Dorar – Mawsūʿat al-Akhlāq"
+  },
+  "Abschnitt al-ʿUjb · nennt Ibn al-Mubārak, Aḥmad und Ibn Qutaybah": {
+   "ar": "القسم al-ʿUjb · يذكر Ibn al-Mubārak وAḥmad وIbn Qutaybah",
+   "en": "Section al-ʿUjb · names Ibn al-Mubārak, Aḥmad and Ibn Qutaybah",
+   "tr": "Bölüm al-ʿUjb · Ibn al-Mubārak, Aḥmad ve Ibn Qutaybah’ı anar",
+   "ku": "Beş al-ʿUjb · Ibn al-Mubārak, Aḥmad û Ibn Qutaybah tîne",
+   "ckb": "بەشی al-ʿUjb · Ibn al-Mubārak، Aḥmad و Ibn Qutaybah دەهێنێت",
+   "bs": "Odjeljak al-ʿUjb · navodi Ibn al-Mubāraka, Aḥmada i Ibn Qutaybah",
+   "fr": "Section al-ʿUjb · nomme Ibn al-Mubārak, Aḥmad et Ibn Qutaybah",
+   "es": "Sección al-ʿUjb · nombra a Ibn al-Mubārak, Aḥmad e Ibn Qutaybah"
+  },
+  "Muṭarrif ibn ʿAbdillāh stellt nicht den Schlaf über das Gebet. Er vergleicht zwei Zustände des Herzens: eine Schwäche, die den Menschen zur Reue bringt, und eine sichtbare ʿIbādah, nach der der Mensch sich selbst bewundert.": {
+   "ar": "لا يقدّم Muṭarrif ibn ʿAbdillāh النوم على الصلاة. إنه يقارن حالين للقلب: ضعفًا يقود الإنسان إلى التوبة، وعبادة ظاهرة يعجب الإنسان بعدها بنفسه.",
+   "en": "Muṭarrif ibn ʿAbdillāh does not place sleep above prayer. He compares two states of the heart: a weakness that brings the person to repentance, and a visible ʿIbādah after which the person admires himself.",
+   "tr": "Muṭarrif ibn ʿAbdillāh uykuyu namazın üstüne koymaz. Kalbin iki hâlini karşılaştırır: insanı tövbeye götüren bir zayıflık ve ardından insanın kendini beğendiği görünür bir ʿIbādah.",
+   "ku": "Muṭarrif ibn ʿAbdillāh xewê li ser nimêjê danîne. Ew du rewşên dil didide ber hev: lawaziyek ku mirov dibe tobeyê, û ʿIbādah eke xuya ku mirov piştî wê xwe mezin dibîne.",
+   "ckb": "Muṭarrif ibn ʿAbdillāh خەو لەسەر نوێژ دانانێت. دوو حاڵی دڵ بەراورد دەکات: لاوازێک کە مرۆڤ دەباتە تۆبە، و ʿIbādahێکی دیار کە مرۆڤ دوای ئەو خۆی سەرسام دەکات.",
+   "bs": "Muṭarrif ibn ʿAbdillāh ne stavlja san iznad namaza. On poredi dva stanja srca: slabost koja čovjeka dovodi do pokajanja, i vidljivu ʿIbādah nakon koje čovjek sebe divi.",
+   "fr": "Muṭarrif ibn ʿAbdillāh ne place pas le sommeil au-dessus de la prière. Il compare deux états du cœur : une faiblesse qui mène la personne au repentir, et une ʿIbādah visible après laquelle la personne s’admire elle-même.",
+   "es": "Muṭarrif ibn ʿAbdillāh no pone el sueño por encima de la oración. Compara dos estados del corazón: una debilidad que lleva a la persona al arrepentimiento, y una ʿIbādah visible después de la cual la persona se admira a sí misma."
+  },
+  "Die Aussage zeigt, dass die Gefahr nicht nur vor der Tat liegt, sondern auch danach. Eine gute Tat kann für den Menschen zur Prüfung werden, wenn er sie sich selbst zuschreibt, sich sicher fühlt oder innerlich auf seine eigene Leistung blickt.": {
+   "ar": "يبيّن القول أن الخطر ليس فقط قبل العمل، بل بعده أيضًا. قد يصير العمل الصالح امتحانًا للإنسان إذا نسبه إلى نفسه، أو شعر بالأمن، أو نظر في باطنه إلى عمله.",
+   "en": "The statement shows that the danger lies not only before the deed, but also after it. A good deed can become a trial for the person if he attributes it to himself, feels secure, or inwardly looks at his own performance.",
+   "tr": "Söz gösterir ki tehlike yalnızca amelden önce değil, sonra da vardır. İyi bir amel, kişi onu kendine bağlarsa, güvende hissederse veya içten kendi başarısına bakarsa, insan için bir imtihan olabilir.",
+   "ku": "Gotin nîşan dide ku metirsî ne tenê berî kiryarê ye, belkî piştî wê jî. Kiryareke baş dikare bibe ceribandinek ji bo mirov, heke ew wê bi xwe ve girê bide, xwe ewle hîs bike, an jî di hundir de li ser kara xwe binêre.",
+   "ckb": "وتەکە نیشان دەدات کە مەترسی تەنها پێش کردەوە نییە، بەڵکو دوای ئەویش. کردەوەیەکی باش دەکرێت ببێتە تاقیکردنەوە بۆ مرۆڤ ئەگەر بیداتە پاڵ خۆی، هەست بە دڵنیایی بکات، یان لە ناوەوە بڕوانێتە کارکردی خۆی.",
+   "bs": "Izjava pokazuje da opasnost nije samo prije djela, nego i poslije njega. Dobro djelo može čovjeku postati ispit ako ga pripisuje sebi, osjeća se sigurnim ili iznutra gleda na vlastiti učinak.",
+   "fr": "La parole montre que le danger n’est pas seulement avant l’acte, mais aussi après. Un bon acte peut devenir une épreuve pour la personne s’il se l’attribue, se sent en sécurité, ou regarde intérieurement sa propre performance.",
+   "es": "La afirmación muestra que el peligro no está solo antes de la obra, sino también después. Una buena obra puede volverse una prueba para la persona si se la atribuye a sí misma, se siente segura, o mira por dentro su propio rendimiento."
+  },
+  "Thema: ʿUjb nach der ʿIbādah": {
+   "ar": "الموضوع: ʿUjb بعد العبادة",
+   "en": "Topic: ʿUjb after the ʿIbādah",
+   "tr": "Konu: ʿIbādah’tan sonra ʿUjb",
+   "ku": "Mijar: ʿUjb piştî ʿIbādah",
+   "ckb": "بابەت: ʿUjb دوای ʿIbādah",
+   "bs": "Tema: ʿUjb nakon ʿIbādaha",
+   "fr": "Sujet : le ʿUjb après la ʿIbādah",
+   "es": "Tema: ʿUjb después de la ʿIbādah"
+  },
+  "ʿUjb ist Selbstgefälligkeit: Das Herz sieht die eigene Tat groß und vergisst die Bedürftigkeit gegenüber Allah. Dadurch kann eine äußere gute Handlung innerlich beschädigt werden.": {
+   "ar": "ʿUjb هو الإعجاب بالنفس: يرى القلب عمله كبيرًا وينسى الافتقار إلى الله. وبذلك قد يتضرر العمل الصالح الظاهر في الباطن.",
+   "en": "ʿUjb is self-satisfaction: the heart sees its own deed as great and forgets its neediness toward Allāh. Thereby an outwardly good action can be damaged inwardly.",
+   "tr": "ʿUjb kendini beğenmişliktir: Kalp kendi amelini büyük görür ve Allāh’a muhtaçlığı unutur. Böylece dıştan iyi bir amel içten zarar görebilir.",
+   "ku": "ʿUjb razîbûna bi xwe ye: dil kiryara xwe mezin dibîne û hewcedariya xwe ji Allāh ji bîr dike. Bi wê kiryareke baş a derve dikare di hundir de zerar bibîne.",
+   "ckb": "ʿUjb خۆبەدڵییە: دڵ کردەوەی خۆی گەورە دەبینێت و پێویستیی خۆی بە الله لەبیر دەکات. بەوە کردارێکی باش لە ڕووکەشدا دەکرێت لە ناوەوە زیان ببینێت.",
+   "bs": "ʿUjb je samodopadljivost: srce vidi vlastito djelo velikim i zaboravlja potrebitost prema Allāhu. Time vanjski dobar čin može iznutra biti oštećen.",
+   "fr": "Le ʿUjb est la suffisance : le cœur voit son propre acte grand et oublie son besoin envers Allāh. Ainsi un acte bon à l’extérieur peut être abîmé à l’intérieur.",
+   "es": "ʿUjb es la autocomplacencia: el corazón ve grande la propia obra y olvida la necesidad frente a Allāh. Con ello una acción exteriormente buena puede dañarse por dentro."
+  },
+  "Darum warnten die Salaf vor dem Zustand nach der ʿIbādah. Wer nach einer Tat demütig bleibt, Allah um Annahme bittet und seine eigene Schwäche erkennt, ist sicherer als jemand, der wegen seiner Tat hoch von sich denkt.": {
+   "ar": "لذلك حذّر السلف من الحال بعد العبادة. من يبقى بعد العمل متواضعًا، ويسأل الله القبول، ويعرف ضعفه، أسلم ممن يرفع نفسه بسبب عمله.",
+   "en": "Therefore the Salaf warned against the state after the ʿIbādah. Whoever after a deed remains humble, asks Allāh for acceptance, and recognizes his own weakness is safer than someone who thinks highly of himself because of his deed.",
+   "tr": "Bu yüzden Salaf, ʿIbādah’tan sonraki hâle karşı uyardı. Amelden sonra mütevazı kalan, Allāh’tan kabul dileyen ve kendi zayıflığını tanıyan kimse, ameli yüzünden kendini yüksek gören kimseden daha emindir.",
+   "ku": "Ji ber vê yekê Salaf ji rewşa piştî ʿIbādah hişyar kirin. Yê ku piştî kiryarê nizm dimîne, ji Allāh qebûlê dixwaze û lawaziya xwe nas dike, ewletir e ji yê ku ji ber kiryara xwe xwe bilind dibîne.",
+   "ckb": "لەبەر ئەوە Salaf ئاگاداریان دا لە حاڵی دوای ʿIbādah. ئەوەی دوای کردارێک نزم دەمێنێتەوە، لە الله قبوڵکردن دەخوازێت و لاوازیی خۆی دەناسێت، سەلامەترە لەوەی بەهۆی کردارەکەیەوە خۆی بەرز دەزانێت.",
+   "bs": "Zato su Salaf upozoravali na stanje nakon ʿIbādaha. Ko nakon djela ostane ponizan, moli Allāha za primanje i prepoznaje vlastitu slabost, sigurniji je od onoga koji zbog svog djela visoko misli o sebi.",
+   "fr": "C’est pourquoi les Salaf ont mis en garde contre l’état après la ʿIbādah. Celui qui après un acte reste humble, demande à Allāh l’acceptation et reconnaît sa propre faiblesse est plus en sûreté que celui qui, à cause de son acte, pense hautement de lui-même.",
+   "es": "Por eso los Salaf advirtieron del estado después de la ʿIbādah. Quien después de una obra permanece humilde, pide a Allāh la aceptación y reconoce su propia debilidad está más a salvo que quien, por su obra, piensa alto de sí mismo."
+  },
+  "Die Aussage lenkt den Blick auf das Herz. Eine Sünde oder Schwäche, die Reue hervorbringt, kann den Menschen brechen und zurückführen. Eine ʿIbādah, die Selbstbewunderung hervorbringt, kann ihn täuschen. Darum braucht jede gute Tat Ikhlāṣ, Furcht vor Nichtannahme und Demut vor Allah.": {
+   "ar": "يوجّه القول النظر إلى القلب. ذنب أو ضعف يُنتج التوبة يمكن أن يكسر الإنسان ويردّه. وعبادة تُنتج الإعجاب بالنفس يمكن أن تغرّه. لذلك يحتاج كل عمل صالح إلى Ikhlāṣ، وخوف من عدم القبول، وتواضع أمام الله.",
+   "en": "The statement directs the gaze to the heart. A sin or a weakness that brings forth repentance can break the person and bring him back. An ʿIbādah that brings forth self-admiration can deceive him. Therefore every good deed needs Ikhlāṣ, fear of non-acceptance, and humility before Allāh.",
+   "tr": "Söz bakışı kalbe çevirir. Tövbe doğuran bir günah veya zayıflık insanı kırabilir ve geri getirebilir. Kendini beğenme doğuran bir ʿIbādah onu aldatabilir. Bu yüzden her iyi amel Ikhlāṣ’a, kabul edilmemekten korkuya ve Allāh önünde tevazua muhtaçtır.",
+   "ku": "Gotin nihêrînê ber bi dil ve dizivirîne. Gunah an lawaziyek ku tobeyê derdixe dikare mirov bişkîne û vegerîne. ʿIbādah eke ku heyrana bi xwe derdixe dikare wî bixapîne. Ji ber vê yekê her kiryareke baş hewceyî Ikhlāṣ, tirs ji neqebûlkirinê û nizmî li ber Allāh e.",
+   "ckb": "وتەکە سەرنج دەباتە سەر دڵ. گوناهێک یان لاوازێک کە تۆبە دەهێنێتەوە دەکرێت مرۆڤ بشکێنێت و بیهێنێتەوە. ʿIbādahێک کە سەرسامبوون بە خۆی دەهێنێتەوە دەکرێت فریوی بدات. لەبەر ئەوە هەموو کردەوەیەکی باش پێویستی بە Ikhlāṣ، ترس لە قبوڵنەکردن، و نزمبوونەوە لەبەردەم الله هەیە.",
+   "bs": "Izjava usmjerava pogled na srce. Grijeh ili slabost koja rađa pokajanje može čovjeka slomiti i vratiti ga. ʿIbādah koja rađa divljenje sebi može ga prevariti. Zato svako dobro djelo treba Ikhlāṣ, strah od neprimanja i poniznost pred Allāhom.",
+   "fr": "La parole dirige le regard vers le cœur. Un péché ou une faiblesse qui produit le repentir peut briser la personne et la ramener. Une ʿIbādah qui produit l’admiration de soi peut la tromper. C’est pourquoi tout bon acte a besoin d’Ikhlāṣ, de crainte de ne pas être accepté, et d’humilité devant Allāh.",
+   "es": "La afirmación dirige la mirada al corazón. Un pecado o una debilidad que produce arrepentimiento puede quebrar a la persona y devolverla. Una ʿIbādah que produce admiración de sí puede engañarla. Por eso toda buena obra necesita Ikhlāṣ, temor de no ser aceptada y humildad ante Allāh."
   }
  }
 }

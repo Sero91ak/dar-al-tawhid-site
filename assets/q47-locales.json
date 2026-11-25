@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,238 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Tawḥīd, Īmān und Akhlāq – Q47 | DĀR AL TAWḤĪD": {
+   "ar": "التوحيد والإيمان والأخلاق – Q47 | DĀR AL TAWḤĪD",
+   "en": "Tawḥīd, īmān, and character – Q47 | DĀR AL TAWḤĪD",
+   "tr": "Tevhid, iman ve ahlak – Q47 | DĀR AL TAWḤĪD",
+   "ku": "Tewhîd, îman û exlaq – Q47 | DĀR AL TAWḤĪD",
+   "ckb": "تەوحید، ئیمان و ئەخلاق – Q47 | DĀR AL TAWḤĪD",
+   "bs": "Tevhid, iman i ahlak – Q47 | DĀR AL TAWḤĪD",
+   "fr": "Tawḥīd, îmān et caractère – Q47 | DĀR AL TAWḤĪD",
+   "es": "Tawḥīd, īmān y carácter – Q47 | DĀR AL TAWḤĪD"
+  },
+  "Wissen aus Qurʾān, Sunnah und den frühen Generationen": {
+   "ar": "علم من القرآن والسنة والأجيال الأولى",
+   "en": "Knowledge from the Qurʾān, the Sunnah, and the early generations",
+   "tr": "Qurʾān, Sunnah ve ilk nesillerden ilim",
+   "ku": "Zanîn ji Qurʾān, Sunnah û nifşên pêşîn",
+   "ckb": "زانست لە قورئان، سوننەت و نەوەکانی سەرەتا",
+   "bs": "Znanje iz Qurʾāna, Sunnaha i ranih generacija",
+   "fr": "Savoir tiré du Qurʾān, de la Sunnah et des premières générations",
+   "es": "Conocimiento del Qurʾān, de la Sunnah y de las primeras generaciones"
+  },
+  "Tawḥīd, Īmān und Akhlāq – ein Dīn": {
+   "ar": "التوحيد والإيمان والأخلاق – دين واحد",
+   "en": "Tawḥīd, īmān, and character – one dīn",
+   "tr": "Tevhid, iman ve ahlak – bir din",
+   "ku": "Tewhîd, îman û exlaq – yek dîn",
+   "ckb": "تەوحید، ئیمان و ئەخلاق – یەک دین",
+   "bs": "Tevhid, iman i ahlak – jedan din",
+   "fr": "Tawḥīd, îmān et caractère – un seul dīn",
+   "es": "Tawḥīd, īmān y carácter: un solo dīn"
+  },
+  ", Bd. 17, S. 279–281, Tafsīr zu 16:90": {
+   "ar": "، المجلد 17، ص 279–281، تفسير 16:90",
+   "en": ", vol. 17, pp. 279–281, tafsīr of 16:90",
+   "tr": ", cilt 17, s. 279–281, 16:90 tefsiri",
+   "ku": ", cild 17, rûpel 279–281, tefsîra 16:90",
+   "ckb": "، بەرگی 17، لاپەڕە 279–281، تەفسیری 16:90",
+   "bs": ", sv. 17, str. 279–281, tefsir 16:90",
+   "fr": ", vol. 17, p. 279–281, tafsīr de 16:90",
+   "es": ", vol. 17, pp. 279–281, tafsir de 16:90"
+  },
+  "Athār; keine prophetischen Ḥadīṯe. Keine abschließende Isnād-Einstufung.": {
+   "ar": "آثار؛ وليست أحاديث نبوية. ولا توجد درجة إسناد ختامية.",
+   "en": "Athār; not prophetic ḥadīths. No final isnād grading.",
+   "tr": "Eserler; peygamberî hadisler değildir. Nihai bir isnad derecelendirmesi yoktur.",
+   "ku": "Eser; ne hedîsên pêxemberî ne. Nirxandineke isnadê ya dawî tune ye.",
+   "ckb": "ئاسار؛ حەدیسی پێغەمبەرانە نین. هەڵسەنگاندنی کۆتاییی ئیسناد نییە.",
+   "bs": "Asari; nisu vjerovjesnički hadisi. Nema konačne ocjene seneda.",
+   "fr": "Athâr ; non des hadiths prophétiques. Aucune classification finale de l’isnâd.",
+   "es": "Atares; no son hadices proféticos. No hay una clasificación final del isnad."
+  },
+  "Ibn ʿAbbās – Tawḥīd und Pflichten": {
+   "ar": "ابن عباس – التوحيد والواجبات",
+   "en": "Ibn ʿAbbās – tawḥīd and duties",
+   "tr": "Ibn ʿAbbās – tevhid ve vecibeler",
+   "ku": "Ibn ʿAbbās – tewhîd û erk",
+   "ckb": "ئیبن عەبباس – تەوحید و ئەرکەکان",
+   "bs": "Ibn ʿAbbās – tevhid i obaveze",
+   "fr": "Ibn ʿAbbās – tawḥīd et obligations",
+   "es": "Ibn ʿAbbās – tawḥīd y deberes"
+  },
+  "🖋️ Ibn ʿAbbās رضي الله عنهما erklärte zu Sūrah an-Naḥl (16:90) sinngemäß:": {
+   "ar": "🖋️ شرح ابن عباس رضي الله عنهما سورة النحل (16:90) بالمعنى:",
+   "en": "🖋️ Ibn ʿAbbās رضي الله عنهما explained, according to the meaning, regarding Sūrah an-Naḥl (16:90):",
+   "tr": "🖋️ Ibn ʿAbbās رضي الله عنهما Sūrah an-Naḥl (16:90) hakkında anlamca şöyle açıkladı:",
+   "ku": "🖋️ Ibn ʿAbbās رضي الله عنهما li ser Sūrah an-Naḥl (16:90) li gorî wateyê rave kir:",
+   "ckb": "🖋️ ئیبن عەبباس رضي الله عنهما بە واتە دەربارەی سورة النحل (16:90) ڕوونی کردەوە:",
+   "bs": "🖋️ Ibn ʿAbbās رضي الله عنهما je, po smislu, o Sūrah an-Naḥlu (16:90) objasnio:",
+   "fr": "🖋️ Ibn ʿAbbās رضي الله عنهما a expliqué, selon le sens, au sujet de la sourate an-Naḥl (16:90) :",
+   "es": "🖋️ Ibn ʿAbbās رضي الله عنهما explicó, según el sentido, acerca de Sūrah an-Naḥl (16:90):"
+  },
+  "ist das Bekenntnis gemeint, dass": {
+   "ar": "المراد الإقرار بأن",
+   "en": "what is meant is the confession that",
+   "tr": "kastedilen ikrardır ki",
+   "ku": "mebest ew e ku îqrar ev e ku",
+   "ckb": "مەبەست دانپێدانە کە",
+   "bs": "misli se priznanje da",
+   "fr": "il s’agit de l’aveu que",
+   "es": "se entiende la confesión de que"
+  },
+  "es keine anbetungswürdige Gottheit außer Allah gibt": {
+   "ar": "لا معبود بحق إلا الله",
+   "en": "there is no deity worthy of worship except Allah",
+   "tr": "Allah’tan başka ibadete layık ilah yoktur",
+   "ku": "ji bilî Allah tu yezdanê ku heqê perestinê bike tune ye",
+   "ckb": "هیچ پەرستراوێک بە حەق نییە جگە لە خوا",
+   "bs": "nema božanstva dostojnog ibadeta osim Allaha",
+   "fr": "il n’y a de divinité digne d’adoration qu’Allah",
+   "es": "no hay divinidad digna de adoración salvo Allah"
+  },
+  "die Erfüllung der Pflichten.": {
+   "ar": "أداء الواجبات.",
+   "en": "the fulfillment of the duties.",
+   "tr": "vecibelerin yerine getirilmesi.",
+   "ku": "pêkanîna erkan.",
+   "ckb": "جێبەجێکردنی ئەرکەکان.",
+   "bs": "ispunjavanje obaveza.",
+   "fr": "l’accomplissement des obligations.",
+   "es": "el cumplimiento de los deberes."
+  },
+  "Zur Gerechtigkeit: das Zeugnis, dass es keine anbetungswürdige Gottheit außer Allah gibt. Zu Iḥsān:": {
+   "ar": "في العدل: الشهادة بأنه لا معبود بحق إلا الله. وفي الإحسان:",
+   "en": "On justice: the testimony that there is no deity worthy of worship except Allah. On iḥsān:",
+   "tr": "Adalet hakkında: Allah’tan başka ibadete layık ilah olmadığına şehadet. İhsan hakkında:",
+   "ku": "Der barê dadê: şehadet ku ji bilî Allah tu yezdanê ku heqê perestinê bike tune ye. Der barê îhsanê:",
+   "ckb": "دەربارەی داد: شایەتی کە هیچ پەرستراوێک بە حەق نییە جگە لە خوا. دەربارەی ئیحسان:",
+   "bs": "O pravdi: svjedočanstvo da nema božanstva dostojnog ibadeta osim Allaha. O ihsanu:",
+   "fr": "Sur la justice : le témoignage qu’il n’y a de divinité digne d’adoration qu’Allah. Sur l’iḥsān :",
+   "es": "Sobre la justicia: el testimonio de que no hay divinidad digna de adoración salvo Allah. Sobre el iḥsān:"
+  },
+  "Überlieferungsweg bei aṭ-Ṭabarī über ʿAlī ibn Abī Ṭalḥah; keine durchgehend verbundene Kette zu Ibn ʿAbbās.": {
+   "ar": "طريق الرواية عند الطبري عن علي بن أبي طلحة؛ ليست سلسلة متصلة إلى ابن عباس.",
+   "en": "The path of transmission in aṭ-Ṭabarī is through ʿAlī ibn Abī Ṭalḥah; there is no continuously connected chain to Ibn ʿAbbās.",
+   "tr": "Rivayet yolu aṭ-Ṭabarī’de ʿAlī ibn Abī Ṭalḥah üzerindendir; Ibn ʿAbbās’a kadar kesintisiz bağlı bir zincir yoktur.",
+   "ku": "Rêya ragihandinê li ba aṭ-Ṭabarī bi rêya ʿAlī ibn Abī Ṭalḥah e; zincîreke bi domdarî girêdayî heta Ibn ʿAbbās tune ye.",
+   "ckb": "ڕێگای گێڕانەوە لای تەبەری لە ڕێگەی عەلی کوڕی ئەبی تەڵحەیە؛ زنجیرەیەکی بەردەوام بەستراو تا ئیبن عەبباس نییە.",
+   "bs": "Put prenošenja kod aṭ-Ṭabarīja je preko ʿAlīja ibn Abī Ṭalḥaha; nema neprekidno spojenog lanca do Ibn ʿAbbāsa.",
+   "fr": "La voie de transmission chez aṭ-Ṭabarī passe par ʿAlī ibn Abī Ṭalḥah ; il n’y a pas de chaîne continûment reliée jusqu’à Ibn ʿAbbās.",
+   "es": "La vía de transmisión en aṭ-Ṭabarī es por ʿAlī ibn Abī Ṭalḥah; no hay una cadena continuamente conectada hasta Ibn ʿAbbās."
+  },
+  "Qatādah – guter Charakter": {
+   "ar": "قتادة – الخلق الحسن",
+   "en": "Qatādah – good character",
+   "tr": "Qatādah – güzel ahlak",
+   "ku": "Qatādah – exlaqê baş",
+   "ckb": "قەتادە – خووێکی چاک",
+   "bs": "Qatādah – lijep karakter",
+   "fr": "Qatādah – le bon caractère",
+   "es": "Qatādah – el buen carácter"
+  },
+  "🖋️ Qatādah رحمه الله sagte sinngemäß über denselben Vers:": {
+   "ar": "🖋️ قال قتادة رحمه الله بالمعنى عن الآية نفسها:",
+   "en": "🖋️ Qatādah رحمه الله said, according to the meaning, about the same verse:",
+   "tr": "🖋️ Qatādah رحمه الله aynı âyet hakkında anlamca şöyle dedi:",
+   "ku": "🖋️ Qatādah رحمه الله li ser heman ayetê li gorî wateyê got:",
+   "ckb": "🖋️ قەتادە رحمه الله بە واتە دەربارەی هەمان ئایەت گوتی:",
+   "bs": "🖋️ Qatādah رحمه الله je, po smislu, o istom ajetu rekao:",
+   "fr": "🖋️ Qatādah رحمه الله a dit, selon le sens, au sujet du même verset :",
+   "es": "🖋️ Qatādah رحمه الله dijo, según el sentido, acerca del mismo versículo:"
+  },
+  ", den die Menschen der Ǧāhiliyyah pflegten und schätzten, außer dass Allah ihn geboten hat, und keinen": {
+   "ar": "، الذي كان أهل الجاهلية يمارسونه ويقدرونه، إلا أن الله أمر به، ولا",
+   "en": ", which the people of the Ǧāhiliyyah practiced and valued, except that Allah has commanded it, and no",
+   "tr": ", ki cahiliye insanlarının uyguladığı ve değer verdiği, ancak Allah’ın onu emrettiği, ve hiçbir",
+   "ku": ", yê ku mirovên Ǧāhiliyyahê dikirin û qedrê wî digirtin, ji bilî ku Allah ferman daye, û ne",
+   "ckb": "، کە خەڵکی جاهیلیە پەیڕەویان دەکرد و بەهادار بوو لایان، جگە لەوەی خوا فەرمانی پێ داوە، و هیچ",
+   "bs": ", koji su ljudi džahilijeta njegovali i cijenili, osim što ga je Allah naredio, i nijedan",
+   "fr": ", que les gens de la Ǧāhiliyyah pratiquaient et estimaient, si ce n’est qu’Allah l’a ordonné, et aucun",
+   "es": ", que la gente de la Ǧāhiliyyah practicaba y apreciaba, salvo que Allah lo ha ordenado, y ningún"
+  },
+  ", den sie einander vorwarfen, außer dass Er ihn verboten hat.": {
+   "ar": "، الذي كانوا يلومون به بعضهم بعضًا، إلا أنه حرّمه.",
+   "en": ", which they used to reproach one another for, except that He has forbidden it.",
+   "tr": ", ki onunla birbirlerini kınadıkları, ancak O’nun onu haram kıldığı.",
+   "ku": ", yê ku wan pê hevûdu rexne dikirin, ji bilî ku Wî ew qedexe kiriye.",
+   "ckb": "، کە پێی یەکتریان لۆمە دەکرد، جگە لەوەی ئەو قەدەغەی کردووە.",
+   "bs": ", kojim su jedni druge prekoravali, osim što ga je On zabranio.",
+   "fr": ", dont ils se blâmaient les uns les autres, si ce n’est qu’Il l’a interdit.",
+   "es": ", con el que se reprochaban unos a otros, salvo que Él lo ha prohibido."
+  },
+  "Sinngemäß: Allah gebot die": {
+   "ar": "بالمعنى: أمر الله بـ",
+   "en": "According to the meaning: Allah commanded the",
+   "tr": "Anlamca: Allah şunu emretti",
+   "ku": "Li gorî wateyê: Allah ferman da bi",
+   "ckb": "بە واتە: خوا فەرمانی دا بە",
+   "bs": "Po smislu: Allah je naredio",
+   "fr": "Selon le sens : Allah a ordonné les",
+   "es": "Según el sentido: Allah ordenó los"
+  },
+  "und verbot die schlechten, die man schon in der Ǧāhiliyyah tadelte.": {
+   "ar": "ونهى عن السيئة التي كانت تُلام في الجاهلية.",
+   "en": "and He forbade the bad ones, which were already blamed in the Ǧāhiliyyah.",
+   "tr": "ve cahiliyede zaten kınanan kötü olanları yasakladı.",
+   "ku": "û yên xerab ên ku berê di Ǧāhiliyyahê de dihatin rexnekirin qedexe kirin.",
+   "ckb": "و ئەو خراپانەی قەدەغە کرد کە لە جاهیلیەدا پێشتر لۆمە دەکران.",
+   "bs": "i zabranio loše, koje su već u džahilijetu prekoravane.",
+   "fr": "et Il a interdit les mauvaises, que l’on blâmait déjà dans la Ǧāhiliyyah.",
+   "es": "y prohibió las malas, que ya se reprochaban en la Ǧāhiliyyah."
+  },
+  "Überlieferungsweg: Bishr → Yazīd → Saʿīd → Qatādah.": {
+   "ar": "طريق الرواية: بشر ← يزيد ← سعيد ← قتادة.",
+   "en": "Path of transmission: Bishr → Yazīd → Saʿīd → Qatādah.",
+   "tr": "Rivayet yolu: Bishr → Yazīd → Saʿīd → Qatādah.",
+   "ku": "Rêya ragihandinê: Bishr → Yazīd → Saʿīd → Qatādah.",
+   "ckb": "ڕێگای گێڕانەوە: بشر → یەزید → سەعید → قەتادە.",
+   "bs": "Put prenošenja: Bishr → Yazīd → Saʿīd → Qatādah.",
+   "fr": "Voie de transmission : Bishr → Yazīd → Saʿīd → Qatādah.",
+   "es": "Vía de transmisión: Bishr → Yazīd → Saʿīd → Qatādah."
+  },
+  "Aṭ-Ṭabarī, Tafsīr 16:90, markierte arabische Textstelle": {
+   "ar": "الطبري، تفسير 16:90، موضع النص العربي المحدد",
+   "en": "Aṭ-Ṭabarī, tafsīr of 16:90, marked Arabic passage",
+   "tr": "Aṭ-Ṭabarī, 16:90 tefsiri, işaretli Arapça metin yeri",
+   "ku": "Aṭ-Ṭabarī, tefsîra 16:90, cihê nivîsa erebî yê nîşankirî",
+   "ckb": "تەبەری، تەفسیری 16:90، شوێنی دەقی عەرەبیی دیاریکراو",
+   "bs": "Aṭ-Ṭabarī, tefsir 16:90, označeno arapsko mjesto teksta",
+   "fr": "Aṭ-Ṭabarī, tafsīr de 16:90, passage arabe marqué",
+   "es": "Aṭ-Ṭabarī, tafsir de 16:90, pasaje árabe marcado"
+  },
+  "zeigt sich im Handeln. Dies ist eine Zusammenfassung, kein wörtliches Zitat.": {
+   "ar": "يظهر في العمل. هذا تلخيص، وليس اقتباسًا حرفيًا.",
+   "en": "is shown in action. This is a summary, not a verbatim quotation.",
+   "tr": "amelde görünür. Bu bir özettir, harfî bir alıntı değildir.",
+   "ku": "di kiryarê de xuya dibe. Ev kurte ye, ne vegotineke peyv bi peyv e.",
+   "ckb": "لە کرداردا دەردەکەوێت. ئەمە پوختەیەکە، گێڕانەوەیەکی وشەبەوشە نییە.",
+   "bs": "pokazuje se u djelu. Ovo je sažetak, ne doslovan citat.",
+   "fr": "se montre dans l’acte. Ceci est un résumé, non une citation littérale.",
+   "es": "se muestra en la acción. Esto es un resumen, no una cita literal."
+  },
+  "Wissen vertiefen: Tawḥīd, Īmān und Akhlāq": {
+   "ar": "تعميق العلم: التوحيد والإيمان والأخلاق",
+   "en": "Deepen knowledge: tawḥīd, īmān, and character",
+   "tr": "İlmi derinleştir: tevhid, iman ve ahlak",
+   "ku": "Zanînê kûr bike: tewhîd, îman û exlaq",
+   "ckb": "قووڵکردنەوەی زانست: تەوحید، ئیمان و ئەخلاق",
+   "bs": "Produbiti znanje: tevhid, iman i ahlak",
+   "fr": "Approfondir le savoir : tawḥīd, îmān et caractère",
+   "es": "Profundizar el conocimiento: tawḥīd, īmān y carácter"
+  },
+  "Frei zugängliche Lerneinheit mit vier Verständnisfragen zu den überlieferten Erläuterungen. Ein Lernangebot, kein weiterer Quellenbeleg.": {
+   "ar": "وحدة تعلّم متاحة مجانًا بأربعة أسئلة فهم عن الشروح المروية. عرض تعليمي، وليس شاهدًا إضافيًا.",
+   "en": "A freely accessible learning unit with four comprehension questions on the transmitted explanations. A learning offer, not a further source reference.",
+   "tr": "Nakledilen açıklamalara dair dört anlama sorusu olan, serbestçe erişilen bir öğrenme birimi. Bir öğrenme sunumu, ek bir kaynak delili değil.",
+   "ku": "Yekeya hînbûnê ya ku bi belaş tê gihîştin, bi çar pirsên fêmkirinê li ser ravekirinên ragihandî. Pêşkêşeke hînbûnê ye, ne belgeyeke çavkaniyê ya zêde ye.",
+   "ckb": "یەکەیەکی فێربوونی بە خۆڕایی بەردەست بە چوار پرسیاری تێگەیشتن دەربارەی ڕوونکردنەوە گێڕدراوەکان. پێشکەشێکی فێربوونە، بەڵگەیەکی سەرچاوەی زیادە نییە.",
+   "bs": "Slobodno dostupna jedinica učenja s četiri pitanja razumijevanja o prenesenim objašnjenjima. Ponuda učenja, ne dodatni dokaz izvora.",
+   "fr": "Une unité d’apprentissage librement accessible, avec quatre questions de compréhension sur les explications transmises. Une offre d’apprentissage, non une référence de source supplémentaire.",
+   "es": "Una unidad de aprendizaje de libre acceso con cuatro preguntas de comprensión sobre las explicaciones transmitidas. Una oferta de aprendizaje, no una referencia de fuente adicional."
   }
  }
 }

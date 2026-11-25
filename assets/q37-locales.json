@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,278 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Sufyān aṯ-Ṯawrī – Der Kampf um die Niyyah – DAR AL TAWḤĪD": {
+   "ar": "سفيان الثوري – الصراع على النية – DAR AL TAWḤĪD",
+   "en": "Sufyān aṯ-Ṯawrī – The struggle over the niyyah – DAR AL TAWḤĪD",
+   "tr": "Sufyān aṯ-Ṯawrī – Niyet için mücadele – DAR AL TAWḤĪD",
+   "ku": "Sufyān aṯ-Ṯawrī – Têkoşîn li ser niyetê – DAR AL TAWḤĪD",
+   "ckb": "سفیان الثوری – تێکۆشان بۆ نیەت – DAR AL TAWḤĪD",
+   "bs": "Sufyān aṯ-Ṯawrī – Borba za nijjet – DAR AL TAWḤĪD",
+   "fr": "Sufyān aṯ-Ṯawrī – Le combat pour la niyya – DAR AL TAWḤĪD",
+   "es": "Sufyān aṯ-Ṯawrī – La lucha por la niyya – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "إسهامات وفق القرآن والسنة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the āthār",
+   "tr": "Qurʾān, Sunnah ve âsâra göre katkılar",
+   "ku": "Beşdarî li gorî Qurʾān, Sunnah û eseran",
+   "ckb": "بەشدارییەکان بەپێی قورئان، سوننەت و ئاسار",
+   "bs": "Prilozi prema Qurʾānu, Sunnahu i asarima",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les athâr",
+   "es": "Aportes según el Qurʾān, la Sunnah y los atares"
+  },
+  "Āṯār · Niyyah · Ikhlāṣ · Tazkiyah": {
+   "ar": "آثار · نية · إخلاص · تزكية",
+   "en": "Āthār · Niyyah · Ikhlāṣ · Tazkiyah",
+   "tr": "Âsâr · Niyet · İhlas · Tezkiye",
+   "ku": "Eser · Niyet · Îxlas · Tezkiye",
+   "ckb": "ئاسار · نیەت · ئیخلاس · تەزکیە",
+   "bs": "Asari · Nijjet · Ihlas · Tezkija",
+   "fr": "Athâr · Niyya · Ikhlâs · Tazkiya",
+   "es": "Atares · Niyya · Ijlás · Tazkiya"
+  },
+  "Der schwerste Kampf: die eigene Absicht": {
+   "ar": "أشقّ جهاد: النية نفسها",
+   "en": "The hardest struggle: one’s own intention",
+   "tr": "En çetin mücadele: kendi niyeti",
+   "ku": "Têkoşîna herî giran: niyeta xwe",
+   "ckb": "قورسترین تێکۆشان: نیەتی خۆی",
+   "bs": "Najteža borba: vlastita namjera",
+   "fr": "Le combat le plus dur : sa propre intention",
+   "es": "La lucha más dura: la propia intención"
+  },
+  "„Mit nichts hatte ich schwerer zu kämpfen als mit meiner Absicht, denn sie verändert sich bei mir immer wieder.“": {
+   "ar": "«لم يكن شيء أشقّ عليّ في المجاهدة من نيتي، فإنها تتغير عندي مرة بعد مرة.»",
+   "en": "“There was nothing I struggled with more heavily than my intention, for it keeps changing with me.”",
+   "tr": "“Niyetim kadar hiçbir şeyle mücadele etmek bana daha ağır gelmedi; çünkü niyetim bende sürekli değişiyor.”",
+   "ku": "“Tiştek nebû ku ez pê re dijwartir ji niyeta xwe têbikoşim, lewre ew li cem min her tim diguhere.”",
+   "ckb": "«هیچ شتێک وەک نیەتم لە تێکۆشاندا لەسەرم قورس نەبوو، چونکە لای من بەردەوام دەگۆڕێت.»",
+   "bs": "“Ni sa čim mi nije bilo teže boriti se nego sa svojom namjerom, jer se kod mene stalno mijenja.”",
+   "fr": "« Rien ne m’a été plus pénible à combattre que mon intention, car elle ne cesse de changer chez moi. »",
+   "es": "“Nada me costó más combatir que mi intención, pues cambia en mí una y otra vez.”"
+  },
+  "Sufyān aṯ-Ṯawrī (رحمه الله)": {
+   "ar": "سفيان الثوري (رحمه الله)",
+   "en": "Sufyān aṯ-Ṯawrī (رحمه الله)",
+   "tr": "Sufyān aṯ-Ṯawrī (رحمه الله)",
+   "ku": "Sufyān aṯ-Ṯawrī (رحمه الله)",
+   "ckb": "سفیان الثوری (رحمه الله)",
+   "bs": "Sufyān aṯ-Ṯawrī (رحمه الله)",
+   "fr": "Sufyān aṯ-Ṯawrī (رحمه الله)",
+   "es": "Sufyān aṯ-Ṯawrī (رحمه الله)"
+  },
+  "al-Ḫaṭīb al-Baġdādī, al-Ǧāmiʿ li-Aḫlāq ar-Rāwī wa-Ādāb as-Sāmiʿ, Band 1, S. 317, Nr. 692": {
+   "ar": "الخطيب البغدادي، الجامع لأخلاق الراوي وآداب السامع، المجلد 1، ص 317، رقم 692",
+   "en": "al-Ḫaṭīb al-Baġdādī, al-Ǧāmiʿ li-Aḫlāq ar-Rāwī wa-Ādāb as-Sāmiʿ, volume 1, p. 317, no. 692",
+   "tr": "al-Ḫaṭīb al-Baġdādī, al-Ǧāmiʿ li-Aḫlāq ar-Rāwī wa-Ādāb as-Sāmiʿ, cilt 1, s. 317, no. 692",
+   "ku": "al-Ḫaṭīb al-Baġdādī, al-Ǧāmiʿ li-Aḫlāq ar-Rāwī wa-Ādāb as-Sāmiʿ, cild 1, rûpel 317, hejmar 692",
+   "ckb": "خەتیبی بەغدادی، الجامع لأخلاق الراوي وآداب السامع، بەرگی 1، لاپەڕە 317، ژمارە 692",
+   "bs": "al-Ḫaṭīb al-Baġdādī, al-Ǧāmiʿ li-Aḫlāq ar-Rāwī wa-Ādāb as-Sāmiʿ, svezak 1, str. 317, br. 692",
+   "fr": "al-Ḫaṭīb al-Baġdādī, al-Ǧāmiʿ li-Aḫlāq ar-Rāwī wa-Ādāb as-Sāmiʿ, vol. 1, p. 317, n° 692",
+   "es": "al-Ḫaṭīb al-Baġdādī, al-Ǧāmiʿ li-Aḫlāq ar-Rāwī wa-Ādāb as-Sāmiʿ, vol. 1, p. 317, n.º 692"
+  },
+  "Der Wortlaut bei al-Ḫaṭīb al-Baġdādī": {
+   "ar": "اللفظ عند الخطيب البغدادي",
+   "en": "The wording in al-Ḫaṭīb al-Baġdādī",
+   "tr": "al-Ḫaṭīb al-Baġdādī’deki lafız",
+   "ku": "Gotina li ba al-Ḫaṭīb al-Baġdādī",
+   "ckb": "دەقەکە لای خەتیبی بەغدادی",
+   "bs": "Zvučenje kod al-Ḫaṭība al-Baġdādīja",
+   "fr": "La formulation chez al-Ḫaṭīb al-Baġdādī",
+   "es": "La formulación en al-Ḫaṭīb al-Baġdādī"
+  },
+  "Al-Ḫaṭīb überliefert unter Nr. 692 über Ibn as-Sammāk, der Sufyān aṯ-Ṯawrī hörte, den folgenden Ausspruch:": {
+   "ar": "يروي الخطيب تحت رقم 692، عن ابن السماك الذي سمع سفيان الثوري، القول الآتي:",
+   "en": "Al-Ḫaṭīb transmits, under no. 692, through Ibn as-Sammāk, who heard Sufyān aṯ-Ṯawrī, the following statement:",
+   "tr": "Al-Ḫaṭīb, Sufyān aṯ-Ṯawrī’yi işiten Ibn as-Sammāk yoluyla, 692 numarada şu sözü nakleder:",
+   "ku": "Al-Ḫaṭīb di bin hejmara 692 de, bi rêya Ibn as-Sammāk ê ku Sufyān aṯ-Ṯawrī bihîst, vê gotinê radigihîne:",
+   "ckb": "خەتیب لە ژمارە 692، لە ڕێگەی ئیبن ئەس-سەمماك کە سفیان الثوری بیستووە، ئەم قسەیە دەگێڕێتەوە:",
+   "bs": "Al-Ḫaṭīb pod br. 692 prenosi, preko Ibn as-Sammāka koji je čuo Sufyāna aṯ-Ṯawrīja, sljedeći iskaz:",
+   "fr": "Al-Ḫaṭīb rapporte, sous le n° 692, par Ibn as-Sammāk, qui entendit Sufyān aṯ-Ṯawrī, la parole suivante :",
+   "es": "Al-Ḫaṭīb transmite, bajo el n.º 692, por Ibn as-Sammāk, que oyó a Sufyān aṯ-Ṯawrī, la siguiente declaración:"
+  },
+  "Auf Deutsch: „Nichts fiel mir schwerer als meine Absicht, denn sie verändert sich bei mir immer wieder.“ Der entscheidende Ausdruck lautet": {
+   "ar": "بالألمانية: «لم يكن شيء أشقّ عليّ من نيتي، فإنها تتغير عندي مرة بعد مرة.» والعبارة الحاسمة هي",
+   "en": "In German: “Nothing was harder for me than my intention, for it keeps changing with me.” The decisive expression is",
+   "tr": "Almanca olarak: “Hiçbir şey niyetim kadar bana ağır gelmedi, çünkü o bende sürekli değişiyor.” Belirleyici ifade şudur",
+   "ku": "Bi almanî: “Tiştek ji niyeta min zehmettir li min neket, lewre ew li cem min her tim diguhere.” Gotina biryardar ev e",
+   "ckb": "بە ئەڵمانی: «هیچ شتێک وەک نیەتم لەسەرم قورس نەبوو، چونکە لای من بەردەوام دەگۆڕێت.» دەربڕینە یەکلاکەرەوەکە ئەمەیە",
+   "bs": "Na njemačkom: “Ništa mi nije bilo teže od moje namjere, jer se kod mene stalno mijenja.” Odlučujući izraz glasi",
+   "fr": "En allemand : « Rien ne me fut plus pénible que mon intention, car elle change sans cesse chez moi. » L’expression décisive est",
+   "es": "En alemán: “Nada me resultó más difícil que mi intención, pues cambia en mí una y otra vez.” La expresión decisiva es"
+  },
+  "نِيَّتِي – „meine Absicht“": {
+   "ar": "نِيَّتِي – «نيتي»",
+   "en": "نِيَّتِي – “my intention”",
+   "tr": "نِيَّتِي – “niyetim”",
+   "ku": "نِيَّتِي – “niyeta min”",
+   "ckb": "نِيَّتِي – «نیەتم»",
+   "bs": "نِيَّتِي – “moja namjera”",
+   "fr": "نِيَّتِي – « mon intention »",
+   "es": "نِيَّتِي – “mi intención”"
+  },
+  "Islamweb · al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, 1/317, Nr. 692": {
+   "ar": "إسلام ويب · الجامع لأخلاق الراوي، 1/317، رقم 692",
+   "en": "Islamweb · al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, 1/317, no. 692",
+   "tr": "Islamweb · al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, 1/317, no. 692",
+   "ku": "Islamweb · al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, 1/317, hejmar 692",
+   "ckb": "ئیسلامویب · الجامع لأخلاق الراوي، 1/317، ژمارە 692",
+   "bs": "Islamweb · al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, 1/317, br. 692",
+   "fr": "Islamweb · al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, 1/317, n° 692",
+   "es": "Islamweb · al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, 1/317, n.º 692"
+  },
+  "Originalwortlaut mit Textfragment-Markierung": {
+   "ar": "اللفظ الأصلي مع تحديد موضع النص",
+   "en": "Original wording with a text-fragment marker",
+   "tr": "Metin parçası işaretli özgün lafız",
+   "ku": "Gotina resen bi nîşankirina perçeya nivîsê",
+   "ckb": "دەقی ڕەسەن لەگەڵ دیاریکردنی پارچەی دەق",
+   "bs": "Izvorni tekst s označenim fragmentom",
+   "fr": "Texte original avec marquage du fragment",
+   "es": "Texto original con marcado del fragmento"
+  },
+  "Die überlieferte Wortlautvariante": {
+   "ar": "صيغة اللفظ المروية المختلفة",
+   "en": "The transmitted variant wording",
+   "tr": "Nakledilen lafız varyantı",
+   "ku": "Guhertoya gotinê ya ragihandî",
+   "ckb": "جۆری گێڕدراوی دەقەکە",
+   "bs": "Prenesena varijanta iskaza",
+   "fr": "La variante de formulation transmise",
+   "es": "La variante de formulación transmitida"
+  },
+  "(Band 7, Seite 6 in der Islamweb-Bibliothek) überliefert Abū Nuʿaym über Wakīʿ von Sufyān eine verwandte Aussage:": {
+   "ar": "(المجلد 7، الصفحة 6 في مكتبة إسلام ويب) يروي أبو نعيم عن وكيع عن سفيان قولًا قريبًا:",
+   "en": "(Volume 7, page 6 in the Islamweb library) Abū Nuʿaym transmits, through Wakīʿ, from Sufyān a related statement:",
+   "tr": "(Islamweb kütüphanesinde cilt 7, sayfa 6) Abū Nuʿaym, Wakīʿ yoluyla Sufyān’dan yakın bir söz nakleder:",
+   "ku": "(Di pirtûkxaneya Islamweb de, cild 7, rûpel 6) Abū Nuʿaym bi rêya Wakīʿ ji Sufyān gotineke nêzîk radigihîne:",
+   "ckb": "(بەرگی 7، لاپەڕەی 6 لە کتێبخانەی ئیسلامویب) ئەبوو نوعەیم لە ڕێگەی وەکیعەوە لە سفیان قسەیەکی نزیک دەگێڕێتەوە:",
+   "bs": "(Svezak 7, stranica 6 u biblioteci Islamweb) Abū Nuʿaym prenosi preko Wakīʿa od Sufyāna srodan iskaz:",
+   "fr": "(Volume 7, page 6 dans la bibliothèque Islamweb) Abū Nuʿaym rapporte, par Wakīʿ, de Sufyān une parole apparentée :",
+   "es": "(Volumen 7, página 6 en la biblioteca de Islamweb) Abū Nuʿaym transmite, por Wakīʿ, de Sufyān una declaración afín:"
+  },
+  "نَفْسِي – „mein eigenes Selbst“": {
+   "ar": "نَفْسِي – «نفسي»",
+   "en": "نَفْسِي – “my own self”",
+   "tr": "نَفْسِي – “kendi nefsim”",
+   "ku": "نَفْسِي – “nefsê min bi xwe”",
+   "ckb": "نَفْسِي – «نەفسی خۆم»",
+   "bs": "نَفْسِي – “moje vlastito ja”",
+   "fr": "نَفْسِي – « mon propre nafs »",
+   "es": "نَفْسِي – “mi propio nafs”"
+  },
+  "und nicht „meine Absicht“. Beide Fassungen dürfen in einem wörtlichen Zitat nicht vermischt werden.": {
+   "ar": "وليس «نيتي». لا يجوز خلط الصيغتين في اقتباس حرفي.",
+   "en": "and not “my intention.” The two versions must not be mixed in a verbatim quotation.",
+   "tr": "ve “niyetim” değil. İki lafız, harfî bir alıntıda birbirine karıştırılmamalıdır.",
+   "ku": "ne “niyeta min”. Her du guherto di vegotineke peyv bi peyv de nabin bên tevlihevkirin.",
+   "ckb": "نەک «نیەتم». نابێت هەردوو فۆرمەکە لە گێڕانەوەیەکی وشەبەوشەدا تێکەڵ بکرێن.",
+   "bs": "a ne “moja namjera”. Obje verzije ne smiju se miješati u doslovnom citatu.",
+   "fr": "et non « mon intention ». Les deux versions ne doivent pas être mêlées dans une citation littérale.",
+   "es": "y no “mi intención”. Ambas versiones no deben mezclarse en una cita literal."
+  },
+  "Islamweb · Ḥilyat al-Awliyāʾ, 7/6": {
+   "ar": "إسلام ويب · حلية الأولياء، 7/6",
+   "en": "Islamweb · Ḥilyat al-Awliyāʾ, 7/6",
+   "tr": "Islamweb · Ḥilyat al-Awliyāʾ, 7/6",
+   "ku": "Islamweb · Ḥilyat al-Awliyāʾ, 7/6",
+   "ckb": "ئیسلامویب · حلية الأولياء، 7/6",
+   "bs": "Islamweb · Ḥilyat al-Awliyāʾ, 7/6",
+   "fr": "Islamweb · Ḥilyat al-Awliyāʾ, 7/6",
+   "es": "Islamweb · Ḥilyat al-Awliyāʾ, 7/6"
+  },
+  "Textfragment zur Fassung mit „meinem Selbst“": {
+   "ar": "موضع النص في الصيغة التي فيها «نفسي»",
+   "en": "Text fragment for the version with “my self”",
+   "tr": "“nefsim” geçen rivayetin metin parçası",
+   "ku": "Parçeya nivîsê ya guhertoya bi “nefsê min”",
+   "ckb": "پارچەی دەق بۆ ئەو فۆرمەی «نەفسم»ی تێدایە",
+   "bs": "Fragment teksta za verziju sa “mojim ja”",
+   "fr": "Fragment de texte pour la version avec « mon nafs »",
+   "es": "Fragmento de texto de la versión con “mi propio ser”"
+  },
+  "Weitere klassische Bezeugung": {
+   "ar": "شاهد كلاسيكي آخر",
+   "en": "A further classical attestation",
+   "tr": "Başka bir klasik tanıklık",
+   "ku": "Şehadeteke klasîk a din",
+   "ckb": "شاهێدێکی کلاسیکی دیکە",
+   "bs": "Daljnje klasično svjedočanstvo",
+   "fr": "Une autre attestation classique",
+   "es": "Otra atestación clásica"
+  },
+  "Auch adh-Dhahabī überliefert in": {
+   "ar": "وكذلك يروي الذهبي في",
+   "en": "Adh-Dhahabī also transmits in",
+   "tr": "Adh-Dhahabī de şurada nakleder",
+   "ku": "Adh-Dhahabī jî tê de radigihîne",
+   "ckb": "هەروەها زەهەبی دەگێڕێتەوە لە",
+   "bs": "I adh-Dhahabī prenosi u",
+   "fr": "Adh-Dhahabī transmet également dans",
+   "es": "También adh-Dhahabī transmite en"
+  },
+  "in der Biographie von Sufyān aṯ-Ṯawrī die Fassung mit „meinem Selbst“. Das bestätigt die Existenz der Wortlautvariante, nicht die Gleichheit der Zitate.": {
+   "ar": "في ترجمة سفيان الثوري الصيغة التي فيها «نفسي». وهذا يثبت وجود اختلاف اللفظ، لا تطابق الاقتباسين.",
+   "en": "in the biography of Sufyān aṯ-Ṯawrī the version with “my self.” This confirms that the variant wording exists, not that the quotations are the same.",
+   "tr": "Sufyān aṯ-Ṯawrī’nin biyografisinde “nefsim” lafzını. Bu, lafız varyantının varlığını doğrular; alıntıların aynı olduğunu değil.",
+   "ku": "di jînenîgariya Sufyān aṯ-Ṯawrī de guhertoya bi “nefsê min”. Ev hebûna guhertoya gotinê piştrast dike, ne wekheviya vegotinan.",
+   "ckb": "لە ژیاننامەی سفیان الثوری فۆرمی «نەفسم». ئەمە بوونی جیاوازیی دەق پشتڕاست دەکاتەوە، نەک یەکسانی گێڕانەوەکان.",
+   "bs": "u biografiji Sufyāna aṯ-Ṯawrīja verziju sa “mojim ja”. To potvrđuje postojanje varijante iskaza, a ne istovjetnost citata.",
+   "fr": "dans la biographie de Sufyān aṯ-Ṯawrī la version avec « mon nafs ». Cela confirme l’existence de la variante de formulation, non l’identité des citations.",
+   "es": "en la biografía de Sufyān aṯ-Ṯawrī la versión con “mi propio ser”. Esto confirma que existe la variante de formulación, no que las citas sean idénticas."
+  },
+  "Islamweb · Siyar Aʿlām an-Nubalāʾ, Band 7": {
+   "ar": "إسلام ويب · سير أعلام النبلاء، المجلد 7",
+   "en": "Islamweb · Siyar Aʿlām an-Nubalāʾ, volume 7",
+   "tr": "Islamweb · Siyar Aʿlām an-Nubalāʾ, cilt 7",
+   "ku": "Islamweb · Siyar Aʿlām an-Nubalāʾ, cild 7",
+   "ckb": "ئیسلامویب · سير أعلام النبلاء، بەرگی 7",
+   "bs": "Islamweb · Siyar Aʿlām an-Nubalāʾ, svezak 7",
+   "fr": "Islamweb · Siyar Aʿlām an-Nubalāʾ, volume 7",
+   "es": "Islamweb · Siyar Aʿlām an-Nubalāʾ, volumen 7"
+  },
+  "Klassische Bezeugung der Fassung mit Nafs": {
+   "ar": "شاهد كلاسيكي للصيغة التي فيها نفس",
+   "en": "Classical attestation of the version with nafs",
+   "tr": "Nefs lafzını içeren rivayetin klasik tanıklığı",
+   "ku": "Şehadeta klasîk a guhertoya bi nefsê",
+   "ckb": "شاهێدی کلاسیکی بۆ فۆرمی نەفس",
+   "bs": "Klasično svjedočanstvo verzije sa nefsom",
+   "fr": "Attestation classique de la version avec nafs",
+   "es": "Atestación clásica de la versión con nafs"
+  },
+  "mit dem angegebenen Wortlaut, Band 1, Seite 317, Nr. 692. Frühere und andere klassische Fassungen verwenden stattdessen": {
+   "ar": "باللفظ المذكور، المجلد 1، الصفحة 317، رقم 692. أما الصيغ الكلاسيكية الأقدم وغيرها فتستخدم بدلًا من ذلك",
+   "en": "with the stated wording, volume 1, page 317, no. 692. Earlier and other classical versions use instead",
+   "tr": "belirtilen lafızla, cilt 1, sayfa 317, no. 692. Daha eski ve diğer klasik rivayetler bunun yerine şunu kullanır",
+   "ku": "bi gotina diyarkirî, cild 1, rûpel 317, hejmar 692. Guhertoyên klasîk ên berê û yên din li şûna wê bikar tînin",
+   "ckb": "بەو دەقەی ئاماژەی پێ دراوە، بەرگی 1، لاپەڕە 317، ژمارە 692. فۆرمە کلاسیکییە کۆنترەکان و ئەوانی تر لە جیاتی ئەوە بەکار دەهێنن",
+   "bs": "navedenim zvučenjem, svezak 1, stranica 317, br. 692. Ranije i druge klasične verzije umjesto toga koriste",
+   "fr": "avec la formulation indiquée, volume 1, page 317, n° 692. Des versions classiques antérieures et d’autres utilisent à la place",
+   "es": "con la formulación indicada, volumen 1, página 317, n.º 692. Versiones clásicas anteriores y otras usan en su lugar"
+  },
+  ". Die Lehre ist, die eigene Absicht immer wieder zu prüfen und auf Allah auszurichten.": {
+   "ar": ". والعبرة أن يفحص الإنسان نيته مرة بعد مرة وأن يوجهها إلى الله.",
+   "en": ". The lesson is to examine one’s own intention again and again and to direct it to Allah.",
+   "tr": ". Ders şudur: kişi kendi niyetini tekrar tekrar yoklamalı ve onu Allah’a yöneltmelidir.",
+   "ku": ". Ders ev e ku mirov niyeta xwe careke din û careke din bipirse û ber bi Allah ve bizivirîne.",
+   "ckb": ". وانەکە ئەوەیە مرۆڤ نیەتی خۆی جار لە دوای جار بپشکنێت و بۆ خوای ئاڕاستە بکات.",
+   "bs": ". Pouka je da čovjek svoju namjeru uvijek iznova ispituje i usmjerava je Allahu.",
+   "fr": ". L’enseignement est d’examiner sans cesse sa propre intention et de l’orienter vers Allah.",
+   "es": ". La enseñanza es examinar una y otra vez la propia intención y orientarla hacia Allah."
+  },
+  "zugeschrieben. Es handelt sich nicht um einen prophetischen Ḥadīṯ. Die Fundstellennennung allein ist keine abschließende Bewertung der Überliefererkette.": {
+   "ar": "منسوب. وليس هذا حديثًا نبويًا. ومجرد ذكر موضع الورود ليس حكمًا ختاميًا على سلسلة الرواة.",
+   "en": "attributed. This is not a prophetic ḥadīth. Naming the source location alone is not a final assessment of the chain of transmitters.",
+   "tr": "nispet edilmiştir. Bu, peygamberî bir hadis değildir. Yalnızca kaynağın yerini anmak, râvi zincirinin nihai değerlendirmesi değildir.",
+   "ku": "hatiye nisbetkirin. Ev ne hedîseke pêxemberî ye. Tenê navkirina cihê çavkaniyê nirxandineke dawî ya zincîra ragihanderan nîne.",
+   "ckb": "ڕێی پێ دراوە. ئەمە حەدیسێکی پێغەمبەرانە نییە. تەنها ناوهێنانی شوێنی سەرچاوە هەڵسەنگاندنی کۆتایی بۆ زنجیرەی گێڕەرەوەکان نییە.",
+   "bs": "pripisano. Ovo nije vjerovjesnički hadis. Samo navođenje mjesta izvora nije konačna ocjena lanca prenosilaca.",
+   "fr": "attribué. Il ne s’agit pas d’un hadith prophétique. La seule mention du lieu de la source n’est pas une évaluation finale de la chaîne des transmetteurs.",
+   "es": "atribuido. No se trata de un hadiz profético. Indicar solo el lugar de la fuente no es una valoración final de la cadena de transmisores."
   }
  }
 }

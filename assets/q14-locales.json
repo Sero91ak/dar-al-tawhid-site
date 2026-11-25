@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,258 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Hochmut ist, die Wahrheit abzulehnen – DAR AL TAWḤĪD": {
+   "ar": "الكبر هو ردّ الحق – DAR AL TAWḤĪD",
+   "en": "Arrogance is to reject the truth – DAR AL TAWḤĪD",
+   "tr": "Kibir, hakikati reddetmektir – DAR AL TAWḤĪD",
+   "ku": "Pozbilindî ew e ku mirov rastiyê red bike – DAR AL TAWḤĪD",
+   "ckb": "لووتبەرزی بریتییە لە ڕەتکردنەوەی ڕاستی – DAR AL TAWḤĪD",
+   "bs": "Oholost je odbiti istinu – DAR AL TAWḤĪD",
+   "fr": "L’orgueil, c’est rejeter la vérité – DAR AL TAWḤĪD",
+   "es": "La soberbia es rechazar la verdad – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "مساهمات وفق القرآن والسنة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre katkılar",
+   "ku": "Beşdarî li gor Qurʾān, Sunnah û Āthār",
+   "ckb": "بەشدارییەکان بەپێی القرآن و السنة و الآثار",
+   "bs": "Prilozi prema Qurʾānu, Sunni i Āthāru",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Contribuciones según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Ṣaḥīḥ Muslim · Adab · Kibr": {
+   "ar": "Ṣaḥīḥ Muslim · Adab · Kibr",
+   "en": "Ṣaḥīḥ Muslim · Adab · Kibr",
+   "tr": "Ṣaḥīḥ Muslim · Adab · Kibr",
+   "ku": "Ṣaḥīḥ Muslim · Adab · Kibr",
+   "ckb": "Ṣaḥīḥ Muslim · Adab · Kibr",
+   "bs": "Ṣaḥīḥ Muslim · Adab · Kibr",
+   "fr": "Ṣaḥīḥ Muslim · Adab · Kibr",
+   "es": "Ṣaḥīḥ Muslim · Adab · Kibr"
+  },
+  "Hochmut ist, die Wahrheit abzulehnen": {
+   "ar": "الكبر هو ردّ الحق",
+   "en": "Arrogance is to reject the truth",
+   "tr": "Kibir, hakikati reddetmektir",
+   "ku": "Pozbilindî ew e ku mirov rastiyê red bike",
+   "ckb": "لووتبەرزی بریتییە لە ڕەتکردنەوەی ڕاستی",
+   "bs": "Oholost je odbiti istinu",
+   "fr": "L’orgueil, c’est rejeter la vérité",
+   "es": "La soberbia es rechazar la verdad"
+  },
+  "Kibr, Wahrheit, Ego und Geringschätzung der Menschen.": {
+   "ar": "Kibr، والحق، والأنا، واحتقار الناس.",
+   "en": "Kibr, truth, ego and belittling people.",
+   "tr": "Kibr, hakikat, ego ve insanları küçümseme.",
+   "ku": "Kibr, rastî, ego û piçûk dîtina mirovan.",
+   "ckb": "Kibr، ڕاستی، خود و بچووکزانینی خەڵک.",
+   "bs": "Kibr, istina, ego i omalovažavanje ljudi.",
+   "fr": "Kibr, vérité, ego et mépris des gens.",
+   "es": "Kibr, verdad, ego y menosprecio de la gente."
+  },
+  "Ṣaḥīḥ Muslim, Kitāb al-Īmān, Bāb Taḥrīm al-Kibr wa-Bayānuh, Ḥadīṯ Nr. 91.": {
+   "ar": "Ṣaḥīḥ Muslim، Kitāb al-Īmān، Bāb Taḥrīm al-Kibr wa-Bayānuh، الحديث رقم 91.",
+   "en": "Ṣaḥīḥ Muslim, Kitāb al-Īmān, Bāb Taḥrīm al-Kibr wa-Bayānuh, Ḥadīṯ no. 91.",
+   "tr": "Ṣaḥīḥ Muslim, Kitāb al-Īmān, Bāb Taḥrīm al-Kibr wa-Bayānuh, Ḥadīṯ no. 91.",
+   "ku": "Ṣaḥīḥ Muslim, Kitāb al-Īmān, Bāb Taḥrīm al-Kibr wa-Bayānuh, Ḥadīṯ hejmar 91.",
+   "ckb": "Ṣaḥīḥ Muslim، Kitāb al-Īmān، Bāb Taḥrīm al-Kibr wa-Bayānuh، Ḥadīṯ ژمارە 91.",
+   "bs": "Ṣaḥīḥ Muslim, Kitāb al-Īmān, Bāb Taḥrīm al-Kibr wa-Bayānuh, Ḥadīṯ br. 91.",
+   "fr": "Ṣaḥīḥ Muslim, Kitāb al-Īmān, Bāb Taḥrīm al-Kibr wa-Bayānuh, Ḥadīṯ n° 91.",
+   "es": "Ṣaḥīḥ Muslim, Kitāb al-Īmān, Bāb Taḥrīm al-Kibr wa-Bayānuh, Ḥadīṯ n.º 91."
+  },
+  "Es tritt nicht ins Paradies ein, wer in seinem Herzen das Gewicht eines Stäubchens an Hochmut hat. Ein Mann sagte: „Der Mensch liebt es, dass sein Gewand schön ist und seine Sandalen schön sind.“ Da sagte der Prophet ﷺ: „Gewiss,": {
+   "ar": "لا يدخل الجنة من كان في قلبه مثقال ذرة من كبر. قال رجل: «إن المرء يحب أن يكون ثوبه حسنًا ونعلاه حسنتين.» فقال النبي ﷺ: «إن",
+   "en": "No one enters Paradise who has in his heart the weight of a speck of dust of arrogance. A man said: “A person loves that his garment be beautiful and his sandals be beautiful.” Then the Prophet ﷺ said: “Certainly,",
+   "tr": "Kalbinde bir toz tanesi ağırlığınca kibir bulunan kimse Cennete girmez. Bir adam dedi: “İnsan, elbisesinin güzel olmasını ve nalınlarının güzel olmasını sever.” Bunun üzerine Peygamber ﷺ dedi: “Şüphesiz,",
+   "ku": "Ew kes nakeve cennetê ku di dilê wî de bi qasî giraniya tozekê pozbilindî hebe. Zilamekî got: “Mirov hez dike ku cilê wî xweşik be û solên wî xweşik bin.” Wê gavê Peyamber ﷺ got: “Bêguman,",
+   "ckb": "ئەو کەسە ناچێتە بەهەشت کە لە دڵیدا بە قەبارەی کێشی تۆزێک لووتبەرزی هەبێت. پیاوێک گوتی: «مرۆڤ حەز دەکات جلەکەی جوان بێت و نەعلەکانی جوان بن.» ئەو کاتە پێغەمبەر ﷺ فەرمووی: «بێگومان،",
+   "bs": "U Džennet ne ulazi onaj u čijem srcu ima oholosti koliko težina jedne čestice prašine. Jedan čovjek reče: “Čovjek voli da mu odjeća bude lijepa i da mu sandale budu lijepe.” Tada Poslanik ﷺ reče: “Zaista,",
+   "fr": "N’entre pas au Paradis celui qui a dans le cœur le poids d’un grain de poussière d’orgueil. Un homme dit : « L’homme aime que son vêtement soit beau et que ses sandales soient belles. » Alors le Prophète ﷺ dit : « Certes,",
+   "es": "No entra en el Paraíso quien tenga en su corazón el peso de una mota de polvo de soberbia. Un hombre dijo: “A la persona le gusta que su vestido sea hermoso y que sus sandalias sean hermosas.” Entonces el Profeta ﷺ dijo: “Ciertamente,"
+  },
+  "ist schön und liebt Schönheit. Hochmut ist, die Wahrheit abzulehnen und die Menschen gering zu schätzen.“": {
+   "ar": "جميل ويحب الجمال. الكبر هو ردّ الحق واحتقار الناس.»",
+   "en": "is beautiful and loves beauty. Arrogance is to reject the truth and to belittle people.”",
+   "tr": "güzeldir ve güzelliği sever. Kibir, hakikati reddetmek ve insanları küçümsemektir.”",
+   "ku": "xweşik e û ji xweşikiyê hez dike. Pozbilindî ew e ku mirov rastiyê red bike û mirovan biçûk bibîne.”",
+   "ckb": "جوانە و حەزی لە جوانییە. لووتبەرزی بریتییە لە ڕەتکردنەوەی ڕاستی و بچووکزانینی خەڵک.»",
+   "bs": "lijep je i voli ljepotu. Oholost je odbiti istinu i omalovažavati ljude.”",
+   "fr": "est beau et aime la beauté. L’orgueil, c’est rejeter la vérité et mépriser les gens. »",
+   "es": "es hermoso y ama la hermosura. La soberbia es rechazar la verdad y menospreciar a la gente.”"
+  },
+  "Fundstelle und Einordnung": {
+   "ar": "موضع الورود والتقدير",
+   "en": "Source location and assessment",
+   "tr": "Geçtiği yer ve değerlendirme",
+   "ku": "Cihê jêderê û nirxandin",
+   "ckb": "شوێنی سەرچاوە و هەڵسەنگاندن",
+   "bs": "Mjesto navođenja i ocjena",
+   "fr": "Lieu de la source et appréciation",
+   "es": "Lugar de la fuente y valoración"
+  },
+  "Der Ḥadīṯ wird in Ṣaḥīḥ Muslim im Kitāb al-Īmān unter dem Kapitel über das Verbot und die Erklärung von Hochmut überliefert.": {
+   "ar": "يُروى الحديث في Ṣaḥīḥ Muslim في Kitāb al-Īmān تحت الباب عن تحريم الكبر وبيانه.",
+   "en": "The Ḥadīṯ is transmitted in Ṣaḥīḥ Muslim in Kitāb al-Īmān under the chapter on the prohibition and the explanation of arrogance.",
+   "tr": "Ḥadīṯ, Ṣaḥīḥ Muslim’de Kitāb al-Īmān içinde, kibrin yasaklanması ve açıklanması hakkındaki bölümde rivayet edilir.",
+   "ku": "Ḥadīṯ di Ṣaḥīḥ Muslim de, di Kitāb al-Īmān de, di beşa qedexekirina pozbilindiyê û ravekirina wê de tê veguhastin.",
+   "ckb": "Ḥadīṯ لە Ṣaḥīḥ Muslim لە Kitāb al-Īmān لەژێر ئەو بابەتەدا دەگێڕدرێتەوە کە باس لە قەدەغەکردنی لووتبەرزی و ڕوونکردنەوەی دەکات.",
+   "bs": "Ḥadīṯ se u Ṣaḥīḥ Muslimu, u Kitāb al-Īmān, prenosi pod poglavljem o zabrani i objašnjenju oholosti.",
+   "fr": "Le Ḥadīṯ est transmis dans Ṣaḥīḥ Muslim, dans Kitāb al-Īmān, sous le chapitre sur l’interdiction et l’explication de l’orgueil.",
+   "es": "El Ḥadīṯ se transmite en Ṣaḥīḥ Muslim, en Kitāb al-Īmān, bajo el capítulo sobre la prohibición y la explicación de la soberbia."
+  },
+  ", Kitāb al-Īmān, Bāb Taḥrīm al-Kibr wa-Bayānuh, Ḥadīṯ Nr. 91.": {
+   "ar": "، Kitāb al-Īmān، Bāb Taḥrīm al-Kibr wa-Bayānuh، الحديث رقم 91.",
+   "en": ", Kitāb al-Īmān, Bāb Taḥrīm al-Kibr wa-Bayānuh, Ḥadīṯ no. 91.",
+   "tr": ", Kitāb al-Īmān, Bāb Taḥrīm al-Kibr wa-Bayānuh, Ḥadīṯ no. 91.",
+   "ku": ", Kitāb al-Īmān, Bāb Taḥrīm al-Kibr wa-Bayānuh, Ḥadīṯ hejmar 91.",
+   "ckb": "، Kitāb al-Īmān، Bāb Taḥrīm al-Kibr wa-Bayānuh، Ḥadīṯ ژمارە 91.",
+   "bs": ", Kitāb al-Īmān, Bāb Taḥrīm al-Kibr wa-Bayānuh, Ḥadīṯ br. 91.",
+   "fr": ", Kitāb al-Īmān, Bāb Taḥrīm al-Kibr wa-Bayānuh, Ḥadīṯ n° 91.",
+   "es": ", Kitāb al-Īmān, Bāb Taḥrīm al-Kibr wa-Bayānuh, Ḥadīṯ n.º 91."
+  },
+  "Der Prophet ﷺ trennte zwischen erlaubter Schönheit und verwerflichem Hochmut. Schöne Kleidung ist nicht automatisch Kibr; Kibr ist die innere Ablehnung der Wahrheit und das Herabsetzen der Menschen.": {
+   "ar": "فرّق النبي ﷺ بين الجمال المباح والكبر المذموم. اللباس الجميل ليس تلقائيًا Kibr؛ إن Kibr هو الرفض الباطن للحق وتحقير الناس.",
+   "en": "The Prophet ﷺ distinguished between permitted beauty and blameworthy arrogance. Beautiful clothing is not automatically Kibr; Kibr is the inner rejection of the truth and the belittling of people.",
+   "tr": "Peygamber ﷺ mübah güzellik ile yerilen kibri birbirinden ayırdı. Güzel elbise kendiliğinden Kibr değildir; Kibr, hakikati içten reddetmek ve insanları küçümsemektir.",
+   "ku": "Peyamber ﷺ ferq kir di navbera xweşikiya destûrdar û pozbilindiya nebaş de. Cilê xweşik bi xweber Kibr nîne; Kibr redkirina hundirîn a rastiyê û biçûk dîtina mirovan e.",
+   "ckb": "پێغەمبەر ﷺ جیاوازی کرد لە نێوان جوانیی ڕێگەپێدراو و لووتبەرزیی نەفرەتلێکراو. جلوبەرگی جوان بەخۆکار Kibr نییە؛ Kibr ڕەتکردنەوەی ناوەکی ڕاستییە و بچووکزانینی خەڵکە.",
+   "bs": "Poslanik ﷺ razdvojio je dozvoljenu ljepotu i pokuđenu oholost. Lijepa odjeća nije automatski Kibr; Kibr je unutarnje odbijanje istine i omalovažavanje ljudi.",
+   "fr": "Le Prophète ﷺ a distingué la beauté permise et l’orgueil blâmable. Un beau vêtement n’est pas automatiquement du Kibr ; le Kibr est le rejet intérieur de la vérité et le rabaissement des gens.",
+   "es": "El Profeta ﷺ distinguió entre la hermosura permitida y la soberbia censurable. La ropa hermosa no es automáticamente Kibr; Kibr es el rechazo interior de la verdad y el menosprecio de la gente."
+  },
+  "Bedeutung der zwei Begriffe": {
+   "ar": "معنى المصطلحين",
+   "en": "Meaning of the two terms",
+   "tr": "İki kavramın anlamı",
+   "ku": "Wateya her du têgehan",
+   "ckb": "واتای هەردوو زاراوەکە",
+   "bs": "Značenje dvaju pojmova",
+   "fr": "Sens des deux termes",
+   "es": "Significado de los dos términos"
+  },
+  "bedeutet: die Wahrheit zurückweisen, wegdrücken oder nicht annehmen, obwohl sie klar geworden ist.": {
+   "ar": "يعني: ردّ الحق، ودفعه، أو عدم قبوله، مع أنه قد بان.",
+   "en": "means: to reject the truth, to push it aside, or not to accept it, although it has become clear.",
+   "tr": "şudur: hakikati geri çevirmek, bir kenara itmek veya açık hale geldiği hâlde kabul etmemek.",
+   "ku": "wateya wê: rastiyê red kirin, alîkî ve avêtin, an jî qebûl nekirin, her çend ew zelal bûbe.",
+   "ckb": "واتا: ڕاستی ڕەت بکرێتەوە، لای ببردرێت، یان قبوڵ نەکرێت، ئەگەرچی ڕوون بووبێتەوە.",
+   "bs": "znači: istinu odbiti, odgurnuti je ili je ne prihvatiti, iako je postala jasna.",
+   "fr": "signifie : rejeter la vérité, la repousser ou ne pas l’accepter, bien qu’elle soit devenue claire.",
+   "es": "significa: rechazar la verdad, apartarla o no aceptarla, aunque se haya vuelto clara."
+  },
+  "bedeutet: die Menschen gering schätzen, sie herabsetzen oder sie als unbedeutend ansehen.": {
+   "ar": "يعني: احتقار الناس، وتحقيرهم، أو عدّهم بلا شأن.",
+   "en": "means: to belittle people, to demean them, or to regard them as insignificant.",
+   "tr": "şudur: insanları küçümsemek, onları aşağılamak veya önemsiz görmek.",
+   "ku": "wateya wê: mirovan biçûk dîtin, wan nizim kirin, an jî wan bêqîmet dîtin.",
+   "ckb": "واتا: خەڵک بچووک بزانرێت، سووکایەتییان پێ بکرێت، یان بە بێبایەخ دابنرێن.",
+   "bs": "znači: ljude omalovažavati, ponižavati ih ili ih smatrati beznačajnima.",
+   "fr": "signifie : mépriser les gens, les rabaisser ou les tenir pour insignifiants.",
+   "es": "significa: menospreciar a la gente, rebajarla o considerarla insignificante."
+  },
+  "Darum ist Kibr nicht nur eine äußere Haltung, sondern eine Krankheit des Herzens gegenüber Wahrheit und Menschen.": {
+   "ar": "لذلك ليس Kibr مجرد هيئة ظاهرة، بل مرض في القلب تجاه الحق والناس.",
+   "en": "Therefore Kibr is not only an outward attitude, but a disease of the heart toward the truth and toward people.",
+   "tr": "Bu yüzden Kibr yalnızca dış bir tutum değil, hakikate ve insanlara karşı kalbin bir hastalığıdır.",
+   "ku": "Ji ber vê yekê Kibr ne tenê rewşeke derve ye, belkî nexweşiyeke dil e li hember rastiyê û mirovan.",
+   "ckb": "لەبەر ئەوە Kibr تەنها ڕەفتارێکی دەرەکی نییە، بەڵکو نەخۆشیی دڵە بەرامبەر ڕاستی و خەڵک.",
+   "bs": "Zato Kibr nije samo vanjski stav, nego bolest srca prema istini i ljudima.",
+   "fr": "C’est pourquoi le Kibr n’est pas seulement une attitude extérieure, mais une maladie du cœur envers la vérité et les gens.",
+   "es": "Por eso Kibr no es solo una actitud exterior, sino una enfermedad del corazón frente a la verdad y frente a la gente."
+  },
+  "Der Beitrag bleibt kurz: Hochmut ist, wenn man die Wahrheit erkennt und sie trotzdem ablehnt. Der Quellenlink zeigt ausführlicher, dass der Ḥadīṯ nicht äußere Schönheit verbietet, sondern die innere Überheblichkeit gegenüber Wahrheit und Menschen erklärt.": {
+   "ar": "يبقى النص قصيرًا: الكبر هو أن يعرف الإنسان الحق ثم يرده. ويُظهر رابط المصدر بتفصيل أكثر أن الحديث لا يحرّم الجمال الظاهر، بل يبيّن الاستعلاء الباطن تجاه الحق والناس.",
+   "en": "The post stays short: arrogance is when one recognizes the truth and still rejects it. The source link shows in more detail that the Ḥadīṯ does not forbid outward beauty, but explains the inner haughtiness toward the truth and toward people.",
+   "tr": "Metin kısa kalır: kibir, kişinin hakikati görüp yine de reddetmesidir. Kaynak bağlantısı daha ayrıntılı gösterir ki Ḥadīṯ dış güzelliği yasaklamaz, hakikate ve insanlara karşı içteki büyüklenmeyi açıklar.",
+   "ku": "Nivîs kurt dimîne: pozbilindî ew e ku mirov rastiyê nas bike û dîsa jî red bike. Girêdana jêderê bi berfirehî nîşan dide ku Ḥadīṯ xweşikiya derve qedexe nake, belkî mezinkirina hundirîn li hember rastiyê û mirovan rave dike.",
+   "ckb": "بابەتەکە کورت دەمێنێتەوە: لووتبەرزی ئەوەیە کە مرۆڤ ڕاستی بناسێت و هێشتا ڕەتی بکاتەوە. بەستەری سەرچاوە بە وردیتر نیشان دەدات کە Ḥadīṯ جوانیی دەرەکی قەدەغە ناکات، بەڵکو لووتبەرزیی ناوەکی بەرامبەر ڕاستی و خەڵک ڕوون دەکاتەوە.",
+   "bs": "Tekst ostaje kratak: oholost je kada čovjek prepozna istinu i ipak je odbije. Link izvora podrobnije pokazuje da Ḥadīṯ ne zabranjuje vanjsku ljepotu, nego objašnjava unutarnju uzdignutost prema istini i ljudima.",
+   "fr": "Le texte reste bref : l’orgueil, c’est reconnaître la vérité et la rejeter malgré cela. Le lien de la source montre plus en détail que le Ḥadīṯ n’interdit pas la beauté extérieure, mais explique la hauteur intérieure envers la vérité et les gens.",
+   "es": "El texto permanece breve: la soberbia es reconocer la verdad y rechazarla aun así. El enlace de la fuente muestra con más detalle que el Ḥadīṯ no prohíbe la hermosura exterior, sino que explica la altivez interior frente a la verdad y frente a la gente."
+  },
+  "Ḥadīṯ in Ṣaḥīḥ Muslim öffnen": {
+   "ar": "افتح الحديث في Ṣaḥīḥ Muslim",
+   "en": "Open the Ḥadīṯ in Ṣaḥīḥ Muslim",
+   "tr": "Ḥadīṯ’i Ṣaḥīḥ Muslim’de aç",
+   "ku": "Ḥadīṯ di Ṣaḥīḥ Muslim de veke",
+   "ckb": "Ḥadīṯ لە Ṣaḥīḥ Muslim بکەرەوە",
+   "bs": "Otvori Ḥadīṯ u Ṣaḥīḥ Muslimu",
+   "fr": "Ouvrir le Ḥadīṯ dans Ṣaḥīḥ Muslim",
+   "es": "Abrir el Ḥadīṯ en Ṣaḥīḥ Muslim"
+  },
+  "Islamweb · Kitāb al-Īmān · Bāb Taḥrīm al-Kibr wa-Bayānuh": {
+   "ar": "Islamweb · Kitāb al-Īmān · Bāb Taḥrīm al-Kibr wa-Bayānuh",
+   "en": "Islamweb · Kitāb al-Īmān · Bāb Taḥrīm al-Kibr wa-Bayānuh",
+   "tr": "Islamweb · Kitāb al-Īmān · Bāb Taḥrīm al-Kibr wa-Bayānuh",
+   "ku": "Islamweb · Kitāb al-Īmān · Bāb Taḥrīm al-Kibr wa-Bayānuh",
+   "ckb": "Islamweb · Kitāb al-Īmān · Bāb Taḥrīm al-Kibr wa-Bayānuh",
+   "bs": "Islamweb · Kitāb al-Īmān · Bāb Taḥrīm al-Kibr wa-Bayānuh",
+   "fr": "Islamweb · Kitāb al-Īmān · Bāb Taḥrīm al-Kibr wa-Bayānuh",
+   "es": "Islamweb · Kitāb al-Īmān · Bāb Taḥrīm al-Kibr wa-Bayānuh"
+  },
+  "Dorar · Ṣaḥīḥ Muslim 1/93 · Nr. 91": {
+   "ar": "Dorar · Ṣaḥīḥ Muslim 1/93 · رقم 91",
+   "en": "Dorar · Ṣaḥīḥ Muslim 1/93 · no. 91",
+   "tr": "Dorar · Ṣaḥīḥ Muslim 1/93 · no. 91",
+   "ku": "Dorar · Ṣaḥīḥ Muslim 1/93 · hejmar 91",
+   "ckb": "Dorar · Ṣaḥīḥ Muslim 1/93 · ژمارە 91",
+   "bs": "Dorar · Ṣaḥīḥ Muslim 1/93 · br. 91",
+   "fr": "Dorar · Ṣaḥīḥ Muslim 1/93 · n° 91",
+   "es": "Dorar · Ṣaḥīḥ Muslim 1/93 · n.º 91"
+  },
+  "Erklärung der Begriffe öffnen": {
+   "ar": "افتح شرح المصطلحين",
+   "en": "Open the explanation of the terms",
+   "tr": "Kavramların açıklamasını aç",
+   "ku": "Ravekirina têgehan veke",
+   "ckb": "ڕوونکردنەوەی زاراوەکان بکەرەوە",
+   "bs": "Otvori objašnjenje pojmova",
+   "fr": "Ouvrir l’explication des termes",
+   "es": "Abrir la explicación de los términos"
+  },
+  "Islamweb · Tuḥfat al-Aḥwadhī · Baṭar al-Ḥaqq und Ghamṭ an-Nās": {
+   "ar": "Islamweb · Tuḥfat al-Aḥwadhī · Baṭar al-Ḥaqq و Ghamṭ an-Nās",
+   "en": "Islamweb · Tuḥfat al-Aḥwadhī · Baṭar al-Ḥaqq and Ghamṭ an-Nās",
+   "tr": "Islamweb · Tuḥfat al-Aḥwadhī · Baṭar al-Ḥaqq ve Ghamṭ an-Nās",
+   "ku": "Islamweb · Tuḥfat al-Aḥwadhī · Baṭar al-Ḥaqq û Ghamṭ an-Nās",
+   "ckb": "Islamweb · Tuḥfat al-Aḥwadhī · Baṭar al-Ḥaqq و Ghamṭ an-Nās",
+   "bs": "Islamweb · Tuḥfat al-Aḥwadhī · Baṭar al-Ḥaqq i Ghamṭ an-Nās",
+   "fr": "Islamweb · Tuḥfat al-Aḥwadhī · Baṭar al-Ḥaqq et Ghamṭ an-Nās",
+   "es": "Islamweb · Tuḥfat al-Aḥwadhī · Baṭar al-Ḥaqq y Ghamṭ an-Nās"
+  },
+  "Thematische Vertiefung öffnen": {
+   "ar": "افتح التعمق الموضوعي",
+   "en": "Open the thematic deepening",
+   "tr": "Konu derinleştirmesini aç",
+   "ku": "Kûrbûna mijarê veke",
+   "ckb": "قووڵکردنەوەی بابەتی بکەرەوە",
+   "bs": "Otvori tematsko produbljivanje",
+   "fr": "Ouvrir l’approfondissement thématique",
+   "es": "Abrir la profundización temática"
+  },
+  "Islamweb · Maǧmūʿ al-Fatāwā · Kibr, Wahrheit und Menschenrecht": {
+   "ar": "Islamweb · Maǧmūʿ al-Fatāwā · Kibr، والحق، وحق الناس",
+   "en": "Islamweb · Maǧmūʿ al-Fatāwā · Kibr, truth and the right of people",
+   "tr": "Islamweb · Maǧmūʿ al-Fatāwā · Kibr, hakikat ve insanların hakkı",
+   "ku": "Islamweb · Maǧmūʿ al-Fatāwā · Kibr, rastî û mafê mirovan",
+   "ckb": "Islamweb · Maǧmūʿ al-Fatāwā · Kibr، ڕاستی و مافی خەڵک",
+   "bs": "Islamweb · Maǧmūʿ al-Fatāwā · Kibr, istina i pravo ljudi",
+   "fr": "Islamweb · Maǧmūʿ al-Fatāwā · Kibr, vérité et droit des gens",
+   "es": "Islamweb · Maǧmūʿ al-Fatāwā · Kibr, verdad y derecho de la gente"
+  },
+  "Hochmut ist nicht bloß Auftreten. Hochmut ist, wenn ein Mensch die Wahrheit nicht annimmt und andere Menschen herabsetzt.": {
+   "ar": "ليس الكبر مجرد هيئة. الكبر هو أن لا يقبل الإنسان الحق وأن يحطّ من شأن الناس الآخرين.",
+   "en": "Arrogance is not merely demeanor. Arrogance is when a person does not accept the truth and belittles other people.",
+   "tr": "Kibir yalnızca bir duruş değildir. Kibir, kişinin hakikati kabul etmemesi ve başka insanları küçümsemesidir.",
+   "ku": "Pozbilindî ne tenê tevger e. Pozbilindî ew e ku mirov rastiyê qebûl neke û mirovên din biçûk bibîne.",
+   "ckb": "لووتبەرزی تەنها ڕەفتار نییە. لووتبەرزی ئەوەیە کە مرۆڤ ڕاستی قبوڵ نەکات و خەڵکی دیکە بچووک بزانێت.",
+   "bs": "Oholost nije samo držanje. Oholost je kada čovjek ne prima istinu i omalovažava druge ljude.",
+   "fr": "L’orgueil n’est pas seulement une allure. L’orgueil, c’est lorsqu’une personne n’accepte pas la vérité et rabaisse les autres.",
+   "es": "La soberbia no es solo el porte. La soberbia es cuando una persona no acepta la verdad y menosprecia a otras personas."
   }
  }
 }

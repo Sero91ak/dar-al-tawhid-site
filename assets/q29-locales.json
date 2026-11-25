@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,238 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Ayyūb as-Sakhtiyānī – Wenn Fleiß auf Bidʿah nicht rettet – DAR AL TAWḤĪD": {
+   "ar": "أيوب السختياني – إذا لم ينقذ الاجتهاد على البدعة – DAR AL TAWḤĪD",
+   "en": "Ayyūb as-Sakhtiyānī – When diligence upon bidʿah does not save – DAR AL TAWḤĪD",
+   "tr": "Eyyûb es-Sahtiyânî – Bid‘at üzerindeki gayret kurtarmadığında – DAR AL TAWḤĪD",
+   "ku": "Eyyûb es-Saxtiyânî – Dema ku xîret li ser bidʿah rizgar nake – DAR AL TAWḤĪD",
+   "ckb": "ئەیووبی سەختیانی – کاتێک تێکۆشان لەسەر بدعە ڕزگار ناکات – DAR AL TAWḤĪD",
+   "bs": "Ejjūb es-Sahtijānī – Kada marljivost na bidʿi ne spašava – DAR AL TAWḤĪD",
+   "fr": "Ayyūb as-Sakhtiyānī – Lorsque l’assiduité sur une bidʿah ne sauve pas – DAR AL TAWḤĪD",
+   "es": "Ayyūb as-Sakhtiyānī – Cuando el empeño sobre una bidʿah no salva – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "مقالات وفق القرآن والسنة والآثار",
+   "en": "Articles according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre yazılar",
+   "ku": "Nivîs li gorî Qurʾān, Sunnah û Āthār",
+   "ckb": "بابەتەکان بەپێی قورئان و سوننەت و ئاسەوار",
+   "bs": "Tekstovi prema Qurʾānu, Sunnah i Āthāru",
+   "fr": "Articles selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Artículos según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Manhaj · Bidʿah · Sunnah · Ittibāʿ": {
+   "ar": "منهج · بدعة · سنة · اتباع",
+   "en": "Manhaj · Bidʿah · Sunnah · Ittibāʿ",
+   "tr": "Manhaj · Bidʿah · Sunnah · Ittibāʿ",
+   "ku": "Manhaj · Bidʿah · Sunnah · Ittibāʿ",
+   "ckb": "منهج · بدعة · سنة · اتباع",
+   "bs": "Manhaj · Bidʿah · Sunnah · Ittibāʿ",
+   "fr": "Manhaj · Bidʿah · Sunnah · Ittibāʿ",
+   "es": "Manhaj · Bidʿah · Sunnah · Ittibāʿ"
+  },
+  "Wenn Fleiß auf Bidʿah nicht rettet": {
+   "ar": "إذا لم ينقذ الاجتهاد على البدعة",
+   "en": "When diligence upon bidʿah does not save",
+   "tr": "Bid‘at üzerindeki gayret kurtarmadığında",
+   "ku": "Dema ku xîret li ser bidʿah rizgar nake",
+   "ckb": "کاتێک تێکۆشان لەسەر بدعە ڕزگار ناکات",
+   "bs": "Kada marljivost na bidʿi ne spašava",
+   "fr": "Lorsque l’assiduité sur une bidʿah ne sauve pas",
+   "es": "Cuando el empeño sobre una bidʿah no salva"
+  },
+  "„Der Anhänger einer Bidʿah nimmt nicht an Anstrengung zu, außer dass er dadurch nur noch mehr an Entfernung von Allah zunimmt.“": {
+   "ar": "«ما ازداد صاحب بدعة اجتهادًا إلا ازداد بذلك بُعدًا من الله.»",
+   "en": "“The follower of a bidʿah does not increase in exertion except that he thereby only increases further in distance from Allah.”",
+   "tr": "“Bid‘at ehli, çabada artmaz ki bununla ancak Allah’tan uzaklığı daha da artsın.”",
+   "ku": "“Peyrewê bidʿah di xîretê de zêde nabe, ji bilî ku bi wê yekê tenê dûrbûna wî ji Allah hîn zêdetir bibe.”",
+   "ckb": "«شوێنکەوتی بدعە لە تێکۆشاندا زیاد ناکات، مەگەر بەوە تەنها دوورییەکەی لە الله زیاتر ببێت.»",
+   "bs": "„Sljedbenik bidʿe ne uvećava trud, a da time samo još više ne uveća udaljenost od Allaha.“",
+   "fr": "« L’adepte d’une bidʿah n’augmente pas en effort, si ce n’est qu’il n’en augmente encore que son éloignement d’Allah. »",
+   "es": "«El seguidor de una bidʿah no aumenta en esfuerzo, sino que con ello solo aumenta aún más en lejanía de Allah.»"
+  },
+  "Ayyūb as-Sakhtiyānī رحمه الله": {
+   "ar": "أيوب السختياني رحمه الله",
+   "en": "Ayyūb as-Sakhtiyānī رحمه الله",
+   "tr": "Eyyûb es-Sahtiyânî رحمه الله",
+   "ku": "Eyyûb es-Saxtiyânî رحمه الله",
+   "ckb": "ئەیووبی سەختیانی رحمه الله",
+   "bs": "Ejjūb es-Sahtijānī رحمه الله",
+   "fr": "Ayyūb as-Sakhtiyānī رحمه الله",
+   "es": "Ayyūb as-Sakhtiyānī رحمه الله"
+  },
+  "Warnung vor Bidʿah, falscher ʿIbādah und Anstrengung ohne Sunnah.": {
+   "ar": "التحذير من البدعة، والعبادة الفاسدة، والاجتهاد من غير سنة.",
+   "en": "Warning against bidʿah, false ʿibādah, and exertion without the Sunnah.",
+   "tr": "Bid‘ate, bozuk ʿibâdete ve Sünnetsiz çabaya karşı uyarı.",
+   "ku": "Hişyarî ji bidʿah, ʿibādah a xelet, û xîreta bê Sunnah.",
+   "ckb": "ئاگادارکردنەوە لە بدعە، عیبادەتی هەڵە، و تێکۆشان بێ سوننەت.",
+   "bs": "Upozorenje od bidʿe, pogrešne ʿibāde i truda bez Sunne.",
+   "fr": "Mise en garde contre la bidʿah, une ʿibādah fausse, et l’effort sans la Sunnah.",
+   "es": "Advertencia frente a la bidʿah, una ʿibādah falsa y el esfuerzo sin la Sunnah."
+  },
+  "al-Mawsūʿah al-ʿAqadiyyah": {
+   "ar": "الموسوعة العقدية",
+   "en": "al-Mawsūʿah al-ʿAqadiyyah",
+   "tr": "al-Mawsūʿah al-ʿAqadiyyah",
+   "ku": "al-Mawsūʿah al-ʿAqadiyyah",
+   "ckb": "الموسوعة العقدیة",
+   "bs": "al-Mawsūʿah al-ʿAqadiyyah",
+   "fr": "al-Mawsūʿah al-ʿAqadiyyah",
+   "es": "al-Mawsūʿah al-ʿAqadiyyah"
+  },
+  ", Abschnitt über die Gefahr der Bidʿah und ihre schlechten Folgen.": {
+   "ar": "، قسم عن خطر البدعة وعواقبها السيئة.",
+   "en": ", section on the danger of bidʿah and its bad consequences.",
+   "tr": ", bid‘atin tehlikesi ve kötü sonuçları üzerine bölüm.",
+   "ku": ", beş li ser metirsiya bidʿah û encamên wê yên xirab.",
+   "ckb": "، بەشێک دەربارەی مەترسی بدعە و ئەنجامە خراپەکانی.",
+   "bs": ", odjeljak o opasnosti bidʿe i njezinim lošim posljedicama.",
+   "fr": ", section sur le danger de la bidʿah et ses mauvaises conséquences.",
+   "es": ", sección sobre el peligro de la bidʿah y sus malas consecuencias."
+  },
+  "Aussage von Ayyūb as-Sakhtiyānī": {
+   "ar": "قول أيوب السختياني",
+   "en": "Statement of Ayyūb as-Sakhtiyānī",
+   "tr": "Eyyûb es-Sahtiyânî’nin sözü",
+   "ku": "Gotina Eyyûb es-Saxtiyânî",
+   "ckb": "وتەی ئەیووبی سەختیانی",
+   "bs": "Izjava Ejjūba es-Sahtijānīja",
+   "fr": "Parole d’Ayyūb as-Sakhtiyānī",
+   "es": "Declaración de Ayyūb as-Sakhtiyānī"
+  },
+  "Ayyūb as-Sakhtiyānī رحمه الله sagte:": {
+   "ar": "قال أيوب السختياني رحمه الله:",
+   "en": "Ayyūb as-Sakhtiyānī رحمه الله said:",
+   "tr": "Eyyûb es-Sahtiyânî رحمه الله dedi:",
+   "ku": "Eyyûb es-Saxtiyânî رحمه الله got:",
+   "ckb": "ئەیووبی سەختیانی رحمه الله فەرمووی:",
+   "bs": "Ejjūb es-Sahtijānī رحمه الله je rekao:",
+   "fr": "Ayyūb as-Sakhtiyānī رحمه الله a dit :",
+   "es": "Ayyūb as-Sakhtiyānī رحمه الله dijo:"
+  },
+  "zu, außer dass er dadurch nur noch mehr an": {
+   "ar": "في، إلا أنه بذلك لا يزيد إلا في",
+   "en": "in, except that he thereby only increases further in",
+   "tr": "de, ancak bununla yalnızca şunda daha da artar:",
+   "ku": "de, ji bilî ku bi wê yekê tenê hîn zêdetir bibe di",
+   "ckb": "دا، مەگەر بەوە تەنها زیاتر ببێت لە",
+   "bs": "u, osim što time samo još više uveća",
+   "fr": "en, si ce n’est qu’il n’en augmente encore que",
+   "es": "en, salvo que con ello solo aumenta aún más en"
+  },
+  ", S. 67; angeführt bei Dorar,": {
+   "ar": "، ص 67؛ مذكور عند دورار،",
+   "en": ", p. 67; cited at Dorar,",
+   "tr": ", s. 67; Dorar’da anılır,",
+   "ku": ", r. 67; li Dorar tê anîn,",
+   "ckb": "، ل 67؛ لە دوراردا هاتووە،",
+   "bs": ", str. 67; navedeno kod Dorara,",
+   "fr": ", p. 67 ; cité chez Dorar,",
+   "es": ", p. 67; citado en Dorar,"
+  },
+  ", im Abschnitt über die Gefahr der Bidʿah und ihre schlechten Folgen.": {
+   "ar": "، في قسم خطر البدعة وعواقبها السيئة.",
+   "en": ", in the section on the danger of bidʿah and its bad consequences.",
+   "tr": ", bid‘atin tehlikesi ve kötü sonuçları bölümünde.",
+   "ku": ", di beşa metirsiya bidʿah û encamên wê yên xirab de.",
+   "ckb": "، لە بەشی مەترسی بدعە و ئەنجامە خراپەکانیدا.",
+   "bs": ", u odjeljku o opasnosti bidʿe i njezinim lošim posljedicama.",
+   "fr": ", dans la section sur le danger de la bidʿah et ses mauvaises conséquences.",
+   "es": ", en la sección sobre el peligro de la bidʿah y sus malas consecuencias."
+  },
+  "Die Aussage richtet den Blick auf eine ernste Grenze: Nicht jede sichtbare": {
+   "ar": "القول يوجّه النظر إلى حدّ خطير: ليست كل",
+   "en": "The statement directs the gaze to a serious boundary: not every visible",
+   "tr": "Söz bakışı ciddi bir sınıra çevirir: Her görünen",
+   "ku": "Gotin nihêrînê ber bi sînorekî giran ve dike: Ne her",
+   "ckb": "وتەکە سەرنج ئاڕاستەی سنوورێکی مەترسیدار دەکات: نە هەموو",
+   "bs": "Izjava usmjerava pogled na ozbiljnu granicu: nije svaka vidljiva",
+   "fr": "La parole dirige le regard vers une limite grave : ce n’est pas toute",
+   "es": "La declaración dirige la mirada hacia un límite grave: no toda"
+  },
+  ", nicht jeder Fleiß und nicht jede Anstrengung ist Nähe zu Allah. Der Maßstab ist nicht bloß die Menge der Handlung, sondern ob sie auf": {
+   "ar": "، ولا كل اجتهاد، ولا كل جهد هو قرب من الله. الميزان ليس مجرد كثرة العمل، بل هل هو على",
+   "en": ", nor every diligence, nor every exertion is nearness to Allah. The measure is not merely the amount of action, but whether it rests on",
+   "tr": "değil, her gayret de, her çaba da Allah’a yakınlık değildir. Ölçü salt amelin çokluğu değil, onun şunun üzerinde olup olmadığıdır:",
+   "ku": "ne, ne her xîret û ne her hewl nêzîkbûna ji Allah e. Pîvan ne tenê pirbûna kirinê ye, lê gelo ew li ser",
+   "ckb": "، نە هەموو تێکۆشان، و نە هەموو ماندووبوون نزیکی لە الله نییە. پێوەر تەنها زۆری کردار نییە، بەڵکو ئایا لەسەر",
+   "bs": ", niti svaka marljivost, niti svaki napor blizina je Allahu. Mjerilo nije samo količina djela, nego da li ono stoji na",
+   "fr": ", ni toute assiduité, ni tout effort n’est une proximité d’Allah. La mesure n’est pas seulement la quantité de l’acte, mais s’il repose sur",
+   "es": ", ni toda diligencia, ni todo esfuerzo es cercanía a Allah. La medida no es solo la cantidad de la obra, sino si descansa sobre"
+  },
+  "Darum warnten die frühen Imāme davor, eine erfundene religiöse Handlung mit viel Eifer zu schmücken. Wenn die Grundlage falsch ist, kann vermehrter Fleiß den Irrtum verfestigen und das Herz noch stärker an die eigene Bidʿah binden.": {
+   "ar": "لذلك حذّر الأئمة المتقدمون من تزيين عمل ديني مخترع بكثير من الحماسة. إذا كان الأصل فاسدًا، فقد يثبّت الاجتهاد الزائد الخطأ، ويربط القلب ببدعته ربطًا أقوى.",
+   "en": "Therefore the early imāms warned against adorning an invented religious act with much zeal. If the foundation is false, increased diligence can harden the error and bind the heart still more strongly to its own bidʿah.",
+   "tr": "Bu yüzden ilk imamlar, uydurulmuş dinî bir ameli çok gayretle süslemeye karşı uyardılar. Temel yanlışsa, artan gayret yanlışı pekiştirebilir ve kalbi kendi bid‘atine daha güçlü bağlayabilir.",
+   "ku": "Ji ber vê yekê îmamên pêşîn ji xemilandina kirineke dînî ya çêkirî bi gelek xîretê hişyar kirin. Eger bingeh xelet be, xîreta zêde dikare xeletiyê hişk bike û dil hîn bihêztir bi bidʿah a wî ve girê bide.",
+   "ckb": "بۆیە ئیمامە پێشینەکان ئاگاداریان کردەوە لە ڕازاندنەوەی کردارێکی دینی داڕێژراو بە زۆر تێکۆشان. ئەگەر بنەڕەت هەڵە بێت، تێکۆشانی زیادە دەتوانێت هەڵەکە پتەو بکات و دڵ بەهێزتر بە بدعەکەی خۆیەوە ببەستێت.",
+   "bs": "Zato su rani imami upozoravali na ukrašavanje izmišljenog vjerskog djela velikim žarom. Ako je temelj pogrešan, uvećana marljivost može učvrstiti zabludu i srce još jače vezati za vlastitu bidʿu.",
+   "fr": "C’est pourquoi les premiers imāms ont mis en garde contre le fait de parer un acte religieux inventé de beaucoup de zèle. Si le fondement est faux, un surcroît d’assiduité peut durcir l’erreur et lier le cœur encore plus fortement à sa propre bidʿah.",
+   "es": "Por eso los primeros imāmes advirtieron contra adornar un acto religioso inventado con mucho celo. Si el fundamento es falso, un empeño mayor puede endurecer el error y atar el corazón aún más fuerte a su propia bidʿah."
+  },
+  "Direkte Quellenstellen öffnen": {
+   "ar": "فتح مواضع المصادر المباشرة",
+   "en": "Open the direct source passages",
+   "tr": "Doğrudan kaynak yerlerini aç",
+   "ku": "Cihên rasterast ên çavkaniyan veke",
+   "ckb": "شوێنە ڕاستەوخۆکانی سەرچاوە بکەرەوە",
+   "bs": "Otvori izravna mjesta u izvorima",
+   "fr": "Ouvrir les passages directs des sources",
+   "es": "Abrir los pasajes directos de las fuentes"
+  },
+  "Der folgende Nachweis führt zur passenden Textstelle. Die Fundstelle nennt Werk, Band, Seite und Abschnitt, damit die Aussage direkt nachvollziehbar bleibt.": {
+   "ar": "الشاهد التالي يؤدي إلى موضع النص المناسب. موضع الورود يذكر الكتاب، والجزء، والصفحة، والقسم، حتى يبقى القول قابلًا للتتبع مباشرة.",
+   "en": "The following reference leads to the fitting text passage. The locus names the work, volume, page, and section, so that the statement remains directly traceable.",
+   "tr": "Aşağıdaki delil uygun metin yerine götürür. Geçtiği yer eser, cilt, sayfa ve bölümü bildirir; böylece söz doğrudan izlenebilir kalır.",
+   "ku": "Belgeya jêrîn dibe cihê nivîsê yê guncaw. Cihê hatinê berhem, cild, rûpel û beşê dide, da ku gotin rasterast were şopandin.",
+   "ckb": "ئەم بەڵگەیەی خوارەوە دەباتە شوێنی دەقی گونجاو. شوێنی هاتن کتێب، بەرگ، لاپەڕە و بەش دەڵێت، تا وتەکە ڕاستەوخۆ بێتەوە بەدواداچوون.",
+   "bs": "Sljedeći navod vodi do odgovarajućeg tekstualnog mjesta. Mjesto navođenja navodi djelo, svezak, stranicu i odjeljak, tako da izjava ostaje izravno provjerljiva.",
+   "fr": "La référence suivante mène au passage approprié. Le lieu indique l’ouvrage, le volume, la page et la section, afin que la parole reste directement vérifiable.",
+   "es": "La referencia siguiente conduce al pasaje apropiado. El lugar indica la obra, el volumen, la página y la sección, para que la declaración siga siendo directamente comprobable."
+  },
+  "Dorar · Gefahr der Bidʿah": {
+   "ar": "دورار · خطر البدعة",
+   "en": "Dorar · the danger of bidʿah",
+   "tr": "Dorar · bid‘atin tehlikesi",
+   "ku": "Dorar · metirsiya bidʿah",
+   "ckb": "دورار · مەترسی بدعە",
+   "bs": "Dorar · opasnost bidʿe",
+   "fr": "Dorar · le danger de la bidʿah",
+   "es": "Dorar · el peligro de la bidʿah"
+  },
+  "Ayyūb as-Sakhtiyānī · Ḥilyat al-Awliyāʾ 3/9 · al-Bidaʿ S. 67": {
+   "ar": "أيوب السختياني · حلية الأولياء 3/9 · البدع ص 67",
+   "en": "Ayyūb as-Sakhtiyānī · Ḥilyat al-Awliyāʾ 3/9 · al-Bidaʿ p. 67",
+   "tr": "Eyyûb es-Sahtiyânî · Ḥilyat al-Awliyāʾ 3/9 · el-Bidaʿ s. 67",
+   "ku": "Eyyûb es-Saxtiyânî · Ḥilyat al-Awliyāʾ 3/9 · al-Bidaʿ r. 67",
+   "ckb": "ئەیووبی سەختیانی · حلیة الأولیاء 3/9 · البدع ل 67",
+   "bs": "Ejjūb es-Sahtijānī · Ḥilyat al-Awliyāʾ 3/9 · al-Bidaʿ str. 67",
+   "fr": "Ayyūb as-Sakhtiyānī · Ḥilyat al-Awliyāʾ 3/9 · al-Bidaʿ p. 67",
+   "es": "Ayyūb as-Sakhtiyānī · Ḥilyat al-Awliyāʾ 3/9 · al-Bidaʿ p. 67"
+  },
+  "rettet. Wenn eine Handlung nicht auf": {
+   "ar": "ينقذ. إذا لم يقم عمل على",
+   "en": "save. If an action does not rest on",
+   "tr": "kurtarır. Bir amel şunun üzerinde durmuyorsa",
+   "ku": "rizgar dike. Eger kirinek li ser",
+   "ckb": "ڕزگار دەکات. ئەگەر کردارێک لەسەر",
+   "bs": "spašava. Ako djelo ne stoji na",
+   "fr": "sauve. Si un acte ne repose pas sur",
+   "es": "salva. Si una obra no descansa sobre"
+  },
+  "steht, kann viel Fleiß den Menschen tiefer in": {
+   "ar": "يقوم، يمكن لكثير من الاجتهاد أن يُدخل الإنسان أعمق في",
+   "en": "stands, much diligence can take the person deeper into",
+   "tr": "durursa, çok gayret insanı daha derine götürebilir",
+   "ku": "bisekine, gelek xîret dikare mirov kûrtir bibe nav",
+   "ckb": "بوەستێت، زۆر تێکۆشان دەتوانێت مرۆڤ قووڵتر بباتە ناو",
+   "bs": "stoji, mnogo marljivosti može čovjeka dublje odvesti u",
+   "fr": "se tient, beaucoup d’assiduité peut mener l’homme plus profondément dans",
+   "es": "se sostiene, mucho empeño puede llevar a la persona más hondo en"
   }
  }
 }

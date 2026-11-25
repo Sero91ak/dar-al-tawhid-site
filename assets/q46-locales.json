@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,208 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Wissen und vorbildliche Lebensführung – Ibn Sīrīn – Q46 | DĀR AL TAWḤĪD": {
+   "ar": "العلم والسلوك القدوة – ابن سيرين – Q46 | DĀR AL TAWḤĪD",
+   "en": "Knowledge and exemplary conduct – Ibn Sīrīn – Q46 | DĀR AL TAWḤĪD",
+   "tr": "İlim ve örnek yaşayış – Ibn Sīrīn – Q46 | DĀR AL TAWḤĪD",
+   "ku": "Zanîn û jiyana nimûne – Ibn Sīrīn – Q46 | DĀR AL TAWḤĪD",
+   "ckb": "زانست و ڕەفتاری نموونەیی – ئیبن سیرین – Q46 | DĀR AL TAWḤĪD",
+   "bs": "Znanje i uzorno življenje – Ibn Sīrīn – Q46 | DĀR AL TAWḤĪD",
+   "fr": "Le savoir et la conduite exemplaire – Ibn Sīrīn – Q46 | DĀR AL TAWḤĪD",
+   "es": "El conocimiento y la conducta ejemplar – Ibn Sīrīn – Q46 | DĀR AL TAWḤĪD"
+  },
+  "Wissen aus Qurʾān, Sunnah und den frühen Generationen": {
+   "ar": "علم من القرآن والسنة والأجيال الأولى",
+   "en": "Knowledge from the Qurʾān, the Sunnah, and the early generations",
+   "tr": "Qurʾān, Sunnah ve ilk nesillerden ilim",
+   "ku": "Zanîn ji Qurʾān, Sunnah û nifşên pêşîn",
+   "ckb": "زانست لە قورئان، سوننەت و نەوەکانی سەرەتا",
+   "bs": "Znanje iz Qurʾāna, Sunnaha i ranih generacija",
+   "fr": "Savoir tiré du Qurʾān, de la Sunnah et des premières générations",
+   "es": "Conocimiento del Qurʾān, de la Sunnah y de las primeras generaciones"
+  },
+  "Wissen · Vorbild · Charakter · Frühe Generationen": {
+   "ar": "علم · قدوة · خلق · الأجيال الأولى",
+   "en": "Knowledge · Example · Character · Early generations",
+   "tr": "İlim · Örnek · Karakter · İlk nesiller",
+   "ku": "Zanîn · Nimûne · Exlaq · Nifşên pêşîn",
+   "ckb": "زانست · نموونە · خوو · نەوەکانی سەرەتا",
+   "bs": "Znanje · Uzor · Karakter · Rane generacije",
+   "fr": "Savoir · Exemple · Caractère · Premières générations",
+   "es": "Conocimiento · Ejemplo · Carácter · Primeras generaciones"
+  },
+  "Wissen und vorbildliche Lebensführung": {
+   "ar": "العلم والسلوك القدوة",
+   "en": "Knowledge and exemplary conduct",
+   "tr": "İlim ve örnek yaşayış",
+   "ku": "Zanîn û jiyana nimûne",
+   "ckb": "زانست و ڕەفتاری نموونەیی",
+   "bs": "Znanje i uzorno življenje",
+   "fr": "Le savoir et la conduite exemplaire",
+   "es": "El conocimiento y la conducta ejemplar"
+  },
+  "vorbildliche Lebensführung": {
+   "ar": "السلوك القدوة",
+   "en": "exemplary conduct",
+   "tr": "örnek yaşayış",
+   "ku": "jiyana nimûne",
+   "ckb": "ڕەفتاری نموونەیی",
+   "bs": "uzorno življenje",
+   "fr": "conduite exemplaire",
+   "es": "conducta ejemplar"
+  },
+  "Muḥammad ibn Sīrīn (Tābiʿī, gest. 110 n. H.)": {
+   "ar": "محمد بن سيرين (تابعي، ت. 110 هـ)",
+   "en": "Muḥammad ibn Sīrīn (Tābiʿī, d. 110 AH)",
+   "tr": "Muḥammad ibn Sīrīn (tâbiî, ö. 110 H.)",
+   "ku": "Muḥammad ibn Sīrīn (tabiî, m. 110 h.)",
+   "ckb": "محەممەد کوڕی سیرین (تابعی، کۆچی دوایی 110ی کۆچی)",
+   "bs": "Muḥammad ibn Sīrīn (tabi'in, umr. 110. h.)",
+   "fr": "Muḥammad ibn Sīrīn (tâbiʿī, m. 110 H.)",
+   "es": "Muḥammad ibn Sīrīn (tabiʿí, m. 110 H.)"
+  },
+  ", Band 1, Seite 80, Nr. 9 (Einleitung)": {
+   "ar": "، المجلد 1، الصفحة 80، رقم 9 (المقدمة)",
+   "en": ", volume 1, page 80, no. 9 (introduction)",
+   "tr": ", cilt 1, sayfa 80, no. 9 (giriş)",
+   "ku": ", cild 1, rûpel 80, hejmar 9 (pêşgotin)",
+   "ckb": "، بەرگی 1، لاپەڕە 80، ژمارە 9 (پێشەکی)",
+   "bs": ", svezak 1, stranica 80, br. 9 (uvod)",
+   "fr": ", volume 1, page 80, n° 9 (introduction)",
+   "es": ", volumen 1, página 80, n.º 9 (introducción)"
+  },
+  "Überlieferte Aussage eines Tābiʿī;": {
+   "ar": "قول مروي عن تابعي؛",
+   "en": "A transmitted statement of a Tābiʿī;",
+   "tr": "Bir tâbiîden nakledilen söz;",
+   "ku": "Gotineke ragihandî ya tabiîyekî;",
+   "ckb": "قسەیەکی گێڕدراوی تابعییەک؛",
+   "bs": "Preneseni iskaz jednog tabi'ina;",
+   "fr": "Parole transmise d’un tâbiʿī ;",
+   "es": "Declaración transmitida de un tabiʿí;"
+  },
+  ". Die konkrete Überlieferungskette wurde nicht eigenständig vollständig bewertet.": {
+   "ar": ". ولم تُقيَّم سلسلة الرواية المعيّنة هنا تقييمًا مستقلًا كاملًا.",
+   "en": ". This particular chain of transmission was not independently and fully assessed here.",
+   "tr": ". Belirli rivayet zinciri burada bağımsız ve tam olarak değerlendirilmemiştir.",
+   "ku": ". Zincîra ragihandinê ya diyarkirî li vir bi serbixwe û bi temamî nehatiye nirxandin.",
+   "ckb": ". زنجیرەی گێڕانەوەی دیاریکراو لێرە بە سەربەخۆیی و بە تەواوی هەڵنەسەنگێنراوە.",
+   "bs": ". Konkretni lanac prenošenja ovdje nije nezavisno i potpuno ocijenjen.",
+   "fr": ". La chaîne de transmission concrète n’a pas été évaluée ici de façon indépendante et complète.",
+   "es": ". La cadena de transmisión concreta no fue valorada aquí de forma independiente y completa."
+  },
+  "Aussage und Überlieferungsweg": {
+   "ar": "القول وطريق الرواية",
+   "en": "The statement and the path of transmission",
+   "tr": "Söz ve rivayet yolu",
+   "ku": "Gotin û rêya ragihandinê",
+   "ckb": "قسەکە و ڕێگای گێڕانەوە",
+   "bs": "Iskaz i put prenošenja",
+   "fr": "La parole et la voie de transmission",
+   "es": "La declaración y la vía de transmisión"
+  },
+  "al-Ḫaṭīb al-Baġdādī überliefert die Aussage von Ibn Sīrīn über Imām Mālik ibn Anas. In dem anschließenden Bericht wird erwähnt, dass Ibn Sīrīn jemanden aussandte, um die Lebensführung und das Verhalten von al-Qāsim zu beobachten.": {
+   "ar": "يروي الخطيب البغدادي قول ابن سيرين عن الإمام مالك بن أنس. وفي الخبر الذي يليه يُذكر أن ابن سيرين أرسل أحدًا ليلاحظ سيرة القاسم وسلوكه.",
+   "en": "Al-Ḫaṭīb al-Baġdādī transmits the statement of Ibn Sīrīn through Imām Mālik ibn Anas. In the report that follows, it is mentioned that Ibn Sīrīn sent someone to observe the conduct and behavior of al-Qāsim.",
+   "tr": "Al-Ḫaṭīb al-Baġdādī, Ibn Sīrīn’in sözünü İmâm Mālik ibn Anas yoluyla nakleder. Ardından gelen haberde, Ibn Sīrīn’in al-Qāsim’ın yaşayışını ve davranışını gözlemek üzere birini gönderdiği anılır.",
+   "ku": "Al-Ḫaṭīb al-Baġdādī gotina Ibn Sīrīn bi rêya İmâm Mālik ibn Anas radigihîne. Di rapora pişt re tê gotin ku Ibn Sīrīn kesek şand da ku jiyan û reftara al-Qāsim temaşe bike.",
+   "ckb": "خەتیبی بەغدادی قسەی ئیبن سیرین لە ڕێگەی ئیمام مالیک کوڕی ئەنەس دەگێڕێتەوە. لە هەواڵی دواتردا باس دەکرێت کە ئیبن سیرین کەسێکی ناردووە تا ڕەفتار و هەڵسوکەوتی قاسم ببینێت.",
+   "bs": "Al-Ḫaṭīb al-Baġdādī prenosi iskaz Ibn Sīrīna preko imama Mālik ibn Anasa. U predaji koja slijedi spominje se da je Ibn Sīrīn nekoga poslao da posmatra življenje i ponašanje al-Qāsima.",
+   "fr": "Al-Ḫaṭīb al-Baġdādī transmet la parole d’Ibn Sīrīn par l’imam Mālik ibn Anas. Dans le récit qui suit, il est mentionné qu’Ibn Sīrīn envoya quelqu’un observer la conduite et le comportement d’al-Qāsim.",
+   "es": "Al-Ḫaṭīb al-Baġdādī transmite la declaración de Ibn Sīrīn por el imām Mālik ibn Anas. En el relato que sigue se menciona que Ibn Sīrīn envió a alguien a observar la conducta y el comportamiento de al-Qāsim."
+  },
+  "Die deutsche Formulierung ist eine sinngemäße Wiedergabe des überlieferten Wortes. Damit wird der Wert guter Führung und guten Verhaltens beim Wissenserwerb betont. Das ist keine zusätzliche wörtliche Aussage des Überlieferers.": {
+   "ar": "الصيغة الألمانية نقل بالمعنى للكلمة المروية. وبها يُبرَز قدر السيرة الحسنة والسلوك الحسن عند طلب العلم. وهي ليست قولًا حرفيًا إضافيًا للراوي.",
+   "en": "The German formulation is a rendering according to the meaning of the transmitted word. It stresses the worth of good conduct and good behavior in seeking knowledge. It is not an additional verbatim statement of the transmitter.",
+   "tr": "Almanca biçim, nakledilen sözün anlamca aktarımıdır. Bununla ilim öğrenirken iyi yaşayışın ve iyi davranışın değeri vurgulanır. Bu, râvinin ek bir harfî sözü değildir.",
+   "ku": "Forma almanî veguhastineke li gorî wateyê ya gotina ragihandî ye. Bi wê qedrê jiyana baş û reftara baş di xwestina zanînê de tê teqezkirin. Ev ne gotineke peyv bi peyv a zêde ya ragihander e.",
+   "ckb": "فۆرمە ئەڵمانییەکە گواستنەوەیەکی بە واتەی ووشە گێڕدراوەکەیە. بەوە نرخی ڕەفتاری باش و هەڵسوکەوتی باش لە کاتی وەرگرتنی زانستدا جەخت دەکرێتەوە. ئەمە قسەیەکی وشەبەوشەی زیادەی گێڕەرەوە نییە.",
+   "bs": "Njemačka formulacija je prikaz po smislu prenesene riječi. Njome se ističe vrijednost dobrog vođenja i dobrog ponašanja pri stjecanju znanja. To nije dodatni doslovan iskaz prenositelja.",
+   "fr": "La formulation allemande est une restitution selon le sens de la parole transmise. Elle souligne la valeur d’une bonne conduite et d’un bon comportement dans l’acquisition du savoir. Ce n’est pas une parole littérale supplémentaire du transmetteur.",
+   "es": "La formulación alemana es una versión según el sentido de la palabra transmitida. Con ella se destaca el valor de la buena conducta y del buen comportamiento al adquirir conocimiento. No es una declaración literal adicional del transmisor."
+  },
+  "Direkter Originalnachweis": {
+   "ar": "شاهد أصلي مباشر",
+   "en": "A direct original reference",
+   "tr": "Doğrudan özgün delil",
+   "ku": "Belgeya resen a rasterast",
+   "ckb": "بەڵگەیەکی ڕەسەنی ڕاستەوخۆ",
+   "bs": "Izravan izvorni dokaz",
+   "fr": "Une référence originale directe",
+   "es": "Una referencia original directa"
+  },
+  "Die folgende Originalbibliothek führt unmittelbar zum überlieferten Wortlaut in Band 1, Seite 80, Nr. 9. Die Textstelle ist mit einer Fragmentmarkierung versehen.": {
+   "ar": "المكتبة الأصلية الآتية تؤدي مباشرة إلى اللفظ المروي في المجلد 1، الصفحة 80، رقم 9. وموضع النص معلَّم بتحديد جزء.",
+   "en": "The following original library leads directly to the transmitted wording in volume 1, page 80, no. 9. The passage is marked with a fragment marker.",
+   "tr": "Aşağıdaki özgün kütüphane, cilt 1, sayfa 80, no. 9’daki nakledilen lafzın doğrudan kendisine götürür. Metin yeri bir parça işaretiyle belirtilmiştir.",
+   "ku": "Pirtûkxaneya resen a jêrîn rasterast dibe ber bi gotina ragihandî di cild 1, rûpel 80, hejmar 9. Cihê nivîsê bi nîşana perçeyekê hatiye diyarkirin.",
+   "ckb": "کتێبخانە ڕەسەنەکەی خوارەوە ڕاستەوخۆ دەبێتە سەر دەقی گێڕدراو لە بەرگی 1، لاپەڕە 80، ژمارە 9. شوێنی دەق بە دیاریکردنی پارچەیەک نیشان کراوە.",
+   "bs": "Sljedeća izvorna biblioteka vodi neposredno do prenesenog teksta u svesku 1, stranica 80, br. 9. Mjesto teksta označeno je oznakom fragmenta.",
+   "fr": "La bibliothèque originale suivante mène directement au libellé transmis au volume 1, page 80, n° 9. Le passage est pourvu d’un marquage de fragment.",
+   "es": "La biblioteca original siguiente lleva directamente al texto transmitido en el volumen 1, página 80, n.º 9. El pasaje está marcado con una marca de fragmento."
+  },
+  "Islamweb · al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, 1/80, Nr. 9": {
+   "ar": "إسلام ويب · الجامع لأخلاق الراوي، 1/80، رقم 9",
+   "en": "Islamweb · al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, 1/80, no. 9",
+   "tr": "Islamweb · al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, 1/80, no. 9",
+   "ku": "Islamweb · al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, 1/80, hejmar 9",
+   "ckb": "ئیسلامویب · الجامع لأخلاق الراوي، 1/80، ژمارە 9",
+   "bs": "Islamweb · al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, 1/80, br. 9",
+   "fr": "Islamweb · al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, 1/80, n° 9",
+   "es": "Islamweb · al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, 1/80, n.º 9"
+  },
+  "Primärwerk, vollständiger Überlieferungstext und markierte Originalstelle": {
+   "ar": "المصدر الأولي، نص الرواية الكامل والموضع الأصلي المحدد",
+   "en": "The primary work, the full transmission text, and the marked original passage",
+   "tr": "Birincil eser, tam rivayet metni ve işaretli özgün yer",
+   "ku": "Berhema bingehîn, nivîsa ragihandinê ya temam û cihê resen ê nîşankirî",
+   "ckb": "بەرھەمی سەرەکی، دەقی تەواوی گێڕانەوە و شوێنی ڕەسەنی دیاریکراو",
+   "bs": "Primarno djelo, potpuni tekst predaje i označeno izvorno mjesto",
+   "fr": "L’œuvre première, le texte complet de la transmission et le passage original marqué",
+   "es": "La obra primaria, el texto completo de la transmisión y el pasaje original marcado"
+  },
+  "Die frühen Generationen widmeten dem": {
+   "ar": "الأجيال الأولى جعلت لـ",
+   "en": "The early generations gave",
+   "tr": "İlk nesiller şuna",
+   "ku": "Nifşên pêşîn didan",
+   "ckb": "نەوەکانی سەرەتا بۆ",
+   "bs": "Rane generacije su",
+   "fr": "Les premières générations accordaient",
+   "es": "Las primeras generaciones dedicaban"
+  },
+  "gleichermaßen Aufmerksamkeit.": {
+   "ar": "اهتمامًا مماثلًا.",
+   "en": "equal attention.",
+   "tr": "aynı ölçüde dikkat gösterdiler.",
+   "ku": "balê wekhev.",
+   "ckb": "هەمان ئاوەڕووان.",
+   "bs": "jednaku pažnju.",
+   "fr": "une attention égale.",
+   "es": "igual atención."
+  },
+  "Wissen vertiefen: Lernbereich zu Ibn Sīrīn": {
+   "ar": "تعميق العلم: مجال التعلّم عن ابن سيرين",
+   "en": "Deepen knowledge: the learning section on Ibn Sīrīn",
+   "tr": "İlmi derinleştir: Ibn Sīrīn öğrenme alanı",
+   "ku": "Zanînê kûr bike: beşa hînbûnê ya Ibn Sīrīn",
+   "ckb": "قووڵکردنەوەی زانست: بەشی فێربوون دەربارەی ئیبن سیرین",
+   "bs": "Produbiti znanje: oblast učenja o Ibn Sīrīnu",
+   "fr": "Approfondir le savoir : l’espace d’apprentissage sur Ibn Sīrīn",
+   "es": "Profundizar el conocimiento: el ámbito de aprendizaje sobre Ibn Sīrīn"
+  },
+  "Kostenfrei und freiwillig · die überlieferte Aussage verstehen und mit vier Fragen überprüfen. Ein Lernangebot, kein zusätzlicher Quellenbeleg.": {
+   "ar": "مجاني واختياري · فهم القول المروي والتحقق منه بأربعة أسئلة. عرض تعليمي، وليس شاهدًا إضافيًا.",
+   "en": "Free and voluntary · understand the transmitted statement and check it with four questions. A learning offer, not an additional source reference.",
+   "tr": "Ücretsiz ve isteğe bağlı · nakledilen sözü anlamak ve dört soruyla yoklamak. Bir öğrenme sunumu, ek bir kaynak delili değil.",
+   "ku": "Belaş û bi dilxwazî · gotina ragihandî fêm bike û bi çar pirsan bipirse. Pêşkêşeke hînbûnê ye, ne belgeyeke çavkaniyê ya zêde ye.",
+   "ckb": "خۆڕایی و ئارەزوومەندانە · قسە گێڕدراوەکە تێبگە و بە چوار پرسیار بیپشکنە. پێشکەشێکی فێربوونە، بەڵگەیەکی سەرچاوەی زیادە نییە.",
+   "bs": "Besplatno i dobrovoljno · razumjeti preneseni iskaz i provjeriti ga s četiri pitanja. Ponuda učenja, ne dodatni dokaz izvora.",
+   "fr": "Gratuit et facultatif · comprendre la parole transmise et la vérifier par quatre questions. Une offre d’apprentissage, non une référence de source supplémentaire.",
+   "es": "Gratuito y voluntario · comprender la declaración transmitida y comprobarla con cuatro preguntas. Una oferta de aprendizaje, no una referencia de fuente adicional."
   }
  }
 }

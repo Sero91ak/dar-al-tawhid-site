@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,658 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Aufstehen im Gericht: kein automatischer Kufr – DAR AL TAWḤĪD": {
+   "ar": "القيام في المحكمة: ليس كفرًا تلقائيًا – DAR AL TAWḤĪD",
+   "en": "Standing up in court: not automatic Kufr – DAR AL TAWḤĪD",
+   "tr": "Mahkemede ayağa kalkmak: kendiliğinden Kufr değil – DAR AL TAWḤĪD",
+   "ku": "Sekinîn di dadgehê de: ne Kufr a xweber – DAR AL TAWḤĪD",
+   "ckb": "وەستان لە دادگا: بەخۆکار Kufr نییە – DAR AL TAWḤĪD",
+   "bs": "Ustajanje na sudu: nije automatski Kufr – DAR AL TAWḤĪD",
+   "fr": "Se lever au tribunal : pas un Kufr automatique – DAR AL TAWḤĪD",
+   "es": "Ponerse de pie en el tribunal: no es Kufr automático – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "مساهمات وفق القرآن والسنة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre katkılar",
+   "ku": "Beşdarî li gor Qurʾān, Sunnah û Āthār",
+   "ckb": "بەشدارییەکان بەپێی القرآن و السنة و الآثار",
+   "bs": "Prilozi prema Qurʾānu, Sunni i Āthāru",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Contribuciones según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Fiqh · Qāḍī · Adab · Aufstehen · Gericht": {
+   "ar": "Fiqh · Qāḍī · Adab · القيام · المحكمة",
+   "en": "Fiqh · Qāḍī · Adab · standing up · court",
+   "tr": "Fiqh · Qāḍī · Adab · ayağa kalkmak · mahkeme",
+   "ku": "Fiqh · Qāḍī · Adab · sekinîn · dadgeh",
+   "ckb": "Fiqh · Qāḍī · Adab · وەستان · دادگا",
+   "bs": "Fiqh · Qāḍī · Adab · ustajanje · sud",
+   "fr": "Fiqh · Qāḍī · Adab · se lever · tribunal",
+   "es": "Fiqh · Qāḍī · Adab · ponerse de pie · tribunal"
+  },
+  "Aufstehen im Gericht: kein automatischer Kufr": {
+   "ar": "القيام في المحكمة: ليس كفرًا تلقائيًا",
+   "en": "Standing up in court: not automatic Kufr",
+   "tr": "Mahkemede ayağa kalkmak: kendiliğinden Kufr değil",
+   "ku": "Sekinîn di dadgehê de: ne Kufr a xweber",
+   "ckb": "وەستان لە دادگا: بەخۆکار Kufr نییە",
+   "bs": "Ustajanje na sudu: nije automatski Kufr",
+   "fr": "Se lever au tribunal : pas un Kufr automatique",
+   "es": "Ponerse de pie en el tribunal: no es Kufr automático"
+  },
+  "Die klassischen Texte behandeln das Aufstehen in verschiedenen Kapiteln: Gerichtsordnung, Qāḍī-Adab, Ehrung, Hochmut und Bedarf. Daraus entsteht keine pauschale Regel, dass jedes körperliche Aufstehen vor Gericht automatisch Kufr ist.": {
+   "ar": "تعالج النصوص الكلاسيكية القيام في أبواب مختلفة: نظام المحكمة، وQāḍī-Adab، والإكرام، والكبر، والحاجة. ولا ينشأ من ذلك قاعدة عامة بأن كل قيام بدني أمام المحكمة هو تلقائيًا كفر.",
+   "en": "The classical texts treat standing up in different chapters: court order, Qāḍī-Adab, honor, arrogance and need. From this no blanket rule arises that every bodily standing up before a court is automatically Kufr.",
+   "tr": "Klasik metinler ayağa kalkmayı farklı bölümlerde ele alır: mahkeme düzeni, Qāḍī-Adab, ikram, kibir ve ihtiyaç. Bundan, mahkeme önünde her bedensel ayağa kalkmanın kendiliğinden Kufr olduğu genel bir kural çıkmaz.",
+   "ku": "Tekstên klasîk sekinînê di beşên cuda de didin ber çavan: rêzkirina dadgehê, Qāḍī-Adab, rêz, pozbilindî û pêwistî. Ji vê rêbazeke giştî dernakeve ku her sekinîna bedenî li ber dadgehê bi xweber Kufr e.",
+   "ckb": "دەقە کلاسیکییەکان وەستان لە بابەتی جیاوازدا مامەڵەی لەگەڵ دەکەن: ڕێکخستنی دادگا، Qāḍī-Adab، ڕێزلێنان، لووتبەرزی و پێویستی. لەمە یاسایەکی گشتی دروست نابێت کە هەموو وەستانێکی جەستەیی لەبەردەم دادگا بەخۆکار Kufr بێت.",
+   "bs": "Klasični tekstovi obrađuju ustajanje u različitim poglavljima: sudski red, Qāḍī-Adab, počast, oholost i potreba. Iz toga ne nastaje opće pravilo da je svako tjelesno ustajanje pred sudom automatski Kufr.",
+   "fr": "Les textes classiques traitent le fait de se lever dans différents chapitres : ordre du tribunal, Qāḍī-Adab, honneur, orgueil et besoin. Il n’en résulte aucune règle générale selon laquelle tout lever corporel devant un tribunal serait automatiquement du Kufr.",
+   "es": "Los textos clásicos tratan el ponerse de pie en capítulos distintos: orden del tribunal, Qāḍī-Adab, honra, soberbia y necesidad. De ello no surge una regla general de que todo ponerse de pie corporal ante un tribunal sea automáticamente Kufr."
+  },
+  "Aufstehen im Gericht, Qāḍī-Adab, Ordnung, Gleichbehandlung, Hochmut und Ehrung.": {
+   "ar": "القيام في المحكمة، وQāḍī-Adab، والنظام، والمساواة في المعاملة، والكبر، والإكرام.",
+   "en": "Standing up in court, Qāḍī-Adab, order, equal treatment, arrogance and honor.",
+   "tr": "Mahkemede ayağa kalkmak, Qāḍī-Adab, düzen, eşit muamele, kibir ve ikram.",
+   "ku": "Sekinîn di dadgehê de, Qāḍī-Adab, rêz, wekhevî di muameleyê de, pozbilindî û rêzgirtin.",
+   "ckb": "وەستان لە دادگا، Qāḍī-Adab، ڕێکخستن، یەکسان مامەڵەکردن، لووتبەرزی و ڕێزلێنان.",
+   "bs": "Ustajanje na sudu, Qāḍī-Adab, red, jednako postupanje, oholost i počast.",
+   "fr": "Se lever au tribunal, Qāḍī-Adab, ordre, traitement égal, orgueil et honneur.",
+   "es": "Ponerse de pie en el tribunal, Qāḍī-Adab, orden, trato igual, soberbia y honra."
+  },
+  "Ibn al-Humām, Ibn Nuǧaym, al-Mardāwī, Muʿāwiyah, Saʿd ibn Muʿādh, Ibn Ḥaǧar, Ibn Rushd und al-Bayhaqī.": {
+   "ar": "Ibn al-Humām، وIbn Nuǧaym، وal-Mardāwī، وMuʿāwiyah، وSaʿd ibn Muʿādh، وIbn Ḥaǧar، وIbn Rushd، وal-Bayhaqī.",
+   "en": "Ibn al-Humām, Ibn Nuǧaym, al-Mardāwī, Muʿāwiyah, Saʿd ibn Muʿādh, Ibn Ḥaǧar, Ibn Rushd and al-Bayhaqī.",
+   "tr": "Ibn al-Humām, Ibn Nuǧaym, al-Mardāwī, Muʿāwiyah, Saʿd ibn Muʿādh, Ibn Ḥaǧar, Ibn Rushd ve al-Bayhaqī.",
+   "ku": "Ibn al-Humām, Ibn Nuǧaym, al-Mardāwī, Muʿāwiyah, Saʿd ibn Muʿādh, Ibn Ḥaǧar, Ibn Rushd û al-Bayhaqī.",
+   "ckb": "Ibn al-Humām، Ibn Nuǧaym، al-Mardāwī، Muʿāwiyah، Saʿd ibn Muʿādh، Ibn Ḥaǧar، Ibn Rushd و al-Bayhaqī.",
+   "bs": "Ibn al-Humām, Ibn Nuǧaym, al-Mardāwī, Muʿāwiyah, Saʿd ibn Muʿādh, Ibn Ḥaǧar, Ibn Rushd i al-Bayhaqī.",
+   "fr": "Ibn al-Humām, Ibn Nuǧaym, al-Mardāwī, Muʿāwiyah, Saʿd ibn Muʿādh, Ibn Ḥaǧar, Ibn Rushd et al-Bayhaqī.",
+   "es": "Ibn al-Humām, Ibn Nuǧaym, al-Mardāwī, Muʿāwiyah, Saʿd ibn Muʿādh, Ibn Ḥaǧar, Ibn Rushd y al-Bayhaqī."
+  },
+  "Die Texte sprechen nicht exakt vom modernen Protokoll der Urteilsverkündung, sondern von relevanten Grundstellen zum Aufstehen, zur Gerichtsetikette und zur Absicht.": {
+   "ar": "لا تتكلم النصوص بالضبط عن البروتوكول الحديث لإعلان الحكم، بل عن مواضع أصلية ذات صلة بالقيام، وبآداب المحكمة، وبالقصد.",
+   "en": "The texts do not speak exactly of the modern protocol of pronouncing judgment, but of relevant basic passages on standing up, on court etiquette and on intention.",
+   "tr": "Metinler tam olarak hükmün açıklanmasının modern protokolünden değil, ayağa kalkmaya, mahkeme âdabına ve niyete dair ilgili temel yerlerden söz eder.",
+   "ku": "Tekst ne bi tamî behsa protokola nûjen a ragihandina hukmê dikin, belkî behsa cihên bingehîn ên têkildar bi sekinînê, bi adabê dadgehê û bi niyetê dikin.",
+   "ckb": "دەقەکان بە وردی باس لە پرۆتۆکۆلی نوێی ڕاگەیاندنی حوکم ناکەن، بەڵکو باس لە شوێنی بنەڕەتیی پەیوەندیدار بە وەستان، بە ئادابی دادگا و بە نیاز دەکەن.",
+   "bs": "Tekstovi ne govore tačno o modernom protokolu objave presude, nego o relevantnim osnovnim mjestima o ustajanju, o sudskom adabu i o namjeri.",
+   "fr": "Les textes ne parlent pas exactement du protocole moderne de la prononciation du jugement, mais de passages de base pertinents sur le fait de se lever, sur l’étiquette du tribunal et sur l’intention.",
+   "es": "Los textos no hablan exactamente del protocolo moderno de la proclamación del fallo, sino de lugares básicos pertinentes sobre ponerse de pie, sobre la etiqueta del tribunal y sobre la intención."
+  },
+  "Ibn al-Humām: Gerichtsordnung vor dem Qāḍī": {
+   "ar": "Ibn al-Humām: نظام المحكمة أمام Qāḍī",
+   "en": "Ibn al-Humām: court order before the Qāḍī",
+   "tr": "Ibn al-Humām: Qāḍī önünde mahkeme düzeni",
+   "ku": "Ibn al-Humām: rêzkirina dadgehê li ber Qāḍī",
+   "ckb": "Ibn al-Humām: ڕێکخستنی دادگا لەبەردەم Qāḍī",
+   "bs": "Ibn al-Humām: sudski red pred Qāḍījem",
+   "fr": "Ibn al-Humām : l’ordre du tribunal devant le Qāḍī",
+   "es": "Ibn al-Humām: el orden del tribunal ante el Qāḍī"
+  },
+  "die äußere Ordnung vor dem Richter erwähnt: Die beiden Streitparteien sitzen beziehungsweise befinden sich in geordneter Haltung vor ihm; die Helfer des Qāḍī stehen vor ihm, damit das Gericht ehrfurchtgebietender und geordneter ist.": {
+   "ar": "يذكر النظام الظاهر أمام القاضي: يجلس طرفا الخصومة أو يكونان في هيئة منتظمة أمامه؛ ويقف أعوان Qāḍī أمامه، ليكون المجلس أهيَب وأرتب.",
+   "en": "mentions the outward order before the judge: the two disputing parties sit, or are in an orderly posture, before him; the assistants of the Qāḍī stand before him, so that the court is more awe-inspiring and more orderly.",
+   "tr": "hâkim önündeki dış düzeni anar: İki taraf oturur ya da onun önünde düzenli bir duruşta bulunur; Qāḍī’nin yardımcıları onun önünde durur ki mahkeme daha heybetli ve daha düzenli olsun.",
+   "ku": "rêza derve li ber dadger tîne: her du aliyên nakokiyê rûdinin an jî bi awayekî rêzkirî li ber wî ne; alîkarên Qāḍī li ber wî disekinin, da ku dadgeh bi heybetir û rêkûpêktir be.",
+   "ckb": "ڕێکخستنی دەرەکی لەبەردەم دادوەر دەهێنێت: هەردوو لایەنی ناکۆکی دادەنیشن یان لە دۆخێکی ڕێکخراودا لەبەردەمی دان؛ یارمەتیدەرانی Qāḍī لەبەردەمی دەوەستن، تا دادگا سەنگینتر و ڕێکخراوتر بێت.",
+   "bs": "spominje vanjski red pred sudijom: dvije strane u sporu sjede ili se nalaze u uređenom držanju pred njim; pomoćnici Qāḍīja stoje pred njim, da sud bude impozantniji i uređeniji.",
+   "fr": "mentionne l’ordre extérieur devant le juge : les deux parties au litige sont assises, ou se tiennent dans une posture ordonnée, devant lui ; les auxiliaires du Qāḍī se tiennent debout devant lui, afin que le tribunal soit plus imposant et plus ordonné.",
+   "es": "menciona el orden exterior ante el juez: las dos partes de la disputa se sientan o están en una postura ordenada ante él; los auxiliares del Qāḍī están de pie ante él, para que el tribunal sea más imponente y más ordenado."
+  },
+  "Das Stehen der Helfer und die geordnete Haltung der Prozessparteien werden hier unter": {
+   "ar": "يُذكر هنا قيام الأعوان وهيئة أطراف الدعوى المنتظمة تحت",
+   "en": "The standing of the assistants and the orderly posture of the parties are mentioned here under",
+   "tr": "Yardımcıların durması ve dava taraflarının düzenli duruşu burada şunun altında anılır:",
+   "ku": "Sekinîna alîkaran û helwesta rêzkirî ya aliyên dozê li vir di bin",
+   "ckb": "وەستانی یارمەتیدەران و دۆخی ڕێکخراوی لایەنەکانی داوا لێرەدا لەژێر",
+   "bs": "Stajanje pomoćnika i uređeno držanje stranaka ovdje se navodi pod",
+   "fr": "Le fait que les auxiliaires se tiennent debout et la posture ordonnée des parties sont mentionnés ici sous",
+   "es": "El estar de pie de los auxiliares y la postura ordenada de las partes se mencionan aquí bajo"
+  },
+  ", Kitāb Adab al-Qāḍī, Bd. 7, Stelle zu مجلس القضاء.": {
+   "ar": "، Kitāb Adab al-Qāḍī، ج 7، موضع مجلس القضاء.",
+   "en": ", Kitāb Adab al-Qāḍī, vol. 7, passage on مجلس القضاء.",
+   "tr": ", Kitāb Adab al-Qāḍī, c. 7, مجلس القضاء yeri.",
+   "ku": ", Kitāb Adab al-Qāḍī, berg 7, cihê مجلس القضاء.",
+   "ckb": "، Kitāb Adab al-Qāḍī، بەرگ 7، شوێنی مجلس القضاء.",
+   "bs": ", Kitāb Adab al-Qāḍī, sv. 7, mjesto مجلس القضاء.",
+   "fr": ", Kitāb Adab al-Qāḍī, vol. 7, passage sur مجلس القضاء.",
+   "es": ", Kitāb Adab al-Qāḍī, vol. 7, lugar de مجلس القضاء."
+  },
+  "Ibn Nuǧaym: Helfer des Qāḍī stehen vor ihm": {
+   "ar": "Ibn Nuǧaym: أعوان Qāḍī يقفون أمامه",
+   "en": "Ibn Nuǧaym: the assistants of the Qāḍī stand before him",
+   "tr": "Ibn Nuǧaym: Qāḍī’nin yardımcıları onun önünde durur",
+   "ku": "Ibn Nuǧaym: alîkarên Qāḍī li ber wî disekinin",
+   "ckb": "Ibn Nuǧaym: یارمەتیدەرانی Qāḍī لەبەردەمی دەوەستن",
+   "bs": "Ibn Nuǧaym: pomoćnici Qāḍīja stoje pred njim",
+   "fr": "Ibn Nuǧaym : les auxiliaires du Qāḍī se tiennent debout devant lui",
+   "es": "Ibn Nuǧaym: los auxiliares del Qāḍī están de pie ante él"
+  },
+  "im Kitāb al-Qaḍāʾ ebenfalls die Ordnung im Gericht: Die Helfer des Richters stehen vor ihm; außerdem kann ein Mann vor ihm stehen, der die Menschen daran hindert, zu nah vorzutreten.": {
+   "ar": "في Kitāb al-Qaḍāʾ أيضًا نظام المحكمة: يقف أعوان القاضي أمامه؛ ويمكن أن يقف أمامه رجل يمنع الناس من التقدم أكثر مما ينبغي.",
+   "en": "in Kitāb al-Qaḍāʾ likewise the order in court: the assistants of the judge stand before him; moreover a man may stand before him who prevents people from coming too close.",
+   "tr": "Kitāb al-Qaḍāʾ içinde de mahkeme düzeni: Hâkimin yardımcıları onun önünde durur; ayrıca önünde, insanların fazla yaklaşmasını engelleyen bir adam durabilir.",
+   "ku": "di Kitāb al-Qaḍāʾ de jî rêza dadgehê: alîkarên dadger li ber wî disekinin; her wiha dikare li ber wî mêrek bisekine ku mirovan asteng dike ku zêde nêzîk bibin.",
+   "ckb": "لە Kitāb al-Qaḍāʾ هەروەها ڕێکخستنی دادگا: یارمەتیدەرانی دادوەر لەبەردەمی دەوەستن؛ هەروەها دەکرێت پیاوێک لەبەردەمی بوەستێت کە خەڵک ڕێگری دەکات لەوەی زۆر نزیک ببنەوە.",
+   "bs": "u Kitāb al-Qaḍāʾ također red na sudu: pomoćnici sudije stoje pred njim; osim toga pred njim može stajati čovjek koji ljude sprečava da previše priđu.",
+   "fr": "dans Kitāb al-Qaḍāʾ également l’ordre au tribunal : les auxiliaires du juge se tiennent debout devant lui ; de plus un homme peut se tenir devant lui pour empêcher les gens de s’avancer trop près.",
+   "es": "en Kitāb al-Qaḍāʾ asimismo el orden en el tribunal: los auxiliares del juez están de pie ante él; además puede estar de pie ante él un hombre que impide a la gente acercarse demasiado."
+  },
+  "Das Stehen im Gerichtsumfeld wird ausdrücklich als Ordnungsform des Gerichts erwähnt.": {
+   "ar": "يُذكر القيام في محيط المحكمة صراحة بوصفه شكلًا من نظام المحكمة.",
+   "en": "Standing in the court setting is expressly mentioned as a form of the court’s order.",
+   "tr": "Mahkeme çevresinde durmak, mahkemenin bir düzen biçimi olarak açıkça anılır.",
+   "ku": "Sekinîn di hawîrdora dadgehê de bi eşkere wek şêweyekî rêza dadgehê tê gotin.",
+   "ckb": "وەستان لە دەوروبەری دادگا بە ڕاشکاوی وەک شێوەیەکی ڕێکخستنی دادگا دەهێنرێت.",
+   "bs": "Stajanje u okruženju suda izričito se spominje kao oblik sudskog reda.",
+   "fr": "Le fait de se tenir debout dans l’entourage du tribunal est expressément mentionné comme une forme de l’ordre du tribunal.",
+   "es": "El estar de pie en el entorno del tribunal se menciona expresamente como una forma del orden del tribunal."
+  },
+  "al-Baḥr ar-Rāʾiq Sharḥ Kanz ad-Daqāʾiq": {
+   "ar": "al-Baḥr ar-Rāʾiq Sharḥ Kanz ad-Daqāʾiq",
+   "en": "al-Baḥr ar-Rāʾiq Sharḥ Kanz ad-Daqāʾiq",
+   "tr": "al-Baḥr ar-Rāʾiq Sharḥ Kanz ad-Daqāʾiq",
+   "ku": "al-Baḥr ar-Rāʾiq Sharḥ Kanz ad-Daqāʾiq",
+   "ckb": "al-Baḥr ar-Rāʾiq Sharḥ Kanz ad-Daqāʾiq",
+   "bs": "al-Baḥr ar-Rāʾiq Sharḥ Kanz ad-Daqāʾiq",
+   "fr": "al-Baḥr ar-Rāʾiq Sharḥ Kanz ad-Daqāʾiq",
+   "es": "al-Baḥr ar-Rāʾiq Sharḥ Kanz ad-Daqāʾiq"
+  },
+  ", Kitāb al-Qaḍāʾ, Abschnitt: Mā yafʿaluhu al-Qāḍī idhā taqallada al-Qaḍāʾ, Bd. 6.": {
+   "ar": "، Kitāb al-Qaḍāʾ، القسم: Mā yafʿaluhu al-Qāḍī idhā taqallada al-Qaḍāʾ، ج 6.",
+   "en": ", Kitāb al-Qaḍāʾ, section: Mā yafʿaluhu al-Qāḍī idhā taqallada al-Qaḍāʾ, vol. 6.",
+   "tr": ", Kitāb al-Qaḍāʾ, bölüm: Mā yafʿaluhu al-Qāḍī idhā taqallada al-Qaḍāʾ, c. 6.",
+   "ku": ", Kitāb al-Qaḍāʾ, beş: Mā yafʿaluhu al-Qāḍī idhā taqallada al-Qaḍāʾ, berg 6.",
+   "ckb": "، Kitāb al-Qaḍāʾ، بەش: Mā yafʿaluhu al-Qāḍī idhā taqallada al-Qaḍāʾ، بەرگ 6.",
+   "bs": ", Kitāb al-Qaḍāʾ, odjeljak: Mā yafʿaluhu al-Qāḍī idhā taqallada al-Qaḍāʾ, sv. 6.",
+   "fr": ", Kitāb al-Qaḍāʾ, section : Mā yafʿaluhu al-Qāḍī idhā taqallada al-Qaḍāʾ, vol. 6.",
+   "es": ", Kitāb al-Qaḍāʾ, sección: Mā yafʿaluhu al-Qāḍī idhā taqallada al-Qaḍāʾ, vol. 6."
+  },
+  "al-Mardāwī: Ordnungsperson am Kopf des Qāḍī": {
+   "ar": "al-Mardāwī: شخص للنظام عند رأس Qāḍī",
+   "en": "al-Mardāwī: an orderly at the head of the Qāḍī",
+   "tr": "al-Mardāwī: Qāḍī’nin başında düzen kişisi",
+   "ku": "al-Mardāwī: kesê rêzê li serê Qāḍī",
+   "ckb": "al-Mardāwī: کەسی ڕێکخستن لە سەری Qāḍī",
+   "bs": "al-Mardāwī: osoba za red kod glave Qāḍīja",
+   "fr": "al-Mardāwī : une personne d’ordre à la tête du Qāḍī",
+   "es": "al-Mardāwī: una persona de orden a la cabeza del Qāḍī"
+  },
+  "im Kitāb al-Qaḍāʾ, dass es im Gerichtsumfeld eine Person geben kann, die über den Ablauf ordnet und die Prozessparteien anspricht.": {
+   "ar": "في Kitāb al-Qaḍāʾ، أنه يمكن أن يكون في محيط المحكمة شخص يرتّب السير ويخاطب أطراف الدعوى.",
+   "en": "in Kitāb al-Qaḍāʾ, that there can be in the court setting a person who orders the course of things and addresses the parties.",
+   "tr": "Kitāb al-Qaḍāʾ içinde, mahkeme çevresinde işleyişi düzenleyen ve dava taraflarına seslenen bir kişi olabileceğini.",
+   "ku": "di Kitāb al-Qaḍāʾ de, ku di hawîrdora dadgehê de dikare kesek hebe ku rêza kar rêz dike û bi aliyên dozê re diaxive.",
+   "ckb": "لە Kitāb al-Qaḍāʾ، کە دەکرێت لە دەوروبەری دادگا کەسێک هەبێت کە ڕەوتی کار ڕێک دەخات و قسە لەگەڵ لایەنەکانی داوا دەکات.",
+   "bs": "u Kitāb al-Qaḍāʾ, da u okruženju suda može biti osoba koja uređuje tok i obraća se strankama.",
+   "fr": "dans Kitāb al-Qaḍāʾ, qu’il peut y avoir dans l’entourage du tribunal une personne qui ordonne le déroulement et s’adresse aux parties.",
+   "es": "en Kitāb al-Qaḍāʾ, que en el entorno del tribunal puede haber una persona que ordena el curso y se dirige a las partes."
+  },
+  "Im Kapitel über den Weg und die Form des Urteils wird ebenfalls erwähnt:": {
+   "ar": "وفي الباب عن طريق الحكم وصورته يُذكر أيضًا:",
+   "en": "In the chapter on the way and the form of the judgment it is also mentioned:",
+   "tr": "Hükmün yolu ve biçimi hakkındaki bölümde de anılır:",
+   "ku": "Di beşa rê û şêweya hukmê de jî tê gotin:",
+   "ckb": "لە بابەتی ڕێگا و شێوەی حوکم هەروەها دەهێنرێت:",
+   "bs": "U poglavlju o putu i obliku presude također se spominje:",
+   "fr": "Dans le chapitre sur la voie et la forme du jugement il est aussi mentionné :",
+   "es": "En el capítulo sobre el camino y la forma del fallo también se menciona:"
+  },
+  "Auch in der ḥanbalitischen Gerichtsliteratur wird eine stehende Ordnungsperson am Gericht erwähnt.": {
+   "ar": "وفي أدب القضاء الحنبلي أيضًا يُذكر شخص قائم للنظام في المحكمة.",
+   "en": "In the Ḥanbalī court literature too, a standing orderly at the court is mentioned.",
+   "tr": "Hanbelî mahkeme literatüründe de mahkemede ayakta duran bir düzen kişisi anılır.",
+   "ku": "Di edebiyata dadgehê ya henbelî de jî kesekî sekinî yê rêzê li dadgehê tê gotin.",
+   "ckb": "لە ئەدەبیاتی دادگای حەنبەلیشدا کەسێکی وەستاوی ڕێکخستن لە دادگا دەهێنرێت.",
+   "bs": "I u hanbelijskoj sudskoj literaturi spominje se osoba koja stoji radi reda na sudu.",
+   "fr": "Dans la littérature judiciaire hanbalite aussi, une personne d’ordre debout au tribunal est mentionnée.",
+   "es": "También en la literatura judicial hanbalí se menciona una persona de orden de pie en el tribunal."
+  },
+  ", Kitāb al-Qaḍāʾ, Bāb Adab al-Qāḍī und Bāb Ṭarīq al-Ḥukm wa Ṣifatuh, Bd. 11.": {
+   "ar": "، Kitāb al-Qaḍāʾ، Bāb Adab al-Qāḍī و Bāb Ṭarīq al-Ḥukm wa Ṣifatuh، ج 11.",
+   "en": ", Kitāb al-Qaḍāʾ, Bāb Adab al-Qāḍī and Bāb Ṭarīq al-Ḥukm wa Ṣifatuh, vol. 11.",
+   "tr": ", Kitāb al-Qaḍāʾ, Bāb Adab al-Qāḍī ve Bāb Ṭarīq al-Ḥukm wa Ṣifatuh, c. 11.",
+   "ku": ", Kitāb al-Qaḍāʾ, Bāb Adab al-Qāḍī û Bāb Ṭarīq al-Ḥukm wa Ṣifatuh, berg 11.",
+   "ckb": "، Kitāb al-Qaḍāʾ، Bāb Adab al-Qāḍī و Bāb Ṭarīq al-Ḥukm wa Ṣifatuh، بەرگ 11.",
+   "bs": ", Kitāb al-Qaḍāʾ, Bāb Adab al-Qāḍī i Bāb Ṭarīq al-Ḥukm wa Ṣifatuh, sv. 11.",
+   "fr": ", Kitāb al-Qaḍāʾ, Bāb Adab al-Qāḍī et Bāb Ṭarīq al-Ḥukm wa Ṣifatuh, vol. 11.",
+   "es": ", Kitāb al-Qaḍāʾ, Bāb Adab al-Qāḍī y Bāb Ṭarīq al-Ḥukm wa Ṣifatuh, vol. 11."
+  },
+  "Muʿāwiyah: Warnung vor Liebe zum Aufstehenlassen": {
+   "ar": "Muʿāwiyah: تحذير من حب القيام للشخص",
+   "en": "Muʿāwiyah: warning against loving to have people stand up",
+   "tr": "Muʿāwiyah: insanların ayağa kaldırılmasını sevme konusunda uyarı",
+   "ku": "Muʿāwiyah: hişyarî ji hezkirina sekinandina mirovan",
+   "ckb": "Muʿāwiyah: ئاگاداری لە خۆشەویستی وەستاندنی خەڵک",
+   "bs": "Muʿāwiyah: upozorenje od ljubavi da se ljude diže na noge",
+   "fr": "Muʿāwiyah : mise en garde contre le fait d’aimer qu’on se lève pour soi",
+   "es": "Muʿāwiyah: advertencia contra amar que hagan ponerse de pie"
+  },
+  "Als Muʿāwiyah رضي الله عنه zu Ibn az-Zubayr und Ibn ʿĀmir herauskam, stand Ibn ʿĀmir auf, während Ibn az-Zubayr sitzen blieb. Muʿāwiyah sagte zu Ibn ʿĀmir: Setz dich. Dann führte er den Ḥadīṯ an.": {
+   "ar": "لما خرج Muʿāwiyah رضي الله عنه إلى Ibn az-Zubayr وIbn ʿĀmir، قام Ibn ʿĀmir، بينما بقي Ibn az-Zubayr جالسًا. قال Muʿāwiyah لـ Ibn ʿĀmir: اجلس. ثم أورد الحديث.",
+   "en": "When Muʿāwiyah رضي الله عنه came out to Ibn az-Zubayr and Ibn ʿĀmir, Ibn ʿĀmir stood up, while Ibn az-Zubayr remained seated. Muʿāwiyah said to Ibn ʿĀmir: Sit down. Then he cited the Ḥadīṯ.",
+   "tr": "Muʿāwiyah رضي الله عنه, Ibn az-Zubayr ve Ibn ʿĀmir’e çıktığında Ibn ʿĀmir ayağa kalktı, Ibn az-Zubayr ise oturdu. Muʿāwiyah, Ibn ʿĀmir’e dedi: Otur. Sonra Ḥadīṯ’i getirdi.",
+   "ku": "Dema Muʿāwiyah رضي الله عنه derket ba Ibn az-Zubayr û Ibn ʿĀmir, Ibn ʿĀmir rabû ser xwe, Ibn az-Zubayr jî rûniştî ma. Muʿāwiyah ji Ibn ʿĀmir re got: Rûne. Paşê Ḥadīṯ anî.",
+   "ckb": "کاتێک Muʿāwiyah رضي الله عنه هاتە دەرەوە بۆ لای Ibn az-Zubayr و Ibn ʿĀmir، Ibn ʿĀmir وەستا، لە کاتێکدا Ibn az-Zubayr دانیشت. Muʿāwiyah بە Ibn ʿĀmir گوت: دابنیشە. پاشان Ḥadīṯی هێنا.",
+   "bs": "Kada je Muʿāwiyah رضي الله عنه izašao Ibn az-Zubayru i Ibn ʿĀmiru, Ibn ʿĀmir ustade, dok Ibn az-Zubayr ostade sjediti. Muʿāwiyah reče Ibn ʿĀmiru: Sjedni. Zatim navede Ḥadīṯ.",
+   "fr": "Lorsque Muʿāwiyah رضي الله عنه sortit vers Ibn az-Zubayr et Ibn ʿĀmir, Ibn ʿĀmir se leva, tandis qu’Ibn az-Zubayr resta assis. Muʿāwiyah dit à Ibn ʿĀmir : Assieds-toi. Puis il cita le Ḥadīṯ.",
+   "es": "Cuando Muʿāwiyah رضي الله عنه salió hacia Ibn az-Zubayr e Ibn ʿĀmir, Ibn ʿĀmir se puso de pie, mientras Ibn az-Zubayr permaneció sentado. Muʿāwiyah dijo a Ibn ʿĀmir: Siéntate. Luego citó el Ḥadīṯ."
+  },
+  "„Wer liebt, dass die Männer für ihn stehend dastehen, der soll seinen Platz im Feuer einnehmen.“": {
+   "ar": "«من أحب أن يقوم الرجال له قيامًا فليتبوأ مقعده من النار.»",
+   "en": "“Whoever loves that men stand for him while standing, let him take his place in the Fire.”",
+   "tr": "“Erkeklerin kendisi için ayakta durmasını seven, yerini ateşte alsın.”",
+   "ku": "“Yê ku hez dike mêr ji bo wî li ser piyan bisekinin, bila cihê xwe di agir de bigire.”",
+   "ckb": "«ئەوەی حەز دەکات پیاوان بۆی بە وەستان بوەستن، با شوێنی خۆی لە ئاگر دا بگرێت.»",
+   "bs": "“Ko voli da muškarci stoje za njega, neka uzme svoje mjesto u vatri.”",
+   "fr": "« Celui qui aime que les hommes se tiennent debout pour lui, qu’il prenne sa place dans le Feu. »",
+   "es": "“Quien ame que los hombres estén de pie para él, que tome su lugar en el Fuego.”"
+  },
+  "Der Ḥadīṯ betrifft das Lieben und Verlangen nach diesem Aufstehen aus Erhöhung und Hochmut.": {
+   "ar": "الحديث يتعلق بحب هذا القيام وطلبه من باب الرفعة والكبر.",
+   "en": "The Ḥadīṯ concerns loving and seeking this standing up out of exaltation and arrogance.",
+   "tr": "Ḥadīṯ, yücelme ve kibirdan bu ayağa kalkmayı sevmeye ve onu istemeye dairdir.",
+   "ku": "Ḥadīṯ der barê hezkirin û xwestina vê sekinînê ye ji bilindkirin û pozbilindiyê.",
+   "ckb": "Ḥadīṯ پەیوەندی بە خۆشەویستی و داواکردنی ئەم وەستانەوە هەیە لە بەرزکردنەوە و لووتبەرزی.",
+   "bs": "Ḥadīṯ se tiče voljenja i traženja ovog ustajanja iz uzdizanja i oholosti.",
+   "fr": "Le Ḥadīṯ concerne le fait d’aimer et de rechercher ce lever par exaltation et par orgueil.",
+   "es": "El Ḥadīṯ concierne al amar y buscar este ponerse de pie por exaltación y soberbia."
+  },
+  "Abū Dāwūd, Nr. 5229; at-Tirmiḏī, Nr. 2755; auch bei Aḥmad.": {
+   "ar": "Abū Dāwūd، رقم 5229؛ at-Tirmiḏī، رقم 2755؛ وكذلك عند Aḥmad.",
+   "en": "Abū Dāwūd, no. 5229; at-Tirmiḏī, no. 2755; also in Aḥmad.",
+   "tr": "Abū Dāwūd, no. 5229; at-Tirmiḏī, no. 2755; Aḥmad’da da.",
+   "ku": "Abū Dāwūd, hejmar 5229; at-Tirmiḏī, hejmar 2755; her wiha li cem Aḥmad.",
+   "ckb": "Abū Dāwūd، ژمارە 5229؛ at-Tirmiḏī، ژمارە 2755؛ هەروەها لای Aḥmad.",
+   "bs": "Abū Dāwūd, br. 5229; at-Tirmiḏī, br. 2755; također kod Aḥmada.",
+   "fr": "Abū Dāwūd, n° 5229 ; at-Tirmiḏī, n° 2755 ; aussi chez Aḥmad.",
+   "es": "Abū Dāwūd, n.º 5229; at-Tirmiḏī, n.º 2755; también en Aḥmad."
+  },
+  "Saʿd ibn Muʿādh: „Steht zu eurem Führer auf“": {
+   "ar": "Saʿd ibn Muʿādh: «قوموا إلى قائدكم»",
+   "en": "Saʿd ibn Muʿādh: “Stand up for your leader”",
+   "tr": "Saʿd ibn Muʿādh: “Önderinize kalkın”",
+   "ku": "Saʿd ibn Muʿādh: “Ji bo rêberê xwe rabin”",
+   "ckb": "Saʿd ibn Muʿādh: «بۆ سەرکردەکەتان هەستن»",
+   "bs": "Saʿd ibn Muʿādh: “Ustanite svom vođi”",
+   "fr": "Saʿd ibn Muʿādh : « Levez-vous pour votre chef »",
+   "es": "Saʿd ibn Muʿādh: “Poneos de pie ante vuestro jefe”"
+  },
+  "Als Saʿd ibn Muʿādh رضي الله عنه kam, nachdem Banū Qurayẓah sich seinem Urteil unterworfen hatten, sagte der Prophet ﷺ zu den Anṣār:": {
+   "ar": "لما جاء Saʿd ibn Muʿādh رضي الله عنه بعد أن خضعت Banū Qurayẓah لحكمه، قال النبي ﷺ للأنصار:",
+   "en": "When Saʿd ibn Muʿādh رضي الله عنه came, after Banū Qurayẓah had submitted to his judgment, the Prophet ﷺ said to the Anṣār:",
+   "tr": "Banū Qurayẓah onun hükmüne boyun eğdikten sonra Saʿd ibn Muʿādh رضي الله عنه gelince, Peygamber ﷺ Anṣār’a dedi:",
+   "ku": "Dema Saʿd ibn Muʿādh رضي الله عنه hat, piştî ku Banū Qurayẓah xwe da bin hukmê wî, Peyamber ﷺ ji Anṣār re got:",
+   "ckb": "کاتێک Saʿd ibn Muʿādh رضي الله عنه هات، دوای ئەوەی Banū Qurayẓah خۆیان دا بە حوکمی ئەو، پێغەمبەر ﷺ بە Anṣār فەرمووی:",
+   "bs": "Kada je Saʿd ibn Muʿādh رضي الله عنه došao, nakon što se Banū Qurayẓah pokorila njegovoj presudi, Poslanik ﷺ reče Anṣāru:",
+   "fr": "Lorsque Saʿd ibn Muʿādh رضي الله عنه vint, après que Banū Qurayẓah se fut soumise à son jugement, le Prophète ﷺ dit aux Anṣār :",
+   "es": "Cuando llegó Saʿd ibn Muʿādh رضي الله عنه, después de que Banū Qurayẓah se sometiera a su fallo, el Profeta ﷺ dijo a los Anṣār:"
+  },
+  "„Steht zu eurem Führer auf“ oder „zu eurem Besten“.": {
+   "ar": "«قوموا إلى قائدكم» أو «إلى أفضلِكم».",
+   "en": "“Stand up for your leader” or “for your best one.”",
+   "tr": "“Önderinize kalkın” veya “en hayırlınıza.”",
+   "ku": "“Ji bo rêberê xwe rabin” an “ji bo çêtirînê xwe.”",
+   "ckb": "«بۆ سەرکردەکەتان هەستن» یان «بۆ باشترینتان».",
+   "bs": "“Ustanite svom vođi” ili “svom najboljem.”",
+   "fr": "« Levez-vous pour votre chef » ou « pour votre meilleur. »",
+   "es": "“Poneos de pie ante vuestro jefe” o “ante vuestro mejor.”"
+  },
+  "Das bloße körperliche Aufstehen für eine Person ist nicht in jeder Form seiner Gattung nach Kufr.": {
+   "ar": "مجرد القيام البدني لشخص ليس في كل صورة من جنسه كفرًا.",
+   "en": "The mere bodily standing up for a person is not, in every form of its kind, Kufr.",
+   "tr": "Bir kişi için salt bedensel ayağa kalkmak, cinsinin her biçiminde Kufr değildir.",
+   "ku": "Tenê sekinîna bedenî ji bo kesekî ne di her şêweya cureya xwe de Kufr e.",
+   "ckb": "تەنها وەستانی جەستەیی بۆ کەسێک لە هەموو شێوەیەکی جۆرەکەیدا Kufr نییە.",
+   "bs": "Samo tjelesno ustajanje za osobu nije u svakom obliku svoje vrste Kufr.",
+   "fr": "Le simple fait de se lever corporellement pour une personne n’est pas, dans chaque forme de son genre, du Kufr.",
+   "es": "El mero ponerse de pie corporalmente por una persona no es, en toda forma de su género, Kufr."
+  },
+  "al-Buḫārī, Nr. 4121; Muslim, Nr. 1768.": {
+   "ar": "al-Buḫārī، رقم 4121؛ Muslim، رقم 1768.",
+   "en": "al-Buḫārī, no. 4121; Muslim, no. 1768.",
+   "tr": "al-Buḫārī, no. 4121; Muslim, no. 1768.",
+   "ku": "al-Buḫārī, hejmar 4121; Muslim, hejmar 1768.",
+   "ckb": "al-Buḫārī، ژمارە 4121؛ Muslim، ژمارە 1768.",
+   "bs": "al-Buḫārī, br. 4121; Muslim, br. 1768.",
+   "fr": "al-Buḫārī, n° 4121 ; Muslim, n° 1768.",
+   "es": "al-Buḫārī, n.º 4121; Muslim, n.º 1768."
+  },
+  "Ibn Ḥaǧar: das Aufstehen hat mehrere Arten": {
+   "ar": "Ibn Ḥaǧar: للقيام أنواع عدة",
+   "en": "Ibn Ḥaǧar: standing up has several kinds",
+   "tr": "Ibn Ḥaǧar: ayağa kalkmanın birkaç türü vardır",
+   "ku": "Ibn Ḥaǧar: sekinîn çend cure hene",
+   "ckb": "Ibn Ḥaǧar: وەستان چەند جۆرێکی هەیە",
+   "bs": "Ibn Ḥaǧar: ustajanje ima više vrsta",
+   "fr": "Ibn Ḥaǧar : le fait de se lever a plusieurs sortes",
+   "es": "Ibn Ḥaǧar: el ponerse de pie tiene varias clases"
+  },
+  "die Diskussion zum Ḥadīṯ „Steht zu eurem Führer auf“. Er überliefert von Abū al-Walīd Ibn Rushd, dass das Aufstehen nicht nur eine einzige Kategorie hat, sondern auf vier Arten fällt.": {
+   "ar": "النقاش حول الحديث «قوموا إلى قائدكم». يروي عن Abū al-Walīd Ibn Rushd أن القيام ليس فئة واحدة فقط، بل يقع على أربعة أنواع.",
+   "en": "the discussion of the Ḥadīṯ “Stand up for your leader.” He transmits from Abū al-Walīd Ibn Rushd that standing up is not only one single category, but falls into four kinds.",
+   "tr": "“Önderinize kalkın” Ḥadīṯ’i hakkındaki tartışma. Abū al-Walīd Ibn Rushd’dan rivayet eder ki ayağa kalkmak tek bir kategori değildir, dört türe ayrılır.",
+   "ku": "nîqaşa li ser Ḥadīṯ “Ji bo rêberê xwe rabin”. Ew ji Abū al-Walīd Ibn Rushd vediguhêze ku sekinîn ne tenê yek kategorî ye, belkî dikeve çar cureyan.",
+   "ckb": "گفتوگۆی Ḥadīṯی «بۆ سەرکردەکەتان هەستن». لە Abū al-Walīd Ibn Rushd دەگێڕێتەوە کە وەستان تەنها یەک پۆل نییە، بەڵکو دەکەوێتە چوار جۆر.",
+   "bs": "rasprava o Ḥadīṯu “Ustanite svom vođi”. Prenosi od Abū al-Walīd Ibn Rushda da ustajanje nije samo jedna kategorija, nego pada u četiri vrste.",
+   "fr": "la discussion du Ḥadīṯ « Levez-vous pour votre chef ». Il transmet d’Abū al-Walīd Ibn Rushd que le fait de se lever n’a pas une seule catégorie, mais se répartit en quatre sortes.",
+   "es": "la discusión del Ḥadīṯ “Poneos de pie ante vuestro jefe”. Transmite de Abū al-Walīd Ibn Rushd que el ponerse de pie no es una sola categoría, sino que cae en cuatro clases."
+  },
+  "Das Aufstehen kann je nach Absicht, Anlass und Kontext verboten, makrūh, erlaubt oder empfohlen sein.": {
+   "ar": "يمكن أن يكون القيام بحسب القصد والمناسبة والسياق محرّمًا أو مكروهًا أو مباحًا أو مندوبًا.",
+   "en": "Standing up can, according to intention, occasion and context, be forbidden, makrūh, permitted or recommended.",
+   "tr": "Ayağa kalkmak niyet, vesile ve bağlama göre haram, mekruh, mubah veya mendup olabilir.",
+   "ku": "Sekinîn li gor niyet, bûyer û kontekstê dikare heram, mekrûh, mubah an jî pêşniyar be.",
+   "ckb": "وەستان بەپێی نیاز، بۆنە و کۆنتێکست دەکرێت حەرام، مەکروو، مباح یان پێشنیارکراو بێت.",
+   "bs": "Ustajanje može, prema namjeri, povodu i kontekstu, biti zabranjeno, makrūh, dozvoljeno ili preporučeno.",
+   "fr": "Le fait de se lever peut, selon l’intention, l’occasion et le contexte, être interdit, makrūh, permis ou recommandé.",
+   "es": "El ponerse de pie puede, según la intención, la ocasión y el contexto, ser prohibido, makrūh, permitido o recomendado."
+  },
+  ", Kitāb al-Istiʾdhān, Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum, Bd. 11.": {
+   "ar": "، Kitāb al-Istiʾdhān، Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum، ج 11.",
+   "en": ", Kitāb al-Istiʾdhān, Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum, vol. 11.",
+   "tr": ", Kitāb al-Istiʾdhān, Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum, c. 11.",
+   "ku": ", Kitāb al-Istiʾdhān, Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum, berg 11.",
+   "ckb": "، Kitāb al-Istiʾdhān، Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum، بەرگ 11.",
+   "bs": ", Kitāb al-Istiʾdhān, Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum, sv. 11.",
+   "fr": ", Kitāb al-Istiʾdhān, Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum, vol. 11.",
+   "es": ", Kitāb al-Istiʾdhān, Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum, vol. 11."
+  },
+  "al-Bayhaqī: erlaubt aus Güte und Ehrung": {
+   "ar": "al-Bayhaqī: مباح من باب البر والإكرام",
+   "en": "al-Bayhaqī: permitted out of kindness and honor",
+   "tr": "al-Bayhaqī: iyilik ve ikramdan dolayı mubah",
+   "ku": "al-Bayhaqī: destûr ji qencî û rêzgirtinê",
+   "ckb": "al-Bayhaqī: ڕێگەپێدراو لە چاکە و ڕێزلێنان",
+   "bs": "al-Bayhaqī: dozvoljeno iz dobrote i počasti",
+   "fr": "al-Bayhaqī : permis par bonté et par honneur",
+   "es": "al-Bayhaqī: permitido por bondad y honra"
+  },
+  "Ibn Ḥaǧar überliefert in derselben Diskussion auch von al-Bayhaqī, dass Aufstehen auf eine erlaubte Weise vorkommen kann, wenn es aus Güte und Ehrung geschieht. Zugleich darf derjenige, für den aufgestanden wird, es nicht als Anspruch für sich ansehen.": {
+   "ar": "يروي Ibn Ḥaǧar في المناقشة نفسها أيضًا عن al-Bayhaqī أن القيام يمكن أن يقع على وجه مباح إذا كان من باب البر والإكرام. وفي الوقت نفسه لا يجوز لمن يُقام له أن يعدّه حقًا لنفسه.",
+   "en": "Ibn Ḥaǧar also transmits, in the same discussion, from al-Bayhaqī that standing up can occur in a permitted way when it is done out of kindness and honor. At the same time, the one for whom people stand must not regard it as a claim for himself.",
+   "tr": "Ibn Ḥaǧar aynı tartışmada al-Bayhaqī’den de rivayet eder ki ayağa kalkmak, iyilik ve ikramdan olursa mubah bir şekilde olabilir. Aynı zamanda, kendisi için ayağa kalkılan kimse bunu kendisi için bir hak saymamalıdır.",
+   "ku": "Ibn Ḥaǧar di heman nîqaşê de ji al-Bayhaqī jî vediguhêze ku sekinîn dikare bi awayekî destûrdar bibe dema ku ji qencî û rêzgirtinê be. Di heman demê de, yê ku ji bo wî radiwestin, nikare wê wek mafekî ji bo xwe bibîne.",
+   "ckb": "Ibn Ḥaǧar لە هەمان گفتوگۆدا لە al-Bayhaqīش دەگێڕێتەوە کە وەستان دەکرێت بە شێوەیەکی ڕێگەپێدراو ڕوو بدات ئەگەر لە چاکە و ڕێزلێنان بێت. لە هەمان کاتدا ئەوەی بۆی دەوەستن نابێت وەک مافێک بۆ خۆی دایبنێت.",
+   "bs": "Ibn Ḥaǧar u istoj raspravi prenosi i od al-Bayhaqīja da ustajanje može biti na dozvoljen način ako je iz dobrote i počasti. U isto vrijeme onaj za koga se ustaje ne smije to smatrati pravom za sebe.",
+   "fr": "Ibn Ḥaǧar transmet aussi, dans la même discussion, d’al-Bayhaqī que le fait de se lever peut se produire de façon permise lorsqu’il vient de la bonté et de l’honneur. En même temps, celui pour qui l’on se lève ne doit pas le regarder comme un droit pour lui-même.",
+   "es": "Ibn Ḥaǧar transmite también, en la misma discusión, de al-Bayhaqī que el ponerse de pie puede darse de manera permitida cuando es por bondad y honra. Al mismo tiempo, aquel por quien se pone de pie no debe considerarlo un derecho para sí."
+  },
+  "Erlaubtes Aufstehen aus Birr und Ikrām wird erwähnt; problematisch ist das Verlangen und Beanspruchen davon.": {
+   "ar": "يُذكر القيام المباح من Birr وIkrām؛ والمشكل هو طلبه وادعاء الحق فيه.",
+   "en": "Permitted standing up out of Birr and Ikrām is mentioned; what is problematic is seeking it and claiming it as a right.",
+   "tr": "Birr ve Ikrām’dan mubah ayağa kalkmak anılır; sorunlu olan onu istemek ve onda hak iddia etmektir.",
+   "ku": "Sekinîna destûrdar ji Birr û Ikrām tê gotin; problem xwestina wê û daxwaza mafê li ser wê ye.",
+   "ckb": "وەستانی ڕێگەپێدراو لە Birr و Ikrām دەهێنرێت؛ کێشەکە داواکردنی و داواکردنی مافە لەسەری.",
+   "bs": "Spominje se dozvoljeno ustajanje iz Birra i Ikrāma; problematično je tražiti ga i polagati pravo na njega.",
+   "fr": "Le lever permis par Birr et Ikrām est mentionné ; ce qui est problématique, c’est de le rechercher et d’y prétendre un droit.",
+   "es": "Se menciona el ponerse de pie permitido por Birr e Ikrām; lo problemático es buscarlo y reclamarlo como derecho."
+  },
+  "al-Bayhaqī, überliefert bei Ibn Ḥaǧar in": {
+   "ar": "al-Bayhaqī، مروي عند Ibn Ḥaǧar في",
+   "en": "al-Bayhaqī, transmitted by Ibn Ḥaǧar in",
+   "tr": "al-Bayhaqī, Ibn Ḥaǧar’da rivayet edilen, içinde",
+   "ku": "al-Bayhaqī, veguhastî li cem Ibn Ḥaǧar di",
+   "ckb": "al-Bayhaqī، گێڕدراوەتەوە لای Ibn Ḥaǧar لە",
+   "bs": "al-Bayhaqī, preneseno kod Ibn Ḥaǧara u",
+   "fr": "al-Bayhaqī, transmis chez Ibn Ḥaǧar dans",
+   "es": "al-Bayhaqī, transmitido en Ibn Ḥaǧar en"
+  },
+  ", Kitāb al-Istiʾdhān, Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum.": {
+   "ar": "، Kitāb al-Istiʾdhān، Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum.",
+   "en": ", Kitāb al-Istiʾdhān, Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum.",
+   "tr": ", Kitāb al-Istiʾdhān, Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum.",
+   "ku": ", Kitāb al-Istiʾdhān, Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum.",
+   "ckb": "، Kitāb al-Istiʾdhān، Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum.",
+   "bs": ", Kitāb al-Istiʾdhān, Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum.",
+   "fr": ", Kitāb al-Istiʾdhān, Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum.",
+   "es": ", Kitāb al-Istiʾdhān, Bāb Qawl an-Nabī ﷺ: Qūmū ilā Sayyidikum."
+  },
+  "Zusammenfassung der direkten Stellen": {
+   "ar": "خلاصة المواضع المباشرة",
+   "en": "Summary of the direct passages",
+   "tr": "Doğrudan yerlerin özeti",
+   "ku": "Kurteya cihên rasterast",
+   "ckb": "پوختەی شوێنە ڕاستەوخۆکان",
+   "bs": "Sažetak izravnih mjesta",
+   "fr": "Résumé des passages directs",
+   "es": "Resumen de los lugares directos"
+  },
+  "In den Ḥanafī-Quellen wird das Stehen im Gerichtsumfeld unter": {
+   "ar": "في مصادر الحنفية يُذكر القيام في محيط المحكمة تحت",
+   "en": "In the Ḥanafī sources, standing in the court setting is mentioned under",
+   "tr": "Hanefî kaynaklarda mahkeme çevresinde durmak şunun altında anılır:",
+   "ku": "Di jêderên henefî de sekinîn di hawîrdora dadgehê de di bin",
+   "ckb": "لە سەرچاوەکانی حەنەفی وەستان لە دەوروبەری دادگا لەژێر",
+   "bs": "U hanefijskim izvorima stajanje u okruženju suda spominje se pod",
+   "fr": "Dans les sources ḥanafites, le fait de se tenir debout dans l’entourage du tribunal est mentionné sous",
+   "es": "En las fuentes ḥanafíes, el estar de pie en el entorno del tribunal se menciona bajo"
+  },
+  "und Gerichtsordnung erwähnt.": {
+   "ar": "ونظام المحكمة.",
+   "en": "and court order.",
+   "tr": "ve mahkeme düzeni.",
+   "ku": "û rêzkirina dadgehê.",
+   "ckb": "و ڕێکخستنی دادگا.",
+   "bs": "i sudski red.",
+   "fr": "et l’ordre du tribunal.",
+   "es": "y el orden del tribunal."
+  },
+  "Bei al-Mardāwī erscheint eine stehende Ordnungsperson am Gericht im Kapitel über Qāḍī-Adab und Ablauf des Urteils.": {
+   "ar": "وعند al-Mardāwī يظهر شخص قائم للنظام في المحكمة في الباب عن آداب القاضي وسير الحكم.",
+   "en": "In al-Mardāwī a standing orderly at the court appears in the chapter on the Qāḍī’s Adab and the course of the judgment.",
+   "tr": "al-Mardāwī’de mahkemede ayakta duran bir düzen kişisi, kadının âdabı ve hükmün işleyişi hakkındaki bölümde görünür.",
+   "ku": "Li cem al-Mardāwī kesekî sekinî yê rêzê li dadgehê di beşa adabê Qāḍī û rêça hukmê de xuya dike.",
+   "ckb": "لای al-Mardāwī کەسێکی وەستاوی ڕێکخستن لە دادگا لە بابەتی ئادابی Qāḍī و ڕەوتی حوکم دەردەکەوێت.",
+   "bs": "Kod al-Mardāwīja osoba koja stoji radi reda na sudu pojavljuje se u poglavlju o adabu Qāḍīja i toku presude.",
+   "fr": "Chez al-Mardāwī, une personne d’ordre debout au tribunal apparaît dans le chapitre sur l’Adab du Qāḍī et le déroulement du jugement.",
+   "es": "En al-Mardāwī aparece una persona de orden de pie en el tribunal en el capítulo sobre el Adab del Qāḍī y el curso del fallo."
+  },
+  "Der Ḥadīṯ von Muʿāwiyah warnt vor demjenigen, der liebt, dass Menschen für ihn stehen.": {
+   "ar": "حديث Muʿāwiyah يحذّر ممن يحب أن يقوم الناس له.",
+   "en": "The Ḥadīṯ of Muʿāwiyah warns against the one who loves that people stand for him.",
+   "tr": "Muʿāwiyah’ın Ḥadīṯ’i, insanların kendisi için ayağa kalkmasını seveni uyarır.",
+   "ku": "Ḥadīṯ a Muʿāwiyah hişyarî dide ji yê ku hez dike mirov ji bo wî rabin.",
+   "ckb": "Ḥadīṯی Muʿāwiyah ئاگاداری دەدات لەوەی کە حەز دەکات خەڵک بۆی بوەستن.",
+   "bs": "Ḥadīṯ Muʿāwiyaha upozorava na onoga koji voli da ljudi stoje za njega.",
+   "fr": "Le Ḥadīṯ de Muʿāwiyah met en garde contre celui qui aime que les gens se lèvent pour lui.",
+   "es": "El Ḥadīṯ de Muʿāwiyah advierte contra quien ama que la gente esté de pie para él."
+  },
+  "Der Ḥadīṯ von Saʿd ibn Muʿādh zeigt, dass bloßes Aufstehen nicht in jeder Form automatisch Kufr ist.": {
+   "ar": "حديث Saʿd ibn Muʿādh يبيّن أن مجرد القيام ليس في كل صورة تلقائيًا كفرًا.",
+   "en": "The Ḥadīṯ of Saʿd ibn Muʿādh shows that mere standing up is not in every form automatically Kufr.",
+   "tr": "Saʿd ibn Muʿādh’ın Ḥadīṯ’i gösterir ki salt ayağa kalkmak her biçimde kendiliğinden Kufr değildir.",
+   "ku": "Ḥadīṯ a Saʿd ibn Muʿādh nîşan dide ku tenê sekinîn ne di her şêweyê de bi xweber Kufr e.",
+   "ckb": "Ḥadīṯی Saʿd ibn Muʿādh نیشان دەدات کە تەنها وەستان لە هەموو شێوەیەکدا بەخۆکار Kufr نییە.",
+   "bs": "Ḥadīṯ Saʿd ibn Muʿādha pokazuje da samo ustajanje nije u svakom obliku automatski Kufr.",
+   "fr": "Le Ḥadīṯ de Saʿd ibn Muʿādh montre que le simple fait de se lever n’est pas dans chaque forme automatiquement du Kufr.",
+   "es": "El Ḥadīṯ de Saʿd ibn Muʿādh muestra que el mero ponerse de pie no es en toda forma automáticamente Kufr."
+  },
+  "Ibn Ḥaǧar überliefert von Ibn Rushd, dass Aufstehen je nach Situation unterschiedliche Urteile haben kann.": {
+   "ar": "يروي Ibn Ḥaǧar عن Ibn Rushd أن القيام يمكن أن تكون له أحكام مختلفة بحسب الحال.",
+   "en": "Ibn Ḥaǧar transmits from Ibn Rushd that standing up can have different rulings according to the situation.",
+   "tr": "Ibn Ḥaǧar, Ibn Rushd’dan rivayet eder ki ayağa kalkmanın duruma göre farklı hükümleri olabilir.",
+   "ku": "Ibn Ḥaǧar ji Ibn Rushd vediguhêze ku sekinîn dikare li gor rewşê hukmên cuda hebin.",
+   "ckb": "Ibn Ḥaǧar لە Ibn Rushd دەگێڕێتەوە کە وەستان دەکرێت بەپێی حاڵەت حوکمی جیاوازی هەبێت.",
+   "bs": "Ibn Ḥaǧar prenosi od Ibn Rushda da ustajanje može imati različite hukmove prema situaciji.",
+   "fr": "Ibn Ḥaǧar transmet d’Ibn Rushd que le fait de se lever peut avoir des jugements différents selon la situation.",
+   "es": "Ibn Ḥaǧar transmite de Ibn Rushd que el ponerse de pie puede tener fallos distintos según la situación."
+  },
+  "al-Bayhaqī erwähnt erlaubtes Aufstehen aus Güte und Ehrung, ohne dass der Geehrte dies als Anspruch verlangt.": {
+   "ar": "يذكر al-Bayhaqī القيام المباح من باب البر والإكرام، من غير أن يطلب المُكرَم ذلك حقًا.",
+   "en": "al-Bayhaqī mentions permitted standing up out of kindness and honor, without the one honored demanding it as a claim.",
+   "tr": "al-Bayhaqī, iyilik ve ikramdan mubah ayağa kalkmayı anar; ikram edilen bunu hak olarak istemez.",
+   "ku": "al-Bayhaqī sekinîna destûrdar ji qencî û rêzgirtinê tîne, bêyî ku yê rêzkirî wê wek maf bixwaze.",
+   "ckb": "al-Bayhaqī وەستانی ڕێگەپێدراو لە چاکە و ڕێزلێنان دەهێنێت، بەبێ ئەوەی ئەوەی ڕێزی لێ دەگیرێت وەک ماف داوای بکات.",
+   "bs": "al-Bayhaqī spominje dozvoljeno ustajanje iz dobrote i počasti, a da počašćeni to ne traži kao pravo.",
+   "fr": "al-Bayhaqī mentionne le lever permis par bonté et par honneur, sans que l’honoré le réclame comme un droit.",
+   "es": "al-Bayhaqī menciona el ponerse de pie permitido por bondad y honra, sin que el honrado lo exija como un derecho."
+  },
+  "Verboten ist Hochmut, Selbstüberhöhung, religiöse Überhöhung, Zustimmung zu falscher Gesetzgebung oder das Lieben, dass Menschen für einen stehen. Ein bloßes Aufstehen wegen Ablauf, Ordnung, Druck, gerichtlichem Protokoll oder Zwang ist daraus nicht automatisch Kufr.": {
+   "ar": "المحرّم هو الكبر، ورفع النفس، والرفع الديني، والموافقة على تشريع باطل، أو حب أن يقوم الناس للإنسان. ومجرد القيام بسبب السير أو النظام أو الضغط أو بروتوكول المحكمة أو الإكراه ليس من ذلك تلقائيًا كفرًا.",
+   "en": "Forbidden are arrogance, self-exaltation, religious exaltation, assent to false legislation, or loving that people stand for a person. A mere standing up because of procedure, order, pressure, court protocol or compulsion is not automatically Kufr from that.",
+   "tr": "Haram olan kibirdir, kendini yükseltmektir, dinî yüceltmedir, batıl yasamaya razı olmaktır veya insanların bir kişi için ayağa kalkmasını sevmektir. İşleyiş, düzen, baskı, mahkeme protokolü veya zorlama yüzünden salt ayağa kalkmak bundan kendiliğinden Kufr değildir.",
+   "ku": "Heram pozbilindî ye, bilindkirina xwe ye, bilindkirina dînî ye, razîbûna bi qanûna nerast e, an jî hezkirina ku mirov ji bo kesekî rabin. Tenê sekinîn ji ber rêça kar, rêz, zext, protokola dadgehê an neçarî ji vê bi xweber Kufr nîne.",
+   "ckb": "قەدەغەکراو لووتبەرزییە، بەرزکردنەوەی خۆیە، بەرزکردنەوەی ئایینییە، ڕازیبوون بە یاسای هەڵەیە، یان خۆشەویستی ئەوەی خەڵک بۆ کەسێک بوەستن. تەنها وەستان بەهۆی ڕەوت، ڕێکخستن، فشار، پرۆتۆکۆلی دادگا یان ناچاری لەمەوە بەخۆکار Kufr نییە.",
+   "bs": "Zabranjeni su oholost, samouzdizanje, vjersko uzdizanje, pristanak na pogrešno zakonodavstvo ili voljenje da ljudi stoje za nekoga. Samo ustajanje zbog toka, reda, pritiska, sudskog protokola ili prisile nije iz toga automatski Kufr.",
+   "fr": "Sont interdits l’orgueil, l’élévation de soi, l’élévation religieuse, l’assentiment à une législation fausse, ou le fait d’aimer que les gens se lèvent pour une personne. Un simple lever à cause du déroulement, de l’ordre, de la pression, du protocole du tribunal ou de la contrainte n’est pas automatiquement du Kufr à partir de cela.",
+   "es": "Están prohibidos la soberbia, la autoexaltación, la exaltación religiosa, el asentimiento a una legislación falsa, o amar que la gente esté de pie para una persona. Un mero ponerse de pie por el curso, el orden, la presión, el protocolo del tribunal o la coacción no es automáticamente Kufr a partir de ello."
+  },
+  "Islamweb · Ibn al-Humām, Fatḥ al-Qadīr": {
+   "ar": "Islamweb · Ibn al-Humām، Fatḥ al-Qadīr",
+   "en": "Islamweb · Ibn al-Humām, Fatḥ al-Qadīr",
+   "tr": "Islamweb · Ibn al-Humām, Fatḥ al-Qadīr",
+   "ku": "Islamweb · Ibn al-Humām, Fatḥ al-Qadīr",
+   "ckb": "Islamweb · Ibn al-Humām، Fatḥ al-Qadīr",
+   "bs": "Islamweb · Ibn al-Humām, Fatḥ al-Qadīr",
+   "fr": "Islamweb · Ibn al-Humām, Fatḥ al-Qadīr",
+   "es": "Islamweb · Ibn al-Humām, Fatḥ al-Qadīr"
+  },
+  "Islamweb · Ibn Nuǧaym, al-Baḥr ar-Rāʾiq": {
+   "ar": "Islamweb · Ibn Nuǧaym، al-Baḥr ar-Rāʾiq",
+   "en": "Islamweb · Ibn Nuǧaym, al-Baḥr ar-Rāʾiq",
+   "tr": "Islamweb · Ibn Nuǧaym, al-Baḥr ar-Rāʾiq",
+   "ku": "Islamweb · Ibn Nuǧaym, al-Baḥr ar-Rāʾiq",
+   "ckb": "Islamweb · Ibn Nuǧaym، al-Baḥr ar-Rāʾiq",
+   "bs": "Islamweb · Ibn Nuǧaym, al-Baḥr ar-Rāʾiq",
+   "fr": "Islamweb · Ibn Nuǧaym, al-Baḥr ar-Rāʾiq",
+   "es": "Islamweb · Ibn Nuǧaym, al-Baḥr ar-Rāʾiq"
+  },
+  "Islamweb · al-Inṣāf · Adab al-Qāḍī": {
+   "ar": "Islamweb · al-Inṣāf · Adab al-Qāḍī",
+   "en": "Islamweb · al-Inṣāf · Adab al-Qāḍī",
+   "tr": "Islamweb · al-Inṣāf · Adab al-Qāḍī",
+   "ku": "Islamweb · al-Inṣāf · Adab al-Qāḍī",
+   "ckb": "Islamweb · al-Inṣāf · Adab al-Qāḍī",
+   "bs": "Islamweb · al-Inṣāf · Adab al-Qāḍī",
+   "fr": "Islamweb · al-Inṣāf · Adab al-Qāḍī",
+   "es": "Islamweb · al-Inṣāf · Adab al-Qāḍī"
+  },
+  "Islamweb · al-Inṣāf · Ṭarīq al-Ḥukm": {
+   "ar": "Islamweb · al-Inṣāf · Ṭarīq al-Ḥukm",
+   "en": "Islamweb · al-Inṣāf · Ṭarīq al-Ḥukm",
+   "tr": "Islamweb · al-Inṣāf · Ṭarīq al-Ḥukm",
+   "ku": "Islamweb · al-Inṣāf · Ṭarīq al-Ḥukm",
+   "ckb": "Islamweb · al-Inṣāf · Ṭarīq al-Ḥukm",
+   "bs": "Islamweb · al-Inṣāf · Ṭarīq al-Ḥukm",
+   "fr": "Islamweb · al-Inṣāf · Ṭarīq al-Ḥukm",
+   "es": "Islamweb · al-Inṣāf · Ṭarīq al-Ḥukm"
+  },
+  "Dorar · Wer liebt, dass Menschen für ihn stehen": {
+   "ar": "Dorar · من يحب أن يقوم الناس له",
+   "en": "Dorar · whoever loves that people stand for him",
+   "tr": "Dorar · insanların kendisi için ayağa kalkmasını seven",
+   "ku": "Dorar · yê ku hez dike mirov ji bo wî rabin",
+   "ckb": "Dorar · ئەوەی حەز دەکات خەڵک بۆی بوەستن",
+   "bs": "Dorar · ko voli da ljudi stoje za njega",
+   "fr": "Dorar · celui qui aime que les gens se lèvent pour lui",
+   "es": "Dorar · quien ama que la gente esté de pie para él"
+  },
+  "Sunan Abī Dāwūd · Nr. 5229": {
+   "ar": "Sunan Abī Dāwūd · رقم 5229",
+   "en": "Sunan Abī Dāwūd · no. 5229",
+   "tr": "Sunan Abī Dāwūd · no. 5229",
+   "ku": "Sunan Abī Dāwūd · hejmar 5229",
+   "ckb": "Sunan Abī Dāwūd · ژمارە 5229",
+   "bs": "Sunan Abī Dāwūd · br. 5229",
+   "fr": "Sunan Abī Dāwūd · n° 5229",
+   "es": "Sunan Abī Dāwūd · n.º 5229"
+  },
+  "Dorar · Qūmū ilā Sayyidikum": {
+   "ar": "Dorar · Qūmū ilā Sayyidikum",
+   "en": "Dorar · Qūmū ilā Sayyidikum",
+   "tr": "Dorar · Qūmū ilā Sayyidikum",
+   "ku": "Dorar · Qūmū ilā Sayyidikum",
+   "ckb": "Dorar · Qūmū ilā Sayyidikum",
+   "bs": "Dorar · Qūmū ilā Sayyidikum",
+   "fr": "Dorar · Qūmū ilā Sayyidikum",
+   "es": "Dorar · Qūmū ilā Sayyidikum"
+  },
+  "Islamweb · Fatḥ al-Bārī · Qūmū ilā Sayyidikum": {
+   "ar": "Islamweb · Fatḥ al-Bārī · Qūmū ilā Sayyidikum",
+   "en": "Islamweb · Fatḥ al-Bārī · Qūmū ilā Sayyidikum",
+   "tr": "Islamweb · Fatḥ al-Bārī · Qūmū ilā Sayyidikum",
+   "ku": "Islamweb · Fatḥ al-Bārī · Qūmū ilā Sayyidikum",
+   "ckb": "Islamweb · Fatḥ al-Bārī · Qūmū ilā Sayyidikum",
+   "bs": "Islamweb · Fatḥ al-Bārī · Qūmū ilā Sayyidikum",
+   "fr": "Islamweb · Fatḥ al-Bārī · Qūmū ilā Sayyidikum",
+   "es": "Islamweb · Fatḥ al-Bārī · Qūmū ilā Sayyidikum"
+  },
+  "Fatḥ al-Qadīr als PDF öffnen": {
+   "ar": "افتح Fatḥ al-Qadīr كـ PDF",
+   "en": "Open Fatḥ al-Qadīr as PDF",
+   "tr": "Fatḥ al-Qadīr’i PDF olarak aç",
+   "ku": "Fatḥ al-Qadīr wek PDF veke",
+   "ckb": "Fatḥ al-Qadīr وەک PDF بکەرەوە",
+   "bs": "Otvori Fatḥ al-Qadīr kao PDF",
+   "fr": "Ouvrir Fatḥ al-Qadīr en PDF",
+   "es": "Abrir Fatḥ al-Qadīr como PDF"
+  },
+  "Archive · Teil 5 · ash-Sharikah bis Adab al-Qāḍī": {
+   "ar": "Archive · الجزء 5 · ash-Sharikah حتى Adab al-Qāḍī",
+   "en": "Archive · part 5 · ash-Sharikah up to Adab al-Qāḍī",
+   "tr": "Archive · 5. kısım · ash-Sharikah’dan Adab al-Qāḍī’ye",
+   "ku": "Archive · beş 5 · ash-Sharikah heta Adab al-Qāḍī",
+   "ckb": "Archive · بەشی 5 · ash-Sharikah تا Adab al-Qāḍī",
+   "bs": "Archive · dio 5 · ash-Sharikah do Adab al-Qāḍī",
+   "fr": "Archive · partie 5 · ash-Sharikah jusqu’à Adab al-Qāḍī",
+   "es": "Archive · parte 5 · ash-Sharikah hasta Adab al-Qāḍī"
+  },
+  "al-Baḥr ar-Rāʾiq Bd. 6 als PDF öffnen": {
+   "ar": "افتح al-Baḥr ar-Rāʾiq ج 6 كـ PDF",
+   "en": "Open al-Baḥr ar-Rāʾiq vol. 6 as PDF",
+   "tr": "al-Baḥr ar-Rāʾiq c. 6’yı PDF olarak aç",
+   "ku": "al-Baḥr ar-Rāʾiq berg 6 wek PDF veke",
+   "ckb": "al-Baḥr ar-Rāʾiq بەرگ 6 وەک PDF بکەرەوە",
+   "bs": "Otvori al-Baḥr ar-Rāʾiq sv. 6 kao PDF",
+   "fr": "Ouvrir al-Baḥr ar-Rāʾiq vol. 6 en PDF",
+   "es": "Abrir al-Baḥr ar-Rāʾiq vol. 6 como PDF"
+  },
+  "Archive/Waqfeya · Kitāb al-Qaḍāʾ": {
+   "ar": "Archive/Waqfeya · Kitāb al-Qaḍāʾ",
+   "en": "Archive/Waqfeya · Kitāb al-Qaḍāʾ",
+   "tr": "Archive/Waqfeya · Kitāb al-Qaḍāʾ",
+   "ku": "Archive/Waqfeya · Kitāb al-Qaḍāʾ",
+   "ckb": "Archive/Waqfeya · Kitāb al-Qaḍāʾ",
+   "bs": "Archive/Waqfeya · Kitāb al-Qaḍāʾ",
+   "fr": "Archive/Waqfeya · Kitāb al-Qaḍāʾ",
+   "es": "Archive/Waqfeya · Kitāb al-Qaḍāʾ"
+  },
+  "Wikisource · vollständiger Scan": {
+   "ar": "Wikisource · المسح الكامل",
+   "en": "Wikisource · complete scan",
+   "tr": "Wikisource · tam tarama",
+   "ku": "Wikisource · scana tevahî",
+   "ckb": "Wikisource · سکانی تەواو",
+   "bs": "Wikisource · potpuni sken",
+   "fr": "Wikisource · scan complet",
+   "es": "Wikisource · escaneo completo"
+  },
+  "Fatḥ al-Bārī Bd. 11 Scan/PDF öffnen": {
+   "ar": "افتح Fatḥ al-Bārī ج 11 مسح/PDF",
+   "en": "Open Fatḥ al-Bārī vol. 11 scan/PDF",
+   "tr": "Fatḥ al-Bārī c. 11 tarama/PDF aç",
+   "ku": "Fatḥ al-Bārī berg 11 scan/PDF veke",
+   "ckb": "Fatḥ al-Bārī بەرگ 11 سکان/PDF بکەرەوە",
+   "bs": "Otvori Fatḥ al-Bārī sv. 11 sken/PDF",
+   "fr": "Ouvrir Fatḥ al-Bārī vol. 11 scan/PDF",
+   "es": "Abrir Fatḥ al-Bārī vol. 11 escaneo/PDF"
+  },
+  "Wikisource · Teil 11 · Qūmū ilā Sayyidikum": {
+   "ar": "Wikisource · الجزء 11 · Qūmū ilā Sayyidikum",
+   "en": "Wikisource · part 11 · Qūmū ilā Sayyidikum",
+   "tr": "Wikisource · 11. kısım · Qūmū ilā Sayyidikum",
+   "ku": "Wikisource · beş 11 · Qūmū ilā Sayyidikum",
+   "ckb": "Wikisource · بەشی 11 · Qūmū ilā Sayyidikum",
+   "bs": "Wikisource · dio 11 · Qūmū ilā Sayyidikum",
+   "fr": "Wikisource · partie 11 · Qūmū ilā Sayyidikum",
+   "es": "Wikisource · parte 11 · Qūmū ilā Sayyidikum"
   }
  }
 }

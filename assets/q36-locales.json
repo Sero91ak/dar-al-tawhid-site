@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,618 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Miʿrāǧ, Ruʾyah und pauschaler Takfīr – DAR AL TAWḤĪD": {
+   "ar": "المعراج، والرؤية، والتكفير الإجمالي – DAR AL TAWḤĪD",
+   "en": "Miʿrāj, ruʾyah, and blanket takfīr – DAR AL TAWḤĪD",
+   "tr": "Miʿrac, ruʾyet ve toptan tekfir – DAR AL TAWḤĪD",
+   "ku": "Miʿrac, ruʾyet û tekfîra giştî – DAR AL TAWḤĪD",
+   "ckb": "میعراج، ڕؤیە، و تەکفیری گشتی – DAR AL TAWḤĪD",
+   "bs": "Miʿradž, ruʾja i paušalni tekfir – DAR AL TAWḤĪD",
+   "fr": "Miʿrāǧ, ruʾyah et takfīr global – DAR AL TAWḤĪD",
+   "es": "Miʿrāǧ, ruʾyah y takfīr general – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "مقالات وفق القرآن والسنة والآثار",
+   "en": "Articles according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre yazılar",
+   "ku": "Nivîs li gorî Qurʾān, Sunnah û Āthār",
+   "ckb": "بابەتەکان بەپێی قورئان و سوننەت و ئاسەوار",
+   "bs": "Tekstovi prema Qurʾānu, Sunnah i Āthāru",
+   "fr": "Articles selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Artículos según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "ʿAqīdah · Miʿrāǧ · Ruʾyah · Ikhtilāf · Takfīr": {
+   "ar": "عقيدة · معراج · رؤية · اختلاف · تكفير",
+   "en": "ʿAqīdah · Miʿrāǧ · Ruʾyah · Ikhtilāf · Takfīr",
+   "tr": "ʿAqīdah · Miʿrāǧ · Ruʾyah · Ikhtilāf · Takfīr",
+   "ku": "ʿAqīdah · Miʿrāǧ · Ruʾyah · Ikhtilāf · Takfīr",
+   "ckb": "عقیدة · معراج · رؤیة · اختلاف · تکفیر",
+   "bs": "ʿAqīdah · Miʿrāǧ · Ruʾyah · Ikhtilāf · Takfīr",
+   "fr": "ʿAqīdah · Miʿrāǧ · Ruʾyah · Ikhtilāf · Takfīr",
+   "es": "ʿAqīdah · Miʿrāǧ · Ruʾyah · Ikhtilāf · Takfīr"
+  },
+  "Miʿrāǧ und Ruʾyah: Was die frühen und klassischen Quellen tatsächlich belegen": {
+   "ar": "المعراج والرؤية: ما تثبته المصادر المبكرة والكلاسيكية فعلًا",
+   "en": "Miʿrāj and ruʾyah: what the early and classical sources actually establish",
+   "tr": "Miʿrac ve ruʾyet: erken ve klasik kaynakların gerçekten ortaya koyduğu",
+   "ku": "Miʿrac û ruʾyet: ya ku çavkaniyên zû û klasîk bi rastî didin ber çavan",
+   "ckb": "میعراج و ڕؤیە: ئەوەی سەرچاوە زوو و کلاسیکەکان بە ڕاستی دەیسەلمێنن",
+   "bs": "Miʿradž i ruʾja: ono što rani i klasični izvori zaista utvrđuju",
+   "fr": "Miʿrāǧ et ruʾyah : ce que les sources anciennes et classiques établissent réellement",
+   "es": "Miʿrāǧ y ruʾyah: lo que las fuentes tempranas y clásicas establecen realmente"
+  },
+  "Die Behauptung, jeder sei Kāfir, der den körperlichen Miʿrāǧ oder eine Ruʾyah des Propheten ﷺ bejaht, vermischt zwei verschiedene Fragen und ignoriert den dokumentierten Ikhtilāf.": {
+   "ar": "دعوى أن كل من يُثبت المعراج بالجسد أو رؤية للنبي ﷺ فهو كافر، تخلط مسألتين مختلفتين وتتجاهل الاختلاف الموثق.",
+   "en": "The claim that everyone is a kāfir who affirms the bodily miʿrāj or a ruʾyah of the Prophet ﷺ mixes two different questions and ignores the documented ikhtilāf.",
+   "tr": "Bedenle miʿracı veya Peygamber ﷺ’in bir ruʾyetini kabul eden herkesin kâfir olduğu iddiası, iki ayrı meseleyi karıştırır ve belgelenmiş ihtilafı görmezden gelir.",
+   "ku": "Daxwaza ku her kes kafir e yê ku miʿraca bi laş an ruʾyeteke Pêxember ﷺ erê dike, du pirsan cuda tevlihev dike û îxtilafa belgekirî paşguh dike.",
+   "ckb": "بانگەشەی ئەوەی هەموو کەسێک کافرە کە میعراجی جەستەیی یان ڕؤیەیەکی پێغەمبەر ﷺ دەسەلمێنێت، دوو پرسی جیاواز تێکەڵ دەکات و ناکۆکیی بەڵگەکراو پشتگوێ دەخات.",
+   "bs": "Tvrdnja da je svako kâfir ko potvrđuje tjelesni miʿradž ili ruʾju Vjerovjesnika ﷺ miješa dva različita pitanja i zanemaruje dokumentirani ihtilaf.",
+   "fr": "L’affirmation que serait kāfir quiconque affirme le miʿrāǧ corporel ou une ruʾyah du Prophète ﷺ mêle deux questions distinctes et ignore l’ikhtilāf documenté.",
+   "es": "La afirmación de que es kāfir todo el que afirma el miʿrāǧ corporal o una ruʾyah del Profeta ﷺ mezcla dos cuestiones distintas e ignora el ikhtilāf documentado."
+  },
+  "Körperlicher Miʿrāǧ, Ruʾyah Allahs und die Grenzen eines pauschalen Takfīr.": {
+   "ar": "المعراج بالجسد، ورؤية الله، وحدود التكفير الإجمالي.",
+   "en": "Bodily miʿrāj, the ruʾyah of Allah, and the limits of a blanket takfīr.",
+   "tr": "Bedenle miʿrac, Allah’ın ruʾyeti ve toptan tekfirin sınırları.",
+   "ku": "Miʿraca bi laş, ruʾyeta Allah, û sînorên tekfîreke giştî.",
+   "ckb": "میعراجی جەستەیی، ڕؤیەی الله، و سنوورەکانی تەکفیرێکی گشتی.",
+   "bs": "Tjelesni miʿradž, ruʾja Allaha i granice paušalnog tekfira.",
+   "fr": "Miʿrāǧ corporel, ruʾyah d’Allah, et limites d’un takfīr global.",
+   "es": "Miʿrāǧ corporal, ruʾyah de Allah y límites de un takfīr general."
+  },
+  "„Körperlicher Miʿrāǧ“ bedeutet hier den wirklichen Aufstieg mit Körper und Seele. Eine räumliche Ko-Lokalität oder Umfassung Allahs wird damit nicht behauptet.": {
+   "ar": "«المعراج بالجسد» يعني هنا الصعود الحقيقي بالجسد والروح. ولا يُدَّعى بذلك حلول مكاني مشترك أو إحاطة بالله.",
+   "en": "“Bodily miʿrāj” means here the real ascent with body and soul. A spatial co-locality or an encompassing of Allah is not thereby claimed.",
+   "tr": "“Bedenle miʿrac” burada beden ve ruhla gerçek yükseliş demektir. Bununla Allah’ın mekânda birlikte bulunması veya kuşatılması iddia edilmez.",
+   "ku": "“Miʿraca bi laş” li vir rabûna rastîn bi laş û ruh e. Bi wê yekê hebûna hevcih a mekanî an dorpêçkirina Allah nayê daxwazkirin.",
+   "ckb": "«میعراجی جەستەیی» لێرە واتای بەرزبوونەوەی ڕاستەقینەیە بە جەستە و ڕۆح. بەمە هاوبوونی شوێنی یان دەوردانی الله بانگەشە ناکرێت.",
+   "bs": "“Tjelesni miʿradž” ovdje znači stvarni uspon tijelom i dušom. Time se ne tvrdi prostorna su-lokalnost ni obuhvatanje Allaha.",
+   "fr": "« Miʿrāǧ corporel » signifie ici l’ascension réelle avec le corps et l’âme. Une co-localité spatiale ou un englobement d’Allah n’est pas affirmé par là.",
+   "es": "“Miʿrāǧ corporal” significa aquí el ascenso real con cuerpo y alma. Con ello no se afirma una colocalidad espacial ni un abarcamiento de Allah."
+  },
+  "Der körperliche Miʿrāǧ ist die Mehrheitsposition": {
+   "ar": "المعراج بالجسد هو قول الجمهور",
+   "en": "The bodily miʿrāj is the majority position",
+   "tr": "Bedenle miʿrac çoğunluk görüşüdür",
+   "ku": "Miʿraca bi laş helwesta piraniyê ye",
+   "ckb": "میعراجی جەستەیی بۆچوونی زۆرینەیە",
+   "bs": "Tjelesni miʿradž je stav većine",
+   "fr": "Le miʿrāǧ corporel est la position majoritaire",
+   "es": "El miʿrāǧ corporal es la posición mayoritaria"
+  },
+  "Al-Qāḍī ʿIyāḍ überliefert zunächst den tatsächlichen Ikhtilāf über die Art des Isrāʾ und sagt dann ausdrücklich:": {
+   "ar": "القاضي عياض يروي أولًا الاختلاف الواقع في كيفية الإسراء، ثم يقول صراحة:",
+   "en": "Al-Qāḍī ʿIyāḍ first transmits the actual ikhtilāf about the manner of the isrāʾ, and then says expressly:",
+   "tr": "Kādî İyâz önce isrânın keyfiyeti hakkındaki gerçek ihtilafı nakleder, sonra açıkça der:",
+   "ku": "Qadî Îyad pêşî îxtilafa rastîn li ser çawaniya îsraê vediguhêze, paşê bi eşkere dibêje:",
+   "ckb": "قادیی عیاز سەرەتا ناکۆکیی ڕاستەقینە دەربارەی چۆنیەتی ئیسرا دەگێڕێتەوە، پاشان بە ڕاشکاوی دەڵێت:",
+   "bs": "El-Qādī ʿIyāḍ prvo prenosi stvarni ihtilaf o načinu isrāʾa, zatim izričito kaže:",
+   "fr": "Al-Qāḍī ʿIyāḍ transmet d’abord l’ikhtilāf réel sur le mode de l’isrāʾ, puis dit expressément :",
+   "es": "Al-Qāḍī ʿIyāḍ transmite primero el ikhtilāf real sobre el modo del isrāʾ, y luego dice expresamente:"
+  },
+  "„Die Mehrheit der Salaf und der Muslime vertrat, dass er mit dem Körper und im Wachzustand stattfand.“": {
+   "ar": "«ذهب جمهور السلف والمسلمين إلى أنه كان بالجسد وفي اليقظة.»",
+   "en": "“The majority of the Salaf and of the Muslims held that it took place with the body and in the waking state.”",
+   "tr": "“Selef’in ve Müslümanların çoğunluğu, onun bedenle ve uyanıkken olduğunu benimsedi.”",
+   "ku": "“Piraniya Salaf û misilmanan girt ku ew bi laş û di hişyariyê de bû.”",
+   "ckb": "«زۆرینەی سەلەف و موسڵمانان گرتیان کە بە جەستە و لە کاتی بێداری بوو.»",
+   "bs": "„Većina selefa i muslimana zastupala je da se dogodio tijelom i u budnom stanju.“",
+   "fr": "« La majorité des Salaf et des musulmans a soutenu qu’il eut lieu avec le corps et à l’état de veille. »",
+   "es": "“La mayoría de los Salaf y de los musulmanes sostuvo que ocurrió con el cuerpo y en estado de vigilia.”"
+  },
+  "Anschließend erklärt er diese Auffassung für richtig.": {
+   "ar": "ثم يصرّح بأن هذا القول هو الصحيح.",
+   "en": "He then declares this view to be the correct one.",
+   "tr": "Ardından bu görüşü doğru diye açıklar.",
+   "ku": "Paşê ew vê nêrînê rast diyar dike.",
+   "ckb": "پاشان ئەم بۆچوونە بە ڕاست ڕادەگەیەنێت.",
+   "bs": "Zatim ovo shvatanje izjavljuje ispravnim.",
+   "fr": "Il déclare ensuite cette position juste.",
+   "es": "Luego declara correcta esta opinión."
+  },
+  "Damit kann die bloße Aussage, der Prophet ﷺ sei beim Miʿrāǧ": {
+   "ar": "وبذلك لا يمكن عرض مجرد القول بأن النبي ﷺ في المعراج",
+   "en": "Thus the mere statement that the Prophet ﷺ, at the miʿrāj,",
+   "tr": "Böylece Peygamber ﷺ’in miʿracta yalnızca şu sözü",
+   "ku": "Bi vî awayî tenê gotina ku Pêxember ﷺ di miʿracê de",
+   "ckb": "بەمە تەنها ئەو وتەیە کە پێغەمبەر ﷺ لە میعراجدا",
+   "bs": "Time se puka izjava da je Vjerovjesnik ﷺ na miʿradžu",
+   "fr": "Ainsi la simple affirmation que le Prophète ﷺ, lors du miʿrāǧ,",
+   "es": "Así la mera afirmación de que el Profeta ﷺ, en el miʿrāǧ,"
+  },
+  "wirklich mit Körper und Seele": {
+   "ar": "حقًا بالجسد والروح",
+   "en": "really with body and soul",
+   "tr": "gerçekten beden ve ruhla",
+   "ku": "bi rastî bi laş û ruh",
+   "ckb": "بە ڕاستی بە جەستە و ڕۆح",
+   "bs": "zaista tijelom i dušom",
+   "fr": "réellement avec le corps et l’âme",
+   "es": "realmente con cuerpo y alma"
+  },
+  "aufgestiegen, nicht als eine fremde Kufr-Lehre dargestellt werden; sie ist vielmehr als Mehrheitsauffassung der Salaf und Muslime dokumentiert.": {
+   "ar": "صعد، لا تُعرض على أنها عقيدة كفر غريبة؛ بل هي موثقة بوصفها قول جمهور السلف والمسلمين.",
+   "en": "ascended, cannot be presented as a foreign doctrine of kufr; it is rather documented as the majority view of the Salaf and the Muslims.",
+   "tr": "yükseldiği, yabancı bir küfür öğretisi diye sunulamaz; o, Selef’in ve Müslümanların çoğunluk görüşü olarak belgelenmiştir.",
+   "ku": "rabûye, nikare wekî doktrîneke kufrê ya biyanî were nîşandan; ew wekî nêrîna piraniya Salaf û misilmanan hatiye belgekirin.",
+   "ckb": "بەرزبووەتەوە، ناکرێت وەک عەقیدەیەکی کوفری نامۆ پیشان بدرێت؛ بەڵکو وەک بۆچوونی زۆرینەی سەلەف و موسڵمانان بەڵگە کراوە.",
+   "bs": "uzdignuo, ne može se prikazati kao strana doktrina kufra; ona je naprotiv dokumentirana kao stav većine selefa i muslimana.",
+   "fr": "est monté, ne peut pas être présentée comme une doctrine de kufr étrangère ; elle est au contraire documentée comme l’opinion majoritaire des Salaf et des musulmans.",
+   "es": "ascendió, no puede presentarse como una doctrina de kufr ajena; está más bien documentada como la opinión mayoritaria de los Salaf y de los musulmanes."
+  },
+  "Islamweb · al-Qāḍī ʿIyāḍ, aš-Šifāʾ": {
+   "ar": "إسلام ويب · القاضي عياض، الشفاء",
+   "en": "Islamweb · al-Qāḍī ʿIyāḍ, ash-Shifāʾ",
+   "tr": "İslamweb · Kādî İyâz, eş-Şifâ",
+   "ku": "Islamweb · Qadî Îyad, eş-Şifa",
+   "ckb": "ئیسلاموێب · قادیی عیاز، الشفاء",
+   "bs": "Islamweb · al-Qāḍī ʿIyāḍ, aš-Šifāʾ",
+   "fr": "Islamweb · al-Qāḍī ʿIyāḍ, ash-Shifāʾ",
+   "es": "Islamweb · al-Qāḍī ʿIyāḍ, ash-Shifāʾ"
+  },
+  "Direktmarkierung bei der Mehrheitsposition: Körper und Wachzustand": {
+   "ar": "تحديد مباشر عند قول الجمهور: الجسد واليقظة",
+   "en": "direct marker at the majority position: body and waking state",
+   "tr": "çoğunluk görüşünde doğrudan işaret: beden ve uyanıklık",
+   "ku": "nîşana rasterast li helwesta piraniyê: laş û hişyarî",
+   "ckb": "نیشانەی ڕاستەوخۆ لای بۆچوونی زۆرینە: جەستە و بێداری",
+   "bs": "izravna oznaka kod stava većine: tijelo i budnost",
+   "fr": "marquage direct à la position majoritaire : corps et état de veille",
+   "es": "marca directa en la posición mayoritaria: cuerpo y vigilia"
+  },
+  "Über die Modalität des Isrāʾ wurde tatsächlich gestritten": {
+   "ar": "في كيفية الإسراء وُجد خلاف فعلًا",
+   "en": "There was in fact dispute about the modality of the isrāʾ",
+   "tr": "İsrânın keyfiyeti hakkında gerçekten ihtilaf edilmiştir",
+   "ku": "Li ser çawaniya îsraê bi rastî nîqaş hebû",
+   "ckb": "دەربارەی چۆنیەتی ئیسرا بە ڕاستی ناکۆکی هەبوو",
+   "bs": "O modalitetu isrāʾa se zaista sporilo",
+   "fr": "On a effectivement discuté de la modalité de l’isrāʾ",
+   "es": "Sobre la modalidad del isrāʾ hubo de hecho disputa"
+  },
+  "Der gleiche Abschnitt beginnt ausdrücklich mit:": {
+   "ar": "القسم نفسه يبدأ صراحة بـ:",
+   "en": "The same section begins expressly with:",
+   "tr": "Aynı bölüm açıkça şununla başlar:",
+   "ku": "Heman beş bi eşkere bi vî dest pê dike:",
+   "ckb": "هەمان بەش بە ڕاشکاوی بەمە دەست پێدەکات:",
+   "bs": "Isti odjeljak izričito počinje sa:",
+   "fr": "La même section commence expressément par :",
+   "es": "La misma sección comienza expresamente con:"
+  },
+  "„Die Salaf und die Gelehrten waren uneinig: geschah sein Isrāʾ mit seiner Seele oder seinem Körper?“": {
+   "ar": "«اختلف السلف والعلماء: هل كان إسراؤه بروحه أم بجسده؟»",
+   "en": "“The Salaf and the scholars disagreed: did his isrāʾ take place with his soul or with his body?”",
+   "tr": "“Selef ve âlimler ayrılığa düştü: isrâsı ruhuyla mı, bedeniyle mi oldu?”",
+   "ku": "“Salaf û zana li hev nekirin: gelo îsraê wî bi ruhê wî bû an bi laşê wî?”",
+   "ckb": "«سەلەف و زانایان ناکۆک بوون: ئایا ئیسراکەی بە ڕۆحی بوو یان بە جەستەی؟»",
+   "bs": "„Selef i učenjaci su se razišli: je li njegov isrāʾ bio dušom ili tijelom?“",
+   "fr": "« Les Salaf et les savants ont divergé : son isrāʾ eut-il lieu avec son âme ou avec son corps ? »",
+   "es": "“Los Salaf y los sabios discreparon: ¿su isrāʾ fue con su alma o con su cuerpo?”"
+  },
+  "Al-Qāḍī ʿIyāḍ nennt drei überlieferte Auffassungen.": {
+   "ar": "القاضي عياض يذكر ثلاثة أقوال مروية.",
+   "en": "Al-Qāḍī ʿIyāḍ names three transmitted views.",
+   "tr": "Kādî İyâz nakledilen üç görüşü anar.",
+   "ku": "Qadî Îyad sê nêrînên veguhastî bi nav dike.",
+   "ckb": "قادیی عیاز سێ بۆچوونی گێڕدراو ناودەبات.",
+   "bs": "El-Qādī ʿIyāḍ navodi tri prenesena shvatanja.",
+   "fr": "Al-Qāḍī ʿIyāḍ nomme trois opinions transmises.",
+   "es": "Al-Qāḍī ʿIyāḍ nombra tres opiniones transmitidas."
+  },
+  "Das bedeutet: Wer die historische Quellenlage korrekt wiedergibt, muss zwischen der": {
+   "ar": "ومعنى ذلك: من يعرض الوضع التاريخي للمصادر عرضًا صحيحًا يجب أن يميّز بين",
+   "en": "That means: whoever reports the historical state of the sources correctly must distinguish between the",
+   "tr": "Bunun anlamı: Kaynakların tarihî durumunu doğru aktaran kimse şunları ayırmalıdır:",
+   "ku": "Wateya vê yekê: Yê ku rewşa dîrokî ya çavkaniyan rast bide, divê cuda bike di navbera",
+   "ckb": "واتای ئەمە: ئەوەی باری مێژوویی سەرچاوەکان بە دروستی دەگێڕێتەوە، دەبێت جیا بکاتەوە لە نێوان",
+   "bs": "To znači: ko historijsko stanje izvora ispravno prenosi, mora razlikovati između",
+   "fr": "Cela signifie : qui rend correctement l’état historique des sources doit distinguer entre",
+   "es": "Eso significa: quien expone correctamente el estado histórico de las fuentes debe distinguir entre"
+  },
+  "Islamweb · aš-Šifāʾ, „Ḥaqīqat al-Isrāʾ“": {
+   "ar": "إسلام ويب · الشفاء، «حقيقة الإسراء»",
+   "en": "Islamweb · ash-Shifāʾ, “Ḥaqīqat al-Isrāʾ”",
+   "tr": "İslamweb · eş-Şifâ, “Hakîkatü’l-isrâ”",
+   "ku": "Islamweb · eş-Şifa, “Heqîqeta îsraê”",
+   "ckb": "ئیسلاموێب · الشفاء، «حقیقة الإسراء»",
+   "bs": "Islamweb · aš-Šifāʾ, „Ḥaqīqat al-Isrāʾ“",
+   "fr": "Islamweb · ash-Shifāʾ, « Ḥaqīqat al-Isrāʾ »",
+   "es": "Islamweb · ash-Shifāʾ, “Ḥaqīqat al-Isrāʾ”"
+  },
+  "Direktmarkierung beim ausdrücklich genannten Ikhtilāf": {
+   "ar": "تحديد مباشر عند الاختلاف المذكور صراحة",
+   "en": "direct marker at the expressly mentioned ikhtilāf",
+   "tr": "açıkça anılan ihtilafta doğrudan işaret",
+   "ku": "nîşana rasterast li îxtilafa bi eşkere navkirî",
+   "ckb": "نیشانەی ڕاستەوخۆ لای ناکۆکییەکی بە ڕاشکاوی ناوهێنراو",
+   "bs": "izravna oznaka kod izričito spomenutog ihtilafa",
+   "fr": "marquage direct à l’ikhtilāf expressément mentionné",
+   "es": "marca directa en el ikhtilāf expresamente mencionado"
+  },
+  "ʿĀʾišah sagte nicht: „Wer das glaubt, ist Kāfir“": {
+   "ar": "عائشة لم تقل: «من اعتقد ذلك فهو كافر»",
+   "en": "ʿĀʾishah did not say: “Whoever believes that is a kāfir”",
+   "tr": "Âişe demedi: “Buna inanan kâfirdir”",
+   "ku": "ʿÂişe negot: “Yê ku vê bawer dike kafir e”",
+   "ckb": "عائیشە نەیوت: «ئەوەی ئەمە باوەڕ دەکات کافرە»",
+   "bs": "ʿĀʾiša nije rekla: „Ko to vjeruje, kâfir je“",
+   "fr": "ʿĀʾishah n’a pas dit : « Quiconque croit cela est kāfir »",
+   "es": "ʿĀʾishah no dijo: “Quien cree eso es kāfir”"
+  },
+  "In Ṣaḥīḥ Muslim sagt ʿĀʾišah رضي الله عنها über die Behauptung, Muḥammad ﷺ habe seinen Herrn gesehen:": {
+   "ar": "في صحيح مسلم تقول عائشة رضي الله عنها عن دعوى أن محمدًا ﷺ رأى ربه:",
+   "en": "In Ṣaḥīḥ Muslim, ʿĀʾishah رضي الله عنها says about the claim that Muḥammad ﷺ saw his Lord:",
+   "tr": "Sahih Müslim’de Âişe رضي الله عنها, Muhammed ﷺ’in Rabbini gördüğü iddiası hakkında der:",
+   "ku": "Di Sehîh Muslim de ʿÂişe رضي الله عنها derbarê daxwaza ku Muḥammad ﷺ Rebbê xwe dîtiye dibêje:",
+   "ckb": "لە سەحیح مسلم، عائیشە رضي الله عنها دەربارەی بانگەشەی ئەوەی محمد ﷺ پەروەردگاری بینیوە دەڵێت:",
+   "bs": "U Sahihu Muslimu ʿĀʾiša رضي الله عنها o tvrdnji da je Muḥammad ﷺ vidio svoga Gospodara kaže:",
+   "fr": "Dans Ṣaḥīḥ Muslim, ʿĀʾishah رضي الله عنها dit, au sujet de l’affirmation que Muḥammad ﷺ a vu son Seigneur :",
+   "es": "En Ṣaḥīḥ Muslim, ʿĀʾishah رضي الله عنها dice sobre la afirmación de que Muḥammad ﷺ vio a su Señor:"
+  },
+  "„Wer behauptet, Muḥammad ﷺ habe seinen Herrn gesehen, der hat eine gewaltige Falschbehauptung gegen Allah ausgesprochen.“": {
+   "ar": "«من زعم أن محمدًا ﷺ رأى ربه فقد أعظم على الله الفرية.»",
+   "en": "“Whoever claims that Muḥammad ﷺ saw his Lord has uttered a grave falsehood against Allah.”",
+   "tr": "“Kim Muhammed ﷺ’in Rabbini gördüğünü iddia ederse, Allah’a karşı büyük bir iftira söylemiştir.”",
+   "ku": "“Yê ku daxwaz dike ku Muḥammad ﷺ Rebbê xwe dîtiye, dereweke mezin li ser Allah aniye.”",
+   "ckb": "«ئەوەی بانگەشە دەکات کە محمد ﷺ پەروەردگاری بینیوە، بوختانێکی گەورەی لەسەر الله هێناوە.»",
+   "bs": "„Ko tvrdi da je Muḥammad ﷺ vidio svoga Gospodara, izrekao je golemu laž protiv Allaha.“",
+   "fr": "« Quiconque prétend que Muḥammad ﷺ a vu son Seigneur a proféré contre Allah un mensonge grave. »",
+   "es": "“Quien afirma que Muḥammad ﷺ vio a su Señor ha proferido una falsedad grave contra Allah.”"
+  },
+  "Ihr authentischer Wortlaut lautet": {
+   "ar": "لفظها الصحيح هو",
+   "en": "Her authentic wording is",
+   "tr": "Onun sahih lafzı şudur:",
+   "ku": "Gotina wê ya sehîh ev e",
+   "ckb": "ووشەی سەحیحی ئەو ئەمەیە",
+   "bs": "Njezin vjerodostojni tekst glasi",
+   "fr": "Son libellé authentique est",
+   "es": "Su texto auténtico es"
+  },
+  "„faqad aʿẓama ʿalā Allāhi al-firyah“": {
+   "ar": "«فقد أعظم على الله الفرية»",
+   "en": "“faqad aʿẓama ʿalā Allāhi al-firyah”",
+   "tr": "“faqad aʿẓama ʿalā Allāhi al-firyah”",
+   "ku": "“faqad aʿẓama ʿalā Allāhi al-firyah”",
+   "ckb": "«فقد أعظم علی الله الفریة»",
+   "bs": "“faqad aʿẓama ʿalā Allāhi al-firyah”",
+   "fr": "“faqad aʿẓama ʿalā Allāhi al-firyah”",
+   "es": "“faqad aʿẓama ʿalā Allāhi al-firyah”"
+  },
+  ". In diesem Bericht steht nicht:": {
+   "ar": ". وفي هذا الخبر لا يوجد:",
+   "en": ". In this report it does not say:",
+   "tr": ". Bu rivayette şu yoktur:",
+   "ku": ". Di vê rîwayetê de tune:",
+   "ckb": ". لەم هەواڵەدا نییە:",
+   "bs": ". U ovom izvještaju ne stoji:",
+   "fr": ". Dans ce récit il n’y a pas :",
+   "es": ". En este relato no está:"
+  },
+  ". Der Bericht darf daher nicht wortlos in einen ausdrücklichen Takfīr umgeschrieben werden.": {
+   "ar": ". لذلك لا يجوز أن يُعاد صياغة الخبر بصمت إلى تكفير صريح.",
+   "en": ". The report must therefore not be silently rewritten into an explicit takfīr.",
+   "tr": ". Bu yüzden rivayet sessizce açık bir tekfire dönüştürülemez.",
+   "ku": ". Ji ber vê yekê rîwayet nikare bêdeng were guherandin bo tekfîreke eşkere.",
+   "ckb": ". بۆیە نابێت هەواڵەکە بێدەنگ بگۆڕدرێتە تەکفیرێکی ڕاشکاو.",
+   "bs": ". Zato se izvještaj ne smije nijemo prepisati u izričit tekfir.",
+   "fr": ". Le récit ne doit donc pas être réécrit en silence en un takfīr explicite.",
+   "es": ". Por eso el relato no debe reescribirse en silencio como un takfīr explícito."
+  },
+  "Der authentische Wortlaut ʿĀʾišahs – ohne ausdrückliche Takfīr-Formel": {
+   "ar": "اللفظ الصحيح لعائشة – من غير صيغة تكفير صريحة",
+   "en": "The authentic wording of ʿĀʾishah – without an explicit takfīr formula",
+   "tr": "Âişe’nin sahih lafzı – açık bir tekfir formülü olmaksızın",
+   "ku": "Gotina sehîh a ʿÂişe – bê formuleke tekfîrê ya eşkere",
+   "ckb": "ووشەی سەحیحی عائیشە – بێ فۆرمولەی تەکفیری ڕاشکاو",
+   "bs": "Vjerodostojni tekst ʿĀʾiše – bez izričite formule tekfira",
+   "fr": "Le libellé authentique de ʿĀʾishah – sans formule explicite de takfīr",
+   "es": "El texto auténtico de ʿĀʾishah – sin una fórmula explícita de takfīr"
+  },
+  "Ibn ʿAbbās bejahte eine Ruʾyah mit dem Herzen": {
+   "ar": "ابن عباس أثبت رؤية بالقلب",
+   "en": "Ibn ʿAbbās affirmed a ruʾyah with the heart",
+   "tr": "İbn Abbâs kalple bir ruʾyeti kabul etti",
+   "ku": "Ibn ʿAbbās ruʾyeteke bi dil erê kir",
+   "ckb": "ابن عباس ڕؤیەیەکی بە دڵ سەلماند",
+   "bs": "Ibn ʿAbbās je potvrdio ruʾju srcem",
+   "fr": "Ibn ʿAbbās a affirmé une ruʾyah par le cœur",
+   "es": "Ibn ʿAbbās afirmó una ruʾyah con el corazón"
+  },
+  "„Das Herz hat nicht gelogen bei dem, was es sah“": {
+   "ar": "«ما كذب الفؤاد ما رأى»",
+   "en": "“The heart did not lie about what it saw”",
+   "tr": "“Gönül, gördüğü şeyde yalan söylemedi”",
+   "ku": "“Dil di ya ku dît de derew nekir”",
+   "ckb": "«دڵ لەوەی بینی درۆی نەکرد»",
+   "bs": "„Srce nije slagalo u onome što je vidjelo“",
+   "fr": "« Le cœur n’a pas menti sur ce qu’il a vu »",
+   "es": "“El corazón no mintió en lo que vio”"
+  },
+  "„Und wahrlich, er sah Ihn ein weiteres Mal“": {
+   "ar": "«ولقد رآه نزلة أخرى»",
+   "en": "“And indeed he saw Him another time”",
+   "tr": "“Andolsun, O’nu bir kez daha gördü”",
+   "ku": "“Û bi rastî wî Ew careke din dît”",
+   "ckb": "«و بە ڕاستی جاریکی تر بینی»",
+   "bs": "„I zaista Ga je vidio još jednom“",
+   "fr": "« Et certes il L’a vu une autre fois »",
+   "es": "“Y en verdad Lo vio otra vez”"
+  },
+  "sagte Ibn ʿAbbās رضي الله عنهما:": {
+   "ar": "قال ابن عباس رضي الله عنهما:",
+   "en": "Ibn ʿAbbās رضي الله عنهما said:",
+   "tr": "İbn Abbâs رضي الله عنهما dedi:",
+   "ku": "Ibn ʿAbbās رضي الله عنهما got:",
+   "ckb": "ابن عباس رضي الله عنهما فەرمووی:",
+   "bs": "Ibn ʿAbbās رضي الله عنهما je rekao:",
+   "fr": "Ibn ʿAbbās رضي الله عنهما a dit :",
+   "es": "Ibn ʿAbbās رضي الله عنهما dijo:"
+  },
+  "„Er sah Ihn mit seinem Herzen zweimal.“": {
+   "ar": "«رآه بقلبه مرتين.»",
+   "en": "“He saw Him with his heart twice.”",
+   "tr": "“O’nu kalbiyle iki kez gördü.”",
+   "ku": "“Wî Ew bi dilê xwe du car dît.”",
+   "ckb": "«دوو جار بە دڵی بینی.»",
+   "bs": "„Vidjeo Ga je srcem dvaput.“",
+   "fr": "« Il L’a vu avec son cœur deux fois. »",
+   "es": "“Lo vio con su corazón dos veces.”"
+  },
+  "Diese Überlieferung steht in": {
+   "ar": "هذه الرواية في",
+   "en": "This transmission is in",
+   "tr": "Bu rivayet şuradadır:",
+   "ku": "Ev veguhastin di",
+   "ckb": "ئەم گێڕانەوەیە لە",
+   "bs": "Ova predaja je u",
+   "fr": "Cette transmission se trouve dans",
+   "es": "Esta transmisión está en"
+  },
+  ". Damit ist die Bejahung einer Ruʾyah in einer authentischen Form von einem Ṣaḥābī überliefert.": {
+   "ar": ". وبذلك فإن إثبات رؤية بصورة صحيحة مروي عن صحابي.",
+   "en": ". Thus the affirmation of a ruʾyah in an authentic form is transmitted from a ṣaḥābī.",
+   "tr": ". Böylece bir ruʾyetin sahih bir biçimde kabulü bir sahâbîden nakledilmiştir.",
+   "ku": ". Bi vî awayî erêkirina ruʾyetekê bi şêweyeke sehîh ji sehabîyekî hatiye veguhastin.",
+   "ckb": ". بەمە سەلماندنی ڕؤیەیەک بە شێوەیەکی سەحیح لە سەحابییەکەوە گێڕدراوەتەوە.",
+   "bs": ". Time je potvrđivanje ruʾje u vjerodostojnom obliku preneseno od jednog ashaba.",
+   "fr": ". Ainsi l’affirmation d’une ruʾyah sous une forme authentique est transmise d’un ṣaḥābī.",
+   "es": ". Así la afirmación de una ruʾyah en una forma auténtica está transmitida de un ṣaḥābī."
+  },
+  "Ibn ʿAbbās: „Er sah Ihn mit seinem Herzen zweimal“": {
+   "ar": "ابن عباس: «رآه بقلبه مرتين»",
+   "en": "Ibn ʿAbbās: “He saw Him with his heart twice”",
+   "tr": "İbn Abbâs: “O’nu kalbiyle iki kez gördü”",
+   "ku": "Ibn ʿAbbās: “Wî Ew bi dilê xwe du car dît”",
+   "ckb": "ابن عباس: «دوو جار بە دڵی بینی»",
+   "bs": "Ibn ʿAbbās: „Vidjeo Ga je srcem dvaput“",
+   "fr": "Ibn ʿAbbās : « Il L’a vu avec son cœur deux fois »",
+   "es": "Ibn ʿAbbās: “Lo vio con su corazón dos veces”"
+  },
+  "Die klassischen Gelehrten dokumentierten echten Ikhtilāf über die Ruʾyah": {
+   "ar": "العلماء الكلاسيكيون وثّقوا اختلافًا حقيقيًا في الرؤية",
+   "en": "The classical scholars documented a real ikhtilāf about the ruʾyah",
+   "tr": "Klasik âlimler ruʾyet hakkında gerçek bir ihtilafı belgelediler",
+   "ku": "Zanayên klasîk îxtilafeke rastîn li ser ruʾyetê belge kirin",
+   "ckb": "زانایانی کلاسیکی ناکۆکییەکی ڕاستەقینەیان دەربارەی ڕؤیە بەڵگە کرد",
+   "bs": "Klasični učenjaci su dokumentirali stvarni ihtilaf o ruʾji",
+   "fr": "Les savants classiques ont documenté un ikhtilāf réel sur la ruʾyah",
+   "es": "Los sabios clásicos documentaron un ikhtilāf real sobre la ruʾyah"
+  },
+  "ʿĀʾišah und Ibn Masʿūd verneinten die Ruʾyah; von Abū Ḏarr wurden unterschiedliche Berichte überliefert; eine Gruppe bejahte sie.": {
+   "ar": "عائشة وابن مسعود نفيا الرؤية؛ وعن أبي ذر رُويت أخبار مختلفة؛ وجماعة أثبتتها.",
+   "en": "ʿĀʾishah and Ibn Masʿūd denied the ruʾyah; differing reports were transmitted from Abū Dharr; a group affirmed it.",
+   "tr": "Âişe ve İbn Mesʿûd ruʾyeti nefyettiler; Ebû Zer’den farklı rivayetler nakledildi; bir grup onu kabul etti.",
+   "ku": "ʿÂişe û Ibn Mesʿûd ruʾyet red kirin; ji Ebû Zerr rîwayetên cuda hatin veguhastin; komalekê ew erê kir.",
+   "ckb": "عائیشە و ابن مسعود ڕؤیەیان ڕەت کردەوە؛ لە أبو ذر هەواڵی جیاواز گێڕدراونەتەوە؛ کۆمەڵێک سەلماندیان.",
+   "bs": "ʿĀʾiša i Ibn Masʿūd su negirali ruʾju; od Abū Ḏarra su preneseni različiti izvještaji; jedna skupina ju je potvrdila.",
+   "fr": "ʿĀʾishah et Ibn Masʿūd ont nié la ruʾyah ; d’Abū Dharr des récits divergents ont été transmis ; un groupe l’a affirmée.",
+   "es": "ʿĀʾishah e Ibn Masʿūd negaron la ruʾyah; de Abū Dharr se transmitieron relatos distintos; un grupo la afirmó."
+  },
+  "Er nennt außerdem, dass al-Ḥasan al-Baṣrī darauf schwor, Muḥammad ﷺ habe seinen Herrn gesehen, und erwähnt die bejahende Überlieferung von ʿUrwah ibn az-Zubayr.": {
+   "ar": "ويذكر أيضًا أن الحسن البصري أقسم أن محمدًا ﷺ رأى ربه، ويورد الرواية المثبتة عن عروة بن الزبير.",
+   "en": "He also mentions that al-Ḥasan al-Baṣrī swore that Muḥammad ﷺ saw his Lord, and he mentions the affirming transmission from ʿUrwah ibn az-Zubayr.",
+   "tr": "Ayrıca el-Hasan el-Basrî’nin, Muhammed ﷺ’in Rabbini gördüğüne yemin ettiğini anar ve Urve b. ez-Zübeyr’den kabul eden rivayeti zikreder.",
+   "ku": "Ew herwiha tîne ku el-Ḥesen el-Besrî sond xwar ku Muḥammad ﷺ Rebbê xwe dîtiye, û veguhastina erêker a ʿUrwe ibn ez-Zubeyr tîne.",
+   "ckb": "هەروەها دەڵێت کە حەسەنی بەسری سوێندی خوارد کە محمد ﷺ پەروەردگاری بینیوە، و گێڕانەوەی سەلمێنەری عوروەی کوڕی زوبەیر دەهێنێت.",
+   "bs": "On također navodi da se al-Ḥasan al-Baṣrī zakleo da je Muḥammad ﷺ vidio svoga Gospodara, i spominje potvrđujuću predaju od ʿUrwe ibn az-Zubayra.",
+   "fr": "Il mentionne aussi qu’al-Ḥasan al-Baṣrī jura que Muḥammad ﷺ a vu son Seigneur, et il mentionne la transmission affirmative de ʿUrwah ibn az-Zubayr.",
+   "es": "También menciona que al-Ḥasan al-Baṣrī juró que Muḥammad ﷺ vio a su Señor, y menciona la transmisión afirmativa de ʿUrwah ibn az-Zubayr."
+  },
+  "Unabhängig davon, welche Detailauffassung als stärker bewertet wird, behandelt die klassische Literatur die Frage als": {
+   "ar": "بغض النظر عن أي قول تفصيلي يُرجَّح أقوى، الأدب الكلاسيكي يعامل المسألة على أنها",
+   "en": "Regardless of which detailed view is judged stronger, the classical literature treats the question as",
+   "tr": "Hangi ayrıntılı görüş daha güçlü sayılırsa sayılsın, klasik literatür meseleyi şöyle ele alır:",
+   "ku": "Bêyî ku kîjan nêrîna berfireh bihêztir were dîtin, edeba klasîk pirsê wekî",
+   "ckb": "بێ گوێدانە ئەوەی کام بۆچوونی ورد بەهێزتر دەزانرێت، ئەدەبی کلاسیکی پرسیارەکە وەک",
+   "bs": "Bez obzira koji se detaljni stav ocijeni jačim, klasična literatura pitanje tretira kao",
+   "fr": "Quelle que soit l’opinion de détail jugée plus forte, la littérature classique traite la question comme",
+   "es": "Sea cual sea la opinión de detalle que se juzgue más fuerte, la literatura clásica trata la cuestión como"
+  },
+  "– nicht als einfache Grenze „Muslim oder Kāfir“.": {
+   "ar": "– لا حدًّا بسيطًا «مسلم أو كافر».",
+   "en": "– not as a simple boundary “Muslim or kāfir”.",
+   "tr": "– basit bir “Müslüman ya da kâfir” sınırı olarak değil.",
+   "ku": "– ne wekî sînorekî sade “misilman an kafir”.",
+   "ckb": "– نە وەک سنوورێکی سادە «موسڵمان یان کافر».",
+   "bs": "– ne kao jednostavnu granicu „musliman ili kâfir“.",
+   "fr": "– non comme une simple limite « musulman ou kāfir ».",
+   "es": "– no como un límite simple “musulmán o kāfir”."
+  },
+  "Islamweb · Ibn Ḥaǧar, Fatḥ al-Bārī": {
+   "ar": "إسلام ويب · ابن حجر، فتح الباري",
+   "en": "Islamweb · Ibn Ḥajar, Fatḥ al-Bārī",
+   "tr": "İslamweb · İbn Hacer, Fethu’l-Bârî",
+   "ku": "Islamweb · Ibn Hecer, Feth el-Barî",
+   "ckb": "ئیسلاموێب · ابن حجر، فتح الباري",
+   "bs": "Islamweb · Ibn Ḥaǧar, Fatḥ al-Bārī",
+   "fr": "Islamweb · Ibn Ḥajar, Fatḥ al-Bārī",
+   "es": "Islamweb · Ibn Ḥajar, Fatḥ al-Bārī"
+  },
+  "Direktmarkierung beim dokumentierten Ikhtilāf der Salaf über die Ruʾyah": {
+   "ar": "تحديد مباشر عند اختلاف السلف الموثق في الرؤية",
+   "en": "direct marker at the documented ikhtilāf of the Salaf about the ruʾyah",
+   "tr": "ruʾyet hakkındaki belgelenmiş Selef ihtilafında doğrudan işaret",
+   "ku": "nîşana rasterast li îxtilafa belgekirî ya Salaf li ser ruʾyetê",
+   "ckb": "نیشانەی ڕاستەوخۆ لای ناکۆکیی بەڵگەکراوی سەلەف دەربارەی ڕؤیە",
+   "bs": "izravna oznaka kod dokumentiranog ihtilafa selefa o ruʾji",
+   "fr": "marquage direct à l’ikhtilāf documenté des Salaf sur la ruʾyah",
+   "es": "marca directa en el ikhtilāf documentado de los Salaf sobre la ruʾyah"
+  },
+  "Wichtige Präzisierung: Herz-Ruʾyah ist sicherer belegt als Augen-Ruʾyah": {
+   "ar": "تدقيق مهم: رؤية القلب أثبت رواية من رؤية العين",
+   "en": "Important precision: the heart-ruʾyah is more securely established than the eye-ruʾyah",
+   "tr": "Önemli incelik: Kalp ruʾyeti, göz ruʾyetinden daha sağlam sabittir",
+   "ku": "Duristkirineke girîng: ruʾyeta dilê ji ruʾyeta çav bi ewletir sabît e",
+   "ckb": "وردکردنەوەیەکی گرنگ: ڕؤیەی دڵ لە ڕؤیەی چاو سەقامگیرتر بەڵگەیە",
+   "bs": "Važna preciznost: ruʾja srcem je sigurnije utvrđena od ruʾje očima",
+   "fr": "Précision importante : la ruʾyah du cœur est établie de façon plus sûre que la ruʾyah des yeux",
+   "es": "Precisión importante: la ruʾyah del corazón está establecida con más seguridad que la ruʾyah de los ojos"
+  },
+  "Ibn Taymiyyah fasst die Überlieferungslage so zusammen: Das in den ṣaḥīḥen Quellen Feststehende von Ibn ʿAbbās ist": {
+   "ar": "ابن تيمية يلخص حال الرواية هكذا: الثابت في المصادر الصحيحة عن ابن عباس هو",
+   "en": "Ibn Taymiyyah summarizes the state of transmission thus: what is established in the ṣaḥīḥ sources from Ibn ʿAbbās is",
+   "tr": "İbn Teymiyye rivayet durumunu şöyle özetler: İbn Abbâs’tan sahih kaynaklarda sabit olan",
+   "ku": "Ibn Teymiyye rewşa veguhastinê wiha kurt dike: ya ku di çavkaniyên sehîh de ji Ibn ʿAbbās sabit e ev e",
+   "ckb": "ابن تەیمیە باری گێڕانەوە ئاوا کورت دەکاتەوە: ئەوەی لە سەرچاوە سەحیحەکاندا لە ابن عباس جێگیرە ئەمەیە",
+   "bs": "Ibn Taymiyyah stanje predaje ovako sažima: ono što je u sahih izvorima utvrđeno od Ibn ʿAbbāsa jest",
+   "fr": "Ibn Taymiyyah résume ainsi l’état de la transmission : ce qui est établi dans les sources ṣaḥīḥ d’Ibn ʿAbbās est",
+   "es": "Ibn Taymiyyah resume así el estado de la transmisión: lo establecido en las fuentes ṣaḥīḥ de Ibn ʿAbbās es"
+  },
+  "„Muḥammad sah seinen Herrn mit seinem Herzen zweimal“": {
+   "ar": "«رأى محمد ربه بقلبه مرتين»",
+   "en": "“Muḥammad saw his Lord with his heart twice”",
+   "tr": "“Muhammed Rabbini kalbiyle iki kez gördü”",
+   "ku": "“Muḥammad Rebbê xwe bi dilê xwe du car dît”",
+   "ckb": "«محمد پەروەردگاری بە دڵی دوو جار بینی»",
+   "bs": "„Muḥammad je svoga Gospodara srcem dvaput vidio“",
+   "fr": "« Muḥammad a vu son Seigneur avec son cœur deux fois »",
+   "es": "“Muḥammad vio a su Señor con su corazón dos veces”"
+  },
+  ". Er erklärt ausdrücklich, dass von Ibn ʿAbbās": {
+   "ar": ". وهو يصرّح أن عن ابن عباس",
+   "en": ". He expressly explains that from Ibn ʿAbbās",
+   "tr": ". O açıkça açıklar ki İbn Abbâs’tan",
+   "ku": ". Ew bi eşkere diyar dike ku ji Ibn ʿAbbās",
+   "ckb": ". ئەو بە ڕاشکاوی ڕوونی دەکاتەوە کە لە ابن عباس",
+   "bs": ". On izričito objašnjava da od Ibn ʿAbbāsa",
+   "fr": ". Il explique expressément que d’Ibn ʿAbbās",
+   "es": ". Explica expresamente que de Ibn ʿAbbās"
+  },
+  "keine authentische ausdrückliche Formulierung": {
+   "ar": "لا تثبت صيغة صريحة صحيحة",
+   "en": "no authentic explicit wording is established",
+   "tr": "sahih açık bir ifade sabit değildir",
+   "ku": "gotineke eşkere ya sehîh sabit nabe",
+   "ckb": "دەستەواژەیەکی ڕاشکاوی سەحیح جێگیر نییە",
+   "bs": "nije utvrđena vjerodostojna izričita formulacija",
+   "fr": "aucune formulation explicite authentique n’est établie",
+   "es": "no queda establecida una formulación explícita auténtica"
+  },
+  "feststehe, wonach er Ihn mit seinen leiblichen Augen gesehen habe.": {
+   "ar": "بأنه رآه بعينيه الجسديتين.",
+   "en": "according to which he saw Him with his bodily eyes.",
+   "tr": "ona göre O’nu bedenî gözleriyle gördüğüne dair.",
+   "ku": "ku li gor wê wî Ew bi çavên xwe yên laşî dîtibe.",
+   "ckb": "کە بەپێی ئەوە بە چاوە جەستەییەکانی بینیبێتی.",
+   "bs": "prema kojoj Ga je vidio tjelesnim očima.",
+   "fr": "selon laquelle il L’aurait vu de ses yeux corporels.",
+   "es": "según la cual Lo habría visto con sus ojos corporales."
+  },
+  "Darum ist es ungenau, jede Form der bejahten Ruʾyah automatisch als": {
+   "ar": "لذلك من غير الدقة أن تُعرض كل صورة من الرؤية المثبتة تلقائيًا على أنها",
+   "en": "Therefore it is imprecise to present every form of the affirmed ruʾyah automatically as",
+   "tr": "Bu yüzden kabul edilen ruʾyetin her biçimini kendiliğinden şöyle sunmak isabetsizdir:",
+   "ku": "Ji ber vê yekê ne rast e ku her şêweya ruʾyeta erêkirî bixweber wekî",
+   "ckb": "بۆیە نادروستە هەموو شێوەیەکی ڕؤیەی سەلمێنراو بە خۆکاری وەک",
+   "bs": "Zato je neprecizno svaki oblik potvrđene ruʾje automatski prikazati kao",
+   "fr": "Il est donc imprécis de présenter automatiquement toute forme de la ruʾyah affirmée comme",
+   "es": "Por eso es impreciso presentar automáticamente toda forma de la ruʾyah afirmada como"
+  },
+  "darzustellen. Die allgemeine Bejahung und die Herz-Ruʾyah sind von der spezifischen Behauptung einer leiblichen Augen-Ruʾyah zu unterscheiden.": {
+   "ar": "تُعرض. يجب التمييز بين الإثبات العام ورؤية القلب من جهة، ودعوى رؤية العين الجسدية من جهة أخرى.",
+   "en": "to be presented. The general affirmation and the heart-ruʾyah are to be distinguished from the specific claim of a bodily eye-ruʾyah.",
+   "tr": "sunulması. Genel kabul ile kalp ruʾyeti, bedenî göz ruʾyeti iddiasından ayrılmalıdır.",
+   "ku": "were nîşandan. Erêkirina giştî û ruʾyeta dilê divê ji daxwaza taybet a ruʾyeta çavê laşî werin cudakirin.",
+   "ckb": "پیشان بدرێت. سەلماندنی گشتی و ڕؤیەی دڵ دەبێت لە بانگەشەی تایبەتی ڕؤیەی چاوی جەستەیی جیا بکرێنەوە.",
+   "bs": "prikazati. Opće potvrđivanje i ruʾja srcem moraju se razlikovati od posebne tvrdnje o ruʾji tjelesnim okom.",
+   "fr": "à présenter. L’affirmation générale et la ruʾyah du cœur doivent être distinguées de l’affirmation spécifique d’une ruʾyah des yeux corporels.",
+   "es": "presentarla. La afirmación general y la ruʾyah del corazón han de distinguirse de la afirmación específica de una ruʾyah de los ojos corporales."
+  },
+  "Islamweb · Ibn Taymiyyah, Maǧmūʿ al-Fatāwā 6/509": {
+   "ar": "إسلام ويب · ابن تيمية، مجموع الفتاوى 6/509",
+   "en": "Islamweb · Ibn Taymiyyah, Majmūʿ al-Fatāwā 6/509",
+   "tr": "İslamweb · İbn Teymiyye, Mecmûʿu’l-fetâvâ 6/509",
+   "ku": "Islamweb · Ibn Teymiyye, Mecmûʿ el-Fetawa 6/509",
+   "ckb": "ئیسلاموێب · ابن تەیمیە، مجموع الفتاوی 6/509",
+   "bs": "Islamweb · Ibn Taymiyyah, Maǧmūʿ al-Fatāwā 6/509",
+   "fr": "Islamweb · Ibn Taymiyyah, Majmūʿ al-Fatāwā 6/509",
+   "es": "Islamweb · Ibn Taymiyyah, Majmūʿ al-Fatāwā 6/509"
+  },
+  "Keine authentische ausdrückliche Augen-Ruʾyah von Ibn ʿAbbās; Herz-Ruʾyah ist ṣaḥīḥ belegt": {
+   "ar": "لا رؤية عين صريحة صحيحة عن ابن عباس؛ رؤية القلب ثابتة صحيحة",
+   "en": "No authentic explicit eye-ruʾyah from Ibn ʿAbbās; the heart-ruʾyah is established as ṣaḥīḥ",
+   "tr": "İbn Abbâs’tan sahih açık bir göz ruʾyeti yoktur; kalp ruʾyeti sahih sabittir",
+   "ku": "Ji Ibn ʿAbbās ruʾyeta çav a eşkere ya sehîh tune; ruʾyeta dilê sehîh sabit e",
+   "ckb": "هیچ ڕؤیەی چاوێکی ڕاشکاوی سەحیح لە ابن عباس نییە؛ ڕؤیەی دڵ بە سەحیح جێگیرە",
+   "bs": "Nema vjerodostojne izričite ruʾje okom od Ibn ʿAbbāsa; ruʾja srcem je sahih utvrđena",
+   "fr": "Pas de ruʾyah des yeux explicite et authentique d’Ibn ʿAbbās ; la ruʾyah du cœur est établie comme ṣaḥīḥ",
+   "es": "No hay una ruʾyah de los ojos explícita y auténtica de Ibn ʿAbbās; la ruʾyah del corazón está establecida como ṣaḥīḥ"
+  },
+  "Der wirkliche Miʿrāǧ mit Körper und Seele im Wachzustand ist als Mehrheitsauffassung der Salaf und Muslime überliefert. Zugleich ist ein historischer Ikhtilāf über die Modalität dokumentiert.": {
+   "ar": "المعراج الحقيقي بالجسد والروح في اليقظة مروي بوصفه قول جمهور السلف والمسلمين. وفي الوقت نفسه اختلاف تاريخي في الكيفية موثق.",
+   "en": "The real miʿrāj with body and soul in the waking state is transmitted as the majority view of the Salaf and the Muslims. At the same time, a historical ikhtilāf about the modality is documented.",
+   "tr": "Uyanıkken beden ve ruhla gerçek miʿrac, Selef’in ve Müslümanların çoğunluk görüşü olarak nakledilmiştir. Aynı zamanda keyfiyet hakkında tarihî bir ihtilaf belgelenmiştir.",
+   "ku": "Miʿraca rastîn bi laş û ruh di hişyariyê de wekî nêrîna piraniya Salaf û misilmanan hatiye veguhastin. Di heman demê de îxtilafeke dîrokî li ser çawaniyê hatiye belgekirin.",
+   "ckb": "میعراجی ڕاستەقینە بە جەستە و ڕۆح لە بێداریدا وەک بۆچوونی زۆرینەی سەلەف و موسڵمانان گێڕدراوەتەوە. لە هەمان کاتدا ناکۆکییەکی مێژوویی دەربارەی چۆنیەتی بەڵگە کراوە.",
+   "bs": "Stvarni miʿradž tijelom i dušom u budnom stanju prenesen je kao stav većine selefa i muslimana. Istovremeno je dokumentiran historijski ihtilaf o modalitetu.",
+   "fr": "Le miʿrāǧ réel avec le corps et l’âme à l’état de veille est transmis comme l’opinion majoritaire des Salaf et des musulmans. En même temps, un ikhtilāf historique sur la modalité est documenté.",
+   "es": "El miʿrāǧ real con cuerpo y alma en vigilia está transmitido como la opinión mayoritaria de los Salaf y de los musulmanes. Al mismo tiempo está documentado un ikhtilāf histórico sobre la modalidad."
+  },
+  "ʿĀʾišah رضي الله عنها verneinte die Ruʾyah sehr scharf, sagte im authentischen Bericht aber nicht: „Wer dies glaubt, ist Kāfir.“": {
+   "ar": "عائشة رضي الله عنها نفت الرؤية نفيًا شديدًا، لكنها لم تقل في الخبر الصحيح: «من اعتقد هذا فهو كافر.»",
+   "en": "ʿĀʾishah رضي الله عنها denied the ruʾyah very sharply, but in the authentic report she did not say: “Whoever believes this is a kāfir.”",
+   "tr": "Âişe رضي الله عنها ruʾyeti çok sert biçimde nefyetti, fakat sahih rivayette “Buna inanan kâfirdir” demedi.",
+   "ku": "ʿÂişe رضي الله عنها ruʾyet pir tund red kir, lê di rîwayeta sehîh de negot: “Yê ku vê bawer dike kafir e.”",
+   "ckb": "عائیشە رضي الله عنها ڕؤیەی بە توندی ڕەت کردەوە، بەڵام لە هەواڵی سەحیحدا نەیوت: «ئەوەی ئەمە باوەڕ دەکات کافرە.»",
+   "bs": "ʿĀʾiša رضي الله عنها je ruʾju vrlo oštro negirala, ali u vjerodostojnom izvještaju nije rekla: „Ko ovo vjeruje, kâfir je.“",
+   "fr": "ʿĀʾishah رضي الله عنها a nié la ruʾyah très sévèrement, mais dans le récit authentique elle n’a pas dit : « Quiconque croit ceci est kāfir. »",
+   "es": "ʿĀʾishah رضي الله عنها negó la ruʾyah con mucha dureza, pero en el relato auténtico no dijo: “Quien cree esto es kāfir.”"
+  },
+  "Ibn ʿAbbās رضي الله عنهما bejahte in Ṣaḥīḥ Muslim ausdrücklich eine Ruʾyah": {
+   "ar": "ابن عباس رضي الله عنهما أثبت في صحيح مسلم صراحة رؤية",
+   "en": "Ibn ʿAbbās رضي الله عنهما expressly affirmed in Ṣaḥīḥ Muslim a ruʾyah",
+   "tr": "İbn Abbâs رضي الله عنهما Sahih Müslim’de açıkça bir ruʾyeti kabul etti",
+   "ku": "Ibn ʿAbbās رضي الله عنهما di Sehîh Muslim de bi eşkere ruʾyetek erê kir",
+   "ckb": "ابن عباس رضي الله عنهما لە سەحیح مسلم بە ڕاشکاوی ڕؤیەیەکی سەلماند",
+   "bs": "Ibn ʿAbbās رضي الله عنهما je u Sahihu Muslimu izričito potvrdio ruʾju",
+   "fr": "Ibn ʿAbbās رضي الله عنهما a expressément affirmé dans Ṣaḥīḥ Muslim une ruʾyah",
+   "es": "Ibn ʿAbbās رضي الله عنهما afirmó expresamente en Ṣaḥīḥ Muslim una ruʾyah"
+  },
+  ". Klassische Werke dokumentieren darüber hinaus den Streit über die Ruʾyah. Deshalb lässt sich aus der Aussage ʿĀʾišahs kein pauschaler Takfīr aller Personen ableiten, die eine überlieferte Form der Ruʾyah bejahen.": {
+   "ar": ". والمصنفات الكلاسيكية توثق فوق ذلك الخلاف في الرؤية. لذلك لا يُستخرج من قول عائشة تكفير إجمالي لكل من يُثبت صورة مروية من الرؤية.",
+   "en": ". Classical works document, beyond that, the dispute about the ruʾyah. Therefore no blanket takfīr of all persons who affirm a transmitted form of the ruʾyah can be derived from ʿĀʾishah’s statement.",
+   "tr": ". Klasik eserler bunun ötesinde ruʾyet ihtilafını belgeler. Bu yüzden Âişe’nin sözünden, ruʾyetin nakledilmiş bir biçimini kabul eden herkese toptan bir tekfir çıkarılamaz.",
+   "ku": ". Berhemên klasîk li ser vê jî nîqaşa li ser ruʾyetê belge dikin. Ji ber vê yekê ji gotina ʿÂişe tekfîreke giştî ya hemû kesên ku şêweyeke veguhastî ya ruʾyetê erê dikin nayê derxistin.",
+   "ckb": ". کتێبە کلاسیکەکان لەسەر ئەمەش ناکۆکی دەربارەی ڕؤیە بەڵگە دەکەن. بۆیە لە وتەی عائیشە تەکفیرێکی گشتی بۆ هەموو ئەوانە ناهێنرێتە دەر کە شێوەیەکی گێڕدراوی ڕؤیە دەسەلمێنن.",
+   "bs": ". Klasična djela povrh toga dokumentiraju spor o ruʾji. Zato se iz izjave ʿĀʾiše ne može izvesti paušalni tekfir svih osoba koje potvrđuju prenesen oblik ruʾje.",
+   "fr": ". Les ouvrages classiques documentent en outre le différend sur la ruʾyah. On ne peut donc pas tirer de la parole de ʿĀʾishah un takfīr global de toutes les personnes qui affirment une forme transmise de la ruʾyah.",
+   "es": ". Las obras clásicas documentan además la disputa sobre la ruʾyah. Por eso de la declaración de ʿĀʾishah no se puede derivar un takfīr general de todas las personas que afirman una forma transmitida de la ruʾyah."
+  },
+  "Die Formulierung „der Prophet ﷺ war mit seinem Körper bei Allah“ darf nicht als Behauptung einer räumlichen Ko-Lokalität verstanden werden. Belegt wird der körperliche Aufstieg; die Frage der Ruʾyah ist davon getrennt zu behandeln.": {
+   "ar": "عبارة «كان النبي ﷺ بجسده عند الله» لا يجوز أن تُفهم على أنها دعوى حلول مكاني مشترك. الثابت هو الصعود بالجسد؛ ومسألة الرؤية تُعالَج منفصلة عن ذلك.",
+   "en": "The wording “the Prophet ﷺ was with his body with Allah” must not be understood as a claim of spatial co-locality. What is established is the bodily ascent; the question of the ruʾyah is to be treated separately from that.",
+   "tr": "“Peygamber ﷺ bedeniyle Allah’ın yanında idi” ifadesi, mekânda birlikte bulunma iddiası diye anlaşılamaz. Sabit olan bedenle yükseliştir; ruʾyet meselesi bundan ayrı ele alınır.",
+   "ku": "Gotina “Pêxember ﷺ bi laşê xwe li ba Allah bû” nikare wekî daxwaza hebûna hevcih a mekanî were fêmkirin. Ya sabit rabûna bi laş e; pirsa ruʾyetê ji wê cuda tê dîtin.",
+   "ckb": "دەستەواژەی «پێغەمبەر ﷺ بە جەستەی لای الله بوو» نابێت وەک بانگەشەی هاوبوونی شوێنی تێبگەینرێت. ئەوەی جێگیرە بەرزبوونەوەی جەستەییە؛ پرسی ڕؤیە لەوە جیا مامەڵەی لەگەڵ دەکرێت.",
+   "bs": "Formulacija „Vjerovjesnik ﷺ je tijelom bio kod Allaha“ ne smije se razumjeti kao tvrdnja o prostornoj su-lokalnosti. Utvrđen je tjelesni uspon; pitanje ruʾje treba se od toga odvojeno tretirati.",
+   "fr": "La formulation « le Prophète ﷺ était avec son corps auprès d’Allah » ne doit pas être comprise comme l’affirmation d’une co-localité spatiale. Ce qui est établi, c’est l’ascension corporelle ; la question de la ruʾyah doit être traitée à part.",
+   "es": "La formulación “el Profeta ﷺ estaba con su cuerpo junto a Allah” no debe entenderse como una afirmación de colocalidad espacial. Lo establecido es el ascenso corporal; la cuestión de la ruʾyah ha de tratarse aparte de ello."
   }
  }
 }

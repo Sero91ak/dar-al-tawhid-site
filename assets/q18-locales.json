@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,198 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Imām al-Buḫārī und die Stärke seines Ḥifẓ – DAR AL TAWḤĪD": {
+   "ar": "Imām al-Buḫārī وقوة حفظه – DAR AL TAWḤĪD",
+   "en": "Imām al-Buḫārī and the strength of his Ḥifẓ – DAR AL TAWḤĪD",
+   "tr": "Imām al-Buḫārī ve Ḥifẓ’ının gücü – DAR AL TAWḤĪD",
+   "ku": "Imām al-Buḫārī û hêza Ḥifẓ a wî – DAR AL TAWḤĪD",
+   "ckb": "Imām al-Buḫārī و هێزی Ḥifẓی ئەو – DAR AL TAWḤĪD",
+   "bs": "Imām al-Buḫārī i snaga njegovog Ḥifẓa – DAR AL TAWḤĪD",
+   "fr": "Imām al-Buḫārī et la force de son Ḥifẓ – DAR AL TAWḤĪD",
+   "es": "Imām al-Buḫārī y la fuerza de su Ḥifẓ – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "مساهمات وفق القرآن والسنة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre katkılar",
+   "ku": "Beşdarî li gor Qurʾān, Sunnah û Āthār",
+   "ckb": "بەشدارییەکان بەپێی القرآن و السنة و الآثار",
+   "bs": "Prilozi prema Qurʾānu, Sunni i Āthāru",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Contribuciones según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Imām al-Buḫārī und die Stärke seines Ḥifẓ": {
+   "ar": "Imām al-Buḫārī وقوة حفظه",
+   "en": "Imām al-Buḫārī and the strength of his Ḥifẓ",
+   "tr": "Imām al-Buḫārī ve Ḥifẓ’ının gücü",
+   "ku": "Imām al-Buḫārī û hêza Ḥifẓ a wî",
+   "ckb": "Imām al-Buḫārī و هێزی Ḥifẓی ئەو",
+   "bs": "Imām al-Buḫārī i snaga njegovog Ḥifẓa",
+   "fr": "Imām al-Buḫārī et la force de son Ḥifẓ",
+   "es": "Imām al-Buḫārī y la fuerza de su Ḥifẓ"
+  },
+  "Diese Quellenkarte belegt zwei getrennte Aussagen: das Lob Abū Ḥātim ar-Rāzīs über al-Buḫārī und den Bericht über mehr als 15.000 Ḥadīṯe, die al-Buḫārī auswendig vortrug.": {
+   "ar": "تثبت هذه البطاقة المصدرية قولين منفصلين: ثناء Abū Ḥātim ar-Rāzī على al-Buḫārī، والخبر عن أكثر من 15.000 حديث سردها al-Buḫārī من حفظه.",
+   "en": "This source card documents two separate statements: the praise of Abū Ḥātim ar-Rāzī for al-Buḫārī, and the report about more than 15,000 Ḥadīṯe that al-Buḫārī recited from memory.",
+   "tr": "Bu kaynak kartı iki ayrı sözü belgeler: Abū Ḥātim ar-Rāzī’nin al-Buḫārī hakkındaki övgüsü ve al-Buḫārī’nin ezberden okuduğu 15.000’den fazla Ḥadīṯ hakkındaki haber.",
+   "ku": "Ev karta jêderê du gotinên cuda îsbat dike: pesnê Abū Ḥātim ar-Rāzī li ser al-Buḫārī, û ragihandina li ser zêdetirî 15.000 Ḥadīṯ ku al-Buḫārī ji berê xwendin.",
+   "ckb": "ئەم کارتی سەرچاوەیە دوو وتەی جیا دەسەلمێنێت: ستایشی Abū Ḥātim ar-Rāzī بۆ al-Buḫārī، و هەواڵی زیاتر لە 15,000 Ḥadīṯ کە al-Buḫārī لەبەر خوێندییەوە.",
+   "bs": "Ova kartica izvora potvrđuje dvije odvojene izjave: pohvalu Abū Ḥātim ar-Rāzīja o al-Buḫārīju i izvještaj o više od 15.000 Ḥadīṯa koje je al-Buḫārī izgovorio napamet.",
+   "fr": "Cette carte de source atteste deux paroles distinctes : l’éloge d’Abū Ḥātim ar-Rāzī sur al-Buḫārī, et le récit de plus de 15 000 Ḥadīṯe qu’al-Buḫārī a récités de mémoire.",
+   "es": "Esta ficha de fuente documenta dos afirmaciones separadas: el elogio de Abū Ḥātim ar-Rāzī sobre al-Buḫārī, y el informe de más de 15.000 Ḥadīṯe que al-Buḫārī recitó de memoria."
+  },
+  "Stellung von Imām al-Buḫārī im Ḥadīṯ-Wissen und in der Gedächtnisstärke.": {
+   "ar": "منزلة Imām al-Buḫārī في علم الحديث وقوة الحفظ.",
+   "en": "The standing of Imām al-Buḫārī in Ḥadīṯ knowledge and in strength of memory.",
+   "tr": "Imām al-Buḫārī’nin Ḥadīṯ bilgisindeki yeri ve hafıza gücü.",
+   "ku": "Cihê Imām al-Buḫārī di zanîna Ḥadīṯ de û di hêza bîrê de.",
+   "ckb": "پێگەی Imām al-Buḫārī لە زانستی Ḥadīṯ و لە هێزی یادەوەری.",
+   "bs": "Položaj Imāma al-Buḫārīja u znanju Ḥadīṯa i u snazi pamćenja.",
+   "fr": "La place de l’Imām al-Buḫārī dans la science du Ḥadīṯ et dans la force de mémoire.",
+   "es": "El lugar del Imām al-Buḫārī en el saber del Ḥadīṯ y en la fuerza de la memoria."
+  },
+  "Abū Ḥātim ar-Rāzī; Ḥāshid ibn Ismāʿīl und ein weiterer Überlieferer über al-Buḫārī.": {
+   "ar": "Abū Ḥātim ar-Rāzī؛ وḤāshid ibn Ismāʿīl وراوٍ آخر عن al-Buḫārī.",
+   "en": "Abū Ḥātim ar-Rāzī; Ḥāshid ibn Ismāʿīl and another transmitter about al-Buḫārī.",
+   "tr": "Abū Ḥātim ar-Rāzī; Ḥāshid ibn Ismāʿīl ve al-Buḫārī hakkında başka bir ravi.",
+   "ku": "Abū Ḥātim ar-Rāzī; Ḥāshid ibn Ismāʿīl û veguhêzekî din der barê al-Buḫārī de.",
+   "ckb": "Abū Ḥātim ar-Rāzī؛ Ḥāshid ibn Ismāʿīl و گێڕەرەوەیەکی دیکە دەربارەی al-Buḫārī.",
+   "bs": "Abū Ḥātim ar-Rāzī; Ḥāshid ibn Ismāʿīl i još jedan prenosilac o al-Buḫārīju.",
+   "fr": "Abū Ḥātim ar-Rāzī ; Ḥāshid ibn Ismāʿīl et un autre transmetteur au sujet d’al-Buḫārī.",
+   "es": "Abū Ḥātim ar-Rāzī; Ḥāshid ibn Ismāʿīl y otro transmisor sobre al-Buḫārī."
+  },
+  "Abū Ḥātim ar-Rāzī über al-Buḫārī": {
+   "ar": "Abū Ḥātim ar-Rāzī عن al-Buḫārī",
+   "en": "Abū Ḥātim ar-Rāzī on al-Buḫārī",
+   "tr": "Abū Ḥātim ar-Rāzī, al-Buḫārī hakkında",
+   "ku": "Abū Ḥātim ar-Rāzī der barê al-Buḫārī de",
+   "ckb": "Abū Ḥātim ar-Rāzī دەربارەی al-Buḫārī",
+   "bs": "Abū Ḥātim ar-Rāzī o al-Buḫārīju",
+   "fr": "Abū Ḥātim ar-Rāzī sur al-Buḫārī",
+   "es": "Abū Ḥātim ar-Rāzī sobre al-Buḫārī"
+  },
+  "Abū Ḥātim ar-Rāzī sagte: „Aus Ḫurāsān kam niemals jemand hervor, der mehr Ḥadīṯ auswendig konnte als Muḥammad ibn Ismāʿīl, und niemand kam von dort in den ʿIrāq, der wissender war als er.“": {
+   "ar": "قال Abū Ḥātim ar-Rāzī: «لم يخرج من Ḫurāsān أحد أحفظ للحديث من Muḥammad ibn Ismāʿīl، ولم يأت من هناك إلى ʿIrāq أحد أعلم منه.»",
+   "en": "Abū Ḥātim ar-Rāzī said: “Never did anyone come forth from Ḫurāsān who could memorize more Ḥadīṯ than Muḥammad ibn Ismāʿīl, and no one came from there to ʿIrāq who was more knowledgeable than he.”",
+   "tr": "Abū Ḥātim ar-Rāzī dedi: “Ḫurāsān’dan Muḥammad ibn Ismāʿīl’den daha çok Ḥadīṯ ezberleyen kimse çıkmadı ve oradan ʿIrāq’a ondan daha bilgili kimse gelmedi.”",
+   "ku": "Abū Ḥātim ar-Rāzī got: “Ji Ḫurāsān tu kes derneket ku ji Muḥammad ibn Ismāʿīl zêdetir Ḥadīṯ ji ber bike, û ji wir tu kes nehat ʿIrāq ku ji wî zanatiri be.”",
+   "ckb": "Abū Ḥātim ar-Rāzī گوتی: «لە Ḫurāsān کەسێک دەرنەکەوت کە لە Muḥammad ibn Ismāʿīl زیاتر Ḥadīṯی لەبەر بێت، و لەوێوە کەسێک نەهاتە ʿIrāq کە لەو زاناتر بێت.»",
+   "bs": "Abū Ḥātim ar-Rāzī reče: “Iz Ḫurāsāna nikada nije izašao niko ko je više Ḥadīṯa znao napamet od Muḥammad ibn Ismāʿīla, i niko nije odatle došao u ʿIrāq ko je bio učeniji od njega.”",
+   "fr": "Abū Ḥātim ar-Rāzī dit : « Il n’est jamais sorti de Ḫurāsān quelqu’un qui retenait plus de Ḥadīṯ que Muḥammad ibn Ismāʿīl, et personne n’est venu de là en ʿIrāq qui fût plus savant que lui. »",
+   "es": "Abū Ḥātim ar-Rāzī dijo: “De Ḫurāsān nunca salió nadie que memorizara más Ḥadīṯ que Muḥammad ibn Ismāʿīl, y nadie llegó de allí a ʿIrāq que fuera más sabio que él.”"
+  },
+  "Textstelle markiert öffnen": {
+   "ar": "افتح الموضع المعلم",
+   "en": "Open the marked text passage",
+   "tr": "İşaretli metin yerini aç",
+   "ku": "Cihê tekstê yê nîşankirî veke",
+   "ckb": "شوێنی دەقی نیشانکراو بکەرەوە",
+   "bs": "Otvori označeno mjesto teksta",
+   "fr": "Ouvrir le passage de texte marqué",
+   "es": "Abrir el pasaje de texto marcado"
+  },
+  "Islamweb · Taġlīq at-Taʿlīq · 5/412 · Textfragment": {
+   "ar": "Islamweb · Taġlīq at-Taʿlīq · 5/412 · مقطع نص",
+   "en": "Islamweb · Taġlīq at-Taʿlīq · 5/412 · text fragment",
+   "tr": "Islamweb · Taġlīq at-Taʿlīq · 5/412 · metin parçası",
+   "ku": "Islamweb · Taġlīq at-Taʿlīq · 5/412 · perça tekstê",
+   "ckb": "Islamweb · Taġlīq at-Taʿlīq · 5/412 · پارچەی دەق",
+   "bs": "Islamweb · Taġlīq at-Taʿlīq · 5/412 · fragment teksta",
+   "fr": "Islamweb · Taġlīq at-Taʿlīq · 5/412 · fragment de texte",
+   "es": "Islamweb · Taġlīq at-Taʿlīq · 5/412 · fragmento de texto"
+  },
+  "PDF/Scan direkt auf Aussage-Seite": {
+   "ar": "PDF/Scan مباشرة على صفحة القول",
+   "en": "PDF/Scan directly on the page of the statement",
+   "tr": "PDF/Scan doğrudan sözün sayfasında",
+   "ku": "PDF/Scan rasterast li ser rûpela gotinê",
+   "ckb": "PDF/Scan ڕاستەوخۆ لەسەر لاپەڕەی وتە",
+   "bs": "PDF/Scan izravno na stranici izjave",
+   "fr": "PDF/Scan directement sur la page de la parole",
+   "es": "PDF/Scan directamente en la página de la afirmación"
+  },
+  "Taġlīq at-Taʿlīq · Band 5 · #page=412 · Suchtext im PDF-Anker": {
+   "ar": "Taġlīq at-Taʿlīq · المجلد 5 · #page=412 · نص البحث في مرساة PDF",
+   "en": "Taġlīq at-Taʿlīq · volume 5 · #page=412 · search text in the PDF anchor",
+   "tr": "Taġlīq at-Taʿlīq · cilt 5 · #page=412 · PDF çıpasındaki arama metni",
+   "ku": "Taġlīq at-Taʿlīq · berg 5 · #page=412 · teksta lêgerînê di lengerê PDF de",
+   "ckb": "Taġlīq at-Taʿlīq · بەرگ 5 · #page=412 · دەقی گەڕان لە لنگی PDF",
+   "bs": "Taġlīq at-Taʿlīq · svezak 5 · #page=412 · tekst pretrage u PDF-sidru",
+   "fr": "Taġlīq at-Taʿlīq · volume 5 · #page=412 · texte de recherche dans l’ancre PDF",
+   "es": "Taġlīq at-Taʿlīq · volumen 5 · #page=412 · texto de búsqueda en el ancla del PDF"
+  },
+  "Aussage eines großen Ḥadīṯ-Imāms über die Stellung al-Buḫārīs im Ḥifẓ und Wissen.": {
+   "ar": "قول إمام كبير في الحديث عن منزلة al-Buḫārī في الحفظ والعلم.",
+   "en": "A statement of a great Ḥadīṯ Imām about the standing of al-Buḫārī in Ḥifẓ and knowledge.",
+   "tr": "Büyük bir Ḥadīṯ Imām’ının, al-Buḫārī’nin Ḥifẓ ve bilgideki yeri hakkındaki sözü.",
+   "ku": "Gotina İmamekî mezin ê Ḥadīṯ der barê cihê al-Buḫārī di Ḥifẓ û zanînê de.",
+   "ckb": "وتەی ئیمامێکی گەورەی Ḥadīṯ دەربارەی پێگەی al-Buḫārī لە Ḥifẓ و زانست.",
+   "bs": "Izjava velikog Imāma Ḥadīṯa o položaju al-Buḫārīja u Ḥifẓu i znanju.",
+   "fr": "Parole d’un grand Imām du Ḥadīṯ sur la place d’al-Buḫārī dans le Ḥifẓ et le savoir.",
+   "es": "Afirmación de un gran Imām del Ḥadīṯ sobre el lugar de al-Buḫārī en el Ḥifẓ y el saber."
+  },
+  "Der Bericht über mehr als 15.000 Ḥadīṯe": {
+   "ar": "الخبر عن أكثر من 15.000 حديث",
+   "en": "The report about more than 15,000 Ḥadīṯe",
+   "tr": "15.000’den fazla Ḥadīṯ hakkındaki haber",
+   "ku": "Ragihandina li ser zêdetirî 15.000 Ḥadīṯ",
+   "ckb": "هەواڵی زیاتر لە 15,000 Ḥadīṯ",
+   "bs": "Izvještaj o više od 15.000 Ḥadīṯa",
+   "fr": "Le récit de plus de 15 000 Ḥadīṯe",
+   "es": "El informe de más de 15.000 Ḥadīṯe"
+  },
+  "Muḥammad ibn Abī Ḥātim al-Warrāq berichtete von Ḥāshid ibn Ismāʿīl und einem weiteren Mann: „Wir brachten ihm hervor, was bei uns war; es überstieg fünfzehntausend Ḥadīṯe. Da las er sie alle auswendig vor, bis wir unsere Bücher nach seinem Ḥifẓ festigten.“": {
+   "ar": "روى Muḥammad ibn Abī Ḥātim al-Warrāq عن Ḥāshid ibn Ismāʿīl ورجل آخر: «أخرجنا له ما كان عندنا؛ فجاوز خمسة عشر ألف حديث. فقرأها كلها من حفظه، حتى ثبّتنا كتبنا على حفظه.»",
+   "en": "Muḥammad ibn Abī Ḥātim al-Warrāq reported from Ḥāshid ibn Ismāʿīl and another man: “We brought out to him what we had; it exceeded fifteen thousand Ḥadīṯe. Then he recited them all from memory, until we fixed our books according to his Ḥifẓ.”",
+   "tr": "Muḥammad ibn Abī Ḥātim al-Warrāq, Ḥāshid ibn Ismāʿīl ve başka bir adamdan bildirdi: “Yanımızda olanı ona çıkardık; on beş bin Ḥadīṯ’i aşıyordu. O da hepsini ezberden okudu, ta ki kitaplarımızı onun Ḥifẓ’ına göre sağlamlaştırana kadar.”",
+   "ku": "Muḥammad ibn Abī Ḥātim al-Warrāq ji Ḥāshid ibn Ismāʿīl û mêrekî din ragihand: “Me tiştê ku li cem me bû ji wî re derxist; ew ji panzdeh hezar Ḥadīṯ derbas bû. Wî hemû ji berê xwendin, heta ku me pirtûkên xwe li gor Ḥifẓ a wî sabît kir.”",
+   "ckb": "Muḥammad ibn Abī Ḥātim al-Warrāq لە Ḥāshid ibn Ismāʿīl و پیاوێکی دیکە گێڕایەوە: «ئەوەی لای ئێمە بوو بۆی دەرهێناین؛ لە پازدە هەزار Ḥadīṯ تێپەڕی. ئەویش هەمووی لەبەر خوێندییەوە، تا کتێبەکانمان بە Ḥifẓی ئەو جێگیر کرد.»",
+   "bs": "Muḥammad ibn Abī Ḥātim al-Warrāq prenio je od Ḥāshid ibn Ismāʿīla i još jednog čovjeka: “Iznesli smo mu ono što je kod nas bilo; prešlo je petnaest hiljada Ḥadīṯa. On ih je sve pročitao napamet, dok nismo svoje knjige učvrstili prema njegovom Ḥifẓu.”",
+   "fr": "Muḥammad ibn Abī Ḥātim al-Warrāq a rapporté de Ḥāshid ibn Ismāʿīl et d’un autre homme : « Nous lui avons présenté ce que nous avions ; cela dépassait quinze mille Ḥadīṯe. Il les récita tous de mémoire, jusqu’à ce que nous ayons fixé nos livres d’après son Ḥifẓ. »",
+   "es": "Muḥammad ibn Abī Ḥātim al-Warrāq transmitió de Ḥāshid ibn Ismāʿīl y de otro hombre: “Le presentamos lo que teníamos; superaba quince mil Ḥadīṯe. Él los recitó todos de memoria, hasta que fijamos nuestros libros según su Ḥifẓ.”"
+  },
+  "Islamweb · Siyar Aʿlām an-Nubalāʾ · 12/408 · Textfragment": {
+   "ar": "Islamweb · Siyar Aʿlām an-Nubalāʾ · 12/408 · مقطع نص",
+   "en": "Islamweb · Siyar Aʿlām an-Nubalāʾ · 12/408 · text fragment",
+   "tr": "Islamweb · Siyar Aʿlām an-Nubalāʾ · 12/408 · metin parçası",
+   "ku": "Islamweb · Siyar Aʿlām an-Nubalāʾ · 12/408 · perça tekstê",
+   "ckb": "Islamweb · Siyar Aʿlām an-Nubalāʾ · 12/408 · پارچەی دەق",
+   "bs": "Islamweb · Siyar Aʿlām an-Nubalāʾ · 12/408 · fragment teksta",
+   "fr": "Islamweb · Siyar Aʿlām an-Nubalāʾ · 12/408 · fragment de texte",
+   "es": "Islamweb · Siyar Aʿlām an-Nubalāʾ · 12/408 · fragmento de texto"
+  },
+  "Siyar Aʿlām an-Nubalāʾ · Band 12 · #page=408 · Suchtext im PDF-Anker": {
+   "ar": "Siyar Aʿlām an-Nubalāʾ · المجلد 12 · #page=408 · نص البحث في مرساة PDF",
+   "en": "Siyar Aʿlām an-Nubalāʾ · volume 12 · #page=408 · search text in the PDF anchor",
+   "tr": "Siyar Aʿlām an-Nubalāʾ · cilt 12 · #page=408 · PDF çıpasındaki arama metni",
+   "ku": "Siyar Aʿlām an-Nubalāʾ · berg 12 · #page=408 · teksta lêgerînê di lengerê PDF de",
+   "ckb": "Siyar Aʿlām an-Nubalāʾ · بەرگ 12 · #page=408 · دەقی گەڕان لە لنگی PDF",
+   "bs": "Siyar Aʿlām an-Nubalāʾ · svezak 12 · #page=408 · tekst pretrage u PDF-sidru",
+   "fr": "Siyar Aʿlām an-Nubalāʾ · volume 12 · #page=408 · texte de recherche dans l’ancre PDF",
+   "es": "Siyar Aʿlām an-Nubalāʾ · volumen 12 · #page=408 · texto de búsqueda en el ancla del PDF"
+  },
+  "Die Zahl 15.000 gehört zu diesem Bericht von Ḥāshid ibn Ismāʿīl, nicht zur Aussage Abū Ḥātim ar-Rāzīs.": {
+   "ar": "العدد 15.000 يخص هذا الخبر عن Ḥāshid ibn Ismāʿīl، لا قول Abū Ḥātim ar-Rāzī.",
+   "en": "The number 15,000 belongs to this report from Ḥāshid ibn Ismāʿīl, not to the statement of Abū Ḥātim ar-Rāzī.",
+   "tr": "15.000 sayısı, Ḥāshid ibn Ismāʿīl’in bu haberine aittir, Abū Ḥātim ar-Rāzī’nin sözüne değil.",
+   "ku": "Hejmara 15.000 a vê ragihandina Ḥāshid ibn Ismāʿīl e, ne ya gotina Abū Ḥātim ar-Rāzī.",
+   "ckb": "ژمارەی 15,000 هی ئەم هەواڵەی Ḥāshid ibn Ismāʿīl، نەک وتەی Abū Ḥātim ar-Rāzī.",
+   "bs": "Broj 15.000 pripada ovom izvještaju od Ḥāshid ibn Ismāʿīla, a ne izjavi Abū Ḥātim ar-Rāzīja.",
+   "fr": "Le nombre 15 000 appartient à ce récit de Ḥāshid ibn Ismāʿīl, non à la parole d’Abū Ḥātim ar-Rāzī.",
+   "es": "El número 15.000 pertenece a este informe de Ḥāshid ibn Ismāʿīl, no a la afirmación de Abū Ḥātim ar-Rāzī."
+  },
+  "Die erste Aussage belegt die Anerkennung al-Buḫārīs durch Abū Ḥātim ar-Rāzī. Die zweite Aussage belegt seine außergewöhnliche Gedächtnisstärke anhand des Berichts, dass er mehr als 15.000 Ḥadīṯe auswendig vortrug.": {
+   "ar": "القول الأول يثبت اعتراف Abū Ḥātim ar-Rāzī بـ al-Buḫārī. والقول الثاني يثبت قوة حفظه الاستثنائية بالخبر أنه سرد أكثر من 15.000 حديث من حفظه.",
+   "en": "The first statement documents the recognition of al-Buḫārī by Abū Ḥātim ar-Rāzī. The second statement documents his extraordinary strength of memory by the report that he recited more than 15,000 Ḥadīṯe from memory.",
+   "tr": "İlk söz, Abū Ḥātim ar-Rāzī’nin al-Buḫārī’yi tanıdığını belgeler. İkinci söz, onun 15.000’den fazla Ḥadīṯ’i ezberden okuduğu haberle olağanüstü hafıza gücünü belgeler.",
+   "ku": "Gotina yekem naskirina al-Buḫārī ji aliyê Abū Ḥātim ar-Rāzī ve îsbat dike. Gotina duyem hêza bîra wî ya awarte bi ragihandina ku wî zêdetirî 15.000 Ḥadīṯ ji berê xwendin îsbat dike.",
+   "ckb": "وتەی یەکەم دانپێدانانی Abū Ḥātim ar-Rāzī بە al-Buḫārī دەسەلمێنێت. وتەی دووەم هێزی یادەوەریی نائاسایی ئەو بەو هەواڵە دەسەلمێنێت کە زیاتر لە 15,000 Ḥadīṯی لەبەر خوێندووەتەوە.",
+   "bs": "Prva izjava potvrđuje priznanje al-Buḫārīja od strane Abū Ḥātim ar-Rāzīja. Druga izjava potvrđuje njegovu izvanrednu snagu pamćenja izvještajem da je više od 15.000 Ḥadīṯa izgovorio napamet.",
+   "fr": "La première parole atteste la reconnaissance d’al-Buḫārī par Abū Ḥātim ar-Rāzī. La seconde atteste sa force de mémoire extraordinaire par le récit selon lequel il a récité de mémoire plus de 15 000 Ḥadīṯe.",
+   "es": "La primera afirmación documenta el reconocimiento de al-Buḫārī por Abū Ḥātim ar-Rāzī. La segunda documenta su extraordinaria fuerza de memoria mediante el informe de que recitó de memoria más de 15.000 Ḥadīṯe."
   }
  }
 }

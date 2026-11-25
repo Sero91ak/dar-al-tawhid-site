@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,398 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Nuʿaym ibn Ḥammād – Zwischen Tašbīh und Taʿṭīl – DAR AL TAWḤĪD": {
+   "ar": "نعيم بن حماد – بين التشبيه والتعطيل – DAR AL TAWḤĪD",
+   "en": "Nuʿaym ibn Ḥammād – Between tashbīh and taʿṭīl – DAR AL TAWḤĪD",
+   "tr": "Nuʿaym ibn Ḥammād – Teşbih ile taʿṭîl arasında – DAR AL TAWḤĪD",
+   "ku": "Nuʿaym ibn Ḥammād – Di navbera teşbîh û taʿṭîl de – DAR AL TAWḤĪD",
+   "ckb": "نوعەیمی کوڕی حەمماد – لە نێوان تەشبێه و تەعتیل – DAR AL TAWḤĪD",
+   "bs": "Nuʿaym ibn Ḥammād – Između tešbīha i taʿṭīla – DAR AL TAWḤĪD",
+   "fr": "Nuʿaym ibn Ḥammād – Entre le tashbīh et le taʿṭīl – DAR AL TAWḤĪD",
+   "es": "Nuʿaym ibn Ḥammād – Entre el tashbīh y el taʿṭīl – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "مقالات وفق القرآن والسنة والآثار",
+   "en": "Articles according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre yazılar",
+   "ku": "Nivîs li gorî Qurʾān, Sunnah û Āthār",
+   "ckb": "بابەتەکان بەپێی قورئان و سوننەت و ئاسەوار",
+   "bs": "Tekstovi prema Qurʾānu, Sunnah i Āthāru",
+   "fr": "Articles selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Artículos según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Weder Ähnlichmachung noch Leugnung der Ṣifāt": {
+   "ar": "لا تشبيه ولا إنكار للصفات",
+   "en": "Neither likening nor denial of the ṣifāt",
+   "tr": "Ne benzetme ne de sıfatları inkâr",
+   "ku": "Ne şibandin û ne jî înkarkirina sifat",
+   "ckb": "نە لێکچواندن و نە نکۆڵیکردن لە سیفەتەکان",
+   "bs": "Ni upodobljavanje ni poricanje sifāta",
+   "fr": "Ni assimilation ni négation des ṣifāt",
+   "es": "Ni semejanza ni negación de los ṣifāt"
+  },
+  "Allah Seiner Schöpfung ähnlich macht": {
+   "ar": "يشبّه الله بخلقه",
+   "en": "makes Allah similar to His creation",
+   "tr": "Allah’ı yaratılışına benzetir",
+   "ku": "Allah dişibîne afirandina Wî",
+   "ckb": "الله بە دروستکراوەکەی دەچوێنێت",
+   "bs": "Allaha čini sličnim Njegovoj stvorenji",
+   "fr": "rend Allah semblable à Sa création",
+   "es": "hace a Allah semejante a Su creación"
+  },
+  ", hat Kufr begangen. Und wer": {
+   "ar": "، فقد كفر. ومن",
+   "en": ", has committed kufr. And whoever",
+   "tr": ", küfre düşmüştür. Kim de",
+   "ku": ", kufir kiriye. Û yê ku",
+   "ckb": "، کوفری کردووە. و ئەوەی",
+   "bs": ", počinio je kufr. A ko",
+   "fr": ", a commis un kufr. Et quiconque",
+   "es": ", ha cometido kufr. Y quien"
+  },
+  "leugnet, womit Allah Sich selbst beschrieben hat": {
+   "ar": "ينكر ما وصف الله به نفسه",
+   "en": "denies that with which Allah has described Himself",
+   "tr": "Allah’ın kendisini vasfettiği şeyi inkâr eder",
+   "ku": "ya ku Allah xwe pê wesif kiriye înkar dike",
+   "ckb": "نکۆڵی دەکات لەوەی الله خۆی پێ وەسفی کردووە",
+   "bs": "poriče ono čime je Allah Sebe opisao",
+   "fr": "nie ce par quoi Allah S’est décrit Lui-même",
+   "es": "niega aquello con lo que Allah Se ha descrito a Sí mismo"
+  },
+  ", hat Kufr begangen. Und das, womit Allah Sich selbst und Sein Gesandter ﷺ Ihn beschrieben haben, ist": {
+   "ar": "، فقد كفر. وما وصف الله به نفسه ووصفه به رسوله ﷺ هو",
+   "en": ", has committed kufr. And that with which Allah has described Himself and with which His Messenger ﷺ has described Him is",
+   "tr": ", küfre düşmüştür. Allah’ın kendisini vasfettiği ve Elçisi ﷺ’in O’nu vasfettiği şey ise",
+   "ku": ", kufir kiriye. Û ya ku Allah xwe pê wesif kiriye û Peyamberê Wî ﷺ Ew pê wesif kiriye ev e",
+   "ckb": "، کوفری کردووە. و ئەوەی الله خۆی پێ وەسفی کردووە و پێغەمبەرەکەی ﷺ پێی وەسفی کردووە،",
+   "bs": ", počinio je kufr. A ono čime je Allah Sebe opisao i čime Ga je opisao Njegov Poslanik ﷺ jest",
+   "fr": ", a commis un kufr. Et ce par quoi Allah S’est décrit Lui-même et par quoi Son Messager ﷺ L’a décrit est",
+   "es": ", ha cometido kufr. Y aquello con lo que Allah Se ha descrito a Sí mismo y con lo que Su Mensajero ﷺ Lo ha descrito es"
+  },
+  "Nuʿaym ibn Ḥammād al-Khuzāʿī رحمه الله (gest. 228/229 H.)": {
+   "ar": "نعيم بن حماد الخزاعي رحمه الله (توفي 228/229 هـ)",
+   "en": "Nuʿaym ibn Ḥammād al-Khuzāʿī رحمه الله (d. 228/229 AH)",
+   "tr": "Nuʿaym ibn Ḥammād al-Khuzāʿī رحمه الله (ö. 228/229 H.)",
+   "ku": "Nuʿaym ibn Ḥammād al-Khuzāʿī رحمه الله (m. 228/229 H.)",
+   "ckb": "نعیم بن حماد الخزاعی رحمه الله (کۆچی دوایی 228/229 ک.)",
+   "bs": "Nuʿaym ibn Ḥammād al-Khuzāʿī رحمه الله (umro 228/229. h.)",
+   "fr": "Nuʿaym ibn Ḥammād al-Khuzāʿī رحمه الله (m. 228/229 H.)",
+   "es": "Nuʿaym ibn Ḥammād al-Khuzāʿī رحمه الله (m. 228/229 H.)"
+  },
+  "Tašbīh, Taʿṭīl, Bestätigung der überlieferten Ṣifāt und Verneinung der Gleichheit mit der Schöpfung.": {
+   "ar": "التشبيه، والتعطيل، وإثبات الصفات المأثورة، ونفي المماثلة للخلق.",
+   "en": "Tashbīh, taʿṭīl, affirmation of the transmitted ṣifāt, and negation of likeness to the creation.",
+   "tr": "Teşbih, taʿṭîl, nakledilen sıfatların isbatı ve yaratılışa benzerliğin nefyi.",
+   "ku": "Teşbîh, taʿṭîl, îsbata sifatên veguhastî, û nefyakirina wekheviya bi afirandinê re.",
+   "ckb": "تەشبێه، تەعتیل، سەلماندنی سیفەتە گێڕدراوەکان، و نەفیکردنی هاوشێوەیی لەگەڵ دروستکراو.",
+   "bs": "Tešbīh, taʿṭīl, potvrđivanje prenesenih sifāta i nijekanje sličnosti stvorenju.",
+   "fr": "Le tashbīh, le taʿṭīl, l’affirmation des ṣifāt transmises, et la négation de l’égalité avec la création.",
+   "es": "El tashbīh, el taʿṭīl, la afirmación de los ṣifāt transmitidos y la negación de la igualdad con la creación."
+  },
+  "Šarḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa-l-Ǧamāʿah": {
+   "ar": "شرح أصول اعتقاد أهل السنة والجماعة",
+   "en": "Šarḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa-l-Ǧamāʿah",
+   "tr": "Şerhu usûli iʿtikādi ehli’s-sünne ve’l-cemâʿa",
+   "ku": "Šerḥa usûlê îtîqada ehlê Sunnah û cemāʿah",
+   "ckb": "شرح أصول اعتقاد أهل السنة والجماعة",
+   "bs": "Šarḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa-l-Ǧamāʿah",
+   "fr": "Šarḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa-l-Ǧamāʿah",
+   "es": "Šarḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa-l-Ǧamāʿah"
+  },
+  ", Nr. 936, Bd. 3, S. 532. Parallele Überlieferung bei aḏ-Ḏahabī,": {
+   "ar": "، رقم 936، ج 3، ص 532. رواية موازية عند الذهبي،",
+   "en": ", no. 936, vol. 3, p. 532. A parallel transmission by aḏ-Ḏahabī,",
+   "tr": ", no. 936, c. 3, s. 532. ez-Zehebî’de paralel bir rivayet,",
+   "ku": ", hej. 936, c. 3, r. 532. Veguhastineke paralel li cem aḏ-Ḏahabī,",
+   "ckb": "، ژ 936، بەرگی 3، ل 532. گێڕانەوەیەکی هاوتەریب لای الذهبی،",
+   "bs": ", br. 936, sv. 3, str. 532. Paralelna predaja kod aḏ-Ḏahabīja,",
+   "fr": ", n° 936, vol. 3, p. 532. Transmission parallèle chez aḏ-Ḏahabī,",
+   "es": ", n.º 936, vol. 3, p. 532. Transmisión paralela en aḏ-Ḏahabī,"
+  },
+  "„Wer Allah irgendetwas von Seiner Schöpfung ähnlich macht, hat Kufr begangen. Und wer leugnet, womit Allah Sich selbst beschrieben hat, hat Kufr begangen. Und das, womit Allah Sich selbst und Sein Gesandter ﷺ Ihn beschrieben haben, ist kein Tašbīh.“": {
+   "ar": "«من شبّه الله بشيء من خلقه فقد كفر. ومن جحد ما وصف الله به نفسه فقد كفر. وليس فيما وصف الله به نفسه ووصفه به رسوله ﷺ تشبيه.»",
+   "en": "“Whoever makes Allah similar to anything of His creation has committed kufr. And whoever denies that with which Allah has described Himself has committed kufr. And that with which Allah has described Himself and with which His Messenger ﷺ has described Him is not tashbīh.”",
+   "tr": "“Kim Allah’ı yaratılışından bir şeye benzetirse küfre düşmüştür. Kim Allah’ın kendisini vasfettiği şeyi inkâr ederse küfre düşmüştür. Allah’ın kendisini vasfettiği ve Elçisi ﷺ’in O’nu vasfettiği şeyde teşbih yoktur.”",
+   "ku": "“Yê ku Allah bi tiştekî ji afirandina Wî dişibîne, kufir kiriye. Û yê ku ya ku Allah xwe pê wesif kiriye înkar dike, kufir kiriye. Û di ya ku Allah xwe pê wesif kiriye û Peyamberê Wî ﷺ Ew pê wesif kiriye de teşbîh tune.”",
+   "ckb": "«ئەوەی الله بە شتێک لە دروستکراوەکەی دەچوێنێت، کوفری کردووە. و ئەوەی نکۆڵی دەکات لەوەی الله خۆی پێ وەسفی کردووە، کوفری کردووە. و لەوەی الله خۆی پێ وەسفی کردووە و پێغەمبەرەکەی ﷺ پێی وەسفی کردووە، تەشبێه نییە.»",
+   "bs": "„Ko Allaha učini sličnim ičemu od Njegove stvorenje, počinio je kufr. I ko poriče ono čime je Allah Sebe opisao, počinio je kufr. A ono čime je Allah Sebe opisao i čime Ga je opisao Njegov Poslanik ﷺ nije tešbīh.“",
+   "fr": "« Quiconque rend Allah semblable à quoi que ce soit de Sa création a commis un kufr. Et quiconque nie ce par quoi Allah S’est décrit Lui-même a commis un kufr. Et ce par quoi Allah S’est décrit Lui-même et par quoi Son Messager ﷺ L’a décrit n’est pas un tashbīh. »",
+   "es": "«Quien hace a Allah semejante a algo de Su creación ha cometido kufr. Y quien niega aquello con lo que Allah Se ha descrito a Sí mismo ha cometido kufr. Y aquello con lo que Allah Se ha descrito a Sí mismo y con lo que Su Mensajero ﷺ Lo ha descrito no es tashbīh.»"
+  },
+  "Die Überlieferung bei al-Lālakāʾī": {
+   "ar": "الرواية عند اللالكائي",
+   "en": "The transmission by al-Lālakāʾī",
+   "tr": "el-Lâlekâî’deki rivayet",
+   "ku": "Veguhastin li cem el-Lâlekâî",
+   "ckb": "گێڕانەوەکە لای لالەکائی",
+   "bs": "Predaja kod al-Lālakāʾīja",
+   "fr": "La transmission chez al-Lālakāʾī",
+   "es": "La transmisión en al-Lālakāʾī"
+  },
+  "al-Lālakāʾī führt die Aussage im Abschnitt über die Verurteilung des Tašbīh an. Der Weg lautet dort über ʿAbd ar-Raḥmān ibn Abī Ḥātim, von ʿAbdullāh ibn Muḥammad ibn al-Faḍl aṣ-Ṣaydāwī, von Nuʿaym ibn Ḥammād.": {
+   "ar": "اللالكائي يورد القول في قسم إدانة التشبيه. الطريق هناك عن عبد الرحمن بن أبي حاتم، عن عبد الله بن محمد بن الفضل الصيداوي، عن نعيم بن حماد.",
+   "en": "al-Lālakāʾī cites the statement in the section condemning tashbīh. The path there runs through ʿAbd ar-Raḥmān ibn Abī Ḥātim, from ʿAbdullāh ibn Muḥammad ibn al-Faḍl aṣ-Ṣaydāwī, from Nuʿaym ibn Ḥammād.",
+   "tr": "el-Lâlekâî sözü teşbihin kınandığı bölümde nakleder. Yol orada Abdurrahman b. Ebî Hâtim’den, Abdullah b. Muhammed b. el-Fadl es-Saydâvî’den, Nuaym b. Hammâd’dan gelir.",
+   "ku": "el-Lâlekâî gotinê di beşa şermezarkirina teşbîhê de tîne. Rê li wir di ser ʿAbd ar-Raḥmān ibn Abī Ḥātim re ye, ji ʿAbdullāh ibn Muḥammad ibn al-Faḍl aṣ-Ṣaydāwī, ji Nuʿaym ibn Ḥammād.",
+   "ckb": "لالەکائی وتەکە لە بەشی سەرزەنشتی تەشبێه دەهێنێت. ڕێگەکە لەوێ بە عبد الرحمن بن أبي حاتم، لە عبد الله بن محمد بن الفضل الصیداوي، لە نعیم بن حماد دێت.",
+   "bs": "al-Lālakāʾī navodi izjavu u odjeljku osude tešbīha. Put tamo ide preko ʿAbd ar-Raḥmāna ibn Abī Ḥātima, od ʿAbdullāha ibn Muḥammada ibn al-Faḍla aṣ-Ṣaydāwīja, od Nuʿayma ibn Ḥammāda.",
+   "fr": "al-Lālakāʾī rapporte la parole dans la section qui condamne le tashbīh. La voie y passe par ʿAbd ar-Raḥmān ibn Abī Ḥātim, de ʿAbdullāh ibn Muḥammad ibn al-Faḍl aṣ-Ṣaydāwī, de Nuʿaym ibn Ḥammād.",
+   "es": "al-Lālakāʾī cita la declaración en la sección de la condena del tashbīh. La vía allí pasa por ʿAbd ar-Raḥmān ibn Abī Ḥātim, de ʿAbdullāh ibn Muḥammad ibn al-Faḍl aṣ-Ṣaydāwī, de Nuʿaym ibn Ḥammād."
+  },
+  "Athar von Nuʿaym ibn Ḥammād": {
+   "ar": "أثر نعيم بن حماد",
+   "en": "Athar of Nuʿaym ibn Ḥammād",
+   "tr": "Nuaym b. Hammâd eseri",
+   "ku": "Esera Nuʿaym ibn Ḥammād",
+   "ckb": "ئەسەری نعیم بن حماد",
+   "bs": "Asar Nuʿayma ibn Ḥammāda",
+   "fr": "Athar de Nuʿaym ibn Ḥammād",
+   "es": "Athar de Nuʿaym ibn Ḥammād"
+  },
+  ", kein Prophetenḥadīṯ. Sie formuliert zwei Grenzen zugleich:": {
+   "ar": "، وليس حديثًا نبويًا. يصوغ حدّين معًا:",
+   "en": ", not a prophetic ḥadīth. It formulates two boundaries at once:",
+   "tr": ", peygamber hadisi değildir. İki sınırı birden kurar:",
+   "ku": ", ne hedîseke pêxemberî ye. Ew du sînoran bi hev re datîne:",
+   "ckb": "، و حەدیثی پێغەمبەر نییە. دوو سنوور پێکەوە دادەڕێژێت:",
+   "bs": ", nije vjerovjesnički hadis. Ona oblikuje dvije granice odjednom:",
+   "fr": ", non un ḥadīth prophétique. Elle formule deux limites à la fois :",
+   "es": ", no un ḥadīth profético. Formula dos límites a la vez:"
+  },
+  "keine Ähnlichmachung Allahs mit Seiner Schöpfung": {
+   "ar": "عدم تشبيه الله بخلقه",
+   "en": "no likening of Allah to His creation",
+   "tr": "Allah’ı yaratılışına benzetmemek",
+   "ku": "neşibandina Allah bi afirandina Wî",
+   "ckb": "نەچواندنی الله بە دروستکراوەکەی",
+   "bs": "ne upodobljavati Allaha Njegovoj stvorenji",
+   "fr": "ne pas rendre Allah semblable à Sa création",
+   "es": "no hacer a Allah semejante a Su creación"
+  },
+  "keine Leugnung dessen, womit Allah Sich selbst beschrieben hat": {
+   "ar": "عدم إنكار ما وصف الله به نفسه",
+   "en": "no denial of that with which Allah has described Himself",
+   "tr": "Allah’ın kendisini vasfettiği şeyi inkâr etmemek",
+   "ku": "neînkarkirina ya ku Allah xwe pê wesif kiriye",
+   "ckb": "نەنکۆڵیکردن لەوەی الله خۆی پێ وەسفی کردووە",
+   "bs": "ne poricati ono čime je Allah Sebe opisao",
+   "fr": "ne pas nier ce par quoi Allah S’est décrit Lui-même",
+   "es": "no negar aquello con lo que Allah Se ha descrito a Sí mismo"
+  },
+  "Parallele Überlieferung bei aḏ-Ḏahabī": {
+   "ar": "رواية موازية عند الذهبي",
+   "en": "Parallel transmission by aḏ-Ḏahabī",
+   "tr": "ez-Zehebî’de paralel rivayet",
+   "ku": "Veguhastina paralel li cem aḏ-Ḏahabī",
+   "ckb": "گێڕانەوەی هاوتەریب لای الذهبی",
+   "bs": "Paralelna predaja kod aḏ-Ḏahabīja",
+   "fr": "Transmission parallèle chez aḏ-Ḏahabī",
+   "es": "Transmisión paralela en aḏ-Ḏahabī"
+  },
+  "aḏ-Ḏahabī überliefert in der Biographie Nuʿayms einen weiteren Weg über Muḥammad ibn Ismāʿīl at-Tirmiḏī, der sagt, er habe Nuʿaym ibn Ḥammād diese Aussage sprechen hören.": {
+   "ar": "الذهبي يروي في ترجمة نعيم طريقًا آخر عن محمد بن إسماعيل الترمذي، الذي يقول إنه سمع نعيم بن حماد يقول هذا القول.",
+   "en": "aḏ-Ḏahabī transmits, in the biography of Nuʿaym, a further path through Muḥammad ibn Ismāʿīl at-Tirmiḏī, who says that he heard Nuʿaym ibn Ḥammād say this statement.",
+   "tr": "ez-Zehebî, Nuaym’in tercemesinde, Muhammed b. İsmâîl et-Tirmizî üzerinden başka bir yol nakleder; o, Nuaym b. Hammâd’ı bu sözü söylerken işittiğini söyler.",
+   "ku": "aḏ-Ḏahabī di jînenîgariya Nuʿaym de rêyeke din bi rêya Muḥammad ibn Ismāʿīl at-Tirmiḏī vediguhêze, yê ku dibêje wî bihîstiye ku Nuʿaym ibn Ḥammād vê gotinê dibêje.",
+   "ckb": "ذهەبی لە ژیاننامەی نعیم ڕێگەیەکی تر دەگێڕێتەوە بە محمد بن إسماعیل الترمذي، کە دەڵێت گوێی لە نعیم بن حماد بووە ئەم وتەیە دەڵێت.",
+   "bs": "aḏ-Ḏahabī u biografiji Nuʿayma prenosi drugi put preko Muḥammada ibn Ismāʿīla at-Tirmiḏīja, koji kaže da je čuo Nuʿayma ibn Ḥammāda kako izgovara ovu izjavu.",
+   "fr": "aḏ-Ḏahabī transmet, dans la biographie de Nuʿaym, une autre voie par Muḥammad ibn Ismāʿīl at-Tirmiḏī, qui dit avoir entendu Nuʿaym ibn Ḥammād prononcer cette parole.",
+   "es": "aḏ-Ḏahabī transmite, en la biografía de Nuʿaym, otra vía por Muḥammad ibn Ismāʿīl at-Tirmiḏī, quien dice que oyó a Nuʿaym ibn Ḥammād decir esta declaración."
+  },
+  "Der Wortlaut lautet dort nahezu identisch: Wer Allah Seiner Schöpfung ähnlich macht, begeht Kufr; wer leugnet, womit Allah Sich beschrieben hat, begeht Kufr; und in der Beschreibung Allahs durch Sich selbst und durch Seinen Gesandten ﷺ liegt kein Tašbīh.": {
+   "ar": "اللفظ هناك يكاد يكون مطابقًا: من شبّه الله بخلقه فقد كفر؛ ومن جحد ما وصف الله به نفسه فقد كفر؛ وفي وصف الله نفسه ووصف رسوله ﷺ له ليس تشبيه.",
+   "en": "The wording there is nearly identical: whoever makes Allah similar to His creation commits kufr; whoever denies that with which Allah has described Himself commits kufr; and in Allah’s description of Himself and His Messenger’s ﷺ description of Him there is no tashbīh.",
+   "tr": "Lafız orada neredeyse aynıdır: Kim Allah’ı yaratılışına benzetirse küfre düşer; kim Allah’ın kendisini vasfettiği şeyi inkâr ederse küfre düşer; Allah’ın kendisini ve Elçisi ﷺ’in O’nu vasfetmesinde teşbih yoktur.",
+   "ku": "Gotin li wir hema hema yek e: Yê ku Allah dişibîne afirandina Wî, kufir dike; yê ku ya ku Allah xwe pê wesif kiriye înkar dike, kufir dike; û di wesifkirina Allah xwe û wesifkirina Peyamberê Wî ﷺ de teşbîh tune.",
+   "ckb": "ووشەکە لەوێ نزیکە لە یەک: ئەوەی الله بە دروستکراوەکەی دەچوێنێت کوفر دەکات؛ ئەوەی نکۆڵی دەکات لەوەی الله خۆی پێ وەسفی کردووە کوفر دەکات؛ و لە وەسفی الله بۆ خۆی و وەسفی پێغەمبەرەکەی ﷺ بۆی تەشبێه نییە.",
+   "bs": "Tekst je tamo gotovo istovjetan: ko Allaha učini sličnim Njegovoj stvorenji čini kufr; ko poriče ono čime je Allah Sebe opisao čini kufr; a u Allahovu opisu Sebe i opisu Njegova Poslanika ﷺ nema tešbīha.",
+   "fr": "Le libellé y est presque identique : quiconque rend Allah semblable à Sa création commet un kufr ; quiconque nie ce par quoi Allah S’est décrit commet un kufr ; et dans la description qu’Allah fait de Lui-même et dans celle que Son Messager ﷺ fait de Lui, il n’y a pas de tashbīh.",
+   "es": "El texto allí es casi idéntico: quien hace a Allah semejante a Su creación comete kufr; quien niega aquello con lo que Allah Se ha descrito comete kufr; y en la descripción que Allah hace de Sí mismo y en la que Su Mensajero ﷺ hace de Él no hay tashbīh."
+  },
+  "Nuʿaym setzt die Bestätigung der überlieferten Ṣifāt": {
+   "ar": "نعيم يضع إثبات الصفات المأثورة",
+   "en": "Nuʿaym sets the affirmation of the transmitted ṣifāt",
+   "tr": "Nuaym, nakledilen sıfatların isbatını koyar",
+   "ku": "Nuʿaym îsbata sifatên veguhastî datîne",
+   "ckb": "نعیم سەلماندنی سیفەتە گێڕدراوەکان دادەنێت",
+   "bs": "Nuʿaym postavlja potvrđivanje prenesenih sifāta",
+   "fr": "Nuʿaym place l’affirmation des ṣifāt transmises",
+   "es": "Nuʿaym sitúa la afirmación de los ṣifāt transmitidos"
+  },
+  ". Tašbīh entsteht durch die Gleichsetzung Allahs mit Seiner Schöpfung. Die bloße Bestätigung dessen, womit Allah Sich selbst oder Sein Gesandter ﷺ Ihn beschrieben hat, wird in diesem Athar ausdrücklich davon unterschieden.": {
+   "ar": ". التشبيه ينشأ بمساواة الله بخلقه. ومجرد إثبات ما وصف الله به نفسه أو وصفه به رسوله ﷺ يُميَّز في هذا الأثر صراحة عن ذلك.",
+   "en": ". Tashbīh arises by equating Allah with His creation. The mere affirmation of that with which Allah has described Himself, or with which His Messenger ﷺ has described Him, is in this athar expressly distinguished from that.",
+   "tr": ". Teşbih, Allah’ı yaratılışıyla eşitlemekten doğar. Allah’ın kendisini vasfettiği veya Elçisi ﷺ’in O’nu vasfettiği şeyin salt isbatı, bu eserde açıkça ondan ayrılır.",
+   "ku": ". Teşbîh bi wekhevkirina Allah bi afirandina Wî çêdibe. Tenê îsbata ya ku Allah xwe pê wesif kiriye, an Peyamberê Wî ﷺ Ew pê wesif kiriye, di vê eserê de bi eşkere ji wê tê cudakirin.",
+   "ckb": ". تەشبێه بە یەکسانکردنی الله بە دروستکراوەکەی دروست دەبێت. تەنها سەلماندنی ئەوەی الله خۆی پێ وەسفی کردووە، یان پێغەمبەرەکەی ﷺ پێی وەسفی کردووە، لەم ئەسەرەدا بە ڕاشکاوی لەوە جیا دەکرێتەوە.",
+   "bs": ". Tešbīh nastaje izjednačavanjem Allaha s Njegovom stvorenjom. Samo potvrđivanje onoga čime je Allah Sebe opisao, ili čime Ga je opisao Njegov Poslanik ﷺ, u ovom asaru se izričito od toga razlikuje.",
+   "fr": ". Le tashbīh naît de l’égalisation d’Allah avec Sa création. La simple affirmation de ce par quoi Allah S’est décrit, ou par quoi Son Messager ﷺ L’a décrit, est dans cet athar expressément distinguée de cela.",
+   "es": ". El tashbīh nace de igualar a Allah con Su creación. La mera afirmación de aquello con lo que Allah Se ha descrito, o con lo que Su Mensajero ﷺ Lo ha descrito, se distingue expresamente de ello en este athar."
+  },
+  "Damit wird eine doppelte Grenze gezogen:": {
+   "ar": "وبذلك يُرسم حد مزدوج:",
+   "en": "A double boundary is thereby drawn:",
+   "tr": "Böylece çifte bir sınır çizilir:",
+   "ku": "Bi vî awayî sînorekî ducar tê kişandin:",
+   "ckb": "بەمە سنوورێکی دووانە دەکێشرێت:",
+   "bs": "Time se povlači dvostruka granica:",
+   "fr": "Une double limite est ainsi tracée :",
+   "es": "Con ello se traza un doble límite:"
+  },
+  "Taʿṭīl bzw. die Leugnung der bestätigten Ṣifāt": {
+   "ar": "التعطيل، أو إنكار الصفات المثبتة",
+   "en": "taʿṭīl, or the denial of the affirmed ṣifāt",
+   "tr": "taʿṭîl, ya da sabit sıfatların inkârı",
+   "ku": "taʿṭîl, an înkarkirina sifatên îsbatkirî",
+   "ckb": "تەعتیل، یان نکۆڵیکردن لە سیفەتە سەلمێنراوەکان",
+   "bs": "taʿṭīl, ili poricanje potvrđenih sifāta",
+   "fr": "le taʿṭīl, ou la négation des ṣifāt affirmées",
+   "es": "el taʿṭīl, o la negación de los ṣifāt afirmados"
+  },
+  ". Die Kayfiyyah einer göttlichen Ṣifah wird dadurch nicht festgelegt.": {
+   "ar": ". وبذلك لا تُحدَّد كيفية صفة إلهية.",
+   "en": ". The kayfiyyah of a divine ṣifah is not thereby fixed.",
+   "tr": ". Bununla ilâhî bir sıfatın keyfiyyeti belirlenmez.",
+   "ku": ". Bi wê yekê keyfiyeta sifateke îlahî nayê diyarkirin.",
+   "ckb": ". بەمە چۆنیەتی سیفەتێکی خوایی دیاری ناکرێت.",
+   "bs": ". Time se ne utvrđuje kakvoća božanskog sifāta.",
+   "fr": ". La kayfiyyah d’une ṣifah divine n’est pas ainsi fixée.",
+   "es": ". Con ello no se fija la kayfiyyah de un ṣifah divino."
+  },
+  "Direkte Quellenstellen öffnen": {
+   "ar": "فتح مواضع المصادر المباشرة",
+   "en": "Open the direct source passages",
+   "tr": "Doğrudan kaynak yerlerini aç",
+   "ku": "Cihên rasterast ên çavkaniyan veke",
+   "ckb": "شوێنە ڕاستەوخۆکانی سەرچاوە بکەرەوە",
+   "bs": "Otvori izravna mjesta u izvorima",
+   "fr": "Ouvrir les passages directs des sources",
+   "es": "Abrir los pasajes directos de las fuentes"
+  },
+  "Jeder Webnachweis führt per Textfragment direkt zum belegten Wortlaut; der PDF-Nachweis öffnet direkt die verifizierte Seite.": {
+   "ar": "كل شاهد شبكي يؤدي بجزء النص مباشرة إلى اللفظ المثبت؛ وشاهد PDF يفتح مباشرة الصفحة المتحققة.",
+   "en": "Each web reference leads by a text fragment directly to the established wording; the PDF reference opens directly the verified page.",
+   "tr": "Her web delili metin parçasıyla doğrudan sabit lafza götürür; PDF delili doğrulanmış sayfayı doğrudan açar.",
+   "ku": "Her belgeya webê bi perçekî tekstê rasterast dibe gotina sabit; belgeya PDF rasterast rûpela piştrastkirî vedike.",
+   "ckb": "هەر بەڵگەیەکی وێب بە پارچەی دەق ڕاستەوخۆ دەباتە ووشەی جێگیر؛ بەڵگەی PDF ڕاستەوخۆ لاپەڕەی پشتڕاستکراو دەکاتەوە.",
+   "bs": "Svaki mrežni navod vodi fragmentom teksta izravno do utvrđenog teksta; PDF-navod izravno otvara provjerenu stranicu.",
+   "fr": "Chaque référence web mène par un fragment de texte directement au libellé établi ; la référence PDF ouvre directement la page vérifiée.",
+   "es": "Cada referencia web conduce por un fragmento de texto directamente al texto establecido; la referencia PDF abre directamente la página verificada."
+  },
+  "Islamweb · Siyar Aʿlām an-Nubalāʾ 10/610": {
+   "ar": "إسلام ويب · سير أعلام النبلاء 10/610",
+   "en": "Islamweb · Siyar Aʿlām an-Nubalāʾ 10/610",
+   "tr": "İslamweb · Siyeru aʿlâmi’n-nübelâ 10/610",
+   "ku": "Islamweb · Siyar Aʿlām an-Nubalāʾ 10/610",
+   "ckb": "ئیسلاموێب · سیر أعلام النبلاء 10/610",
+   "bs": "Islamweb · Siyar Aʿlām an-Nubalāʾ 10/610",
+   "fr": "Islamweb · Siyar Aʿlām an-Nubalāʾ 10/610",
+   "es": "Islamweb · Siyar Aʿlām an-Nubalāʾ 10/610"
+  },
+  "Textmarkierung öffnet direkt beim Wortlaut von Nuʿaym ibn Ḥammād": {
+   "ar": "تحديد النص يفتح مباشرة عند لفظ نعيم بن حماد",
+   "en": "the text marker opens directly at the wording of Nuʿaym ibn Ḥammād",
+   "tr": "metin işaretlemesi doğrudan Nuaym b. Hammâd’ın lafzında açılır",
+   "ku": "nîşana tekstê rasterast li gotina Nuʿaym ibn Ḥammād vedibe",
+   "ckb": "نیشانەی دەق ڕاستەوخۆ لە ووشەی نعیم بن حماد دەکرێتەوە",
+   "bs": "oznaka teksta se otvara izravno kod teksta Nuʿayma ibn Ḥammāda",
+   "fr": "le marquage du texte s’ouvre directement au libellé de Nuʿaym ibn Ḥammād",
+   "es": "la marca de texto se abre directamente en el texto de Nuʿaym ibn Ḥammād"
+  },
+  "al-Maktaba · direkter Textnachweis": {
+   "ar": "المكتبة · شاهد نصي مباشر",
+   "en": "al-Maktaba · direct text reference",
+   "tr": "el-Mektebe · doğrudan metin delili",
+   "ku": "al-Maktaba · belgeya nivîsê ya rasterast",
+   "ckb": "المکتبة · بەڵگەی ڕاستەوخۆی دەق",
+   "bs": "al-Maktaba · izravan tekstualni navod",
+   "fr": "al-Maktaba · référence textuelle directe",
+   "es": "al-Maktaba · referencia textual directa"
+  },
+  "Textmarkierung führt unmittelbar zur überlieferten Aussage": {
+   "ar": "تحديد النص يؤدي مباشرة إلى القول المروي",
+   "en": "the text marker leads directly to the transmitted statement",
+   "tr": "metin işaretlemesi doğrudan nakledilen söze götürür",
+   "ku": "nîşana tekstê rasterast dibe gotina veguhastî",
+   "ckb": "نیشانەی دەق ڕاستەوخۆ دەباتە وتەی گێڕدراو",
+   "bs": "oznaka teksta vodi izravno do prenesene izjave",
+   "fr": "le marquage du texte mène directement à la parole transmise",
+   "es": "la marca de texto conduce directamente a la declaración transmitida"
+  },
+  "PDF / Scan · direkte Seite mit Athar Nr. 936": {
+   "ar": "PDF / مسح · الصفحة المباشرة للأثر رقم 936",
+   "en": "PDF / scan · the direct page with athar no. 936",
+   "tr": "PDF / tarama · 936 numaralı eserin doğrudan sayfası",
+   "ku": "PDF / scan · rûpela rasterast a eserê hej. 936",
+   "ckb": "PDF / سکان · لاپەڕەی ڕاستەوخۆی ئەسەری ژ 936",
+   "bs": "PDF / sken · izravna stranica s asarom br. 936",
+   "fr": "PDF / scan · la page directe de l’athar n° 936",
+   "es": "PDF / escaneo · la página directa con el athar n.º 936"
+  },
+  "Öffnet unmittelbar die verifizierte PDF-Seite mit dem Wortlaut": {
+   "ar": "يفتح مباشرة صفحة PDF المتحققة التي فيها اللفظ",
+   "en": "Opens directly the verified PDF page that contains the wording",
+   "tr": "Lafzın bulunduğu doğrulanmış PDF sayfasını doğrudan açar",
+   "ku": "Rastê rûpela PDF ya piştrastkirî vedike ku gotin tê de ye",
+   "ckb": "ڕاستەوخۆ لاپەڕەی PDFی پشتڕاستکراو دەکاتەوە کە ووشەکەی تێدایە",
+   "bs": "Izravno otvara provjerenu PDF-stranicu na kojoj je tekst",
+   "fr": "Ouvre directement la page PDF vérifiée qui contient le libellé",
+   "es": "Abre directamente la página PDF verificada que contiene el texto"
+  },
+  "Der Athar zieht die Grenze in beide Richtungen: Allah wird": {
+   "ar": "الأثر يرسم الحد في الاتجاهين: الله",
+   "en": "The athar draws the boundary in both directions: Allah is",
+   "tr": "Eser sınırı her iki yönde çizer: Allah",
+   "ku": "Eser sînor di her du aliyan de dikşîne: Allah",
+   "ckb": "ئەسەرەکە سنوور لە هەردوو ئاراستەدا دەکێشێت: الله",
+   "bs": "Asar povlači granicu u oba smjera: Allah se",
+   "fr": "L’athar trace la limite dans les deux sens : Allah",
+   "es": "El athar traza el límite en ambas direcciones: Allah"
+  },
+  "nicht der Schöpfung gleichgemacht": {
+   "ar": "لا يُسوَّى بالخلق",
+   "en": "not made equal to the creation",
+   "tr": "yaratılışa eşitlenmez",
+   "ku": "bi afirandinê re nayê wekhevkirin",
+   "ckb": "یەکسان ناکرێت بە دروستکراو",
+   "bs": "ne izjednačava sa stvorenjem",
+   "fr": "n’est pas égalé à la création",
+   "es": "no se iguala a la creación"
+  },
+  "nicht geleugnet, womit Er Sich selbst beschrieben hat": {
+   "ar": "ولا يُنكر ما وصف به نفسه",
+   "en": "and that with which He has described Himself is not denied",
+   "tr": "ve kendisini vasfettiği şey inkâr edilmez",
+   "ku": "û ya ku Wî xwe pê wesif kiriye nayê înkarkirin",
+   "ckb": "و نکۆڵی ناکرێت لەوەی خۆی پێ وەسفی کردووە",
+   "bs": "i ne poriče se ono čime je Sebe opisao",
+   "fr": "et ce par quoi Il S’est décrit n’est pas nié",
+   "es": "y no se niega aquello con lo que Él Se ha descrito"
+  },
+  ". Die Bestätigung einer überlieferten Ṣifah ist nach diesem Wortlaut nicht schon deshalb Tašbīh.": {
+   "ar": ". إثبات صفة مأثورة، بحسب هذا اللفظ، ليس لذلك وحده تشبيهًا.",
+   "en": ". The affirmation of a transmitted ṣifah is, according to this wording, not already tashbīh for that reason alone.",
+   "tr": ". Nakledilen bir sıfatın isbatı, bu lafza göre, yalnız bu sebeple teşbih değildir.",
+   "ku": ". Îsbata sifateke veguhastî, li gor vê gotinê, ne bi tenê ji ber vê yekê teşbîh e.",
+   "ckb": ". سەلماندنی سیفەتێکی گێڕدراو، بەپێی ئەم ووشەیە، تەنها لەبەر ئەوە تەشبێه نییە.",
+   "bs": ". Potvrđivanje prenesenog sifāta, prema ovom tekstu, samo zbog toga nije tešbīh.",
+   "fr": ". L’affirmation d’une ṣifah transmise n’est pas, selon ce libellé, déjà un tashbīh pour cette seule raison.",
+   "es": ". La afirmación de un ṣifah transmitido no es, según este texto, ya tashbīh solo por eso."
+  },
+  "Die Aussage ist ein allgemeiner ʿAqīdah-Grundsatz. Die Anwendung eines Kufr-Urteils auf eine bestimmte Person ist eine gesonderte Frage mit eigenen Voraussetzungen und Hinderungsgründen.": {
+   "ar": "القول قاعدة عامة في العقيدة. تطبيق حكم الكفر على شخص معيّن مسألة مستقلة لها شروطها وموانعها.",
+   "en": "The statement is a general principle of ʿaqīdah. Applying a judgment of kufr to a particular person is a separate question, with its own conditions and impediments.",
+   "tr": "Söz genel bir akîde kuralıdır. Küfür hükmünün belirli bir kişiye uygulanması, kendi şartları ve engelleri olan ayrı bir meseledir.",
+   "ku": "Gotin qaîdeyeke giştî ya ʿaqīdah e. Sepandina hukmê kufr li kesekî diyarkirî pirsake cuda ye, bi merc û astengên xwe.",
+   "ckb": "وتەکە بنەمایەکی گشتیی عەقیدەیە. جێبەجێکردنی حوکمی کوفر لەسەر کەسێکی دیاریکراو پرسیارێکی جیاوازە، بە مەرج و ڕێگرەکانی خۆی.",
+   "bs": "Izjava je opće načelo ʿaqīde. Primjena propisa kufra na određenu osobu zasebno je pitanje, sa svojim uvjetima i zaprekama.",
+   "fr": "La parole est un principe général d’ʿaqīdah. Appliquer un jugement de kufr à une personne déterminée est une question distincte, avec ses conditions et ses empêchements.",
+   "es": "La declaración es un principio general de ʿaqīdah. Aplicar un juicio de kufr a una persona concreta es una cuestión aparte, con sus propias condiciones e impedimentos."
   }
  }
 }

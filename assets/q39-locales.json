@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,208 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Fremde Rechte zurückgeben – Sufyān aṯ-Ṯawrī – DAR AL TAWḤĪD": {
+   "ar": "ردّ حقوق الآخرين – سفيان الثوري – DAR AL TAWḤĪD",
+   "en": "Restoring the rights of others – Sufyān aṯ-Ṯawrī – DAR AL TAWḤĪD",
+   "tr": "Başkalarının haklarını geri vermek – Sufyān aṯ-Ṯawrī – DAR AL TAWḤĪD",
+   "ku": "Vegerandina mafên kesên din – Sufyān aṯ-Ṯawrī – DAR AL TAWḤĪD",
+   "ckb": "گەڕاندنەوەی مافی کەسانی تر – سفیان الثوری – DAR AL TAWḤĪD",
+   "bs": "Vraćanje tuđih prava – Sufyān aṯ-Ṯawrī – DAR AL TAWḤĪD",
+   "fr": "Restituer les droits d’autrui – Sufyān aṯ-Ṯawrī – DAR AL TAWḤĪD",
+   "es": "Devolver los derechos ajenos – Sufyān aṯ-Ṯawrī – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah &amp; Āthār": {
+   "ar": "إسهامات وفق القرآن والسنة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the āthār",
+   "tr": "Qurʾān, Sunnah ve âsâra göre katkılar",
+   "ku": "Beşdarî li gorî Qurʾān, Sunnah û eseran",
+   "ckb": "بەشدارییەکان بەپێی قورئان، سوننەت و ئاسار",
+   "bs": "Prilozi prema Qurʾānu, Sunnahu i asarima",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les athâr",
+   "es": "Aportes según el Qurʾān, la Sunnah y los atares"
+  },
+  "Āṯār · Rechte der Menschen · Tazkiyah · Dhikr": {
+   "ar": "آثار · حقوق الناس · تزكية · ذكر",
+   "en": "Āthār · Rights of people · Tazkiyah · Dhikr",
+   "tr": "Âsâr · İnsanların hakları · Tezkiye · Zikir",
+   "ku": "Eser · Mafên mirovan · Tezkiye · Zikir",
+   "ckb": "ئاسار · مافی خەڵک · تەزکیە · زیکر",
+   "bs": "Asari · Prava ljudi · Tezkija · Zikr",
+   "fr": "Athâr · Droits des gens · Tazkiya · Dhikr",
+   "es": "Atares · Derechos de las personas · Tazkiya · Dhikr"
+  },
+  "Erst das Unrecht beheben – dann den Dhikr vermehren": {
+   "ar": "أولًا رفع الظلم – ثم الإكثار من الذكر",
+   "en": "First redress the wrong – then increase the dhikr",
+   "tr": "Önce haksızlığı gider – sonra zikri artır",
+   "ku": "Pêşî neheqiyê rake – paşê zikir zêde bike",
+   "ckb": "سەرەتا ستەمەکە ڕاست بکەرەوە – پاشان زیکر زیاد بکە",
+   "bs": "Najprije ispravi nepravdu – zatim uvećaj zikr",
+   "fr": "D’abord réparer l’injustice – puis multiplier le dhikr",
+   "es": "Primero reparar la injusticia – luego aumentar el dhikr"
+  },
+  "Sufyān aṯ-Ṯawrī wurde gefragt, ob ein Mann, der 30.000 Dirham zu Unrecht erworben hat, diese Verfehlung durch ebenso viel Tasbīḥ, Taḥmīd und Takbīr ausgleichen könne. Er antwortete: „Er soll das Geld zuerst zurückgeben. Denn sein Dhikr wird nicht angenommen, bis er es zurückgegeben hat.“": {
+   "ar": "سُئل سفيان الثوري: هل يستطيع رجل اكتسب ثلاثين ألف درهم بغير حق أن يجبر هذه الزلّة بمثل ذلك من التسبيح والتحميد والتكبير؟ فأجاب: «ليردّ المال أولًا. فإن ذكره لا يُقبل حتى يردّه.»",
+   "en": "Sufyān aṯ-Ṯawrī was asked whether a man who had acquired 30,000 dirhams wrongfully could make up for that offense by an equal amount of tasbīḥ, taḥmīd, and takbīr. He answered: “He should return the money first. For his dhikr will not be accepted until he has returned it.”",
+   "tr": "Sufyān aṯ-Ṯawrī’ye, haksız yere 30.000 dirhem elde etmiş bir adamın bu hatayı aynı miktarda tesbih, tahmid ve tekbirle telafi edip edemeyeceği soruldu. Şöyle cevap verdi: “Önce parayı geri versin. Çünkü onu geri verinceye kadar zikri kabul edilmez.”",
+   "ku": "Ji Sufyān aṯ-Ṯawrī hat pirsîn ka gelo zilamekî ku 30.000 dirhem bi neheqî bi dest xistiye dikare vê xeletiyê bi heman qas tesbîḥ, teḥmîd û tekbîr bigire. Wî bersiv da: “Bila pêşî pereyan vegerîne. Lewre zikirê wî nayê qebûlkirin heta ku ew venegerîne.”",
+   "ckb": "لە سفیان الثوری پرسیار کرا ئایا پیاوێک کە 30,000 درهمی بە ناحەق بەدەست هێنابێت، دەتوانێت ئەم هەڵەیە بە هەمان ئەندازە تەسبیح و تەحمید و تەکبیر قەرەبوو بکاتەوە. وەڵامی دایەوە: «با سەرەتا پارەکە بگەڕێنێتەوە. چونکە زیکری تا ئەو کاتەی نەگەڕاندبێتەوە وەرناگیرێت.»",
+   "bs": "Sufyān aṯ-Ṯawrī upitan je može li čovjek koji je nepravedno stekao 30.000 dirhema tu pogrešku nadoknaditi istom količinom tesbiha, tahmida i tekbira. Odgovorio je: “Neka najprije vrati novac. Jer njegov zikr neće biti primljen dok ga ne vrati.”",
+   "fr": "On demanda à Sufyān aṯ-Ṯawrī si un homme qui avait acquis 30 000 dirhams injustement pouvait compenser cette faute par autant de tasbīḥ, de taḥmīd et de takbīr. Il répondit : « Qu’il rende d’abord l’argent. Car son dhikr ne sera pas accepté tant qu’il ne l’aura pas rendu. »",
+   "es": "Se preguntó a Sufyān aṯ-Ṯawrī si un hombre que había adquirido 30.000 dirhams injustamente podía compensar esa falta con la misma cantidad de tasbīḥ, taḥmīd y takbīr. Respondió: “Que devuelva primero el dinero. Porque su dhikr no será aceptado hasta que lo haya devuelto.”"
+  },
+  "Sufyān aṯ-Ṯawrī رحمه الله (gest. 161 n. H.)": {
+   "ar": "سفيان الثوري رحمه الله (ت. 161 هـ)",
+   "en": "Sufyān aṯ-Ṯawrī رحمه الله (d. 161 AH)",
+   "tr": "Sufyān aṯ-Ṯawrī رحمه الله (ö. 161 H.)",
+   "ku": "Sufyān aṯ-Ṯawrī رحمه الله (m. 161 h.)",
+   "ckb": "سفیان الثوری رحمه الله (کۆچی دوایی 161ی کۆچی)",
+   "bs": "Sufyān aṯ-Ṯawrī رحمه الله (umr. 161. h.)",
+   "fr": "Sufyān aṯ-Ṯawrī رحمه الله (m. 161 H.)",
+   "es": "Sufyān aṯ-Ṯawrī رحمه الله (m. 161 H.)"
+  },
+  "Abū Nuʿaym al-Iṣfahānī, Ḥilyat al-Awliyāʾ wa-Ṭabaqāt al-Aṣfiyāʾ, Bd. 7, S. 10, Kapitel über Sufyān aṯ-Ṯawrī": {
+   "ar": "أبو نعيم الأصفهاني، حلية الأولياء وطبقات الأصفياء، المجلد 7، ص 10، باب في سفيان الثوري",
+   "en": "Abū Nuʿaym al-Iṣfahānī, Ḥilyat al-Awliyāʾ wa-Ṭabaqāt al-Aṣfiyāʾ, vol. 7, p. 10, chapter on Sufyān aṯ-Ṯawrī",
+   "tr": "Abū Nuʿaym al-Iṣfahānī, Ḥilyat al-Awliyāʾ wa-Ṭabaqāt al-Aṣfiyāʾ, cilt 7, s. 10, Sufyān aṯ-Ṯawrī bölümü",
+   "ku": "Abū Nuʿaym al-Iṣfahānī, Ḥilyat al-Awliyāʾ wa-Ṭabaqāt al-Aṣfiyāʾ, cild 7, rûpel 10, beşa li ser Sufyān aṯ-Ṯawrī",
+   "ckb": "ئەبوو نوعەیمی ئەسفەهانی، حلية الأولياء وطبقات الأصفياء، بەرگی 7، لاپەڕە 10، بەشی سفیان الثوری",
+   "bs": "Abū Nuʿaym al-Iṣfahānī, Ḥilyat al-Awliyāʾ wa-Ṭabaqāt al-Aṣfiyāʾ, sv. 7, str. 10, poglavlje o Sufyānu aṯ-Ṯawrīju",
+   "fr": "Abū Nuʿaym al-Iṣfahānī, Ḥilyat al-Awliyāʾ wa-Ṭabaqāt al-Aṣfiyāʾ, vol. 7, p. 10, chapitre sur Sufyān aṯ-Ṯawrī",
+   "es": "Abū Nuʿaym al-Iṣfahānī, Ḥilyat al-Awliyāʾ wa-Ṭabaqāt al-Aṣfiyāʾ, vol. 7, p. 10, capítulo sobre Sufyān aṯ-Ṯawrī"
+  },
+  "Āṯār-Bericht mit überlieferter Kette über Ḫalaf ibn Tamīm. Keine abschließende unabhängige Einstufung dieser konkreten Kette als ṣaḥīḥ nachgewiesen. Kein prophetischer Ḥadīṯ.": {
+   "ar": "خبر أثري بسلسلة مروية عن خلف بن تميم. لم يثبت حكم ختامي مستقل على هذه السلسلة بعينها بأنها صحيحة. وليس حديثًا نبويًا.",
+   "en": "An āthār report with a transmitted chain through Ḫalaf ibn Tamīm. No final independent grading of this specific chain as ṣaḥīḥ has been established. It is not a prophetic ḥadīth.",
+   "tr": "Ḫalaf ibn Tamīm yoluyla nakledilen zincirle bir eser haberi. Bu belirli zincirin sahih diye nihai ve bağımsız derecelendirmesi ortaya konmamıştır. Peygamberî bir hadis değildir.",
+   "ku": "Raporek eser e bi zincîreke ragihandî bi rêya Ḫalaf ibn Tamīm. Nirxandineke dawî û serbixwe ya vê zincîra diyarkirî wek sehîh nehatiye isbatkirin. Ne hedîseke pêxemberî ye.",
+   "ckb": "هەواڵێکی ئاسارە بە زنجیرەیەکی گێڕدراو لە ڕێگەی خەلەف کوڕی تەمیم. هەڵسەنگاندنی کۆتایی و سەربەخۆ بۆ ئەم زنجیرە دیاریکراوە وەک سەحیح نەسەلمێنراوە. حەدیسێکی پێغەمبەرانە نییە.",
+   "bs": "Predaja asara s prenesenim lancem preko Ḫalafa ibn Tamīma. Nije utvrđena konačna nezavisna ocjena baš ovog lanca kao sahih. Nije vjerovjesnički hadis.",
+   "fr": "Récit d’athar avec une chaîne transmise par Ḫalaf ibn Tamīm. Aucune classification finale et indépendante de cette chaîne précise comme ṣaḥīḥ n’est établie. Ce n’est pas un hadith prophétique.",
+   "es": "Relato de atar con una cadena transmitida por Ḫalaf ibn Tamīm. No se ha establecido una clasificación final e independiente de esta cadena concreta como ṣaḥīḥ. No es un hadiz profético."
+  },
+  "Arabischer Originalwortlaut und Originalquelle": {
+   "ar": "اللفظ العربي الأصلي والمصدر الأصلي",
+   "en": "Arabic original wording and the original source",
+   "tr": "Arapça özgün lafız ve özgün kaynak",
+   "ku": "Gotina erebî ya resen û çavkaniya resen",
+   "ckb": "دەقی عەرەبیی ڕەسەن و سەرچاوەی ڕەسەن",
+   "bs": "Arapski izvorni tekst i izvorni izvor",
+   "fr": "Texte arabe original et source originale",
+   "es": "Texto árabe original y fuente original"
+  },
+  "Der Bericht nennt eine Frage von Iyās ibn ʿAmr ibn Yazīd ibn ʿAqqāl und die Antwort Sufyāns. Überlieferung bei Abū Nuʿaym: Sulaymān ibn Aḥmad → Aḥmad ibn Muḥammad ibn Ṣadaqah → ʿAlī ibn Muḥammad ibn Abī al-Maḍāʾ → Ḫalaf ibn Tamīm. Die Gesamtkette wurde für diesen Beitrag nicht abschließend bewertet.": {
+   "ar": "يذكر الخبر سؤال إياس بن عمرو بن يزيد بن عقال وجواب سفيان. والرواية عند أبي نعيم: سليمان بن أحمد ← أحمد بن محمد بن صدقة ← علي بن محمد بن أبي المضاء ← خلف بن تميم. ولم تُقيَّم السلسلة بكاملها تقييمًا ختاميًا لهذا الموضوع.",
+   "en": "The report names a question from Iyās ibn ʿAmr ibn Yazīd ibn ʿAqqāl and Sufyān’s answer. The transmission in Abū Nuʿaym: Sulaymān ibn Aḥmad → Aḥmad ibn Muḥammad ibn Ṣadaqah → ʿAlī ibn Muḥammad ibn Abī al-Maḍāʾ → Ḫalaf ibn Tamīm. The chain as a whole was not finally assessed for this contribution.",
+   "tr": "Haber, Iyās ibn ʿAmr ibn Yazīd ibn ʿAqqāl’ın sorusunu ve Sufyān’ın cevabını anar. Abū Nuʿaym’daki rivayet: Sulaymān ibn Aḥmad → Aḥmad ibn Muḥammad ibn Ṣadaqah → ʿAlī ibn Muḥammad ibn Abī al-Maḍāʾ → Ḫalaf ibn Tamīm. Zincirin bütünü bu katkı için nihai olarak değerlendirilmemiştir.",
+   "ku": "Rapor pirsa Iyās ibn ʿAmr ibn Yazīd ibn ʿAqqāl û bersiva Sufyān dide nasîn. Ragihîn li ba Abū Nuʿaym: Sulaymān ibn Aḥmad → Aḥmad ibn Muḥammad ibn Ṣadaqah → ʿAlī ibn Muḥammad ibn Abī al-Maḍāʾ → Ḫalaf ibn Tamīm. Zincîra giştî ji bo vê beşdariyê dawî nehatiye nirxandin.",
+   "ckb": "هەواڵەکە پرسیاری ئیاس کوڕی عەمرو کوڕی یەزید کوڕی عەققال و وەڵامی سفیان دەهێنێت. گێڕانەوە لای ئەبوو نوعەیم: سولەیمان کوڕی ئەحمەد → ئەحمەد کوڕی محەممەد کوڕی سەدەقە → عەلی کوڕی محەممەد کوڕی ئەبی ئەلمەداʾ → خەلەف کوڕی تەمیم. زنجیرەکە بە گشتی بۆ ئەم بەشدارییە بە کۆتایی هەڵنەسەنگێنراوە.",
+   "bs": "Predaja navodi pitanje Iyāsa ibn ʿAmra ibn Yazīda ibn ʿAqqāla i Sufyānov odgovor. Predaja kod Abū Nuʿayma: Sulaymān ibn Aḥmad → Aḥmad ibn Muḥammad ibn Ṣadaqah → ʿAlī ibn Muḥammad ibn Abī al-Maḍāʾ → Ḫalaf ibn Tamīm. Lanac u cjelini za ovaj prilog nije konačno ocijenjen.",
+   "fr": "Le récit mentionne une question d’Iyās ibn ʿAmr ibn Yazīd ibn ʿAqqāl et la réponse de Sufyān. Transmission chez Abū Nuʿaym : Sulaymān ibn Aḥmad → Aḥmad ibn Muḥammad ibn Ṣadaqah → ʿAlī ibn Muḥammad ibn Abī al-Maḍāʾ → Ḫalaf ibn Tamīm. La chaîne dans son ensemble n’a pas été évaluée de façon finale pour cette contribution.",
+   "es": "El relato menciona una pregunta de Iyās ibn ʿAmr ibn Yazīd ibn ʿAqqāl y la respuesta de Sufyān. Transmisión en Abū Nuʿaym: Sulaymān ibn Aḥmad → Aḥmad ibn Muḥammad ibn Ṣadaqah → ʿAlī ibn Muḥammad ibn Abī al-Maḍāʾ → Ḫalaf ibn Tamīm. La cadena en su conjunto no fue valorada de forma definitiva para esta contribución."
+  },
+  "Islamweb · Ḥilyat al-Awliyāʾ, 7/10": {
+   "ar": "إسلام ويب · حلية الأولياء، 7/10",
+   "en": "Islamweb · Ḥilyat al-Awliyāʾ, 7/10",
+   "tr": "Islamweb · Ḥilyat al-Awliyāʾ, 7/10",
+   "ku": "Islamweb · Ḥilyat al-Awliyāʾ, 7/10",
+   "ckb": "ئیسلامویب · حلية الأولياء، 7/10",
+   "bs": "Islamweb · Ḥilyat al-Awliyāʾ, 7/10",
+   "fr": "Islamweb · Ḥilyat al-Awliyāʾ, 7/10",
+   "es": "Islamweb · Ḥilyat al-Awliyāʾ, 7/10"
+  },
+  "Originaltext bei Abū Nuʿaym mit markierter Textstelle": {
+   "ar": "النص الأصلي عند أبي نعيم مع موضع النص المحدد",
+   "en": "Original text in Abū Nuʿaym with the passage marked",
+   "tr": "Abū Nuʿaym’daki özgün metin, işaretli pasajla",
+   "ku": "Nivîsa resen li ba Abū Nuʿaym bi cihê nivîsê yê nîşankirî",
+   "ckb": "دەقی ڕەسەن لای ئەبوو نوعەیم لەگەڵ دیاریکردنی شوێنی دەق",
+   "bs": "Izvorni tekst kod Abū Nuʿayma s označenim mjestom",
+   "fr": "Texte original chez Abū Nuʿaym avec le passage marqué",
+   "es": "Texto original en Abū Nuʿaym con el pasaje marcado"
+  },
+  "Fiqh-Grundsatz: Zu Unrecht erlangtes Gut zurückgeben": {
+   "ar": "قاعدة فقهية: ردّ المال المأخوذ بغير حق",
+   "en": "A fiqh principle: returning property acquired wrongfully",
+   "tr": "Fıkıh kaidesi: haksız elde edilen malı geri vermek",
+   "ku": "Bingeha fiqhê: vegerandina malê ku bi neheqî hatiye bidestxistin",
+   "ckb": "بنەمای فیقه: گەڕاندنەوەی سامانێک کە بە ناحەق بەدەست هاتووە",
+   "bs": "Fikhsko pravilo: vraćanje imovine stečene nepravedno",
+   "fr": "Règle de fiqh : restituer le bien acquis injustement",
+   "es": "Principio de fiqh: devolver el bien obtenido injustamente"
+  },
+  "Unabhängig davon, ob der spezielle Āṯār-Isnād authentisch ist, belegen klassische Fiqh-Werke die Pflicht zur Rückgabe widerrechtlich genommenen Eigentums. Die folgende Quelle erläutert den Rechtsgrundsatz im Kapitel": {
+   "ar": "بغضّ النظر عما إذا كان إسناد هذا الأثر بعينه صحيحًا، تثبت كتب الفقه الكلاسيكية وجوب ردّ الملك المأخوذ بغير حق. والمصدر الآتي يشرح القاعدة في باب",
+   "en": "Regardless of whether this particular āthār isnād is authentic, classical fiqh works establish the duty to return property taken unlawfully. The following source explains the legal principle in the chapter",
+   "tr": "Bu özel eser isnadının sahih olup olmadığından bağımsız olarak, klasik fıkıh eserleri haksız alınan mülkün geri verilmesinin farz olduğunu ortaya koyar. Aşağıdaki kaynak kaideyi şu bölümde açıklar",
+   "ku": "Bêyî ku isnada taybet a vî eserî sehîh be an na, berhemên fiqhê yên klasîk ferzbûna vegerandina milkê ku bi neheqî hatiye girtin belge dikin. Çavkaniya jêrîn bingehê hiqûqî di beşê de rave dike",
+   "ckb": "بێ گوێدانە ئەوەی ئایا ئیسنادی تایبەتی ئەم ئاسارە سەحیحە یان نا، کتێبە فیقهییە کلاسیکییەکان واجبی گەڕاندنەوەی موڵکی بە ناحەق وەرگیراو دەسەلمێنن. سەرچاوەی خوارەوە بنەمای یاسایی لەم بەشەدا ڕوون دەکاتەوە",
+   "bs": "Neovisno o tome je li sened ovog posebnog asara sahih, klasična fikhska djela utvrđuju obavezu vraćanja imovine uzete protivno pravu. Sljedeći izvor objašnjava pravno načelo u poglavlju",
+   "fr": "Que l’isnâd particulier de cet athar soit authentique ou non, les ouvrages classiques de fiqh établissent l’obligation de restituer le bien pris illicitement. La source suivante explique le principe juridique dans le chapitre",
+   "es": "Con independencia de si el isnad concreto de este atar es auténtico, las obras clásicas de fiqh establecen la obligación de devolver la propiedad tomada ilícitamente. La fuente siguiente explica el principio jurídico en el capítulo"
+  },
+  ". Sie ist kein zweiter Überlieferungsweg für Sufyāns Ausspruch.": {
+   "ar": ". وهو ليس طريق رواية ثانٍ لقول سفيان.",
+   "en": ". It is not a second path of transmission for Sufyān’s statement.",
+   "tr": ". Sufyān’ın sözü için ikinci bir rivayet yolu değildir.",
+   "ku": ". Ew rêyeke duyem a ragihandinê ji bo gotina Sufyān nîne.",
+   "ckb": ". ئەمە ڕێگایەکی دووەمی گێڕانەوە نییە بۆ قسەی سفیان.",
+   "bs": ". To nije drugi put prenošenja za Sufyānov iskaz.",
+   "fr": ". Ce n’est pas une seconde voie de transmission pour la parole de Sufyān.",
+   "es": ". No es una segunda vía de transmisión de la declaración de Sufyān."
+  },
+  "Islamweb · al-Mubdiʿ fī Šarḥ al-Muqniʿ, Kitāb al-Ġaṣb": {
+   "ar": "إسلام ويب · المبدع في شرح المقنع، كتاب الغصب",
+   "en": "Islamweb · al-Mubdiʿ fī Šarḥ al-Muqniʿ, Kitāb al-Ġaṣb",
+   "tr": "Islamweb · al-Mubdiʿ fī Šarḥ al-Muqniʿ, Kitāb al-Ġaṣb",
+   "ku": "Islamweb · al-Mubdiʿ fī Šarḥ al-Muqniʿ, Kitāb al-Ġaṣb",
+   "ckb": "ئیسلامویب · المبدع في شرح المقنع، كتاب الغصب",
+   "bs": "Islamweb · al-Mubdiʿ fī Šarḥ al-Muqniʿ, Kitāb al-Ġaṣb",
+   "fr": "Islamweb · al-Mubdiʿ fī Šarḥ al-Muqniʿ, Kitāb al-Ġaṣb",
+   "es": "Islamweb · al-Mubdiʿ fī Šarḥ al-Muqniʿ, Kitāb al-Ġaṣb"
+  },
+  "Pflicht zur Rückgabe widerrechtlich erlangten Eigentums": {
+   "ar": "وجوب ردّ الملك المأخوذ بغير حق",
+   "en": "The duty to return property acquired unlawfully",
+   "tr": "Haksız elde edilen mülkü geri verme farzı",
+   "ku": "Ferza vegerandina milkê ku bi neheqî hatiye bidestxistin",
+   "ckb": "واجبی گەڕاندنەوەی موڵکی بە ناحەق بەدەستهاتوو",
+   "bs": "Obaveza vraćanja imovine stečene protivno pravu",
+   "fr": "L’obligation de restituer le bien acquis illicitement",
+   "es": "La obligación de devolver la propiedad obtenida ilícitamente"
+  },
+  "Einordnung und Quellenredlichkeit": {
+   "ar": "التصنيف وأمانة المصدر",
+   "en": "Placement and honesty toward the sources",
+   "tr": "Yerleştirme ve kaynak dürüstlüğü",
+   "ku": "Cihkirin û rastbûna bi çavkaniyan",
+   "ckb": "جێگیرکردن و ڕاستگۆیی لەگەڵ سەرچاوە",
+   "bs": "Smještanje i poštenje prema izvorima",
+   "fr": "Classement et loyauté envers les sources",
+   "es": "Clasificación y honradez con las fuentes"
+  },
+  "Die Aussage ist ein berichtetes Wort Sufyāns aṯ-Ṯawrī und nicht dem Gesandten Allahs ﷺ zuzuschreiben. Die sinngemäße deutsche Wiedergabe soll zeigen, dass ein Mensch Rechte anderer nicht durch einen rechnerischen Ausgleich freiwilliger Gottesdienste übergehen darf. Die Frage der Annahme bestimmter Taten bei Allah ist nicht aus einer ungesicherten Einzelüberlieferung allgemein zu entscheiden.": {
+   "ar": "هذا القول كلمة مروية عن سفيان الثوري، ولا يُنسب إلى رسول الله ﷺ. والمراد من النقل الألماني بالمعنى أن يبيّن أن الإنسان لا يجوز له أن يتجاوز حقوق الآخرين بمقاصة حسابية من عبادات تطوعية. ومسألة قبول أعمال معيّنة عند الله لا تُحسم حكمًا عامًا من رواية مفردة غير ثابتة.",
+   "en": "The statement is a reported saying of Sufyān aṯ-Ṯawrī and is not to be ascribed to the Messenger of Allah ﷺ. The German rendering according to the meaning is meant to show that a person may not set aside the rights of others by a numerical offset of voluntary acts of worship. Whether particular deeds are accepted with Allah is not to be decided in general from one unsecured single report.",
+   "tr": "Bu söz, Sufyān aṯ-Ṯawrī’den nakledilen bir sözdür ve Allah’ın Elçisi ﷺ’e nispet edilmez. Anlamca Almanca aktarım, insanın başkalarının haklarını nâfile ibadetlerin sayısal bir dengelemesiyle geçiştiremeyeceğini göstermek içindir. Belirli amellerin Allah katında kabulü, güvenliği kurulmamış tek bir rivayetten genel olarak hükme bağlanmaz.",
+   "ku": "Ev gotin peyveke ragihandî ya Sufyān aṯ-Ṯawrī ye û nabe ku li Peyxemberê Allah ﷺ were nisbetkirin. Veguhastina almanî ya li gorî wateyê dixwaze nîşan bide ku mirov nikare mafên kesên din bi hevsengiyeke jimartî ya ibadetên dilxwazî derbas bike. Pirsa qebûlbûna kirinên diyarkirî li cem Allah ji yek ragihandineke neewle bi giştî nayê biryardan.",
+   "ckb": "ئەم قسەیە وتەیەکی گێڕدراوی سفیان الثورییە و نابێت بۆ پێغەمبەری خوا ﷺ بگەڕێتەوە. گواستنەوەی ئەڵمانی بە واتە دەیەوێت نیشان بدات مرۆڤ نابێت مافی کەسانی تر بە قەرەبوویەکی ژمارەیی لە عیبادەتی خۆبەخشانە تێپەڕێنێت. پرسی وەرگرتنی کردەوەی دیاریکراو لای خوا نابێت لە یەک گێڕانەوەی نەسەلمێنراو بە گشتی بڕیاری لێ بدرێت.",
+   "bs": "Ovaj iskaz je prenesena riječ Sufyāna aṯ-Ṯawrīja i ne pripisuje se Allahovom Poslaniku ﷺ. Njemački prikaz po smislu treba pokazati da čovjek ne smije tuđa prava zaobići računskim poravnanjem dobrovoljnih ibadeta. Pitanje primanja određenih djela kod Allaha ne odlučuje se općenito iz jedne neosigurane pojedinačne predaje.",
+   "fr": "Cette parole est un propos rapporté de Sufyān aṯ-Ṯawrī et ne doit pas être attribuée au Messager d’Allah ﷺ. La restitution allemande selon le sens vise à montrer qu’une personne ne peut pas passer outre les droits d’autrui par une compensation chiffrée d’actes d’adoration surérogatoires. La question de l’acceptation de certains actes auprès d’Allah ne se tranche pas de façon générale à partir d’une transmission isolée non assurée.",
+   "es": "La declaración es una palabra transmitida de Sufyān aṯ-Ṯawrī y no debe atribuirse al Mensajero de Allah ﷺ. La versión alemana según el sentido quiere mostrar que una persona no puede pasar por alto los derechos de otros mediante una compensación numérica de actos voluntarios de adoración. La cuestión de la aceptación de determinados actos ante Allah no se decide en general a partir de una transmisión aislada no asegurada."
+  },
+  "DAR AL TAWḤĪD · by Serhat Abu Malik": {
+   "ar": "DAR AL TAWḤĪD · بقلم Serhat Abu Malik",
+   "en": "DAR AL TAWḤĪD · by Serhat Abu Malik",
+   "tr": "DAR AL TAWḤĪD · yazan Serhat Abu Malik",
+   "ku": "DAR AL TAWḤĪD · ji aliyê Serhat Abu Malik ve",
+   "ckb": "DAR AL TAWḤĪD · لەلایەن Serhat Abu Malik",
+   "bs": "DAR AL TAWḤĪD · od Serhat Abu Malik",
+   "fr": "DAR AL TAWḤĪD · par Serhat Abu Malik",
+   "es": "DAR AL TAWḤĪD · por Serhat Abu Malik"
   }
  }
 }

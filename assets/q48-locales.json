@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,358 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Die Seele zur Rechenschaft ziehen – Q48 | DĀR AL TAWḤĪD": {
+   "ar": "محاسبة النفس – Q48 | DĀR AL TAWḤĪD",
+   "en": "Calling the soul to account – Q48 | DĀR AL TAWḤĪD",
+   "tr": "Nefsi hesaba çekmek – Q48 | DĀR AL TAWḤĪD",
+   "ku": "Nefsê hesibandin – Q48 | DĀR AL TAWḤĪD",
+   "ckb": "لێپرسینەوەی نەفس – Q48 | DĀR AL TAWḤĪD",
+   "bs": "Pozivati dušu na račun – Q48 | DĀR AL TAWḤĪD",
+   "fr": "Demander des comptes à l’âme – Q48 | DĀR AL TAWḤĪD",
+   "es": "Pedir cuentas al alma – Q48 | DĀR AL TAWḤĪD"
+  },
+  "Wissen aus Qurʾān, Sunnah und den frühen Generationen": {
+   "ar": "علم من القرآن والسنة والأجيال الأولى",
+   "en": "Knowledge from the Qurʾān, the Sunnah, and the early generations",
+   "tr": "Qurʾān, Sunnah ve ilk nesillerden ilim",
+   "ku": "Zanîn ji Qurʾān, Sunnah û nifşên pêşîn",
+   "ckb": "زانست لە قورئان، سوننەت و نەوەکانی سەرەتا",
+   "bs": "Znanje iz Qurʾāna, Sunnaha i ranih generacija",
+   "fr": "Savoir tiré du Qurʾān, de la Sunnah et des premières générations",
+   "es": "Conocimiento del Qurʾān, de la Sunnah y de las primeras generaciones"
+  },
+  "Tazkiyah · Muḥāsabah · al-Ḥasan al-Baṣrī": {
+   "ar": "تزكية · محاسبة · الحسن البصري",
+   "en": "Tazkiyah · Muḥāsabah · al-Ḥasan al-Baṣrī",
+   "tr": "Tezkiye · Muhasebe · al-Ḥasan al-Baṣrī",
+   "ku": "Tezkiye · Muhasebe · al-Ḥasan al-Baṣrī",
+   "ckb": "تەزکیە · موحاسەبە · حەسەنی بەسری",
+   "bs": "Tezkija · Muhaseba · al-Ḥasan al-Baṣrī",
+   "fr": "Tazkiya · Muḥāsabah · al-Ḥasan al-Baṣrī",
+   "es": "Tazkiya · Muḥāsabah · al-Ḥasan al-Baṣrī"
+  },
+  "Die Seele zur Rechenschaft ziehen": {
+   "ar": "محاسبة النفس",
+   "en": "Calling the soul to account",
+   "tr": "Nefsi hesaba çekmek",
+   "ku": "Nefsê hesibandin",
+   "ckb": "لێپرسینەوەی نەفس",
+   "bs": "Pozivati dušu na račun",
+   "fr": "Demander des comptes à l’âme",
+   "es": "Pedir cuentas al alma"
+  },
+  "Selbstprüfung im Diesseits": {
+   "ar": "محاسبة النفس في الدنيا",
+   "en": "Self-examination in this world",
+   "tr": "Dünyada nefis muhasebesi",
+   "ku": "Pirsîna nefsê di vê dinyayê de",
+   "ckb": "پشکنینی خود لەم دونیایەدا",
+   "bs": "Samoprovjera na ovom svijetu",
+   "fr": "L’examen de soi dans ce monde",
+   "es": "El examen de sí en este mundo"
+  },
+  "– die Seele prüfen, ehe der Tag der Abrechnung kommt.": {
+   "ar": "– فحص النفس قبل أن يأتي يوم الحساب.",
+   "en": "– examine the soul before the Day of Reckoning comes.",
+   "tr": "– hesap günü gelmeden nefsi yoklamak.",
+   "ku": "– nefsê bipirse berî ku roja hesabê were.",
+   "ckb": "– نەفس بپشکنە پێش ئەوەی ڕۆژی لێپرسینەوە بێت.",
+   "bs": "– ispitati dušu prije nego dođe Dan obračuna.",
+   "fr": "– examiner l’âme avant que vienne le Jour du compte.",
+   "es": "– examinar el alma antes de que llegue el Día del ajuste de cuentas."
+  },
+  "al-Ḥasan al-Baṣrī رحمه الله, Tābiʿī": {
+   "ar": "الحسن البصري رحمه الله، تابعي",
+   "en": "al-Ḥasan al-Baṣrī رحمه الله, a Tābiʿī",
+   "tr": "al-Ḥasan al-Baṣrī رحمه الله, tâbiî",
+   "ku": "al-Ḥasan al-Baṣrī رحمه الله, tabiî",
+   "ckb": "حەسەنی بەسری رحمه الله، تابعی",
+   "bs": "al-Ḥasan al-Baṣrī رحمه الله, tabi'in",
+   "fr": "al-Ḥasan al-Baṣrī رحمه الله, un tâbiʿī",
+   "es": "al-Ḥasan al-Baṣrī رحمه الله, un tabiʿí"
+  },
+  ", Nr. 307, Bd. 1, S. 104; Ibn Abī Shaybah,": {
+   "ar": "، رقم 307، المجلد 1، ص 104؛ ابن أبي شيبة،",
+   "en": ", no. 307, vol. 1, p. 104; Ibn Abī Shaybah,",
+   "tr": ", no. 307, cilt 1, s. 104; Ibn Abī Shaybah,",
+   "ku": ", hejmar 307, cild 1, rûpel 104; Ibn Abī Shaybah,",
+   "ckb": "، ژمارە 307، بەرگی 1، لاپەڕە 104؛ ئیبن ئەبی شەیبە،",
+   "bs": ", br. 307, sv. 1, str. 104; Ibn Abī Shaybah,",
+   "fr": ", n° 307, vol. 1, p. 104 ; Ibn Abī Shaybah,",
+   "es": ", n.º 307, vol. 1, p. 104; Ibn Abī Shaybah,"
+  },
+  ", Bd. 8, S. 257, Bericht Nr. 23": {
+   "ar": "، المجلد 8، ص 257، الخبر رقم 23",
+   "en": ", vol. 8, p. 257, report no. 23",
+   "tr": ", cilt 8, s. 257, haber no. 23",
+   "ku": ", cild 8, rûpel 257, rapor hejmar 23",
+   "ckb": "، بەرگی 8، لاپەڕە 257، هەواڵی ژمارە 23",
+   "bs": ", sv. 8, str. 257, predaja br. 23",
+   "fr": ", vol. 8, p. 257, récit n° 23",
+   "es": ", vol. 8, p. 257, relato n.º 23"
+  },
+  "Āṯār – Aussage eines Tābiʿī,": {
+   "ar": "أثر – قول تابعي،",
+   "en": "An athar – a statement of a Tābiʿī,",
+   "tr": "Bir eser – bir tâbiînin sözü,",
+   "ku": "Eser – gotina tabiîyekî,",
+   "ckb": "ئاسار – قسەی تابعییەک،",
+   "bs": "Asar – iskaz jednog tabi'ina,",
+   "fr": "Un athar – parole d’un tâbiʿī,",
+   "es": "Un atar: declaración de un tabiʿí,"
+  },
+  ". Die Überlieferungskette wurde nicht unabhängig abschließend bewertet.": {
+   "ar": ". ولم تُقيَّم سلسلة الرواية تقييمًا مستقلًا ختاميًا.",
+   "en": ". The chain of transmission was not independently and finally assessed.",
+   "tr": ". Rivayet zinciri bağımsız ve nihai olarak değerlendirilmemiştir.",
+   "ku": ". Zincîra ragihandinê bi serbixwe û bi dawî nehatiye nirxandin.",
+   "ckb": ". زنجیرەی گێڕانەوە بە سەربەخۆیی و بە کۆتایی هەڵنەسەنگێنراوە.",
+   "bs": ". Lanac prenošenja nije nezavisno i konačno ocijenjen.",
+   "fr": ". La chaîne de transmission n’a pas été évaluée de façon indépendante et finale.",
+   "es": ". La cadena de transmisión no fue valorada de forma independiente y definitiva."
+  },
+  "Vollständige deutsche Aussage aus dem Beitrag": {
+   "ar": "القول الألماني الكامل من المساهمة",
+   "en": "The complete German statement from the contribution",
+   "tr": "Katkıdaki tam Almanca söz",
+   "ku": "Gotina almanî ya temam ji beşdariyê",
+   "ckb": "قسە ئەڵمانییە تەواوەکە لە بەشدارییەکە",
+   "bs": "Potpuni njemački iskaz iz priloga",
+   "fr": "La parole allemande complète tirée de la contribution",
+   "es": "La declaración alemana completa del aporte"
+  },
+  "🖋️ Al-Ḥasan al-Baṣrī رحمه الله sagte sinngemäß:": {
+   "ar": "🖋️ قال الحسن البصري رحمه الله بالمعنى:",
+   "en": "🖋️ Al-Ḥasan al-Baṣrī رحمه الله said, according to the meaning:",
+   "tr": "🖋️ Al-Ḥasan al-Baṣrī رحمه الله anlamca şöyle dedi:",
+   "ku": "🖋️ Al-Ḥasan al-Baṣrī رحمه الله li gorî wateyê got:",
+   "ckb": "🖋️ حەسەنی بەسری رحمه الله بە واتە گوتی:",
+   "bs": "🖋️ Al-Ḥasan al-Baṣrī رحمه الله je, po smislu, rekao:",
+   "fr": "🖋️ Al-Ḥasan al-Baṣrī رحمه الله a dit, selon le sens :",
+   "es": "🖋️ Al-Ḥasan al-Baṣrī رحمه الله dijo, según el sentido:"
+  },
+  "zieht sich um Allāhs willen zur Rechenschaft.": {
+   "ar": "يحاسب نفسه من أجل الله.",
+   "en": "calls himself to account for Allah’s sake.",
+   "tr": "Allah için kendini hesaba çeker.",
+   "ku": "ji bo Allah xwe dihese.",
+   "ckb": "بۆ خوای خۆی لێپرسینەوە دەکات.",
+   "bs": "poziva sebe na račun radi Allaha.",
+   "fr": "se demande des comptes pour Allah.",
+   "es": "se pide cuentas a sí mismo por Allah."
+  },
+  "Die Abrechnung am Tag der Auferstehung wird für diejenigen": {
+   "ar": "سيكون الحساب يوم القيامة لمن",
+   "en": "The reckoning on the Day of Resurrection will be for those",
+   "tr": "Kıyamet günü hesap şunlar için olacaktır",
+   "ku": "Hesab di roja vejînê de dê ji bo wan be",
+   "ckb": "لێپرسینەوە لە ڕۆژی زیندووبوونەوە بۆ ئەوانە دەبێت",
+   "bs": "Obračun na Danu proživljenja bit će za one",
+   "fr": "Le compte au Jour de la résurrection sera pour ceux",
+   "es": "El ajuste de cuentas el Día de la Resurrección será para quienes"
+  },
+  "sich bereits im Diesseits selbst zur Rechenschaft gezogen haben.": {
+   "ar": "الذين حاسبوا أنفسهم في الدنيا.",
+   "en": "who have already called themselves to account in this world.",
+   "tr": "ki kendilerini dünyada hesaba çekmiş olanlar.",
+   "ku": "yên ku di vê dinyayê de xwe hesibandine.",
+   "ckb": "کە پێشتر لەم دونیایەدا خۆیان لێپرسینەوە کردووە.",
+   "bs": "koji su već na ovom svijetu sebe pozvali na račun.",
+   "fr": "qui se sont déjà demandé des comptes dans ce monde.",
+   "es": "que ya se han pedido cuentas a sí mismos en este mundo."
+  },
+  "Schwer hingegen wird die Abrechnung": {
+   "ar": "أما الحساب فسيكون شديدًا",
+   "en": "Hard, by contrast, the reckoning will be",
+   "tr": "Buna karşılık hesap ağır olacaktır",
+   "ku": "Lê hesab dê giran be",
+   "ckb": "بە پێچەوانەوە لێپرسینەوە قورس دەبێت",
+   "bs": "Teško će, naprotiv, obračun biti",
+   "fr": "Dur, en revanche, sera le compte",
+   "es": "Duro, en cambio, será el ajuste de cuentas"
+  },
+  "für diejenigen, die ihre Angelegenheiten": {
+   "ar": "لمن شؤونهم",
+   "en": "for those who their affairs",
+   "tr": "onların işlerini",
+   "ku": "ji bo wan ên ku karên wan",
+   "ckb": "بۆ ئەوانەی کاروبارەکانیان",
+   "bs": "za one koji svoje poslove",
+   "fr": "pour ceux qui leurs affaires",
+   "es": "para quienes sus asuntos"
+  },
+  "Diese deutsche Aussage ist eine": {
+   "ar": "هذا القول الألماني هو",
+   "en": "This German statement is a",
+   "tr": "Bu Almanca söz bir",
+   "ku": "Ev gotina almanî yek e",
+   "ckb": "ئەم قسە ئەڵمانییە",
+   "bs": "Ovaj njemački iskaz je",
+   "fr": "Cette parole allemande est une",
+   "es": "Esta declaración alemana es una"
+  },
+  "des entsprechenden Abschnitts des Athar, kein wortwörtliches deutsches Originalzitat.": {
+   "ar": "للقسم المقابل من الأثر، وليس اقتباسًا ألمانيًا أصليًا حرفيًا.",
+   "en": "of the corresponding section of the athar, not a verbatim German original quotation.",
+   "tr": "eserin ilgili bölümünün, harfî bir özgün Almanca alıntı değil.",
+   "ku": "ya beşa têkildar a eser, ne vegotineke almanî ya resen a peyv bi peyv e.",
+   "ckb": "ی بەشی هاوتا لە ئاسارەکە، نەک گێڕانەوەیەکی ئەڵمانیی ڕەسەنی وشەبەوشە.",
+   "bs": "odgovarajućeg odjeljka asara, ne doslovan njemački izvorni citat.",
+   "fr": "de la section correspondante de l’athar, non une citation allemande originale et littérale.",
+   "es": "de la sección correspondiente del atar, no una cita alemana original y literal."
+  },
+  "Arabischer Originalwortlaut": {
+   "ar": "اللفظ العربي الأصلي",
+   "en": "The Arabic original wording",
+   "tr": "Arapça özgün lafız",
+   "ku": "Gotina erebî ya resen",
+   "ckb": "دەقی عەرەبیی ڕەسەن",
+   "bs": "Arapski izvorni tekst",
+   "fr": "Le texte arabe original",
+   "es": "El texto árabe original"
+  },
+  "Beide Bücher geben denselben Überlieferungsweg wieder. Im längeren Wortlaut erläutert al-Ḥasan außerdem, wie der Gläubige seine Begierden prüft, Fehltritte bereut und sich durch den Qurʾān ermahnen lässt.": {
+   "ar": "كلا الكتابين يذكران طريق الرواية نفسه. وفي اللفظ الأطول يشرح الحسن أيضًا كيف يفحص المؤمن شهواته، ويتوب من الزلّات، ويتعظ بالقرآن.",
+   "en": "Both books give the same path of transmission. In the longer wording al-Ḥasan also explains how the believer examines his desires, repents of slips, and lets himself be admonished by the Qurʾān.",
+   "tr": "Her iki kitap aynı rivayet yolunu verir. Daha uzun lafızda al-Ḥasan ayrıca müminin arzularını nasıl yokladığını, sürçmelerden tövbe ettiğini ve Qurʾān ile öğüt aldığını açıklar.",
+   "ku": "Her du pirtûk heman rêya ragihandinê didin. Di gotina dirêjtir de al-Ḥasan herwiha rave dike ka bawermend çawa xwestekên xwe dipirse, ji xeletiyan tobe dike û bi Qurʾān şîretê werdigire.",
+   "ckb": "هەردوو کتێبەکە هەمان ڕێگای گێڕانەوە دەدەن. لە دەقە درێژترەکەدا حەسەن هەروەها ڕوون دەکاتەوە چۆن باوەڕدار خواستەکانی دەپشکنێت، لە هەڵەکان تۆبە دەکات، و بە قورئان ئامۆژگاری وەردەگرێت.",
+   "bs": "Obje knjige navode isti put prenošenja. U dužem tekstu al-Ḥasan još objašnjava kako vjernik ispituje svoje strasti, kaje se od posrtaja i prima opomenu Qurʾānom.",
+   "fr": "Les deux livres donnent la même voie de transmission. Dans le libellé plus long, al-Ḥasan explique aussi comment le croyant examine ses désirs, se repent de ses écarts et se laisse exhorter par le Qurʾān.",
+   "es": "Ambos libros dan la misma vía de transmisión. En el texto más largo al-Ḥasan explica además cómo el creyente examina sus deseos, se arrepiente de los tropiezos y se deja exhortar por el Qurʾān."
+  },
+  "Ibn al-Mubārak → Maʿmar → Yaḥyā ibn al-Muḫtār → al-Ḥasan al-Baṣrī. Die namentliche Wiedergabe der Kette ist noch keine abschließende Einstufung ihrer Authentizität.": {
+   "ar": "ابن المبارك ← معمر ← يحيى بن المختار ← الحسن البصري. وذكر السلسلة بأسمائها ليس بعدُ درجة ختامية لصحّتها.",
+   "en": "Ibn al-Mubārak → Maʿmar → Yaḥyā ibn al-Muḫtār → al-Ḥasan al-Baṣrī. Naming the chain is not yet a final grading of its authenticity.",
+   "tr": "Ibn al-Mubārak → Maʿmar → Yaḥyā ibn al-Muḫtār → al-Ḥasan al-Baṣrī. Zinciri adlarıyla anmak henüz sıhhatinin nihai derecelendirmesi değildir.",
+   "ku": "Ibn al-Mubārak → Maʿmar → Yaḥyā ibn al-Muḫtār → al-Ḥasan al-Baṣrī. Navkirina zincîrê hê ne nirxandineke dawî ya rastbûna wê ye.",
+   "ckb": "ئیبن موبارەک → مەعمەر → یەحیای کوڕی موختار → حەسەنی بەسری. ناوهێنانی زنجیرە هێشتا هەڵسەنگاندنی کۆتایی بۆ ڕاستییەکەی نییە.",
+   "bs": "Ibn al-Mubārak → Maʿmar → Yaḥyā ibn al-Muḫtār → al-Ḥasan al-Baṣrī. Navođenje lanca po imenima još nije konačna ocjena njegove autentičnosti.",
+   "fr": "Ibn al-Mubārak → Maʿmar → Yaḥyā ibn al-Muḫtār → al-Ḥasan al-Baṣrī. Nommer la chaîne n’est pas encore une classification finale de son authenticité.",
+   "es": "Ibn al-Mubārak → Maʿmar → Yaḥyā ibn al-Muḫtār → al-Ḥasan al-Baṣrī. Nombrar la cadena aún no es una clasificación final de su autenticidad."
+  },
+  "Islamweb führt die Überlieferung bei Ibn Abī Shaybah als „5047 (23)“: 5047 bezeichnet die fortlaufende elektronische Kennung, 23 den Bericht im Abschnitt. In der angezeigten Ausgabe lautet die Fundstelle": {
+   "ar": "يورد إسلام ويب الرواية عند ابن أبي شيبة بوصف «5047 (23)»: 5047 هو المعرّف الإلكتروني المتسلسل، و23 الخبر في القسم. وفي الطبعة المعروضة موضع الورود هو",
+   "en": "Islamweb lists the transmission in Ibn Abī Shaybah as “5047 (23)”: 5047 is the running electronic identifier, and 23 is the report in the section. In the displayed edition the reference reads",
+   "tr": "Islamweb, Ibn Abī Shaybah’daki rivayeti “5047 (23)” diye verir: 5047 ardışık elektronik kimliktir, 23 bölümdeki haberdir. Gösterilen baskıda yer şöyledir",
+   "ku": "Islamweb ragihandinê li ba Ibn Abī Shaybah wek “5047 (23)” tîne: 5047 nasnameya elektronîk a li pey hev e, 23 rapor di beşê de ye. Di çapa nîşandayî de cihê çavkaniyê ev e",
+   "ckb": "ئیسلامویب گێڕانەوەکە لای ئیبن ئەبی شەیبە وەک «5047 (23)» دەهێنێت: 5047 ناسنامەی ئەلیکترۆنیی بەدوایەکە، 23 هەواڵەکەی ناو بەشەکەیە. لە چاپە پیشاندراوەکەدا شوێنی سەرچاوە ئەمەیە",
+   "bs": "Islamweb navodi predaju kod Ibn Abī Shaybaha kao “5047 (23)”: 5047 je tekuća elektronska oznaka, a 23 je predaja u odjeljku. U prikazanom izdanju mjesto glasi",
+   "fr": "Islamweb présente la transmission chez Ibn Abī Shaybah comme « 5047 (23) » : 5047 désigne l’identifiant électronique continu, 23 le récit dans la section. Dans l’édition affichée, la référence est",
+   "es": "Islamweb presenta la transmisión en Ibn Abī Shaybah como “5047 (23)”: 5047 es el identificador electrónico consecutivo, y 23 el relato de la sección. En la edición mostrada el lugar dice"
+  },
+  "Originalnachweise mit Textmarkierung": {
+   "ar": "شواهد أصلية مع تحديد النص",
+   "en": "Original references with a text marker",
+   "tr": "Metin işaretli özgün deliller",
+   "ku": "Belgeyên resen bi nîşankirina nivîsê",
+   "ckb": "بەڵگە ڕەسەنەکان لەگەڵ دیاریکردنی دەق",
+   "bs": "Izvorni dokazi s označenim tekstom",
+   "fr": "Références originales avec marquage du texte",
+   "es": "Referencias originales con marcado del texto"
+  },
+  "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq, Nr. 307, Bd. 1, S. 104": {
+   "ar": "ابن المبارك – الزهد والرقائق، رقم 307، المجلد 1، ص 104",
+   "en": "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq, no. 307, vol. 1, p. 104",
+   "tr": "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq, no. 307, cilt 1, s. 104",
+   "ku": "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq, hejmar 307, cild 1, rûpel 104",
+   "ckb": "ئیبن موبارەک – الزهد والرقائق، ژمارە 307، بەرگی 1، لاپەڕە 104",
+   "bs": "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq, br. 307, sv. 1, str. 104",
+   "fr": "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq, n° 307, vol. 1, p. 104",
+   "es": "Ibn al-Mubārak – az-Zuhd wa-r-Raqāʾiq, n.º 307, vol. 1, p. 104"
+  },
+  "Originalüberlieferung und markierter arabischer Beginn": {
+   "ar": "الرواية الأصلية والبداية العربية المحددة",
+   "en": "The original transmission and the marked Arabic beginning",
+   "tr": "Özgün rivayet ve işaretli Arapça başlangıç",
+   "ku": "Ragihandina resen û destpêka erebî ya nîşankirî",
+   "ckb": "گێڕانەوەی ڕەسەن و سەرەتای عەرەبیی دیاریکراو",
+   "bs": "Izvorna predaja i označeni arapski početak",
+   "fr": "La transmission originale et le début arabe marqué",
+   "es": "La transmisión original y el comienzo árabe marcado"
+  },
+  "Ibn Abī Shaybah – al-Muṣannaf, Bd. 8, S. 257, Bericht Nr. 23": {
+   "ar": "ابن أبي شيبة – المصنف، المجلد 8، ص 257، الخبر رقم 23",
+   "en": "Ibn Abī Shaybah – al-Muṣannaf, vol. 8, p. 257, report no. 23",
+   "tr": "Ibn Abī Shaybah – al-Muṣannaf, cilt 8, s. 257, haber no. 23",
+   "ku": "Ibn Abī Shaybah – al-Muṣannaf, cild 8, rûpel 257, rapor hejmar 23",
+   "ckb": "ئیبن ئەبی شەیبە – المصنف، بەرگی 8، لاپەڕە 257، هەواڵی ژمارە 23",
+   "bs": "Ibn Abī Shaybah – al-Muṣannaf, sv. 8, str. 257, predaja br. 23",
+   "fr": "Ibn Abī Shaybah – al-Muṣannaf, vol. 8, p. 257, récit n° 23",
+   "es": "Ibn Abī Shaybah – al-Muṣannaf, vol. 8, p. 257, relato n.º 23"
+  },
+  "Gleicher Überlieferungsweg; markierte Passage zur Abrechnung": {
+   "ar": "طريق الرواية نفسه؛ المقطع المحدد عن الحساب",
+   "en": "The same path of transmission; the marked passage on the reckoning",
+   "tr": "Aynı rivayet yolu; hesaba dair işaretli pasaj",
+   "ku": "Heman rêya ragihandinê; perçeya nîşankirî li ser hesabê",
+   "ckb": "هەمان ڕێگای گێڕانەوە؛ پارچەی دیاریکراو دەربارەی لێپرسینەوە",
+   "bs": "Isti put prenošenja; označeni odlomak o obračunu",
+   "fr": "La même voie de transmission ; le passage marqué sur le compte",
+   "es": "La misma vía de transmisión; el pasaje marcado sobre el ajuste de cuentas"
+  },
+  "Die Erziehung der eigenen Seele": {
+   "ar": "تربية النفس",
+   "en": "The upbringing of one’s own soul",
+   "tr": "Kendi nefsinin terbiyesi",
+   "ku": "Perwerdeya nefsa xwe",
+   "ckb": "پەروەردەی نەفسی خۆ",
+   "bs": "Odgoj vlastite duše",
+   "fr": "L’éducation de sa propre âme",
+   "es": "La educación de la propia alma"
+  },
+  "beginnt mit der aufrichtigen Selbstprüfung. Wer seine Fehler erkennt, seine Begierden beherrscht und sich selbst zur Rechenschaft zieht, bemüht sich um die": {
+   "ar": "تبدأ بالمحاسبة الصادقة. من يعرف أخطاءه، ويملك شهواته، ويحاسب نفسه، يجتهد في",
+   "en": "begins with sincere self-examination. Whoever recognizes his faults, masters his desires, and calls himself to account strives for the",
+   "tr": "samimi nefis muhasebesiyle başlar. Hatalarını tanıyan, arzularına hâkim olan ve kendini hesaba çeken kimse şunun için çabalar",
+   "ku": "bi pirsîna dilsoz dest pê dike. Yê ku xeletiyên xwe nas dike, xwestekên xwe dixe bin destê xwe û xwe dihese, hewl dide ji bo",
+   "ckb": "بە پشکنینی دڵسۆزانەی خود دەست پێ دەکات. ئەوەی هەڵەکانی دەناسێت، خواستەکانی کۆنتڕۆڵ دەکات و خۆی لێپرسینەوە دەکات، هەوڵ دەدات بۆ",
+   "bs": "počinje iskrenim samoprovjeravanjem. Ko prepoznaje svoje greške, vlada svojim strastima i sebe poziva na račun, trudi se za",
+   "fr": "commence par l’examen sincère de soi. Qui reconnaît ses fautes, maîtrise ses désirs et se demande des comptes s’efforce vers",
+   "es": "comienza con el examen sincero de sí. Quien reconoce sus faltas, domina sus deseos y se pide cuentas se esfuerza por"
+  },
+  "und den Gehorsam gegenüber Allāh.": {
+   "ar": "وطاعة الله.",
+   "en": "and obedience to Allah.",
+   "tr": "ve Allah’a itaat.",
+   "ku": "û guhdariya Allah.",
+   "ckb": "و گوێڕایەڵیی خوا.",
+   "bs": "i pokornost Allahu.",
+   "fr": "et l’obéissance envers Allah.",
+   "es": "y la obediencia a Allah."
+  },
+  "Dieses Fazit ist eine redaktionelle Zusammenfassung, keine weitere wörtliche Aussage des Überlieferers.": {
+   "ar": "هذه الخاتمة تلخيص تحريري، وليست قولًا حرفيًا آخر للراوي.",
+   "en": "This closing is an editorial summary, not a further verbatim statement of the transmitter.",
+   "tr": "Bu sonuç redaksiyonel bir özettir, râvinin başka bir harfî sözü değildir.",
+   "ku": "Ev encam kurteyeke edîtorî ye, ne gotineke din a peyv bi peyv a ragihander e.",
+   "ckb": "ئەم کۆتاییە پوختەیەکی سەرنووسەرییە، قسەیەکی وشەبەوشەی دیکەی گێڕەرەوە نییە.",
+   "bs": "Ovaj zaključak je redakcijski sažetak, ne daljnji doslovan iskaz prenositelja.",
+   "fr": "Cette conclusion est un résumé rédactionnel, non une autre parole littérale du transmetteur.",
+   "es": "Esta conclusión es un resumen editorial, no otra declaración literal del transmisor."
+  },
+  "Wissen vertiefen: Selbstprüfung": {
+   "ar": "تعميق العلم: محاسبة النفس",
+   "en": "Deepen knowledge: self-examination",
+   "tr": "İlmi derinleştir: nefis muhasebesi",
+   "ku": "Zanînê kûr bike: pirsîna nefsê",
+   "ckb": "قووڵکردنەوەی زانست: پشکنینی خود",
+   "bs": "Produbiti znanje: samoprovjera",
+   "fr": "Approfondir le savoir : l’examen de soi",
+   "es": "Profundizar el conocimiento: el examen de sí"
+  },
+  "Vier kurze Verständnisfragen zur Aussage. Der Lernbereich ist keine zusätzliche Überlieferungsquelle.": {
+   "ar": "أربعة أسئلة فهم قصيرة عن القول. ومجال التعلّم ليس مصدر رواية إضافيًا.",
+   "en": "Four short comprehension questions on the statement. The learning section is not an additional source of transmission.",
+   "tr": "Söze dair dört kısa anlama sorusu. Öğrenme alanı ek bir rivayet kaynağı değildir.",
+   "ku": "Çar pirsên kurt ên fêmkirinê li ser gotinê. Beşa hînbûnê ne çavkaniyeke ragihandinê ya zêde ye.",
+   "ckb": "چوار پرسیاری کورت بۆ تێگەیشتن دەربارەی قسەکە. بەشی فێربوون سەرچاوەیەکی گێڕانەوەی زیادە نییە.",
+   "bs": "Četiri kratka pitanja razumijevanja o iskazu. Oblast učenja nije dodatni izvor predaje.",
+   "fr": "Quatre courtes questions de compréhension sur la parole. L’espace d’apprentissage n’est pas une source de transmission supplémentaire.",
+   "es": "Cuatro preguntas breves de comprensión sobre la declaración. El ámbito de aprendizaje no es una fuente de transmisión adicional."
   }
  }
 }

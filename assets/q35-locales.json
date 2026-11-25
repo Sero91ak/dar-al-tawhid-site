@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,758 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "ʿĪsā ibn Maryam – Leben, Nuzūl und früher Ikhtilāf – DAR AL TAWḤĪD": {
+   "ar": "عيسى بن مريم – الحياة والنزول والاختلاف المبكر – DAR AL TAWḤĪD",
+   "en": "ʿĪsā ibn Maryam – life, nuzūl, and the early ikhtilāf – DAR AL TAWḤĪD",
+   "tr": "ʿĪsā ibn Maryam – hayat, nüzûl ve erken ihtilaf – DAR AL TAWḤĪD",
+   "ku": "ʿĪsā ibn Maryam – jiyan, nuzûl û îxtilafa zû – DAR AL TAWḤĪD",
+   "ckb": "عیسای کوڕی مەریەم – ژیان، نزول و ناکۆکی زوو – DAR AL TAWḤĪD",
+   "bs": "ʿĪsā ibn Maryam – život, nuzūl i rani ihtilaf – DAR AL TAWḤĪD",
+   "fr": "ʿĪsā ibn Maryam – vie, nuzūl et ikhtilāf ancien – DAR AL TAWḤĪD",
+   "es": "ʿĪsā ibn Maryam – vida, nuzūl y el ikhtilāf temprano – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "مقالات وفق القرآن والسنة والآثار",
+   "en": "Articles according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre yazılar",
+   "ku": "Nivîs li gorî Qurʾān, Sunnah û Āthār",
+   "ckb": "بابەتەکان بەپێی قورئان و سوننەت و ئاسەوار",
+   "bs": "Tekstovi prema Qurʾānu, Sunnah i Āthāru",
+   "fr": "Articles selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Artículos según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "ʿAqīdah · ʿĪsā ibn Maryam · Nuzūl · Tafsīr": {
+   "ar": "عقيدة · عيسى بن مريم · نزول · تفسير",
+   "en": "ʿAqīdah · ʿĪsā ibn Maryam · Nuzūl · Tafsīr",
+   "tr": "ʿAqīdah · ʿĪsā ibn Maryam · Nuzūl · Tafsīr",
+   "ku": "ʿAqīdah · ʿĪsā ibn Maryam · Nuzūl · Tafsīr",
+   "ckb": "عقیدة · عیسی بن مریم · نزول · تفسیر",
+   "bs": "ʿAqīdah · ʿĪsā ibn Maryam · Nuzūl · Tafsīr",
+   "fr": "ʿAqīdah · ʿĪsā ibn Maryam · Nuzūl · Tafsīr",
+   "es": "ʿAqīdah · ʿĪsā ibn Maryam · Nuzūl · Tafsīr"
+  },
+  "ʿĪsā ibn Maryam: Leben, Nuzūl und der tatsächliche frühe Ikhtilāf": {
+   "ar": "عيسى بن مريم: الحياة، والنزول، والاختلاف المبكر الواقع",
+   "en": "ʿĪsā ibn Maryam: life, nuzūl, and the actual early ikhtilāf",
+   "tr": "ʿĪsā ibn Maryam: hayat, nüzûl ve gerçek erken ihtilaf",
+   "ku": "ʿĪsā ibn Maryam: jiyan, nuzûl û îxtilafa zû ya rastîn",
+   "ckb": "عیسای کوڕی مەریەم: ژیان، نزول، و ناکۆکیی زووی ڕاستەقینە",
+   "bs": "ʿĪsā ibn Maryam: život, nuzūl i stvarni rani ihtilaf",
+   "fr": "ʿĪsā ibn Maryam : vie, nuzūl et l’ikhtilāf ancien réel",
+   "es": "ʿĪsā ibn Maryam: vida, nuzūl y el ikhtilāf temprano real"
+  },
+  "Eine einzige Quellenakte mit den Belegen zu": {
+   "ar": "ملف مصادر واحد بالأدلة على",
+   "en": "A single source file with the evidence for",
+   "tr": "Şunun delilleriyle tek bir kaynak dosyası:",
+   "ku": "Dosyeyeke çavkaniyan a yek bi belgeyên li ser",
+   "ckb": "یەک پەڕاوی سەرچاوە بە بەڵگەکان لەسەر",
+   "bs": "Jedna izvorna datoteka s dokazima o",
+   "fr": "Un seul dossier de sources avec les preuves sur",
+   "es": "Un solo expediente de fuentes con las pruebas sobre"
+  },
+  ", dem Leben ʿĪsās, seinem persönlichen": {
+   "ar": "، حياة عيسى، وشخصيّه",
+   "en": ", the life of ʿĪsā, his personal",
+   "tr": ", ʿĪsā’nın hayatına, onun kişisel",
+   "ku": ", jiyana ʿĪsā, ya wî ya kesane",
+   "ckb": "، ژیانی عیسا، و کەسییەکەی",
+   "bs": ", život ʿĪsāa, njegov lični",
+   "fr": ", la vie de ʿĪsā, son personnel",
+   "es": ", la vida de ʿĪsā, su personal"
+  },
+  "und den frühen ʿAqīdah-Texten bis zum 5. Jahrhundert.": {
+   "ar": "ونصوص العقيدة المبكرة حتى القرن الخامس.",
+   "en": "and the early ʿaqīdah texts up to the 5th century.",
+   "tr": "ve 5. yüzyıla kadar erken akîde metinlerine.",
+   "ku": "û nivîsên ʿaqīdah ên zû heta sedsala 5an.",
+   "ckb": "و دەقە زووەکانی عەقیدە تا سەدەی پێنجەم.",
+   "bs": "i ranim tekstovima ʿaqīde do 5. stoljeća.",
+   "fr": "et les textes anciens d’ʿaqīdah jusqu’au 5e siècle.",
+   "es": "y los textos tempranos de ʿaqīdah hasta el siglo V."
+  },
+  "Abgrenzung des echten Tafsīr-Ikhtilāf von der Behauptung eines später geborenen, nur metaphorischen „ʿĪsā“.": {
+   "ar": "تمييز اختلاف التفسير الحقيقي عن دعوى «عيسى» لاحق الولادة، مجازي فحسب.",
+   "en": "Distinguishing the real tafsīr-ikhtilāf from the claim of a later-born, merely metaphorical “ʿĪsā”.",
+   "tr": "Gerçek tefsir ihtilafını, sonradan doğmuş, yalnızca mecazi bir “ʿĪsā” iddiasından ayırmak.",
+   "ku": "Cudakirina îxtilafa tefsîrê ya rastîn ji daxwaza “ʿĪsā”yekî paşê ji dayik bûyî, tenê mecazî.",
+   "ckb": "جیاکردنەوەی ناکۆکیی ڕاستەقینەی تەفسیر لە بانگەشەی «عیسا»یەکی دواتر لەدایکبوو، تەنها خوازەیی.",
+   "bs": "Razdvajanje stvarnog tefsirskog ihtilafa od tvrdnje o kasnije rođenom, samo metaforičkom “ʿĪsāu”.",
+   "fr": "Distinguer l’ikhtilāf réel du tafsīr de l’affirmation d’un « ʿĪsā » né plus tard et seulement métaphorique.",
+   "es": "Distinguir el ikhtilāf real del tafsīr de la afirmación de un “ʿĪsā” nacido después y solo metafórico."
+  },
+  "Qurʾān und Sunnah; Ṣaḥābah/Tābiʿūn; frühe Imāme bis Abū ʿAmr ad-Dānī (gest. 444 H.).": {
+   "ar": "القرآن والسنة؛ الصحابة/التابعون؛ الأئمة المبكرون حتى أبي عمرو الداني (توفي 444 هـ).",
+   "en": "The Qurʾān and the Sunnah; Ṣaḥābah/Tābiʿūn; early imāms up to Abū ʿAmr ad-Dānī (d. 444 AH).",
+   "tr": "Qurʾān ve Sünnet; sahâbe/tâbiûn; Ebû Amr ed-Dânî’ye (ö. 444 H.) kadar erken imamlar.",
+   "ku": "Qurʾān û Sunnah; Ṣaḥābah/Tābiʿūn; îmamên zû heta Abū ʿAmr ad-Dānī (m. 444 H.).",
+   "ckb": "قورئان و سوننەت؛ سەحابە/تابیعون؛ ئیمامە زووەکان تا أبو عمرو الداني (کۆچی دوایی 444 ک.).",
+   "bs": "Qurʾān i Sunnah; ashabi/tabiʿūni; rani imami do Abū ʿAmra ad-Dānīja (umro 444. h.).",
+   "fr": "Le Qurʾān et la Sunnah ; Ṣaḥābah/Tābiʿūn ; premiers imāms jusqu’à Abū ʿAmr ad-Dānī (m. 444 H.).",
+   "es": "El Qurʾān y la Sunnah; Ṣaḥābah/Tābiʿūn; primeros imāmes hasta Abū ʿAmr ad-Dānī (m. 444 H.)."
+  },
+  "Tawaffī bedeutet nicht zwingend endgültigen Tod": {
+   "ar": "«توفّى» لا يعني بالضرورة الموت النهائي",
+   "en": "Tawaffī does not necessarily mean final death",
+   "tr": "Tevaffî zorunlu olarak kesin ölüm demek değildir",
+   "ku": "Tewaffî ne bi zorî mirina dawîn e",
+   "ckb": "تەوەففی بە پێویستی واتای مردنی کۆتایی نییە",
+   "bs": "Tewaffī ne znači nužno konačnu smrt",
+   "fr": "Tawaffī ne signifie pas nécessairement la mort définitive",
+   "es": "Tawaffī no significa necesariamente la muerte definitiva"
+  },
+  "Az-Zumar 39:42 verwendet tawaffā sowohl für den Tod als auch ausdrücklich für diejenigen, die": {
+   "ar": "الزمر 39:42 يستعمل «توفّى» للموت وأيضًا صراحة للذين",
+   "en": "Az-Zumar 39:42 uses tawaffā both for death and expressly for those who",
+   "tr": "Ez-Zümer 39:42 “teveffâ”yı hem ölüm için hem de açıkça şunlar için kullanır:",
+   "ku": "Ez-Zumer 39:42 tewaffa hem ji bo mirinê hem jî bi eşkere ji bo wan bi kar tîne ku",
+   "ckb": "زومر 39:42 «تەوەففا» هم بۆ مردن و هم بە ڕاشکاوی بۆ ئەوانە بەکاردەهێنێت کە",
+   "bs": "Az-Zumar 39:42 koristi tewaffā i za smrt i izričito za one koji",
+   "fr": "Az-Zumar 39:42 emploie tawaffā à la fois pour la mort et expressément pour ceux qui",
+   "es": "Az-Zumar 39:42 usa tawaffā tanto para la muerte como expresamente para quienes"
+  },
+  "sind, während ihres Schlafes. Al-Anʿām 6:60 verwendet dasselbe Verb für das nächtliche Nehmen.": {
+   "ar": "هم، في أثناء نومهم. والأنعام 6:60 يستعمل الفعل نفسه للأخذ الليلي.",
+   "en": "are, during their sleep. Al-Anʿām 6:60 uses the same verb for the taking at night.",
+   "tr": "dirler, uykuları sırasında. El-Enʿâm 6:60 aynı fiili geceleyin alma için kullanır.",
+   "ku": "in, di dema xewa wan de. El-Enʿâm 6:60 heman lêkerê ji bo girtina şevê bi kar tîne.",
+   "ckb": "ن، لە کاتی خەویاندا. ئەنعام 6:60 هەمان کردار بۆ گرتنی شەوانە بەکاردەهێنێت.",
+   "bs": "jesu, tokom njihova sna. Al-Anʿām 6:60 isti glagol koristi za noćno uzimanje.",
+   "fr": "sont, pendant leur sommeil. Al-Anʿām 6:60 emploie le même verbe pour la prise nocturne.",
+   "es": "están, durante su sueño. Al-Anʿām 6:60 usa el mismo verbo para la toma nocturna."
+  },
+  "in Āl ʿImrān 3:55 allein nicht sprachlich zwingend geschlossen werden, ʿĪsā sei endgültig gestorben.": {
+   "ar": "في آل عمران 3:55 وحدها لا يُستنتج استنتاجًا لغويًا لازمًا أن عيسى قد مات نهائيًا.",
+   "en": "in Āl ʿImrān 3:55 alone it cannot be concluded as linguistically necessary that ʿĪsā died finally.",
+   "tr": "Âl-i İmrân 3:55’ten tek başına, ʿĪsā’nın kesin olarak öldüğü dil bakımından zorunlu sonuç çıkmaz.",
+   "ku": "di Âl Îmrân 3:55 bi tenê, bi zorîna zimanî nayê encamdan ku ʿĪsā bi dawî miribe.",
+   "ckb": "لە ئال عیمڕان 3:55 بە تەنها، بە پێویستیی زمانەوانی ناکرێتە ئەنجام کە عیسا بە کۆتایی مردبێت.",
+   "bs": "u Āl ʿImrānu 3:55 samo po sebi se jezički obavezno ne zaključuje da je ʿĪsā konačno umro.",
+   "fr": "dans Āl ʿImrān 3:55 seule, on ne peut pas conclure de façon linguistiquement nécessaire que ʿĪsā soit mort définitivement.",
+   "es": "en Āl ʿImrān 3:55 sola no se concluye como lingüísticamente necesario que ʿĪsā haya muerto definitivamente."
+  },
+  "Islamweb · Āl ʿImrān 3:55": {
+   "ar": "إسلام ويب · آل عمران 3:55",
+   "en": "Islamweb · Āl ʿImrān 3:55",
+   "tr": "İslamweb · Âl-i İmrân 3:55",
+   "ku": "Islamweb · Âl Îmrân 3:55",
+   "ckb": "ئیسلاموێب · ئال عیمڕان 3:55",
+   "bs": "Islamweb · Āl ʿImrān 3:55",
+   "fr": "Islamweb · Āl ʿImrān 3:55",
+   "es": "Islamweb · Āl ʿImrān 3:55"
+  },
+  "Direktmarkierung zur klassischen Auslegungsdiskussion um tawaffī": {
+   "ar": "تحديد مباشر لنقاش التفسير الكلاسيكي حول التوفّي",
+   "en": "direct marker to the classical discussion of interpretation about tawaffī",
+   "tr": "teveffî etrafındaki klasik tefsir tartışmasına doğrudan işaret",
+   "ku": "nîşana rasterast a gotûbêja tefsîra klasîk li ser tewaffî",
+   "ckb": "نیشانەی ڕاستەوخۆ بۆ گفتوگۆی تەفسیری کلاسیکی دەربارەی تەوەففی",
+   "bs": "izravna oznaka klasične rasprave tumačenja o tewaffīju",
+   "fr": "marquage direct vers la discussion classique d’interprétation autour de tawaffī",
+   "es": "marca directa hacia la discusión clásica de interpretación sobre tawaffī"
+  },
+  "Der echte Ikhtilāf über mutawaffīka": {
+   "ar": "الاختلاف الحقيقي في «متوفيك»",
+   "en": "The real ikhtilāf about mutawaffīka",
+   "tr": "“Müteweffîke” üzerindeki gerçek ihtilaf",
+   "ku": "Îxtilafa rastîn li ser “mutewaffîke”",
+   "ckb": "ناکۆکیی ڕاستەقینە دەربارەی «متوفّیک»",
+   "bs": "Stvarni ihtilaf o mutewaffīka",
+   "fr": "L’ikhtilāf réel sur mutawaffīka",
+   "es": "El ikhtilāf real sobre mutawaffīka"
+  },
+  "Über Ibn ʿAbbās wird die Deutung „Ich lasse dich sterben“ überliefert. Maṭar al-Warrāq erklärt dagegen:": {
+   "ar": "يُروى عن ابن عباس تأويل «إني أميتك». أما مطر الوراق فيفسّر بخلاف ذلك:",
+   "en": "From Ibn ʿAbbās the interpretation “I cause you to die” is transmitted. Maṭar al-Warrāq, by contrast, explains:",
+   "tr": "İbn Abbâs’tan “Seni öldürürüm” yorumu nakledilir. Matar el-Verrâk ise buna karşı açıklar:",
+   "ku": "Ji Ibn ʿAbbās şiroveya “Ez te dimirim” tê veguhastin. Maṭar el-Werrâq jî li hember vê diyar dike:",
+   "ckb": "لە ابن عباس لێکدانەوەی «دەت مرێنم» دەگێڕدرێتەوە. مەتەری وەڕراق بە پێچەوانەوە ڕوونی دەکاتەوە:",
+   "bs": "Od Ibn ʿAbbāsa se prenosi tumačenje „Puštam te da umreš“. Maṭar al-Warrāq, naprotiv, objašnjava:",
+   "fr": "D’Ibn ʿAbbās est transmise l’interprétation « Je te fais mourir ». Maṭar al-Warrāq explique au contraire :",
+   "es": "De Ibn ʿAbbās se transmite la interpretación “Te hago morir”. Maṭar al-Warrāq, en cambio, explica:"
+  },
+  "„Ich nehme dich aus dieser Welt; nicht durch Tod.“": {
+   "ar": "«إني آخذك من هذه الدنيا؛ لا بالموت.»",
+   "en": "“I take you out of this world; not by death.”",
+   "tr": "“Seni bu dünyadan alırım; ölümle değil.”",
+   "ku": "“Ez te ji vê dinyayê digirim; ne bi mirinê.”",
+   "ckb": "«من لەم دنیا دەتبەم؛ نە بە مردن.»",
+   "bs": "„Uzim te iz ovog svijeta; ne smrću.“",
+   "fr": "« Je te prends de ce monde ; non par la mort. »",
+   "es": "“Te tomo de este mundo; no por la muerte.”"
+  },
+  "Von al-Ḥasan wird überliefert:": {
+   "ar": "ويُروى عن الحسن:",
+   "en": "From al-Ḥasan it is transmitted:",
+   "tr": "El-Hasan’dan nakledilir:",
+   "ku": "Ji el-Ḥesan tê veguhastin:",
+   "ckb": "لە حەسەن دەگێڕدرێتەوە:",
+   "bs": "Od al-Ḥasana se prenosi:",
+   "fr": "D’al-Ḥasan est transmis :",
+   "es": "De al-Ḥasan se transmite:"
+  },
+  "„Ich nehme dich von der Erde.“": {
+   "ar": "«إني آخذك من الأرض.»",
+   "en": "“I take you from the earth.”",
+   "tr": "“Seni yerden alırım.”",
+   "ku": "“Ez te ji erdê digirim.”",
+   "ckb": "«من لە زەوی دەتبەم.»",
+   "bs": "„Uzim te sa zemlje.“",
+   "fr": "« Je te prends de la terre. »",
+   "es": "“Te tomo de la tierra.”"
+  },
+  "Ibn Zayd erklärt, ʿĪsā sei noch nicht gestorben, bis er den Daǧǧāl tötet; danach werde er sterben.": {
+   "ar": "يفسّر ابن زيد أن عيسى لم يمت بعد، حتى يقتل الدجال؛ ثم يموت.",
+   "en": "Ibn Zayd explains that ʿĪsā has not yet died, until he kills the Dajjāl; after that he will die.",
+   "tr": "İbn Zeyd, ʿĪsā’nın Deccâl’i öldürene kadar henüz ölmediğini, sonra öleceğini açıklar.",
+   "ku": "Ibn Zeyd diyar dike ku ʿĪsā hîn nemiriye, heta ku Deccal bkuje; paşê dimire.",
+   "ckb": "ابن زەید ڕوونی دەکاتەوە کە عیسا هێشتا نەمردووە، تا دەججال دەکوژێت؛ پاشان دەمرێت.",
+   "bs": "Ibn Zayd objašnjava da ʿĪsā još nije umro, dok ne ubije Dedždžāla; potom će umrijeti.",
+   "fr": "Ibn Zayd explique que ʿĪsā n’est pas encore mort, jusqu’à ce qu’il tue le Dajjāl ; ensuite il mourra.",
+   "es": "Ibn Zayd explica que ʿĪsā aún no ha muerto, hasta que mate al Dajjāl; después morirá."
+  },
+  "Aṭ-Ṭabarī bevorzugt die Wegnahme von der Erde und die Erhebung und verweist dabei auf die vielfach überlieferten Nuzūl-Berichte.": {
+   "ar": "الطبري يرجّح الأخذ من الأرض والرفع، ويحيل في ذلك إلى أخبار النزول الكثيرة الرواية.",
+   "en": "Aṭ-Ṭabarī prefers the taking from the earth and the raising, and in that connection refers to the multiply transmitted reports of the nuzūl.",
+   "tr": "et-Taberî yerden alınıp yükseltilmeyi tercih eder ve bunda çokça nakledilen nüzûl haberlerine işaret eder.",
+   "ku": "et-Taberî girtina ji erdê û bilindkirinê tercîh dike, û di wê de îşaretê dide xeberên nuzûlê yên pir veguhastî.",
+   "ckb": "تەبەری وەرگرتن لە زەوی و بەرزکردنەوە پەسند دەکات، و لەوێدا ئاماژە بۆ هەواڵە زۆرگێڕدراوەکانی نزول دەکات.",
+   "bs": "Aṭ-Ṭabarī daje prednost uzimanju sa zemlje i uzdizanju, i pri tome upućuje na mnogostruko prenesene vijesti o nuzūlu.",
+   "fr": "Aṭ-Ṭabarī préfère la prise de la terre et l’élévation, et renvoie à ce propos aux récits du nuzūl transmis de nombreuses voies.",
+   "es": "Aṭ-Ṭabarī prefiere la toma de la tierra y la elevación, y a ese respecto remite a los relatos del nuzūl transmitidos por muchas vías."
+  },
+  "Islamweb · aṭ-Ṭabarī zu 3:55": {
+   "ar": "إسلام ويب · الطبري عند 3:55",
+   "en": "Islamweb · aṭ-Ṭabarī on 3:55",
+   "tr": "İslamweb · et-Taberî, 3:55",
+   "ku": "Islamweb · et-Taberî li 3:55",
+   "ckb": "ئیسلاموێب · تەبەری لە 3:55",
+   "bs": "Islamweb · aṭ-Ṭabarī uz 3:55",
+   "fr": "Islamweb · aṭ-Ṭabarī sur 3:55",
+   "es": "Islamweb · aṭ-Ṭabarī en 3:55"
+  },
+  "Direktmarkierung bei Maṭar al-Warrāq; dieselbe Stelle enthält die weiteren frühen Deutungen": {
+   "ar": "تحديد مباشر عند مطر الوراق؛ والموضع نفسه فيه التأويلات المبكرة الأخرى",
+   "en": "direct marker at Maṭar al-Warrāq; the same place contains the other early interpretations",
+   "tr": "Matar el-Verrâk’ta doğrudan işaret; aynı yer diğer erken yorumları da içerir",
+   "ku": "nîşana rasterast li Maṭar el-Werrâq; heman cih şiroveyên zû yên din jî dihewîne",
+   "ckb": "نیشانەی ڕاستەوخۆ لای مەتەری وەڕراق؛ هەمان شوێن لێکدانەوە زووەکانی تریشی تێدایە",
+   "bs": "izravna oznaka kod Maṭara al-Warrāqa; isto mjesto sadrži i ostala rana tumačenja",
+   "fr": "marquage direct chez Maṭar al-Warrāq ; le même passage contient les autres interprétations anciennes",
+   "es": "marca directa en Maṭar al-Warrāq; el mismo lugar contiene las demás interpretaciones tempranas"
+  },
+  "PDF / Scan · Tafsīr aṭ-Ṭabarī": {
+   "ar": "PDF / مسح · تفسير الطبري",
+   "en": "PDF / scan · Tafsīr aṭ-Ṭabarī",
+   "tr": "PDF / tarama · Tefsîru’t-Taberî",
+   "ku": "PDF / scan · Tefsîra aṭ-Ṭabarī",
+   "ckb": "PDF / سکان · تەفسیری تەبەری",
+   "bs": "PDF / sken · Tefsīr aṭ-Ṭabarī",
+   "fr": "PDF / scan · Tafsīr aṭ-Ṭabarī",
+   "es": "PDF / escaneo · Tafsīr aṭ-Ṭabarī"
+  },
+  "Waqfeya-Scan des Werkes; Stelle: Āl ʿImrān 3:55": {
+   "ar": "مسح وقفية للعمل؛ الموضع: آل عمران 3:55",
+   "en": "Waqfeya scan of the work; place: Āl ʿImrān 3:55",
+   "tr": "Eserin Vakfiyye taraması; yer: Âl-i İmrân 3:55",
+   "ku": "Scana Waqfeya ya berhemê; cih: Âl Îmrân 3:55",
+   "ckb": "سکانی وەقفییە بۆ کتێبەکە؛ شوێن: ئال عیمڕان 3:55",
+   "bs": "Waqfeya-sken djela; mjesto: Āl ʿImrān 3:55",
+   "fr": "Scan Waqfeya de l’ouvrage ; passage : Āl ʿImrān 3:55",
+   "es": "Escaneo de Waqfeya de la obra; lugar: Āl ʿImrān 3:55"
+  },
+  "Al-Ḥasan al-Baṣrī: Er ist jetzt lebendig": {
+   "ar": "الحسن البصري: هو الآن حي",
+   "en": "Al-Ḥasan al-Baṣrī: he is alive now",
+   "tr": "El-Hasan el-Basrî: o şimdi diridir",
+   "ku": "El-Ḥesen el-Besrî: ew niha sax e",
+   "ckb": "حەسەنی بەسری: ئێستا زیندووە",
+   "bs": "Al-Ḥasan al-Baṣrī: on je sada živ",
+   "fr": "Al-Ḥasan al-Baṣrī : il est maintenant vivant",
+   "es": "Al-Ḥasan al-Baṣrī: él está vivo ahora"
+  },
+  "Zu an-Nisāʾ 4:159 wird von al-Ḥasan al-Baṣrī überliefert:": {
+   "ar": "عند النساء 4:159 يُروى عن الحسن البصري:",
+   "en": "At an-Nisāʾ 4:159 it is transmitted from al-Ḥasan al-Baṣrī:",
+   "tr": "En-Nisâ 4:159’da el-Hasan el-Basrî’den nakledilir:",
+   "ku": "Li en-Nisâ 4:159 ji el-Ḥesen el-Besrî tê veguhastin:",
+   "ckb": "لە نسائ 4:159 لە حەسەنی بەسری دەگێڕدرێتەوە:",
+   "bs": "Uz an-Nisāʾ 4:159 prenosi se od al-Ḥasana al-Baṣrīja:",
+   "fr": "À an-Nisāʾ 4:159, il est transmis d’al-Ḥasan al-Baṣrī :",
+   "es": "En an-Nisāʾ 4:159 se transmite de al-Ḥasan al-Baṣrī:"
+  },
+  "„Vor dem Tod von ʿĪsā. Bei Allah, er ist jetzt lebendig bei Allah; wenn er herabsteigt, werden sie alle an ihn glauben.“": {
+   "ar": "«قبل موت عيسى. والله إنه الآن حي عند الله؛ فإذا نزل آمنوا به جميعًا.»",
+   "en": "“Before the death of ʿĪsā. By Allah, he is alive now with Allah; when he descends, they will all believe in him.”",
+   "tr": "“ʿĪsā’nın ölümünden önce. Allah’a yemin olsun, o şimdi Allah katında diridir; indiğinde hepsi ona iman edecekler.”",
+   "ku": "“Berî mirina ʿĪsā. Bi Allah, ew niha li ba Allah sax e; gava dakeve, hemû wê bi wî bawer bikin.”",
+   "ckb": "«پێش مردنی عیسا. سوێند بە الله، ئێستا لای الله زیندووە؛ کاتێک دادەبەزێت، هەموویان باوەڕی پێ دەهێنن.»",
+   "bs": "„Prije smrti ʿĪsāa. Tako mi Allaha, on je sada živ kod Allaha; kada siđe, svi će u njega povjerovati.“",
+   "fr": "« Avant la mort de ʿĪsā. Par Allah, il est maintenant vivant auprès d’Allah ; lorsqu’il descendra, ils croiront tous en lui. »",
+   "es": "“Antes de la muerte de ʿĪsā. Por Allah, él está vivo ahora junto a Allah; cuando descienda, todos creerán en él.”"
+  },
+  "Von ihm wird an derselben Stelle außerdem überliefert:": {
+   "ar": "وعنه يُروى في الموضع نفسه أيضًا:",
+   "en": "From him it is also transmitted at the same place:",
+   "tr": "Ondan aynı yerde ayrıca nakledilir:",
+   "ku": "Ji wî di heman cihî de herwiha tê veguhastin:",
+   "ckb": "لەو هەروەها لە هەمان شوێن دەگێڕدرێتەوە:",
+   "bs": "Od njega se na istom mjestu također prenosi:",
+   "fr": "De lui est aussi transmis au même endroit :",
+   "es": "De él también se transmite en el mismo lugar:"
+  },
+  "„ʿĪsā – und er ist noch nicht gestorben.“": {
+   "ar": "«عيسى — ولم يمت بعد.»",
+   "en": "“ʿĪsā — and he has not yet died.”",
+   "tr": "“ʿĪsā — ve henüz ölmedi.”",
+   "ku": "“ʿĪsā — û hîn nemiriye.”",
+   "ckb": "«عیسا — و هێشتا نەمردووە.»",
+   "bs": "„ʿĪsā — a još nije umro.“",
+   "fr": "« ʿĪsā — et il n’est pas encore mort. »",
+   "es": "“ʿĪsā — y aún no ha muerto.”"
+  },
+  "Islamweb · aṭ-Ṭabarī zu 4:159": {
+   "ar": "إسلام ويب · الطبري عند 4:159",
+   "en": "Islamweb · aṭ-Ṭabarī on 4:159",
+   "tr": "İslamweb · et-Taberî, 4:159",
+   "ku": "Islamweb · et-Taberî li 4:159",
+   "ckb": "ئیسلاموێب · تەبەری لە 4:159",
+   "bs": "Islamweb · aṭ-Ṭabarī uz 4:159",
+   "fr": "Islamweb · aṭ-Ṭabarī sur 4:159",
+   "es": "Islamweb · aṭ-Ṭabarī en 4:159"
+  },
+  "Textmarkierung direkt bei „er ist jetzt lebendig bei Allah“": {
+   "ar": "تحديد النص مباشرة عند «إنه الآن حي عند الله»",
+   "en": "text marker directly at “he is alive now with Allah”",
+   "tr": "metin işaretlemesi doğrudan “o şimdi Allah katında diridir” yanında",
+   "ku": "nîşana tekstê rasterast li “ew niha li ba Allah sax e”",
+   "ckb": "نیشانەی دەق ڕاستەوخۆ لای «ئێستا لای الله زیندووە»",
+   "bs": "oznaka teksta izravno kod „on je sada živ kod Allaha“",
+   "fr": "marquage du texte directement à « il est maintenant vivant auprès d’Allah »",
+   "es": "marca de texto directamente en “está vivo ahora junto a Allah”"
+  },
+  "Ibn ʿAbbās: Die Herabkunft von ʿĪsā ibn Maryam": {
+   "ar": "ابن عباس: نزول عيسى بن مريم",
+   "en": "Ibn ʿAbbās: the descent of ʿĪsā ibn Maryam",
+   "tr": "İbn Abbâs: ʿĪsā ibn Meryem’in inişi",
+   "ku": "Ibn ʿAbbās: daketina ʿĪsā ibn Meryem",
+   "ckb": "ابن عباس: دابەزینی عیسای کوڕی مەریەم",
+   "bs": "Ibn ʿAbbās: silazak ʿĪsāa ibn Merjeme",
+   "fr": "Ibn ʿAbbās : la descente de ʿĪsā ibn Maryam",
+   "es": "Ibn ʿAbbās: el descenso de ʿĪsā ibn Maryam"
+  },
+  "Zu az-Zuḫruf 43:61 wird von Ibn ʿAbbās überliefert:": {
+   "ar": "عند الزخرف 43:61 يُروى عن ابن عباس:",
+   "en": "At az-Zuḫruf 43:61 it is transmitted from Ibn ʿAbbās:",
+   "tr": "Ez-Zuhruf 43:61’de İbn Abbâs’tan nakledilir:",
+   "ku": "Li ez-Zuxruf 43:61 ji Ibn ʿAbbās tê veguhastin:",
+   "ckb": "لە زوخروف 43:61 لە ابن عباس دەگێڕدرێتەوە:",
+   "bs": "Uz az-Zuḫruf 43:61 prenosi se od Ibn ʿAbbāsa:",
+   "fr": "À az-Zuḫruf 43:61, il est transmis d’Ibn ʿAbbās :",
+   "es": "En az-Zuḫruf 43:61 se transmite de Ibn ʿAbbās:"
+  },
+  "„Die Herabkunft von ʿĪsā ibn Maryam.“": {
+   "ar": "«نزول عيسى بن مريم.»",
+   "en": "“The descent of ʿĪsā ibn Maryam.”",
+   "tr": "“ʿĪsā ibn Meryem’in inişi.”",
+   "ku": "“Daketina ʿĪsā ibn Meryem.”",
+   "ckb": "«دابەزینی عیسای کوڕی مەریەم.»",
+   "bs": "„Silazak ʿĪsāa ibn Merjema.“",
+   "fr": "« La descente de ʿĪsā ibn Maryam. »",
+   "es": "“El descenso de ʿĪsā ibn Maryam.”"
+  },
+  "Auch von Muǧāhid, Qatādah, as-Suddī, aḍ-Ḍaḥḥāk und Ibn Zayd werden entsprechende Nuzūl-Erklärungen überliefert.": {
+   "ar": "وكذلك تُروى تفسيرات نزول موافقة عن مجاهد، وقتادة، والسدي، والضحاك، وابن زيد.",
+   "en": "Corresponding explanations of the nuzūl are also transmitted from Muǧāhid, Qatādah, as-Suddī, aḍ-Ḍaḥḥāk, and Ibn Zayd.",
+   "tr": "Mücâhid, Katâde, es-Süddî, ed-Dahhâk ve İbn Zeyd’den de buna uyan nüzûl açıklamaları nakledilir.",
+   "ku": "Herwiha ji Mucâhid, Qetade, es-Suddî, ed-Dehhak û Ibn Zeyd şiroveyên nuzûlê yên li hev tên veguhastin.",
+   "ckb": "هەروەها لە موجاهد، قەتادە، سەددی، دەححاک، و ابن زەید لێکدانەوەی نزولی هاوتا دەگێڕدرێنەوە.",
+   "bs": "Od Muǧāhida, Qatāde, es-Suddīja, eḍ-Ḍaḥḥāka i Ibn Zeyda također se prenose odgovarajuća objašnjenja nuzūla.",
+   "fr": "Des explications du nuzūl correspondantes sont aussi transmises de Muǧāhid, Qatādah, as-Suddī, aḍ-Ḍaḥḥāk et Ibn Zayd.",
+   "es": "También se transmiten explicaciones correspondientes del nuzūl de Muǧāhid, Qatādah, as-Suddī, aḍ-Ḍaḥḥāk e Ibn Zayd."
+  },
+  "Islamweb · aṭ-Ṭabarī zu 43:61": {
+   "ar": "إسلام ويب · الطبري عند 43:61",
+   "en": "Islamweb · aṭ-Ṭabarī on 43:61",
+   "tr": "İslamweb · et-Taberî, 43:61",
+   "ku": "Islamweb · et-Taberî li 43:61",
+   "ckb": "ئیسلاموێب · تەبەری لە 43:61",
+   "bs": "Islamweb · aṭ-Ṭabarī uz 43:61",
+   "fr": "Islamweb · aṭ-Ṭabarī sur 43:61",
+   "es": "Islamweb · aṭ-Ṭabarī en 43:61"
+  },
+  "Direktmarkierung bei „Nuzūl ʿĪsā ibn Maryam“": {
+   "ar": "تحديد مباشر عند «نزول عيسى بن مريم»",
+   "en": "direct marker at “nuzūl of ʿĪsā ibn Maryam”",
+   "tr": "“ʿĪsā ibn Meryem’in nüzûlü” yanında doğrudan işaret",
+   "ku": "nîşana rasterast li “nuzûla ʿĪsā ibn Meryem”",
+   "ckb": "نیشانەی ڕاستەوخۆ لای «نزول عیسای کوڕی مەریەم»",
+   "bs": "izravna oznaka kod „nuzūl ʿĪsāa ibn Merjema“",
+   "fr": "marquage direct à « nuzūl de ʿĪsā ibn Maryam »",
+   "es": "marca directa en “nuzūl de ʿĪsā ibn Maryam”"
+  },
+  "Ṣaḥīḥ: Die Ummah, ihr Amīr und ʿĪsā ibn Maryam": {
+   "ar": "صحيح: الأمة، وأميرها، وعيسى بن مريم",
+   "en": "Ṣaḥīḥ: the ummah, its amīr, and ʿĪsā ibn Maryam",
+   "tr": "Sahih: ümmet, emîri ve ʿĪsā ibn Meryem",
+   "ku": "Sehîh: ummet, emîrê wê, û ʿĪsā ibn Meryem",
+   "ckb": "سەحیح: ئوممەت، ئەمیرەکەی، و عیسای کوڕی مەریەم",
+   "bs": "Sahih: ummet, njen emir i ʿĪsā ibn Merjem",
+   "fr": "Ṣaḥīḥ : l’ummah, son amīr, et ʿĪsā ibn Maryam",
+   "es": "Ṣaḥīḥ: la ummah, su amīr y ʿĪsā ibn Maryam"
+  },
+  "„Wie wird es mit euch sein, wenn Ibn Maryam unter euch herabsteigt und euer Imām aus euch ist?“": {
+   "ar": "«كيف يكون شأنكم إذا نزل ابن مريم فيكم وإمامكم منكم؟»",
+   "en": "“How will it be with you when Ibn Maryam descends among you and your imām is from among you?”",
+   "tr": "“İbn Meryem aranıza indiğinde ve imamınız sizden olduğunda hâliniz nasıl olur?”",
+   "ku": "“Dema ku Ibn Meryem di nav we de dakeve û imamê we ji we be, hûnê çawa bin?”",
+   "ckb": "«چۆن دەبن کاتێک کوڕی مەریەم لە نێوانتان دادەبەزێت و ئیمامەکەتان لە ئێوە بێت؟»",
+   "bs": "„Kako će biti s vama kada Ibn Merjem siđe među vas i vaš imam bude od vas?“",
+   "fr": "« Comment en sera-t-il de vous lorsque Ibn Maryam descendra parmi vous et que votre imām sera d’entre vous ? »",
+   "es": "“¿Cómo será con vosotros cuando Ibn Maryam descienda entre vosotros y vuestro imām sea de vosotros?”"
+  },
+  "Ṣaḥīḥ Muslim 156 nennt zuerst eine Gruppe": {
+   "ar": "صحيح مسلم 156 يذكر أولًا جماعة",
+   "en": "Ṣaḥīḥ Muslim 156 first names a group",
+   "tr": "Sahih Muslim 156 önce bir topluluğu anar",
+   "ku": "Sehîh Muslim 156 pêşî komalekê bi nav dike",
+   "ckb": "سەحیح مسلم 156 سەرەتا کۆمەڵێک ناودەبات",
+   "bs": "Sahih Muslim 156 prvo spominje skupinu",
+   "fr": "Ṣaḥīḥ Muslim 156 nomme d’abord un groupe",
+   "es": "Ṣaḥīḥ Muslim 156 nombra primero a un grupo"
+  },
+  "„Dann steigt ʿĪsā ibn Maryam herab.“": {
+   "ar": "«ثم ينزل عيسى بن مريم.»",
+   "en": "“Then ʿĪsā ibn Maryam descends.”",
+   "tr": "“Sonra ʿĪsā ibn Meryem iner.”",
+   "ku": "“Paşê ʿĪsā ibn Meryem dakeve.”",
+   "ckb": "«پاشان عیسای کوڕی مەریەم دادەبەزێت.»",
+   "bs": "„Zatim silazi ʿĪsā ibn Merjem.“",
+   "fr": "« Puis ʿĪsā ibn Maryam descend. »",
+   "es": "“Luego desciende ʿĪsā ibn Maryam.”"
+  },
+  "mit ihm. Der Text unterscheidet damit die Ummah und ihren Amīr von dem zu ihnen herabsteigenden ʿĪsā ibn Maryam.": {
+   "ar": "معه. وبذلك يميّز النص الأمة وأميرها من عيسى بن مريم النازل إليهم.",
+   "en": "with him. The text thereby distinguishes the ummah and its amīr from ʿĪsā ibn Maryam who descends to them.",
+   "tr": "onunla. Metin böylece ümmeti ve emîrini, onlara inen ʿĪsā ibn Meryem’den ayırır.",
+   "ku": "bi wî re. Bi vî awayî nivîs ummetê û emîrê wê ji ʿĪsā ibn Meryem ê ku ber bi wan dakeve cuda dike.",
+   "ckb": "لەگەڵی. بەمە دەقەکە ئوممەت و ئەمیرەکەی لە عیسای کوڕی مەریەمی دابەزۆ بۆ لایان جیا دەکاتەوە.",
+   "bs": "s njim. Tekst time razlikuje ummet i njenog emira od ʿĪsāa ibn Merjema koji k njima silazi.",
+   "fr": "avec lui. Le texte distingue ainsi l’ummah et son amīr de ʿĪsā ibn Maryam qui descend vers eux.",
+   "es": "con él. El texto distingue así a la ummah y a su amīr de ʿĪsā ibn Maryam que desciende hacia ellos."
+  },
+  "Dorar · al-Buḫārī 3449 / Muslim 155": {
+   "ar": "دورار · البخاري 3449 / مسلم 155",
+   "en": "Dorar · al-Bukhārī 3449 / Muslim 155",
+   "tr": "Dorar · el-Buhârî 3449 / Müslim 155",
+   "ku": "Dorar · el-Buxarî 3449 / Muslim 155",
+   "ckb": "دورار · بوخاری 3449 / مسلم 155",
+   "bs": "Dorar · al-Buḫārī 3449 / Muslim 155",
+   "fr": "Dorar · al-Bukhārī 3449 / Muslim 155",
+   "es": "Dorar · al-Bukhārī 3449 / Muslim 155"
+  },
+  "Ibn Maryam steigt herab; der Imām ist aus den Muslimen": {
+   "ar": "ابن مريم ينزل؛ والإمام من المسلمين",
+   "en": "Ibn Maryam descends; the imām is from the Muslims",
+   "tr": "İbn Meryem iner; imam Müslümanlardandır",
+   "ku": "Ibn Meryem dakeve; imam ji misilmanan e",
+   "ckb": "کوڕی مەریەم دادەبەزێت؛ ئیمام لە موسڵمانانە",
+   "bs": "Ibn Merjem silazi; imam je od muslimana",
+   "fr": "Ibn Maryam descend ; l’imām est d’entre les musulmans",
+   "es": "Ibn Maryam desciende; el imām es de los musulmanes"
+  },
+  "„Meine Ummah“ → „ʿĪsā ibn Maryam“ → „ihr Amīr“": {
+   "ar": "«أمتي» ← «عيسى بن مريم» ← «أميرهم»",
+   "en": "“My ummah” → “ʿĪsā ibn Maryam” → “their amīr”",
+   "tr": "“Ümmetim” → “ʿĪsā ibn Meryem” → “emîrleri”",
+   "ku": "“Ummeta min” → “ʿĪsā ibn Meryem” → “emîrê wan”",
+   "ckb": "«ئوممەتەکەم» ← «عیسای کوڕی مەریەم» ← «ئەمیرەکەیان»",
+   "bs": "„Moja ummet“ → „ʿĪsā ibn Merjem“ → „njihov emir“",
+   "fr": "« Mon ummah » → « ʿĪsā ibn Maryam » → « leur amīr »",
+   "es": "“Mi ummah” → “ʿĪsā ibn Maryam” → “su amīr”"
+  },
+  "PDF / Scan · Ṣaḥīḥ Muslim": {
+   "ar": "PDF / مسح · صحيح مسلم",
+   "en": "PDF / scan · Ṣaḥīḥ Muslim",
+   "tr": "PDF / tarama · Sahih Müslim",
+   "ku": "PDF / scan · Sehîh Muslim",
+   "ckb": "PDF / سکان · سەحیح مسلم",
+   "bs": "PDF / sken · Sahih Muslim",
+   "fr": "PDF / scan · Ṣaḥīḥ Muslim",
+   "es": "PDF / escaneo · Ṣaḥīḥ Muslim"
+  },
+  "Waqfeya, Ausgabe Muḥammad Fuʾād ʿAbd al-Bāqī": {
+   "ar": "وقفية، طبعة محمد فؤاد عبد الباقي",
+   "en": "Waqfeya, edition of Muḥammad Fuʾād ʿAbd al-Bāqī",
+   "tr": "Vakfiyye, Muhammed Fuâd Abdülbâkî baskısı",
+   "ku": "Waqfeya, çapa Muḥammad Fuʾād ʿAbd al-Bāqī",
+   "ckb": "وەقفییە، چاپی محمد فؤاد عبد الباقي",
+   "bs": "Waqfeya, izdanje Muḥammada Fuʾāda ʿAbd al-Bāqīja",
+   "fr": "Waqfeya, édition de Muḥammad Fuʾād ʿAbd al-Bāqī",
+   "es": "Waqfeya, edición de Muḥammad Fuʾād ʿAbd al-Bāqī"
+  },
+  "Ṣaḥīḥ Muslim 2937: Ort, Engel und Daǧǧāl": {
+   "ar": "صحيح مسلم 2937: المكان، والملائكة، والدجال",
+   "en": "Ṣaḥīḥ Muslim 2937: the place, the angels, and the Dajjāl",
+   "tr": "Sahih Müslim 2937: yer, melekler ve Deccâl",
+   "ku": "Sehîh Muslim 2937: cih, milyaket û Deccal",
+   "ckb": "سەحیح مسلم 2937: شوێن، فریشتەکان، و دەججال",
+   "bs": "Sahih Muslim 2937: mjesto, meleki i Dedždžāl",
+   "fr": "Ṣaḥīḥ Muslim 2937 : le lieu, les anges et le Dajjāl",
+   "es": "Ṣaḥīḥ Muslim 2937: el lugar, los ángeles y el Dajjāl"
+  },
+  "Der Prophet ﷺ berichtet, dass Allah": {
+   "ar": "يخبر النبي ﷺ أن الله",
+   "en": "The Prophet ﷺ reports that Allah",
+   "tr": "Peygamber ﷺ haber verir ki Allah",
+   "ku": "Pêxember ﷺ agah dike ku Allah",
+   "ckb": "پێغەمبەر ﷺ هەواڵ دەدات کە الله",
+   "bs": "Vjerovjesnik ﷺ javlja da će Allah",
+   "fr": "Le Prophète ﷺ rapporte qu’Allah",
+   "es": "El Profeta ﷺ informa que Allah"
+  },
+  "senden werde. Er steigt beim weißen Minarett östlich von Damaskus herab, legt seine Hände auf die Flügel zweier Engel und tötet den Daǧǧāl beim Tor von Ludd.": {
+   "ar": "سيرسله. ينزل عند المنارة البيضاء شرقي دمشق، ويضع يديه على جناحي ملكين، ويقتل الدجال عند باب لدّ.",
+   "en": "will send him. He descends at the white minaret east of Damascus, places his hands on the wings of two angels, and kills the Dajjāl at the gate of Ludd.",
+   "tr": "onu gönderecektir. Şam’ın doğusundaki beyaz minarenin yanında iner, ellerini iki meleğin kanatlarına koyar ve Deccâl’i Lüdd kapısında öldürür.",
+   "ku": "wê wî bişîne. Ew li bal minareya spî ya rojhilatê Şamê dakeve, destên xwe datîne ser baskên du milyaketan, û Deccal li ber deriyê Lud dide kuştin.",
+   "ckb": "دەینێرێت. لەلای منارەی سپی ڕۆژهەڵاتی دیمەشق دادەبەزێت، دەستەکانی لەسەر باڵی دوو فریشتە دادەنێت، و دەججال لە دەروازەی لود دەکوژێت.",
+   "bs": "će ga poslati. On silazi kod bijelog minareta istočno od Damaska, stavlja ruke na krila dva meleka i ubija Dedždžāla kod kapije Ludda.",
+   "fr": "l’enverra. Il descend près du minaret blanc à l’est de Damas, pose ses mains sur les ailes de deux anges et tue le Dajjāl à la porte de Ludd.",
+   "es": "lo enviará. Desciende junto al minarete blanco al este de Damasco, pone sus manos sobre las alas de dos ángeles y mata al Dajjāl en la puerta de Ludd."
+  },
+  "Dorar · Ṣaḥīḥ Muslim 2937": {
+   "ar": "دورار · صحيح مسلم 2937",
+   "en": "Dorar · Ṣaḥīḥ Muslim 2937",
+   "tr": "Dorar · Sahih Müslim 2937",
+   "ku": "Dorar · Sehîh Muslim 2937",
+   "ckb": "دورار · سەحیح مسلم 2937",
+   "bs": "Dorar · Sahih Muslim 2937",
+   "fr": "Dorar · Ṣaḥīḥ Muslim 2937",
+   "es": "Dorar · Ṣaḥīḥ Muslim 2937"
+  },
+  "Direkter Wortlaut zum Nuzūl beim weißen Minarett und zur Tötung des Daǧǧāl": {
+   "ar": "اللفظ المباشر للنزول عند المنارة البيضاء ولقتل الدجال",
+   "en": "direct wording of the nuzūl at the white minaret and of the killing of the Dajjāl",
+   "tr": "beyaz minaredeki nüzûle ve Deccâl’in öldürülmesine dair doğrudan lafız",
+   "ku": "gotina rasterast a nuzûlê li minareya spî û kuştina Deccal",
+   "ckb": "ووشەی ڕاستەوخۆی نزول لای منارەی سپی و کوشتنی دەججال",
+   "bs": "izravan tekst nuzūla kod bijelog minareta i ubijanja Dedždžāla",
+   "fr": "libellé direct du nuzūl près du minaret blanc et du meurtre du Dajjāl",
+   "es": "texto directo del nuzūl junto al minarete blanco y de la muerte del Dajjāl"
+  },
+  "Aṭ-Ṭaḥāwī nennt im Glauben an die Zeichen der Stunde ausdrücklich": {
+   "ar": "الطحاوي يذكر في الإيمان بعلامات الساعة صراحة",
+   "en": "Aṭ-Ṭaḥāwī, in the belief in the signs of the Hour, expressly names",
+   "tr": "et-Tahâvî, saatin alametlerine imanda açıkça anar",
+   "ku": "et-Tehawî, di baweriya bi nîşanên saetê de, bi eşkere bi nav dike",
+   "ckb": "تەحاوی لە باوەڕ بە نیشانەکانی کاتژمێردا بە ڕاشکاوی ناوی",
+   "bs": "Aṭ-Ṭaḥāwī u vjerovanju u znakove Časa izričito spominje",
+   "fr": "Aṭ-Ṭaḥāwī, dans la foi aux signes de l’Heure, nomme expressément",
+   "es": "Aṭ-Ṭaḥāwī, en la fe en las señales de la Hora, nombra expresamente"
+  },
+  "die Herabkunft von ʿĪsā ibn Maryam vom Himmel": {
+   "ar": "نزول عيسى بن مريم من السماء",
+   "en": "the descent of ʿĪsā ibn Maryam from heaven",
+   "tr": "ʿĪsā ibn Meryem’in gökten inişini",
+   "ku": "daketina ʿĪsā ibn Meryem ji ezman",
+   "ckb": "دابەزینی عیسای کوڕی مەریەم لە ئاسمان",
+   "bs": "silazak ʿĪsāa ibn Merjema s neba",
+   "fr": "la descente de ʿĪsā ibn Maryam du ciel",
+   "es": "el descenso de ʿĪsā ibn Maryam desde el cielo"
+  },
+  "Islamweb · al-ʿAqīdah aṭ-Ṭaḥāwiyyah": {
+   "ar": "إسلام ويب · العقيدة الطحاوية",
+   "en": "Islamweb · al-ʿAqīdah aṭ-Ṭaḥāwiyyah",
+   "tr": "İslamweb · el-Akîdetü’t-Tahâviyye",
+   "ku": "Islamweb · el-ʿAqîde et-Tehawiyye",
+   "ckb": "ئیسلاموێب · عەقیدەی تەحاوی",
+   "bs": "Islamweb · al-ʿAqīdah aṭ-Ṭaḥāwiyyah",
+   "fr": "Islamweb · al-ʿAqīdah aṭ-Ṭaḥāwiyyah",
+   "es": "Islamweb · al-ʿAqīdah aṭ-Ṭaḥāwiyyah"
+  },
+  "Textmarkierung beim Nuzūl von ʿĪsā ibn Maryam vom Himmel": {
+   "ar": "تحديد النص عند نزول عيسى بن مريم من السماء",
+   "en": "text marker at the nuzūl of ʿĪsā ibn Maryam from heaven",
+   "tr": "ʿĪsā ibn Meryem’in gökten nüzûlü yanında metin işaretlemesi",
+   "ku": "nîşana tekstê li nuzûla ʿĪsā ibn Meryem ji ezman",
+   "ckb": "نیشانەی دەق لای نزولی عیسای کوڕی مەریەم لە ئاسمان",
+   "bs": "oznaka teksta kod nuzūla ʿĪsāa ibn Merjema s neba",
+   "fr": "marquage du texte au nuzūl de ʿĪsā ibn Maryam du ciel",
+   "es": "marca de texto en el nuzūl de ʿĪsā ibn Maryam desde el cielo"
+  },
+  "Shamela · al-ʿAqīdah aṭ-Ṭaḥāwiyyah": {
+   "ar": "شاملة · العقيدة الطحاوية",
+   "en": "Shamela · al-ʿAqīdah aṭ-Ṭaḥāwiyyah",
+   "tr": "Şâmile · el-Akîdetü’t-Tahâviyye",
+   "ku": "Shamela · el-ʿAqîde et-Tehawiyye",
+   "ckb": "شاملە · عەقیدەی تەحاوی",
+   "bs": "Shamela · al-ʿAqīdah aṭ-Ṭaḥāwiyyah",
+   "fr": "Shamela · al-ʿAqīdah aṭ-Ṭaḥāwiyyah",
+   "es": "Shamela · al-ʿAqīdah aṭ-Ṭaḥāwiyyah"
+  },
+  "PDF / Scan · aṭ-Ṭaḥāwiyyah": {
+   "ar": "PDF / مسح · الطحاوية",
+   "en": "PDF / scan · aṭ-Ṭaḥāwiyyah",
+   "tr": "PDF / tarama · et-Tahâviyye",
+   "ku": "PDF / scan · et-Tehawiyye",
+   "ckb": "PDF / سکان · تەحاویە",
+   "bs": "PDF / sken · aṭ-Ṭaḥāwiyyah",
+   "fr": "PDF / scan · aṭ-Ṭaḥāwiyyah",
+   "es": "PDF / escaneo · aṭ-Ṭaḥāwiyyah"
+  },
+  "Scan der Ausgabe al-Maktab al-Islāmī": {
+   "ar": "مسح طبعة المكتب الإسلامي",
+   "en": "scan of the edition of al-Maktab al-Islāmī",
+   "tr": "el-Mektebü’l-İslâmî baskısının taraması",
+   "ku": "scana çapa el-Mekteb el-İslamî",
+   "ckb": "سکانی چاپی المکتب الإسلامي",
+   "bs": "sken izdanja al-Maktab al-Islāmī",
+   "fr": "scan de l’édition d’al-Maktab al-Islāmī",
+   "es": "escaneo de la edición de al-Maktab al-Islāmī"
+  },
+  "Ibn Baṭṭah – gest. 387 H. – Konsenskontext": {
+   "ar": "ابن بطة – توفي 387 هـ – سياق الإجماع",
+   "en": "Ibn Baṭṭah – d. 387 AH – consensus context",
+   "tr": "İbn Batta – ö. 387 H. – icmâ bağlamı",
+   "ku": "Ibn Beṭṭa – m. 387 H. – çarçoveya îcmaê",
+   "ckb": "ابن بطة – کۆچی دوایی 387 ک. – چوارچێوەی کۆدەنگی",
+   "bs": "Ibn Baṭṭah – umro 387. h. – kontekst konsenzusa",
+   "fr": "Ibn Baṭṭah – m. 387 H. – contexte du consensus",
+   "es": "Ibn Baṭṭah – m. 387 H. – contexto del consenso"
+  },
+  "Ibn Baṭṭah führt innerhalb seiner Darstellung dessen, worauf sich nach seiner Aussage Ahl al-Islām und die Ummah in den Grundlagen geeinigt hätten, den Glauben an, dass": {
+   "ar": "ابن بطة يذكر، ضمن عرضه لما قال إن أهل الإسلام والأمة قد اتفقوا عليه في الأصول، الإيمان بأن",
+   "en": "Ibn Baṭṭah, within his presentation of that upon which, according to his statement, ahl al-Islām and the ummah had agreed in the foundations, mentions the belief that",
+   "tr": "İbn Batta, kendi ifadesine göre ehl-i İslam’ın ve ümmetin esaslarda üzerinde birleştiğini sunduğu yerde, şuna imanı anar:",
+   "ku": "Ibn Beṭṭa, di nav pêşkêşkirina wê yekê de ku li gor gotina wî ehlê îslamê û ummet di bingehan de li ser li hev kirine, baweriyê tîne ku",
+   "ckb": "ابن بطة، لە ناو پیشاندانی ئەوەی کە بەپێی وتەی خۆی ئەهلی ئیسلام و ئوممەت لە بنەڕەتەکاندا لەسەری کۆک بوون، باوەڕ دەهێنێت کە",
+   "bs": "Ibn Baṭṭah, unutar izlaganja onoga o čemu su se, prema njegovoj izjavi, ehli-islam i ummet složili u osnovama, navodi vjerovanje da",
+   "fr": "Ibn Baṭṭah, dans son exposé de ce sur quoi, selon sa parole, ahl al-Islām et l’ummah se seraient accordés dans les fondements, mentionne la foi que",
+   "es": "Ibn Baṭṭah, dentro de su exposición de aquello en lo que, según su declaración, ahl al-Islām y la ummah se habrían puesto de acuerdo en los fundamentos, menciona la fe de que"
+  },
+  "ʿĪsā ibn Maryam vom Himmel zur Erde herabsteigt": {
+   "ar": "عيسى بن مريم ينزل من السماء إلى الأرض",
+   "en": "ʿĪsā ibn Maryam descends from heaven to the earth",
+   "tr": "ʿĪsā ibn Meryem gökten yere iner",
+   "ku": "ʿĪsā ibn Meryem ji ezman ber bi erdê dakeve",
+   "ckb": "عیسای کوڕی مەریەم لە ئاسمانەوە بۆ سەر زەوی دادەبەزێت",
+   "bs": "ʿĪsā ibn Merjem silazi s neba na zemlju",
+   "fr": "ʿĪsā ibn Maryam descend du ciel vers la terre",
+   "es": "ʿĪsā ibn Maryam desciende del cielo a la tierra"
+  },
+  "Einleitung des Konsenskontexts und Nuzūl-Aussage": {
+   "ar": "مقدمة سياق الإجماع وقول النزول",
+   "en": "introduction of the consensus context and the nuzūl statement",
+   "tr": "icmâ bağlamının girişi ve nüzûl sözü",
+   "ku": "pêşgotina çarçoveya îcmaê û gotina nuzûlê",
+   "ckb": "پێشەکی چوارچێوەی کۆدەنگی و وتەی نزول",
+   "bs": "uvod konteksta konsenzusa i izjava o nuzūlu",
+   "fr": "introduction du contexte du consensus et parole du nuzūl",
+   "es": "introducción del contexto del consenso y la declaración del nuzūl"
+  },
+  "PDF / Scan · al-Ibānah aṣ-Ṣuġrā": {
+   "ar": "PDF / مسح · الإبانة الصغرى",
+   "en": "PDF / scan · al-Ibānah aṣ-Ṣuġrā",
+   "tr": "PDF / tarama · el-İbânetü’s-suğrâ",
+   "ku": "PDF / scan · el-İbâne es-Suğra",
+   "ckb": "PDF / سکان · الإبانة الصغرى",
+   "bs": "PDF / sken · al-Ibānah aṣ-Ṣuġrā",
+   "fr": "PDF / scan · al-Ibānah aṣ-Ṣuġrā",
+   "es": "PDF / escaneo · al-Ibānah aṣ-Ṣuġrā"
+  },
+  "Waqfeya-Scan; gedruckte Fundstellen S. 191 und 241": {
+   "ar": "مسح وقفية؛ مواضع مطبوعة ص 191 و241",
+   "en": "Waqfeya scan; printed loci pp. 191 and 241",
+   "tr": "Vakfiyye taraması; basılı yerler s. 191 ve 241",
+   "ku": "Scana Waqfeya; cihên çapkirî r. 191 û 241",
+   "ckb": "سکانی وەقفییە؛ شوێنە چاپکراوەکان ل 191 و 241",
+   "bs": "Waqfeya-sken; štampana mjesta str. 191 i 241",
+   "fr": "Scan Waqfeya ; lieux imprimés p. 191 et 241",
+   "es": "Escaneo de Waqfeya; lugares impresos pp. 191 y 241"
+  },
+  "Abū ʿAmr ad-Dānī – gest. 444 H.": {
+   "ar": "أبو عمرو الداني – توفي 444 هـ",
+   "en": "Abū ʿAmr ad-Dānī – d. 444 AH",
+   "tr": "Ebû Amr ed-Dânî – ö. 444 H.",
+   "ku": "Ebû Amr ed-Dânî – m. 444 H.",
+   "ckb": "أبو عمرو الداني – کۆچی دوایی 444 ک.",
+   "bs": "Abū ʿAmr ad-Dānī – umro 444. h.",
+   "fr": "Abū ʿAmr ad-Dānī – m. 444 H.",
+   "es": "Abū ʿAmr ad-Dānī – m. 444 H."
+  },
+  "Ad-Dānī zählt den Nuzūl ʿĪsās zu dem, woran aufgrund authentischer Überlieferung vom Propheten ﷺ geglaubt werden muss. Zu an-Nisāʾ 4:159 erklärt er:": {
+   "ar": "الداني يعدّ نزول عيسى مما يجب الإيمان به بناء على رواية صحيحة عن النبي ﷺ. وعند النساء 4:159 يبيّن:",
+   "en": "Ad-Dānī counts the nuzūl of ʿĪsā among that which must be believed on the basis of authentic transmission from the Prophet ﷺ. At an-Nisāʾ 4:159 he explains:",
+   "tr": "ed-Dânî, ʿĪsā’nın nüzûlünü, Peygamber ﷺ’den sahih nakle dayanarak iman edilmesi gerekenler arasında sayar. En-Nisâ 4:159’da açıklar:",
+   "ku": "ed-Dânî nuzûla ʿĪsā di nav wê de dihejmêre ku divê li ser bingeha veguhastineke sehîh ji Pêxember ﷺ pê were bawerkirin. Li en-Nisâ 4:159 diyar dike:",
+   "ckb": "دانی نزولی عیسا دەخاتە ناو ئەوەی کە دەبێت لەسەر بنەمای گێڕانەوەیەکی سەحیح لە پێغەمبەر ﷺ باوەڕی پێ بهێنرێت. لە نسائ 4:159 ڕوونی دەکاتەوە:",
+   "bs": "Ad-Dānī ubraja nuzūl ʿĪsāa u ono u što se mora vjerovati na osnovu vjerodostojne predaje od Vjerovjesnika ﷺ. Uz an-Nisāʾ 4:159 objašnjava:",
+   "fr": "Ad-Dānī compte le nuzūl de ʿĪsā parmi ce qui doit être cru sur la base d’une transmission authentique du Prophète ﷺ. À an-Nisāʾ 4:159, il explique :",
+   "es": "Ad-Dānī cuenta el nuzūl de ʿĪsā entre aquello en lo que se debe creer sobre la base de una transmisión auténtica del Profeta ﷺ. En an-Nisāʾ 4:159 explica:"
+  },
+  "vor dem Tod von ʿĪsā, wenn er herabsteigt": {
+   "ar": "قبل موت عيسى، إذا نزل",
+   "en": "before the death of ʿĪsā, when he descends",
+   "tr": "ʿĪsā’nın ölümünden önce, indiğinde",
+   "ku": "berî mirina ʿĪsā, gava dakeve",
+   "ckb": "پێش مردنی عیسا، کاتێک دادەبەزێت",
+   "bs": "prije smrti ʿĪsāa, kada siđe",
+   "fr": "avant la mort de ʿĪsā, lorsqu’il descend",
+   "es": "antes de la muerte de ʿĪsā, cuando desciende"
+  },
+  "Direktmarkierung beim Zitat aus ar-Risālah al-Wāfiyah": {
+   "ar": "تحديد مباشر عند النقل من الرسالة الوافية",
+   "en": "direct marker at the quotation from ar-Risālah al-Wāfiyah",
+   "tr": "er-Risâletü’l-vâfiye’den nakilde doğrudan işaret",
+   "ku": "nîşana rasterast li veguhastina ji er-Risale el-Wafiye",
+   "ckb": "نیشانەی ڕاستەوخۆ لای گێڕانەوە لە الرسالة الوافیة",
+   "bs": "izravna oznaka kod navoda iz ar-Risālah al-Wāfiyah",
+   "fr": "marquage direct à la citation d’ar-Risālah al-Wāfiyah",
+   "es": "marca directa en la cita de ar-Risālah al-Wāfiyah"
+  },
+  "PDF / Scan · ar-Risālah al-Wāfiyah": {
+   "ar": "PDF / مسح · الرسالة الوافية",
+   "en": "PDF / scan · ar-Risālah al-Wāfiyah",
+   "tr": "PDF / tarama · er-Risâletü’l-vâfiye",
+   "ku": "PDF / scan · er-Risale el-Wafiye",
+   "ckb": "PDF / سکان · الرسالة الوافیة",
+   "bs": "PDF / sken · ar-Risālah al-Wāfiyah",
+   "fr": "PDF / scan · ar-Risālah al-Wāfiyah",
+   "es": "PDF / escaneo · ar-Risālah al-Wāfiyah"
+  },
+  "Waqfeya-Scan; gedruckte Fundstelle S. 243": {
+   "ar": "مسح وقفية؛ الموضع المطبوع ص 243",
+   "en": "Waqfeya scan; printed locus p. 243",
+   "tr": "Vakfiyye taraması; basılı yer s. 243",
+   "ku": "Scana Waqfeya; cihê çapkirî r. 243",
+   "ckb": "سکانی وەقفییە؛ شوێنی چاپکراو ل 243",
+   "bs": "Waqfeya-sken; štampano mjesto str. 243",
+   "fr": "Scan Waqfeya ; lieu imprimé p. 243",
+   "es": "Escaneo de Waqfeya; lugar impreso p. 243"
+  },
+  "Der frühe Ikhtilāf über mutawaffīka ist real. Er betrifft jedoch die Bedeutung und zeitliche Einordnung von tawaffī. Die authentischen Nuzūl-Texte nennen ausdrücklich ʿĪsā ibn Maryam, unterscheiden ihn von der bereits vorhandenen Ummah und ihrem Amīr und beschreiben konkrete Ereignisse seines Nuzūl.": {
+   "ar": "الاختلاف المبكر في «متوفيك» واقع. لكنه يتعلق بمعنى التوفّي وترتيبه الزمني. نصوص النزول الصحيحة تسمّي عيسى بن مريم صراحة، وتميّزه من الأمة الموجودة وأميرها، وتصف أحداثًا معيّنة لنزوله.",
+   "en": "The early ikhtilāf about mutawaffīka is real. It concerns, however, the meaning and the temporal placing of tawaffī. The authentic nuzūl texts expressly name ʿĪsā ibn Maryam, distinguish him from the ummah already present and from its amīr, and describe concrete events of his nuzūl.",
+   "tr": "“Müteweffîke” üzerindeki erken ihtilaf gerçektir. Fakat o, teveffânın anlamı ve zaman bakımından yerleştirilmesiyle ilgilidir. Sahih nüzûl metinleri ʿĪsā ibn Meryem’i açıkça adlandırır, onu mevcut ümmetten ve emîrinden ayırır ve nüzûlünün belirli olaylarını anlatır.",
+   "ku": "Îxtilafa zû li ser “mutewaffîke” rast e. Lê ew li ser wate û cihê demî yê tewaffî ye. Nivîsên nuzûlê yên sehîh bi eşkere ʿĪsā ibn Meryem bi nav dikin, wî ji ummeta heyî û emîrê wê cuda dikin, û bûyerên diyarkirî yên nuzûla wî diyar dikin.",
+   "ckb": "ناکۆکیی زوو دەربارەی «متوفّیک» ڕاستەقینەیە. بەڵام پەیوەندی بە واتای تەوەففی و دانانی کاتییەوە هەیە. دەقە سەحیحەکانی نزول بە ڕاشکاوی عیسای کوڕی مەریەم ناودەبەن، لە ئوممەتی ئامادە و ئەمیرەکەی جیای دەکەنەوە، و ڕووداوە دیاریکراوەکانی نزولەکەی وەسف دەکەن.",
+   "bs": "Rani ihtilaf o mutewaffīka je stvaran. On se ipak tiče značenja i vremenskog smještanja tewaffīja. Vjerodostojni tekstovi nuzūla izričito imenuju ʿĪsāa ibn Merjema, razlikuju ga od već prisutne ummeta i njenog emira i opisuju određene događaje njegova nuzūla.",
+   "fr": "L’ikhtilāf ancien sur mutawaffīka est réel. Il concerne toutefois le sens et le placement temporel de tawaffī. Les textes authentiques du nuzūl nomment expressément ʿĪsā ibn Maryam, le distinguent de l’ummah déjà présente et de son amīr, et décrivent des événements concrets de son nuzūl.",
+   "es": "El ikhtilāf temprano sobre mutawaffīka es real. Concierne, sin embargo, al sentido y a la colocación temporal de tawaffī. Los textos auténticos del nuzūl nombran expresamente a ʿĪsā ibn Maryam, lo distinguen de la ummah ya presente y de su amīr, y describen acontecimientos concretos de su nuzūl."
+  },
+  "In den hier dokumentierten frühen Quellen findet sich kein entsprechender Beleg dafür, dass mit diesem ʿĪsā ibn Maryam lediglich ein später geborener Mann aus der Ummah gemeint sei.": {
+   "ar": "في المصادر المبكرة الموثقة هنا لا يوجد دليل مقابل على أن هذا عيسى بن مريم يعني فحسب رجلًا مولودًا لاحقًا من الأمة.",
+   "en": "In the early sources documented here, no corresponding evidence is found that this ʿĪsā ibn Maryam means merely a later-born man from the ummah.",
+   "tr": "Burada belgelenen erken kaynaklarda, bu ʿĪsā ibn Meryem’in yalnızca ümmetten sonradan doğmuş bir adam olduğu yönünde buna karşılık gelen bir delil bulunmaz.",
+   "ku": "Di çavkaniyên zû yên li vir belgekirî de belgeyeke li hember tune ku ev ʿĪsā ibn Meryem tenê mêrekî paşê ji dayik bûyî ji ummetê be.",
+   "ckb": "لە سەرچاوە زووەکانی لێرە بەڵگەکراودا بەڵگەیەکی هاوتا نییە کە ئەم عیسای کوڕی مەریەم تەنها پیاوێکی دواتر لەدایکبوو لە ئوممەت بێت.",
+   "bs": "U ovdje dokumentiranim ranim izvorima nema odgovarajućeg dokaza da ovaj ʿĪsā ibn Merjem znači samo kasnije rođenog čovjeka iz ummeta.",
+   "fr": "Dans les sources anciennes documentées ici, on ne trouve pas de preuve correspondante que ce ʿĪsā ibn Maryam désigne seulement un homme né plus tard, issu de l’ummah.",
+   "es": "En las fuentes tempranas documentadas aquí no se halla una prueba correspondiente de que este ʿĪsā ibn Maryam signifique solo un hombre nacido después, de la ummah."
   }
  }
 }

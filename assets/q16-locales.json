@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,278 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Wissen kommt vor Wort und Tat – DAR AL TAWḤĪD": {
+   "ar": "العلم قبل القول والعمل – DAR AL TAWḤĪD",
+   "en": "Knowledge comes before word and deed – DAR AL TAWḤĪD",
+   "tr": "Bilgi, sözden ve amelden önce gelir – DAR AL TAWḤĪD",
+   "ku": "Zanîn berî gotin û kiryarê tê – DAR AL TAWḤĪD",
+   "ckb": "زانست پێش قسە و کردار دێت – DAR AL TAWḤĪD",
+   "bs": "Znanje dolazi prije riječi i djela – DAR AL TAWḤĪD",
+   "fr": "Le savoir vient avant la parole et l’acte – DAR AL TAWḤĪD",
+   "es": "El saber viene antes de la palabra y la obra – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "مساهمات وفق القرآن والسنة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre katkılar",
+   "ku": "Beşdarî li gor Qurʾān, Sunnah û Āthār",
+   "ckb": "بەشدارییەکان بەپێی القرآن و السنة و الآثار",
+   "bs": "Prilozi prema Qurʾānu, Sunni i Āthāru",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Contribuciones según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Ṣaḥīḥ al-Buḫārī · Wissen · ʿIlm · Qurʾān 47:19": {
+   "ar": "Ṣaḥīḥ al-Buḫārī · العلم · ʿIlm · القرآن 47:19",
+   "en": "Ṣaḥīḥ al-Buḫārī · knowledge · ʿIlm · Qurʾān 47:19",
+   "tr": "Ṣaḥīḥ al-Buḫārī · bilgi · ʿIlm · Qurʾān 47:19",
+   "ku": "Ṣaḥīḥ al-Buḫārī · zanîn · ʿIlm · Qurʾān 47:19",
+   "ckb": "Ṣaḥīḥ al-Buḫārī · زانست · ʿIlm · Qurʾān 47:19",
+   "bs": "Ṣaḥīḥ al-Buḫārī · znanje · ʿIlm · Qurʾān 47:19",
+   "fr": "Ṣaḥīḥ al-Buḫārī · savoir · ʿIlm · Qurʾān 47:19",
+   "es": "Ṣaḥīḥ al-Buḫārī · saber · ʿIlm · Qurʾān 47:19"
+  },
+  "Wissen kommt vor Wort und Tat": {
+   "ar": "العلم قبل القول والعمل",
+   "en": "Knowledge comes before word and deed",
+   "tr": "Bilgi, sözden ve amelden önce gelir",
+   "ku": "Zanîn berî gotin û kiryarê tê",
+   "ckb": "زانست پێش قسە و کردار دێت",
+   "bs": "Znanje dolazi prije riječi i djela",
+   "fr": "Le savoir vient avant la parole et l’acte",
+   "es": "El saber viene antes de la palabra y la obra"
+  },
+  "Imām al-Buḫārī stellte ein eigenes Kapitel auf: Wissen vor Reden und Handeln. Danach führte er als Beweis die Aussage von": {
+   "ar": "عقد Imām al-Buḫārī بابًا مستقلًا: العلم قبل القول والعمل. ثم أورد دليلًا قول",
+   "en": "Imām al-Buḫārī set up a chapter of his own: knowledge before speaking and acting. Then he brought as proof the statement of",
+   "tr": "Imām al-Buḫārī ayrı bir bölüm koydu: konuşmadan ve amelden önce bilgi. Sonra delil olarak şu sözü getirdi:",
+   "ku": "Imām al-Buḫārī beşek serbixwe danî: zanîn berî axaftin û kirinê. Paşê wek delîl gotina",
+   "ckb": "Imām al-Buḫārī بابەتێکی سەربەخۆی دانا: زانست پێش قسەکردن و کردار. پاشان وەک بەڵگە وتەی",
+   "bs": "Imām al-Buḫārī postavio je posebno poglavlje: znanje prije govora i djela. Zatim je kao dokaz naveo riječ",
+   "fr": "L’Imām al-Buḫārī a établi un chapitre propre : le savoir avant la parole et l’acte. Ensuite il a apporté comme preuve la parole de",
+   "es": "El Imām al-Buḫārī estableció un capítulo propio: el saber antes de hablar y de obrar. Luego trajo como prueba la palabra de"
+  },
+  "an: „Wisse also, dass es keinen anbetungswürdigen Gott gibt außer": {
+   "ar": ": «فاعلم أنه لا إله يُعبد إلا",
+   "en": "cites: “Know, then, that there is no god worthy of worship except",
+   "tr": "diye aktarır: “Bil ki, ibadete layık hiçbir ilah yoktur, ancak",
+   "ku": "tîne: “Bizane ku tu xwedayê şayanê perestinê nîne ji bilî",
+   "ckb": "دەیهێنێت: «بزانە کە هیچ خوایەکی شایستەی پەرستن نییە جگە لە",
+   "bs": "navodi: “Znaj dakle da nema boga dostojnog obožavanja osim",
+   "fr": "cite : « Sache donc qu’il n’y a pas de divinité digne d’adoration sauf",
+   "es": "cita: «Sabe, pues, que no hay dios digno de adoración excepto"
+  },
+  "Wissen als Grundlage vor Aussage, Handlung, Urteil und Daʿwah.": {
+   "ar": "العلم أساسًا قبل القول والعمل والحكم وDaʿwah.",
+   "en": "Knowledge as the basis before statement, action, judgment and Daʿwah.",
+   "tr": "Söz, amel, hüküm ve Daʿwah’tan önce temel olarak bilgi.",
+   "ku": "Zanîn wek bingeh berî gotin, kiryar, hukm û Daʿwah.",
+   "ckb": "زانست وەک بنەما پێش وتە، کردار، حوکم و Daʿwah.",
+   "bs": "Znanje kao temelj prije izjave, djela, presude i Daʿwah.",
+   "fr": "Le savoir comme fondement avant la parole, l’acte, le jugement et la Daʿwah.",
+   "es": "El saber como base antes de la afirmación, la obra, el fallo y la Daʿwah."
+  },
+  "Erst Wissen, dann Rede und Handlung. Wer ohne Wissen spricht, gefährdet sich selbst und andere.": {
+   "ar": "أولًا العلم، ثم القول والعمل. من يتكلم بلا علم يعرّض نفسه وغيره للخطر.",
+   "en": "First knowledge, then speech and action. Whoever speaks without knowledge endangers himself and others.",
+   "tr": "Önce bilgi, sonra söz ve amel. Bilgisiz konuşan kendini ve başkalarını tehlikeye atar.",
+   "ku": "Pêşî zanîn, paşê axaftin û kiryar. Yê ku bê zanîn diaxive xwe û yên din dixe metirsiyê.",
+   "ckb": "سەرەتا زانست، پاشان قسە و کردار. ئەوەی بێ زانست قسە دەکات خۆی و کەسانی دیکە دەخاتە مەترسی.",
+   "bs": "Prvo znanje, zatim govor i djelo. Ko govori bez znanja, ugrožava sebe i druge.",
+   "fr": "D’abord le savoir, puis la parole et l’acte. Qui parle sans savoir met en danger lui-même et les autres.",
+   "es": "Primero el saber, luego la palabra y la obra. Quien habla sin saber pone en peligro a sí mismo y a otros."
+  },
+  "Die Kapitelüberschrift bei al-Buḫārī": {
+   "ar": "عنوان الباب عند al-Buḫārī",
+   "en": "The chapter heading in al-Buḫārī",
+   "tr": "al-Buḫārī’deki bölüm başlığı",
+   "ku": "Sernavê beşê li cem al-Buḫārī",
+   "ckb": "سەردێڕی بابەت لای al-Buḫārī",
+   "bs": "Naslov poglavlja kod al-Buḫārīja",
+   "fr": "Le titre du chapitre chez al-Buḫārī",
+   "es": "El título del capítulo en al-Buḫārī"
+  },
+  "Imām al-Buḫārī رحمه الله setzte in Ṣaḥīḥ al-Buḫārī im Kitāb al-ʿIlm das Kapitel:": {
+   "ar": "وضع Imām al-Buḫārī رحمه الله في Ṣaḥīḥ al-Buḫārī في Kitāb al-ʿIlm الباب:",
+   "en": "Imām al-Buḫārī رحمه الله placed in Ṣaḥīḥ al-Buḫārī, in Kitāb al-ʿIlm, the chapter:",
+   "tr": "Imām al-Buḫārī رحمه الله, Ṣaḥīḥ al-Buḫārī’de Kitāb al-ʿIlm içinde şu bölümü koydu:",
+   "ku": "Imām al-Buḫārī رحمه الله di Ṣaḥīḥ al-Buḫārī de, di Kitāb al-ʿIlm de, ev beş danî:",
+   "ckb": "Imām al-Buḫārī رحمه الله لە Ṣaḥīḥ al-Buḫārī لە Kitāb al-ʿIlm ئەم بابەتەی دانا:",
+   "bs": "Imām al-Buḫārī رحمه الله stavio je u Ṣaḥīḥ al-Buḫārīju, u Kitāb al-ʿIlm, poglavlje:",
+   "fr": "L’Imām al-Buḫārī رحمه الله a placé dans Ṣaḥīḥ al-Buḫārī, dans Kitāb al-ʿIlm, le chapitre :",
+   "es": "El Imām al-Buḫārī رحمه الله puso en Ṣaḥīḥ al-Buḫārī, en Kitāb al-ʿIlm, el capítulo:"
+  },
+  "Kapitel: Wissen vor dem Reden und Handeln.": {
+   "ar": "باب: العلم قبل القول والعمل.",
+   "en": "Chapter: knowledge before speaking and acting.",
+   "tr": "Bölüm: konuşmadan ve amelden önce bilgi.",
+   "ku": "Beş: zanîn berî axaftin û kirinê.",
+   "ckb": "بابەت: زانست پێش قسەکردن و کردار.",
+   "bs": "Poglavlje: znanje prije govora i djela.",
+   "fr": "Chapitre : le savoir avant la parole et l’acte.",
+   "es": "Capítulo: el saber antes de hablar y de obrar."
+  },
+  "Damit stellte er die Ordnung klar: Der Diener beginnt nicht mit bloßer Rede oder Handlung, sondern mit Wissen, Beweis und Verständnis.": {
+   "ar": "وبذلك أوضح الترتيب: لا يبدأ العبد بمجرد القول أو العمل، بل بالعلم والدليل والفهم.",
+   "en": "With that he made the order clear: the servant does not begin with mere speech or action, but with knowledge, proof and understanding.",
+   "tr": "Bununla düzeni açık etti: kul salt sözle veya amelle başlamaz, bilgi, delil ve anlayışla başlar.",
+   "ku": "Bi wê rêzê zelal kir: bend ne bi tenê axaftin an kiryarê dest pê dike, belkî bi zanîn, delîl û têgihiştinê.",
+   "ckb": "بەوە ڕیزبەندییەکەی ڕوون کردەوە: بەندە بە تەنها قسە یان کردار دەست پێ ناکات، بەڵکو بە زانست، بەڵگە و تێگەیشتن.",
+   "bs": "Time je red jasno postavio: rob ne počinje samim govorom ili djelom, nego znanjem, dokazom i razumijevanjem.",
+   "fr": "Il a ainsi rendu l’ordre clair : le serviteur ne commence pas par la seule parole ou le seul acte, mais par le savoir, la preuve et la compréhension.",
+   "es": "Con ello dejó claro el orden: el siervo no empieza con la mera palabra o la mera obra, sino con el saber, la prueba y la comprensión."
+  },
+  "Der Beweis aus dem Qurʾān": {
+   "ar": "الدليل من القرآن",
+   "en": "The proof from the Qurʾān",
+   "tr": "Qurʾān’dan delil",
+   "ku": "Delîl ji Qurʾān",
+   "ckb": "بەڵگە لە Qurʾān",
+   "bs": "Dokaz iz Qurʾāna",
+   "fr": "La preuve tirée du Qurʾān",
+   "es": "La prueba del Qurʾān"
+  },
+  "al-Buḫārī führte direkt danach die Aussage von": {
+   "ar": "أورد al-Buḫārī مباشرة بعد ذلك قول",
+   "en": "al-Buḫārī brought immediately after that the statement of",
+   "tr": "al-Buḫārī hemen ardından şu sözü getirdi:",
+   "ku": "al-Buḫārī rast piştî wê gotina",
+   "ckb": "al-Buḫārī ڕاستەوخۆ دوای ئەوە وتەی",
+   "bs": "al-Buḫārī je odmah nakon toga naveo riječ",
+   "fr": "al-Buḫārī a cité juste après la parole de",
+   "es": "al-Buḫārī citó inmediatamente después la palabra de"
+  },
+  "„Wisse also, dass es keinen anbetungswürdigen Gott gibt außer": {
+   "ar": "«فاعلم أنه لا إله يُعبد إلا",
+   "en": "“Know, then, that there is no god worthy of worship except",
+   "tr": "“Bil ki, ibadete layık hiçbir ilah yoktur, ancak",
+   "ku": "“Bizane ku tu xwedayê şayanê perestinê nîne ji bilî",
+   "ckb": "«بزانە کە هیچ خوایەکی شایستەی پەرستن نییە جگە لە",
+   "bs": "“Znaj dakle da nema boga dostojnog obožavanja osim",
+   "fr": "« Sache donc qu’il n’y a pas de divinité digne d’adoration sauf",
+   "es": "«Sabe, pues, que no hay dios digno de adoración excepto"
+  },
+  "„Er begann also mit dem Wissen.“": {
+   "ar": "«فبدأ بالعلم.»",
+   "en": "“So he began with knowledge.”",
+   "tr": "“Bilgiyle başladı.”",
+   "ku": "“Wî bi zanînê dest pê kir.”",
+   "ckb": "«کەواتە بە زانست دەستی پێ کرد.»",
+   "bs": "“Počeo je dakle znanjem.”",
+   "fr": "« Il a donc commencé par le savoir. »",
+   "es": "“Comenzó, pues, por el saber.”"
+  },
+  "Der Nutzen ist klar: Wissen steht vor Aussage, Handlung, Urteil und Daʿwah. Wer über den Dīn spricht, braucht zuerst ʿIlm.": {
+   "ar": "الفائدة واضحة: العلم قبل القول والعمل والحكم وDaʿwah. من يتكلم عن الدين يحتاج أولًا إلى ʿIlm.",
+   "en": "The benefit is clear: knowledge stands before statement, action, judgment and Daʿwah. Whoever speaks about the Dīn needs ʿIlm first.",
+   "tr": "Fayda açıktır: bilgi; söz, amel, hüküm ve Daʿwah’tan önce gelir. Dīn hakkında konuşan önce ʿIlm’e muhtaçtır.",
+   "ku": "Feyde zelal e: zanîn berî gotin, kiryar, hukm û Daʿwah radiweste. Yê ku der barê Dīn de diaxive pêşî hewceyî ʿIlm e.",
+   "ckb": "سوودەکە ڕوونە: زانست پێش وتە، کردار، حوکم و Daʿwah دەوەستێت. ئەوەی دەربارەی Dīn قسە دەکات سەرەتا پێویستی بە ʿIlmە.",
+   "bs": "Korist je jasna: znanje stoji prije izjave, djela, presude i Daʿwah. Ko govori o Dīnu, prvo treba ʿIlm.",
+   "fr": "L’utilité est claire : le savoir précède la parole, l’acte, le jugement et la Daʿwah. Qui parle du Dīn a d’abord besoin de ʿIlm.",
+   "es": "El beneficio es claro: el saber está antes de la afirmación, la obra, el fallo y la Daʿwah. Quien habla del Dīn necesita primero ʿIlm."
+  },
+  "Das bedeutet nicht, dass Wissen ohne Handlung genügt. Es bedeutet: Die Handlung muss auf Wissen stehen und die Rede muss durch Wissen getragen werden.": {
+   "ar": "هذا لا يعني أن العلم بلا عمل يكفي. معناه: يجب أن يقوم العمل على العلم، وأن يحمل القولَ العلم.",
+   "en": "This does not mean that knowledge without action is enough. It means: the action must rest on knowledge, and the speech must be carried by knowledge.",
+   "tr": "Bu, bilginin amel olmadan yettiği anlamına gelmez. Şunu ifade eder: Amel bilgi üzerine durmalı ve söz bilgiyle taşınmalıdır.",
+   "ku": "Ev nayê wê wateyê ku zanîn bê kiryar bes e. Wateya wê: divê kiryar li ser zanînê raweste û axaftin bi zanînê were hilgirtin.",
+   "ckb": "ئەمە واتای ئەوە نییە کە زانست بێ کردار بەسە. واتای ئەوەیە: کردار دەبێت لەسەر زانست بوەستێت و قسە دەبێت بە زانست هەڵبگیرێت.",
+   "bs": "To ne znači da je znanje bez djela dovoljno. Znači: djelo mora stajati na znanju, a govor mora biti nošen znanjem.",
+   "fr": "Cela ne signifie pas que le savoir sans acte suffit. Cela signifie : l’acte doit reposer sur le savoir, et la parole doit être portée par le savoir.",
+   "es": "Esto no significa que el saber sin obra baste. Significa: la obra debe apoyarse en el saber, y la palabra debe estar sostenida por el saber."
+  },
+  "Ohne Wissen wird Rede zur Gefahr und Handlung zur Verirrung.": {
+   "ar": "بلا علم يصير القول خطرًا والعمل ضلالًا.",
+   "en": "Without knowledge, speech becomes a danger and action becomes misguidance.",
+   "tr": "Bilgisiz söz tehlike, amel sapma olur.",
+   "ku": "Bê zanîn axaftin dibe metirsî û kiryar dibe rêwinda.",
+   "ckb": "بێ زانست قسە دەبێتە مەترسی و کردار دەبێتە گومڕایی.",
+   "bs": "Bez znanja govor postaje opasnost, a djelo zabluda.",
+   "fr": "Sans savoir, la parole devient un danger et l’acte un égarement.",
+   "es": "Sin saber, la palabra se vuelve un peligro y la obra un extravío."
+  },
+  "Die Linkkarten folgen dem festen Quellenlink-Standard: Webnachweis zuerst, danach weitere Textmarkierungen und Kurzlink-Fallback.": {
+   "ar": "بطاقات الروابط تتبع معيار رابط المصدر الثابت: أولًا إثبات الويب، ثم تعليمات نص إضافية، ثم الرجوع إلى الرابط القصير.",
+   "en": "The link cards follow the fixed source-link standard: web proof first, then further text markers, and the short-link fallback.",
+   "tr": "Bağlantı kartları sabit kaynak bağlantısı standardını izler: önce web delili, sonra başka metin işaretleri ve kısa bağlantı yedeği.",
+   "ku": "Kartên girêdanê standarda sabît a girêdana jêderê dişopînin: pêşî delîla webê, paşê nîşanên tekstê yên din û vegera girêdana kurt.",
+   "ckb": "کارتەکانی بەستەر شوێن پێوەری جێگیری بەستەری سەرچاوە دەکەون: سەرەتا بەڵگەی وێب، پاشان نیشانەی دەقی زیاتر و گەڕانەوەی بەستەری کورت.",
+   "bs": "Kartice linkova slijede fiksni standard linka izvora: prvo web-dokaz, zatim dalje oznake teksta i rezerva kratkog linka.",
+   "fr": "Les cartes de liens suivent la norme fixe du lien de source : d’abord la preuve web, puis d’autres marquages de texte, et le repli du lien court.",
+   "es": "Las tarjetas de enlace siguen la norma fija del enlace de la fuente: primero la prueba web, luego más marcas de texto y el respaldo del enlace corto."
+  },
+  "Kapitel bei Islamweb öffnen": {
+   "ar": "افتح الباب عند Islamweb",
+   "en": "Open the chapter at Islamweb",
+   "tr": "Bölümü Islamweb’de aç",
+   "ku": "Beşê li Islamweb veke",
+   "ckb": "بابەتەکە لە Islamweb بکەرەوە",
+   "bs": "Otvori poglavlje na Islamwebu",
+   "fr": "Ouvrir le chapitre sur Islamweb",
+   "es": "Abrir el capítulo en Islamweb"
+  },
+  "Ṣaḥīḥ al-Buḫārī · Kitāb al-ʿIlm · Bāb al-ʿIlm qabl al-Qawl wa-l-ʿAmal": {
+   "ar": "Ṣaḥīḥ al-Buḫārī · Kitāb al-ʿIlm · Bāb al-ʿIlm qabl al-Qawl wa-l-ʿAmal",
+   "en": "Ṣaḥīḥ al-Buḫārī · Kitāb al-ʿIlm · Bāb al-ʿIlm qabl al-Qawl wa-l-ʿAmal",
+   "tr": "Ṣaḥīḥ al-Buḫārī · Kitāb al-ʿIlm · Bāb al-ʿIlm qabl al-Qawl wa-l-ʿAmal",
+   "ku": "Ṣaḥīḥ al-Buḫārī · Kitāb al-ʿIlm · Bāb al-ʿIlm qabl al-Qawl wa-l-ʿAmal",
+   "ckb": "Ṣaḥīḥ al-Buḫārī · Kitāb al-ʿIlm · Bāb al-ʿIlm qabl al-Qawl wa-l-ʿAmal",
+   "bs": "Ṣaḥīḥ al-Buḫārī · Kitāb al-ʿIlm · Bāb al-ʿIlm qabl al-Qawl wa-l-ʿAmal",
+   "fr": "Ṣaḥīḥ al-Buḫārī · Kitāb al-ʿIlm · Bāb al-ʿIlm qabl al-Qawl wa-l-ʿAmal",
+   "es": "Ṣaḥīḥ al-Buḫārī · Kitāb al-ʿIlm · Bāb al-ʿIlm qabl al-Qawl wa-l-ʿAmal"
+  },
+  "Qurʾān-Beweis im Kapitel öffnen": {
+   "ar": "افتح دليل القرآن في الباب",
+   "en": "Open the Qurʾān proof in the chapter",
+   "tr": "Bölümdeki Qurʾān delilini aç",
+   "ku": "Delîla Qurʾān di beşê de veke",
+   "ckb": "بەڵگەی Qurʾān لە بابەتەکەدا بکەرەوە",
+   "bs": "Otvori dokaz iz Qurʾāna u poglavlju",
+   "fr": "Ouvrir la preuve du Qurʾān dans le chapitre",
+   "es": "Abrir la prueba del Qurʾān en el capítulo"
+  },
+  "Islamweb · Textmarkierung zu Qurʾān 47:19": {
+   "ar": "Islamweb · تعليم النص على القرآن 47:19",
+   "en": "Islamweb · text marker for Qurʾān 47:19",
+   "tr": "Islamweb · Qurʾān 47:19 için metin işareti",
+   "ku": "Islamweb · nîşana tekstê bo Qurʾān 47:19",
+   "ckb": "Islamweb · نیشانەی دەق بۆ Qurʾān 47:19",
+   "bs": "Islamweb · oznaka teksta za Qurʾān 47:19",
+   "fr": "Islamweb · marquage de texte pour Qurʾān 47:19",
+   "es": "Islamweb · marca de texto para Qurʾān 47:19"
+  },
+  "„Er begann mit Wissen“ öffnen": {
+   "ar": "افتح «بدأ بالعلم»",
+   "en": "Open “He began with knowledge”",
+   "tr": "“Bilgiyle başladı”yı aç",
+   "ku": "“Bi zanînê dest pê kir” veke",
+   "ckb": "«بە زانست دەستی پێ کرد» بکەرەوە",
+   "bs": "Otvori “Počeo je znanjem”",
+   "fr": "Ouvrir « Il a commencé par le savoir »",
+   "es": "Abrir “Comenzó por el saber”"
+  },
+  "Islamweb · markierte Stelle aus dem Kapitel": {
+   "ar": "Islamweb · موضع موسوم من الباب",
+   "en": "Islamweb · marked passage from the chapter",
+   "tr": "Islamweb · bölümden işaretli yer",
+   "ku": "Islamweb · cihê nîşankirî ji beşê",
+   "ckb": "Islamweb · شوێنی نیشانکراو لە بابەتەکە",
+   "bs": "Islamweb · označeno mjesto iz poglavlja",
+   "fr": "Islamweb · passage marqué du chapitre",
+   "es": "Islamweb · pasaje marcado del capítulo"
+  },
+  "Interner Fallback · dar-al-tawhid.de/q/16/": {
+   "ar": "رجوع داخلي · dar-al-tawhid.de/q/16/",
+   "en": "Internal fallback · dar-al-tawhid.de/q/16/",
+   "tr": "İç yedek · dar-al-tawhid.de/q/16/",
+   "ku": "Vegera hundirîn · dar-al-tawhid.de/q/16/",
+   "ckb": "گەڕانەوەی ناوخۆیی · dar-al-tawhid.de/q/16/",
+   "bs": "Unutarnja rezerva · dar-al-tawhid.de/q/16/",
+   "fr": "Repli interne · dar-al-tawhid.de/q/16/",
+   "es": "Respaldo interno · dar-al-tawhid.de/q/16/"
   }
  }
 }

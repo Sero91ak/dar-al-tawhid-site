@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,748 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Recht zurückfordern bei nichtislamischer Autorität – DAR AL TAWḤĪD": {
+   "ar": "المطالبة بالحق عند سلطة غير إسلامية – DAR AL TAWḤĪD",
+   "en": "Claiming a right before a non-Islamic authority – DAR AL TAWḤĪD",
+   "tr": "İslamî olmayan bir otoritede hakkı istemek – DAR AL TAWḤĪD",
+   "ku": "Daxwaza mafê li cem desthilateke ne îslamî – DAR AL TAWḤĪD",
+   "ckb": "داواکردنی ماف لای دەسەڵاتێکی نائیسلامی – DAR AL TAWḤĪD",
+   "bs": "Potraživanje prava kod neislamske vlasti – DAR AL TAWḤĪD",
+   "fr": "Réclamer un droit auprès d’une autorité non islamique – DAR AL TAWḤĪD",
+   "es": "Reclamar un derecho ante una autoridad no islámica – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "مساهمات وفق القرآن والسنة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre katkılar",
+   "ku": "Beşdarî li gor Qurʾān, Sunnah û Āthār",
+   "ckb": "بەشدارییەکان بەپێی القرآن و السنة و الآثار",
+   "bs": "Prilozi prema Qurʾānu, Sunni i Āthāru",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Contribuciones según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Fiqh · Siyar · Ḥuqūq · Ẓulm": {
+   "ar": "Fiqh · Siyar · Ḥuqūq · Ẓulm",
+   "en": "Fiqh · Siyar · Ḥuqūq · Ẓulm",
+   "tr": "Fiqh · Siyar · Ḥuqūq · Ẓulm",
+   "ku": "Fiqh · Siyar · Ḥuqūq · Ẓulm",
+   "ckb": "Fiqh · Siyar · Ḥuqūq · Ẓulm",
+   "bs": "Fiqh · Siyar · Ḥuqūq · Ẓulm",
+   "fr": "Fiqh · Siyar · Ḥuqūq · Ẓulm",
+   "es": "Fiqh · Siyar · Ḥuqūq · Ẓulm"
+  },
+  "Recht zurückfordern bei nichtislamischer Autorität": {
+   "ar": "المطالبة بالحق عند سلطة غير إسلامية",
+   "en": "Claiming a right before a non-Islamic authority",
+   "tr": "İslamî olmayan bir otoritede hakkı istemek",
+   "ku": "Daxwaza mafê li cem desthilateke ne îslamî",
+   "ckb": "داواکردنی ماف لای دەسەڵاتێکی نائیسلامی",
+   "bs": "Potraživanje prava kod neislamske vlasti",
+   "fr": "Réclamer un droit auprès d’une autorité non islamique",
+   "es": "Reclamar un derecho ante una autoridad no islámica"
+  },
+  "Beweis, Rückgabe des eigenen Rechts und klare Grenzen gegen Khiyānah und Übergriff.": {
+   "ar": "الدليل، وردّ الحق الخاص، وحدود واضحة ضد Khiyānah والاعتداء.",
+   "en": "Proof, the return of one’s own right, and clear boundaries against Khiyānah and transgression.",
+   "tr": "Delil, kendi hakkının iadesi ve Khiyānah ile tecavüze karşı açık sınırlar.",
+   "ku": "Delîl, vegerandina mafê xwe, û sînorên zelal li dijî Khiyānah û destavêtinê.",
+   "ckb": "بەڵگە، گەڕاندنەوەی مافی خۆت، و سنووری ڕوون دژ بە Khiyānah و دەستدرێژی.",
+   "bs": "Dokaz, vraćanje vlastitog prava i jasne granice protiv Khiyāne i nasrtaja.",
+   "fr": "La preuve, la restitution du droit propre, et des limites claires contre la Khiyānah et l’atteinte.",
+   "es": "La prueba, la devolución del propio derecho y límites claros contra la Khiyānah y la extralimitación."
+  },
+  "Ausschließlich Rechtsrückforderung: genommenes Eigentum, Beweis vor deren ḥākim, Dār al-Ḥarb, Amān und Ḥilf al-Fuḍūl.": {
+   "ar": "حصرًا استرداد الحق: ملك مأخوذ، والدليل أمام ḥākimهم، وDār al-Ḥarb، وAmān، وḤilf al-Fuḍūl.",
+   "en": "Exclusively the recovery of a right: taken property, proof before their ḥākim, Dār al-Ḥarb, Amān and Ḥilf al-Fuḍūl.",
+   "tr": "Yalnızca hakkın geri istenmesi: alınmış mülk, onların ḥākim’i önünde delil, Dār al-Ḥarb, Amān ve Ḥilf al-Fuḍūl.",
+   "ku": "Tenê paşve xwestina mafê: milkê standî, delîl li ber ḥākim a wan, Dār al-Ḥarb, Amān û Ḥilf al-Fuḍūl.",
+   "ckb": "تەنها وەرگرتنەوەی ماف: موڵکی گیراو، بەڵگە لەبەردەم ḥākimی ئەوان، Dār al-Ḥarb، Amān و Ḥilf al-Fuḍūl.",
+   "bs": "Isključivo vraćanje prava: uzeto vlasništvo, dokaz pred njihovim ḥākimom, Dār al-Ḥarb, Amān i Ḥilf al-Fuḍūl.",
+   "fr": "Exclusivement la récupération du droit : un bien pris, la preuve devant leur ḥākim, Dār al-Ḥarb, Amān et Ḥilf al-Fuḍūl.",
+   "es": "Exclusivamente la recuperación del derecho: propiedad tomada, prueba ante su ḥākim, Dār al-Ḥarb, Amān y Ḥilf al-Fuḍūl."
+  },
+  "Jede Stelle wird danach getrennt, was sie tatsächlich beweist und was daraus nicht abgeleitet werden darf.": {
+   "ar": "يُفصل كل موضع بحسب ما يثبته فعلًا وما لا يجوز أن يُستنبط منه.",
+   "en": "Each passage is separated according to what it actually proves and what may not be derived from it.",
+   "tr": "Her yer, gerçekte neyi ispatladığına ve ondan neyin çıkarılamayacağına göre ayrılır.",
+   "ku": "Her cih li gor wê tê veqetandin ka bi rastî çi îsbat dike û ji wê çi nayê derxistin.",
+   "ckb": "هەر شوێنێک جیا دەکرێتەوە بەپێی ئەوەی بەڕاستی چی دەسەلمێنێت و چی نابێت لێی دەربهێنرێت.",
+   "bs": "Svako mjesto se razdvaja prema onome što stvarno dokazuje i što se iz njega ne smije izvesti.",
+   "fr": "Chaque passage est distingué selon ce qu’il prouve réellement et ce qui ne peut pas en être déduit.",
+   "es": "Cada lugar se separa según lo que realmente prueba y lo que no se debe derivar de él."
+  },
+  "as-Saraḫsī: Beweis – und deren ḥākim gibt das Recht zurück": {
+   "ar": "as-Saraḫsī: الدليل – وḥākimهم يردّ الحق",
+   "en": "as-Saraḫsī: proof – and their ḥākim returns the right",
+   "tr": "as-Saraḫsī: delil – ve onların ḥākim’i hakkı geri verir",
+   "ku": "as-Saraḫsī: delîl – û ḥākim a wan mafê vedigerîne",
+   "ckb": "as-Saraḫsī: بەڵگە – و ḥākimی ئەوان ماف دەگەڕێنێتەوە",
+   "bs": "as-Saraḫsī: dokaz – i njihov ḥākim vraća pravo",
+   "fr": "as-Saraḫsī : la preuve – et leur ḥākim rend le droit",
+   "es": "as-Saraḫsī: la prueba – y su ḥākim devuelve el derecho"
+  },
+  "Wenn der Muslim den Beweis erbringt und": {
+   "ar": "إذا أقام المسلم الدليل و",
+   "en": "If the Muslim brings the proof and",
+   "tr": "Müslüman delili getirirse ve",
+   "ku": "Heke Misilman delîl bîne û",
+   "ckb": "ئەگەر موسڵمان بەڵگە بهێنێت و",
+   "bs": "Ako musliman iznese dokaz i",
+   "fr": "Si le musulman apporte la preuve et",
+   "es": "Si el musulmán presenta la prueba y"
+  },
+  "das Gut vom Ġāṣib nimmt und es ihm übergibt, gehört es dem Muslim; darauf fällt kein ḫums an.": {
+   "ar": "يأخذ المال من Ġāṣib ويسلّمه إليه، فهو للمسلم؛ ولا يجب فيه ḫums.",
+   "en": "takes the property from the Ġāṣib and hands it over to him, it belongs to the Muslim; no ḫums is due on it.",
+   "tr": "malı Ġāṣib’den alır ve ona teslim ederse, o Müslümana aittir; üzerine ḫums düşmez.",
+   "ku": "mal ji Ġāṣib distîne û dide wî, ew ê Misilman e; li ser wê ḫums nakeve.",
+   "ckb": "سامان لە Ġāṣib وەردەگرێت و دەیداتێ، هی موسڵمانە؛ ḫumsی لەسەر ناکەوێت.",
+   "bs": "uzme imovinu od Ġāṣiba i preda mu je, ona pripada muslimanu; na nju ne pada ḫums.",
+   "fr": "prend le bien au Ġāṣib et le lui remet, il appartient au musulman ; aucun ḫums ne lui est dû.",
+   "es": "toma el bien del Ġāṣib y se lo entrega, pertenece al musulmán; no recae sobre ello ḫums."
+  },
+  "Šarḥ Kitāb as-Siyar al-Kabīr": {
+   "ar": "Šarḥ Kitāb as-Siyar al-Kabīr",
+   "en": "Šarḥ Kitāb as-Siyar al-Kabīr",
+   "tr": "Šarḥ Kitāb as-Siyar al-Kabīr",
+   "ku": "Šarḥ Kitāb as-Siyar al-Kabīr",
+   "ckb": "Šarḥ Kitāb as-Siyar al-Kabīr",
+   "bs": "Šarḥ Kitāb as-Siyar al-Kabīr",
+   "fr": "Šarḥ Kitāb as-Siyar al-Kabīr",
+   "es": "Šarḥ Kitāb as-Siyar al-Kabīr"
+  },
+  ", Bāb fī fidāʾ al-mušrikīn fī al-muwādaʿah wa-mā yakūnu muḥrazan bi-ġaṣb al-mušrikīn, Ausgabe aš-Šarikah aš-Šarqiyyah li-l-Iʿlānāt, 1971, fortlaufende Seitenzählung, S. 1743–1745.": {
+   "ar": "، Bāb fī fidāʾ al-mušrikīn fī al-muwādaʿah wa-mā yakūnu muḥrazan bi-ġaṣb al-mušrikīn، طبعة aš-Šarikah aš-Šarqiyyah li-l-Iʿlānāt، 1971، ترقيم صفحات متصل، ص 1743–1745.",
+   "en": ", Bāb fī fidāʾ al-mušrikīn fī al-muwādaʿah wa-mā yakūnu muḥrazan bi-ġaṣb al-mušrikīn, edition aš-Šarikah aš-Šarqiyyah li-l-Iʿlānāt, 1971, continuous page numbering, pp. 1743–1745.",
+   "tr": ", Bāb fī fidāʾ al-mušrikīn fī al-muwādaʿah wa-mā yakūnu muḥrazan bi-ġaṣb al-mušrikīn, aš-Šarikah aš-Šarqiyyah li-l-Iʿlānāt baskısı, 1971, sürekli sayfa numarası, s. 1743–1745.",
+   "ku": ", Bāb fī fidāʾ al-mušrikīn fī al-muwādaʿah wa-mā yakūnu muḥrazan bi-ġaṣb al-mušrikīn, çapa aš-Šarikah aš-Šarqiyyah li-l-Iʿlānāt, 1971, hejmartina rûpelan a domdar, r. 1743–1745.",
+   "ckb": "، Bāb fī fidāʾ al-mušrikīn fī al-muwādaʿah wa-mā yakūnu muḥrazan bi-ġaṣb al-mušrikīn، چاپی aš-Šarikah aš-Šarqiyyah li-l-Iʿlānāt، 1971، ژمارەی لاپەڕەی بەردەوام، لاپەڕە 1743–1745.",
+   "bs": ", Bāb fī fidāʾ al-mušrikīn fī al-muwādaʿah wa-mā yakūnu muḥrazan bi-ġaṣb al-mušrikīn, izdanje aš-Šarikah aš-Šarqiyyah li-l-Iʿlānāt, 1971, neprekidno numeriranje stranica, str. 1743–1745.",
+   "fr": ", Bāb fī fidāʾ al-mušrikīn fī al-muwādaʿah wa-mā yakūnu muḥrazan bi-ġaṣb al-mušrikīn, édition aš-Šarikah aš-Šarqiyyah li-l-Iʿlānāt, 1971, pagination continue, p. 1743–1745.",
+   "es": ", Bāb fī fidāʾ al-mušrikīn fī al-muwādaʿah wa-mā yakūnu muḥrazan bi-ġaṣb al-mušrikīn, edición aš-Šarikah aš-Šarqiyyah li-l-Iʿlānāt, 1971, numeración continua de páginas, pp. 1743–1745."
+  },
+  "Parallelstelle im frei zugänglichen Scan:": {
+   "ar": "موضع موازٍ في المسح المتاح مجانًا:",
+   "en": "Parallel passage in the freely accessible scan:",
+   "tr": "Serbest erişilen taramadaki paralel yer:",
+   "ku": "Cihê paralel di scana belaş de:",
+   "ckb": "شوێنی هاوتا لە سکانی بە خۆڕایی:",
+   "bs": "Paralelno mjesto u slobodno dostupnom skenu:",
+   "fr": "Passage parallèle dans le scan librement accessible :",
+   "es": "Lugar paralelo en el escaneo de libre acceso:"
+  },
+  "Dār al-Kutub al-ʿIlmiyyah, 1417/1997, Bd. 5, S. 37–38: Der Anspruchsteller bringt den Beweis für sein Recht; die Rückgabe erfolgt durch das Urteil ihres Königs/ḥākim.": {
+   "ar": "Dār al-Kutub al-ʿIlmiyyah، 1417/1997، ج 5، ص 37–38: يقدّم المدّعي الدليل على حقه؛ ويكون الردّ بحكم ملكهم/ḥākim.",
+   "en": "Dār al-Kutub al-ʿIlmiyyah, 1417/1997, vol. 5, pp. 37–38: the claimant brings the proof of his right; the return takes place by the judgment of their king/ḥākim.",
+   "tr": "Dār al-Kutub al-ʿIlmiyyah, 1417/1997, c. 5, s. 37–38: Davacı hakkına dair delili getirir; iade onların kralının/ḥākim’inin hükmüyle olur.",
+   "ku": "Dār al-Kutub al-ʿIlmiyyah, 1417/1997, berg 5, r. 37–38: Daxwazkar delîla mafê xwe tîne; vegerandin bi hukmê padîşahê wan/ḥākim dibe.",
+   "ckb": "Dār al-Kutub al-ʿIlmiyyah، 1417/1997، بەرگ 5، لاپەڕە 37–38: داواکار بەڵگەی مافەکەی دەهێنێت؛ گەڕاندنەوە بە حوکمی پاشایان/ḥākim دەبێت.",
+   "bs": "Dār al-Kutub al-ʿIlmiyyah, 1417/1997, sv. 5, str. 37–38: Tužilac donosi dokaz za svoje pravo; vraćanje biva presudom njihovog kralja/ḥākima.",
+   "fr": "Dār al-Kutub al-ʿIlmiyyah, 1417/1997, vol. 5, p. 37–38 : le demandeur apporte la preuve de son droit ; la restitution se fait par le jugement de leur roi/ḥākim.",
+   "es": "Dār al-Kutub al-ʿIlmiyyah, 1417/1997, vol. 5, pp. 37–38: el demandante presenta la prueba de su derecho; la devolución se produce por el fallo de su rey/ḥākim."
+  },
+  "Das ist der zentrale Beleg dieser Sammlung: Ein Muslim macht sein genommenes Recht mit Beweis geltend, und eine": {
+   "ar": "هذا هو الدليل المركزي لهذه المجموعة: مسلم يُثبت حقه المأخوذ بالدليل، و",
+   "en": "This is the central proof of this collection: a Muslim asserts his taken right with proof, and a",
+   "tr": "Bu, bu derlemenin merkezî delilidir: Bir Müslüman alınmış hakkını delille ileri sürer ve bir",
+   "ku": "Ev delîla navendî ya vê berhevokê ye: Misilmanek mafê xwe yê standî bi delîl dike, û yek",
+   "ckb": "ئەمە بەڵگەی ناوەندیی ئەم کۆمەڵەیەیە: موسڵمانێک مافی گیراوی خۆی بە بەڵگە دەسەلمێنێت، و",
+   "bs": "Ovo je središnji dokaz ove zbirke: musliman svoje uzeto pravo dokazuje dokazom, i jedna",
+   "fr": "C’est la preuve centrale de ce recueil : un musulman fait valoir son droit pris au moyen d’une preuve, et une",
+   "es": "Esta es la prueba central de esta colección: un musulmán hace valer su derecho tomado con una prueba, y una"
+  },
+  "nichtmuslimische Autorität": {
+   "ar": "سلطة غير مسلمة",
+   "en": "non-Muslim authority",
+   "tr": "Müslüman olmayan otorite",
+   "ku": "desthilata ne misilman",
+   "ckb": "دەسەڵاتێکی ناموسڵمان",
+   "bs": "nemuslimanska vlast",
+   "fr": "autorité non musulmane",
+   "es": "autoridad no musulmana"
+  },
+  "nimmt das Gut vom unrechtmäßigen Besitzer und gibt es ihm zurück.": {
+   "ar": "تأخذ المال من الحائز بغير حق وتردّه إليه.",
+   "en": "takes the property from the unlawful possessor and returns it to him.",
+   "tr": "malı haksız zilyetten alır ve ona geri verir.",
+   "ku": "mal ji xwediyê neheq distîne û didiyê wî.",
+   "ckb": "سامان لە خاوەنی ناڕەوا وەردەگرێت و دەیگەڕێنێتەوە بۆی.",
+   "bs": "uzima imovinu od nepravednog posjednika i vraća mu je.",
+   "fr": "prend le bien au possesseur illégitime et le lui rend.",
+   "es": "toma el bien del poseedor ilegítimo y se lo devuelve."
+  },
+  "Die Stelle erklärt nicht jede Gesetzgebung oder jedes Urteil dieser Autorität für erlaubt. Sie behandelt konkret die": {
+   "ar": "الموضع لا يبيح كل تشريع أو كل حكم لهذه السلطة. وهو يعالج تحديدًا",
+   "en": "The passage does not declare every legislation or every judgment of this authority permitted. It treats specifically the",
+   "tr": "Yer, bu otoritenin her yasamasını veya her hükmünü helal saymaz. Somut olarak şunu ele alır:",
+   "ku": "Cih ne her qanûn an her hukmê vê desthilatê destûr dide. Ew bi taybetî dide ber çavan",
+   "ckb": "شوێنەکە هەموو یاسا یان هەموو حوکمی ئەم دەسەڵاتە ڕێگەپێدراو ناکات. بە دیاریکراوی مامەڵە لەگەڵ",
+   "bs": "Mjesto ne proglašava svako zakonodavstvo ili svaku presudu te vlasti dozvoljenim. Ono konkretno obrađuje",
+   "fr": "Le passage ne déclare pas permise toute législation ou tout jugement de cette autorité. Il traite concrètement",
+   "es": "El lugar no declara permitida toda legislación ni todo fallo de esta autoridad. Trata concretamente"
+  },
+  "Rückgabe eines bereits bestehenden Rechts": {
+   "ar": "ردّ حق قائم من قبل",
+   "en": "the return of a right that already exists",
+   "tr": "önceden var olan bir hakkın iadesi",
+   "ku": "vegerandina mafekî ku berê heye",
+   "ckb": "گەڕاندنەوەی مافێک کە پێشتر هەبووە",
+   "bs": "vraćanje prava koje već postoji",
+   "fr": "la restitution d’un droit déjà existant",
+   "es": "la devolución de un derecho que ya existe"
+  },
+  "Textmarkierung: deren ḥākim gibt das Recht zurück": {
+   "ar": "تعليم النص: ḥākimهم يردّ الحق",
+   "en": "Text marker: their ḥākim returns the right",
+   "tr": "Metin işareti: onların ḥākim’i hakkı geri verir",
+   "ku": "Nîşana tekstê: ḥākim a wan mafê vedigerîne",
+   "ckb": "نیشانەی دەق: ḥākimی ئەوان ماف دەگەڕێنێتەوە",
+   "bs": "Oznaka teksta: njihov ḥākim vraća pravo",
+   "fr": "Marquage de texte : leur ḥākim rend le droit",
+   "es": "Marca de texto: su ḥākim devuelve el derecho"
+  },
+  "as-Saraḫsī · markiert direkt „Beweis – ḥākim – Ġāṣib – Rückgabe“": {
+   "ar": "as-Saraḫsī · موسوم مباشرة «دليل – ḥākim – Ġāṣib – ردّ»",
+   "en": "as-Saraḫsī · marked directly “proof – ḥākim – Ġāṣib – return”",
+   "tr": "as-Saraḫsī · doğrudan işaretli “delil – ḥākim – Ġāṣib – iade”",
+   "ku": "as-Saraḫsī · rasterast nîşankirî “delîl – ḥākim – Ġāṣib – vegerandin”",
+   "ckb": "as-Saraḫsī · ڕاستەوخۆ نیشانکراو «بەڵگە – ḥākim – Ġāṣib – گەڕاندنەوە»",
+   "bs": "as-Saraḫsī · izravno označeno “dokaz – ḥākim – Ġāṣib – vraćanje”",
+   "fr": "as-Saraḫsī · marqué directement « preuve – ḥākim – Ġāṣib – restitution »",
+   "es": "as-Saraḫsī · marcado directamente “prueba – ḥākim – Ġāṣib – devolución”"
+  },
+  "Scan Bd. 5, S. 37: Beweis + Urteil ihres Königs": {
+   "ar": "مسح ج 5، ص 37: الدليل + حكم ملكهم",
+   "en": "Scan vol. 5, p. 37: proof + the judgment of their king",
+   "tr": "Tarama c. 5, s. 37: delil + krallarının hükmü",
+   "ku": "Scan berg 5, r. 37: delîl + hukmê padîşahê wan",
+   "ckb": "سکان بەرگ 5، لاپەڕە 37: بەڵگە + حوکمی پاشایان",
+   "bs": "Sken sv. 5, str. 37: dokaz + presuda njihovog kralja",
+   "fr": "Scan vol. 5, p. 37 : preuve + jugement de leur roi",
+   "es": "Escaneo vol. 5, p. 37: prueba + fallo de su rey"
+  },
+  "Direktseite · der Anspruchsteller beweist sein Recht; Rückgabe durch qaḍāʾ malikihim": {
+   "ar": "صفحة مباشرة · المدّعي يثبت حقه؛ الردّ بـ qaḍāʾ malikihim",
+   "en": "Direct page · the claimant proves his right; return by qaḍāʾ malikihim",
+   "tr": "Doğrudan sayfa · davacı hakkını ispatlar; iade qaḍāʾ malikihim ile",
+   "ku": "Rûpela rasterast · daxwazkar mafê xwe îsbat dike; vegerandin bi qaḍāʾ malikihim",
+   "ckb": "لاپەڕەی ڕاستەوخۆ · داواکار مافەکەی دەسەلمێنێت؛ گەڕاندنەوە بە qaḍāʾ malikihim",
+   "bs": "Izravna stranica · tužilac dokazuje svoje pravo; vraćanje putem qaḍāʾ malikihim",
+   "fr": "Page directe · le demandeur prouve son droit ; restitution par qaḍāʾ malikihim",
+   "es": "Página directa · el demandante prueba su derecho; devolución por qaḍāʾ malikihim"
+  },
+  "Scan Bd. 5, S. 38: Rückgabe an den Eigentümer": {
+   "ar": "مسح ج 5، ص 38: الردّ إلى المالك",
+   "en": "Scan vol. 5, p. 38: return to the owner",
+   "tr": "Tarama c. 5, s. 38: sahibine iade",
+   "ku": "Scan berg 5, r. 38: vegerandin bo xwedî",
+   "ckb": "سکان بەرگ 5، لاپەڕە 38: گەڕاندنەوە بۆ خاوەن",
+   "bs": "Sken sv. 5, str. 38: vraćanje vlasniku",
+   "fr": "Scan vol. 5, p. 38 : restitution au propriétaire",
+   "es": "Escaneo vol. 5, p. 38: devolución al propietario"
+  },
+  "Direktseite · wenn ihr Herrscher das Vermögen zurückgibt, wird es dem muslimischen Mustaʾmin zurückgegeben": {
+   "ar": "صفحة مباشرة · إذا ردّ حاكمهم المال، يُردّ إلى Mustaʾmin المسلم",
+   "en": "Direct page · if their ruler returns the property, it is returned to the Muslim Mustaʾmin",
+   "tr": "Doğrudan sayfa · hükümdarları malı geri verirse, Müslüman Mustaʾmin’e iade edilir",
+   "ku": "Rûpela rasterast · heke serwerê wan mal vegerîne, ew tê vegerandin bo Mustaʾmin ê misilman",
+   "ckb": "لاپەڕەی ڕاستەوخۆ · ئەگەر فەرمانڕەوایان سامان بگەڕێنێتەوە، دەدرێتەوە بە Mustaʾminی موسڵمان",
+   "bs": "Izravna stranica · ako njihov vladar vrati imovinu, ona se vraća muslimanskom Mustaʾminu",
+   "fr": "Page directe · si leur souverain rend le bien, il est rendu au Mustaʾmin musulman",
+   "es": "Página directa · si su gobernante devuelve los bienes, se devuelven al Mustaʾmin musulmán"
+  },
+  "Shamela: Kapitel und Ausgabe prüfen": {
+   "ar": "Shamela: افحص الباب والطبعة",
+   "en": "Shamela: check the chapter and the edition",
+   "tr": "Shamela: bölümü ve baskıyı kontrol et",
+   "ku": "Shamela: beş û çapê kontrol bike",
+   "ckb": "Shamela: بابەت و چاپەکە بپشکنە",
+   "bs": "Shamela: provjeri poglavlje i izdanje",
+   "fr": "Shamela : vérifier le chapitre et l’édition",
+   "es": "Shamela: comprobar el capítulo y la edición"
+  },
+  "Šarḥ as-Siyar al-Kabīr · fortlaufende Druckzählung der 1971-Ausgabe": {
+   "ar": "Šarḥ as-Siyar al-Kabīr · ترقيم الطبع المتصل لطبعة 1971",
+   "en": "Šarḥ as-Siyar al-Kabīr · continuous print numbering of the 1971 edition",
+   "tr": "Šarḥ as-Siyar al-Kabīr · 1971 baskısının sürekli baskı numarası",
+   "ku": "Šarḥ as-Siyar al-Kabīr · hejmartina çapê ya domdar a çapa 1971",
+   "ckb": "Šarḥ as-Siyar al-Kabīr · ژمارەی چاپی بەردەوامی چاپی 1971",
+   "bs": "Šarḥ as-Siyar al-Kabīr · neprekidno štampano numeriranje izdanja iz 1971.",
+   "fr": "Šarḥ as-Siyar al-Kabīr · pagination d’impression continue de l’édition de 1971",
+   "es": "Šarḥ as-Siyar al-Kabīr · numeración continua de impresión de la edición de 1971"
+  },
+  "ash-Shāfiʿī: Das geraubte Recht bleibt Eigentum": {
+   "ar": "ash-Shāfiʿī: الحق المغصوب يبقى ملكًا",
+   "en": "ash-Shāfiʿī: the seized right remains property",
+   "tr": "ash-Shāfiʿī: gasp edilen hak mülk olarak kalır",
+   "ku": "ash-Shāfiʿī: mafê talankirî milk dimîne",
+   "ckb": "ash-Shāfiʿī: مافی دزراو موڵک دەمێنێتەوە",
+   "bs": "ash-Shāfiʿī: oteto pravo ostaje vlasništvo",
+   "fr": "ash-Shāfiʿī : le droit ravi demeure une propriété",
+   "es": "ash-Shāfiʿī: el derecho arrebatado sigue siendo propiedad"
+  },
+  "Betritt ein Muslim Dār al-Ḥarb mit Amān und findet dort sein Eigentum oder das Eigentum eines Muslims bzw. Dhimmī, das von den Mušrikūn geraubt wurde, darf er es herausbringen; es ist nicht Eigentum des Feindes geworden. Das ist keine Khiyānah.": {
+   "ar": "إذا دخل مسلم Dār al-Ḥarb بـ Amān ووجد هناك ملكه أو ملك مسلم أو Dhimmī قد غصبه المشركون، جاز له إخراجه؛ ولم يصر ملكًا للعدو. وهذا ليس Khiyānah.",
+   "en": "If a Muslim enters Dār al-Ḥarb with Amān and finds there his property, or the property of a Muslim or a Dhimmī, which the Mušrikūn had seized, he may bring it out; it has not become the enemy’s property. This is not Khiyānah.",
+   "tr": "Bir Müslüman Amān ile Dār al-Ḥarb’a girer ve orada, Mušrikūn’un gasp ettiği kendi mülkünü veya bir Müslümanın ya da Dhimmī’nin mülkünü bulursa, onu çıkarabilir; o düşmanın mülkü olmamıştır. Bu Khiyānah değildir.",
+   "ku": "Heke Misilmanek bi Amān bikeve Dār al-Ḥarb û li wir milkê xwe an milkê Misilmanekî an Dhimmī bibîne ku Mušrikūn talan kirine, dikare wê derxe; ew nebûye milkê dijmin. Ev ne Khiyānah e.",
+   "ckb": "ئەگەر موسڵمانێک بە Amān بچێتە Dār al-Ḥarb و لەوێ موڵکی خۆی یان موڵکی موسڵمانێک یان Dhimmī بدۆزێتەوە کە Mušrikūn دزیویانە، دەتوانێت دەری بهێنێت؛ نەبووەتە موڵکی دوژمن. ئەمە Khiyānah نییە.",
+   "bs": "Ako musliman s Amānom uđe u Dār al-Ḥarb i tamo nađe svoje vlasništvo ili vlasništvo muslimana odnosno Dhimmīja koje su Mušrikūn oteli, smije ga iznijeti; ono nije postalo vlasništvo neprijatelja. To nije Khiyānah.",
+   "fr": "Si un musulman entre en Dār al-Ḥarb avec Amān et y trouve son bien, ou le bien d’un musulman ou d’un Dhimmī, que les Mušrikūn ont ravi, il peut le faire sortir ; il n’est pas devenu la propriété de l’ennemi. Ce n’est pas une Khiyānah.",
+   "es": "Si un musulmán entra en Dār al-Ḥarb con Amān y encuentra allí su propiedad, o la propiedad de un musulmán o de un Dhimmī, que los Mušrikūn arrebataron, puede sacarla; no ha pasado a ser propiedad del enemigo. Esto no es Khiyānah."
+  },
+  ", Kitāb al-Ḥukm fī qitāl al-mušrikīn wa-masʾalat māl al-ḥarbī, Bāb: al-Muslim yadḫul Dār al-Ḥarb fa-yaǧid imraʾatah, Bd. 4, S. 284.": {
+   "ar": "، Kitāb al-Ḥukm fī qitāl al-mušrikīn wa-masʾalat māl al-ḥarbī، Bāb: al-Muslim yadḫul Dār al-Ḥarb fa-yaǧid imraʾatah، ج 4، ص 284.",
+   "en": ", Kitāb al-Ḥukm fī qitāl al-mušrikīn wa-masʾalat māl al-ḥarbī, Bāb: al-Muslim yadḫul Dār al-Ḥarb fa-yaǧid imraʾatah, vol. 4, p. 284.",
+   "tr": ", Kitāb al-Ḥukm fī qitāl al-mušrikīn wa-masʾalat māl al-ḥarbī, Bāb: al-Muslim yadḫul Dār al-Ḥarb fa-yaǧid imraʾatah, c. 4, s. 284.",
+   "ku": ", Kitāb al-Ḥukm fī qitāl al-mušrikīn wa-masʾalat māl al-ḥarbī, Bāb: al-Muslim yadḫul Dār al-Ḥarb fa-yaǧid imraʾatah, berg 4, r. 284.",
+   "ckb": "، Kitāb al-Ḥukm fī qitāl al-mušrikīn wa-masʾalat māl al-ḥarbī، Bāb: al-Muslim yadḫul Dār al-Ḥarb fa-yaǧid imraʾatah، بەرگ 4، لاپەڕە 284.",
+   "bs": ", Kitāb al-Ḥukm fī qitāl al-mušrikīn wa-masʾalat māl al-ḥarbī, Bāb: al-Muslim yadḫul Dār al-Ḥarb fa-yaǧid imraʾatah, sv. 4, str. 284.",
+   "fr": ", Kitāb al-Ḥukm fī qitāl al-mušrikīn wa-masʾalat māl al-ḥarbī, Bāb: al-Muslim yadḫul Dār al-Ḥarb fa-yaǧid imraʾatah, vol. 4, p. 284.",
+   "es": ", Kitāb al-Ḥukm fī qitāl al-mušrikīn wa-masʾalat māl al-ḥarbī, Bāb: al-Muslim yadḫul Dār al-Ḥarb fa-yaǧid imraʾatah, vol. 4, p. 284."
+  },
+  "Ein tatsächlich geraubtes Recht verliert seinen Eigentumscharakter nicht dadurch, dass es sich im Machtbereich der Nichtmuslime befindet. Seine Rückführung ist keine Khiyānah.": {
+   "ar": "حق مغصوب فعلًا لا يفقد صفة الملك لمجرد وجوده في دائرة سلطة غير المسلمين. وإرجاعه ليس Khiyānah.",
+   "en": "A right that was actually seized does not lose its character as property merely because it is within the sphere of power of non-Muslims. Bringing it back is not Khiyānah.",
+   "tr": "Gerçekten gasp edilmiş bir hak, gayrimüslimlerin iktidar alanında bulunmasıyla mülkiyet niteliğini kaybetmez. Onun geri getirilmesi Khiyānah değildir.",
+   "ku": "Mafekî ku bi rastî hatiye talankirin, tenê ji ber ku di warê desthilata ne misilmanan de ye, taybetmendiya milkê winda nake. Vegera wî ne Khiyānah e.",
+   "ckb": "مافێک کە بەڕاستی دزراوە تایبەتمەندی موڵک بوونی لەدەست نادات تەنها بەوەی لە بازنەی دەسەڵاتی ناموسڵماناندا بێت. گەڕاندنەوەی Khiyānah نییە.",
+   "bs": "Pravo koje je stvarno oteto ne gubi svojstvo vlasništva time što se nalazi u području vlasti nemuslimana. Njegovo vraćanje nije Khiyānah.",
+   "fr": "Un droit réellement ravi ne perd pas son caractère de propriété du seul fait qu’il se trouve dans la sphère de pouvoir des non-musulmans. Le ramener n’est pas une Khiyānah.",
+   "es": "Un derecho realmente arrebatado no pierde su carácter de propiedad por el solo hecho de hallarse en el ámbito de poder de los no musulmanes. Traerlo de vuelta no es Khiyānah."
+  },
+  "eigener Beleg dafür, dass ein nichtmuslimischer Richter entscheidet. Es ist ein starker ergänzender Eigentumsbeleg. Im selben Text verbietet ash-Shāfiʿī ausdrücklich, anderes Vermögen der Leute unter Amān zu nehmen.": {
+   "ar": "دليل خاص على أن قاضيًا غير مسلم يحكم. وهو دليل ملكية مكمّل قوي. وفي النص نفسه يمنع ash-Shāfiʿī صراحة أخذ مال آخر لأهل Amān.",
+   "en": "its own proof that a non-Muslim judge decides. It is a strong supplementary proof of ownership. In the same text ash-Shāfiʿī expressly forbids taking other property of the people under Amān.",
+   "tr": "gayrimüslim bir hâkimin hükmettiğine dair kendi delili. Güçlü tamamlayıcı bir mülkiyet delilidir. Aynı metinde ash-Shāfiʿī, Amān altındaki kimselerin başka malını almayı açıkça yasaklar.",
+   "ku": "delîlekî xwe ye ku dadgerekî ne misilman biryar dide. Ew delîlekî milkê yê temamker ê bihêz e. Di heman tekstê de ash-Shāfiʿī bi eşkere qedexe dike ku malê din ê gelê bin Amān were standin.",
+   "ckb": "بەڵگەیەکی تایبەتی کە دادوەرێکی ناموسڵمان بڕیار دەدات. بەڵگەیەکی تەواوکەری بەهێزی خاوەندارێتییە. لە هەمان دەقدا ash-Shāfiʿī بە ڕاشکاوی قەدەغە دەکات سامانێکی دیکەی خەڵکی ژێر Amān وەربگیرێت.",
+   "bs": "vlastiti dokaz da nemuslimanski sudija presuđuje. To je jak dopunski dokaz vlasništva. U istom tekstu ash-Shāfiʿī izričito zabranjuje uzimanje druge imovine ljudi pod Amānom.",
+   "fr": "sa propre preuve qu’un juge non musulman décide. C’est une forte preuve complémentaire de propriété. Dans le même texte, ash-Shāfiʿī interdit expressément de prendre d’autres biens des gens sous Amān.",
+   "es": "su propia prueba de que un juez no musulmán decide. Es una prueba complementaria fuerte de propiedad. En el mismo texto ash-Shāfiʿī prohíbe expresamente tomar otros bienes de la gente bajo Amān."
+  },
+  "Textmarkierung: geraubtes Eigentum in Dār al-Ḥarb": {
+   "ar": "تعليم النص: ملك مغصوب في Dār al-Ḥarb",
+   "en": "Text marker: seized property in Dār al-Ḥarb",
+   "tr": "Metin işareti: Dār al-Ḥarb’da gasp edilmiş mülk",
+   "ku": "Nîşana tekstê: milkê talankirî li Dār al-Ḥarb",
+   "ckb": "نیشانەی دەق: موڵکی دزراو لە Dār al-Ḥarb",
+   "bs": "Oznaka teksta: oteto vlasništvo u Dār al-Ḥarbu",
+   "fr": "Marquage de texte : bien ravi en Dār al-Ḥarb",
+   "es": "Marca de texto: propiedad arrebatada en Dār al-Ḥarb"
+  },
+  "Islamweb · al-Umm, Bd. 4, S. 284 · relevante Passage markiert": {
+   "ar": "Islamweb · al-Umm، ج 4، ص 284 · المقطع ذو الصلة موسوم",
+   "en": "Islamweb · al-Umm, vol. 4, p. 284 · the relevant passage marked",
+   "tr": "Islamweb · al-Umm, c. 4, s. 284 · ilgili pasaj işaretli",
+   "ku": "Islamweb · al-Umm, berg 4, r. 284 · beşa têkildar nîşankirî",
+   "ckb": "Islamweb · al-Umm، بەرگ 4، لاپەڕە 284 · بەشی پەیوەندیدار نیشانکراو",
+   "bs": "Islamweb · al-Umm, sv. 4, str. 284 · relevantni odlomak označen",
+   "fr": "Islamweb · al-Umm, vol. 4, p. 284 · passage pertinent marqué",
+   "es": "Islamweb · al-Umm, vol. 4, p. 284 · pasaje pertinente marcado"
+  },
+  "Textmarkierung: „Das ist keine Khiyānah“": {
+   "ar": "تعليم النص: «هذا ليس Khiyānah»",
+   "en": "Text marker: “This is not Khiyānah”",
+   "tr": "Metin işareti: “Bu Khiyānah değildir”",
+   "ku": "Nîşana tekstê: “Ev ne Khiyānah e”",
+   "ckb": "نیشانەی دەق: «ئەمە Khiyānah نییە»",
+   "bs": "Oznaka teksta: “Ovo nije Khiyānah”",
+   "fr": "Marquage de texte : « Ce n’est pas une Khiyānah »",
+   "es": "Marca de texto: “Esto no es Khiyānah”"
+  },
+  "ash-Shāfiʿī · direkte Abgrenzung zwischen Rechtsrückgabe und Verrat": {
+   "ar": "ash-Shāfiʿī · حد مباشر بين ردّ الحق والخيانة",
+   "en": "ash-Shāfiʿī · direct boundary between returning a right and betrayal",
+   "tr": "ash-Shāfiʿī · hakkın iadesi ile ihanet arasında doğrudan sınır",
+   "ku": "ash-Shāfiʿī · sînorê rasterast di navbera vegerandina mafê û xiyanetê de",
+   "ckb": "ash-Shāfiʿī · سنووری ڕاستەوخۆ لە نێوان گەڕاندنەوەی ماف و خیانت",
+   "bs": "ash-Shāfiʿī · izravna granica između vraćanja prava i izdaje",
+   "fr": "ash-Shāfiʿī · limite directe entre la restitution du droit et la trahison",
+   "es": "ash-Shāfiʿī · límite directo entre devolver un derecho y la traición"
+  },
+  "Digitalisierte Fundseite: al-Umm, Seite 1527": {
+   "ar": "صفحة رقمية للموضع: al-Umm، الصفحة 1527",
+   "en": "Digitized source page: al-Umm, page 1527",
+   "tr": "Dijitalleştirilmiş yer sayfası: al-Umm, sayfa 1527",
+   "ku": "Rûpela jêderê ya dîjîtal: al-Umm, rûpel 1527",
+   "ckb": "لاپەڕەی سەرچاوەی دیجیتاڵ: al-Umm، لاپەڕە 1527",
+   "bs": "Digitalizirana stranica izvora: al-Umm, stranica 1527",
+   "fr": "Page numérisée du lieu : al-Umm, page 1527",
+   "es": "Página digitalizada del lugar: al-Umm, página 1527"
+  },
+  "Wikisource · exakt der Abschnitt „Der Muslim betritt Dār al-Ḥarb …“": {
+   "ar": "Wikisource · تحديدًا القسم «المسلم يدخل Dār al-Ḥarb …»",
+   "en": "Wikisource · exactly the section “The Muslim enters Dār al-Ḥarb …”",
+   "tr": "Wikisource · tam olarak “Müslüman Dār al-Ḥarb’a girer …” bölümü",
+   "ku": "Wikisource · tam beşa “Misilman dikeve Dār al-Ḥarb …”",
+   "ckb": "Wikisource · بە وردی بەشی «موسڵمان دەچێتە Dār al-Ḥarb …»",
+   "bs": "Wikisource · tačno odjeljak “Musliman ulazi u Dār al-Ḥarb …”",
+   "fr": "Wikisource · exactement la section « Le musulman entre en Dār al-Ḥarb … »",
+   "es": "Wikisource · exactamente la sección “El musulmán entra en Dār al-Ḥarb …”"
+  },
+  "Ibn Qudāmah: Die Grenze ist Ghadr und fremdes Vermögen": {
+   "ar": "Ibn Qudāmah: الحد هو Ghadr ومال الغير",
+   "en": "Ibn Qudāmah: the boundary is Ghadr and another’s property",
+   "tr": "Ibn Qudāmah: sınır Ghadr ve başkasının malıdır",
+   "ku": "Ibn Qudāmah: sînor Ghadr û malê yekî din e",
+   "ckb": "Ibn Qudāmah: سنوور Ghadr و سامانی کەسانی دیکەیە",
+   "bs": "Ibn Qudāmah: granica je Ghadr i tuđa imovina",
+   "fr": "Ibn Qudāmah : la limite est le Ghadr et le bien d’autrui",
+   "es": "Ibn Qudāmah: el límite es Ghadr y el bien ajeno"
+  },
+  "Wer mit Amān in das Land des Feindes eintritt, darf sie nicht in ihrem Vermögen verraten. Betrügt oder bestiehlt er sie, muss er das Genommene an die Eigentümer zurückgeben.": {
+   "ar": "من يدخل بلاد العدو بـ Amān لا يجوز له أن يخونهم في مالهم. فإن غشّهم أو سرقهم وجب عليه ردّ المأخوذ إلى أصحابه.",
+   "en": "Whoever enters the enemy’s land with Amān may not betray them in their property. If he cheats them or steals from them, he must return what was taken to the owners.",
+   "tr": "Amān ile düşman ülkesine giren kimse, onların malında onlara ihanet edemez. Onları aldatır veya çalarsa, alınanı sahiplerine geri vermelidir.",
+   "ku": "Yê ku bi Amān bikeve welatê dijmin, nikare di malê wan de wan bixapîne. Heke wan bixapîne an jî dizî li wan bike, divê tiştê standî vegerîne xwediyan.",
+   "ckb": "ئەوەی بە Amān دەچێتە وڵاتی دوژمن، نابێت لە سامانەکەیاندا خیانتان لێ بکات. ئەگەر فریویان بدات یان دزیان لێ بکات، دەبێت ئەوەی گیراوە بگەڕێنێتەوە بۆ خاوەنەکانی.",
+   "bs": "Ko s Amānom uđe u zemlju neprijatelja, ne smije ih izdati u njihovoj imovini. Ako ih prevari ili im ukrade, mora uzeto vratiti vlasnicima.",
+   "fr": "Celui qui entre au pays de l’ennemi avec Amān ne doit pas les trahir dans leurs biens. S’il les trompe ou les vole, il doit rendre ce qui a été pris aux propriétaires.",
+   "es": "Quien entra en la tierra del enemigo con Amān no debe traicionarlos en sus bienes. Si los engaña o les roba, debe devolver lo tomado a los propietarios."
+  },
+  ", Kitāb al-Jihād, Masʾalah Nr. 7587; in einer verbreiteten Druckzählung Bd. 9, S. 237; in anderer Ausgabe Bd. 13, S. 152.": {
+   "ar": "، Kitāb al-Jihād، Masʾalah رقم 7587؛ في ترقيم طبع شائع ج 9، ص 237؛ وفي طبعة أخرى ج 13، ص 152.",
+   "en": ", Kitāb al-Jihād, Masʾalah no. 7587; in a widespread print numbering vol. 9, p. 237; in another edition vol. 13, p. 152.",
+   "tr": ", Kitāb al-Jihād, Masʾalah no. 7587; yaygın bir baskı numarasında c. 9, s. 237; başka bir baskıda c. 13, s. 152.",
+   "ku": ", Kitāb al-Jihād, Masʾalah hejmar 7587; di hejmartineke çapê ya belav de berg 9, r. 237; di çapa din de berg 13, r. 152.",
+   "ckb": "، Kitāb al-Jihād، Masʾalah ژمارە 7587؛ لە ژمارەی چاپێکی باو بەرگ 9، لاپەڕە 237؛ لە چاپێکی دیکە بەرگ 13، لاپەڕە 152.",
+   "bs": ", Kitāb al-Jihād, Masʾalah br. 7587; u raširenoj štampanoj numeraciji sv. 9, str. 237; u drugom izdanju sv. 13, str. 152.",
+   "fr": ", Kitāb al-Jihād, Masʾalah n° 7587 ; dans une pagination d’impression répandue vol. 9, p. 237 ; dans une autre édition vol. 13, p. 152.",
+   "es": ", Kitāb al-Jihād, Masʾalah n.º 7587; en una numeración de impresión difundida vol. 9, p. 237; en otra edición vol. 13, p. 152."
+  },
+  "Rechtsrückforderung darf nicht mit eigenmächtigem Raub, Diebstahl oder Ghadr verwechselt werden. Auch in Dār al-Ḥarb bleibt fremdes Vermögen unter Amān geschützt.": {
+   "ar": "لا يجوز الخلط بين استرداد الحق وبين الغصب الذاتي أو السرقة أو Ghadr. وحتى في Dār al-Ḥarb يبقى مال الغير تحت Amān محميًا.",
+   "en": "Recovery of a right must not be confused with seizure on one’s own authority, theft or Ghadr. Even in Dār al-Ḥarb, another’s property remains protected under Amān.",
+   "tr": "Hakkın geri istenmesi, kendi başına gasp, hırsızlık veya Ghadr ile karıştırılmamalıdır. Dār al-Ḥarb’da da başkasının malı Amān altında korunur.",
+   "ku": "Paşve xwestina mafê neyê tevlihev kirin bi talana bi serê xwe, diziyê an Ghadr. Heta li Dār al-Ḥarb jî malê yekî din di bin Amān de parastî dimîne.",
+   "ckb": "نابێت وەرگرتنەوەی ماف تێکەڵ بکرێت بە دزینی بە خۆی، دزی یان Ghadr. تەنانەت لە Dār al-Ḥarb سامانی کەسانی دیکە لەژێر Amān پارێزراو دەمێنێتەوە.",
+   "bs": "Vraćanje prava ne smije se brkati sa samovoljnom otimačinom, krađom ili Ghadrom. I u Dār al-Ḥarbu tuđa imovina ostaje zaštićena pod Amānom.",
+   "fr": "La récupération d’un droit ne doit pas être confondue avec le rapt de sa propre autorité, le vol ou le Ghadr. Même en Dār al-Ḥarb, le bien d’autrui reste protégé sous Amān.",
+   "es": "La recuperación de un derecho no debe confundirse con el arrebato por cuenta propia, el robo o el Ghadr. Incluso en Dār al-Ḥarb el bien ajeno permanece protegido bajo Amān."
+  },
+  "; sie ist nicht der Hauptbeleg für die Rückgabe durch deren ḥākim. Dieser direkte Fall steht bei as-Saraḫsī.": {
+   "ar": "؛ وهي ليست الدليل الرئيس للردّ عن طريق ḥākimهم. هذه الحالة المباشرة عند as-Saraḫsī.",
+   "en": "; it is not the main proof for the return through their ḥākim. This direct case stands with as-Saraḫsī.",
+   "tr": "; o, onların ḥākim’i yoluyla iadenin baş delili değildir. Bu doğrudan hâl as-Saraḫsī’dedir.",
+   "ku": "; ew ne delîla sereke ye bo vegerandinê bi rêya ḥākim a wan. Ev rewşa rasterast li cem as-Saraḫsī ye.",
+   "ckb": "؛ ئەمە بەڵگەی سەرەکی نییە بۆ گەڕاندنەوە لە ڕێگەی ḥākimی ئەوان. ئەم حاڵەتە ڕاستەوخۆیە لای as-Saraḫsīیە.",
+   "bs": "; ona nije glavni dokaz za vraćanje putem njihovog ḥākima. Taj izravni slučaj stoji kod as-Saraḫsīja.",
+   "fr": "; elle n’est pas la preuve principale de la restitution par leur ḥākim. Ce cas direct se trouve chez as-Saraḫsī.",
+   "es": "; no es la prueba principal de la devolución por medio de su ḥākim. Este caso directo está en as-Saraḫsī."
+  },
+  "Textmarkierung: Amān verbietet Khiyānah": {
+   "ar": "تعليم النص: Amān يحرّم Khiyānah",
+   "en": "Text marker: Amān forbids Khiyānah",
+   "tr": "Metin işareti: Amān, Khiyānah’ı yasaklar",
+   "ku": "Nîşana tekstê: Amān Khiyānah qedexe dike",
+   "ckb": "نیشانەی دەق: Amān قەدەغەی Khiyānah دەکات",
+   "bs": "Oznaka teksta: Amān zabranjuje Khiyānah",
+   "fr": "Marquage de texte : Amān interdit la Khiyānah",
+   "es": "Marca de texto: Amān prohíbe la Khiyānah"
+  },
+  "Ibn Qudāmah · al-Mughnī · Masʾalah 7587 · direkte Grenzregel": {
+   "ar": "Ibn Qudāmah · al-Mughnī · Masʾalah 7587 · قاعدة الحد المباشرة",
+   "en": "Ibn Qudāmah · al-Mughnī · Masʾalah 7587 · the direct boundary rule",
+   "tr": "Ibn Qudāmah · al-Mughnī · Masʾalah 7587 · doğrudan sınır kuralı",
+   "ku": "Ibn Qudāmah · al-Mughnī · Masʾalah 7587 · rêbaza sînorê ya rasterast",
+   "ckb": "Ibn Qudāmah · al-Mughnī · Masʾalah 7587 · یاسای سنووری ڕاستەوخۆ",
+   "bs": "Ibn Qudāmah · al-Mughnī · Masʾalah 7587 · izravno pravilo granice",
+   "fr": "Ibn Qudāmah · al-Mughnī · Masʾalah 7587 · règle directe de la limite",
+   "es": "Ibn Qudāmah · al-Mughnī · Masʾalah 7587 · regla directa del límite"
+  },
+  "Textmarkierung: Gestohlenes muss zurückgegeben werden": {
+   "ar": "تعليم النص: يجب ردّ المسروق",
+   "en": "Text marker: what was stolen must be returned",
+   "tr": "Metin işareti: Çalınan geri verilmelidir",
+   "ku": "Nîşana tekstê: Ya dizîyayî divê were vegerandin",
+   "ckb": "نیشانەی دەق: دەبێت دزراو بگەڕێندرێتەوە",
+   "bs": "Oznaka teksta: Ukradeno se mora vratiti",
+   "fr": "Marquage de texte : le volé doit être rendu",
+   "es": "Marca de texto: lo robado debe devolverse"
+  },
+  "Ibn Qudāmah · zeigt ausdrücklich die Grenze gegen unrechtmäßiges Nehmen": {
+   "ar": "Ibn Qudāmah · يُظهر صراحة الحد ضد الأخذ بغير حق",
+   "en": "Ibn Qudāmah · expressly shows the boundary against unlawful taking",
+   "tr": "Ibn Qudāmah · haksız almaya karşı sınırı açıkça gösterir",
+   "ku": "Ibn Qudāmah · bi eşkere sînorê li dijî standina neheq nîşan dide",
+   "ckb": "Ibn Qudāmah · بە ڕاشکاوی سنوور دژ بە وەرگرتنی ناڕەوا نیشان دەدات",
+   "bs": "Ibn Qudāmah · izričito pokazuje granicu protiv nepravednog uzimanja",
+   "fr": "Ibn Qudāmah · montre expressément la limite contre la prise illégitime",
+   "es": "Ibn Qudāmah · muestra expresamente el límite contra la toma ilegítima"
+  },
+  "Ḥilf al-Fuḍūl: Ein zurückgehaltenes Recht wird zurückgefordert": {
+   "ar": "Ḥilf al-Fuḍūl: يُطالب بحق محبوس",
+   "en": "Ḥilf al-Fuḍūl: a withheld right is claimed back",
+   "tr": "Ḥilf al-Fuḍūl: Alıkonan bir hak geri istenir",
+   "ku": "Ḥilf al-Fuḍūl: Mafekî girtî tê paşve xwestin",
+   "ckb": "Ḥilf al-Fuḍūl: مافێکی ڕاگیراو داوا دەکرێتەوە",
+   "bs": "Ḥilf al-Fuḍūl: Zadržano pravo se potražuje natrag",
+   "fr": "Ḥilf al-Fuḍūl : un droit retenu est réclamé",
+   "es": "Ḥilf al-Fuḍūl: se reclama un derecho retenido"
+  },
+  "Die Beteiligten verpflichteten sich, mit jedem Unterdrückten in Makkah gegen denjenigen zu stehen, der ihm Unrecht tat,": {
+   "ar": "التزم المشاركون أن يقفوا مع كل مظلوم في Makkah ضد من ظلمه،",
+   "en": "The participants bound themselves to stand with every wronged person in Makkah against the one who wronged him,",
+   "tr": "Katılanlar, Makkah’da her mazlumun yanında, ona zulmedene karşı durmayı üstlendiler,",
+   "ku": "Beşdar bûn soz dan ku li gel her zilm-lêkirî li Makkah li dijî yê ku neheqî lê kiriye bisekinin,",
+   "ckb": "بەشداربووان پابەند بوون کە لەگەڵ هەموو ستەملێکراوێک لە Makkah بوەستن دژ بەوەی ستەمی لێ کردووە،",
+   "bs": "Učesnici su se obavezali da stoje uz svakog potlačenog u Makki protiv onoga koji mu je nepravdu učinio,",
+   "fr": "Les participants s’engagèrent à se tenir avec chaque opprimé à Makkah contre celui qui lui faisait injustice,",
+   "es": "Los participantes se comprometieron a estar con todo oprimido en Makkah contra quien le hacía agravio,"
+  },
+  "bis ihm sein genommenes Recht zurückgegeben wird": {
+   "ar": "حتى يُردّ إليه حقه المأخوذ",
+   "en": "until his taken right is returned to him",
+   "tr": "ta ki alınmış hakkı ona geri verilene kadar",
+   "ku": "heta ku mafê wî yê standî jê re were vegerandin",
+   "ckb": "تا مافی گیراوی بۆ دەگەڕێتەوە",
+   "bs": "dok mu se uzeto pravo ne vrati",
+   "fr": "jusqu’à ce que son droit pris lui soit rendu",
+   "es": "hasta que se le devuelva su derecho tomado"
+  },
+  "Ein Mann aus Zubayd hatte Ware an al-ʿĀṣ ibn Wāʾil verkauft; dieser hielt ihm sein Recht vor. Daraus entstand der Bund zur Rückgabe solcher Rechte.": {
+   "ar": "رجل من Zubayd باع سلعة لـ al-ʿĀṣ ibn Wāʾil؛ فحبس عنه حقه. ومن ذلك نشأ الحلف لردّ أمثال هذه الحقوق.",
+   "en": "A man from Zubayd had sold goods to al-ʿĀṣ ibn Wāʾil; the latter withheld his right from him. From this arose the pact for the return of such rights.",
+   "tr": "Zubayd’dan bir adam al-ʿĀṣ ibn Wāʾil’e mal satmıştı; o da hakkını ondan alıkoydu. Bundan, böyle hakların iadesi için ahit doğdu.",
+   "ku": "Mêrekî ji Zubayd mal firotibû al-ʿĀṣ ibn Wāʾil; wî mafê wî jê girt. Ji vê peyman ji bo vegerandina mafên weha çêbû.",
+   "ckb": "پیاوێک لە Zubayd کاڵای فرۆشتبوو بە al-ʿĀṢ ibn Wāʾil؛ ئەویش مافەکەی لێ ڕاگرت. لەمەوە پەیمان بۆ گەڕاندنەوەی مافەکانی وەک ئەمە دروست بوو.",
+   "bs": "Čovjek iz Zubayda prodao je robu al-ʿĀṣ ibn Wāʾilu; ovaj mu je zadržao pravo. Iz toga je nastao savez za vraćanje takvih prava.",
+   "fr": "Un homme de Zubayd avait vendu une marchandise à al-ʿĀṣ ibn Wāʾil ; celui-ci lui retint son droit. De là naquit le pacte pour la restitution de tels droits.",
+   "es": "Un hombre de Zubayd había vendido mercancía a al-ʿĀṢ ibn Wāʾil; este le retuvo su derecho. De ello surgió el pacto para devolver tales derechos."
+  },
+  "Sie belegt einen konkreten historischen Mechanismus zur": {
+   "ar": "وهو يثبت آلية تاريخية معينة لـ",
+   "en": "It documents a concrete historical mechanism for",
+   "tr": "O, belirli tarihî bir mekanizmayı belgeler:",
+   "ku": "Ew mekanîzmayeke dîrokî ya diyarkirî îsbat dike bo",
+   "ckb": "ئەمە میکانیزمێکی مێژوویی دیاریکراو دەسەلمێنێت بۆ",
+   "bs": "Ona potvrđuje konkretan historijski mehanizam za",
+   "fr": "Elle atteste un mécanisme historique concret pour",
+   "es": "Documenta un mecanismo histórico concreto para"
+  },
+  "Rückgabe eines vorenthaltenen Rechts": {
+   "ar": "ردّ حق ممنوع",
+   "en": "the return of a withheld right",
+   "tr": "alıkonan bir hakkın iadesi",
+   "ku": "vegerandina mafekî girtî",
+   "ckb": "گەڕاندنەوەی مافێکی ڕاگیراو",
+   "bs": "vraćanje zadržanog prava",
+   "fr": "la restitution d’un droit retenu",
+   "es": "la devolución de un derecho retenido"
+  },
+  "in der jāhilī-mušrikischen Ordnung Makkahs.": {
+   "ar": "في النظام الجاهلي-المشرك لـ Makkah.",
+   "en": "in the jāhilī-mušrik order of Makkah.",
+   "tr": "Makkah’ın jāhilī-mušrik düzeninde.",
+   "ku": "di rêza jāhilī-mušrik a Makkah de.",
+   "ckb": "لە ڕێکخستنی jāhilī-mušrikی Makkah.",
+   "bs": "u jāhilī-mušrik poretku Makke.",
+   "fr": "dans l’ordre jāhilī-mušrik de Makkah.",
+   "es": "en el orden jāhilī-mušrik de Makkah."
+  },
+  "Ḥilf al-Fuḍūl ist kein technischer Beleg für den modernen Gerichtsbegriff „taḥākum“. Er ist ein historischer Beleg dafür, dass die Hilfe zur Rückgabe eines konkreten Rechts nicht dadurch verwerflich wird, dass die gesellschaftliche Ordnung selbst nicht islamisch ist.": {
+   "ar": "Ḥilf al-Fuḍūl ليس دليلًا فنيًا لمفهوم المحكمة الحديث «taḥākum». إنه دليل تاريخي على أن العون لردّ حق معين لا يصير مذمومًا لمجرد أن النظام الاجتماعي نفسه غير إسلامي.",
+   "en": "Ḥilf al-Fuḍūl is not a technical proof for the modern court term “taḥākum”. It is a historical proof that help toward the return of a concrete right does not become blameworthy merely because the social order itself is not Islamic.",
+   "tr": "Ḥilf al-Fuḍūl, modern mahkeme kavramı “taḥākum” için teknik bir delil değildir. O, somut bir hakkın iadesine yardımın, toplumsal düzenin kendisi İslamî olmadığı için yerilmiş olmayacağına dair tarihî bir delildir.",
+   "ku": "Ḥilf al-Fuḍūl ne delîlekî teknîkî ye bo têgeha dadgehê ya nûjen “taḥākum”. Ew delîlekî dîrokî ye ku alîkarî bo vegerandina mafekî diyarkirî tenê ji ber ku rêza civakî bi xwe ne îslamî ye, neyê rexne kirin.",
+   "ckb": "Ḥilf al-Fuḍūl بەڵگەیەکی تەکنیکی نییە بۆ چەمکی دادگای نوێ «taḥākum». بەڵگەیەکی مێژووییە کە یارمەتی بۆ گەڕاندنەوەی مافێکی دیاریکراو بەوە نەفرەتلێکراو نابێت کە ڕێکخستنی کۆمەڵایەتی خۆی ئیسلامی نییە.",
+   "bs": "Ḥilf al-Fuḍūl nije tehnički dokaz za moderni sudski pojam “taḥākum”. On je historijski dokaz da pomoć za vraćanje konkretnog prava ne postaje pokuđena time što sam društveni poredak nije islamski.",
+   "fr": "Ḥilf al-Fuḍūl n’est pas une preuve technique du concept judiciaire moderne « taḥākum ». C’est une preuve historique que l’aide à la restitution d’un droit concret ne devient pas blâmable du seul fait que l’ordre social lui-même n’est pas islamique.",
+   "es": "Ḥilf al-Fuḍūl no es una prueba técnica del concepto judicial moderno “taḥākum”. Es una prueba histórica de que la ayuda para devolver un derecho concreto no se vuelve censurable por el solo hecho de que el orden social mismo no sea islámico."
+  },
+  "Textmarkierung: „bis ihm sein Unrecht zurückgegeben wird“": {
+   "ar": "تعليم النص: «حتى يُردّ إليه ظلمه»",
+   "en": "Text marker: “until his wrong is returned to him”",
+   "tr": "Metin işareti: “ta ki haksızlığı ona geri verilene kadar”",
+   "ku": "Nîşana tekstê: “heta ku neheqiya wî jê re were vegerandin”",
+   "ckb": "نیشانەی دەق: «تا ستەمەکەی بۆ دەگەڕێتەوە»",
+   "bs": "Oznaka teksta: “dok mu se nepravda ne vrati”",
+   "fr": "Marquage de texte : « jusqu’à ce que son tort lui soit rendu »",
+   "es": "Marca de texto: “hasta que se le devuelva su agravio”"
+  },
+  "Ibn Hishām · Bd. 1, S. 134 · Kernformulierung direkt markiert": {
+   "ar": "Ibn Hishām · ج 1، ص 134 · الصيغة الجوهرية موسومة مباشرة",
+   "en": "Ibn Hishām · vol. 1, p. 134 · the core wording marked directly",
+   "tr": "Ibn Hishām · c. 1, s. 134 · çekirdek ifade doğrudan işaretli",
+   "ku": "Ibn Hishām · berg 1, r. 134 · formulasyona bingehîn rasterast nîşankirî",
+   "ckb": "Ibn Hishām · بەرگ 1، لاپەڕە 134 · داڕشتەی ناوەکی ڕاستەوخۆ نیشانکراو",
+   "bs": "Ibn Hishām · sv. 1, str. 134 · jezgrovita formulacija izravno označena",
+   "fr": "Ibn Hishām · vol. 1, p. 134 · la formulation centrale marquée directement",
+   "es": "Ibn Hishām · vol. 1, p. 134 · la formulación central marcada directamente"
+  },
+  "Originalscan: Ibn Hishām – direkte Fundseite": {
+   "ar": "المسح الأصلي: Ibn Hishām – صفحة الموضع المباشرة",
+   "en": "Original scan: Ibn Hishām – the direct source page",
+   "tr": "Asıl tarama: Ibn Hishām – doğrudan yer sayfası",
+   "ku": "Scana eslî: Ibn Hishām – rûpela jêderê ya rasterast",
+   "ckb": "سکانی ڕەسەن: Ibn Hishām – لاپەڕەی ڕاستەوخۆی شوێن",
+   "bs": "Izvorni sken: Ibn Hishām – izravna stranica izvora",
+   "fr": "Scan original : Ibn Hishām – page directe du lieu",
+   "es": "Escaneo original: Ibn Hishām – página directa del lugar"
+  },
+  "Scan-Seite 86 · enthält „ḥattā turadda ʿalayhi maẓlamatuhu“ und den Bund": {
+   "ar": "صفحة المسح 86 · تتضمن «ḥattā turadda ʿalayhi maẓlamatuhu» والحلف",
+   "en": "Scan page 86 · contains “ḥattā turadda ʿalayhi maẓlamatuhu” and the pact",
+   "tr": "Tarama sayfası 86 · “ḥattā turadda ʿalayhi maẓlamatuhu” ve ahdi içerir",
+   "ku": "Rûpela scanê 86 · “ḥattā turadda ʿalayhi maẓlamatuhu” û peymanê dihewîne",
+   "ckb": "لاپەڕەی سکان 86 · «ḥattā turadda ʿalayhi maẓlamatuhu» و پەیمانەکە لەخۆ دەگرێت",
+   "bs": "Stranica skena 86 · sadrži “ḥattā turadda ʿalayhi maẓlamatuhu” i savez",
+   "fr": "Page de scan 86 · contient « ḥattā turadda ʿalayhi maẓlamatuhu » et le pacte",
+   "es": "Página de escaneo 86 · contiene “ḥattā turadda ʿalayhi maẓlamatuhu” y el pacto"
+  },
+  "Der Prophet ﷺ lobte den Bund zur Rechtsrückgabe": {
+   "ar": "مدح النبي ﷺ الحلف لردّ الحق",
+   "en": "The Prophet ﷺ praised the pact for the return of rights",
+   "tr": "Peygamber ﷺ, hakkın iadesi için ahdi övdü",
+   "ku": "Peyamber ﷺ peymana vegerandina mafê pesn da",
+   "ckb": "پێغەمبەر ﷺ پەیمانی گەڕاندنەوەی مافی ستایش کرد",
+   "bs": "Poslanik ﷺ pohvalio je savez za vraćanje prava",
+   "fr": "Le Prophète ﷺ a loué le pacte pour la restitution du droit",
+   "es": "El Profeta ﷺ elogió el pacto para la devolución del derecho"
+  },
+  "Der Prophet ﷺ berichtete, dass er den Bund im Haus von ʿAbdullāh ibn Judʿān erlebt hatte, und sagte, dass er auch im Islam darauf antworten würde, wenn er dazu gerufen würde.": {
+   "ar": "أخبر النبي ﷺ أنه شهد الحلف في بيت ʿAbdullāh ibn Judʿān، وقال إنه في الإسلام أيضًا سيجيب إليه إذا دُعي.",
+   "en": "The Prophet ﷺ reported that he had witnessed the pact in the house of ʿAbdullāh ibn Judʿān, and said that in Islam too he would answer it if he were called to it.",
+   "tr": "Peygamber ﷺ, ahdi ʿAbdullāh ibn Judʿān’ın evinde gördüğünü bildirdi ve İslam’da da ona çağrılırsa icabet edeceğini söyledi.",
+   "ku": "Peyamber ﷺ ragihand ku wî peyman di mala ʿAbdullāh ibn Judʿān de dîtibû, û got ku di Îslamê de jî, heke were gazî kirin, bersivê dide wê.",
+   "ckb": "پێغەمبەر ﷺ فەرمووی کە پەیمانەکەی لە ماڵی ʿAbdullāh ibn Judʿān بینیوە، و فەرمووی کە لە ئیسلامیشدا وەڵامی دەداتەوە ئەگەر بانگ بکرێت بۆی.",
+   "bs": "Poslanik ﷺ javi da je savez doživio u kući ʿAbdullāh ibn Judʿāna i reče da bi i u islamu na njega odgovorio ako bi bio pozvan.",
+   "fr": "Le Prophète ﷺ rapporta qu’il avait assisté au pacte dans la maison de ʿAbdullāh ibn Judʿān, et dit qu’en Islam aussi il y répondrait s’il y était appelé.",
+   "es": "El Profeta ﷺ informó que había presenciado el pacto en la casa de ʿAbdullāh ibn Judʿān, y dijo que también en el Islam respondería a él si fuera llamado."
+  },
+  ", Nr. 13211, in der Ausgabe at-Turkī Bd. 13, S. 344; Ibn Kathīr,": {
+   "ar": "، رقم 13211، في طبعة at-Turkī ج 13، ص 344؛ Ibn Kathīr،",
+   "en": ", no. 13211, in the at-Turkī edition vol. 13, p. 344; Ibn Kathīr,",
+   "tr": ", no. 13211, at-Turkī baskısında c. 13, s. 344; Ibn Kathīr,",
+   "ku": ", hejmar 13211, di çapa at-Turkī de berg 13, r. 344; Ibn Kathīr,",
+   "ckb": "، ژمارە 13211، لە چاپی at-Turkī بەرگ 13، لاپەڕە 344؛ Ibn Kathīr،",
+   "bs": ", br. 13211, u izdanju at-Turkī sv. 13, str. 344; Ibn Kathīr,",
+   "fr": ", n° 13211, dans l’édition at-Turkī vol. 13, p. 344 ; Ibn Kathīr,",
+   "es": ", n.º 13211, en la edición at-Turkī vol. 13, p. 344; Ibn Kathīr,"
+  },
+  "Sie bestätigt den Inhalt von Ḥilf al-Fuḍūl nach der Prophetie: einen Bund, dessen konkreter Anlass und Zweck die Rückgabe vorenthaltener Rechte und das Stehen mit dem Unterdrückten war.": {
+   "ar": "وهي تؤكد مضمون Ḥilf al-Fuḍūl بعد النبوة: حلفًا كان مناسبته وغرضه المتعين ردّ الحقوق الممنوعة والوقوف مع المظلوم.",
+   "en": "It confirms the content of Ḥilf al-Fuḍūl after the prophethood: a pact whose concrete occasion and purpose were the return of withheld rights and standing with the wronged.",
+   "tr": "O, Ḥilf al-Fuḍūl’ün içeriğini peygamberlikten sonra doğrular: somut vesilesi ve amacı alıkonan hakların iadesi ve mazlumun yanında durmak olan bir ahit.",
+   "ku": "Ew naveroka Ḥilf al-Fuḍūl piştî pêxemberiyê piştrast dike: peymanek ku bûyer û armanca wê ya diyarkirî vegerandina mafên girtî û sekinîn li gel zilm-lêkirî bû.",
+   "ckb": "ئەمە ناوەڕۆکی Ḥilf al-Fuḍūl دوای پێغەمبەرایەتی پشتڕاست دەکاتەوە: پەیمانێک کە بۆنە و مەبەستی دیاریکراوی گەڕاندنەوەی مافە ڕاگیراوەکان و وەستان لەگەڵ ستەملێکراو بوو.",
+   "bs": "Ona potvrđuje sadržaj Ḥilf al-Fuḍūla nakon vjerovjesništva: savez čiji su konkretni povod i svrha bili vraćanje zadržanih prava i stajanje uz potlačenog.",
+   "fr": "Elle confirme le contenu de Ḥilf al-Fuḍūl après la prophétie : un pacte dont l’occasion concrète et le but étaient la restitution des droits retenus et le fait de se tenir avec l’opprimé.",
+   "es": "Confirma el contenido de Ḥilf al-Fuḍūl después de la profecía: un pacto cuya ocasión concreta y cuyo fin eran la devolución de derechos retenidos y el estar con el oprimido."
+  },
+  "Die Überlieferungswege werden in den Ḥadīṯ-Werken unterschiedlich bewertet; der Bericht besitzt mehrere Stützen. Deshalb wird hier zusätzlich der Takhrīǧ verlinkt und nicht nur die Sīrah-Erzählung allein verwendet.": {
+   "ar": "تُقدَّر طرق الرواية في كتب الحديث على أنحاء مختلفة؛ وللخبر عدة مؤيّدات. لذلك يُربط هنا Takhrīǧ إضافةً، ولا يُكتفى برواية السيرة وحدها.",
+   "en": "The chains of transmission are assessed differently in the Ḥadīṯ works; the report has several supports. Therefore the Takhrīǧ is linked here in addition, and the Sīrah narrative alone is not used.",
+   "tr": "Rivayet yolları Ḥadīṯ eserlerinde farklı değerlendirilir; haberin birkaç desteği vardır. Bu yüzden burada ayrıca Takhrīǧ bağlanır ve yalnızca Sīrah anlatısı kullanılmaz.",
+   "ku": "Rêyên veguhastinê di berhemên Ḥadīṯ de bi awayên cuda tên nirxandin; ragihandin çend piştgir hene. Ji ber vê yekê li vir zêde Takhrīǧ tê girêdan, û ne tenê vegotina Sīrah tê bikaranîn.",
+   "ckb": "ڕێگاکانی گێڕانەوە لە کتێبەکانی Ḥadīṯ بە شێوەی جیاواز هەڵدەسەنگێنرێن؛ هەواڵەکە چەند پشتێکی هەیە. لەبەر ئەوە لێرە Takhrīǧیش دەبەسترێت، و تەنها گێڕانەوەی Sīrah بەکار ناهێنرێت.",
+   "bs": "Putevi predaje se u djelima Ḥadīṯa različito ocjenjuju; izvještaj ima više potpora. Zato se ovdje dodatno povezuje Takhrīǧ, a ne koristi se samo kazivanje Sīre.",
+   "fr": "Les voies de transmission sont appréciées différemment dans les ouvrages de Ḥadīṯ ; le récit possède plusieurs appuis. C’est pourquoi le Takhrīǧ est ici lié en plus, et le seul récit de la Sīrah n’est pas utilisé.",
+   "es": "Las vías de transmisión se valoran de modo distinto en las obras de Ḥadīṯ; el informe tiene varios apoyos. Por eso aquí se enlaza además el Takhrīǧ, y no se usa solo el relato de la Sīrah."
+  },
+  "Ḥadīṯ + Takhrīǧ: Lob von Ḥilf al-Fuḍūl": {
+   "ar": "حديث + Takhrīǧ: مدح Ḥilf al-Fuḍūl",
+   "en": "Ḥadīṯ + Takhrīǧ: praise of Ḥilf al-Fuḍūl",
+   "tr": "Ḥadīṯ + Takhrīǧ: Ḥilf al-Fuḍūl’ün övgüsü",
+   "ku": "Ḥadīṯ + Takhrīǧ: pesnê Ḥilf al-Fuḍūl",
+   "ckb": "Ḥadīṯ + Takhrīǧ: ستایشی Ḥilf al-Fuḍūl",
+   "bs": "Ḥadīṯ + Takhrīǧ: pohvala Ḥilf al-Fuḍūla",
+   "fr": "Ḥadīṯ + Takhrīǧ : éloge de Ḥilf al-Fuḍūl",
+   "es": "Ḥadīṯ + Takhrīǧ: elogio de Ḥilf al-Fuḍūl"
+  },
+  "Dorar · Textmarkierung + al-Bayhaqī Nr. 13211 + Ibn Kathīr 2/293": {
+   "ar": "Dorar · تعليم النص + al-Bayhaqī رقم 13211 + Ibn Kathīr 2/293",
+   "en": "Dorar · text marker + al-Bayhaqī no. 13211 + Ibn Kathīr 2/293",
+   "tr": "Dorar · metin işareti + al-Bayhaqī no. 13211 + Ibn Kathīr 2/293",
+   "ku": "Dorar · nîşana tekstê + al-Bayhaqī hejmar 13211 + Ibn Kathīr 2/293",
+   "ckb": "Dorar · نیشانەی دەق + al-Bayhaqī ژمارە 13211 + Ibn Kathīr 2/293",
+   "bs": "Dorar · oznaka teksta + al-Bayhaqī br. 13211 + Ibn Kathīr 2/293",
+   "fr": "Dorar · marquage de texte + al-Bayhaqī n° 13211 + Ibn Kathīr 2/293",
+   "es": "Dorar · marca de texto + al-Bayhaqī n.º 13211 + Ibn Kathīr 2/293"
+  },
+  "Ibn Kathīr: „die Rechte ihren Besitzern zurückgeben“": {
+   "ar": "Ibn Kathīr: «ردّ الحقوق إلى أصحابها»",
+   "en": "Ibn Kathīr: “return the rights to their owners”",
+   "tr": "Ibn Kathīr: “hakları sahiplerine geri vermek”",
+   "ku": "Ibn Kathīr: “mafên vegerînin xwediyên wan”",
+   "ckb": "Ibn Kathīr: «مافەکان بگەڕێنەرەوە بۆ خاوەنەکانیان»",
+   "bs": "Ibn Kathīr: “prava vratiti njihovim vlasnicima”",
+   "fr": "Ibn Kathīr : « rendre les droits à leurs détenteurs »",
+   "es": "Ibn Kathīr: “devolver los derechos a sus dueños”"
+  },
+  "al-Bidāyah wa-n-Nihāyah · historischer Zweck des Bundes direkt markiert": {
+   "ar": "al-Bidāyah wa-n-Nihāyah · الغرض التاريخي للحلف موسوم مباشرة",
+   "en": "al-Bidāyah wa-n-Nihāyah · the historical purpose of the pact marked directly",
+   "tr": "al-Bidāyah wa-n-Nihāyah · ahdin tarihî amacı doğrudan işaretli",
+   "ku": "al-Bidāyah wa-n-Nihāyah · armanca dîrokî ya peymanê rasterast nîşankirî",
+   "ckb": "al-Bidāyah wa-n-Nihāyah · مەبەستی مێژوویی پەیمان ڕاستەوخۆ نیشانکراو",
+   "bs": "al-Bidāyah wa-n-Nihāyah · historijska svrha saveza izravno označena",
+   "fr": "al-Bidāyah wa-n-Nihāyah · le but historique du pacte marqué directement",
+   "es": "al-Bidāyah wa-n-Nihāyah · el fin histórico del pacto marcado directamente"
+  },
+  "as-Saraḫsī behandelt ausdrücklich": {
+   "ar": "يعالج as-Saraḫsī صراحة",
+   "en": "as-Saraḫsī expressly treats",
+   "tr": "as-Saraḫsī açıkça ele alır",
+   "ku": "as-Saraḫsī bi eşkere dide ber çavan",
+   "ckb": "as-Saraḫsī بە ڕاشکاوی مامەڵە دەکات لەگەڵ",
+   "bs": "as-Saraḫsī izričito obrađuje",
+   "fr": "as-Saraḫsī traite expressément",
+   "es": "as-Saraḫsī trata expresamente"
+  },
+  "Beweis + deren ḥākim/König + Rückgabe des genommenen Rechts": {
+   "ar": "الدليل + ḥākimهم/الملك + ردّ الحق المأخوذ",
+   "en": "proof + their ḥākim/king + the return of the taken right",
+   "tr": "delil + onların ḥākim’i/kral + alınmış hakkın iadesi",
+   "ku": "delîl + ḥākim a wan/padîşah + vegerandina mafê standî",
+   "ckb": "بەڵگە + ḥākimی ئەوان/پاشا + گەڕاندنەوەی مافی گیراو",
+   "bs": "dokaz + njihov ḥākim/kralj + vraćanje uzetog prava",
+   "fr": "preuve + leur ḥākim/roi + restitution du droit pris",
+   "es": "prueba + su ḥākim/rey + devolución del derecho tomado"
+  },
+  "ash-Shāfiʿī zeigt, dass geraubtes Eigentum in Dār al-Ḥarb Eigentum seines Berechtigten bleibt und seine Rückführung keine Khiyānah ist. Ibn Qudāmah zieht die Grenze gegen Ghadr und unrechtmäßiges Nehmen. Ḥilf al-Fuḍūl zeigt einen konkreten vorislamischen Fall der Rechtsrückgabe, dessen gerechter Inhalt vom Propheten ﷺ gelobt wurde.": {
+   "ar": "يبيّن ash-Shāfiʿī أن الملك المغصوب في Dār al-Ḥarb يبقى ملك صاحبه، وأن إرجاعه ليس Khiyānah. ويضع Ibn Qudāmah الحد ضد Ghadr والأخذ بغير حق. ويُظهر Ḥilf al-Fuḍūl حالة قبل إسلامية معينة لردّ الحق، أثنى النبي ﷺ على مضمونها العادل.",
+   "en": "ash-Shāfiʿī shows that seized property in Dār al-Ḥarb remains the property of the one entitled to it, and that bringing it back is not Khiyānah. Ibn Qudāmah draws the boundary against Ghadr and unlawful taking. Ḥilf al-Fuḍūl shows a concrete pre-Islamic case of the return of a right, whose just content the Prophet ﷺ praised.",
+   "tr": "ash-Shāfiʿī gösterir ki Dār al-Ḥarb’da gasp edilen mülk hak sahibinin mülkü kalır ve geri getirilmesi Khiyānah değildir. Ibn Qudāmah, Ghadr ve haksız almaya karşı sınırı çizer. Ḥilf al-Fuḍūl, hakkın iadesinin somut bir İslam öncesi hâlini gösterir; Peygamber ﷺ onun adil içeriğini övmüştür.",
+   "ku": "ash-Shāfiʿī nîşan dide ku milkê talankirî li Dār al-Ḥarb milkê xwediyê mafê dimîne û vegera wî ne Khiyānah e. Ibn Qudāmah sînorê li dijî Ghadr û standina neheq dikişîne. Ḥilf al-Fuḍūl rewşeke berî îslamê ya diyarkirî ya vegerandina mafê nîşan dide, ku Peyamber ﷺ naveroka wê ya dadmend pesn da.",
+   "ckb": "ash-Shāfiʿī نیشان دەدات کە موڵکی دزراو لە Dār al-Ḥarb موڵکی خاوەن مافەکەی دەمێنێتەوە و گەڕاندنەوەی Khiyānah نییە. Ibn Qudāmah سنوور دژ بە Ghadr و وەرگرتنی ناڕەوا دادەنێت. Ḥilf al-Fuḍūl حاڵەتێکی دیاریکراوی پێش ئیسلامی گەڕاندنەوەی ماف نیشان دەدات، کە پێغەمبەر ﷺ ناوەڕۆکی دادپەروەرانەی ستایش کرد.",
+   "bs": "ash-Shāfiʿī pokazuje da oteto vlasništvo u Dār al-Ḥarbu ostaje vlasništvo svog ovlaštenika i da njegovo vraćanje nije Khiyānah. Ibn Qudāmah povlači granicu protiv Ghadra i nepravednog uzimanja. Ḥilf al-Fuḍūl pokazuje konkretan predislamski slučaj vraćanja prava, čiji je pravedni sadržaj Poslanik ﷺ pohvalio.",
+   "fr": "ash-Shāfiʿī montre que le bien ravi en Dār al-Ḥarb demeure la propriété de son ayant droit, et que le ramener n’est pas une Khiyānah. Ibn Qudāmah trace la limite contre le Ghadr et la prise illégitime. Ḥilf al-Fuḍūl montre un cas préislamique concret de restitution d’un droit, dont le Prophète ﷺ a loué le contenu juste.",
+   "es": "ash-Shāfiʿī muestra que la propiedad arrebatada en Dār al-Ḥarb sigue siendo propiedad de su titular, y que traerla de vuelta no es Khiyānah. Ibn Qudāmah traza el límite contra el Ghadr y la toma ilegítima. Ḥilf al-Fuḍūl muestra un caso preislámico concreto de devolución de un derecho, cuyo contenido justo elogió el Profeta ﷺ."
+  },
+  "dass jede nichtislamische Gesetzgebung erlaubt sei, jedes Urteil einer solchen Autorität angenommen werden dürfe oder jede Form von taḥākum dasselbe Urteil habe. Diese Quellenseite behandelt ausschließlich die enge Frage der": {
+   "ar": "أن تكون كل تشريع غير إسلامي مباحة، أو يجوز قبول كل حكم لسلطة كهذه، أو أن يكون لكل صورة من taḥākum الحكم نفسه. هذه الصفحة المصدرية تعالج حصرًا المسألة الضيقة لـ",
+   "en": "that every non-Islamic legislation would be permitted, that every judgment of such an authority may be accepted, or that every form of taḥākum has the same ruling. This source page treats exclusively the narrow question of",
+   "tr": "her gayriislamî yasamanın helal olduğu, böyle bir otoritenin her hükmünün kabul edilebileceği veya her taḥākum biçiminin aynı hükme sahip olduğu. Bu kaynak sayfası yalnızca şu dar meseleyi ele alır:",
+   "ku": "ku her qanûneke ne îslamî destûr be, her hukmê desthilateke weha were pejirandin, an her şêweya taḥākum heman hukm hebe. Ev rûpela jêderê tenê pirsê teng a",
+   "ckb": "کە هەموو یاسایەکی نائیسلامی ڕێگەپێدراو بێت، هەموو حوکمی دەسەڵاتێکی وەها قبوڵ بکرێت، یان هەموو شێوەیەکی taḥākum هەمان حوکمی هەبێت. ئەم لاپەڕەی سەرچاوەیە تەنها پرسیاری تەسکی",
+   "bs": "da bi svako neislamsko zakonodavstvo bilo dozvoljeno, da se smije prihvatiti svaka presuda takve vlasti ili da svaki oblik taḥākuma ima isti hukm. Ova stranica izvora obrađuje isključivo usko pitanje",
+   "fr": "que toute législation non islamique serait permise, que tout jugement d’une telle autorité pourrait être accepté, ou que toute forme de taḥākum aurait le même jugement. Cette page de source traite exclusivement la question étroite de",
+   "es": "que toda legislación no islámica estaría permitida, que se podría aceptar todo fallo de tal autoridad, o que toda forma de taḥākum tendría el mismo fallo. Esta página de fuente trata exclusivamente la cuestión estrecha de"
+  },
+  "Rückforderung eines bereits bestehenden Rechts": {
+   "ar": "المطالبة بحق قائم من قبل",
+   "en": "the claiming of a right that already exists",
+   "tr": "önceden var olan bir hakkın istenmesi",
+   "ku": "daxwaza mafekî ku berê heye",
+   "ckb": "داواکردنی مافێک کە پێشتر هەبووە",
+   "bs": "potraživanje prava koje već postoji",
+   "fr": "la réclamation d’un droit déjà existant",
+   "es": "la reclamación de un derecho que ya existe"
+  },
+  "dar-al-tawhid.de/q/19/ · Fallback für diese Sammlung": {
+   "ar": "dar-al-tawhid.de/q/19/ · رجوع لهذه المجموعة",
+   "en": "dar-al-tawhid.de/q/19/ · fallback for this collection",
+   "tr": "dar-al-tawhid.de/q/19/ · bu derleme için yedek",
+   "ku": "dar-al-tawhid.de/q/19/ · veger bo vê berhevokê",
+   "ckb": "dar-al-tawhid.de/q/19/ · گەڕانەوە بۆ ئەم کۆمەڵەیە",
+   "bs": "dar-al-tawhid.de/q/19/ · rezerva za ovu zbirku",
+   "fr": "dar-al-tawhid.de/q/19/ · repli pour ce recueil",
+   "es": "dar-al-tawhid.de/q/19/ · respaldo para esta colección"
   }
  }
 }

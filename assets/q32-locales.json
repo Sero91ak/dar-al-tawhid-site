@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,368 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Wenn der Qurʾān nicht über die Kehle hinausgeht – DAR AL TAWḤĪD": {
+   "ar": "إذا لم يتجاوز القرآن الحلق – DAR AL TAWḤĪD",
+   "en": "When the Qurʾān does not go beyond the throat – DAR AL TAWḤĪD",
+   "tr": "Qurʾān boğazdan öteye geçmediğinde – DAR AL TAWḤĪD",
+   "ku": "Dema ku Qurʾān ji qirikê derbas nabe – DAR AL TAWḤĪD",
+   "ckb": "کاتێک قورئان لە قورگ تێناپەڕێت – DAR AL TAWḤĪD",
+   "bs": "Kada Qurʾān ne prelazi grlo – DAR AL TAWḤĪD",
+   "fr": "Lorsque le Qurʾān ne dépasse pas la gorge – DAR AL TAWḤĪD",
+   "es": "Cuando el Qurʾān no pasa de la garganta – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "مقالات وفق القرآن والسنة والآثار",
+   "en": "Articles according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre yazılar",
+   "ku": "Nivîs li gorî Qurʾān, Sunnah û Āthār",
+   "ckb": "بابەتەکان بەپێی قورئان و سوننەت و ئاسەوار",
+   "bs": "Tekstovi prema Qurʾānu, Sunnah i Āthāru",
+   "fr": "Articles selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Artículos según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Khawārij · Ahl al-Ahwāʾ · Manhaj · Fahm": {
+   "ar": "خوارج · أهل الأهواء · منهج · فهم",
+   "en": "Khawārij · Ahl al-Ahwāʾ · Manhaj · Fahm",
+   "tr": "Khawārij · Ahl al-Ahwāʾ · Manhaj · Fahm",
+   "ku": "Khawārij · Ahl al-Ahwāʾ · Manhaj · Fahm",
+   "ckb": "خوارج · أهل الأهواء · منهج · فهم",
+   "bs": "Khawārij · Ahl al-Ahwāʾ · Manhaj · Fahm",
+   "fr": "Khawārij · Ahl al-Ahwāʾ · Manhaj · Fahm",
+   "es": "Khawārij · Ahl al-Ahwāʾ · Manhaj · Fahm"
+  },
+  "Wenn der Qurʾān nicht über die Kehle hinausgeht": {
+   "ar": "إذا لم يتجاوز القرآن الحلق",
+   "en": "When the Qurʾān does not go beyond the throat",
+   "tr": "Qurʾān boğazdan öteye geçmediğinde",
+   "ku": "Dema ku Qurʾān ji qirikê derbas nabe",
+   "ckb": "کاتێک قورئان لە قورگ تێناپەڕێت",
+   "bs": "Kada Qurʾān ne prelazi grlo",
+   "fr": "Lorsque le Qurʾān ne dépasse pas la gorge",
+   "es": "Cuando el Qurʾān no pasa de la garganta"
+  },
+  "„Es werden Leute erscheinen, die den": {
+   "ar": "«سيظهر قوم يقرؤون",
+   "en": "“People will appear who",
+   "tr": "“Öyle kimseler çıkacak ki",
+   "ku": "“Wê gel derkevin ku",
+   "ckb": "«خەڵک دەردەکەون کە",
+   "bs": "„Pojavit će se ljudi koji",
+   "fr": "« Il apparaîtra des gens qui",
+   "es": "«Aparecerá gente que"
+  },
+  "rezitieren, doch er geht nicht über ihre": {
+   "ar": "يتلونه، لكنه لا يتجاوز",
+   "en": "recite, yet it does not go beyond their",
+   "tr": "okurlar, ama o şunlarını geçmez:",
+   "ku": "dixwînin, lê ew ji",
+   "ckb": "دەیخوێننەوە، بەڵام لە",
+   "bs": "uče, ali on ne prelazi njihovo",
+   "fr": "le récitent, mais il ne dépasse pas leur",
+   "es": "lo recitan, pero no pasa de su"
+  },
+  "hinaus. Sie verlassen den": {
+   "ar": ". إنهم يفارقون",
+   "en": ". They leave the",
+   "tr": ". Onlar terk ederler",
+   "ku": ". Ew dihêlin",
+   "ckb": ". ئەوان بەجێدەهێڵن",
+   "bs": ". Oni napuštaju",
+   "fr": ". Ils quittent",
+   "es": ". Ellos dejan"
+  },
+  ", wie der Pfeil durch das Wild hindurchgeht.“": {
+   "ar": "، كما يمر السهم في الصيد.»",
+   "en": ", as the arrow passes through the game.”",
+   "tr": ", ok avdanın içinden geçtiği gibi.”",
+   "ku": ", wekî ku tîr di nêçîrê re derbas dibe.”",
+   "ckb": "، وەک ئەوەی تیر بە نێچیردا تێدەپەڕێت.»",
+   "bs": ", kao što strijela prolazi kroz lovinu.“",
+   "fr": ", comme la flèche traverse le gibier. »",
+   "es": ", como la flecha atraviesa la presa.”"
+  },
+  "Warnung vor Khawārij, Ahl al-Ahwāʾ, Rezitation ohne richtiges Verständnis, äußerem Eifer ohne Wissen und Härte gegen Muslime.": {
+   "ar": "التحذير من الخوارج، وأهل الأهواء، والتلاوة بلا فهم صحيح، والحمية الظاهرة بلا علم، والغلظة على المسلمين.",
+   "en": "Warning against the Khawārij, ahl al-ahwāʾ, recitation without sound understanding, outward zeal without knowledge, and harshness toward the Muslims.",
+   "tr": "Hâricîlere, hevâ ehline, doğru anlayışsız tilâvete, ilimsiz dış gayrete ve Müslümanlara sertliğe karşı uyarı.",
+   "ku": "Hişyarî ji Xewaric, ehlê ehwāʾ, xwendina bê têgihiştineke rast, xîreta derve bê zanîn, û hişkbûna li ser misilmanan.",
+   "ckb": "ئاگادارکردنەوە لە خەواریج، ئەهلی ئەهوا، خوێندنەوە بێ تێگەیشتنی ڕاست، تێکۆشانی دەرەوە بێ زانست، و توندی لەسەر موسڵمانان.",
+   "bs": "Upozorenje od haridžija, ehli-ehvāa, učenja bez ispravnog razumijevanja, vanjskog žara bez znanja i grubosti prema muslimanima.",
+   "fr": "Mise en garde contre les Khawārij, ahl al-ahwāʾ, la récitation sans compréhension juste, le zèle extérieur sans science, et la dureté envers les musulmans.",
+   "es": "Advertencia contra los Khawārij, ahl al-ahwāʾ, la recitación sin comprensión correcta, el celo exterior sin conocimiento y la dureza hacia los musulmanes."
+  },
+  "Ṣaḥīḥ al-Bukhārī, Kitāb Istitābat al-Murtaddīn; Ṣaḥīḥ Muslim, Kitāb az-Zakāh, Bāb Dhikr al-Khawārij wa-Ṣifātihim; Ibn Ḥajar,": {
+   "ar": "صحيح البخاري، كتاب استتابة المرتدين؛ صحيح مسلم، كتاب الزكاة، باب ذكر الخوارج وصفتهم؛ ابن حجر،",
+   "en": "Ṣaḥīḥ al-Bukhārī, Kitāb Istitābat al-Murtaddīn; Ṣaḥīḥ Muslim, Kitāb az-Zakāh, Bāb Dhikr al-Khawārij wa-Ṣifātihim; Ibn Ḥajar,",
+   "tr": "Sahîh el-Buhârî, Kitâbu İstitâbeti’l-murteddîn; Sahîh Muslim, Kitâbu’z-zekât, Bâbu zikri’l-Havâric ve sıfâtihim; İbn Hacer,",
+   "ku": "Ṣaḥīḥ al-Bukhārī, Kitāb Istitābat al-Murtaddīn; Ṣaḥīḥ Muslim, Kitāb az-Zakāh, Bāb Dhikr al-Khawārij wa-Ṣifātihim; Ibn Ḥajar,",
+   "ckb": "صحیح البخاري، کتاب استتابة المرتدین؛ صحیح مسلم، کتاب الزکاة، باب ذکر الخوارج وصفاتهم؛ ابن حجر،",
+   "bs": "Ṣaḥīḥ al-Bukhārī, Kitāb Istitābat al-Murtaddīn; Ṣaḥīḥ Muslim, Kitāb az-Zakāh, Bāb Dhikr al-Khawārij wa-Ṣifātihim; Ibn Ḥajar,",
+   "fr": "Ṣaḥīḥ al-Bukhārī, Kitāb Istitābat al-Murtaddīn ; Ṣaḥīḥ Muslim, Kitāb az-Zakāh, Bāb Dhikr al-Khawārij wa-Ṣifātihim ; Ibn Ḥajar,",
+   "es": "Ṣaḥīḥ al-Bukhārī, Kitāb Istitābat al-Murtaddīn; Ṣaḥīḥ Muslim, Kitāb az-Zakāh, Bāb Dhikr al-Khawārij wa-Ṣifātihim; Ibn Ḥajar,"
+  },
+  ", Erklärung der Kapitel über die Khawārij.": {
+   "ar": "، شرح أبواب الخوارج.",
+   "en": ", explanation of the chapters on the Khawārij.",
+   "tr": ", Hâricîler bâblarının şerhi.",
+   "ku": ", şirovekirina beşa Xewaric.",
+   "ckb": "، ڕوونکردنەوەی بەشەکانی خەواریج.",
+   "bs": ", objašnjenje poglavlja o haridžijama.",
+   "fr": ", explication des chapitres sur les Khawārij.",
+   "es": ", explicación de los capítulos sobre los Khawārij."
+  },
+  "Der Ḥadīṯ über die Khawārij": {
+   "ar": "الحديث عن الخوارج",
+   "en": "The ḥadīth about the Khawārij",
+   "tr": "Hâricîler hakkındaki hadis",
+   "ku": "Hedîs derbarê Xewaric de",
+   "ckb": "حەدیث دەربارەی خەواریج",
+   "bs": "Hadis o haridžijama",
+   "fr": "Le ḥadīth sur les Khawārij",
+   "es": "El ḥadīth sobre los Khawārij"
+  },
+  "Der Prophet ﷺ beschrieb eine Gruppe, deren äußere ʿIbādah stark wirkt: Sie rezitieren den Qurʾān, zeigen Eifer und treten mit religiöser Härte auf. Dennoch sagte er ﷺ, dass der Qurʾān nicht über ihre Kehlen hinausgeht.": {
+   "ar": "وصف النبي ﷺ جماعة تبدو عبادتها الظاهرة قوية: يتلون القرآن، ويُظهرون الحمية، ويبرزون بغلظة دينية. ومع ذلك قال ﷺ إن القرآن لا يتجاوز حلوقهم.",
+   "en": "The Prophet ﷺ described a group whose outward ʿibādah appears strong: they recite the Qurʾān, show zeal, and come forward with religious harshness. Yet he ﷺ said that the Qurʾān does not go beyond their throats.",
+   "tr": "Peygamber ﷺ, dış ʿibâdeti güçlü görünen bir topluluğu vasfetti: Qurʾān okurlar, gayret gösterirler ve dinî sertlikle öne çıkarlar. Yine de ﷺ, Qurʾān’ın onların boğazlarını geçmediğini söyledi.",
+   "ku": "Pêxember ﷺ komalek wesif kir ku ʿibādah a wan a derve bi hêz xuya dike: Qurʾān dixwînin, xîretê nîşan didin û bi hişkbûna dînî derdikevin pêş. Dîsa jî wî ﷺ got ku Qurʾān ji qirikên wan derbas nabe.",
+   "ckb": "پێغەمبەر ﷺ کۆمەڵێکی وەسف کرد کە عیبادەتی دەرەوەیان بەهێز دەردەکەوێت: قورئان دەخوێننەوە، تێکۆشان نیشان دەدەن، و بە توندی دینی دێنە پێش. لەگەڵ ئەوەشدا ﷺ فەرمووی کە قورئان لە قورگیان تێناپەڕێت.",
+   "bs": "Vjerovjesnik ﷺ opisao je skupinu čija vanjska ʿibāda djeluje snažno: uče Qurʾān, pokazuju žar i istupaju vjerskom grubošću. Ipak je ﷺ rekao da Qurʾān ne prelazi njihova grla.",
+   "fr": "Le Prophète ﷺ a décrit un groupe dont l’ʿibādah extérieure paraît forte : ils récitent le Qurʾān, montrent du zèle et s’avancent avec une dureté religieuse. Il ﷺ a néanmoins dit que le Qurʾān ne dépasse pas leurs gorges.",
+   "es": "El Profeta ﷺ describió a un grupo cuya ʿibādah exterior parece fuerte: recitan el Qurʾān, muestran celo y se presentan con dureza religiosa. Sin embargo, él ﷺ dijo que el Qurʾān no pasa de sus gargantas."
+  },
+  "Der Fehler liegt nicht in der Rezitation des Qurʾān. Der Fehler liegt darin, dass die Rezitation nicht mit": {
+   "ar": "الخطأ ليس في تلاوة القرآن. الخطأ في أن التلاوة لا تتصل بـ",
+   "en": "The error is not in the recitation of the Qurʾān. The error is that the recitation is not joined to",
+   "tr": "Hata Qurʾān tilâvetinde değildir. Hata, tilâvetin şuna bağlanmamasındadır:",
+   "ku": "Xelet ne di xwendina Qurʾān de ye. Xelet ew e ku xwendin bi",
+   "ckb": "هەڵەکە لە خوێندنەوەی قورئان نییە. هەڵەکە ئەوەیە کە خوێندنەوەکە نەبەستراوەتەوە بە",
+   "bs": "Greška nije u učenju Qurʾāna. Greška je u tome što učenje nije povezano s",
+   "fr": "L’erreur n’est pas dans la récitation du Qurʾān. L’erreur est que la récitation n’est pas liée à",
+   "es": "El error no está en la recitación del Qurʾān. El error está en que la recitación no está unida a"
+  },
+  "und dem Verständnis der Ṣaḥābah verbunden ist.": {
+   "ar": "ومرتبط بفهم الصحابة.",
+   "en": "and is joined to the understanding of the Ṣaḥābah.",
+   "tr": "ve sahâbenin anlayışına bağlıdır.",
+   "ku": "û bi têgihiştina Ṣaḥābah ve girêdayî ye.",
+   "ckb": "و بە تێگەیشتنی سەحابەوە بەستراوە.",
+   "bs": "i povezano je s razumijevanjem ashaba.",
+   "fr": "et est liée à la compréhension des Ṣaḥābah.",
+   "es": "y está unida a la comprensión de los Ṣaḥābah."
+  },
+  "Ṣaḥīḥ al-Bukhārī, Kitāb Istitābat al-Murtaddīn, Bāb Qatl al-Khawārij wa-l-Mulḥidīn baʿda Iqāmat al-Ḥujjah ʿalayhim; Ṣaḥīḥ Muslim, Kitāb az-Zakāh, Bāb Dhikr al-Khawārij wa-Ṣifātihim.": {
+   "ar": "صحيح البخاري، كتاب استتابة المرتدين، باب قتل الخوارج والملحدين بعد إقامة الحجة عليهم؛ صحيح مسلم، كتاب الزكاة، باب ذكر الخوارج وصفتهم.",
+   "en": "Ṣaḥīḥ al-Bukhārī, Kitāb Istitābat al-Murtaddīn, Bāb Qatl al-Khawārij wa-l-Mulḥidīn baʿda Iqāmat al-Ḥujjah ʿalayhim; Ṣaḥīḥ Muslim, Kitāb az-Zakāh, Bāb Dhikr al-Khawārij wa-Ṣifātihim.",
+   "tr": "Sahîh el-Buhârî, Kitâbu İstitâbeti’l-murteddîn, Bâbu katli’l-Havâric ve’l-mülhidîn baʿde ikāmeti’l-hücce aleyhim; Sahîh Muslim, Kitâbu’z-zekât, Bâbu zikri’l-Havâric ve sıfâtihim.",
+   "ku": "Ṣaḥīḥ al-Bukhārī, Kitāb Istitābat al-Murtaddīn, Bāb Qatl al-Khawārij wa-l-Mulḥidīn baʿda Iqāmat al-Ḥujjah ʿalayhim; Ṣaḥīḥ Muslim, Kitāb az-Zakāh, Bāb Dhikr al-Khawārij wa-Ṣifātihim.",
+   "ckb": "صحیح البخاري، کتاب استتابة المرتدین، باب قتل الخوارج والملحدین بعد إقامة الحجة علیهم؛ صحیح مسلم، کتاب الزکاة، باب ذکر الخوارج وصفاتهم.",
+   "bs": "Ṣaḥīḥ al-Bukhārī, Kitāb Istitābat al-Murtaddīn, Bāb Qatl al-Khawārij wa-l-Mulḥidīn baʿda Iqāmat al-Ḥujjah ʿalayhim; Ṣaḥīḥ Muslim, Kitāb az-Zakāh, Bāb Dhikr al-Khawārij wa-Ṣifātihim.",
+   "fr": "Ṣaḥīḥ al-Bukhārī, Kitāb Istitābat al-Murtaddīn, Bāb Qatl al-Khawārij wa-l-Mulḥidīn baʿda Iqāmat al-Ḥujjah ʿalayhim ; Ṣaḥīḥ Muslim, Kitāb az-Zakāh, Bāb Dhikr al-Khawārij wa-Ṣifātihim.",
+   "es": "Ṣaḥīḥ al-Bukhārī, Kitāb Istitābat al-Murtaddīn, Bāb Qatl al-Khawārij wa-l-Mulḥidīn baʿda Iqāmat al-Ḥujjah ʿalayhim; Ṣaḥīḥ Muslim, Kitāb az-Zakāh, Bāb Dhikr al-Khawārij wa-Ṣifātihim."
+  },
+  "Warum „nicht über die Kehle hinaus“ wichtig ist": {
+   "ar": "لماذا «لا يتجاوز الحلق» مهم",
+   "en": "Why “not beyond the throat” matters",
+   "tr": "“Boğazı geçmez” neden önemlidir",
+   "ku": "Çima “ji qirikê derbas nabe” girîng e",
+   "ckb": "بۆچی «لە قورگ تێناپەڕێت» گرنگە",
+   "bs": "Zašto je “ne prelazi grlo” važno",
+   "fr": "Pourquoi « ne pas dépasser la gorge » importe",
+   "es": "Por qué importa “no pasa de la garganta”"
+  },
+  "Die Aussage zeigt eine gefährliche Trennung: Qurʾān auf der Zunge, aber kein Licht des Qurʾān im Verständnis. Der Mensch kann richtige Texte aussprechen und sie dennoch falsch anwenden, wenn er sie von Sunnah, Isnāḍ und dem Verständnis der Salaf trennt.": {
+   "ar": "القول يبيّن انفصالًا خطيرًا: قرآن على اللسان، ولا نور للقرآن في الفهم. يمكن للإنسان أن ينطق بنصوص صحيحة ثم يسيء تطبيقها، إذا فصلها عن السنة، والإسناد، وفهم السلف.",
+   "en": "The statement shows a dangerous split: Qurʾān on the tongue, but no light of the Qurʾān in the understanding. A person can utter sound texts and still apply them wrongly, if he separates them from the Sunnah, the isnād, and the understanding of the Salaf.",
+   "tr": "Söz tehlikeli bir ayrılığı gösterir: dilde Qurʾān, ama anlayışta Qurʾān’ın nuru yok. İnsan doğru metinleri söyleyebilir ve onları yine de yanlış uygulayabilir, eğer onları Sünnet’ten, isnaddan ve Selef’in anlayışından ayırırsa.",
+   "ku": "Gotin veqetandineke metirsîdar nîşan dide: Qurʾān li ser ziman, lê di têgihiştinê de ronahiya Qurʾān tune. Mirov dikare nivîsên rast bibêje û dîsa wan xelet bi kar bîne, eger wan ji Sunnah, isnād û têgihiştina Salaf veqetîne.",
+   "ckb": "وتەکە جیاکردنەوەیەکی مەترسیدار نیشان دەدات: قورئان لەسەر زمان، بەڵام ڕووناکی قورئان لە تێگەیشتن نییە. مرۆڤ دەتوانێت دەقی ڕاست بڵێت و هێشتا هەڵە جێبەجێی بکات، ئەگەر لە سوننەت، ئیسناد، و تێگەیشتنی سەلەف جیای بکاتەوە.",
+   "bs": "Izjava pokazuje opasno razdvajanje: Qurʾān na jeziku, ali nema svjetla Qurʾāna u razumijevanju. Čovjek može izgovarati ispravne tekstove i ipak ih pogrešno primjenjivati, ako ih odvoji od Sunne, isnāda i razumijevanja selefa.",
+   "fr": "La parole montre une séparation dangereuse : le Qurʾān sur la langue, mais pas de lumière du Qurʾān dans la compréhension. L’homme peut prononcer des textes justes et pourtant mal les appliquer, s’il les sépare de la Sunnah, de l’isnād et de la compréhension des Salaf.",
+   "es": "La declaración muestra una separación peligrosa: Qurʾān en la lengua, pero no luz del Qurʾān en la comprensión. La persona puede pronunciar textos correctos y aun así aplicarlos mal, si los separa de la Sunnah, del isnād y de la comprensión de los Salaf."
+  },
+  "Darum reicht es nicht, dass jemand Verse zitiert, starke Worte benutzt oder äußerlich streng erscheint. Entscheidend ist, ob er den Text an seinem richtigen Ort versteht und ihn nicht gegen Muslime, gegen die Sunnah oder gegen den Weg der Ṣaḥābah verdreht.": {
+   "ar": "لذلك لا يكفي أن يستشهد أحد بالآيات، أو يستعمل كلمات شديدة، أو يبدو في الظاهر صارمًا. الحاسم هو هل يفهم النص في موضعه الصحيح، ولا يلوِيه على المسلمين، ولا على السنة، ولا على طريق الصحابة.",
+   "en": "Therefore it is not enough that someone cites verses, uses strong words, or appears outwardly strict. What decides is whether he understands the text in its right place, and does not twist it against the Muslims, against the Sunnah, or against the way of the Ṣaḥābah.",
+   "tr": "Bu yüzden birinin âyet nakletmesi, sert sözler kullanması veya dıştan katı görünmesi yetmez. Belirleyici olan, metni yerinde anlayıp anlamadığı ve onu Müslümanlara, Sünnet’e veya sahâbenin yoluna karşı eğip eğmediğidir.",
+   "ku": "Ji ber vê yekê ne bes e ku yek ayetan bîne, gotinên tund bi kar bîne, an ji derve tund xuya bike. Ya biryardar ew e gelo ew nivîsê li cihê wê yê rast fêm dike, û wê li dijî misilmanan, li dijî Sunnah, an li dijî rêya Ṣaḥābah naçemîne.",
+   "ckb": "بۆیە بەس نییە کەسێک ئایەت بهێنێتەوە، ووشەی توند بەکاربهێنێت، یان لە دەرەوە توند دەربکەوێت. بڕیاردەر ئەوەیە ئایا دەقەکە لە شوێنی ڕاستی تێدەگات، و نایچەمێنێتەوە دژی موسڵمانان، دژی سوننەت، یان دژی ڕێگەی سەحابە.",
+   "bs": "Zato nije dovoljno da neko navodi ajete, koristi oštre riječi ili izvana izgleda strog. Odlučujuće je razumije li tekst na njegovu pravom mjestu i ne izvrće li ga protiv muslimana, protiv Sunne ili protiv puta ashaba.",
+   "fr": "Il ne suffit donc pas que quelqu’un cite des versets, emploie des paroles dures ou paraisse strict à l’extérieur. Ce qui décide, c’est s’il comprend le texte à sa juste place et ne le tord pas contre les musulmans, contre la Sunnah ou contre la voie des Ṣaḥābah.",
+   "es": "Por eso no basta que alguien cite versos, use palabras duras o parezca estricto por fuera. Lo decisivo es si entiende el texto en su lugar correcto y no lo tuerce contra los musulmanes, contra la Sunnah o contra el camino de los Ṣaḥābah."
+  },
+  "Die Methode der Ghulāt und Ahl al-Ahwāʾ": {
+   "ar": "طريقة الغلاة وأهل الأهواء",
+   "en": "The method of the ghulāt and ahl al-ahwāʾ",
+   "tr": "Gulâtın ve hevâ ehlinin yöntemi",
+   "ku": "Rêbaza ghulāt û ehlê ehwāʾ",
+   "ckb": "ڕێبازی غولات و ئەهلی ئەهوا",
+   "bs": "Način ghulāta i ehli-ehvāa",
+   "fr": "La méthode des ghulāt et d’ahl al-ahwāʾ",
+   "es": "El método de los ghulāt y de ahl al-ahwāʾ"
+  },
+  "Die Ghulāt können Qurʾān erwähnen, über Dīn sprechen und harte Urteile aussprechen. Doch ihr Maßstab ist nicht der ganze Beweis, sondern oft ein aus dem Zusammenhang genommener Text, der dann ohne Fiqh, ohne Bedingungen, ohne Hindernisse und ohne Rückführung auf die klaren Grundlagen benutzt wird.": {
+   "ar": "يمكن للغلاة أن يذكروا القرآن، ويتكلموا عن الدين، ويصدروا أحكامًا غليظة. لكن ميزانهم ليس الدليل كله، بل كثيرًا ما نص مُنتزع من سياقه، يُستعمل بلا فقه، وبلا شروط، وبلا موانع، وبلا ردّ إلى الأصول الواضحة.",
+   "en": "The ghulāt can mention the Qurʾān, speak about the dīn, and issue harsh judgments. But their measure is not the whole proof, but often a text taken out of its context, then used without fiqh, without conditions, without impediments, and without being brought back to the clear foundations.",
+   "tr": "Gulât Qurʾān’ı anabilir, dinden söz edebilir ve sert hükümler verebilir. Fakat onların ölçüsü delilin bütünü değil, çoğu kez bağlamından çıkarılmış bir metindir; o da fıkıhsız, şartlarsız, engellersiz ve açık esaslara döndürülmeden kullanılır.",
+   "ku": "Ghulāt dikarin Qurʾān bînin ziman, li ser dîn biaxivin û hukmên hişk bidin. Lê pîvana wan ne hemû delîl e, lê gelek caran nivîsek e ku ji çarçoveya xwe hatiye derxistin, paşê bê fiqh, bê merc, bê asteng û bê vegerandina ser bingehên zelal tê bikaranîn.",
+   "ckb": "غولات دەتوانن قورئان بهێننەوە، باسی دین بکەن، و حوکمی توند بدەن. بەڵام پێوەریان هەموو بەڵگە نییە، بەڵکو زۆرجار دەقێکە لە سیاقەکەی دەرهێنراوە، پاشان بێ فقه، بێ مەرج، بێ ڕێگر، و بێ گەڕاندنەوە بۆ بنەڕەتە ڕوونەکان بەکاردەهێنرێت.",
+   "bs": "Ghulāt mogu spominjati Qurʾān, govoriti o dīnu i izricati grube propise. Ali njihovo mjerilo nije cijeli dokaz, nego često tekst izvučen iz konteksta, koji se zatim koristi bez fikha, bez uvjeta, bez zapreka i bez vraćanja na jasne temelje.",
+   "fr": "Les ghulāt peuvent mentionner le Qurʾān, parler du dīn et prononcer des jugements durs. Mais leur mesure n’est pas la preuve entière, mais souvent un texte sorti de son contexte, utilisé ensuite sans fiqh, sans conditions, sans empêchements et sans retour aux fondements clairs.",
+   "es": "Los ghulāt pueden mencionar el Qurʾān, hablar del dīn y dictar juicios duros. Pero su medida no es la prueba entera, sino a menudo un texto sacado de su contexto, usado luego sin fiqh, sin condiciones, sin impedimentos y sin volverlo a los fundamentos claros."
+  },
+  ", ungerechte Härte, Spaltung und eine Religion der bloßen Strenge. Der Weg der Ahl as-Sunnah ist dagegen: Qurʾān mit Sunnah, Text mit Fahm, Eifer mit Wissen und Urteil mit Gerechtigkeit.": {
+   "ar": "، غلظة جائرة، وتفريق، ودين مجرد الشدة. طريق أهل السنة بخلاف ذلك: القرآن مع السنة، والنص مع الفهم، والحمية مع العلم، والحكم مع العدل.",
+   "en": ", unjust harshness, splitting, and a religion of mere severity. The way of ahl as-Sunnah is otherwise: the Qurʾān with the Sunnah, the text with fahm, zeal with knowledge, and judgment with justice.",
+   "tr": ", haksız sertlik, ayrılık ve salt şiddetten ibaret bir din. Ehl-i sünnetin yolu bunun karşısındadır: Qurʾān Sünnet’le, metin fehmle, gayret ilimle ve hüküm adaletle.",
+   "ku": ", hişkbûneke neheq, dabeşbûn, û dînek tenê tundî. Rêya ehlê Sunnah li hember vê ye: Qurʾān bi Sunnah, nivîs bi fehm, xîret bi zanîn, û hukm bi dadê.",
+   "ckb": "، توندی ناڕەوا، دابەشبوون، و دینێکی تەنها توندی. ڕێگەی ئەهلی سوننەت بە پێچەوانەی ئەوەیە: قورئان لەگەڵ سوننەت، دەق لەگەڵ فەهم، تێکۆشان لەگەڵ زانست، و حوکم لەگەڵ دادپەروەری.",
+   "bs": ", nepravedna grubost, cijepanje i vjera puke strogosti. Put ehli-sunneta je nasuprot tome: Qurʾān sa Sunnom, tekst s fehmom, žar sa znanjem i propis s pravdom.",
+   "fr": ", dureté injuste, division, et une religion de la seule rigueur. La voie d’ahl as-Sunnah est à l’opposé : le Qurʾān avec la Sunnah, le texte avec le fahm, le zèle avec la science, et le jugement avec la justice.",
+   "es": ", dureza injusta, división y una religión de mera severidad. El camino de ahl as-Sunnah es lo contrario: el Qurʾān con la Sunnah, el texto con el fahm, el celo con el conocimiento y el juicio con la justicia."
+  },
+  "Ibn Ḥajar erklärt im Zusammenhang der Khawārij, dass ihr Problem nicht bloße Rezitation war, sondern falsches Verständnis und falsche Anwendung. Er erwähnt dabei die Wirkung einer ʿIbādah der Unwissenden, deren Brust nicht durch das Licht des Wissens geöffnet wurde.": {
+   "ar": "يبيّن ابن حجر في سياق الخوارج أن مشكلتهم لم تكن مجرد التلاوة، بل الفهم الخاطئ والتطبيق الخاطئ. ويذكر في ذلك أثر عبادة الجاهلين الذين لم يُفتح صدرهم بنور العلم.",
+   "en": "Ibn Ḥajar explains, in the context of the Khawārij, that their problem was not mere recitation, but wrong understanding and wrong application. He mentions in that connection the effect of an ʿibādah of the ignorant, whose breast was not opened by the light of knowledge.",
+   "tr": "İbn Hacer, Hâricîler bağlamında, sorunlarının salt tilâvet değil, yanlış anlayış ve yanlış uygulama olduğunu açıklar. Bu arada, sadrı ilmin nuruyla açılmamış cahillerin ʿibâdetinin etkisini anar.",
+   "ku": "Ibn Ḥajar di çarçoveya Xewaric de diyar dike ku pirsgirêka wan ne tenê xwendin bû, lê têgihiştina xelet û sepandina xelet. Ew di wê de bandora ʿibādah a nezanan tîne ziman, ku sînga wan bi ronahiya zanînê nehatiye vekirin.",
+   "ckb": "ابن حجر لە چوارچێوەی خەواریج ڕوونی دەکاتەوە کە کێشەکەیان تەنها خوێندنەوە نەبوو، بەڵکو تێگەیشتنی هەڵە و جێبەجێکردنی هەڵە بوو. لەوێدا کاریگەری عیبادەتی نەزانان دەهێنێتەوە، کە سنگەکانیان بە ڕووناکی زانست نەکراوەتەوە.",
+   "bs": "Ibn Ḥajar u kontekstu haridžija objašnjava da njihov problem nije bilo samo učenje, nego pogrešno razumijevanje i pogrešna primjena. Pri tome spominje učinak ʿibāde neznalica, kojima grudi nisu otvorene svjetlom znanja.",
+   "fr": "Ibn Ḥajar explique, dans le contexte des Khawārij, que leur problème n’était pas la simple récitation, mais une compréhension fausse et une application fausse. Il mentionne à ce propos l’effet d’une ʿibādah des ignorants, dont la poitrine n’a pas été ouverte par la lumière de la science.",
+   "es": "Ibn Ḥajar explica, en el contexto de los Khawārij, que su problema no fue la mera recitación, sino una comprensión errónea y una aplicación errónea. Menciona a ese respecto el efecto de una ʿibādah de los ignorantes, cuyo pecho no fue abierto por la luz del conocimiento."
+  },
+  "Damit wird deutlich: Äußerliche Strenge schützt nicht, wenn sie von Wissen, Sunnah und dem Verständnis der Salaf getrennt ist.": {
+   "ar": "وبذلك يتضح: الشدة الظاهرة لا تحمي، إذا انفصلت عن العلم، والسنة، وفهم السلف.",
+   "en": "This makes clear: outward strictness does not protect, when it is separated from knowledge, the Sunnah, and the understanding of the Salaf.",
+   "tr": "Böylece açık olur: Dış sertlik korumaz, ilimden, Sünnet’ten ve Selef’in anlayışından ayrıldığında.",
+   "ku": "Bi vî awayî zelal dibe: tundbûna derve naparêze, dema ku ji zanînê, Sunnah û têgihiştina Salaf veqete.",
+   "ckb": "بەمە ڕوون دەبێت: توندی دەرەوە ناپارێزێت، کاتێک لە زانست، سوننەت، و تێگەیشتنی سەلەف جیا ببێتەوە.",
+   "bs": "Time postaje jasno: vanjska strogost ne štiti, kada je odvojena od znanja, Sunne i razumijevanja selefa.",
+   "fr": "Ainsi cela devient clair : la rigueur extérieure ne protège pas, lorsqu’elle est séparée de la science, de la Sunnah et de la compréhension des Salaf.",
+   "es": "Con ello queda claro: la severidad exterior no protege, cuando está separada del conocimiento, de la Sunnah y de la comprensión de los Salaf."
+  },
+  ", Erklärung der Kapitel über die Khawārij in Kitāb Istitābat al-Murtaddīn.": {
+   "ar": "، شرح أبواب الخوارج في كتاب استتابة المرتدين.",
+   "en": ", explanation of the chapters on the Khawārij in Kitāb Istitābat al-Murtaddīn.",
+   "tr": ", Kitâbu İstitâbeti’l-murteddîn içindeki Hâricîler bâblarının şerhi.",
+   "ku": ", şirovekirina beşa Xewaric di Kitāb Istitābat al-Murtaddīn de.",
+   "ckb": "، ڕوونکردنەوەی بەشەکانی خەواریج لە کتاب استتابة المرتدین.",
+   "bs": ", objašnjenje poglavlja o haridžijama u Kitāb Istitābat al-Murtaddīn.",
+   "fr": ", explication des chapitres sur les Khawārij dans Kitāb Istitābat al-Murtaddīn.",
+   "es": ", explicación de los capítulos sobre los Khawārij en Kitāb Istitābat al-Murtaddīn."
+  },
+  "Direkte Quellenstellen öffnen": {
+   "ar": "فتح مواضع المصادر المباشرة",
+   "en": "Open the direct source passages",
+   "tr": "Doğrudan kaynak yerlerini aç",
+   "ku": "Cihên rasterast ên çavkaniyan veke",
+   "ckb": "شوێنە ڕاستەوخۆکانی سەرچاوە بکەرەوە",
+   "bs": "Otvori izravna mjesta u izvorima",
+   "fr": "Ouvrir les passages directs des sources",
+   "es": "Abrir los pasajes directos de las fuentes"
+  },
+  "Die folgenden Nachweise öffnen die konkreten Buch- und Hadithstellen. Die Textmarkierungen führen direkt zum Wortlaut oder zur passenden Erklärung.": {
+   "ar": "الشواهد التالية تفتح مواضع الكتاب والحديث المحددة. تحديدات النص تؤدي مباشرة إلى اللفظ أو إلى الشرح المناسب.",
+   "en": "The following references open the specific book and ḥadīth passages. The text markers lead directly to the wording or to the fitting explanation.",
+   "tr": "Aşağıdaki deliller belirli kitap ve hadis yerlerini açar. Metin işaretlemeleri doğrudan lafzına veya uygun şerhe götürür.",
+   "ku": "Belgeyên jêrîn cihên diyarkirî yên pirtûk û hedîsê vedikin. Nîşanên tekstê rasterast dibin gotinê an şiroveya guncaw.",
+   "ckb": "ئەم بەڵگانەی خوارەوە شوێنە دیاریکراوەکانی کتێب و حەدیث دەکەنەوە. نیشانەکانی دەق ڕاستەوخۆ دەبەنە ووشە یان ڕوونکردنەوەی گونجاو.",
+   "bs": "Sljedeći navodi otvaraju određena mjesta knjige i hadisa. Oznake teksta vode izravno do teksta ili do odgovarajućeg objašnjenja.",
+   "fr": "Les références suivantes ouvrent les passages précis du livre et du ḥadīth. Les marquages du texte mènent directement au libellé ou à l’explication appropriée.",
+   "es": "Las referencias siguientes abren los pasajes concretos del libro y del ḥadīth. Las marcas de texto conducen directamente al texto o a la explicación adecuada."
+  },
+  "Dorar · Ḥadīṯ über die Khawārij": {
+   "ar": "دورار · حديث الخوارج",
+   "en": "Dorar · ḥadīth about the Khawārij",
+   "tr": "Dorar · Hâricîler hadisi",
+   "ku": "Dorar · hedîsa Xewaric",
+   "ckb": "دورار · حەدیثی خەواریج",
+   "bs": "Dorar · hadis o haridžijama",
+   "fr": "Dorar · ḥadīth sur les Khawārij",
+   "es": "Dorar · ḥadīth sobre los Khawārij"
+  },
+  "Direkter Hadith-Nachweis mit dem Wortlaut: Qurʾān rezitieren, aber er geht nicht über ihre Kehlen hinaus": {
+   "ar": "شاهد حديث مباشر باللفظ: يقرؤون القرآن لكنه لا يتجاوز حلوقهم",
+   "en": "Direct ḥadīth reference with the wording: they recite the Qurʾān, but it does not go beyond their throats",
+   "tr": "Doğrudan hadis delili, lafızla: Qurʾān okurlar, ama o boğazlarını geçmez",
+   "ku": "Belgeya hedîsê ya rasterast bi gotinê: Qurʾān dixwînin, lê ew ji qirikên wan derbas nabe",
+   "ckb": "بەڵگەی ڕاستەوخۆی حەدیث بەم ووشەیە: قورئان دەخوێننەوە، بەڵام لە قورگیان تێناپەڕێت",
+   "bs": "Izravan hadiski navod s tekstom: uče Qurʾān, ali on ne prelazi njihova grla",
+   "fr": "Référence directe du ḥadīth avec le libellé : ils récitent le Qurʾān, mais il ne dépasse pas leurs gorges",
+   "es": "Referencia directa del ḥadīth con el texto: recitan el Qurʾān, pero no pasa de sus gargantas"
+  },
+  "Islamweb Bibliothek · Ṣaḥīḥ Muslim": {
+   "ar": "مكتبة إسلام ويب · صحيح مسلم",
+   "en": "Islamweb library · Ṣaḥīḥ Muslim",
+   "tr": "İslamweb kütüphanesi · Sahîh Muslim",
+   "ku": "Pirtûkxaneya Islamweb · Ṣaḥīḥ Muslim",
+   "ckb": "کتێبخانەی ئیسلاموێب · صحیح مسلم",
+   "bs": "Biblioteka Islamweba · Ṣaḥīḥ Muslim",
+   "fr": "Bibliothèque Islamweb · Ṣaḥīḥ Muslim",
+   "es": "Biblioteca de Islamweb · Ṣaḥīḥ Muslim"
+  },
+  "Kitāb az-Zakāh · Bāb Dhikr al-Khawārij wa-Ṣifātihim · direkter Bibliotheksnachweis": {
+   "ar": "كتاب الزكاة · باب ذكر الخوارج وصفتهم · شاهد مكتبة مباشر",
+   "en": "Kitāb az-Zakāh · Bāb Dhikr al-Khawārij wa-Ṣifātihim · direct library reference",
+   "tr": "Kitâbu’z-zekât · Bâbu zikri’l-Havâric ve sıfâtihim · doğrudan kütüphane delili",
+   "ku": "Kitāb az-Zakāh · Bāb Dhikr al-Khawārij wa-Ṣifātihim · belgeya pirtûkxaneyê ya rasterast",
+   "ckb": "کتاب الزکاة · باب ذکر الخوارج وصفاتهم · بەڵگەی ڕاستەوخۆی کتێبخانە",
+   "bs": "Kitāb az-Zakāh · Bāb Dhikr al-Khawārij wa-Ṣifātihim · izravan bibliotečki navod",
+   "fr": "Kitāb az-Zakāh · Bāb Dhikr al-Khawārij wa-Ṣifātihim · référence directe de bibliothèque",
+   "es": "Kitāb az-Zakāh · Bāb Dhikr al-Khawārij wa-Ṣifātihim · referencia directa de biblioteca"
+  },
+  "Islamweb Bibliothek · Fatḥ al-Bārī": {
+   "ar": "مكتبة إسلام ويب · فتح الباري",
+   "en": "Islamweb library · Fatḥ al-Bārī",
+   "tr": "İslamweb kütüphanesi · Fethu’l-Bârî",
+   "ku": "Pirtûkxaneya Islamweb · Fatḥ al-Bārī",
+   "ckb": "کتێبخانەی ئیسلاموێب · فتح الباري",
+   "bs": "Biblioteka Islamweba · Fatḥ al-Bārī",
+   "fr": "Bibliothèque Islamweb · Fatḥ al-Bārī",
+   "es": "Biblioteca de Islamweb · Fatḥ al-Bārī"
+  },
+  "Bāb Qatl al-Khawārij wa-l-Mulḥidīn baʿda Iqāmat al-Ḥujjah · direkte Textstelle": {
+   "ar": "باب قتل الخوارج والملحدين بعد إقامة الحجة · موضع النص المباشر",
+   "en": "Bāb Qatl al-Khawārij wa-l-Mulḥidīn baʿda Iqāmat al-Ḥujjah · direct text passage",
+   "tr": "Bâbu katli’l-Havâric ve’l-mülhidîn baʿde ikāmeti’l-hücce · doğrudan metin yeri",
+   "ku": "Bāb Qatl al-Khawārij wa-l-Mulḥidīn baʿda Iqāmat al-Ḥujjah · cihê nivîsê yê rasterast",
+   "ckb": "باب قتل الخوارج والملحدین بعد إقامة الحجة · شوێنی ڕاستەوخۆی دەق",
+   "bs": "Bāb Qatl al-Khawārij wa-l-Mulḥidīn baʿda Iqāmat al-Ḥujjah · izravno tekstualno mjesto",
+   "fr": "Bāb Qatl al-Khawārij wa-l-Mulḥidīn baʿda Iqāmat al-Ḥujjah · passage direct du texte",
+   "es": "Bāb Qatl al-Khawārij wa-l-Mulḥidīn baʿda Iqāmat al-Ḥujjah · pasaje directo del texto"
+  },
+  "Ibn Ḥajar · Erklärung in Fatḥ al-Bārī": {
+   "ar": "ابن حجر · الشرح في فتح الباري",
+   "en": "Ibn Ḥajar · explanation in Fatḥ al-Bārī",
+   "tr": "İbn Hacer · Fethu’l-Bârî’deki şerh",
+   "ku": "Ibn Ḥajar · şirove di Fatḥ al-Bārī de",
+   "ckb": "ابن حجر · ڕوونکردنەوە لە فتح الباري",
+   "bs": "Ibn Ḥajar · objašnjenje u Fatḥ al-Bārī",
+   "fr": "Ibn Ḥajar · explication dans Fatḥ al-Bārī",
+   "es": "Ibn Ḥajar · explicación en Fatḥ al-Bārī"
+  },
+  "Direkte Textmarkierung zur Erklärung über falsches Verständnis, Ghulūw und ʿIbādah ohne Licht des Wissens": {
+   "ar": "تحديد نص مباشر للشرح عن الفهم الخاطئ، والغلو، والعبادة بلا نور العلم",
+   "en": "direct text marker to the explanation about wrong understanding, ghulūw, and ʿibādah without the light of knowledge",
+   "tr": "yanlış anlayış, gulüv ve ilmin nuru olmaksızın ʿibâdet hakkındaki şerhe doğrudan metin işaretlemesi",
+   "ku": "nîşana tekstê ya rasterast bo şiroveya têgihiştina xelet, ghulūw û ʿibādah bê ronahiya zanînê",
+   "ckb": "نیشانەی ڕاستەوخۆی دەق بۆ ڕوونکردنەوە دەربارەی تێگەیشتنی هەڵە، غلوو، و عیبادەت بێ ڕووناکی زانست",
+   "bs": "izravna oznaka teksta uz objašnjenje o pogrešnom razumijevanju, ghulūwu i ʿibādi bez svjetla znanja",
+   "fr": "marquage direct du texte vers l’explication sur la compréhension fausse, le ghulūw et l’ʿibādah sans la lumière de la science",
+   "es": "marca directa de texto hacia la explicación sobre la comprensión errónea, el ghulūw y la ʿibādah sin la luz del conocimiento"
+  },
+  "Nicht jeder, der den Qurʾān zitiert, ist dadurch schon auf Rechtleitung. Die Khawārij hatten Rezitation, Eifer und harte Worte; doch ihr Verständnis war verdorben. Der Dīn wird mit Qurʾān, Sunnah, Isnād und dem Verständnis der Ṣaḥābah bewahrt — nicht durch Ahl al-Ahwāʾ, Ghulāt oder Sekten.": {
+   "ar": "ليس كل من يستشهد بالقرآن بذلك على الهداية. كان للخوارج تلاوة، وحمية، وكلمات غليظة؛ لكن فهمهم كان فاسدًا. يُحفظ الدين بالقرآن، والسنة، والإسناد، وفهم الصحابة — لا بأهل الأهواء، ولا بالغلاة، ولا بالفرق.",
+   "en": "Not everyone who cites the Qurʾān is thereby already upon guidance. The Khawārij had recitation, zeal, and harsh words; but their understanding was corrupt. The dīn is preserved with the Qurʾān, the Sunnah, the isnād, and the understanding of the Ṣaḥābah — not by ahl al-ahwāʾ, the ghulāt, or the sects.",
+   "tr": "Qurʾān nakleden herkes bununla hidayet üzere değildir. Hâricîlerin tilâveti, gayreti ve sert sözleri vardı; fakat anlayışları bozulmuştu. Din Qurʾān, Sünnet, isnad ve sahâbenin anlayışıyla korunur — hevâ ehli, gulât veya fırkalarla değil.",
+   "ku": "Ne her kesê ku Qurʾān tîne, bi wê yekê jixwe li ser hidayetê ye. Xewaric xwendin, xîret û gotinên hişk hebûn; lê têgihiştina wan xerab bû. Dîn bi Qurʾān, Sunnah, isnād û têgihiştina Ṣaḥābah tê parastin — ne bi ehlê ehwāʾ, ghulāt an firqeyan.",
+   "ckb": "نە هەموو کەسێک کە قورئان دەهێنێتەوە، بەوە لەسەر هیدایەتە. خەواریج خوێندنەوە، تێکۆشان، و ووشەی توندیان هەبوو؛ بەڵام تێگەیشتنیان گەندەڵ بوو. دین بە قورئان، سوننەت، ئیسناد، و تێگەیشتنی سەحابە دەپارێزرێت — نە بە ئەهلی ئەهوا، غولات، یان فیرقەکان.",
+   "bs": "Nije svako ko navodi Qurʾān time već na uputi. Haridžije su imali učenje, žar i grube riječi; ali njihovo razumijevanje je bilo pokvareno. Dīn se čuva Qurʾānom, Sunnom, isnādom i razumijevanjem ashaba — ne ehli-ehvāom, ghulātima ili sektama.",
+   "fr": "Ce n’est pas tout homme qui cite le Qurʾān qui est déjà, par là, sur la guidée. Les Khawārij avaient la récitation, le zèle et des paroles dures ; mais leur compréhension était corrompue. Le dīn se préserve par le Qurʾān, la Sunnah, l’isnād et la compréhension des Ṣaḥābah — non par ahl al-ahwāʾ, les ghulāt ou les sectes.",
+   "es": "No todo el que cita el Qurʾān está ya, por ello, en la guía. Los Khawārij tenían recitación, celo y palabras duras; pero su comprensión estaba corrompida. El dīn se preserva con el Qurʾān, la Sunnah, el isnād y la comprensión de los Ṣaḥābah — no por ahl al-ahwāʾ, los ghulāt o las sectas."
   }
  }
 }

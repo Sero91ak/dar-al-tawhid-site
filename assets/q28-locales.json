@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,368 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "ʿAbdullāh ibn Masʿūd – Die Jamāʿah ist, was der Wahrheit entspricht – DAR AL TAWḤĪD": {
+   "ar": "عبد الله بن مسعود – الجماعة ما وافق الحق – DAR AL TAWḤĪD",
+   "en": "ʿAbdullāh ibn Masʿūd – The jamāʿah is what accords with the truth – DAR AL TAWḤĪD",
+   "tr": "ʿAbdullāh ibn Masʿūd – Cemaat, hakka uyan şeydir – DAR AL TAWḤĪD",
+   "ku": "ʿAbdullāh ibn Masʿūd – Cemāʿah ew e ya ku bi heqiyê re li hev tê – DAR AL TAWḤĪD",
+   "ckb": "عەبدوڵڵای کوڕی مەسعود – جەماعەت ئەوەیە کە لەگەڵ حەق یەک دەگرێتەوە – DAR AL TAWḤĪD",
+   "bs": "ʿAbdullāh ibn Masʿūd – Džemat je ono što odgovara istini – DAR AL TAWḤĪD",
+   "fr": "ʿAbdullāh ibn Masʿūd – La jamāʿah est ce qui correspond à la vérité – DAR AL TAWḤĪD",
+   "es": "ʿAbdullāh ibn Masʿūd – La jamāʿah es lo que concuerda con la verdad – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "مقالات وفق القرآن والسنة والآثار",
+   "en": "Articles according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre yazılar",
+   "ku": "Nivîs li gorî Qurʾān, Sunnah û Āthār",
+   "ckb": "بابەتەکان بەپێی قورئان و سوننەت و ئاسەوار",
+   "bs": "Tekstovi prema Qurʾānu, Sunnah i Āthāru",
+   "fr": "Articles selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Artículos según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Jamāʿah · Wahrheit · Manhaj · Ṣaḥābah": {
+   "ar": "جماعة · حق · منهج · صحابة",
+   "en": "Jamāʿah · truth · Manhaj · Ṣaḥābah",
+   "tr": "Jamāʿah · hak · Manhaj · Ṣaḥābah",
+   "ku": "Jamāʿah · heqî · Manhaj · Ṣaḥābah",
+   "ckb": "جماعة · حق · منهج · صحابة",
+   "bs": "Jamāʿah · istina · Manhaj · Ṣaḥābah",
+   "fr": "Jamāʿah · vérité · Manhaj · Ṣaḥābah",
+   "es": "Jamāʿah · verdad · Manhaj · Ṣaḥābah"
+  },
+  "Wenn die Mehrheit nicht der Maßstab ist": {
+   "ar": "إذا لم تكن الأغلبية هي الميزان",
+   "en": "When the majority is not the measure",
+   "tr": "Çoğunluk ölçü olmadığında",
+   "ku": "Dema ku piranî ne pîvan e",
+   "ckb": "کاتێک زۆرینە پێوەر نییە",
+   "bs": "Kada većina nije mjerilo",
+   "fr": "Lorsque la majorité n’est pas la mesure",
+   "es": "Cuando la mayoría no es la medida"
+  },
+  "„Die Mehrheit der Menschen hat die Jamāʿah verlassen. Die Jamāʿah ist das, was mit der Wahrheit übereinstimmt, auch wenn du allein bist.“": {
+   "ar": "«إن أكثر الناس قد فارقوا الجماعة. والجماعة ما وافق الحق، وإن كنت وحدك.»",
+   "en": "“The majority of the people has left the jamāʿah. The jamāʿah is that which agrees with the truth, even if you are alone.”",
+   "tr": "“İnsanların çoğunluğu cemaati terk etmiştir. Cemaat, hakka uyan şeydir, sen tek başına olsan bile.”",
+   "ku": "“Piraniya mirovan cemāʿah berdaye. Cemāʿah ew e ya ku bi heqiyê re li hev tê, her çend tu bi tenê jî bî.”",
+   "ckb": "«زۆرینەی خەڵک جەماعەتیان بەجێهێشتووە. جەماعەت ئەوەیە کە لەگەڵ حەق یەک دەگرێتەوە، ئەگەر تۆ بە تەنهاش بیت.»",
+   "bs": "„Većina ljudi je napustila džemat. Džemat je ono što se slaže s istinom, čak i ako si sam.“",
+   "fr": "« La majorité des gens a quitté la jamāʿah. La jamāʿah est ce qui s’accorde avec la vérité, même si tu es seul. »",
+   "es": "«La mayoría de la gente ha dejado la jamāʿah. La jamāʿah es lo que concuerda con la verdad, aunque estés solo.»"
+  },
+  "ʿAbdullāh ibn Masʿūd رضي الله عنه": {
+   "ar": "عبد الله بن مسعود رضي الله عنه",
+   "en": "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+   "tr": "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+   "ku": "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+   "ckb": "عبد الله بن مسعود رضي الله عنه",
+   "bs": "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+   "fr": "ʿAbdullāh ibn Masʿūd رضي الله عنه",
+   "es": "ʿAbdullāh ibn Masʿūd رضي الله عنه"
+  },
+  "Jamāʿah, Festhalten am Beweis, Warnung vor bloßer Mehrheit und Bedeutung der Wahrheit im Manhaj.": {
+   "ar": "الجماعة، التمسك بالدليل، التحذير من مجرد الأغلبية، ومعنى الحق في المنهج.",
+   "en": "Jamāʿah, holding to the proof, warning against mere majority, and the meaning of the truth in the manhaj.",
+   "tr": "Cemaat, delile tutunmak, salt çoğunluğa karşı uyarı ve menhecte hakkın anlamı.",
+   "ku": "Cemāʿah, girtina delîlê, hişyarî ji tenê piraniyê, û wateya heqiyê di menhecê de.",
+   "ckb": "جەماعەت، پەیوەستبوون بە بەڵگە، ئاگادارکردنەوە لە تەنها زۆرینە، و واتای حەق لە مەنهەجدا.",
+   "bs": "Džemat, držanje dokaza, upozorenje od puke većine i značenje istine u menhedžu.",
+   "fr": "La jamāʿah, l’attachement à la preuve, la mise en garde contre la simple majorité, et le sens de la vérité dans le manhaj.",
+   "es": "La jamāʿah, aferrarse a la prueba, la advertencia frente a la mera mayoría y el sentido de la verdad en el manhaj."
+  },
+  ", Biographie von ʿAmr ibn Maymūn, Bd. 22, S. 265; Ibn al-Qayyim,": {
+   "ar": "، ترجمة عمرو بن ميمون، ج 22، ص 265؛ ابن القيم،",
+   "en": ", biography of ʿAmr ibn Maymūn, vol. 22, p. 265; Ibn al-Qayyim,",
+   "tr": ", ʿAmr ibn Maymūn biyografisi, c. 22, s. 265; İbnü’l-Kayyim,",
+   "ku": ", jînenîgariya ʿAmr ibn Maymūn, c. 22, r. 265; Ibn al-Qayyim,",
+   "ckb": "، ژیاننامەی عەمرو کوڕی مەیموون، بەرگی 22، ل 265؛ ابن القیم،",
+   "bs": ", biografija ʿAmra ibn Maymūna, sv. 22, str. 265; Ibn al-Qayyim,",
+   "fr": ", biographie de ʿAmr ibn Maymūn, vol. 22, p. 265 ; Ibn al-Qayyim,",
+   "es": ", biografía de ʿAmr ibn Maymūn, vol. 22, p. 265; Ibn al-Qayyim,"
+  },
+  "Iʿlām al-Muwaqqiʿīn ʿan Rabb al-ʿĀlamīn": {
+   "ar": "إعلام الموقعين عن رب العالمين",
+   "en": "Iʿlām al-Muwaqqiʿīn ʿan Rabb al-ʿĀlamīn",
+   "tr": "Iʿlām al-Muwaqqiʿīn ʿan Rabb al-ʿĀlamīn",
+   "ku": "Iʿlām al-Muwaqqiʿīn ʿan Rabb al-ʿĀlamīn",
+   "ckb": "إعلام الموقعین عن رب العالمین",
+   "bs": "Iʿlām al-Muwaqqiʿīn ʿan Rabb al-ʿĀlamīn",
+   "fr": "Iʿlām al-Muwaqqiʿīn ʿan Rabb al-ʿĀlamīn",
+   "es": "Iʿlām al-Muwaqqiʿīn ʿan Rabb al-ʿĀlamīn"
+  },
+  ", Abschnitt über al-Ijmāʿ, al-Ḥujjah und as-Sawād al-Aʿẓam; Islamweb, Fatwā Nr. 210028; Dorar, Artikel über das Erkennen der Jamāʿah durch Wahrheit, nicht durch bloße Zahl.": {
+   "ar": "، قسم عن الإجماع، والحجة، والسواد الأعظم؛ إسلام ويب، فتوى رقم 210028؛ دورار، مقالة عن معرفة الجماعة بالحق لا بمجرد العدد.",
+   "en": ", section on al-Ijmāʿ, al-Ḥujjah, and as-Sawād al-Aʿẓam; Islamweb, fatwā no. 210028; Dorar, article on recognizing the jamāʿah by the truth, not by mere number.",
+   "tr": ", el-İcmâ, el-Hücce ve es-Sevâdü’l-a‘zam bölümü; İslamweb, fetva no. 210028; Dorar, cemaatin salt sayıyla değil hakla tanınması üzerine makale.",
+   "ku": ", beş li ser al-Ijmāʿ, al-Ḥujjah û as-Sawād al-Aʿẓam; Islamweb, fatwa hej. 210028; Dorar, gotarek li ser nasîna cemāʿah bi heqiyê, ne bi tenê hejmarê.",
+   "ckb": "، بەشێک دەربارەی الإجماع و الحجة و السواد الأعظم؛ ئیسلاموێب، فەتوای ژ 210028؛ دورار، وتارێک دەربارەی ناسینەوەی جەماعەت بە حەق، نەک بە تەنها ژمارە.",
+   "bs": ", odjeljak o al-Ijmāʿu, al-Ḥujji i as-Sawād al-Aʿẓamu; Islamweb, fetva br. 210028; Dorar, članak o prepoznavanju džemata po istini, ne po pukom broju.",
+   "fr": ", section sur al-Ijmāʿ, al-Ḥujjah et as-Sawād al-Aʿẓam ; Islamweb, fatwā n° 210028 ; Dorar, article sur la reconnaissance de la jamāʿah par la vérité, non par le seul nombre.",
+   "es": ", sección sobre al-Ijmāʿ, al-Ḥujjah y as-Sawād al-Aʿẓam; Islamweb, fatwā n.º 210028; Dorar, artículo sobre reconocer la jamāʿah por la verdad, no por el mero número."
+  },
+  "Aussage von ʿAbdullāh ibn Masʿūd": {
+   "ar": "قول عبد الله بن مسعود",
+   "en": "Statement of ʿAbdullāh ibn Masʿūd",
+   "tr": "ʿAbdullāh ibn Masʿūd’un sözü",
+   "ku": "Gotina ʿAbdullāh ibn Masʿūd",
+   "ckb": "وتەی عەبدوڵڵای کوڕی مەسعود",
+   "bs": "Izjava ʿAbdullāha ibn Masʿūda",
+   "fr": "Parole de ʿAbdullāh ibn Masʿūd",
+   "es": "Declaración de ʿAbdullāh ibn Masʿūd"
+  },
+  "ʿAbdullāh ibn Masʿūd رضي الله عنه sagte zu ʿAmr ibn Maymūn رحمه الله:": {
+   "ar": "قال عبد الله بن مسعود رضي الله عنه لعمرو بن ميمون رحمه الله:",
+   "en": "ʿAbdullāh ibn Masʿūd رضي الله عنه said to ʿAmr ibn Maymūn رحمه الله:",
+   "tr": "ʿAbdullāh ibn Masʿūd رضي الله عنه, ʿAmr ibn Maymūn رحمه الله’ye dedi:",
+   "ku": "ʿAbdullāh ibn Masʿūd رضي الله عنه ji ʿAmr ibn Maymūn رحمه الله re got:",
+   "ckb": "عبد الله بن مسعود رضي الله عنه بە عەمرو کوڕی مەیموون رحمه الله فەرمووی:",
+   "bs": "ʿAbdullāh ibn Masʿūd رضي الله عنه je rekao ʿAmru ibn Maymūnu رحمه الله:",
+   "fr": "ʿAbdullāh ibn Masʿūd رضي الله عنه a dit à ʿAmr ibn Maymūn رحمه الله :",
+   "es": "ʿAbdullāh ibn Masʿūd رضي الله عنه dijo a ʿAmr ibn Maymūn رحمه الله:"
+  },
+  "„Die Mehrheit der Menschen hat die": {
+   "ar": "«إن أكثر الناس قد",
+   "en": "“The majority of the people has the",
+   "tr": "“İnsanların çoğunluğu",
+   "ku": "“Piraniya mirovan",
+   "ckb": "«زۆرینەی خەڵک",
+   "bs": "„Većina ljudi je",
+   "fr": "« La majorité des gens a",
+   "es": "«La mayoría de la gente ha"
+  },
+  "übereinstimmt, auch wenn du": {
+   "ar": "يوافق، وإن كنت",
+   "en": "agrees, even if you",
+   "tr": "uyar, sen",
+   "ku": "li hev tê, her çend tu",
+   "ckb": "یەک دەگرێتەوە، ئەگەر تۆ",
+   "bs": "slaže se, čak i ako ti",
+   "fr": "s’accorde, même si tu",
+   "es": "concuerda, aunque tú"
+  },
+  "Tahdhīb al-Kamāl fī Asmāʾ ar-Rijāl": {
+   "ar": "تهذيب الكمال في أسماء الرجال",
+   "en": "Tahdhīb al-Kamāl fī Asmāʾ ar-Rijāl",
+   "tr": "Tahdhīb al-Kamāl fī Asmāʾ ar-Rijāl",
+   "ku": "Tahdhīb al-Kamāl fī Asmāʾ ar-Rijāl",
+   "ckb": "تهذیب الکمال فی أسماء الرجال",
+   "bs": "Tahdhīb al-Kamāl fī Asmāʾ ar-Rijāl",
+   "fr": "Tahdhīb al-Kamāl fī Asmāʾ ar-Rijāl",
+   "es": "Tahdhīb al-Kamāl fī Asmāʾ ar-Rijāl"
+  },
+  ", Biographie von ʿAmr ibn Maymūn al-Awdī, Bd. 22, S. 265; Ibn al-Qayyim,": {
+   "ar": "، ترجمة عمرو بن ميمون الأودي، ج 22، ص 265؛ ابن القيم،",
+   "en": ", biography of ʿAmr ibn Maymūn al-Awdī, vol. 22, p. 265; Ibn al-Qayyim,",
+   "tr": ", ʿAmr ibn Maymūn al-Awdī biyografisi, c. 22, s. 265; İbnü’l-Kayyim,",
+   "ku": ", jînenîgariya ʿAmr ibn Maymūn al-Awdī, c. 22, r. 265; Ibn al-Qayyim,",
+   "ckb": "، ژیاننامەی عەمرو کوڕی مەیموونی ئەودی، بەرگی 22، ل 265؛ ابن القیم،",
+   "bs": ", biografija ʿAmra ibn Maymūna al-Awdīja, sv. 22, str. 265; Ibn al-Qayyim,",
+   "fr": ", biographie de ʿAmr ibn Maymūn al-Awdī, vol. 22, p. 265 ; Ibn al-Qayyim,",
+   "es": ", biografía de ʿAmr ibn Maymūn al-Awdī, vol. 22, p. 265; Ibn al-Qayyim,"
+  },
+  ", Abschnitt über al-Ijmāʿ, al-Ḥujjah und as-Sawād al-Aʿẓam; Islamweb, Fatwā Nr. 210028; Dorar, Artikel: Naqḍ Daʿwā anna Akthar al-ʿUlamāʾ wa-Akthar al-Muslimīn Ashāʿirah.": {
+   "ar": "، قسم عن الإجماع، والحجة، والسواد الأعظم؛ إسلام ويب، فتوى رقم 210028؛ دورار، مقالة: نقض دعوى أن أكثر العلماء وأكثر المسلمين أشاعرة.",
+   "en": ", section on al-Ijmāʿ, al-Ḥujjah, and as-Sawād al-Aʿẓam; Islamweb, fatwā no. 210028; Dorar, article: Naqḍ Daʿwā anna Akthar al-ʿUlamāʾ wa-Akthar al-Muslimīn Ashāʿirah.",
+   "tr": ", el-İcmâ, el-Hücce ve es-Sevâdü’l-a‘zam bölümü; İslamweb, fetva no. 210028; Dorar, makale: Naqḍ Daʿwā anna Akthar al-ʿUlamāʾ wa-Akthar al-Muslimīn Ashāʿirah.",
+   "ku": ", beş li ser al-Ijmāʿ, al-Ḥujjah û as-Sawād al-Aʿẓam; Islamweb, fatwa hej. 210028; Dorar, gotar: Naqḍ Daʿwā anna Akthar al-ʿUlamāʾ wa-Akthar al-Muslimīn Ashāʿirah.",
+   "ckb": "، بەشێک دەربارەی الإجماع و الحجة و السواد الأعظم؛ ئیسلاموێب، فەتوای ژ 210028؛ دورار، وتار: نقض دعوی أن أکثر العلماء وأکثر المسلمین أشاعرة.",
+   "bs": ", odjeljak o al-Ijmāʿu, al-Ḥujji i as-Sawād al-Aʿẓamu; Islamweb, fetva br. 210028; Dorar, članak: Naqḍ Daʿwā anna Akthar al-ʿUlamāʾ wa-Akthar al-Muslimīn Ashāʿirah.",
+   "fr": ", section sur al-Ijmāʿ, al-Ḥujjah et as-Sawād al-Aʿẓam ; Islamweb, fatwā n° 210028 ; Dorar, article : Naqḍ Daʿwā anna Akthar al-ʿUlamāʾ wa-Akthar al-Muslimīn Ashāʿirah.",
+   "es": ", sección sobre al-Ijmāʿ, al-Ḥujjah y as-Sawād al-Aʿẓam; Islamweb, fatwā n.º 210028; Dorar, artículo: Naqḍ Daʿwā anna Akthar al-ʿUlamāʾ wa-Akthar al-Muslimīn Ashāʿirah."
+  },
+  "Die Aussage erklärt, dass": {
+   "ar": "القول يبيّن أن",
+   "en": "The statement explains that",
+   "tr": "Söz şunu açıklar:",
+   "ku": "Gotin diyar dike ku",
+   "ckb": "وتەکە ڕوونی دەکاتەوە کە",
+   "bs": "Izjava objašnjava da",
+   "fr": "La parole explique que",
+   "es": "La declaración explica que"
+  },
+  "nicht blind mit bloßer Menschenzahl gleichgesetzt wird. Maßstab ist die Übereinstimmung mit der": {
+   "ar": "لا تُساوى على عمى بمجرد عدد الناس. الميزان هو الموافقة لـ",
+   "en": "is not blindly equated with the mere number of people. The measure is agreement with the",
+   "tr": "kör biçimde salt insan sayısına eşitlenmez. Ölçü, şuna uymaktır:",
+   "ku": "bi korayî bi tenê hejmara mirovan re nayê yeksankirin. Pîvan lihevkirina bi",
+   "ckb": "بە کوێری یەکسان ناکرێت بە تەنها ژمارەی خەڵک. پێوەر یەکگرتنەوەیە لەگەڵ",
+   "bs": "se ne izjednačava slijepo s pukim brojem ljudi. Mjerilo je slaganje s",
+   "fr": "n’est pas aveuglément identifiée au seul nombre des gens. La mesure est l’accord avec",
+   "es": "no se equipara ciegamente con el mero número de personas. La medida es la concordancia con"
+  },
+  "und dem Weg der ersten Generationen.": {
+   "ar": "وبطريق الأجيال الأولى.",
+   "en": "and with the way of the first generations.",
+   "tr": "ve ilk nesillerin yoluyladır.",
+   "ku": "û bi rêya nifşên pêşîn re.",
+   "ckb": "و لەگەڵ ڕێگەی نەوە یەکەمەکان.",
+   "bs": "i s putem prvih generacija.",
+   "fr": "et avec la voie des premières générations.",
+   "es": "y con el camino de las primeras generaciones."
+  },
+  "Der Anlass zeigt die Genauigkeit dieses Verständnisses: Ibn Masʿūd رضي الله عنه befahl das Festhalten an der Jamāʿah, erklärte aber zugleich, dass man die Pflichtgebete zu ihrer Zeit verrichtet, auch wenn spätere Herrscher sie verzögern. Danach wird mit ihnen gebetet, aber als freiwilliges Gebet. So ist die Jamāʿah kein Deckmantel, um einen klaren Beweis zu verlassen.": {
+   "ar": "المناسبة تبيّن دقة هذا الفهم: ابن مسعود رضي الله عنه أمر بالتمسك بالجماعة، وبيّن في الوقت نفسه أن الصلوات المفروضة تُؤدَّى في وقتها، وإن أخّرها الحكام اللاحقون. ثم يُصلَّى معهم، ولكن على أنها صلاة نافلة. فالجماعة ليست غطاءً لترك دليل واضح.",
+   "en": "The occasion shows the precision of this understanding: Ibn Masʿūd رضي الله عنه commanded holding to the jamāʿah, and at the same time explained that the obligatory prayers are performed at their time, even if later rulers delay them. After that one prays with them, but as a voluntary prayer. Thus the jamāʿah is not a cover for leaving a clear proof.",
+   "tr": "Vesile bu anlayışın inceliğini gösterir: İbn Mesʿûd رضي الله عنه cemaate tutunmayı emretti, aynı zamanda farz namazların, sonraki yöneticiler geciktirse bile, vaktinde kılınacağını açıkladı. Sonra onlarla kılınır, fakat nâfile namaz olarak. Böylece cemaat, açık bir delili terk etmenin örtüsü değildir.",
+   "ku": "Rewş rastbûna vê têgihiştinê nîşan dide: Ibn Masʿūd رضي الله عنه emir da girtina cemāʿah, û di heman demê de rave kir ku nimêjên ferz di wextê xwe de tên kirin, her çend serwerên paşîn wan dereng bixin. Piştre bi wan re nimêj tê kirin, lê wekî nimêjeke nafile. Bi vî awayî cemāʿah ne perde ye ji bo berdana delîleke zelal.",
+   "ckb": "هەلومەرجەکە وردی ئەم تێگەیشتنە نیشان دەدات: ابن مسعود رضي الله عنه فەرمانی پەیوەستبوون بە جەماعەتی دا، و لە هەمان کاتدا ڕوونی کردەوە کە نوێژە فەرزەکان لە کاتی خۆیاندا دەکرێن، ئەگەر فەرمانڕەواکانی دواتریش دوایان بخەن. پاشان لەگەڵیان نوێژ دەکرێت، بەڵام وەک نوێژێکی سوننەت. کەواتە جەماعەت پەردە نییە بۆ بەجێهێشتنی بەڵگەیەکی ڕوون.",
+   "bs": "Povod pokazuje preciznost ovog razumijevanja: Ibn Masʿūd رضي الله عنه naredio je držanje džemata, a ujedno je objasnio da se obavezni namazi klanjaju u svoje vrijeme, čak i ako ih kasniji vladari odgađaju. Potom se s njima klanja, ali kao dobrovoljni namaz. Tako džemat nije pokriće za napuštanje jasnog dokaza.",
+   "fr": "L’occasion montre la précision de cette compréhension : Ibn Masʿūd رضي الله عنه a ordonné de s’attacher à la jamāʿah, et a expliqué en même temps que les prières obligatoires sont accomplies à leur heure, même si des gouvernants ultérieurs les retardent. Ensuite on prie avec eux, mais comme prière surérogatoire. Ainsi la jamāʿah n’est pas un voile pour quitter une preuve claire.",
+   "es": "La ocasión muestra la precisión de esta comprensión: Ibn Masʿūd رضي الله عنه ordenó aferrarse a la jamāʿah, y al mismo tiempo explicó que las oraciones obligatorias se hacen a su hora, aunque gobernantes posteriores las retrasen. Después se reza con ellos, pero como oración voluntaria. Así la jamāʿah no es una cubierta para dejar una prueba clara."
+  },
+  "Thema: Wahrheit und Mehrheit": {
+   "ar": "الموضوع: الحق والأكثرية",
+   "en": "Topic: truth and majority",
+   "tr": "Konu: hak ve çoğunluk",
+   "ku": "Mijar: heqî û piranî",
+   "ckb": "بابەت: حەق و زۆرینە",
+   "bs": "Tema: istina i većina",
+   "fr": "Thème : vérité et majorité",
+   "es": "Tema: verdad y mayoría"
+  },
+  "Diese Aussage schützt vor zwei Fehlern: vor dem Alleingang ohne Beweis und vor dem Verstecken hinter der Mehrheit ohne Wahrheit. Wer allein aus Hochmut abweicht, ist nicht auf Jamāʿah. Wer aber mit dem klaren Beweis steht, verlässt die Jamāʿah nicht dadurch, dass wenige Menschen mit ihm stehen.": {
+   "ar": "هذا القول يحمي من خطأين: من الانفراد بلا دليل، ومن الاختباء خلف الأغلبية بلا حق. من ينحرف وحده تكبرًا فليس على الجماعة. ومن يقف مع الدليل الواضح لا يغادر الجماعة بأن يقف معه قليل من الناس.",
+   "en": "This statement protects against two errors: going alone without a proof, and hiding behind the majority without the truth. Whoever deviates alone out of arrogance is not upon the jamāʿah. But whoever stands with the clear proof does not leave the jamāʿah by the fact that few people stand with him.",
+   "tr": "Bu söz iki hatadan korur: delilsiz yalnız yürümekten ve hak olmadan çoğunluğun arkasına saklanmaktan. Kibirle tek başına sapan, cemaat üzere değildir. Açık delille duran ise, yanında az insan durduğu için cemaati terk etmiş olmaz.",
+   "ku": "Ev gotin ji du xeletiyan diparêze: ji tenêçûnê bê delîl, û ji veşartina li paş piraniyê bê heqî. Yê ku bi tenê ji pozbilindiyê derdikeve, ne li ser cemāʿah e. Lê yê ku bi delîla zelal radiweste, cemāʿah bernade bi wê yekê ku hindik mirov bi wî re radiwestin.",
+   "ckb": "ئەم وتەیە لە دوو هەڵە دەپارێزێت: لە بەتەنهاڕۆیشتن بێ بەڵگە، و لە خۆشاردنەوە لە پشت زۆرینە بێ حەق. ئەوەی بە تەنها لە لووتبەرزەوە لادەدات، لەسەر جەماعەت نییە. بەڵام ئەوەی لەگەڵ بەڵگەی ڕوون دەوەستێت، جەماعەت بەجێناهێڵێت بەوەی کە کەم خەڵک لەگەڵی دەوەستن.",
+   "bs": "Ova izjava štiti od dvije greške: od samostalnog hoda bez dokaza i od skrivanja iza većine bez istine. Ko sam odstupi iz oholosti, nije na džematu. A ko stoji uz jasan dokaz, ne napušta džemat time što malo ljudi stoji s njim.",
+   "fr": "Cette parole protège de deux erreurs : marcher seul sans preuve, et se cacher derrière la majorité sans la vérité. Celui qui s’écarte seul par orgueil n’est pas sur la jamāʿah. Mais celui qui se tient avec la preuve claire ne quitte pas la jamāʿah du fait que peu de gens se tiennent avec lui.",
+   "es": "Esta declaración protege de dos errores: de ir solo sin prueba, y de esconderse detrás de la mayoría sin la verdad. Quien se aparta solo por soberbia no está sobre la jamāʿah. Pero quien se mantiene con la prueba clara no deja la jamāʿah por el hecho de que poca gente esté con él."
+  },
+  "Darum ist der sichere Maßstab: Nicht die bloße Zahl entscheidet, sondern die Nähe zur": {
+   "ar": "لذلك فالميزان المأمون: ليست مجرد العدد هي التي تحسم، بل القرب من",
+   "en": "Therefore the reliable measure is: it is not mere number that decides, but nearness to the",
+   "tr": "Bu yüzden güvenli ölçü şudur: Salt sayı karar vermez, yakınlık karar verir:",
+   "ku": "Ji ber vê yekê pîvana ewle ev e: Ne tenê hejmar biryarê dide, lê nêzîkbûna ji",
+   "ckb": "بۆیە پێوەری دڵنیا ئەوەیە: تەنها ژمارە بڕیار نادات، بەڵکو نزیکی لە",
+   "bs": "Zato je sigurno mjerilo: ne odlučuje puki broj, nego blizina",
+   "fr": "C’est pourquoi la mesure sûre est : ce n’est pas le seul nombre qui décide, mais la proximité de",
+   "es": "Por eso la medida segura es: no decide el mero número, sino la cercanía a"
+  },
+  "Direkte Quellenstellen öffnen": {
+   "ar": "فتح مواضع المصادر المباشرة",
+   "en": "Open the direct source passages",
+   "tr": "Doğrudan kaynak yerlerini aç",
+   "ku": "Cihên rasterast ên çavkaniyan veke",
+   "ckb": "شوێنە ڕاستەوخۆکانی سەرچاوە بکەرەوە",
+   "bs": "Otvori izravna mjesta u izvorima",
+   "fr": "Ouvrir les passages directs des sources",
+   "es": "Abrir los pasajes directos de las fuentes"
+  },
+  "Die folgenden Nachweise führen zu den passenden Textstellen. Die Einträge nennen Werk, Abschnitt oder Nummer, damit die Fundstelle direkt nachvollziehbar ist.": {
+   "ar": "الشواهد التالية تؤدي إلى مواضع النص المناسبة. المداخل تذكر الكتاب، أو القسم، أو الرقم، حتى يكون موضع الورود قابلًا للتتبع مباشرة.",
+   "en": "The following references lead to the fitting text passages. The entries name the work, section, or number, so that the locus can be followed directly.",
+   "tr": "Aşağıdaki deliller uygun metin yerlerine götürür. Kayıtlar eser, bölüm veya numarayı bildirir; böylece geçtiği yer doğrudan izlenebilir.",
+   "ku": "Belgeyên jêrîn dibin cihên nivîsê yên guncaw. Têketin berhem, beş an hejmarê didin, da ku cihê hatinê rasterast were şopandin.",
+   "ckb": "ئەم بەڵگانەی خوارەوە دەبەنە شوێنی دەقی گونجاو. تۆمارەکان کتێب، بەش یان ژمارە دەڵێن، تا شوێنی هاتنەکە ڕاستەوخۆ بێتەوە بەدواداچوون.",
+   "bs": "Sljedeći navodi vode do odgovarajućih tekstualnih mjesta. Unosi navode djelo, odjeljak ili broj, tako da se mjesto navođenja može izravno pratiti.",
+   "fr": "Les références suivantes mènent aux passages appropriés. Les entrées indiquent l’ouvrage, la section ou le numéro, afin que le lieu puisse être suivi directement.",
+   "es": "Las referencias siguientes conducen a los pasajes apropiados. Las entradas indican la obra, la sección o el número, para que el lugar pueda seguirse directamente."
+  },
+  "Islamweb · Tahdhīb al-Kamāl": {
+   "ar": "إسلام ويب · تهذيب الكمال",
+   "en": "Islamweb · Tahdhīb al-Kamāl",
+   "tr": "Islamweb · Tahdhīb al-Kamāl",
+   "ku": "Islamweb · Tahdhīb al-Kamāl",
+   "ckb": "ئیسلاموێب · تهذیب الکمال",
+   "bs": "Islamweb · Tahdhīb al-Kamāl",
+   "fr": "Islamweb · Tahdhīb al-Kamāl",
+   "es": "Islamweb · Tahdhīb al-Kamāl"
+  },
+  "Biographie von ʿAmr ibn Maymūn · Bd. 22, S. 265 · Textmarkierung": {
+   "ar": "ترجمة عمرو بن ميمون · ج 22، ص 265 · تحديد النص",
+   "en": "biography of ʿAmr ibn Maymūn · vol. 22, p. 265 · text marker",
+   "tr": "ʿAmr ibn Maymūn biyografisi · c. 22, s. 265 · metin işaretlemesi",
+   "ku": "jînenîgariya ʿAmr ibn Maymūn · c. 22, r. 265 · nîşana tekstê",
+   "ckb": "ژیاننامەی عەمرو کوڕی مەیموون · بەرگی 22، ل 265 · نیشانەی دەق",
+   "bs": "biografija ʿAmra ibn Maymūna · sv. 22, str. 265 · oznaka teksta",
+   "fr": "biographie de ʿAmr ibn Maymūn · vol. 22, p. 265 · marquage du texte",
+   "es": "biografía de ʿAmr ibn Maymūn · vol. 22, p. 265 · marca de texto"
+  },
+  "Islamweb · Iʿlām al-Muwaqqiʿīn": {
+   "ar": "إسلام ويب · إعلام الموقعين",
+   "en": "Islamweb · Iʿlām al-Muwaqqiʿīn",
+   "tr": "Islamweb · Iʿlām al-Muwaqqiʿīn",
+   "ku": "Islamweb · Iʿlām al-Muwaqqiʿīn",
+   "ckb": "ئیسلاموێب · إعلام الموقعین",
+   "bs": "Islamweb · Iʿlām al-Muwaqqiʿīn",
+   "fr": "Islamweb · Iʿlām al-Muwaqqiʿīn",
+   "es": "Islamweb · Iʿlām al-Muwaqqiʿīn"
+  },
+  "Ibn al-Qayyim · al-Ijmāʿ, al-Ḥujjah und as-Sawād al-Aʿẓam · Textmarkierung": {
+   "ar": "ابن القيم · الإجماع، والحجة، والسواد الأعظم · تحديد النص",
+   "en": "Ibn al-Qayyim · al-Ijmāʿ, al-Ḥujjah, and as-Sawād al-Aʿẓam · text marker",
+   "tr": "İbnü’l-Kayyim · el-İcmâ, el-Hücce ve es-Sevâdü’l-a‘zam · metin işaretlemesi",
+   "ku": "Ibn al-Qayyim · al-Ijmāʿ, al-Ḥujjah û as-Sawād al-Aʿẓam · nîşana tekstê",
+   "ckb": "ابن القیم · الإجماع و الحجة و السواد الأعظم · نیشانەی دەق",
+   "bs": "Ibn al-Qayyim · al-Ijmāʿ, al-Ḥujjah i as-Sawād al-Aʿẓam · oznaka teksta",
+   "fr": "Ibn al-Qayyim · al-Ijmāʿ, al-Ḥujjah et as-Sawād al-Aʿẓam · marquage du texte",
+   "es": "Ibn al-Qayyim · al-Ijmāʿ, al-Ḥujjah y as-Sawād al-Aʿẓam · marca de texto"
+  },
+  "Islamweb · Bedeutung von as-Sawād al-Aʿẓam": {
+   "ar": "إسلام ويب · معنى السواد الأعظم",
+   "en": "Islamweb · the meaning of as-Sawād al-Aʿẓam",
+   "tr": "Islamweb · es-Sevâdü’l-a‘zam’ın anlamı",
+   "ku": "Islamweb · wateya as-Sawād al-Aʿẓam",
+   "ckb": "ئیسلاموێب · واتای السواد الأعظم",
+   "bs": "Islamweb · značenje as-Sawād al-Aʿẓama",
+   "fr": "Islamweb · le sens d’as-Sawād al-Aʿẓam",
+   "es": "Islamweb · el sentido de as-Sawād al-Aʿẓam"
+  },
+  "Fatwā Nr. 210028 · Zitat von Ibn al-Qayyim und Ibn Masʿūd": {
+   "ar": "فتوى رقم 210028 · نقل عن ابن القيم وابن مسعود",
+   "en": "fatwā no. 210028 · quotation from Ibn al-Qayyim and Ibn Masʿūd",
+   "tr": "fetva no. 210028 · İbnü’l-Kayyim ve İbn Mesʿûd’dan nakil",
+   "ku": "fatwa hej. 210028 · veguhastin ji Ibn al-Qayyim û Ibn Masʿūd",
+   "ckb": "فەتوای ژ 210028 · گێڕانەوە لە ابن القیم و ابن مسعود",
+   "bs": "fetva br. 210028 · navod od Ibn al-Qayyima i Ibn Masʿūda",
+   "fr": "fatwā n° 210028 · citation d’Ibn al-Qayyim et d’Ibn Masʿūd",
+   "es": "fatwā n.º 210028 · cita de Ibn al-Qayyim e Ibn Masʿūd"
+  },
+  "Islamweb · Qawāʿid ʿAqadiyyah": {
+   "ar": "إسلام ويب · قواعد عقدية",
+   "en": "Islamweb · Qawāʿid ʿAqadiyyah",
+   "tr": "Islamweb · Qawāʿid ʿAqadiyyah",
+   "ku": "Islamweb · Qawāʿid ʿAqadiyyah",
+   "ckb": "ئیسلاموێب · قواعد عقدیة",
+   "bs": "Islamweb · Qawāʿid ʿAqadiyyah",
+   "fr": "Islamweb · Qawāʿid ʿAqadiyyah",
+   "es": "Islamweb · Qawāʿid ʿAqadiyyah"
+  },
+  "Die Aussage als ʿaqīdah-bezogene Regel · Textmarkierung": {
+   "ar": "القول بوصفه قاعدة متعلقة بالعقيدة · تحديد النص",
+   "en": "the statement as an ʿaqīdah-related rule · text marker",
+   "tr": "söz, akîdeyle ilgili bir kural olarak · metin işaretlemesi",
+   "ku": "gotin wekî qaîdeyeke girêdayî ʿaqīdah · nîşana tekstê",
+   "ckb": "وتەکە وەک یاسایەکی پەیوەندیدار بە عەقیدە · نیشانەی دەق",
+   "bs": "izjava kao pravilo vezano za ʿaqīdu · oznaka teksta",
+   "fr": "la parole comme règle liée à l’ʿaqīdah · marquage du texte",
+   "es": "la declaración como regla relacionada con la ʿaqīdah · marca de texto"
+  },
+  "Dorar · Die Jamāʿah wird an der Wahrheit erkannt": {
+   "ar": "دورار · الجماعة تُعرف بالحق",
+   "en": "Dorar · the jamāʿah is recognized by the truth",
+   "tr": "Dorar · cemaat hakla tanınır",
+   "ku": "Dorar · cemāʿah bi heqiyê tê nasîn",
+   "ckb": "دورار · جەماعەت بە حەق دەناسرێتەوە",
+   "bs": "Dorar · džemat se prepoznaje po istini",
+   "fr": "Dorar · la jamāʿah se reconnaît par la vérité",
+   "es": "Dorar · la jamāʿah se reconoce por la verdad"
+  },
+  "Zitat von Ibn Masʿūd und thematische Einordnung": {
+   "ar": "نقل عن ابن مسعود وتصنيف موضوعي",
+   "en": "quotation from Ibn Masʿūd and a thematic classification",
+   "tr": "İbn Mesʿûd’dan nakil ve konuya göre tasnif",
+   "ku": "veguhastin ji Ibn Masʿūd û polînkirineke mijarî",
+   "ckb": "گێڕانەوە لە ابن مسعود و پۆلێنێکی بابەتی",
+   "bs": "navod od Ibn Masʿūda i tematsko razvrstavanje",
+   "fr": "citation d’Ibn Masʿūd et classement thématique",
+   "es": "cita de Ibn Masʿūd y clasificación temática"
   }
  }
 }

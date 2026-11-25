@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,388 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Isḥāq ibn Rāhawayh – Wenn der Kufr durch die Tat selbst klar wird – DAR AL TAWḤĪD": {
+   "ar": "إسحاق بن راهويه – إذا ظهر الكفر بنفس الفعل – DAR AL TAWḤĪD",
+   "en": "Isḥāq ibn Rāhawayh – When the kufr is clear by the act itself – DAR AL TAWḤĪD",
+   "tr": "Isḥāq ibn Rāhawayh – Küfür fiilin kendisiyle açık olduğunda – DAR AL TAWḤĪD",
+   "ku": "Isḥāq ibn Rāhawayh – Dema ku kufr bi kirina xwe zelal dibe – DAR AL TAWḤĪD",
+   "ckb": "ئیسحاق کوڕی ڕاهەوەی – کاتێک کوفر بە خودی کردار ڕوون دەبێت – DAR AL TAWḤĪD",
+   "bs": "Isḥāq ibn Rāhawayh – Kada kufr postaje jasan samim djelom – DAR AL TAWḤĪD",
+   "fr": "Isḥāq ibn Rāhawayh – Lorsque le kufr est clair par l’acte lui-même – DAR AL TAWḤĪD",
+   "es": "Isḥāq ibn Rāhawayh – Cuando el kufr queda claro por el acto mismo – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "مقالات وفق القرآن والسنة والآثار",
+   "en": "Articles according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre yazılar",
+   "ku": "Nivîs li gorî Qurʾān, Sunnah û Āthār",
+   "ckb": "بابەتەکان بەپێی قورئان و سوننەت و ئاسەوار",
+   "bs": "Tekstovi prema Qurʾānu, Sunnah i Āthāru",
+   "fr": "Articles selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Artículos según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "ʿAqīdah · Fiqh · Ijmāʿ · Nawāqiḍ": {
+   "ar": "عقيدة · فقه · إجماع · نواقض",
+   "en": "ʿAqīdah · Fiqh · Ijmāʿ · Nawāqiḍ",
+   "tr": "ʿAqīdah · Fiqh · Ijmāʿ · Nawāqiḍ",
+   "ku": "ʿAqīdah · Fiqh · Ijmāʿ · Nawāqiḍ",
+   "ckb": "عقیدة · فقه · إجماع · نواقض",
+   "bs": "ʿAqīdah · Fiqh · Ijmāʿ · Nawāqiḍ",
+   "fr": "ʿAqīdah · Fiqh · Ijmāʿ · Nawāqiḍ",
+   "es": "ʿAqīdah · Fiqh · Ijmāʿ · Nawāqiḍ"
+  },
+  "Wenn der Kufr durch die Tat selbst klar wird": {
+   "ar": "إذا ظهر الكفر بنفس الفعل",
+   "en": "When the kufr is clear by the act itself",
+   "tr": "Küfür fiilin kendisiyle açık olduğunda",
+   "ku": "Dema ku kufr bi kirina xwe zelal dibe",
+   "ckb": "کاتێک کوفر بە خودی کردار ڕوون دەبێت",
+   "bs": "Kada kufr postaje jasan samim djelom",
+   "fr": "Lorsque le kufr est clair par l’acte lui-même",
+   "es": "Cuando el kufr queda claro por el acto mismo"
+  },
+  "„Die Muslime sind sich einig, dass wer Allah beschimpft, oder Seinen Gesandten ﷺ beschimpft, oder etwas von dem zurückweist, was Allah herabgesandt hat, oder einen Propheten von den Propheten Allahs tötet, dadurch Kafir ist, auch wenn er alles bestätigt, was Allah herabgesandt hat.“": {
+   "ar": "«اتفق المسلمون على أن من سبّ الله، أو سبّ رسوله ﷺ، أو ردّ شيئًا مما أنزل الله، أو قتل نبيًا من أنبياء الله، فهو بذلك كافر، وإن أقرّ بكل ما أنزل الله.»",
+   "en": "“The Muslims agree that whoever insults Allah, or insults His Messenger ﷺ, or rejects something of what Allah has sent down, or kills a prophet among the prophets of Allah, is thereby a kāfir, even if he affirms everything that Allah has sent down.”",
+   "tr": "“Müslümanlar ittifak etmiştir: Kim Allah’a söver, ya da O’nun Elçisi ﷺ’e söver, ya da Allah’ın indirdiğinden bir şeyi reddeder, ya da Allah’ın peygamberlerinden bir peygamberi öldürürse, Allah’ın indirdiğinin tamamını ikrar etse bile bununla kâfirdir.”",
+   "ku": "“Misilman li hev kirine ku yê ku Allah bi şerm dike, an Peyamberê Wî ﷺ bi şerm dike, an tiştekî ji wê yekê vedigerîne ku Allah hinartiye, an pêxemberekî ji pêxemberên Allah dikuje, bi wê yekê kafir e, her çend ew hemû yê ku Allah hinartiye jî erê bike.”",
+   "ckb": "«موسڵمانان کۆکن کە ئەوەی سووکایەتی بە الله دەکات، یان سووکایەتی بە پێغەمبەرەکەی ﷺ دەکات، یان شتێک لەوە ڕەت دەکاتەوە کە الله دایبەزاندووە، یان پێغەمبەرێک لە پێغەمبەرانی الله دەکوژێت، بەوە کافرە، ئەگەر هەموو ئەوەش بسەلمێنێت کە الله دایبەزاندووە.»",
+   "bs": "„Muslimani su složni da je onaj ko vrijeđa Allaha, ili vrijeđa Njegova Poslanika ﷺ, ili odbacuje nešto od onoga što je Allah objavio, ili ubije jednog od Allahovih vjerovjesnika, time kâfir, čak i ako potvrđuje sve što je Allah objavio.“",
+   "fr": "« Les musulmans s’accordent à dire que celui qui insulte Allah, ou insulte Son Messager ﷺ, ou rejette quelque chose de ce qu’Allah a fait descendre, ou tue un prophète parmi les prophètes d’Allah, est par là kāfir, même s’il affirme tout ce qu’Allah a fait descendre. »",
+   "es": "«Los musulmanes coinciden en que quien insulta a Allah, o insulta a Su Mensajero ﷺ, o rechaza algo de lo que Allah ha hecho descender, o mata a un profeta de los profetas de Allah, es por ello kāfir, aunque afirme todo lo que Allah ha hecho descender.»"
+  },
+  "Imām Isḥāq ibn Rāhawayh رحمه الله": {
+   "ar": "الإمام إسحاق بن راهويه رحمه الله",
+   "en": "Imām Isḥāq ibn Rāhawayh رحمه الله",
+   "tr": "İmām Isḥāq ibn Rāhawayh رحمه الله",
+   "ku": "İmām Isḥāq ibn Rāhawayh رحمه الله",
+   "ckb": "الإمام إسحاق بن راهویه رحمه الله",
+   "bs": "Imām Isḥāq ibn Rāhawayh رحمه الله",
+   "fr": "Imām Isḥāq ibn Rāhawayh رحمه الله",
+   "es": "Imām Isḥāq ibn Rāhawayh رحمه الله"
+  },
+  "Eindeutige Kufr-Handlungen: Beschimpfen Allahs, Beschimpfen des Gesandten ﷺ, Zurückweisen des Herabgesandten und das Töten eines Propheten.": {
+   "ar": "أفعال كفر بيّنة: سبّ الله، وسبّ الرسول ﷺ، وردّ المنزل، وقتل نبي.",
+   "en": "Unequivocal acts of kufr: insulting Allah, insulting the Messenger ﷺ, rejecting what was sent down, and killing a prophet.",
+   "tr": "Açık küfür fiilleri: Allah’a sövmek, Elçi ﷺ’e sövmek, indirileni reddetmek ve bir peygamberi öldürmek.",
+   "ku": "Kirinên kufrê yên zelal: şermkirina Allah, şermkirina Peyamber ﷺ, vegerandina wê yekê ku hatiye hinartin, û kuştina pêxemberekî.",
+   "ckb": "کردارە ڕوونەکانی کوفر: سووکایەتیکردن بە الله، سووکایەتیکردن بە پێغەمبەر ﷺ، ڕەتکردنەوەی دابەزێنراو، و کوشتنی پێغەمبەرێک.",
+   "bs": "Jasna djela kufra: vrijeđanje Allaha, vrijeđanje Poslanika ﷺ, odbacivanje objavljenog i ubijanje jednog vjerovjesnika.",
+   "fr": "Actes de kufr sans équivoque : insulter Allah, insulter le Messager ﷺ, rejeter ce qui a été fait descendre, et tuer un prophète.",
+   "es": "Actos inequívocos de kufr: insultar a Allah, insultar al Mensajero ﷺ, rechazar lo descendido y matar a un profeta."
+  },
+  "aṣ-Ṣārim al-Maslūl ʿalā Shātim ar-Rasūl": {
+   "ar": "الصارم المسلول على شاتم الرسول",
+   "en": "aṣ-Ṣārim al-Maslūl ʿalā Shātim ar-Rasūl",
+   "tr": "aṣ-Ṣārim al-Maslūl ʿalā Shātim ar-Rasūl",
+   "ku": "aṣ-Ṣārim al-Maslūl ʿalā Shātim ar-Rasūl",
+   "ckb": "الصارم المسلول علی شاتم الرسول",
+   "bs": "aṣ-Ṣārim al-Maslūl ʿalā Shātim ar-Rasūl",
+   "fr": "aṣ-Ṣārim al-Maslūl ʿalā Shātim ar-Rasūl",
+   "es": "aṣ-Ṣārim al-Maslūl ʿalā Shātim ar-Rasūl"
+  },
+  "al-Mawsūʿah al-ʿAqadiyyah": {
+   "ar": "الموسوعة العقدية",
+   "en": "al-Mawsūʿah al-ʿAqadiyyah",
+   "tr": "al-Mawsūʿah al-ʿAqadiyyah",
+   "ku": "al-Mawsūʿah al-ʿAqadiyyah",
+   "ckb": "الموسوعة العقدیة",
+   "bs": "al-Mawsūʿah al-ʿAqadiyyah",
+   "fr": "al-Mawsūʿah al-ʿAqadiyyah",
+   "es": "al-Mawsūʿah al-ʿAqadiyyah"
+  },
+  ", Abschnitt: Ḥukm Sabb Allah Taʿālā aw al-Istihzāʾ bih; Abschnitt: Kufr wa-Qatl man Sabba an-Nabī ﷺ.": {
+   "ar": "، قسم: حكم سب الله تعالى أو الاستهزاء به؛ قسم: كفر وقتل من سب النبي ﷺ.",
+   "en": ", section: Ḥukm Sabb Allah Taʿālā aw al-Istihzāʾ bih; section: Kufr wa-Qatl man Sabba an-Nabī ﷺ.",
+   "tr": ", bölüm: Ḥukm Sabb Allah Taʿālā aw al-Istihzāʾ bih; bölüm: Kufr wa-Qatl man Sabba an-Nabī ﷺ.",
+   "ku": ", beş: Ḥukm Sabb Allah Taʿālā aw al-Istihzāʾ bih; beş: Kufr wa-Qatl man Sabba an-Nabī ﷺ.",
+   "ckb": "، بەش: حکم سب الله تعالی أو الاستهزاء به؛ بەش: کفر وقتل من سب النبی ﷺ.",
+   "bs": ", odjeljak: Ḥukm Sabb Allah Taʿālā aw al-Istihzāʾ bih; odjeljak: Kufr wa-Qatl man Sabba an-Nabī ﷺ.",
+   "fr": ", section : Ḥukm Sabb Allah Taʿālā aw al-Istihzāʾ bih ; section : Kufr wa-Qatl man Sabba an-Nabī ﷺ.",
+   "es": ", sección: Ḥukm Sabb Allah Taʿālā aw al-Istihzāʾ bih; sección: Kufr wa-Qatl man Sabba an-Nabī ﷺ."
+  },
+  "Aussage von Isḥāq ibn Rāhawayh": {
+   "ar": "قول إسحاق بن راهويه",
+   "en": "Statement of Isḥāq ibn Rāhawayh",
+   "tr": "Isḥāq ibn Rāhawayh’in sözü",
+   "ku": "Gotina Isḥāq ibn Rāhawayh",
+   "ckb": "وتەی ئیسحاق کوڕی ڕاهەوەی",
+   "bs": "Izjava Isḥāq ibn Rāhawayha",
+   "fr": "Parole d’Isḥāq ibn Rāhawayh",
+   "es": "Declaración de Isḥāq ibn Rāhawayh"
+  },
+  "Imām Isḥāq ibn Rāhawayh رحمه الله sagte:": {
+   "ar": "قال الإمام إسحاق بن راهويه رحمه الله:",
+   "en": "Imām Isḥāq ibn Rāhawayh رحمه الله said:",
+   "tr": "İmām Isḥāq ibn Rāhawayh رحمه الله dedi:",
+   "ku": "İmām Isḥāq ibn Rāhawayh رحمه الله got:",
+   "ckb": "الإمام إسحاق بن راهویه رحمه الله فەرمووی:",
+   "bs": "Imām Isḥāq ibn Rāhawayh رحمه الله je rekao:",
+   "fr": "L’imām Isḥāq ibn Rāhawayh رحمه الله a dit :",
+   "es": "El imām Isḥāq ibn Rāhawayh رحمه الله dijo:"
+  },
+  "Seinen Gesandten ﷺ beschimpft": {
+   "ar": "يسبّ رسوله ﷺ",
+   "en": "insults His Messenger ﷺ",
+   "tr": "O’nun Elçisi ﷺ’e söver",
+   "ku": "Peyamberê Wî ﷺ bi şerm dike",
+   "ckb": "سووکایەتی بە پێغەمبەرەکەی ﷺ دەکات",
+   "bs": "vrijeđa Njegova Poslanika ﷺ",
+   "fr": "insulte Son Messager ﷺ",
+   "es": "insulta a Su Mensajero ﷺ"
+  },
+  "hat, oder einen Propheten von den Propheten Allahs tötet, dadurch": {
+   "ar": "قد، أو يقتل نبيًا من أنبياء الله، بذلك",
+   "en": "has, or kills a prophet among the prophets of Allah, thereby",
+   "tr": "olmuştur, ya da Allah’ın peygamberlerinden bir peygamberi öldürür, bununla",
+   "ku": "kiriye, an pêxemberekî ji pêxemberên Allah dikuje, bi wê yekê",
+   "ckb": "کردووە، یان پێغەمبەرێک لە پێغەمبەرانی الله دەکوژێت، بەوە",
+   "bs": "je, ili ubije jednog od Allahovih vjerovjesnika, time",
+   "fr": "a, ou tue un prophète parmi les prophètes d’Allah, par là",
+   "es": "ha, o mata a un profeta de los profetas de Allah, por ello"
+  },
+  "ist, auch wenn er alles bestätigt, was Allah herabgesandt hat.“": {
+   "ar": "هو، وإن أقرّ بكل ما أنزل الله.»",
+   "en": "is, even if he affirms everything that Allah has sent down.”",
+   "tr": "dir, Allah’ın indirdiğinin tamamını ikrar etse bile.”",
+   "ku": "e, her çend ew hemû yê ku Allah hinartiye jî erê bike.”",
+   "ckb": "ە، ئەگەر هەموو ئەوەش بسەلمێنێت کە الله دایبەزاندووە.»",
+   "bs": "jest, čak i ako potvrđuje sve što je Allah objavio.“",
+   "fr": "est, même s’il affirme tout ce qu’Allah a fait descendre. »",
+   "es": "es, aunque afirme todo lo que Allah ha hecho descender.”"
+  },
+  ", Bd. 2, S. 15; angeführt bei Dorar,": {
+   "ar": "، ج 2، ص 15؛ مذكور عند دورار،",
+   "en": ", vol. 2, p. 15; cited at Dorar,",
+   "tr": ", c. 2, s. 15; Dorar’da anılır,",
+   "ku": ", c. 2, r. 15; li Dorar tê anîn,",
+   "ckb": "، بەرگی 2، ل 15؛ لە دوراردا هاتووە،",
+   "bs": ", sv. 2, str. 15; navedeno kod Dorara,",
+   "fr": ", vol. 2, p. 15 ; cité chez Dorar,",
+   "es": ", vol. 2, p. 15; citado en Dorar,"
+  },
+  ", im Abschnitt über das Urteil des Beschimpfens Allahs und im Abschnitt über das Beschimpfen des Propheten ﷺ.": {
+   "ar": "، في قسم حكم سبّ الله وفي قسم سبّ النبي ﷺ.",
+   "en": ", in the section on the ruling of insulting Allah and in the section on insulting the Prophet ﷺ.",
+   "tr": ", Allah’a sövmenin hükmü bölümünde ve Peygamber ﷺ’e sövme bölümünde.",
+   "ku": ", di beşa hukmê şermkirina Allah de û di beşa şermkirina Pêxember ﷺ de.",
+   "ckb": "، لە بەشی حوکمی سووکایەتیکردن بە الله و لە بەشی سووکایەتیکردن بە پێغەمبەر ﷺ.",
+   "bs": ", u odjeljku o propisu vrijeđanja Allaha i u odjeljku o vrijeđanju Vjerovjesnika ﷺ.",
+   "fr": ", dans la section sur le jugement de l’insulte à Allah et dans la section sur l’insulte au Prophète ﷺ.",
+   "es": ", en la sección sobre el juicio de insultar a Allah y en la sección sobre insultar al Profeta ﷺ."
+  },
+  ". In der ʿAqīdah betrifft sie die Grundlage des Īmān: Ehrfurcht vor Allah, Seinen Zeichen, Seinem Gesandten ﷺ und dem, was Er herabgesandt hat. Im Fiqh zeigt sie, dass bestimmte Worte und Handlungen nicht als gewöhnliche Sünden behandelt werden, sondern als Dinge, die den Islam selbst zerstören.": {
+   "ar": ". في العقيدة تتعلق بأصل الإيمان: تعظيم الله، وآياته، ورسوله ﷺ، وما أنزله. وفي الفقه تبيّن أن بعض الأقوال والأفعال لا تُعامل كذنوب عادية، بل كأمور تهدم الإسلام نفسه.",
+   "en": ". In ʿaqīdah it concerns the foundation of īmān: reverence for Allah, His signs, His Messenger ﷺ, and what He has sent down. In fiqh it shows that certain words and acts are not treated as ordinary sins, but as things that destroy Islam itself.",
+   "tr": ". Akîdede îmânın aslına ilişir: Allah’a, O’nun âyetlerine, Elçisi ﷺ’e ve indirdiğine ta’zîm. Fıkıhta ise bazı söz ve fiillerin olağan günahlar gibi değil, İslam’ın kendisini yıkan şeyler olarak ele alındığını gösterir.",
+   "ku": ". Di ʿaqīdah de ew tê ser bingeha îmanê: rêzgirtina Allah, ayetên Wî, Peyamberê Wî ﷺ û ya ku Wî hinartiye. Di fiqhê de nîşan dide ku hin gotin û kirin wekî gunehên asayî nayên dîtin, lê wekî tiştên ku îslamê bi xwe hilweşînin.",
+   "ckb": ". لە عەقیدەدا پەیوەندی بە بنەمای ئیمانەوە هەیە: گەورەدانانی الله، ئایەتەکانی، پێغەمبەرەکەی ﷺ، و ئەوەی دایبەزاندووە. لە فقەدا نیشان دەدات کە هەندێک قسە و کردار وەک گوناهی ئاسایی مامەڵەیان لەگەڵ ناکرێت، بەڵکو وەک شتگەلێک کە خودی ئیسلام تێک دەدەن.",
+   "bs": ". U ʿaqīdi se tiče temelja īmāna: poštovanja Allaha, Njegovih ajeta, Njegova Poslanika ﷺ i onoga što je objavio. U fikhu pokazuje da se određene riječi i djela ne tretiraju kao obični grijesi, nego kao stvari koje ruše sam islam.",
+   "fr": ". En ʿaqīdah, elle touche au fondement de l’īmān : la vénération d’Allah, de Ses signes, de Son Messager ﷺ et de ce qu’Il a fait descendre. En fiqh, elle montre que certaines paroles et certains actes ne sont pas traités comme des péchés ordinaires, mais comme des choses qui détruisent l’islam lui-même.",
+   "es": ". En la ʿaqīdah concierne al fundamento del īmān: la veneración de Allah, de Sus signos, de Su Mensajero ﷺ y de lo que Él ha hecho descender. En el fiqh muestra que ciertas palabras y actos no se tratan como pecados ordinarios, sino como cosas que destruyen el islam mismo."
+  },
+  "Darum nennt Isḥāq ibn Rāhawayh nicht nur ein persönliches Urteil, sondern den": {
+   "ar": "لذلك لا يذكر إسحاق بن راهويه حكمًا شخصيًا فحسب، بل",
+   "en": "Therefore Isḥāq ibn Rāhawayh does not name only a personal judgment, but the",
+   "tr": "Bu yüzden Isḥāq ibn Rāhawayh yalnızca kişisel bir hükmü anmaz, şu",
+   "ku": "Ji ber vê yekê Isḥāq ibn Rāhawayh ne tenê hukmekî kesane bi nav dike, lê",
+   "ckb": "بۆیە ئیسحاق کوڕی ڕاهەوەی تەنها حوکمێکی کەسی ناو نابات، بەڵکو",
+   "bs": "Zato Isḥāq ibn Rāhawayh ne navodi samo lični propis, nego",
+   "fr": "C’est pourquoi Isḥāq ibn Rāhawayh ne mentionne pas seulement un jugement personnel, mais",
+   "es": "Por eso Isḥāq ibn Rāhawayh no menciona solo un juicio personal, sino"
+  },
+  ". Der Kern der Aussage ist: Wer Allah oder den Gesandten ﷺ beschimpft oder etwas vom Herabgesandten zurückweist, bleibt nicht durch bloße allgemeine Bestätigung geschützt. Denn der Angriff richtet sich gegen den Ursprung des Dīn selbst.": {
+   "ar": ". جوهر القول: من سبّ الله أو الرسول ﷺ أو ردّ شيئًا من المنزل لا تحميه مجرد الإقرار العام. لأن الاعتداء يتوجه إلى أصل الدين نفسه.",
+   "en": ". The core of the statement is: whoever insults Allah or the Messenger ﷺ, or rejects something of what was sent down, is not protected by a mere general affirmation. For the attack is directed at the very origin of the dīn.",
+   "tr": ". Sözün özü şudur: Kim Allah’a veya Elçi ﷺ’e söver ya da indirilenden bir şeyi reddederse, salt genel ikrar onu korumaz. Çünkü saldırı dinin aslına yönelir.",
+   "ku": ". Naveroka gotinê ev e: Yê ku Allah an Peyamber ﷺ bi şerm dike, an tiştekî ji ya hinartî vedigerîne, bi tenê erêkirineke giştî nayê parastin. Lewre êrîş ber bi eslê dîn bixwe ve ye.",
+   "ckb": ". ناوەڕۆکی وتەکە ئەوەیە: ئەوەی سووکایەتی بە الله یان پێغەمبەر ﷺ دەکات، یان شتێک لە دابەزێنراو ڕەت دەکاتەوە، بە تەنها ئیقراری گشتی نایپارێزرێت. چونکە هێرشەکە ئاڕاستەی بنەڕەتی خودی دین دەکرێت.",
+   "bs": ". Srž izjave je: ko vrijeđa Allaha ili Poslanika ﷺ, ili odbacuje nešto od objavljenog, nije zaštićen pukim općim priznanjem. Jer napad je usmjeren na sam izvor dīna.",
+   "fr": ". Le cœur de la parole est : celui qui insulte Allah ou le Messager ﷺ, ou qui rejette quelque chose de ce qui a été fait descendre, n’est pas protégé par une simple affirmation générale. Car l’attaque vise l’origine même du dīn.",
+   "es": ". El núcleo de la declaración es: quien insulta a Allah o al Mensajero ﷺ, o rechaza algo de lo descendido, no queda protegido por una mera afirmación general. Porque el ataque se dirige al origen mismo del dīn."
+  },
+  "Grenze zwischen allgemeinem Urteil und Anwendung": {
+   "ar": "الحد بين الحكم العام والتطبيق",
+   "en": "The boundary between the general ruling and its application",
+   "tr": "Genel hüküm ile uygulama arasındaki sınır",
+   "ku": "Sînor di navbera hukmê giştî û sepandinê de",
+   "ckb": "سنوور لە نێوان حوکمی گشتی و جێبەجێکردن",
+   "bs": "Granica između općeg propisa i primjene",
+   "fr": "La limite entre le jugement général et son application",
+   "es": "El límite entre el juicio general y su aplicación"
+  },
+  "Das allgemeine Urteil über solche Worte und Handlungen ist in dieser Aussage sehr klar. Dennoch bleibt die Anwendung auf bestimmte Personen kein Spielraum für Unwissenheit, Zorn, Gerüchte oder private Schnellurteile. In der Wirklichkeit müssen Wortlaut, Absicht, Zwang, Überlieferung, Zustand und Umstände korrekt festgestellt werden.": {
+   "ar": "الحكم العام في مثل هذه الأقوال والأفعال واضح جدًا في هذا القول. ومع ذلك يبقى تطبيق ذلك على أشخاص معيّنين غير متروك للجهل، أو الغضب، أو الإشاعات، أو الأحكام العاجلة الخاصة. في الواقع يجب أن يُثبَت اللفظ، والقصد، والإكراه، والنقل، والحال، والظروف على وجه صحيح.",
+   "en": "The general ruling on such words and acts is very clear in this statement. Still, applying it to particular persons is not room for ignorance, anger, rumors, or private snap judgments. In reality the wording, intent, coercion, transmission, condition, and circumstances must be established correctly.",
+   "tr": "Bu tür söz ve fiiller hakkındaki genel hüküm bu sözde çok açıktır. Yine de bunun belirli kişilere uygulanması cehalete, öfkeye, söylentilere veya özel acele hükümlere bırakılmaz. Gerçekte lafız, kasıt, ikrah, nakil, hâl ve şartlar doğru biçimde tespit edilmelidir.",
+   "ku": "Hukmê giştî li ser van gotin û kirinan di vê gotinê de pir zelal e. Dîsa jî sepandina wê li kesên diyarkirî ne cihê nezanînê, hêrsê, gotegotan an hukmên bilez ên taybet e. Di rastiyê de divê gotin, mebest, zor, veguhastin, rewş û merc rast bên tesbîtkirin.",
+   "ckb": "حوکمی گشتی لەسەر ئەم جۆرە قسە و کردارانە لەم وتەیەدا زۆر ڕوونە. لەگەڵ ئەوەشدا جێبەجێکردنی لەسەر کەسانی دیاریکراو جێی نەزانی، تووڕەیی، گێڕانەوە، یان حوکمی خێرای تایبەت نییە. لە واقیعدا دەبێت ووشە، مەبەست، زۆرلێکردن، گێڕانەوە، حاڵ و بارودۆخ بە دروستی جێگیر بکرێن.",
+   "bs": "Opći propis o takvim riječima i djelima u ovoj izjavi je vrlo jasan. Ipak, primjena na određene osobe nije prostor za neznanje, srdžbu, glasine ili privatne brze presude. U stvarnosti se tekst, namjera, prisila, prenošenje, stanje i okolnosti moraju ispravno utvrditi.",
+   "fr": "Le jugement général sur de telles paroles et de tels actes est très clair dans cette parole. L’application à des personnes déterminées ne laisse pourtant pas de place à l’ignorance, à la colère, aux rumeurs ou aux jugements privés hâtifs. Dans la réalité, le libellé, l’intention, la contrainte, la transmission, l’état et les circonstances doivent être établis correctement.",
+   "es": "El juicio general sobre tales palabras y actos es muy claro en esta declaración. Aun así, aplicarlo a personas concretas no es espacio para la ignorancia, la ira, los rumores o los juicios privados precipitados. En la realidad deben establecerse correctamente el texto, la intención, la coacción, la transmisión, el estado y las circunstancias."
+  },
+  "Der Nutzen dieser Aussage liegt darin, die Grenze des Dīn nicht zu verharmlosen:": {
+   "ar": "فائدة هذا القول هي ألا يُهوَّن حدّ الدين:",
+   "en": "The benefit of this statement is that the boundary of the dīn is not made light:",
+   "tr": "Bu sözün faydası, dinin sınırının hafife alınmamasıdır:",
+   "ku": "Feydeya vê gotinê ew e ku sînorê dîn neyê sivikkirin:",
+   "ckb": "سوودی ئەم وتەیە ئەوەیە سنووری دین سووک نەکرێت:",
+   "bs": "Korist ove izjave je u tome da se granica dīna ne olahko uzima:",
+   "fr": "L’utilité de cette parole est de ne pas banaliser la limite du dīn :",
+   "es": "El beneficio de esta declaración es no rebajar el límite del dīn:"
+  },
+  "Beschimpfung des Gesandten ﷺ": {
+   "ar": "سبّ الرسول ﷺ",
+   "en": "insulting the Messenger ﷺ",
+   "tr": "Elçi ﷺ’e sövmek",
+   "ku": "şermkirina Peyamber ﷺ",
+   "ckb": "سووکایەتیکردن بە پێغەمبەر ﷺ",
+   "bs": "vrijeđanje Poslanika ﷺ",
+   "fr": "l’insulte au Messager ﷺ",
+   "es": "insultar al Mensajero ﷺ"
+  },
+  "Zurückweisung des Herabgesandten": {
+   "ar": "ردّ المنزل",
+   "en": "rejecting what was sent down",
+   "tr": "indirileni reddetmek",
+   "ku": "vegerandina ya hinartî",
+   "ckb": "ڕەتکردنەوەی دابەزێنراو",
+   "bs": "odbacivanje objavljenog",
+   "fr": "le rejet de ce qui a été fait descendre",
+   "es": "rechazar lo descendido"
+  },
+  "sind keine Kleinigkeiten und keine bloßen Meinungsfehler. Es sind Angriffe auf die Grundlage von": {
+   "ar": "ليست أمورًا يسيرة ولا مجرد أخطاء رأي. إنها اعتداءات على أصل",
+   "en": "are not small matters and not mere errors of opinion. They are attacks on the foundation of",
+   "tr": "küçük şeyler ve salt görüş hataları değildir. Bunlar, temeline yönelik saldırılardır",
+   "ku": "ne tiştên biçûk in û ne jî tenê xeletiyên ramanê ne. Ew êrîş in li ser bingeha",
+   "ckb": "شتگەلی بچووک نین و تەنها هەڵەی بۆچوون نین. هێرشن بۆ سەر بنەمای",
+   "bs": "nisu sitnice i nisu puke greške mišljenja. To su napadi na temelj",
+   "fr": "ne sont pas des choses légères ni de simples erreurs d’opinion. Ce sont des attaques contre le fondement de",
+   "es": "no son cosas menores ni meros errores de opinión. Son ataques al fundamento de"
+  },
+  "Direkte Quellenstellen öffnen": {
+   "ar": "فتح مواضع المصادر المباشرة",
+   "en": "Open the direct source passages",
+   "tr": "Doğrudan kaynak yerlerini aç",
+   "ku": "Cihên rasterast ên çavkaniyan veke",
+   "ckb": "شوێنە ڕاستەوخۆکانی سەرچاوە بکەرەوە",
+   "bs": "Otvori izravna mjesta u izvorima",
+   "fr": "Ouvrir les passages directs des sources",
+   "es": "Abrir los pasajes directos de las fuentes"
+  },
+  "Die folgenden Nachweise führen zu den passenden Textstellen. Die Einträge nennen Werk, Band, Seite oder Abschnitt, damit die Fundstelle direkt nachvollziehbar ist.": {
+   "ar": "الشواهد التالية تؤدي إلى مواضع النص المناسبة. المداخل تذكر الكتاب، والجزء، والصفحة أو القسم، حتى يكون موضع الورود قابلًا للتتبع مباشرة.",
+   "en": "The following references lead to the fitting text passages. The entries name the work, volume, page, or section, so that the locus can be followed directly.",
+   "tr": "Aşağıdaki deliller uygun metin yerlerine götürür. Kayıtlar eser, cilt, sayfa veya bölümü bildirir; böylece geçtiği yer doğrudan izlenebilir.",
+   "ku": "Belgeyên jêrîn dibin cihên nivîsê yên guncaw. Têketin berhem, cild, rûpel an beşê didin, da ku cihê hatinê rasterast were şopandin.",
+   "ckb": "ئەم بەڵگانەی خوارەوە دەبەنە شوێنی دەقی گونجاو. تۆمارەکان کتێب، بەرگ، لاپەڕە یان بەش دەڵێن، تا شوێنی هاتنەکە ڕاستەوخۆ بێتەوە بەدواداچوون.",
+   "bs": "Sljedeći navodi vode do odgovarajućih tekstualnih mjesta. Unosi navode djelo, svezak, stranicu ili odjeljak, tako da se mjesto navođenja može izravno pratiti.",
+   "fr": "Les références suivantes mènent aux passages appropriés. Les entrées indiquent l’ouvrage, le volume, la page ou la section, afin que le lieu puisse être suivi directement.",
+   "es": "Las referencias siguientes conducen a los pasajes apropiados. Las entradas indican la obra, el volumen, la página o la sección, para que el lugar pueda seguirse directamente."
+  },
+  "Dorar · Ḥukm Sabb Allah aw al-Istihzāʾ bih": {
+   "ar": "دورار · حكم سب الله أو الاستهزاء به",
+   "en": "Dorar · Ḥukm Sabb Allah aw al-Istihzāʾ bih",
+   "tr": "Dorar · Ḥukm Sabb Allah aw al-Istihzāʾ bih",
+   "ku": "Dorar · Ḥukm Sabb Allah aw al-Istihzāʾ bih",
+   "ckb": "دورار · حکم سب الله أو الاستهزاء به",
+   "bs": "Dorar · Ḥukm Sabb Allah aw al-Istihzāʾ bih",
+   "fr": "Dorar · Ḥukm Sabb Allah aw al-Istihzāʾ bih",
+   "es": "Dorar · Ḥukm Sabb Allah aw al-Istihzāʾ bih"
+  },
+  "Isḥāq ibn Rāhawayh · aṣ-Ṣārim al-Maslūl · Bd. 2, S. 15": {
+   "ar": "إسحاق بن راهويه · الصارم المسلول · ج 2، ص 15",
+   "en": "Isḥāq ibn Rāhawayh · aṣ-Ṣārim al-Maslūl · vol. 2, p. 15",
+   "tr": "Isḥāq ibn Rāhawayh · aṣ-Ṣārim al-Maslūl · c. 2, s. 15",
+   "ku": "Isḥāq ibn Rāhawayh · aṣ-Ṣārim al-Maslūl · c. 2, r. 15",
+   "ckb": "ئیسحاق کوڕی ڕاهەوەی · الصارم المسلول · بەرگی 2، ل 15",
+   "bs": "Isḥāq ibn Rāhawayh · aṣ-Ṣārim al-Maslūl · sv. 2, str. 15",
+   "fr": "Isḥāq ibn Rāhawayh · aṣ-Ṣārim al-Maslūl · vol. 2, p. 15",
+   "es": "Isḥāq ibn Rāhawayh · aṣ-Ṣārim al-Maslūl · vol. 2, p. 15"
+  },
+  "Dorar · Kufr man Sabba an-Nabī ﷺ": {
+   "ar": "دورار · كفر من سب النبي ﷺ",
+   "en": "Dorar · Kufr man Sabba an-Nabī ﷺ",
+   "tr": "Dorar · Kufr man Sabba an-Nabī ﷺ",
+   "ku": "Dorar · Kufr man Sabba an-Nabī ﷺ",
+   "ckb": "دورار · کفر من سب النبی ﷺ",
+   "bs": "Dorar · Kufr man Sabba an-Nabī ﷺ",
+   "fr": "Dorar · Kufr man Sabba an-Nabī ﷺ",
+   "es": "Dorar · Kufr man Sabba an-Nabī ﷺ"
+  },
+  "Wikisource · al-Kalimāt an-Nāfiʿah": {
+   "ar": "ويكي مصدر · الكلمات النافعة",
+   "en": "Wikisource · al-Kalimāt an-Nāfiʿah",
+   "tr": "Wikisource · al-Kalimāt an-Nāfiʿah",
+   "ku": "Wikisource · al-Kalimāt an-Nāfiʿah",
+   "ckb": "ویکیسۆرس · الکلمات النافعة",
+   "bs": "Wikisource · al-Kalimāt an-Nāfiʿah",
+   "fr": "Wikisource · al-Kalimāt an-Nāfiʿah",
+   "es": "Wikisource · al-Kalimāt an-Nāfiʿah"
+  },
+  "Übernimmt den Wortlaut aus aṣ-Ṣārim al-Maslūl · Textmarkierung": {
+   "ar": "ينقل اللفظ من الصارم المسلول · تحديد النص",
+   "en": "Takes the wording from aṣ-Ṣārim al-Maslūl · text marker",
+   "tr": "Lafzı aṣ-Ṣārim al-Maslūl’den alır · metin işaretlemesi",
+   "ku": "Gotinê ji aṣ-Ṣārim al-Maslūl digire · nîşana tekstê",
+   "ckb": "دەقەکە لە الصارم المسلول وەردەگرێت · نیشانەی دەق",
+   "bs": "Preuzima tekst iz aṣ-Ṣārim al-Maslūl · oznaka teksta",
+   "fr": "Reprend le libellé d’aṣ-Ṣārim al-Maslūl · marquage du texte",
+   "es": "Toma el texto de aṣ-Ṣārim al-Maslūl · marca de texto"
+  },
+  "Islamweb · Umgang mit dem Beschimpfen Allahs": {
+   "ar": "إسلام ويب · التعامل مع سبّ الله",
+   "en": "Islamweb · dealing with the insulting of Allah",
+   "tr": "Islamweb · Allah’a sövmeyle muamele",
+   "ku": "Islamweb · muamelekirina bi şermkirina Allah",
+   "ckb": "ئیسلاموێب · مامەڵەکردن لەگەڵ سووکایەتیکردن بە الله",
+   "bs": "Islamweb · postupanje s vrijeđanjem Allaha",
+   "fr": "Islamweb · le traitement de l’insulte à Allah",
+   "es": "Islamweb · el trato del insulto a Allah"
+  },
+  "Zitiert Isḥāq ibn Rāhawayh aus aṣ-Ṣārim al-Maslūl": {
+   "ar": "ينقل إسحاق بن راهويه من الصارم المسلول",
+   "en": "Cites Isḥāq ibn Rāhawayh from aṣ-Ṣārim al-Maslūl",
+   "tr": "Isḥāq ibn Rāhawayh’i aṣ-Ṣārim al-Maslūl’den nakleder",
+   "ku": "Isḥāq ibn Rāhawayh ji aṣ-Ṣārim al-Maslūl vediguhêze",
+   "ckb": "ئیسحاق کوڕی ڕاهەوەی لە الصارم المسلول دەگێڕێتەوە",
+   "bs": "Navodi Isḥāq ibn Rāhawayha iz aṣ-Ṣārim al-Maslūl",
+   "fr": "Cite Isḥāq ibn Rāhawayh d’après aṣ-Ṣārim al-Maslūl",
+   "es": "Cita a Isḥāq ibn Rāhawayh de aṣ-Ṣārim al-Maslūl"
+  },
+  "Die Aussage Isḥāqs ist deshalb stark, weil sie nicht nur sagt: „Das ist falsch.“ Sie nennt den": {
+   "ar": "قول إسحاق قوي لأنه لا يقول فقط: «هذا خطأ.» إنه يسمّي",
+   "en": "Isḥāq’s statement is weighty because it does not only say: “That is wrong.” It names the",
+   "tr": "İshak’ın sözü ağırdır, çünkü yalnızca “Bu yanlıştır” demez. O,",
+   "ku": "Gotina Isḥāq giran e, ji ber ku tenê nabêje: “Ev xelet e.” Ew bi nav dike",
+   "ckb": "وتەی ئیسحاق بەهێزە، چونکە تەنها ناڵێت: «ئەمە هەڵەیە.» ئەو ناوی",
+   "bs": "Izjava Isḥāqa je snažna jer ne kaže samo: „To je pogrešno.“ Ona imenuje",
+   "fr": "La parole d’Isḥāq a du poids parce qu’elle ne dit pas seulement : « C’est faux. » Elle nomme",
+   "es": "La declaración de Isḥāq tiene peso porque no dice solo: “Eso es falso.” Nombra"
+  },
+  "und macht deutlich, dass bestimmte Angriffe gegen Allah, den Gesandten ﷺ und das Herabgesandte die Grundlage des Islams selbst treffen. Genau deshalb ist die Aussage ein Verbindungspunkt zwischen": {
+   "ar": "ويبيّن أن بعض الاعتداءات على الله، والرسول ﷺ، والمنزل تصيب أساس الإسلام نفسه. ولهذا يكون القول نقطة اتصال بين",
+   "en": "and makes clear that certain attacks against Allah, the Messenger ﷺ, and what was sent down strike the foundation of Islam itself. For that reason the statement is a point of connection between",
+   "tr": "ve açıkça gösterir ki Allah’a, Elçi ﷺ’e ve indirilene yönelik bazı saldırılar İslam’ın temelinin kendisine isabet eder. Bu yüzden söz, arasında bir bağlantı noktasıdır",
+   "ku": "û zelal dike ku hin êrîşên li dijî Allah, Peyamber ﷺ û ya hinartî bingeha îslamê bixwe didin. Ji ber vê yekê gotin xala girêdanê ye di navbera",
+   "ckb": "دەهێنێت و ڕوونی دەکاتەوە کە هەندێک هێرش دژی الله، پێغەمبەر ﷺ، و دابەزێنراو، بنەڕەتی خودی ئیسلام دەدەن. بۆیە وتەکە خاڵی پەیوەندییە لە نێوان",
+   "bs": "i jasno pokazuje da određeni napadi na Allaha, Poslanika ﷺ i objavljeno pogađaju sam temelj islama. Zato je izjava tačka spoja između",
+   "fr": "et montre clairement que certaines attaques contre Allah, le Messager ﷺ et ce qui a été fait descendre atteignent le fondement même de l’islam. C’est pourquoi la parole est un point de jonction entre",
+   "es": "y deja claro que ciertos ataques contra Allah, el Mensajero ﷺ y lo descendido alcanzan el fundamento mismo del islam. Por eso la declaración es un punto de enlace entre"
+  },
+  ": Die ʿAqīdah zeigt den Rang und die Grenze, der Fiqh beschreibt das Urteil und seine Einordnung.": {
+   "ar": ": العقيدة تبيّن المرتبة والحد، والفقه يصف الحكم وتصنيفه.",
+   "en": ": the ʿaqīdah shows the rank and the boundary, and the fiqh describes the ruling and its classification.",
+   "tr": ": Akîde mertebeyi ve sınırı gösterir, fıkıh ise hükmü ve tasnifini anlatır.",
+   "ku": ": ʿaqīdah pile û sînor nîşan dide, fiqh jî hukm û polînkirina wê diyar dike.",
+   "ckb": ": عەقیدە پلە و سنوور نیشان دەدات، و فقه حوکم و پۆلێنەکەی وەسف دەکات.",
+   "bs": ": ʿaqīdah pokazuje stepen i granicu, a fikh opisuje propis i njegovo razvrstavanje.",
+   "fr": ": l’ʿaqīdah montre le rang et la limite, et le fiqh décrit le jugement et son classement.",
+   "es": ": la ʿaqīdah muestra el rango y el límite, y el fiqh describe el juicio y su clasificación."
   }
  }
 }

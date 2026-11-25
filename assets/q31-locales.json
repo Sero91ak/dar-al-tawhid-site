@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,348 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Sufyān ath-Thawrī – Wer mit Ahl al-Bidʿah sitzt – DAR AL TAWḤĪD": {
+   "ar": "سفيان الثوري – من يجلس مع أهل البدع – DAR AL TAWḤĪD",
+   "en": "Sufyān ath-Thawrī – Whoever sits with ahl al-bidʿah – DAR AL TAWḤĪD",
+   "tr": "Sufyān es-Sevrî – Bidʿah ehliyle oturan – DAR AL TAWḤĪD",
+   "ku": "Sufyān es-Sewrî – Yê ku bi ehlê bidʿah re rûdine – DAR AL TAWḤĪD",
+   "ckb": "سوفیانی سەوری – ئەوەی لەگەڵ ئەهلی بدعە دادەنیشێت – DAR AL TAWḤĪD",
+   "bs": "Sufjān es-Sevrī – Ko sjedi s ehli-bidʿom – DAR AL TAWḤĪD",
+   "fr": "Sufyān ath-Thawrī – Celui qui s’assied avec ahl al-bidʿah – DAR AL TAWḤĪD",
+   "es": "Sufyān ath-Thawrī – Quien se sienta con ahl al-bidʿah – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "مقالات وفق القرآن والسنة والآثار",
+   "en": "Articles according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre yazılar",
+   "ku": "Nivîs li gorî Qurʾān, Sunnah û Āthār",
+   "ckb": "بابەتەکان بەپێی قورئان و سوننەت و ئاسەوار",
+   "bs": "Tekstovi prema Qurʾānu, Sunnah i Āthāru",
+   "fr": "Articles selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Artículos según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Manhaj · Bidʿah · Ahl al-Ahwāʾ · Shubuhāt": {
+   "ar": "منهج · بدعة · أهل الأهواء · شبهات",
+   "en": "Manhaj · Bidʿah · Ahl al-Ahwāʾ · Shubuhāt",
+   "tr": "Manhaj · Bidʿah · Ahl al-Ahwāʾ · Shubuhāt",
+   "ku": "Manhaj · Bidʿah · Ahl al-Ahwāʾ · Shubuhāt",
+   "ckb": "منهج · بدعة · أهل الأهواء · شبهات",
+   "bs": "Manhaj · Bidʿah · Ahl al-Ahwāʾ · Shubuhāt",
+   "fr": "Manhaj · Bidʿah · Ahl al-Ahwāʾ · Shubuhāt",
+   "es": "Manhaj · Bidʿah · Ahl al-Ahwāʾ · Shubuhāt"
+  },
+  "Wer sich vor Shubuhāt sicher fühlt": {
+   "ar": "من يأمن الشبهات",
+   "en": "Whoever feels safe from shubuhāt",
+   "tr": "Şüphelerden emin olan",
+   "ku": "Yê ku xwe ji şubuhāt ewle dihesibîne",
+   "ckb": "ئەوەی خۆی لە شبهات دڵنیا دەزانێت",
+   "bs": "Ko se osjeća sigurnim od šubuhāta",
+   "fr": "Celui qui se croit à l’abri des shubuhāt",
+   "es": "Quien se siente seguro frente a las shubuhāt"
+  },
+  "„Wer mit einem Anhänger der Bidʿah sitzt, bleibt nicht frei von einer von drei Dingen: Entweder wird er eine Fitnah für andere, oder es fällt etwas in sein Herz, wodurch er stolpert und Allah ihn dadurch ins Feuer eingehen lässt, oder er sagt: Bei Allah, mir ist egal, was sie reden, ich bin mir selbst sicher. Wer sich aber vor Allah auch nur einen Augenblick bezüglich seines Dīn sicher fühlt, dem wird Er ihn entreißen.“": {
+   "ar": "«من جلس إلى صاحب بدعة لم يسلم من إحدى ثلاث: إما أن يكون فتنة لغيره، وإما أن يقع في قلبه شيء فيزلّ فيدخله الله بذلك النار، وإما أن يقول: والله لا أبالي ما يقولون، إني واثق بنفسي. ومن أمن على دينه من الله ولو لحظة، انتزعه منه.»",
+   "en": "“Whoever sits with a follower of bidʿah is not free of one of three things: either he becomes a fitnah for others, or something falls into his heart by which he stumbles and Allah thereby causes him to enter the Fire, or he says: By Allah, I do not care what they say, I am sure of myself. But whoever feels safe before Allah concerning his dīn even for a moment, He will snatch it from him.”",
+   "tr": "“Kim bir bidʿah ehliyle oturursa üç şeyden biri onu bırakmaz: Ya başkaları için fitne olur, ya kalbine bir şey düşer, onunla sürçer ve Allah onu bununla ateşe sokar, ya da der: Allah’a yemin olsun, ne konuştukları umurumda değil, ben kendimden eminim. Kim dininden ötürü Allah karşısında bir an bile emin olursa, Allah onu ondan çekip alır.”",
+   "ku": "“Yê ku bi peyrewekî bidʿah re rûdine, ji sê tiştan yekî xilas nabe: An ew ji bo yên din dibe fitnah, an tiştek dikeve dilê wî, bi wê yekê dixe û Allah wî bi wê yekê dike agir, an jî dibêje: Bi Allah, min ne xem e ku ew çi dibêjin, ez ji xwe ewle me. Lê yê ku li ber Allah di derbarê dînê xwe de hetta kêliyekê xwe ewle hîs bike, Ew wê jê bistîne.”",
+   "ckb": "«ئەوەی لەگەڵ شوێنکەوتووی بدعە دادەنیشێت، لە یەکێک لە سێ شت ڕزگار نابێت: یان دەبێتە فیتنە بۆ خەڵکی تر، یان شتێک دەکەوێتە دڵیەوە کە پێی دەخلیسکێت و الله بەوە دەیخاتە ئاگر، یان دەڵێت: سوێند بە الله، گرنگ نییە چی دەڵێن، من لە خۆم دڵنیام. ئەوەی لەبەردەم الله تەنانەت بۆ ساتێکیش لەسەر دینەکەی خۆی دڵنیا هەست بکات، ئەو لێی دەستێنێت.»",
+   "bs": "„Ko sjedne s sljedbenikom bidʿe, nije slobodan od jedne od tri stvari: ili postaje fitna za druge, ili mu u srce padne nešto čime posrne i Allah ga time uvede u vatru, ili kaže: Tako mi Allaha, nije me briga šta govore, ja sam siguran u sebe. A ko se pred Allahom i za tren osjeća sigurnim u pogledu svoga dīna, On će mu ga oteti.“",
+   "fr": "« Celui qui s’assied avec un adepte de la bidʿah n’est pas à l’abri de l’une de trois choses : ou bien il devient une fitnah pour les autres, ou bien quelque chose tombe dans son cœur, il trébuche par là et Allah le fait entrer dans le Feu, ou bien il dit : Par Allah, peu m’importe ce qu’ils disent, je suis sûr de moi. Mais celui qui se sent en sécurité devant Allah au sujet de son dīn ne serait-ce qu’un instant, Il le lui arrachera. »",
+   "es": "«Quien se sienta con un seguidor de la bidʿah no queda libre de una de tres cosas: o se convierte en una fitnah para otros, o cae algo en su corazón con lo que tropieza y Allah lo hace entrar por ello en el Fuego, o dice: Por Allah, no me importa lo que digan, estoy seguro de mí mismo. Pero a quien se siente seguro ante Allah respecto de su dīn aunque sea un instante, Él se lo arrebatará.»"
+  },
+  "Sufyān ath-Thawrī رحمه الله": {
+   "ar": "سفيان الثوري رحمه الله",
+   "en": "Sufyān ath-Thawrī رحمه الله",
+   "tr": "Sufyān es-Sevrî رحمه الله",
+   "ku": "Sufyān es-Sewrî رحمه الله",
+   "ckb": "سوفیانی سەوری رحمه الله",
+   "bs": "Sufjān es-Sevrī رحمه الله",
+   "fr": "Sufyān ath-Thawrī رحمه الله",
+   "es": "Sufyān ath-Thawrī رحمه الله"
+  },
+  "Warnung vor dem Sitzen mit Ahl al-Bidʿah, Ahl al-Ahwāʾ, Ghulāt und Sekten.": {
+   "ar": "التحذير من الجلوس مع أهل البدع، وأهل الأهواء، والغلاة، والفرق.",
+   "en": "Warning against sitting with ahl al-bidʿah, ahl al-ahwāʾ, the ghulāt, and the sects.",
+   "tr": "Bidʿah ehli, hevâ ehli, gulât ve fırkalarla oturmaya karşı uyarı.",
+   "ku": "Hişyarî ji rûniştina bi ehlê bidʿah, ehlê ehwāʾ, ghulāt û firqeyan re.",
+   "ckb": "ئاگادارکردنەوە لە دانیشتن لەگەڵ ئەهلی بدعە، ئەهلی ئەهوا، غولات، و فیرقەکان.",
+   "bs": "Upozorenje od sjedenja s ehli-bidʿom, ehli-ehvāom, ghulātima i sektama.",
+   "fr": "Mise en garde contre le fait de s’asseoir avec ahl al-bidʿah, ahl al-ahwāʾ, les ghulāt et les sectes.",
+   "es": "Advertencia contra sentarse con ahl al-bidʿah, ahl al-ahwāʾ, los ghulāt y las sectas."
+  },
+  ", Kapitel: an-Nahy ʿan al-Julūs maʿa Ahl al-Bidaʿ wa-Khilṭatihim wa-l-Mashy Maʿahum, Nr. 116 in der Shamela-Ausgabe, S. 96; in anderen Zählungen Nr. 114. Erwähnt auch bei ash-Shāṭibī,": {
+   "ar": "، باب: النهي عن الجلوس مع أهل البدع ومخالطتهم والمشي معهم، رقم 116 في طبعة الشاملة، ص 96؛ وفي عدّات أخرى رقم 114. وهو مذكور أيضًا عند الشاطبي،",
+   "en": ", chapter: an-Nahy ʿan al-Julūs maʿa Ahl al-Bidaʿ wa-Khilṭatihim wa-l-Mashy Maʿahum, no. 116 in the Shamela edition, p. 96; in other numberings no. 114. Also mentioned by ash-Shāṭibī,",
+   "tr": ", bâb: en-Nehy ʿan el-Cülûs mea Ehl el-Bidaʿ ve hiltatihim ve’l-meşy meahum, Şâmile baskısında no. 116, s. 96; başka sayımlarda no. 114. eş-Şâtıbî’de de anılır,",
+   "ku": ", beş: an-Nahy ʿan al-Julūs maʿa Ahl al-Bidaʿ wa-Khilṭatihim wa-l-Mashy Maʿahum, di çapa Shamela de hej. 116, r. 96; di hejmartinên din de hej. 114. Herwiha li cem eş-Şâtibî tê anîn,",
+   "ckb": "، بەش: النهی عن الجلوس مع أهل البدع وخلطتهم والمشی معهم، ژ 116 لە چاپی شاملە، ل 96؛ لە ژماردنی تر ژ 114. هەروەها لای الشاطبي هاتووە،",
+   "bs": ", poglavlje: an-Nahy ʿan al-Julūs maʿa Ahl al-Bidaʿ wa-Khilṭatihim wa-l-Mashy Maʿahum, br. 116 u izdanju Shamele, str. 96; u drugim brojanjima br. 114. Spominje se i kod eš-Šātibīja,",
+   "fr": ", chapitre : an-Nahy ʿan al-Julūs maʿa Ahl al-Bidaʿ wa-Khilṭatihim wa-l-Mashy Maʿahum, n° 116 dans l’édition Shamela, p. 96 ; dans d’autres décomptes n° 114. Mentionné aussi chez ash-Shāṭibī,",
+   "es": ", capítulo: an-Nahy ʿan al-Julūs maʿa Ahl al-Bidaʿ wa-Khilṭatihim wa-l-Mashy Maʿahum, n.º 116 en la edición de Shamela, p. 96; en otros recuentos n.º 114. Mencionado también por ash-Shāṭibī,"
+  },
+  ", im Kapitel über die Warnung vor Ahl al-Bidʿah.": {
+   "ar": "، في باب التحذير من أهل البدع.",
+   "en": ", in the chapter on the warning against ahl al-bidʿah.",
+   "tr": ", bidʿah ehline karşı uyarı bâbında.",
+   "ku": ", di beşa hişyariyê ji ehlê bidʿah de.",
+   "ckb": "، لە بەشی ئاگادارکردنەوە لە ئەهلی بدعە.",
+   "bs": ", u poglavlju o upozorenju od ehli-bidʿe.",
+   "fr": ", dans le chapitre sur la mise en garde contre ahl al-bidʿah.",
+   "es": ", en el capítulo de la advertencia contra ahl al-bidʿah."
+  },
+  "Aussage von Sufyān ath-Thawrī": {
+   "ar": "قول سفيان الثوري",
+   "en": "Statement of Sufyān ath-Thawrī",
+   "tr": "Sufyān es-Sevrî’nin sözü",
+   "ku": "Gotina Sufyān es-Sewrî",
+   "ckb": "وتەی سوفیانی سەوری",
+   "bs": "Izjava Sufjāna es-Sevrīja",
+   "fr": "Parole de Sufyān ath-Thawrī",
+   "es": "Declaración de Sufyān ath-Thawrī"
+  },
+  "Sufyān ath-Thawrī رحمه الله sagte:": {
+   "ar": "قال سفيان الثوري رحمه الله:",
+   "en": "Sufyān ath-Thawrī رحمه الله said:",
+   "tr": "Sufyān es-Sevrî رحمه الله dedi:",
+   "ku": "Sufyān es-Sewrî رحمه الله got:",
+   "ckb": "سوفیانی سەوری رحمه الله فەرمووی:",
+   "bs": "Sufjān es-Sevrī رحمه الله je rekao:",
+   "fr": "Sufyān ath-Thawrī رحمه الله a dit :",
+   "es": "Sufyān ath-Thawrī رحمه الله dijo:"
+  },
+  "sitzt, bleibt nicht frei von einer von drei Dingen: Entweder wird er eine": {
+   "ar": "يجلس، لا يسلم من إحدى ثلاث: إما أن يكون",
+   "en": "sits, is not free of one of three things: either he becomes a",
+   "tr": "oturursa, üç şeyden biri onu bırakmaz: Ya",
+   "ku": "rûdine, ji sê tiştan yekî xilas nabe: An ew dibe",
+   "ckb": "دادەنیشێت، لە یەکێک لە سێ شت ڕزگار نابێت: یان دەبێتە",
+   "bs": "sjedi, nije slobodan od jedne od tri stvari: ili postaje",
+   "fr": "s’assied, n’est pas à l’abri de l’une de trois choses : ou bien il devient",
+   "es": "se sienta, no queda libre de una de tres cosas: o se convierte en"
+  },
+  ", oder es fällt etwas in sein": {
+   "ar": "، وإما أن يقع في",
+   "en": ", or something falls into his",
+   "tr": ", ya da bir şey düşer",
+   "ku": ", an tiştek dikeve",
+   "ckb": "، یان شتێک دەکەوێتە",
+   "bs": ", ili nešto padne u njegovo",
+   "fr": ", ou bien quelque chose tombe dans son",
+   "es": ", o cae algo en su"
+  },
+  ", wodurch er stolpert und Allah ihn dadurch ins": {
+   "ar": "، فيزلّ ويدخله الله بذلك",
+   "en": ", by which he stumbles and Allah thereby into the",
+   "tr": ", onunla sürçer ve Allah onu bununla",
+   "ku": ", bi wê yekê dixe û Allah wî bi wê yekê",
+   "ckb": "، کە پێی دەخلیسکێت و الله بەوە دەیخاتە",
+   "bs": ", čime posrne i Allah ga time u",
+   "fr": ", par quoi il trébuche et Allah par là dans le",
+   "es": ", con lo que tropieza y Allah por ello en el"
+  },
+  "eingehen lässt, oder er sagt: Bei Allah, mir ist egal, was sie reden, ich bin mir selbst": {
+   "ar": "يدخله، أو يقول: والله لا أبالي ما يقولون، إني من نفسي",
+   "en": "causes him to enter, or he says: By Allah, I do not care what they say, I am of myself",
+   "tr": "sokar, ya da der: Allah’a yemin olsun, ne konuştukları umurumda değil, ben kendimden",
+   "ku": "dike, an dibêje: Bi Allah, min ne xem e ku ew çi dibêjin, ez ji xwe",
+   "ckb": "دەیخات، یان دەڵێت: سوێند بە الله، گرنگ نییە چی دەڵێن، من لە خۆم",
+   "bs": "uvede, ili kaže: Tako mi Allaha, nije me briga šta govore, ja sam u sebe",
+   "fr": "le fait entrer, ou bien il dit : Par Allah, peu m’importe ce qu’ils disent, je suis de moi-même",
+   "es": "lo hace entrar, o dice: Por Allah, no me importa lo que digan, yo de mí mismo"
+  },
+  ". Wer sich aber vor Allah auch nur einen": {
+   "ar": ". ومن أمن على دينه من الله ولو",
+   "en": ". But whoever feels safe before Allah concerning his dīn even for a",
+   "tr": ". Kim dininden ötürü Allah karşısında bir",
+   "ku": ". Lê yê ku li ber Allah di derbarê dînê xwe de hetta",
+   "ckb": ". ئەوەی لەبەردەم الله تەنانەت بۆ",
+   "bs": ". A ko se pred Allahom i za",
+   "fr": ". Mais celui qui se sent en sécurité devant Allah au sujet de son dīn ne serait-ce que",
+   "es": ". Pero quien se siente seguro ante Allah respecto de su dīn aunque sea"
+  },
+  "sicher fühlt, dem wird Er ihn entreißen.“": {
+   "ar": "يشعر بالأمان، انتزعه منه.»",
+   "en": "feels safe, He will snatch it from him.”",
+   "tr": "bile emin olursa, onu ondan çekip alır.”",
+   "ku": "xwe ewle hîs bike, Ew wê jê bistîne.”",
+   "ckb": "خۆی دڵنیا هەست بکات، ئەو لێی دەستێنێت.»",
+   "bs": "osjeća sigurnim, On će mu ga oteti.“",
+   "fr": "se sente en sécurité, Il le lui arrachera. »",
+   "es": "se sienta seguro, Él se lo arrebatará.”"
+  },
+  ", Kapitel über das Verbot, mit Ahl al-Bidʿah zu sitzen, sich mit ihnen zu vermischen und mit ihnen zu gehen, Nr. 116 in der Shamela-Ausgabe, S. 96; in anderen Zählungen Nr. 114.": {
+   "ar": "، باب النهي عن الجلوس مع أهل البدع ومخالطتهم والمشي معهم، رقم 116 في طبعة الشاملة، ص 96؛ وفي عدّات أخرى رقم 114.",
+   "en": ", chapter on the prohibition of sitting with ahl al-bidʿah, mixing with them, and walking with them, no. 116 in the Shamela edition, p. 96; in other numberings no. 114.",
+   "tr": ", bidʿah ehliyle oturma, onlarla karışma ve onlarla yürüme yasağı bâbı, Şâmile baskısında no. 116, s. 96; başka sayımlarda no. 114.",
+   "ku": ", beşa qedexeya rûniştina bi ehlê bidʿah re, tevlihevbûna bi wan re û meşiya bi wan re, di çapa Shamela de hej. 116, r. 96; di hejmartinên din de hej. 114.",
+   "ckb": "، بەشی قەدەغەی دانیشتن لەگەڵ ئەهلی بدعە، تێکەڵبوون لەگەڵیان، و ڕۆیشتن لەگەڵیان، ژ 116 لە چاپی شاملە، ل 96؛ لە ژماردنی تر ژ 114.",
+   "bs": ", poglavlje o zabrani sjedenja s ehli-bidʿom, miješanja s njima i hodanja s njima, br. 116 u izdanju Shamele, str. 96; u drugim brojanjima br. 114.",
+   "fr": ", chapitre sur l’interdiction de s’asseoir avec ahl al-bidʿah, de se mêler à eux et de marcher avec eux, n° 116 dans l’édition Shamela, p. 96 ; dans d’autres décomptes n° 114.",
+   "es": ", capítulo sobre la prohibición de sentarse con ahl al-bidʿah, mezclarse con ellos y caminar con ellos, n.º 116 en la edición de Shamela, p. 96; en otros recuentos n.º 114."
+  },
+  "Diese Aussage richtet sich gegen Selbstsicherheit vor": {
+   "ar": "هذا القول يتوجه ضد الاطمئنان أمام",
+   "en": "This statement is directed against self-assurance before",
+   "tr": "Bu söz, karşısındaki emin olmaya karşıdır:",
+   "ku": "Ev gotin li dijî ewlehiya li ber",
+   "ckb": "ئەم وتەیە دژی دڵنیایی لەبەردەم",
+   "bs": "Ova izjava je usmjerena protiv osjećaja sigurnosti pred",
+   "fr": "Cette parole s’adresse contre l’assurance devant",
+   "es": "Esta declaración se dirige contra la seguridad ante"
+  },
+  ". Sufyān ath-Thawrī nennt nicht nur die Gefahr, selbst beeinflusst zu werden, sondern auch die Gefahr, für andere zur": {
+   "ar": ". سفيان الثوري لا يذكر فقط خطر أن يتأثر الإنسان نفسه، بل أيضًا خطر أن يصير",
+   "en": ". Sufyān ath-Thawrī does not mention only the danger of being influenced oneself, but also the danger of becoming",
+   "tr": ". Sufyān es-Sevrî yalnız kendisinin etkilenme tehlikesini değil, şuna dönüşme tehlikesini de anar:",
+   "ku": ". Sufyān es-Sewrî ne tenê metirsiya ku mirov bi xwe bandor bibe, lê metirsiya ku bibe",
+   "ckb": ". سوفیانی سەوری تەنها مەترسی ئەوە ناو نابات کە خودی مرۆڤ کاریگەر ببێت، بەڵکو مەترسی ئەوەش کە ببێتە",
+   "bs": ". Sufjān es-Sevrī ne spominje samo opasnost da čovjek sam bude pod utjecajem, nego i opasnost da postane",
+   "fr": ". Sufyān ath-Thawrī ne mentionne pas seulement le danger d’être soi-même influencé, mais aussi le danger de devenir",
+   "es": ". Sufyān ath-Thawrī no menciona solo el peligro de ser uno mismo influido, sino también el peligro de convertirse en"
+  },
+  "zu werden, wenn man Ahl al-Bidʿah normalisiert oder ihnen durch Nähe Gewicht verleiht.": {
+   "ar": "لغيره، إذا طبّع أهل البدعة أو أعطاهم وزنًا بالقرب منهم.",
+   "en": "for others, if one normalizes ahl al-bidʿah or gives them weight by nearness to them.",
+   "tr": "başkaları için, eğer bidʿah ehlini olağanlaştırır veya onlara yakınlıkla ağırlık verirse.",
+   "ku": "ji bo yên din, eger mirov ehlê bidʿah asayî bike an bi nêzîkbûnê giraniyê bide wan.",
+   "ckb": "بۆ خەڵکی تر، ئەگەر ئەهلی بدعە ئاسایی بکرێت یان بە نزیکی کێشیان پێ بدرێت.",
+   "bs": "za druge, ako se ehli-bidʿa učini običnim ili im se blizinom da težina.",
+   "fr": "pour les autres, si l’on normalise ahl al-bidʿah ou qu’on leur donne du poids par la proximité.",
+   "es": "para otros, si se normaliza a ahl al-bidʿah o se les da peso por la cercanía."
+  },
+  "Der Kern ist: Das Herz wird nicht dadurch geschützt, dass der Mensch von sich selbst überzeugt ist. Schutz liegt im Festhalten an": {
+   "ar": "الجوهر: القلب لا يُحمى بأن يكون الإنسان واثقًا من نفسه. الحماية في التمسك بـ",
+   "en": "The core is: the heart is not protected by the person being convinced of himself. Protection lies in holding to",
+   "tr": "Öz şudur: Kalp, insanın kendine güvenmesiyle korunmaz. Korunma, şuna tutunmaktadır:",
+   "ku": "Naverok ev e: Dil bi wê yekê nayê parastin ku mirov ji xwe bawer be. Parastin di girtina",
+   "ckb": "ناوەڕۆک ئەوەیە: دڵ بەوە نایپارێزرێت کە مرۆڤ لە خۆی دڵنیا بێت. پاراستن لە پەیوەستبووندایە بە",
+   "bs": "Srž je: srce se ne štiti time što je čovjek uvjeren u sebe. Zaštita je u držanju",
+   "fr": "Le fond est : le cœur n’est pas protégé par le fait que l’homme soit convaincu de lui-même. La protection est dans l’attachement à",
+   "es": "El núcleo es: el corazón no se protege porque la persona esté convencida de sí misma. La protección está en aferrarse a"
+  },
+  "klarer Trennung von Ahl al-Ahwāʾ": {
+   "ar": "انفصال واضح عن أهل الأهواء",
+   "en": "a clear separation from ahl al-ahwāʾ",
+   "tr": "ehli hevâdan açık bir ayrılık",
+   "ku": "veqetandineke zelal ji ehlê ehwāʾ",
+   "ckb": "جیاکردنەوەیەکی ڕوون لە ئەهلی ئەهوا",
+   "bs": "jasno odvajanje od ehli-ehvāa",
+   "fr": "une séparation claire d’ahl al-ahwāʾ",
+   "es": "una separación clara de ahl al-ahwāʾ"
+  },
+  "Direkte Quellenstellen öffnen": {
+   "ar": "فتح مواضع المصادر المباشرة",
+   "en": "Open the direct source passages",
+   "tr": "Doğrudan kaynak yerlerini aç",
+   "ku": "Cihên rasterast ên çavkaniyan veke",
+   "ckb": "شوێنە ڕاستەوخۆکانی سەرچاوە بکەرەوە",
+   "bs": "Otvori izravna mjesta u izvorima",
+   "fr": "Ouvrir les passages directs des sources",
+   "es": "Abrir los pasajes directos de las fuentes"
+  },
+  "Die folgenden Nachweise führen zu Originalwerken oder Bibliotheksseiten. Es wurde keine Fatwā-Seite als Quellenangabe verwendet.": {
+   "ar": "الشواهد التالية تؤدي إلى الكتب الأصلية أو صفحات المكتبات. ولم تُستخدم صفحة فتوى مرجعًا.",
+   "en": "The following references lead to original works or library pages. No fatwā page was used as a source citation.",
+   "tr": "Aşağıdaki deliller asıl eserlere veya kütüphane sayfalarına götürür. Fetva sayfası kaynak gösterimi olarak kullanılmamıştır.",
+   "ku": "Belgeyên jêrîn dibin berhemên eslî an rûpelên pirtûkxaneyan. Tu rûpela fatwayê wekî çavkanî nehatiye bikaranîn.",
+   "ckb": "ئەم بەڵگانەی خوارەوە دەبەنە کتێبە ئەسڵییەکان یان لاپەڕەکانی کتێبخانە. هیچ لاپەڕەیەکی فەتوا وەک سەرچاوە بەکارنەهێنراوە.",
+   "bs": "Sljedeći navodi vode do izvornih djela ili stranica biblioteka. Nijedna stranica fetve nije upotrijebljena kao izvor.",
+   "fr": "Les références suivantes mènent aux ouvrages originaux ou aux pages de bibliothèque. Aucune page de fatwā n’a été utilisée comme source.",
+   "es": "Las referencias siguientes conducen a las obras originales o a páginas de biblioteca. Ninguna página de fatwā se ha usado como fuente."
+  },
+  "Shamela · al-Bidaʿ wa-n-Nahy ʿanhā": {
+   "ar": "شاملة · البدع والنهي عنها",
+   "en": "Shamela · al-Bidaʿ wa-n-Nahy ʿanhā",
+   "tr": "Şâmile · el-Bidaʿ ve’n-nehy anhâ",
+   "ku": "Shamela · al-Bidaʿ wa-n-Nahy ʿanhā",
+   "ckb": "شاملە · البدع والنهي عنها",
+   "bs": "Shamela · al-Bidaʿ wa-n-Nahy ʿanhā",
+   "fr": "Shamela · al-Bidaʿ wa-n-Nahy ʿanhā",
+   "es": "Shamela · al-Bidaʿ wa-n-Nahy ʿanhā"
+  },
+  "Ibn Waḍḍāḥ · Kapitel über das Sitzen mit Ahl al-Bidʿah · Nr. 116 · S. 96": {
+   "ar": "ابن وضاح · باب الجلوس مع أهل البدع · رقم 116 · ص 96",
+   "en": "Ibn Waḍḍāḥ · chapter on sitting with ahl al-bidʿah · no. 116 · p. 96",
+   "tr": "İbn Vaddâh · bidʿah ehliyle oturma bâbı · no. 116 · s. 96",
+   "ku": "Ibn Waḍḍāḥ · beşa rûniştina bi ehlê bidʿah · hej. 116 · r. 96",
+   "ckb": "ابن وضاح · بەشی دانیشتن لەگەڵ ئەهلی بدعە · ژ 116 · ل 96",
+   "bs": "Ibn Waḍḍāḥ · poglavlje o sjedenju s ehli-bidʿom · br. 116 · str. 96",
+   "fr": "Ibn Waḍḍāḥ · chapitre sur le fait de s’asseoir avec ahl al-bidʿah · n° 116 · p. 96",
+   "es": "Ibn Waḍḍāḥ · capítulo sobre sentarse con ahl al-bidʿah · n.º 116 · p. 96"
+  },
+  "Waqfeya · Scan/PDF-Bibliotheksseite": {
+   "ar": "وقفية · صفحة مكتبة المسح/PDF",
+   "en": "Waqfeya · scan/PDF library page",
+   "tr": "Vakfiyye · tarama/PDF kütüphane sayfası",
+   "ku": "Waqfeya · rûpela pirtûkxaneya scan/PDF",
+   "ckb": "وەقفییە · لاپەڕەی کتێبخانەی سکان/PDF",
+   "bs": "Waqfeya · stranica biblioteke skena/PDF",
+   "fr": "Waqfeya · page de bibliothèque scan/PDF",
+   "es": "Waqfeya · página de biblioteca de escaneo/PDF"
+  },
+  "Ibn Waḍḍāḥ · al-Bidaʿ wa-n-Nahy ʿanhā · Muḥammad Aḥmad Dahmān": {
+   "ar": "ابن وضاح · البدع والنهي عنها · محمد أحمد دهمان",
+   "en": "Ibn Waḍḍāḥ · al-Bidaʿ wa-n-Nahy ʿanhā · Muḥammad Aḥmad Dahmān",
+   "tr": "İbn Vaddâh · el-Bidaʿ ve’n-nehy anhâ · Muhammed Ahmed Dehmân",
+   "ku": "Ibn Waḍḍāḥ · al-Bidaʿ wa-n-Nahy ʿanhā · Muḥammad Aḥmad Dahmān",
+   "ckb": "ابن وضاح · البدع والنهي عنها · محمد أحمد دهمان",
+   "bs": "Ibn Waḍḍāḥ · al-Bidaʿ wa-n-Nahy ʿanhā · Muḥammad Aḥmad Dahmān",
+   "fr": "Ibn Waḍḍāḥ · al-Bidaʿ wa-n-Nahy ʿanhā · Muḥammad Aḥmad Dahmān",
+   "es": "Ibn Waḍḍāḥ · al-Bidaʿ wa-n-Nahy ʿanhā · Muḥammad Aḥmad Dahmān"
+  },
+  "al-Bidaʿ wa-n-Nahy ʿanhā · direkte PDF-Ansicht zur gedruckten Seitenzählung": {
+   "ar": "البدع والنهي عنها · عرض PDF مباشر لترقيم الصفحات المطبوعة",
+   "en": "al-Bidaʿ wa-n-Nahy ʿanhā · direct PDF view of the printed page numbering",
+   "tr": "el-Bidaʿ ve’n-nehy anhâ · basılı sayfa numarasına doğrudan PDF görünümü",
+   "ku": "al-Bidaʿ wa-n-Nahy ʿanhā · dîtina PDF ya rasterast a hejmartina rûpelên çapkirî",
+   "ckb": "البدع والنهي عنها · بینینی ڕاستەوخۆی PDF بۆ ژمارەی لاپەڕەی چاپکراو",
+   "bs": "al-Bidaʿ wa-n-Nahy ʿanhā · izravan PDF-prikaz štampane paginacije",
+   "fr": "al-Bidaʿ wa-n-Nahy ʿanhā · vue PDF directe de la pagination imprimée",
+   "es": "al-Bidaʿ wa-n-Nahy ʿanhā · vista PDF directa de la paginación impresa"
+  },
+  "Islamweb Bibliothek · al-Iʿtiṣām": {
+   "ar": "مكتبة إسلام ويب · الاعتصام",
+   "en": "Islamweb library · al-Iʿtiṣām",
+   "tr": "İslamweb kütüphanesi · el-İʿtisâm",
+   "ku": "Pirtûkxaneya Islamweb · al-Iʿtiṣām",
+   "ckb": "کتێبخانەی ئیسلاموێب · الاعتصام",
+   "bs": "Biblioteka Islamweba · al-Iʿtiṣām",
+   "fr": "Bibliothèque Islamweb · al-Iʿtiṣām",
+   "es": "Biblioteca de Islamweb · al-Iʿtiṣām"
+  },
+  "ash-Shāṭibī · Überlieferung der Aussage von Sufyān ath-Thawrī": {
+   "ar": "الشاطبي · رواية قول سفيان الثوري",
+   "en": "ash-Shāṭibī · transmission of the statement of Sufyān ath-Thawrī",
+   "tr": "eş-Şâtıbî · Sufyān es-Sevrî’nin sözünün rivayeti",
+   "ku": "eş-Şâtibî · veguhastina gotina Sufyān es-Sewrî",
+   "ckb": "الشاطبي · گێڕانەوەی وتەی سوفیانی سەوری",
+   "bs": "eš-Šātibī · predaja izjave Sufjāna es-Sevrīja",
+   "fr": "ash-Shāṭibī · transmission de la parole de Sufyān ath-Thawrī",
+   "es": "ash-Shāṭibī · transmisión de la declaración de Sufyān ath-Thawrī"
+  },
+  "Der gefährlichste Satz gegenüber Shubuhāt ist: „Mich beeinflusst das nicht.“ Die Salaf warnten davor, das eigene Herz für stärker zu halten, als es ist. Wer seinen Dīn schützen will, schützt auch seine Quellen, seine Sitzungen und seine Nähe.": {
+   "ar": "أخطر جملة أمام الشبهات هي: «هذا لا يؤثر فيّ.» حذّر السلف من أن يحسب الإنسان قلبه أقوى مما هو. من أراد أن يحمي دينه، يحمي أيضًا مصادره، ومجالسه، وقربه.",
+   "en": "The most dangerous sentence before shubuhāt is: “That does not influence me.” The Salaf warned against reckoning one’s own heart stronger than it is. Whoever wants to protect his dīn also protects his sources, his sittings, and his nearness.",
+   "tr": "Şüpheler karşısında en tehlikeli cümle şudur: “Bu beni etkilemez.” Selef, insanın kalbini olduğundan güçlü saymasına karşı uyardı. Dinini korumak isteyen, kaynaklarını, oturuşlarını ve yakınlığını da korur.",
+   "ku": "Hevoka herî metirsîdar li ber şubuhāt ev e: “Ev bandorê li min nake.” Salaf hişyar kirin ku mirov dilê xwe ji ya ku ew e bihêztir nehesibîne. Yê ku dixwaze dînê xwe biparêze, çavkaniyên xwe, rûniştinên xwe û nêzîkbûna xwe jî diparêze.",
+   "ckb": "مەترسیدارترین ڕستە لەبەردەم شبهات ئەوەیە: «ئەمە کاریگەریم لێ ناکات.» سەلەف ئاگاداریان کردەوە لەوەی مرۆڤ دڵی خۆی بەهێزتر بزانێت لەوەی کە هەیە. ئەوەی دەیەوێت دینەکەی بپارێزێت، سەرچاوەکانی، دانیشتنەکانی، و نزیکییەکەشی دەپارێزێت.",
+   "bs": "Najopasnija rečenica pred šubuhātima je: „To na mene ne utječe.“ Selef su upozoravali da čovjek ne smatra svoje srce jačim nego što jeste. Ko želi zaštititi svoj dīn, štiti i svoje izvore, svoja sjedenja i svoju blizinu.",
+   "fr": "La phrase la plus dangereuse face aux shubuhāt est : « Cela ne m’influence pas. » Les Salaf ont mis en garde contre le fait de tenir son propre cœur pour plus fort qu’il n’est. Celui qui veut protéger son dīn protège aussi ses sources, ses assises et sa proximité.",
+   "es": "La frase más peligrosa ante las shubuhāt es: “Eso no me influye.” Los Salaf advirtieron contra considerar el propio corazón más fuerte de lo que es. Quien quiere proteger su dīn protege también sus fuentes, sus reuniones y su cercanía."
+  },
+  "DAR AL TAWḤĪD · by Serhat Abu Malik": {
+   "ar": "DAR AL TAWḤĪD · بقلم Serhat Abu Malik",
+   "en": "DAR AL TAWḤĪD · by Serhat Abu Malik",
+   "tr": "DAR AL TAWḤĪD · yazan Serhat Abu Malik",
+   "ku": "DAR AL TAWḤĪD · ji aliyê Serhat Abu Malik ve",
+   "ckb": "DAR AL TAWḤĪD · لەلایەن Serhat Abu Malik",
+   "bs": "DAR AL TAWḤĪD · autor Serhat Abu Malik",
+   "fr": "DAR AL TAWḤĪD · par Serhat Abu Malik",
+   "es": "DAR AL TAWḤĪD · por Serhat Abu Malik"
   }
  }
 }

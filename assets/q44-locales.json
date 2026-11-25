@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,378 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Die Nafs und der wahre Aḫlāq – Originalquellen Q44 | DĀR AL TAWḤĪD": {
+   "ar": "النفس والخلق الحقيقي – المصادر الأصلية Q44 | DĀR AL TAWḤĪD",
+   "en": "The nafs and true character – original sources Q44 | DĀR AL TAWḤĪD",
+   "tr": "Nefs ve gerçek ahlak – özgün kaynaklar Q44 | DĀR AL TAWḤĪD",
+   "ku": "Nefs û exlaqê rast – çavkaniyên resen Q44 | DĀR AL TAWḤĪD",
+   "ckb": "نەفس و ئەخلاقی ڕاستەقینە – سەرچاوە ڕەسەنەکان Q44 | DĀR AL TAWḤĪD",
+   "bs": "Nefs i istinski ahlak – izvorni izvori Q44 | DĀR AL TAWḤĪD",
+   "fr": "Le nafs et le vrai caractère – sources originales Q44 | DĀR AL TAWḤĪD",
+   "es": "El nafs y el verdadero carácter – fuentes originales Q44 | DĀR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah &amp; Āṯār": {
+   "ar": "إسهامات وفق القرآن والسنة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the āthār",
+   "tr": "Qurʾān, Sunnah ve âsâra göre katkılar",
+   "ku": "Beşdarî li gorî Qurʾān, Sunnah û eseran",
+   "ckb": "بەشدارییەکان بەپێی قورئان، سوننەت و ئاسار",
+   "bs": "Prilozi prema Qurʾānu, Sunnahu i asarima",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les athâr",
+   "es": "Aportes según el Qurʾān, la Sunnah y los atares"
+  },
+  "Nafs · Aḫlāq · Sunnah · frühe Šurūḥ": {
+   "ar": "نفس · أخلاق · سنة · شروح مبكرة",
+   "en": "Nafs · Character · Sunnah · early commentaries",
+   "tr": "Nefs · Ahlak · Sunnah · erken şerhler",
+   "ku": "Nefs · Exlaq · Sunnah · şerhên zû",
+   "ckb": "نەفس · ئەخلاق · سوننەت · شەرحە سەرەتاییەکان",
+   "bs": "Nefs · Ahlak · Sunnah · rani šerhovi",
+   "fr": "Nafs · Caractère · Sunnah · commentaires anciens",
+   "es": "Nafs · Carácter · Sunnah · comentarios tempranos"
+  },
+  "Die Nafs und der wahre Aḫlāq": {
+   "ar": "النفس والخلق الحقيقي",
+   "en": "The nafs and true character",
+   "tr": "Nefs ve gerçek ahlak",
+   "ku": "Nefs û exlaqê rast",
+   "ckb": "نەفس و ئەخلاقی ڕاستەقینە",
+   "bs": "Nefs i istinski ahlak",
+   "fr": "Le nafs et le vrai caractère",
+   "es": "El nafs y el verdadero carácter"
+  },
+  "„Rechtschaffenheit ist guter Charakter. Und Sünde ist das, was in deiner Nafs Unruhe hervorruft und von dem du nicht möchtest, dass die Menschen davon erfahren.“": {
+   "ar": "«الاستقامة حسن الخلق. والإثم ما يثير القلق في نفسك ولا تحب أن يطّلع الناس عليه.»",
+   "en": "“Righteousness is good character. And sin is that which stirs unrest in your nafs and which you would not want people to know about.”",
+   "tr": "“Doğruluk güzel ahlaktır. Günah ise nefsinde huzursuzluk doğuran ve insanların ondan haberdar olmasını istemediğin şeydir.”",
+   "ku": "“Rastbûn exlaqê baş e. Û guneh ew e ku di nefsa te de neaştiyê çêdike û tu naxwazî ku mirov jê agahdar bibin.”",
+   "ckb": "«ڕاستودروستی خووێکی چاکە. و گوناه ئەوەیە کە لە نەفستدا ناڕەحەتی دروست دەکات و ناتەوێت خەڵک لێی ئاگادار بن.»",
+   "bs": "“Ispravnost je lijep karakter. A grijeh je ono što u tvojoj nefsi izaziva nemir i za što ne želiš da ljudi saznaju.”",
+   "fr": "« La droiture est un bon caractère. Et le péché est ce qui suscite l’inquiétude dans ton nafs et dont tu ne voudrais pas que les gens aient connaissance. »",
+   "es": "“La rectitud es el buen carácter. Y el pecado es aquello que provoca inquietud en tu nafs y de lo que no querrías que la gente se enterara.”"
+  },
+  "Der Gesandte Allahs ﷺ; überliefert von an-Nawwās ibn Samʿān رضي الله عنه": {
+   "ar": "رسول الله ﷺ؛ رواه النواس بن سمعان رضي الله عنه",
+   "en": "The Messenger of Allah ﷺ; transmitted by an-Nawwās ibn Samʿān رضي الله عنه",
+   "tr": "Allah’ın Elçisi ﷺ; an-Nawwās ibn Samʿān رضي الله عنه rivayeti",
+   "ku": "Peyxemberê Allah ﷺ; ji aliyê an-Nawwās ibn Samʿān رضي الله عنه ve hatiye ragihandin",
+   "ckb": "پێغەمبەری خوا ﷺ؛ گێڕدراوەتەوە لە النواس کوڕی سەمعان رضي الله عنه",
+   "bs": "Allahov Poslanik ﷺ; prenio an-Nawwās ibn Samʿān رضي الله عنه",
+   "fr": "Le Messager d’Allah ﷺ ; transmis par an-Nawwās ibn Samʿān رضي الله عنه",
+   "es": "El Mensajero de Allah ﷺ; transmitido por an-Nawwās ibn Samʿān رضي الله عنه"
+  },
+  "Ṣaḥīḥ Muslim 2553, Kitāb al-Birr wa-ṣ-Ṣilah; Ǧāmiʿ at-Tirmiḏī 2389, Abwāb az-Zuhd": {
+   "ar": "صحيح مسلم 2553، كتاب البر والصلة؛ جامع الترمذي 2389، أبواب الزهد",
+   "en": "Ṣaḥīḥ Muslim 2553, Kitāb al-Birr wa-ṣ-Ṣilah; Ǧāmiʿ at-Tirmiḏī 2389, Abwāb az-Zuhd",
+   "tr": "Ṣaḥīḥ Muslim 2553, Kitāb al-Birr wa-ṣ-Ṣilah; Ǧāmiʿ at-Tirmiḏī 2389, Abwāb az-Zuhd",
+   "ku": "Ṣaḥīḥ Muslim 2553, Kitāb al-Birr wa-ṣ-Ṣilah; Ǧāmiʿ at-Tirmiḏī 2389, Abwāb az-Zuhd",
+   "ckb": "صحیح مسلم 2553، كتاب البر والصلة؛ جامع الترمذي 2389، أبواب الزهد",
+   "bs": "Ṣaḥīḥ Muslim 2553, Kitāb al-Birr wa-ṣ-Ṣilah; Ǧāmiʿ at-Tirmiḏī 2389, Abwāb az-Zuhd",
+   "fr": "Ṣaḥīḥ Muslim 2553, Kitāb al-Birr wa-ṣ-Ṣilah ; Ǧāmiʿ at-Tirmiḏī 2389, Abwāb az-Zuhd",
+   "es": "Ṣaḥīḥ Muslim 2553, Kitāb al-Birr wa-ṣ-Ṣilah; Ǧāmiʿ at-Tirmiḏī 2389, Abwāb az-Zuhd"
+  },
+  "Ṣaḥīḥ; at-Tirmiḏī bezeichnet seine Fassung als ḥasan ṣaḥīḥ. Hier wird die Variante mit „nafs“ aus at-Tirmiḏī verwendet; Muslim hat „ṣadr“ (Brust).": {
+   "ar": "صحيح؛ والترمذي يصف صيغته بأنها حسن صحيح. وهنا تُستخدم الرواية التي فيها «نفس» من الترمذي؛ وعند مسلم «صدر» (الصدر).",
+   "en": "Ṣaḥīḥ; at-Tirmiḏī describes his version as ḥasan ṣaḥīḥ. Here the variant with “nafs” from at-Tirmiḏī is used; Muslim has “ṣadr” (chest).",
+   "tr": "Sahih; at-Tirmiḏī kendi rivayetini hasen sahih diye niteler. Burada at-Tirmiḏī’deki “nefs” varyantı kullanılır; Muslim’de “sadr” (göğüs) vardır.",
+   "ku": "Sehîh; at-Tirmiḏī guhertoya xwe wek hesen sehîh bi nav dike. Li vir guhertoya bi “nefs” ji at-Tirmiḏī tê bikaranîn; Muslim “sidr” (sing) heye.",
+   "ckb": "سەحیح؛ تێرمیزی فۆرمەکەی خۆی وەک حەسەن سەحیح وەسف دەکات. لێرە فۆرمی «نەفس» لە تێرمیزی بەکار دەهێنرێت؛ موسڵیم «سەدر»ی هەیە (سنگ).",
+   "bs": "Sahih; at-Tirmiḏī svoju verziju naziva hasen sahih. Ovdje se koristi varijanta sa “nefs” iz at-Tirmiḏīja; Muslim ima “sadr” (grudi).",
+   "fr": "Ṣaḥīḥ ; at-Tirmiḏī qualifie sa version de ḥasan ṣaḥīḥ. Ici est utilisée la variante avec “nafs” d’at-Tirmiḏī ; Muslim a “ṣadr” (poitrine).",
+   "es": "Ṣaḥīḥ; at-Tirmiḏī califica su versión como ḥasan ṣaḥīḥ. Aquí se usa la variante con “nafs” de at-Tirmiḏī; Muslim tiene “ṣadr” (pecho)."
+  },
+  "Frühester verifizierter direkter Šarḥ": {
+   "ar": "أقدم شرح مباشر تم التحقق منه",
+   "en": "The earliest direct sharḥ that has been verified",
+   "tr": "Doğrulanan en eski doğrudan şerh",
+   "ku": "Kevirîn şerha rasterast ku hatiye piştrastkirin",
+   "ckb": "کۆنترین شەرحی ڕاستەوخۆ کە پشتڕاست کراوەتەوە",
+   "bs": "Najraniji izravni šerh koji je provjeren",
+   "fr": "Le plus ancien sharḥ direct qui a été vérifié",
+   "es": "El sharḥ directo más antiguo que ha sido verificado"
+  },
+  "Imām Abū Ǧaʿfar aṭ-Ṭaḥāwī (gest. 321 H.), Šarḥ Muškil al-Āṯār, Bd. 5, S. 385–388, Bāb 344, Ḥadīṯ 2138–2139": {
+   "ar": "الإمام أبو جعفر الطحاوي (ت. 321 هـ)، شرح مشكل الآثار، المجلد 5، ص 385–388، الباب 344، الحديث 2138–2139",
+   "en": "Imām Abū Ǧaʿfar aṭ-Ṭaḥāwī (d. 321 AH), Šarḥ Muškil al-Āṯār, vol. 5, pp. 385–388, bāb 344, ḥadīth 2138–2139",
+   "tr": "İmâm Abū Ǧaʿfar aṭ-Ṭaḥāwī (ö. 321 H.), Šarḥ Muškil al-Āṯār, cilt 5, s. 385–388, bâb 344, hadis 2138–2139",
+   "ku": "İmâm Abū Ǧaʿfar aṭ-Ṭaḥāwī (m. 321 h.), Šarḥ Muškil al-Āṯār, cild 5, rûpel 385–388, bab 344, hedîs 2138–2139",
+   "ckb": "ئیمام ئەبوو جەعفەری تەحاوی (کۆچی دوایی 321ی کۆچی)، شرح مشكل الآثار، بەرگی 5، لاپەڕە 385–388، بابی 344، حەدیس 2138–2139",
+   "bs": "Imam Abū Ǧaʿfar aṭ-Ṭaḥāwī (umr. 321. h.), Šarḥ Muškil al-Āṯār, sv. 5, str. 385–388, bab 344, hadis 2138–2139",
+   "fr": "L’imam Abū Ǧaʿfar aṭ-Ṭaḥāwī (m. 321 H.), Šarḥ Muškil al-Āṯār, vol. 5, p. 385–388, bāb 344, hadith 2138–2139",
+   "es": "El imām Abū Ǧaʿfar aṭ-Ṭaḥāwī (m. 321 H.), Šarḥ Muškil al-Āṯār, vol. 5, pp. 385–388, bāb 344, hadiz 2138–2139"
+  },
+  "Arabischer Wortlaut des Ḥadīṯ": {
+   "ar": "اللفظ العربي للحديث",
+   "en": "The Arabic wording of the ḥadīth",
+   "tr": "Hadisin Arapça lafzı",
+   "ku": "Gotina erebî ya hedîsê",
+   "ckb": "دەقی عەرەبیی حەدیس",
+   "bs": "Arapski tekst hadisa",
+   "fr": "Le libellé arabe du hadith",
+   "es": "El texto árabe del hadiz"
+  },
+  "At-Tirmiḏī (Nr. 2389) berichtet über an-Nawwās ibn Samʿān:": {
+   "ar": "يروي الترمذي (رقم 2389) عن النواس بن سمعان:",
+   "en": "At-Tirmiḏī (no. 2389) reports from an-Nawwās ibn Samʿān:",
+   "tr": "At-Tirmiḏī (no. 2389), an-Nawwās ibn Samʿān’dan nakleder:",
+   "ku": "At-Tirmiḏī (hejmar 2389) ji an-Nawwās ibn Samʿān radigihîne:",
+   "ckb": "تێرمیزی (ژمارە 2389) لە النواس کوڕی سەمعان دەگێڕێتەوە:",
+   "bs": "At-Tirmiḏī (br. 2389) prenosi od an-Nawwāsa ibn Samʿāna:",
+   "fr": "At-Tirmiḏī (n° 2389) rapporte d’an-Nawwās ibn Samʿān :",
+   "es": "At-Tirmiḏī (n.º 2389) transmite de an-Nawwās ibn Samʿān:"
+  },
+  "Deutsch, sinngemäß: „Rechtschaffenheit ist guter Charakter. Sünde ist, was dich innerlich beunruhigt und von dem du nicht möchtest, dass die Menschen davon erfahren.“": {
+   "ar": "بالألمانية، بالمعنى: «الاستقامة حسن الخلق. والإثم ما يقلقك في باطنك ولا تحب أن يطّلع الناس عليه.»",
+   "en": "In German, according to the meaning: “Righteousness is good character. Sin is what unsettles you inwardly and what you would not want people to know about.”",
+   "tr": "Almanca, anlamca: “Doğruluk güzel ahlaktır. Günah, seni içten huzursuz eden ve insanların ondan haberdar olmasını istemediğin şeydir.”",
+   "ku": "Bi almanî, li gorî wateyê: “Rastbûn exlaqê baş e. Guneh ew e ku te ji hundir diqelibîne û tu naxwazî ku mirov jê agahdar bibin.”",
+   "ckb": "بە ئەڵمانی، بە واتە: «ڕاستودروستی خووێکی چاکە. گوناه ئەوەیە کە لە ناوەوە ناتەواوت دەکات و ناتەوێت خەڵک لێی ئاگادار بن.»",
+   "bs": "Na njemačkom, po smislu: “Ispravnost je lijep karakter. Grijeh je ono što te iznutra uznemiruje i za što ne želiš da ljudi saznaju.”",
+   "fr": "En allemand, selon le sens : « La droiture est un bon caractère. Le péché est ce qui t’inquiète intérieurement et dont tu ne voudrais pas que les gens aient connaissance. »",
+   "es": "En alemán, según el sentido: “La rectitud es el buen carácter. El pecado es lo que te inquieta por dentro y de lo que no querrías que la gente se enterara.”"
+  },
+  "Die bei Muslim (Nr. 2553) überlieferte Variante lautet an dieser Stelle": {
+   "ar": "الرواية المروية عند مسلم (رقم 2553) تقول في هذا الموضع",
+   "en": "The variant transmitted in Muslim (no. 2553) reads at this point",
+   "tr": "Muslim’de (no. 2553) nakledilen varyant bu yerde şöyledir",
+   "ku": "Guhertoya ku li Muslim (hejmar 2553) hatiye ragihandin li vî cihî dibêje",
+   "ckb": "ئەو فۆرمەی لە موسڵیم (ژمارە 2553) گێڕدراوەتەوە لەم شوێنەدا دەڵێت",
+   "bs": "Varijanta prenesena kod Muslima (br. 2553) na ovom mjestu glasi",
+   "fr": "La variante transmise chez Muslim (n° 2553) dit à cet endroit",
+   "es": "La variante transmitida en Muslim (n.º 2553) dice en este lugar"
+  },
+  "(„was sich in deiner Brust regt“), nicht „nafs“. Beide Fassungen sind getrennt nachgewiesen.": {
+   "ar": "(«ما يتحرك في صدرك»)، لا «نفس». والروايتان مثبتتان كلٌّ على حدة.",
+   "en": "(“what stirs in your chest”), not “nafs.” Both versions are documented separately.",
+   "tr": "(“göğsünde kımıldayan şey”), “nefs” değil. Her iki rivayet ayrı ayrı belgelenmiştir.",
+   "ku": "(“tiştê ku di singê te de dilive”), ne “nefs”. Her du guherto cuda hatine belgekirin.",
+   "ckb": "(«ئەوەی لە سنگتدا دەجوڵێت»)، نەک «نەفس». هەردوو فۆرمەکە جیا جیا بەڵگەدار کراون.",
+   "bs": "(“ono što se pokreće u tvojim grudima”), ne “nefs”. Obje verzije su zasebno potvrđene.",
+   "fr": "(« ce qui s’agite dans ta poitrine »), non “nafs”. Les deux versions sont attestées séparément.",
+   "es": "(“lo que se mueve en tu pecho”), no “nafs”. Ambas versiones están documentadas por separado."
+  },
+  "Aṭ-Ṭaḥāwī – der früheste hier verifizierte direkte Šarḥ": {
+   "ar": "الطحاوي – أقدم شرح مباشر تم التحقق منه هنا",
+   "en": "Aṭ-Ṭaḥāwī – the earliest direct sharḥ verified here",
+   "tr": "Aṭ-Ṭaḥāwī – burada doğrulanan en eski doğrudan şerh",
+   "ku": "Aṭ-Ṭaḥāwī – kevirîn şerha rasterast ku li vir hatiye piştrastkirin",
+   "ckb": "تەحاوی – کۆنترین شەرحی ڕاستەوخۆ کە لێرە پشتڕاست کراوەتەوە",
+   "bs": "Aṭ-Ṭaḥāwī – najraniji izravni šerh ovdje provjeren",
+   "fr": "Aṭ-Ṭaḥāwī – le plus ancien sharḥ direct vérifié ici",
+   "es": "Aṭ-Ṭaḥāwī – el sharḥ directo más antiguo verificado aquí"
+  },
+  "Imām aṭ-Ṭaḥāwī nennt den Bericht von an-Nawwās ausdrücklich, vergleicht ihn mit dem Bericht von Wābiṣah und erläutert den gemeinsamen Sinn.": {
+   "ar": "يذكر الإمام الطحاوي خبر النواس صراحة، ويقارنه بخبر وابصة، ويشرح المعنى المشترك.",
+   "en": "Imām aṭ-Ṭaḥāwī names the report of an-Nawwās expressly, compares it with the report of Wābiṣah, and explains the shared meaning.",
+   "tr": "İmâm aṭ-Ṭaḥāwī, an-Nawwās’ın haberini açıkça anar, onu Wābiṣah’ın haberiyle karşılaştırır ve ortak anlamı açıklar.",
+   "ku": "İmâm aṭ-Ṭaḥāwī rapora an-Nawwās bi eşkere bi nav dike, wê bi rapora Wābiṣah re berhev dike û wateya hevpar rave dike.",
+   "ckb": "ئیمام تەحاوی هەواڵی نەوواس بە ڕاشکاوی دەهێنێت، بە هەواڵی وابیشە بەراوردی دەکات، و واتەی هاوبەش ڕوون دەکاتەوە.",
+   "bs": "Imam aṭ-Ṭaḥāwī izričito navodi predaju an-Nawwāsa, uspoređuje je s predajom Wābiṣaha i objašnjava zajednički smisao.",
+   "fr": "L’imam aṭ-Ṭaḥāwī mentionne expressément le récit d’an-Nawwās, le compare au récit de Wābiṣah et explique le sens commun.",
+   "es": "El imām aṭ-Ṭaḥāwī menciona expresamente el relato de an-Nawwās, lo compara con el relato de Wābiṣah y explica el sentido común."
+  },
+  "Sinngemäß: Beide Überlieferungen weisen nach aṭ-Ṭaḥāwī auf einen gemeinsamen Sinn. Ist die Nafs in rechtschaffener Weise beruhigt, verbindet sich das mit gutem Charakter; innere Unruhe, die Sünde begleitet, steht dem entgegen.": {
+   "ar": "بالمعنى: كلتا الروايتين، بحسب الطحاوي، تدلان على معنى مشترك. فإذا اطمأنت النفس على وجه الاستقامة اقترن ذلك بحسن الخلق؛ والقلق الباطن الذي يصاحب الإثم يقابله.",
+   "en": "According to the meaning: both transmissions, according to aṭ-Ṭaḥāwī, point to one shared meaning. When the nafs is settled in a righteous way, that is joined to good character; the inner unrest that accompanies sin stands against that.",
+   "tr": "Anlamca: Her iki rivayet, aṭ-Ṭaḥāwī’ye göre ortak bir anlama işaret eder. Nefs doğru biçimde sükûn bulursa bu, güzel ahlakla birleşir; günaha eşlik eden iç huzursuzluk bunun karşısındadır.",
+   "ku": "Li gorî wateyê: Her du ragihandin, li gorî aṭ-Ṭaḥāwī, ber bi wateyeke hevpar ve diçin. Gava nefs bi awayekî rast aram bibe, ev bi exlaqê baş ve tê girêdan; neaştiya hundirîn a ku bi guneh re tê li hemberî wê ye.",
+   "ckb": "بە واتە: هەردوو گێڕانەوە، بەپێی تەحاوی، ئاماژە بۆ یەک واتەی هاوبەش دەکەن. کاتێک نەفس بە شێوەیەکی ڕاستودروست ئارام دەبێت، ئەوە بە خووێکی چاکەوە دەبەسترێت؛ ناڕەحەتیی ناوەوە کە لەگەڵ گوناه دێت بەرامبەری دەوەستێت.",
+   "bs": "Po smislu: obje predaje, prema aṭ-Ṭaḥāwīju, ukazuju na jedan zajednički smisao. Kad je nefs smirena na ispravan način, to se spaja s lijepim karakterom; unutarnji nemir koji prati grijeh tome stoji nasuprot.",
+   "fr": "Selon le sens : les deux transmissions, d’après aṭ-Ṭaḥāwī, indiquent un sens commun. Lorsque le nafs est apaisé de façon droite, cela se joint au bon caractère ; l’inquiétude intérieure qui accompagne le péché s’y oppose.",
+   "es": "Según el sentido: ambas transmisiones, según aṭ-Ṭaḥāwī, apuntan a un sentido común. Cuando el nafs está sosegado de manera recta, eso se une al buen carácter; la inquietud interior que acompaña al pecado se opone a ello."
+  },
+  ", Bd. 5, S. 385–388, Bāb 344, Nr. 2138–2139. Die Betrachtung beginnt im Zusammenhang mit dem Bericht von Wābiṣah; daraus darf keine eigenständige Authentizitätseinstufung des Wābiṣah-Isnāds abgeleitet werden.": {
+   "ar": "، المجلد 5، ص 385–388، الباب 344، رقم 2138–2139. والنظر يبدأ في سياق خبر وابصة؛ ولا يجوز أن يُستنتج من ذلك حكم مستقل على صحة إسناد وابصة.",
+   "en": ", vol. 5, pp. 385–388, bāb 344, nos. 2138–2139. The discussion begins in connection with the report of Wābiṣah; from that, no independent grading of the authenticity of Wābiṣah’s isnād may be drawn.",
+   "tr": ", cilt 5, s. 385–388, bâb 344, no. 2138–2139. İnceleme Wābiṣah’ın haberi bağlamında başlar; bundan Wābiṣah isnadının sıhhatine dair bağımsız bir derece çıkarılamaz.",
+   "ku": ", cild 5, rûpel 385–388, bab 344, hejmar 2138–2139. Nirxandin di çarçoveya rapora Wābiṣah de dest pê dike; ji vê nikare nirxandineke serbixwe ya rastbûna isnada Wābiṣah were derxistin.",
+   "ckb": "، بەرگی 5، لاپەڕە 385–388، بابی 344، ژمارە 2138–2139. سەیرکردن لە پەیوەندی هەواڵی وابیشە دەست پێ دەکات؛ نابێت لەمەوە هەڵسەنگاندنێکی سەربەخۆ بۆ ڕاستیی ئیسنادی وابیشە دەربهێنرێت.",
+   "bs": ", sv. 5, str. 385–388, bab 344, br. 2138–2139. Razmatranje počinje u vezi s predajom Wābiṣaha; iz toga se ne smije izvesti nezavisna ocjena autentičnosti Wābiṣahovog seneda.",
+   "fr": ", vol. 5, p. 385–388, bāb 344, n° 2138–2139. L’examen commence en lien avec le récit de Wābiṣah ; on ne peut en tirer aucune classification indépendante de l’authenticité de l’isnâd de Wābiṣah.",
+   "es": ", vol. 5, pp. 385–388, bāb 344, n.º 2138–2139. El examen comienza en relación con el relato de Wābiṣah; de ello no puede derivarse una clasificación independiente de la autenticidad del isnad de Wābiṣah."
+  },
+  "Al-Baġawī – Bedeutung der inneren Unruhe": {
+   "ar": "البغوي – معنى القلق الباطن",
+   "en": "Al-Baġawī – the meaning of the inner unrest",
+   "tr": "Al-Baġawī – iç huzursuzluğun anlamı",
+   "ku": "Al-Baġawī – wateya neaştiya hundirîn",
+   "ckb": "بەغەوی – واتەی ناڕەحەتیی ناوەوە",
+   "bs": "Al-Baġawī – značenje unutarnjeg nemira",
+   "fr": "Al-Baġawī – le sens de l’inquiétude intérieure",
+   "es": "Al-Baġawī – el sentido de la inquietud interior"
+  },
+  "Al-Baġawī erklärt den Ausdruck „mā ḥāka fī nafsika“ mit etwas, das das Herz innerlich beschäftigt, sich dort festsetzt und einen Menschen beunruhigt. Diese Erklärung ist im Werk unmittelbar auf den überlieferten Ḥadīṯ bezogen.": {
+   "ar": "يفسّر البغوي عبارة «ما حاك في نفسك» بما يشغل القلب من داخل، ويستقر فيه، ويُقلق الإنسان. وهذا الشرح في الكتاب متعلق مباشرة بالحديث المروي.",
+   "en": "Al-Baġawī explains the expression “mā ḥāka fī nafsika” as something that occupies the heart inwardly, settles there, and unsettles a person. This explanation in the work is tied directly to the transmitted ḥadīth.",
+   "tr": "Al-Baġawī, “mā ḥāka fī nafsika” ifadesini, kalbi içten meşgul eden, orada yerleşen ve insanı huzursuz eden bir şeyle açıklar. Bu açıklama eserde doğrudan nakledilen hadise bağlıdır.",
+   "ku": "Al-Baġawī gotina “mā ḥāka fī nafsika” bi tiştekî rave dike ku dil ji hundir mijûl dike, li wir dimîne û mirov diqelibîne. Ev ravekirin di berhemê de rasterast bi hedîsa ragihandî ve girêdayî ye.",
+   "ckb": "بەغەوی دەربڕینی «ما حاك في نفسك» بە شتێک ڕوون دەکاتەوە کە دڵ لە ناوەوە سەرقاڵ دەکات، لەوێ جێگیر دەبێت، و مرۆڤ ناڕەحەت دەکات. ئەم ڕوونکردنەوەیە لە کتێبەکەدا ڕاستەوخۆ بە حەدیسە گێڕدراوەکەوە بەستراوە.",
+   "bs": "Al-Baġawī izraz “mā ḥāka fī nafsika” objašnjava kao nešto što srce iznutra zaokuplja, tamo se učvrsti i čovjeka uznemiruje. Ovo objašnjenje u djelu neposredno je vezano za preneseni hadis.",
+   "fr": "Al-Baġawī explique l’expression “mā ḥāka fī nafsika” par ce qui occupe le cœur de l’intérieur, s’y fixe et inquiète une personne. Cette explication, dans l’ouvrage, est directement liée au hadith transmis.",
+   "es": "Al-Baġawī explica la expresión “mā ḥāka fī nafsika” como algo que ocupa el corazón por dentro, se asienta allí e inquieta a la persona. Esta explicación, en la obra, está ligada directamente al hadiz transmitido."
+  },
+  "Al-Qurṭubī – was guter Charakter umfasst": {
+   "ar": "القرطبي – ما يشمله حسن الخلق",
+   "en": "Al-Qurṭubī – what good character includes",
+   "tr": "Al-Qurṭubī – güzel ahlakın kapsadığı şey",
+   "ku": "Al-Qurṭubī – tiştê ku exlaqê baş digire nav xwe",
+   "ckb": "قورتوبی – ئەوەی خووێکی چاک دەیگرێتەوە",
+   "bs": "Al-Qurṭubī – šta lijep karakter obuhvata",
+   "fr": "Al-Qurṭubī – ce que comprend le bon caractère",
+   "es": "Al-Qurṭubī – lo que abarca el buen carácter"
+  },
+  "Al-Qurṭubī erklärt den guten Charakter hier unter anderem als Fairness im Umgang, Milde bei Auseinandersetzungen, gerechtes Urteilen und Wohltätigkeit. Der Ḥadīṯ ersetzt keine klare Offenbarung durch bloße Gefühle: Innere Unruhe ist insbesondere bei fraglichen Dingen ein Hinweis zur sorgfältigen Prüfung.": {
+   "ar": "يفسّر القرطبي حسن الخلق هنا، من جملة ما يفسّره، بالإنصاف في المعاملة، واللين عند الخصومة، والحكم بالعدل، والإحسان. والحديث لا يُغني بمجرد المشاعر عن وحي بيّن: القلق الباطن، خصوصًا في الأمور المشتبهة، إشارة إلى التثبت.",
+   "en": "Al-Qurṭubī explains good character here, among other things, as fairness in dealings, gentleness in disputes, judging justly, and doing good. The ḥadīth does not replace a clear revelation by mere feelings: inner unrest, especially in doubtful matters, is a pointer toward careful examination.",
+   "tr": "Al-Qurṭubī güzel ahlakı burada, başka şeylerin yanı sıra, muamelede insaf, anlaşmazlıkta yumuşaklık, adaletle hüküm ve iyilik olarak açıklar. Hadis, açık bir vahyin yerini salt duygularla tutmaz: iç huzursuzluk, özellikle şüpheli işlerde, dikkatli incelemeye bir işarettir.",
+   "ku": "Al-Qurṭubī exlaqê baş li vir, di nav tiştên din de, wek însaf di danûstandinê de, nermî di nakokiyê de, hukmê dadperwer û qencî rave dike. Hedîs bi tenê hestan şûna wehîyeke zelal nagire: neaştiya hundirîn, bi taybetî di tiştên gumanbar de, îşaretek e ber bi pişkinîna bi baldarî.",
+   "ckb": "قورتوبی خووێکی چاک لێرە، لە نێوان شتەکانی تردا، وەک دادپەروەری لە مامەڵە، نەرمی لە ناکۆکیدا، حوکم بە داد، و چاکە ڕوون دەکاتەوە. حەدیس بە تەنها هەست جێگەی وەحیێکی ڕوون ناگرێتەوە: ناڕەحەتیی ناوەوە، بەتایبەت لە کارە گومانلێکراوەکان، ئاماژەیە بۆ پشکنینی ورد.",
+   "bs": "Al-Qurṭubī lijep karakter ovdje, između ostalog, objašnjava kao pravednost u ophođenju, blagost u sporu, pravedno suđenje i dobročinstvo. Hadis ne zamjenjuje jasnu objavu pukim osjećajima: unutarnji nemir, posebno kod sumnjivih stvari, znak je za pažljivo provjeravanje.",
+   "fr": "Al-Qurṭubī explique ici le bon caractère, entre autres, comme l’équité dans les rapports, la douceur dans les différends, le jugement juste et le bienfait. Le hadith ne remplace pas une révélation claire par de simples sentiments : l’inquiétude intérieure, surtout dans les choses douteuses, est une indication pour un examen attentif.",
+   "es": "Al-Qurṭubī explica aquí el buen carácter, entre otras cosas, como equidad en el trato, suavidad en las disputas, juzgar con justicia y hacer el bien. El hadiz no sustituye una revelación clara por meros sentimientos: la inquietud interior, especialmente en asuntos dudosos, es una señal para un examen cuidadoso."
+  },
+  ", Bd. 6, S. 522–523, Bāb fī al-Birr wa-l-Iṯm.": {
+   "ar": "، المجلد 6، ص 522–523، باب في البر والإثم.",
+   "en": ", vol. 6, pp. 522–523, bāb fī al-Birr wa-l-Iṯm.",
+   "tr": ", cilt 6, s. 522–523, bâb fī al-Birr wa-l-Iṯm.",
+   "ku": ", cild 6, rûpel 522–523, bab fī al-Birr wa-l-Iṯm.",
+   "ckb": "، بەرگی 6، لاپەڕە 522–523، باب في البر والإثم.",
+   "bs": ", sv. 6, str. 522–523, bab fī al-Birr wa-l-Iṯm.",
+   "fr": ", vol. 6, p. 522–523, bāb fī al-Birr wa-l-Iṯm.",
+   "es": ", vol. 6, pp. 522–523, bāb fī al-Birr wa-l-Iṯm."
+  },
+  "Originalquellen und Direktnachweise": {
+   "ar": "المصادر الأصلية والشواهد المباشرة",
+   "en": "Original sources and direct references",
+   "tr": "Özgün kaynaklar ve doğrudan deliller",
+   "ku": "Çavkaniyên resen û belgeyên rasterast",
+   "ckb": "سەرچاوە ڕەسەنەکان و بەڵگە ڕاستەوخۆکان",
+   "bs": "Izvorni izvori i izravni dokazi",
+   "fr": "Sources originales et références directes",
+   "es": "Fuentes originales y referencias directas"
+  },
+  "Ṣaḥīḥ Muslim 2553 – Primärbericht": {
+   "ar": "صحيح مسلم 2553 – الخبر الأولي",
+   "en": "Ṣaḥīḥ Muslim 2553 – the primary report",
+   "tr": "Ṣaḥīḥ Muslim 2553 – birincil haber",
+   "ku": "Ṣaḥīḥ Muslim 2553 – rapora bingehîn",
+   "ckb": "صحیح مسلم 2553 – هەواڵی سەرەکی",
+   "bs": "Ṣaḥīḥ Muslim 2553 – primarna predaja",
+   "fr": "Ṣaḥīḥ Muslim 2553 – le récit premier",
+   "es": "Ṣaḥīḥ Muslim 2553 – el relato primario"
+  },
+  "Dorar – Quelle mit markiertem Wortlaut „al-birru ḥusnu al-ḫuluq“": {
+   "ar": "درر – مصدر باللفظ المحدد «البر حسن الخلق»",
+   "en": "Dorar – source with the marked wording “al-birru ḥusnu al-ḫuluq”",
+   "tr": "Dorar – “al-birru ḥusnu al-ḫuluq” lafzı işaretli kaynak",
+   "ku": "Dorar – çavkanî bi gotina nîşankirî “al-birru ḥusnu al-ḫuluq”",
+   "ckb": "دۆرار – سەرچاوە بە دەقی دیاریکراوی «البر حسن الخلق»",
+   "bs": "Dorar – izvor s označenim tekstom “al-birru ḥusnu al-ḫuluq”",
+   "fr": "Dorar – source avec le libellé marqué “al-birru ḥusnu al-ḫuluq”",
+   "es": "Dorar – fuente con el texto marcado “al-birru ḥusnu al-ḫuluq”"
+  },
+  "At-Tirmiḏī 2389 – Wortlaut mit „nafs“": {
+   "ar": "الترمذي 2389 – اللفظ الذي فيه «نفس»",
+   "en": "At-Tirmiḏī 2389 – the wording with “nafs”",
+   "tr": "At-Tirmiḏī 2389 – “nefs” geçen lafız",
+   "ku": "At-Tirmiḏī 2389 – gotina bi “nefs”",
+   "ckb": "تێرمیزی 2389 – دەقەکە کە «نەفس»ی تێدایە",
+   "bs": "At-Tirmiḏī 2389 – tekst sa “nefs”",
+   "fr": "At-Tirmiḏī 2389 – le libellé avec “nafs”",
+   "es": "At-Tirmiḏī 2389 – el texto con “nafs”"
+  },
+  "Dorar – Originalisnād und Text mit markierter Passage": {
+   "ar": "درر – الإسناد الأصلي والنص مع المقطع المحدد",
+   "en": "Dorar – the original isnād and the text with the marked passage",
+   "tr": "Dorar – özgün isnad ve işaretli pasajlı metin",
+   "ku": "Dorar – isnada resen û nivîs bi perçeya nîşankirî",
+   "ckb": "دۆرار – ئیسنادی ڕەسەن و دەق لەگەڵ پارچەی دیاریکراو",
+   "bs": "Dorar – izvorni sened i tekst s označenim odlomkom",
+   "fr": "Dorar – l’isnâd original et le texte avec le passage marqué",
+   "es": "Dorar – el isnad original y el texto con el pasaje marcado"
+  },
+  "Aṭ-Ṭaḥāwī – frühester verifizierter direkter Šarḥ": {
+   "ar": "الطحاوي – أقدم شرح مباشر تم التحقق منه",
+   "en": "Aṭ-Ṭaḥāwī – the earliest verified direct sharḥ",
+   "tr": "Aṭ-Ṭaḥāwī – doğrulanan en eski doğrudan şerh",
+   "ku": "Aṭ-Ṭaḥāwī – kevirîn şerha rasterast a piştrastkirî",
+   "ckb": "تەحاوی – کۆنترین شەرحی ڕاستەوخۆی پشتڕاستکراو",
+   "bs": "Aṭ-Ṭaḥāwī – najraniji provjereni izravni šerh",
+   "fr": "Aṭ-Ṭaḥāwī – le plus ancien sharḥ direct vérifié",
+   "es": "Aṭ-Ṭaḥāwī – el sharḥ directo verificado más antiguo"
+  },
+  "Islamweb – Šarḥ Muškil al-Āṯār 5/385–388 · Originalerläuterung markiert": {
+   "ar": "إسلام ويب – شرح مشكل الآثار 5/385–388 · الشرح الأصلي محدد",
+   "en": "Islamweb – Šarḥ Muškil al-Āṯār 5/385–388 · original explanation marked",
+   "tr": "Islamweb – Šarḥ Muškil al-Āṯār 5/385–388 · özgün açıklama işaretli",
+   "ku": "Islamweb – Šarḥ Muškil al-Āṯār 5/385–388 · ravekirina resen nîşankirî",
+   "ckb": "ئیسلامویب – شرح مشكل الآثار 5/385–388 · ڕوونکردنەوەی ڕەسەن دیاری کراوە",
+   "bs": "Islamweb – Šarḥ Muškil al-Āṯār 5/385–388 · izvorno objašnjenje označeno",
+   "fr": "Islamweb – Šarḥ Muškil al-Āṯār 5/385–388 · explication originale marquée",
+   "es": "Islamweb – Šarḥ Muškil al-Āṯār 5/385–388 · explicación original marcada"
+  },
+  "Al-Baġawī – die Nafs und die Unruhe": {
+   "ar": "البغوي – النفس والقلق",
+   "en": "Al-Baġawī – the nafs and the unrest",
+   "tr": "Al-Baġawī – nefs ve huzursuzluk",
+   "ku": "Al-Baġawī – nefs û neaştî",
+   "ckb": "بەغەوی – نەفس و ناڕەحەتی",
+   "bs": "Al-Baġawī – nefs i nemir",
+   "fr": "Al-Baġawī – le nafs et l’inquiétude",
+   "es": "Al-Baġawī – el nafs y la inquietud"
+  },
+  "Islamweb – Šarḥ as-Sunnah 13/77–78 · Originaltext markiert": {
+   "ar": "إسلام ويب – شرح السنة 13/77–78 · النص الأصلي محدد",
+   "en": "Islamweb – Šarḥ as-Sunnah 13/77–78 · original text marked",
+   "tr": "Islamweb – Šarḥ as-Sunnah 13/77–78 · özgün metin işaretli",
+   "ku": "Islamweb – Šarḥ as-Sunnah 13/77–78 · nivîsa resen nîşankirî",
+   "ckb": "ئیسلامویب – شرح السنة 13/77–78 · دەقی ڕەسەن دیاری کراوە",
+   "bs": "Islamweb – Šarḥ as-Sunnah 13/77–78 · izvorni tekst označen",
+   "fr": "Islamweb – Šarḥ as-Sunnah 13/77–78 · texte original marqué",
+   "es": "Islamweb – Šarḥ as-Sunnah 13/77–78 · texto original marcado"
+  },
+  "Al-Qurṭubī – Aḫlāq als Umgang und Gerechtigkeit": {
+   "ar": "القرطبي – الأخلاق معاملة وعدل",
+   "en": "Al-Qurṭubī – character as conduct and justice",
+   "tr": "Al-Qurṭubī – ahlak, muamele ve adalet olarak",
+   "ku": "Al-Qurṭubī – exlaq wek danûstandin û dad",
+   "ckb": "قورتوبی – ئەخلاق وەک مامەڵە و داد",
+   "bs": "Al-Qurṭubī – ahlak kao ophođenje i pravda",
+   "fr": "Al-Qurṭubī – le caractère comme rapport et justice",
+   "es": "Al-Qurṭubī – el carácter como trato y justicia"
+  },
+  "Islamweb – al-Mufhim 6/522–523 · Originalkommentar markiert": {
+   "ar": "إسلام ويب – المفهم 6/522–523 · التعليق الأصلي محدد",
+   "en": "Islamweb – al-Mufhim 6/522–523 · original commentary marked",
+   "tr": "Islamweb – al-Mufhim 6/522–523 · özgün yorum işaretli",
+   "ku": "Islamweb – al-Mufhim 6/522–523 · şiroveya resen nîşankirî",
+   "ckb": "ئیسلامویب – المفهم 6/522–523 · لێکدانەوەی ڕەسەن دیاری کراوە",
+   "bs": "Islamweb – al-Mufhim 6/522–523 · izvorni komentar označen",
+   "fr": "Islamweb – al-Mufhim 6/522–523 · commentaire original marqué",
+   "es": "Islamweb – al-Mufhim 6/522–523 · comentario original marcado"
+  },
+  "Guter Charakter zeigt sich im Umgang mit Menschen. Die eigene Nafs ernsthaft zu prüfen ist wichtig, doch der Maßstab bleiben Qurʾān und authentische Sunnah. Eigene Schlussfolgerungen sind keine wortwörtlichen Aussagen der überlieferten Gelehrten.": {
+   "ar": "حسن الخلق يظهر في معاملة الناس. وفحص النفس بجدّ مهم، غير أن الميزان يظل القرآن والسنة الصحيحة. واستنتاجات المرء الخاصة ليست أقوالًا حرفية للعلماء المروي عنهم.",
+   "en": "Good character shows itself in dealing with people. Examining one’s own nafs seriously is important, yet the measure remains the Qurʾān and the authentic Sunnah. One’s own conclusions are not verbatim statements of the scholars who have been transmitted.",
+   "tr": "Güzel ahlak insanlarla muamelede görünür. Kendi nefsini ciddiyetle yoklamak önemlidir, fakat ölçü Qurʾān ve sahih Sunnah olarak kalır. Kişinin kendi çıkarımları, nakledilen âlimlerin harfî sözleri değildir.",
+   "ku": "Exlaqê baş di danûstandina bi mirovan de xuya dibe. Nefsê xwe bi ciddî pirsîn giring e, lê pîvan Qurʾān û Sunnaha sehîh dimîne. Encamên xwe yên mirov ne gotinên peyv bi peyv ên zanyarên ragihandî ne.",
+   "ckb": "خووێکی چاک لە مامەڵە لەگەڵ خەڵک دەردەکەوێت. پشکنینی نەفسی خۆ بە جددی گرنگە، بەڵام پێوەر قورئان و سوننەتی سەحیح دەمێنێتەوە. ئەنجامەکانی خودی مرۆڤ قسەی وشەبەوشەی زانایانی گێڕدراو نین.",
+   "bs": "Lijep karakter pokazuje se u ophođenju s ljudima. Ozbiljno ispitivanje vlastite nefsi je važno, ali mjerilo ostaju Qurʾān i autentična Sunnah. Vlastiti zaključci nisu doslovne izjave prenesenih učenjaka.",
+   "fr": "Le bon caractère se montre dans le rapport avec les gens. Examiner sérieusement son propre nafs est important, mais la mesure demeure le Qurʾān et la Sunnah authentique. Les conclusions personnelles ne sont pas des paroles littérales des savants transmis.",
+   "es": "El buen carácter se muestra en el trato con las personas. Examinar con seriedad el propio nafs es importante, pero la medida siguen siendo el Qurʾān y la Sunnah auténtica. Las conclusiones propias no son declaraciones literales de los eruditos transmitidos."
+  },
+  "DĀR AL TAWḤĪD · Quellenbeleg Q44": {
+   "ar": "DĀR AL TAWḤĪD · شاهد المصدر Q44",
+   "en": "DĀR AL TAWḤĪD · source reference Q44",
+   "tr": "DĀR AL TAWḤĪD · kaynak delili Q44",
+   "ku": "DĀR AL TAWḤĪD · belgeya çavkaniyê Q44",
+   "ckb": "DĀR AL TAWḤĪD · بەڵگەی سەرچاوە Q44",
+   "bs": "DĀR AL TAWḤĪD · dokaz izvora Q44",
+   "fr": "DĀR AL TAWḤĪD · référence de la source Q44",
+   "es": "DĀR AL TAWḤĪD · referencia de la fuente Q44"
   }
  }
 }

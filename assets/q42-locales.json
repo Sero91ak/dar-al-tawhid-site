@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,318 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Die Ameisen und die Gerechtigkeit – Ḥadīṯ – DAR AL TAWḤĪD": {
+   "ar": "النمل والعدل – حديث – DAR AL TAWḤĪD",
+   "en": "The ants and justice – ḥadīth – DAR AL TAWḤĪD",
+   "tr": "Karıncalar ve adalet – hadis – DAR AL TAWḤĪD",
+   "ku": "Mûrî û dad – hedîs – DAR AL TAWḤĪD",
+   "ckb": "مێروولە و دادپەروەری – حەدیس – DAR AL TAWḤĪD",
+   "bs": "Mravi i pravda – hadis – DAR AL TAWḤĪD",
+   "fr": "Les fourmis et la justice – hadith – DAR AL TAWḤĪD",
+   "es": "Las hormigas y la justicia – hadiz – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah &amp; Āthār": {
+   "ar": "إسهامات وفق القرآن والسنة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the āthār",
+   "tr": "Qurʾān, Sunnah ve âsâra göre katkılar",
+   "ku": "Beşdarî li gorî Qurʾān, Sunnah û eseran",
+   "ckb": "بەشدارییەکان بەپێی قورئان، سوننەت و ئاسار",
+   "bs": "Prilozi prema Qurʾānu, Sunnahu i asarima",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les athâr",
+   "es": "Aportes según el Qurʾān, la Sunnah y los atares"
+  },
+  "Ḥadīṯ · Sunnah · Gerechtigkeit · Barmherzigkeit": {
+   "ar": "حديث · سنة · عدل · رحمة",
+   "en": "Ḥadīth · Sunnah · Justice · Mercy",
+   "tr": "Hadis · Sunnah · Adalet · Merhamet",
+   "ku": "Hedîs · Sunnah · Dad · Dilovanî",
+   "ckb": "حەدیس · سوننەت · دادپەروەری · میهرەبانی",
+   "bs": "Hadis · Sunnah · Pravda · Milosrđe",
+   "fr": "Hadith · Sunnah · Justice · Miséricorde",
+   "es": "Hadiz · Sunnah · Justicia · Misericordia"
+  },
+  "Selbst die Ameisen lobpreisen Allah": {
+   "ar": "حتى النمل يسبّح الله",
+   "en": "Even the ants glorify Allah",
+   "tr": "Karıncalar bile Allah’ı tesbih eder",
+   "ku": "Hetta mûrî jî Allah pesnê didin",
+   "ckb": "تەنانەت مێروولەکانیش خوا تەسبیح دەکەن",
+   "bs": "Čak i mravi veličaju Allaha",
+   "fr": "Même les fourmis glorifient Allah",
+   "es": "Incluso las hormigas glorifican a Allah"
+  },
+  "„Eine Ameise biss einen der früheren Propheten. Daraufhin ließ er eine ganze Ameisenkolonie verbrennen. Da offenbarte Allah ihm: Nur weil dich eine Ameise gebissen hat, hast du ein ganzes Volk vernichtet, das Allah lobpreist?“": {
+   "ar": "«لسعت نملة أحد الأنبياء السابقين. فأمر بإحراق قرية نمل بأكملها. فأوحى الله إليه: ألأنّ نملة لدغتك أهلكت أمة تسبّح الله؟»",
+   "en": "“An ant bit one of the earlier prophets. Thereupon he had an entire ant colony burned. Then Allah revealed to him: Just because an ant bit you, have you destroyed a whole people that glorifies Allah?”",
+   "tr": "“Bir karınca önceki peygamberlerden birini ısırdı. Bunun üzerine o, bütün bir karınca topluluğunu yaktırmıştı. Allah ona şöyle vahyetti: Bir karınca seni ısırdı diye, Allah’ı tesbih eden koca bir topluluğu mu helâk ettin?”",
+   "ku": "“Mûriyekê yek ji pêxemberên berê geziya. Piştre wî fermana şewitandina hemû koloniyeke mûriyan da. Wê gavê Allah jê re wehî kir: Ji ber ku mûriyek te geziya, te gelakî ku Allah pesnê dide helak kir?”",
+   "ckb": "«مێروولەیەک یەکێک لە پێغەمبەرەکانی پێشووی گەست. ئەویش فەرمانی سوتاندنی هەموو کۆمەڵگەیەکی مێروولەی دا. خوا پێی وەحی کرد: تەنها چونکە مێروولەیەک گەستی کردوویت، گەلێکت لەناو بردووە کە خوا تەسبیح دەکات؟»",
+   "bs": "“Mrav je ujeo jednog od ranijih vjerovjesnika. On tada naredi da se spali cijela kolonija mrava. Allah mu objavi: Zato što te je ujeo jedan mrav, uništio si cijeli narod koji veliča Allaha?”",
+   "fr": "« Une fourmi piqua l’un des prophètes antérieurs. Il fit alors brûler toute une colonie de fourmis. Allah lui révéla : Parce qu’une fourmi t’a piqué, as-tu anéanti tout un peuple qui glorifie Allah ? »",
+   "es": "“Una hormiga picó a uno de los profetas anteriores. Entonces hizo quemar toda una colonia de hormigas. Allah le reveló: ¿Solo porque una hormiga te picó has destruido a todo un pueblo que glorifica a Allah?”"
+  },
+  "Abū Hurayrah رضي الله عنه – vom Gesandten Allahs ﷺ": {
+   "ar": "أبو هريرة رضي الله عنه – عن رسول الله ﷺ",
+   "en": "Abū Hurayrah رضي الله عنه – from the Messenger of Allah ﷺ",
+   "tr": "Abū Hurayrah رضي الله عنه – Allah’ın Elçisi ﷺ’den",
+   "ku": "Abū Hurayrah رضي الله عنه – ji Peyxemberê Allah ﷺ",
+   "ckb": "ئەبوو هوڕەیڕە رضي الله عنه – لە پێغەمبەری خوا ﷺەوە",
+   "bs": "Abū Hurayrah رضي الله عنه – od Allahovog Poslanika ﷺ",
+   "fr": "Abū Hurayrah رضي الله عنه – du Messager d’Allah ﷺ",
+   "es": "Abū Hurayrah رضي الله عنه – del Mensajero de Allah ﷺ"
+  },
+  "Ṣaḥīḥ Muslim, Kitāb as-Salām, Bāb an-nahy ʿan qatl an-naml, Nr. 2241 (Bd. 4, S. 1759, Ausgabe Muḥammad Fuʾād ʿAbd al-Bāqī); Ṣaḥīḥ al-Buḫārī, Nr. 3019": {
+   "ar": "صحيح مسلم، كتاب السلام، باب النهي عن قتل النمل، رقم 2241 (المجلد 4، ص 1759، طبعة محمد فؤاد عبد الباقي)؛ صحيح البخاري، رقم 3019",
+   "en": "Ṣaḥīḥ Muslim, Kitāb as-Salām, Bāb an-nahy ʿan qatl an-naml, no. 2241 (vol. 4, p. 1759, edition of Muḥammad Fuʾād ʿAbd al-Bāqī); Ṣaḥīḥ al-Buḫārī, no. 3019",
+   "tr": "Ṣaḥīḥ Muslim, Kitāb as-Salām, Bāb an-nahy ʿan qatl an-naml, no. 2241 (cilt 4, s. 1759, Muḥammad Fuʾād ʿAbd al-Bāqī neşri); Ṣaḥīḥ al-Buḫārī, no. 3019",
+   "ku": "Ṣaḥīḥ Muslim, Kitāb as-Salām, Bāb an-nahy ʿan qatl an-naml, hejmar 2241 (cild 4, rûpel 1759, çapa Muḥammad Fuʾād ʿAbd al-Bāqī); Ṣaḥīḥ al-Buḫārī, hejmar 3019",
+   "ckb": "صحیح مسلم، كتاب السلام، باب النهي عن قتل النمل، ژمارە 2241 (بەرگی 4، لاپەڕە 1759، چاپی محەممەد فوئاد عەبدولباقی)؛ صحیح البخاری، ژمارە 3019",
+   "bs": "Ṣaḥīḥ Muslim, Kitāb as-Salām, Bāb an-nahy ʿan qatl an-naml, br. 2241 (sv. 4, str. 1759, izdanje Muḥammada Fuʾāda ʿAbd al-Bāqīja); Ṣaḥīḥ al-Buḫārī, br. 3019",
+   "fr": "Ṣaḥīḥ Muslim, Kitāb as-Salām, Bāb an-nahy ʿan qatl an-naml, n° 2241 (vol. 4, p. 1759, édition de Muḥammad Fuʾād ʿAbd al-Bāqī) ; Ṣaḥīḥ al-Buḫārī, n° 3019",
+   "es": "Ṣaḥīḥ Muslim, Kitāb as-Salām, Bāb an-nahy ʿan qatl an-naml, n.º 2241 (vol. 4, p. 1759, edición de Muḥammad Fuʾād ʿAbd al-Bāqī); Ṣaḥīḥ al-Buḫārī, n.º 3019"
+  },
+  "Ṣaḥīḥ – muttafaqun ʿalayh. Prophetischer Bericht (marfūʿ) über einen früheren Propheten. Die beiden authentischen Fassungen unterscheiden sich geringfügig in der Formulierung.": {
+   "ar": "صحيح – متفق عليه. خبر نبوي (مرفوع) عن نبي سابق. والروايتان الصحيحتان تختلفان اختلافًا يسيرًا في الصياغة.",
+   "en": "Ṣaḥīḥ – muttafaqun ʿalayh. A prophetic report (marfūʿ) about an earlier prophet. The two authentic versions differ slightly in wording.",
+   "tr": "Sahih – muttafaqun ʿalayh. Önceki bir peygamber hakkında peygamberî bir haber (merfû). İki sahih lafız ifadede az farklılık gösterir.",
+   "ku": "Sehîh – muttafaqun ʿalayh. Raporeke pêxemberî (merfûʿ) li ser pêxemberekî berê. Her du gotinên sehîh di formulasyonê de hinekî ji hev cuda ne.",
+   "ckb": "سەحیح – متفق علیه. هەواڵێکی پێغەمبەرانە (مەرفوع) دەربارەی پێغەمبەرێکی پێشوو. هەردوو فۆرمە سەحیحەکە لە داڕشتنەوەدا کەمێک جیاوازن.",
+   "bs": "Sahih – muttafaqun ʿalayh. Vjerovjesnička predaja (merfūʿ) o jednom ranijem vjerovjesniku. Dvije sahih verzije se neznatno razlikuju u formulaciji.",
+   "fr": "Ṣaḥīḥ – muttafaqun ʿalayh. Récit prophétique (marfūʿ) au sujet d’un prophète antérieur. Les deux versions authentiques diffèrent légèrement dans la formulation.",
+   "es": "Ṣaḥīḥ – muttafaqun ʿalayh. Relato profético (marfūʿ) sobre un profeta anterior. Las dos versiones auténticas difieren levemente en la formulación."
+  },
+  "Arabischer Originalwortlaut": {
+   "ar": "اللفظ العربي الأصلي",
+   "en": "The Arabic original wording",
+   "tr": "Arapça özgün lafız",
+   "ku": "Gotina erebî ya resen",
+   "ckb": "دەقی عەرەبیی ڕەسەن",
+   "bs": "Arapski izvorni tekst",
+   "fr": "Le texte arabe original",
+   "es": "El texto árabe original"
+  },
+  "Dieser Wortlaut und der Isnād stehen in Ṣaḥīḥ Muslim Nr. 2241. In der Parallelfassung bei al-Buḫārī Nr. 3019 heißt die letzte Frage sinngemäß: „Hat dich eine Ameise gebissen und du hast eine ganze Gemeinschaft verbrannt, die Allah lobpreist?“ Die Unterschiede werden nicht als zwei separate Aussagen ausgegeben.": {
+   "ar": "هذا اللفظ والإسناد في صحيح مسلم رقم 2241. وفي الرواية الموازية عند البخاري رقم 3019 يكون السؤال الأخير بالمعنى: «ألدغتك نملة فأحرقت أمة تسبّح الله؟» ولا تُعرض الفروق كقولين منفصلين.",
+   "en": "This wording and the isnād are in Ṣaḥīḥ Muslim no. 2241. In the parallel version in al-Buḫārī no. 3019 the final question, according to the meaning, is: “Did an ant bite you, and did you burn an entire community that glorifies Allah?” The differences are not presented as two separate statements.",
+   "tr": "Bu lafız ve isnad Ṣaḥīḥ Muslim no. 2241’dedir. El-Buḫārī no. 3019’daki paralel rivayette son soru anlamca şöyledir: “Seni bir karınca mı ısırdı da Allah’ı tesbih eden bütün bir topluluğu yaktın?” Farklar iki ayrı söz olarak sunulmaz.",
+   "ku": "Ev gotin û isnad di Ṣaḥīḥ Muslim hejmar 2241 de ne. Di guhertoya paralel a li al-Buḫārī hejmar 3019 de pirsa dawî li gorî wateyê ev e: “Mûriyek te geziya û te civakeke ku Allah pesnê dide bi tevahî şewitand?” Cudahî wek du gotinên cuda nayên pêşkêşkirin.",
+   "ckb": "ئەم دەقە و ئیسنادە لە صحیح مسلم ژمارە 2241 دان. لە فۆرمی هاوتەریب لای بوخاری ژمارە 3019 پرسیاری کۆتایی بە واتە ئەمەیە: «ئایا مێروولەیەک گەستی کردوویت و تۆ کۆمەڵگەیەکی تەواوت سوتاندووە کە خوا تەسبیح دەکات؟» جیاوازییەکان وەک دوو قسەی جیا پێشکەش ناکرێن.",
+   "bs": "Ovaj tekst i sened nalaze se u Ṣaḥīḥu Muslimu br. 2241. U paralelnoj verziji kod al-Buḫārīja br. 3019 posljednje pitanje po smislu glasi: “Je li te ujeo mrav, pa si spalio cijelu zajednicu koja veliča Allaha?” Razlike se ne iznose kao dva odvojena iskaza.",
+   "fr": "Ce libellé et l’isnâd se trouvent dans le Ṣaḥīḥ Muslim n° 2241. Dans la version parallèle d’al-Buḫārī n° 3019, la dernière question, selon le sens, est : « Une fourmi t’a-t-elle piqué, et as-tu brûlé toute une communauté qui glorifie Allah ? » Les différences ne sont pas présentées comme deux paroles distinctes.",
+   "es": "Este texto y el isnad están en Ṣaḥīḥ Muslim n.º 2241. En la versión paralela de al-Buḫārī n.º 3019 la última pregunta, según el sentido, es: “¿Te picó una hormiga y quemaste a toda una comunidad que glorifica a Allah?” Las diferencias no se presentan como dos declaraciones separadas."
+  },
+  "Einordnung und klassischer Šarḥ": {
+   "ar": "التصنيف والشرح الكلاسيكي",
+   "en": "Placement and the classical sharḥ",
+   "tr": "Yerleştirme ve klasik şerh",
+   "ku": "Cihkirin û şerha klasîk",
+   "ckb": "جێگیرکردن و شەرحی کلاسیکی",
+   "bs": "Smještanje i klasični šerh",
+   "fr": "Classement et sharḥ classique",
+   "es": "Clasificación y sharḥ clásico"
+  },
+  "Der Ḥadīṯ berichtet über einen nicht namentlich identifizierten Propheten früherer Gemeinschaften. Die Offenbarung tadelt, dass wegen der Handlung eines einzelnen Tieres eine ganze Ameisenkolonie vernichtet wurde. Das Kernprinzip ist, Unbeteiligte nicht mitzubestrafen.": {
+   "ar": "يخبر الحديث عن نبي من الأمم السابقة لم يُسمَّ. والوحي يعاتب على إهلاك قرية نمل كاملة بسبب فعل حيوان واحد. والأصل هو ألا يُعاقب من لم يشارك.",
+   "en": "The ḥadīth reports about a prophet of earlier communities who is not named. The revelation reproves that an entire ant colony was destroyed because of the act of a single animal. The core principle is not to punish along with them those who had no part.",
+   "tr": "Hadis, önceki ümmetlerden adı belirtilmeyen bir peygamberi anlatır. Vahiy, tek bir hayvanın fiili yüzünden bütün bir karınca topluluğunun yok edilmesini kınar. Temel ilke, karışmayanları birlikte cezalandırmamaktır.",
+   "ku": "Hedîs li ser pêxemberekî civakên berê yê ku bi nav nehatiye diyarkirin diaxive. Wehî rexne dike ku ji ber kiryara heywanekî tenê koloniyeke mûriyan bi tevahî hat helakkirin. Bingeh ew e ku yên ne beşdar bi hev re neyên cezakirin.",
+   "ckb": "حەدیسەکە باس لە پێغەمبەرێکی ئوممەتەکانی پێشوو دەکات کە بە ناو دیاری نەکراوە. وەحی سەرزەنشت دەکات کە بەهۆی کردەی ئاژەڵێکی تاکەوە هەموو کۆمەڵگەیەکی مێروولە لەناو براوە. بنەماکە ئەوەیە ئەوانەی بەشدار نەبوون پێکەوە سزا نەدرێن.",
+   "bs": "Hadis govori o vjerovjesniku ranijih zajednica koji nije imenovan. Objava kori što je zbog djela jedne životinje uništena cijela kolonija mrava. Temeljno načelo je da se ne kažnjavaju zajedno oni koji nisu sudjelovali.",
+   "fr": "Le hadith parle d’un prophète des communautés antérieures qui n’est pas nommé. La révélation blâme le fait qu’une colonie entière de fourmis ait été détruite à cause de l’acte d’un seul animal. Le principe central est de ne pas punir avec eux ceux qui n’y ont pas pris part.",
+   "es": "El hadiz informa de un profeta de comunidades anteriores que no se nombra. La revelación reprocha que se destruyera toda una colonia de hormigas por el acto de un solo animal. El principio central es no castigar junto a ellos a quienes no participaron."
+  },
+  "Ältester in dieser Recherche direkt belegter Šarḥ: Imām Abū Ǧaʿfar aṭ-Ṭaḥāwī (gest. 321 n. H.).": {
+   "ar": "أقدم شرح ثبت مباشرة في هذا البحث: الإمام أبو جعفر الطحاوي (ت. 321 هـ).",
+   "en": "The earliest sharḥ directly documented in this research: Imām Abū Ǧaʿfar aṭ-Ṭaḥāwī (d. 321 AH).",
+   "tr": "Bu araştırmada doğrudan belgelenen en eski şerh: İmâm Abū Ǧaʿfar aṭ-Ṭaḥāwī (ö. 321 H.).",
+   "ku": "Kevirîn şerha ku di vê lêkolînê de rasterast hatiye belgekirin: İmâm Abū Ǧaʿfar aṭ-Ṭaḥāwī (m. 321 h.).",
+   "ckb": "کۆنترین شەرح کە لەم توێژینەوەیەدا ڕاستەوخۆ بەڵگەدار کراوە: ئیمام ئەبوو جەعفەری تەحاوی (کۆچی دوایی 321ی کۆچی).",
+   "bs": "Najraniji šerh izravno potvrđen u ovom istraživanju: imam Abū Ǧaʿfar aṭ-Ṭaḥāwī (umr. 321. h.).",
+   "fr": "Le plus ancien sharḥ directement attesté dans cette recherche : l’imam Abū Ǧaʿfar aṭ-Ṭaḥāwī (m. 321 H.).",
+   "es": "El sharḥ más antiguo documentado directamente en esta investigación: el imām Abū Ǧaʿfar aṭ-Ṭaḥāwī (m. 321 H.)."
+  },
+  ", Bd. 2, S. 331–333, Nr. 874 und 876, behandelt er genau diese Überlieferung im Kapitel über das Töten von Ameisen. Er erklärt, dass das grundlose Töten nicht schädigender Ameisen keinen Nutzen bringt und dadurch ihr Lobpreis Allahs unterbunden wird. Er unterscheidet davon den Fall einer schädigenden Ameise. Der Bericht tadelt die Vernichtung einer ganzen Kolonie aufgrund einer einzigen Ameise.": {
+   "ar": "، المجلد 2، ص 331–333، رقم 874 و876، يعالج هذه الرواية بعينها في باب قتل النمل. ويبيّن أن قتل النمل غير المؤذي بلا سبب لا نفع فيه، وبه ينقطع تسبيحهم لله. ويفرّق عن ذلك حالة النملة المؤذية. والخبر يعاتب على إهلاك قرية كاملة بسبب نملة واحدة.",
+   "en": ", vol. 2, pp. 331–333, nos. 874 and 876, he treats precisely this report in the chapter on killing ants. He explains that killing harmless ants without cause brings no benefit and thereby stops their glorification of Allah. He distinguishes from this the case of a harmful ant. The report reproves the destruction of an entire colony because of a single ant.",
+   "tr": ", cilt 2, s. 331–333, no. 874 ve 876’da, karıncaların öldürülmesi bölümünde tam bu rivayeti ele alır. Zarar vermeyen karıncaları sebepsiz öldürmenin fayda getirmediğini ve bununla Allah’ı tesbihlerinin kesildiğini açıklar. Bundan, zarar veren karınca halini ayırır. Haber, tek bir karınca yüzünden bütün bir topluluğun yok edilmesini kınar.",
+   "ku": ", cild 2, rûpel 331–333, hejmar 874 û 876, ew di beşa kuştina mûriyan de tam vê ragihandinê dinirxîne. Ew rave dike ku kuştina mûriyên ne zerar bê sedem fêdeyê nade û bi wê pesnê wan ê ji Allah tê birîn. Ew ji vê rewşa mûriya zerar cuda dike. Rapor rexne dike ku koloniyeke tevahî ji ber mûriyekê tenê hate helakkirin.",
+   "ckb": "، بەرگی 2، لاپەڕە 331–333، ژمارە 874 و 876، ئەو بە تەواوی ئەم گێڕانەوەیە لە بەشی کوشتنی مێروولەدا باس دەکات. ڕوونی دەکاتەوە کە کوشتنی مێروولەی بێزیان بەبێ هۆ سوودی نییە و بەوە تەسبیحیان بۆ خوا دەبڕدرێت. لەمە حاڵەتی مێروولەی زیانبەخش جیا دەکاتەوە. هەواڵەکە لەناوبردنی هەموو کۆمەڵگەیەک بەهۆی مێروولەیەکی تاک سەرزەنشت دەکات.",
+   "bs": ", sv. 2, str. 331–333, br. 874 i 876, on upravo ovu predaju obrađuje u poglavlju o ubijanju mrava. Objašnjava da ubijanje neškodljivih mrava bez razloga ne donosi korist i time se prekida njihovo veličanje Allaha. Od toga razlikuje slučaj štetnog mrava. Predaja kori uništenje cijele kolonije zbog jednog mrava.",
+   "fr": ", vol. 2, p. 331–333, n° 874 et 876, il traite précisément cette transmission dans le chapitre sur le fait de tuer les fourmis. Il explique que tuer sans raison des fourmis qui ne nuisent pas n’apporte aucun profit et interrompt ainsi leur glorification d’Allah. Il en distingue le cas d’une fourmi nuisible. Le récit blâme la destruction d’une colonie entière à cause d’une seule fourmi.",
+   "es": ", vol. 2, pp. 331–333, n.º 874 y 876, trata precisamente esta transmisión en el capítulo sobre matar hormigas. Explica que matar sin motivo hormigas que no dañan no aporta beneficio y con ello se interrumpe su glorificación de Allah. Distingue de ello el caso de una hormiga dañina. El relato reprueba la destrucción de toda una colonia por una sola hormiga."
+  },
+  "Späterer ergänzender Šarḥ:": {
+   "ar": "شرح لاحق مكمّل:",
+   "en": "A later supplementary sharḥ:",
+   "tr": "Daha sonraki tamamlayıcı şerh:",
+   "ku": "Şerheke paşîn a temamker:",
+   "ckb": "شەرحێکی دواتر و تەواوکەر:",
+   "bs": "Kasniji dopunski šerh:",
+   "fr": "Un sharḥ postérieur et complémentaire :",
+   "es": "Un sharḥ posterior y complementario:"
+  },
+  "Imām an-Nawawī erläutert in": {
+   "ar": "يوضح الإمام النووي في",
+   "en": "Imām an-Nawawī explains in",
+   "tr": "İmâm an-Nawawī şurada açıklar",
+   "ku": "İmâm an-Nawawī di vir de rave dike",
+   "ckb": "ئیمام نەوەوی لەم شوێنەدا ڕوونی دەکاتەوە",
+   "bs": "Imam an-Nawawī objašnjava u",
+   "fr": "L’imam an-Nawawī explique dans",
+   "es": "El imām an-Nawawī explica en"
+  },
+  ", Bd. 14, S. 399–400, dass der Tadel das Überschreiten des Maßes über die eine Ameise hinaus betrifft. Die frühere Gesetzgebung jenes Propheten ist keine allgemeine Erlaubnis, Tiere nach der Šarīʿah Muḥammads ﷺ zu verbrennen. Der spätere Kommentar ersetzt nicht die frühere direkte Erklärung aṭ-Ṭaḥāwīs.": {
+   "ar": "، المجلد 14، ص 399–400، أن العتاب يتعلق بتجاوز الحدّ إلى ما بعد النملة الواحدة. وشرع ذلك النبي السابق ليس إذنًا عامًا بإحراق الحيوانات في شريعة محمد ﷺ. والتعليق المتأخر لا يغني عن الشرح المباشر الأسبق للطحاوي.",
+   "en": ", vol. 14, pp. 399–400, that the reproof concerns going beyond the due measure past that one ant. The earlier law of that prophet is not a general permission to burn animals under the Sharīʿah of Muḥammad ﷺ. The later commentary does not replace aṭ-Ṭaḥāwī’s earlier direct explanation.",
+   "tr": ", cilt 14, s. 399–400, kınamanın tek karıncanın ötesine geçen ölçü aşımına ilişkin olduğunu. O peygamberin önceki şeriatı, Muḥammad ﷺ’in şeriatında hayvanları yakmak için genel bir izin değildir. Sonraki yorum, aṭ-Ṭaḥāwī’nin daha erken doğrudan açıklamasının yerini tutmaz.",
+   "ku": ", cild 14, rûpel 399–400, ku rexne derbaskirina sînorê ji wê mûriya tenê wêdetir e. Şerîʿeta berê ya wî pêxemberî destûreke giştî nîne ku di Şerîʿeta Muḥammad ﷺ de heywan werin şewitandin. Şiroveya paşîn şûna ravekirina rasterast a berê ya aṭ-Ṭaḥāwī nagire.",
+   "ckb": "، بەرگی 14، لاپەڕە 399–400، کە سەرزەنشتەکە پەیوەندی بە تێپەڕاندنی سنوورە لەو مێروولە تاکەوە. یاسای پێشووی ئەو پێغەمبەرە مۆڵەتێکی گشتی نییە بۆ سوتاندنی ئاژەڵان لە شەریعەتی محەممەد ﷺ. لێکدانەوەی دواتر جێگەی ڕوونکردنەوە ڕاستەوخۆکەی پێشووی تەحاوی ناگرێتەوە.",
+   "bs": ", sv. 14, str. 399–400, da se ukor tiče prekoračenja mjere iznad onog jednog mrava. Raniji zakon tog vjerovjesnika nije opće dopuštenje da se životinje spaljuju po šerijatu Muḥammada ﷺ. Kasniji komentar ne zamjenjuje ranije izravno objašnjenje aṭ-Ṭaḥāwīja.",
+   "fr": ", vol. 14, p. 399–400, que le blâme concerne le dépassement de la mesure au-delà de cette seule fourmi. La loi antérieure de ce prophète n’est pas une permission générale de brûler des animaux selon la Sharīʿah de Muḥammad ﷺ. Le commentaire postérieur ne remplace pas l’explication directe antérieure d’aṭ-Ṭaḥāwī.",
+   "es": ", vol. 14, pp. 399–400, que el reproche concierne a traspasar la medida más allá de aquella sola hormiga. La legislación anterior de aquel profeta no es un permiso general para quemar animales según la sharīʿah de Muḥammad ﷺ. El comentario posterior no sustituye la explicación directa anterior de aṭ-Ṭaḥāwī."
+  },
+  "Die Geschichte ist eine prophetische Überlieferung über frühere Ereignisse. Das gesprochene deutsche Zitat ist eine sinngemäße Übersetzung und kein arabischer Wortlaut.": {
+   "ar": "القصة رواية نبوية عن أحداث سابقة. والاقتباس الألماني المنطوق ترجمة بالمعنى وليس لفظًا عربيًا.",
+   "en": "The account is a prophetic transmission about earlier events. The spoken German quotation is a rendering according to the meaning, not the Arabic wording.",
+   "tr": "Kıssa, önceki olaylar hakkında peygamberî bir rivayettir. Sesli Almanca alıntı anlamca bir çeviridir, Arapça lafız değildir.",
+   "ku": "Çîrok ragihandineke pêxemberî ye li ser bûyerên berê. Vegotina almanî ya axaftî werger e li gorî wateyê û ne gotina erebî ye.",
+   "ckb": "چیرۆکەکە گێڕانەوەیەکی پێغەمبەرانەیە دەربارەی ڕووداوەکانی پێشوو. گێڕانەوە ئەڵمانییە وتراوەکە وەرگێڕانێکە بە واتە و دەقی عەرەبی نییە.",
+   "bs": "Priča je vjerovjesnička predaja o ranijim događajima. Izgovoreni njemački citat je prijevod po smislu, a ne arapski tekst.",
+   "fr": "Le récit est une transmission prophétique sur des événements antérieurs. La citation allemande prononcée est une traduction selon le sens et non le libellé arabe.",
+   "es": "El relato es una transmisión profética sobre hechos anteriores. La cita alemana hablada es una traducción según el sentido y no el texto árabe."
+  },
+  "Originalnachweise und frühester direkter Šarḥ": {
+   "ar": "الشواهد الأصلية وأقدم شرح مباشر",
+   "en": "The original references and the earliest direct sharḥ",
+   "tr": "Özgün deliller ve en erken doğrudan şerh",
+   "ku": "Belgeyên resen û şerha rasterast a herî kevn",
+   "ckb": "بەڵگە ڕەسەنەکان و کۆنترین شەرحی ڕاستەوخۆ",
+   "bs": "Izvorni dokazi i najraniji izravni šerh",
+   "fr": "Les références originales et le plus ancien sharḥ direct",
+   "es": "Las referencias originales y el sharḥ directo más antiguo"
+  },
+  "Ṣaḥīḥ Muslim – arabischer Originaltext": {
+   "ar": "صحيح مسلم – النص العربي الأصلي",
+   "en": "Ṣaḥīḥ Muslim – the Arabic original text",
+   "tr": "Ṣaḥīḥ Muslim – Arapça özgün metin",
+   "ku": "Ṣaḥīḥ Muslim – nivîsa erebî ya resen",
+   "ckb": "صحیح مسلم – دەقی عەرەبیی ڕەسەن",
+   "bs": "Ṣaḥīḥ Muslim – arapski izvorni tekst",
+   "fr": "Ṣaḥīḥ Muslim – texte arabe original",
+   "es": "Ṣaḥīḥ Muslim – texto árabe original"
+  },
+  "Islamweb · Kitāb as-Salām · Ḥadīṯ 2241 · Bd. 4, S. 1759 · Textmarkierung": {
+   "ar": "إسلام ويب · كتاب السلام · حديث 2241 · المجلد 4، ص 1759 · تحديد النص",
+   "en": "Islamweb · Kitāb as-Salām · ḥadīth 2241 · vol. 4, p. 1759 · text marker",
+   "tr": "Islamweb · Kitāb as-Salām · hadis 2241 · cilt 4, s. 1759 · metin işareti",
+   "ku": "Islamweb · Kitāb as-Salām · hedîs 2241 · cild 4, rûpel 1759 · nîşankirina nivîsê",
+   "ckb": "ئیسلامویب · كتاب السلام · حەدیس 2241 · بەرگی 4، لاپەڕە 1759 · دیاریکردنی دەق",
+   "bs": "Islamweb · Kitāb as-Salām · hadis 2241 · sv. 4, str. 1759 · označavanje teksta",
+   "fr": "Islamweb · Kitāb as-Salām · hadith 2241 · vol. 4, p. 1759 · marquage du texte",
+   "es": "Islamweb · Kitāb as-Salām · hadiz 2241 · vol. 4, p. 1759 · marcado del texto"
+  },
+  "Ṣaḥīḥ al-Buḫārī – Parallelüberlieferung": {
+   "ar": "صحيح البخاري – رواية موازية",
+   "en": "Ṣaḥīḥ al-Buḫārī – a parallel transmission",
+   "tr": "Ṣaḥīḥ al-Buḫārī – paralel rivayet",
+   "ku": "Ṣaḥīḥ al-Buḫārī – ragihandineke paralel",
+   "ckb": "صحیح البخاری – گێڕانەوەیەکی هاوتەریب",
+   "bs": "Ṣaḥīḥ al-Buḫārī – paralelna predaja",
+   "fr": "Ṣaḥīḥ al-Buḫārī – transmission parallèle",
+   "es": "Ṣaḥīḥ al-Buḫārī – transmisión paralela"
+  },
+  "Dorar · Ṣaḥīḥ al-Buḫārī Nr. 3019 · authentisch · Textmarkierung": {
+   "ar": "درر · صحيح البخاري رقم 3019 · صحيح · تحديد النص",
+   "en": "Dorar · Ṣaḥīḥ al-Buḫārī no. 3019 · authentic · text marker",
+   "tr": "Dorar · Ṣaḥīḥ al-Buḫārī no. 3019 · sahih · metin işareti",
+   "ku": "Dorar · Ṣaḥīḥ al-Buḫārī hejmar 3019 · sehîh · nîşankirina nivîsê",
+   "ckb": "دۆرار · صحیح البخاری ژمارە 3019 · سەحیح · دیاریکردنی دەق",
+   "bs": "Dorar · Ṣaḥīḥ al-Buḫārī br. 3019 · sahih · označavanje teksta",
+   "fr": "Dorar · Ṣaḥīḥ al-Buḫārī n° 3019 · authentique · marquage du texte",
+   "es": "Dorar · Ṣaḥīḥ al-Buḫārī n.º 3019 · auténtico · marcado del texto"
+  },
+  "Imām aṭ-Ṭaḥāwī – ältester hier verifizierter direkter Šarḥ": {
+   "ar": "الإمام الطحاوي – أقدم شرح مباشر تم التحقق منه هنا",
+   "en": "Imām aṭ-Ṭaḥāwī – the earliest direct sharḥ verified here",
+   "tr": "İmâm aṭ-Ṭaḥāwī – burada doğrulanan en eski doğrudan şerh",
+   "ku": "İmâm aṭ-Ṭaḥāwī – kevirîn şerha rasterast ku li vir hatiye piştrastkirin",
+   "ckb": "ئیمام تەحاوی – کۆنترین شەرحی ڕاستەوخۆ کە لێرە پشتڕاست کراوەتەوە",
+   "bs": "Imam aṭ-Ṭaḥāwī – najraniji izravni šerh ovdje provjeren",
+   "fr": "Imām aṭ-Ṭaḥāwī – le plus ancien sharḥ direct vérifié ici",
+   "es": "Imām aṭ-Ṭaḥāwī – el sharḥ directo más antiguo verificado aquí"
+  },
+  "Islamweb · Šarḥ Muškil al-Āṯār · Bd. 2, S. 331–333 · Nr. 874, 876 · markierter Originalkommentar": {
+   "ar": "إسلام ويب · شرح مشكل الآثار · المجلد 2، ص 331–333 · رقم 874، 876 · التعليق الأصلي المحدد",
+   "en": "Islamweb · Šarḥ Muškil al-Āṯār · vol. 2, pp. 331–333 · nos. 874, 876 · marked original commentary",
+   "tr": "Islamweb · Šarḥ Muškil al-Āṯār · cilt 2, s. 331–333 · no. 874, 876 · işaretli özgün yorum",
+   "ku": "Islamweb · Šarḥ Muškil al-Āṯār · cild 2, rûpel 331–333 · hejmar 874, 876 · şiroveya resen a nîşankirî",
+   "ckb": "ئیسلامویب · شرح مشكل الآثار · بەرگی 2، لاپەڕە 331–333 · ژمارە 874، 876 · لێکدانەوەی ڕەسەنی دیاریکراو",
+   "bs": "Islamweb · Šarḥ Muškil al-Āṯār · sv. 2, str. 331–333 · br. 874, 876 · označeni izvorni komentar",
+   "fr": "Islamweb · Šarḥ Muškil al-Āṯār · vol. 2, p. 331–333 · n° 874, 876 · commentaire original marqué",
+   "es": "Islamweb · Šarḥ Muškil al-Āṯār · vol. 2, pp. 331–333 · n.º 874, 876 · comentario original marcado"
+  },
+  "Imām an-Nawawī – ergänzender späterer Šarḥ": {
+   "ar": "الإمام النووي – شرح لاحق مكمّل",
+   "en": "Imām an-Nawawī – a supplementary later sharḥ",
+   "tr": "İmâm an-Nawawī – tamamlayıcı sonraki şerh",
+   "ku": "İmâm an-Nawawī – şerha paşîn a temamker",
+   "ckb": "ئیمام نەوەوی – شەرحێکی دواتری تەواوکەر",
+   "bs": "Imam an-Nawawī – dopunski kasniji šerh",
+   "fr": "Imām an-Nawawī – sharḥ postérieur complémentaire",
+   "es": "Imām an-Nawawī – sharḥ posterior complementario"
+  },
+  "Islamweb · Šarḥ Ṣaḥīḥ Muslim · Bd. 14 · Kapitel an-nahy ʿan qatl an-naml · markierter Originalkommentar": {
+   "ar": "إسلام ويب · شرح صحيح مسلم · المجلد 14 · باب النهي عن قتل النمل · التعليق الأصلي المحدد",
+   "en": "Islamweb · Šarḥ Ṣaḥīḥ Muslim · vol. 14 · chapter an-nahy ʿan qatl an-naml · marked original commentary",
+   "tr": "Islamweb · Šarḥ Ṣaḥīḥ Muslim · cilt 14 · an-nahy ʿan qatl an-naml bölümü · işaretli özgün yorum",
+   "ku": "Islamweb · Šarḥ Ṣaḥīḥ Muslim · cild 14 · beşa an-nahy ʿan qatl an-naml · şiroveya resen a nîşankirî",
+   "ckb": "ئیسلامویب · شرح صحیح مسلم · بەرگی 14 · بەشی النهي عن قتل النمل · لێکدانەوەی ڕەسەنی دیاریکراو",
+   "bs": "Islamweb · Šarḥ Ṣaḥīḥ Muslim · sv. 14 · poglavlje an-nahy ʿan qatl an-naml · označeni izvorni komentar",
+   "fr": "Islamweb · Šarḥ Ṣaḥīḥ Muslim · vol. 14 · chapitre an-nahy ʿan qatl an-naml · commentaire original marqué",
+   "es": "Islamweb · Šarḥ Ṣaḥīḥ Muslim · vol. 14 · capítulo an-nahy ʿan qatl an-naml · comentario original marcado"
+  },
+  "PDF / Scan – aṭ-Ṭaḥāwī, Band 2": {
+   "ar": "PDF / نسخة ممسوحة – الطحاوي، المجلد 2",
+   "en": "PDF / scan – aṭ-Ṭaḥāwī, volume 2",
+   "tr": "PDF / tarama – aṭ-Ṭaḥāwī, cilt 2",
+   "ku": "PDF / sken – aṭ-Ṭaḥāwī, cild 2",
+   "ckb": "PDF / سکان – تەحاوی، بەرگی 2",
+   "bs": "PDF / sken – aṭ-Ṭaḥāwī, svezak 2",
+   "fr": "PDF / scan – aṭ-Ṭaḥāwī, volume 2",
+   "es": "PDF / escaneo – aṭ-Ṭaḥāwī, volumen 2"
+  },
+  "Waqfeya / Archive.org · Band 2 der Ausgabe Muʾassasat ar-Risālah (1415 H.) · gedruckte S. 331–333 · PDF-Seitenanker nicht verifiziert": {
+   "ar": "وقفيا / Archive.org · المجلد 2 من طبعة مؤسسة الرسالة (1415 هـ) · الصفحات المطبوعة 331–333 · مرساة صفحة PDF غير متحققة",
+   "en": "Waqfeya / Archive.org · volume 2 of the Muʾassasat ar-Risālah edition (1415 AH) · printed pp. 331–333 · PDF page anchor not verified",
+   "tr": "Waqfeya / Archive.org · Muʾassasat ar-Risālah neşrinin 2. cildi (1415 H.) · basılı s. 331–333 · PDF sayfa çapası doğrulanmamıştır",
+   "ku": "Waqfeya / Archive.org · cild 2 a çapa Muʾassasat ar-Risālah (1415 h.) · rûpelên çapkirî 331–333 · lengerê rûpela PDF’ê nehatiye piştrastkirin",
+   "ckb": "وەقفیا / Archive.org · بەرگی 2ی چاپی مؤسسة الرسالة (1415 کۆچی) · لاپەڕە چاپکراوەکانی 331–333 · لنگی لاپەڕەی PDF پشتڕاست نەکراوەتەوە",
+   "bs": "Waqfeya / Archive.org · svezak 2 izdanja Muʾassasat ar-Risālah (1415. h.) · štampane str. 331–333 · PDF-sidro stranice nije provjereno",
+   "fr": "Waqfeya / Archive.org · volume 2 de l’édition Muʾassasat ar-Risālah (1415 H.) · p. imprimées 331–333 · ancre de page PDF non vérifiée",
+   "es": "Waqfeya / Archive.org · volumen 2 de la edición Muʾassasat ar-Risālah (1415 H.) · pp. impresas 331–333 · ancla de página del PDF no verificada"
+  },
+  "Gerechtigkeit gilt gegenüber allen Geschöpfen. Das Verhalten einer einzelnen Ameise rechtfertigt nicht die Vernichtung der übrigen, die nicht gehandelt haben. Auch gegenüber Tieren dürfen Zorn und unverhältnismäßige Vergeltung nicht über das Recht bestimmen.": {
+   "ar": "العدل يسري في حق جميع المخلوقات. وتصرّف نملة واحدة لا يسوّغ إهلاك الباقيات اللواتي لم يفعلن. وحتى مع الحيوانات لا يجوز أن يحكم الغضب والقصاص المتجاوز للحدّ على الحق.",
+   "en": "Justice applies toward all creatures. The conduct of a single ant does not justify destroying the rest, who did not act. Even toward animals, anger and disproportionate retaliation must not rule over what is right.",
+   "tr": "Adalet bütün yaratılmışlar hakkında geçerlidir. Tek bir karıncanın davranışı, eylemde bulunmayan diğerlerinin yok edilmesini haklı kılmaz. Hayvanlara karşı da öfke ve ölçüsüz karşılık hakkın üzerine çıkmamalıdır.",
+   "ku": "Dad li hemberî hemû afirîdeyan derbas dibe. Reftara mûriyekê tenê helakkirina yên mayî yên ku nekiriye rewa nake. Li hemberî heywanan jî hêrs û tolhildana ne li gorî pîvanê nabin li ser heqê hukim bikin.",
+   "ckb": "دادپەروەری بۆ هەموو دروستکراوەکان دەچەسپێت. ڕەفتاری مێروولەیەکی تاک لەناوبردنی ئەوانی تر کە کردەوەیان نەبووە ڕەوا ناکات. بەرامبەر ئاژەڵانیش تووڕەیی و تۆڵەی نەگونجاو نابێت لەسەر ماف فەرمانڕەوا بن.",
+   "bs": "Pravda vrijedi prema svim stvorenjima. Ponašanje jednog mrava ne opravdava uništenje ostalih koji nisu djelovali. I prema životinjama srdžba i nesrazmjerna odmazda ne smiju vladati nad pravom.",
+   "fr": "La justice vaut à l’égard de toutes les créatures. Le comportement d’une seule fourmi ne justifie pas la destruction des autres, qui n’ont pas agi. Même envers les animaux, la colère et une riposte disproportionnée ne doivent pas l’emporter sur le droit.",
+   "es": "La justicia vale respecto de todas las criaturas. La conducta de una sola hormiga no justifica destruir a las demás, que no actuaron. También frente a los animales, la ira y la represalia desproporcionada no deben imponerse sobre el derecho."
+  },
+  "DAR AL TAWḤĪD · by Serhat Abu Malik": {
+   "ar": "DAR AL TAWḤĪD · بقلم Serhat Abu Malik",
+   "en": "DAR AL TAWḤĪD · by Serhat Abu Malik",
+   "tr": "DAR AL TAWḤĪD · yazan Serhat Abu Malik",
+   "ku": "DAR AL TAWḤĪD · ji aliyê Serhat Abu Malik ve",
+   "ckb": "DAR AL TAWḤĪD · لەلایەن Serhat Abu Malik",
+   "bs": "DAR AL TAWḤĪD · od Serhat Abu Malik",
+   "fr": "DAR AL TAWḤĪD · par Serhat Abu Malik",
+   "es": "DAR AL TAWḤĪD · por Serhat Abu Malik"
   }
  }
 }

@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,338 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Wissen statt Selbstdarstellung – Sufyān ath-Thawrī – Q45 | DĀR AL TAWḤĪD": {
+   "ar": "العلم بدل التزيّن بالنفس – سفيان الثوري – Q45 | DĀR AL TAWḤĪD",
+   "en": "Knowledge instead of self-display – Sufyān ath-Thawrī – Q45 | DĀR AL TAWḤĪD",
+   "tr": "Gösteriş yerine ilim – Sufyān ath-Thawrī – Q45 | DĀR AL TAWḤĪD",
+   "ku": "Zanîn li şûna xwe-nîşandanê – Sufyān ath-Thawrī – Q45 | DĀR AL TAWḤĪD",
+   "ckb": "زانست لە جیاتی خۆنواندن – سفیان الثوری – Q45 | DĀR AL TAWḤĪD",
+   "bs": "Znanje umjesto samoprikazivanja – Sufyān ath-Thawrī – Q45 | DĀR AL TAWḤĪD",
+   "fr": "Le savoir au lieu de l’exhibition de soi – Sufyān ath-Thawrī – Q45 | DĀR AL TAWḤĪD",
+   "es": "El conocimiento en lugar de la exhibición de sí – Sufyān ath-Thawrī – Q45 | DĀR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah &amp; Āṯār": {
+   "ar": "إسهامات وفق القرآن والسنة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the āthār",
+   "tr": "Qurʾān, Sunnah ve âsâra göre katkılar",
+   "ku": "Beşdarî li gorî Qurʾān, Sunnah û eseran",
+   "ckb": "بەشدارییەکان بەپێی قورئان، سوننەت و ئاسار",
+   "bs": "Prilozi prema Qurʾānu, Sunnahu i asarima",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les athâr",
+   "es": "Aportes según el Qurʾān, la Sunnah y los atares"
+  },
+  "ʿIlm · Adab · Ikhlāṣ · Salaf": {
+   "ar": "علم · أدب · إخلاص · سلف",
+   "en": "ʿIlm · Adab · Ikhlāṣ · Salaf",
+   "tr": "İlim · Edep · İhlas · Selef",
+   "ku": "Îlm · Edep · Îxlas · Selef",
+   "ckb": "عیلم · ئەدەب · ئیخلاس · سەلەف",
+   "bs": "Ilm · Edeb · Ihlas · Selef",
+   "fr": "ʿIlm · Adab · Ikhlāṣ · Salaf",
+   "es": "Ilm · Adab · Ijlás · Salaf"
+  },
+  "Wissen statt Selbstdarstellung": {
+   "ar": "العلم بدل التزيّن بالنفس",
+   "en": "Knowledge instead of self-display",
+   "tr": "Gösteriş yerine ilim",
+   "ku": "Zanîn li şûna xwe-nîşandanê",
+   "ckb": "زانست لە جیاتی خۆنواندن",
+   "bs": "Znanje umjesto samoprikazivanja",
+   "fr": "Le savoir au lieu de l’exhibition de soi",
+   "es": "El conocimiento en lugar de la exhibición de sí"
+  },
+  "Schmückt das Wissen durch euch selbst": {
+   "ar": "زيّنوا العلم بأنفسكم",
+   "en": "Adorn knowledge through yourselves",
+   "tr": "İlmi kendinizle süsleyin",
+   "ku": "Zanînê bi xwe ve xeml bikin",
+   "ckb": "زانست بە خۆتان ڕازێننەوە",
+   "bs": "Ukrasite znanje sobom",
+   "fr": "Ornez le savoir par vous-mêmes",
+   "es": "Adornad el conocimiento por medio de vosotros mismos"
+  },
+  "– und schmückt nicht euch selbst mit dem Wissen.“": {
+   "ar": "– ولا تزيّنوا أنفسكم بالعلم.",
+   "en": "– and do not adorn yourselves with knowledge.",
+   "tr": "– ve kendinizi ilimle süslemeyin.",
+   "ku": "– û xwe bi zanînê xeml nekin.",
+   "ckb": "– و خۆتان بە زانست ڕازێننەوە.",
+   "bs": "– i ne kite sebe znanjem.",
+   "fr": "– et ne vous ornez pas vous-mêmes du savoir.",
+   "es": "– y no os adornéis a vosotros mismos con el conocimiento."
+  },
+  "Imām Sufyān ath-Thawrī رحمه الله (gest. 161 H.)": {
+   "ar": "الإمام سفيان الثوري رحمه الله (ت. 161 هـ)",
+   "en": "Imām Sufyān ath-Thawrī رحمه الله (d. 161 AH)",
+   "tr": "İmâm Sufyān ath-Thawrī رحمه الله (ö. 161 H.)",
+   "ku": "İmâm Sufyān ath-Thawrī رحمه الله (m. 161 h.)",
+   "ckb": "ئیمام سفیان الثوری رحمه الله (کۆچی دوایی 161ی کۆچی)",
+   "bs": "Imam Sufyān ath-Thawrī رحمه الله (umr. 161. h.)",
+   "fr": "L’imam Sufyān ath-Thawrī رحمه الله (m. 161 H.)",
+   "es": "El imām Sufyān ath-Thawrī رحمه الله (m. 161 H.)"
+  },
+  ", Bd. 6, S. 361; ergänzend aḏ-Ḏahabī,": {
+   "ar": "، المجلد 6، ص 361؛ ويكمّل الذهبي،",
+   "en": ", vol. 6, p. 361; and, in addition, aḏ-Ḏahabī,",
+   "tr": ", cilt 6, s. 361; ayrıca aḏ-Ḏahabī,",
+   "ku": ", cild 6, rûpel 361; herwiha aḏ-Ḏahabī,",
+   "ckb": "، بەرگی 6، لاپەڕە 361؛ و زیادە زەهەبی،",
+   "bs": ", sv. 6, str. 361; dopunski aḏ-Ḏahabī,",
+   "fr": ", vol. 6, p. 361 ; en complément, aḏ-Ḏahabī,",
+   "es": ", vol. 6, p. 361; de forma complementaria, aḏ-Ḏahabī,"
+  },
+  ", Bd. 7, S. 244 (leicht abweichender Wortlaut)": {
+   "ar": "، المجلد 7، ص 244 (لفظ يختلف اختلافًا يسيرًا)",
+   "en": ", vol. 7, p. 244 (a slightly different wording)",
+   "tr": ", cilt 7, s. 244 (biraz farklı lafız)",
+   "ku": ", cild 7, rûpel 244 (gotineke hinekî cuda)",
+   "ckb": "، بەرگی 7، لاپەڕە 244 (دەقێکی کەمێک جیاواز)",
+   "bs": ", sv. 7, str. 244 (neznatno različit tekst)",
+   "fr": ", vol. 7, p. 244 (libellé légèrement différent)",
+   "es": ", vol. 7, p. 244 (formulación ligeramente distinta)"
+  },
+  "Maʾṯūr: Aussage eines frühen Imāms,": {
+   "ar": "مأثور: قول إمام متقدم،",
+   "en": "Maʾṯūr: a statement of an early imām,",
+   "tr": "Me’sûr: erken bir imamın sözü,",
+   "ku": "Me’sûr: gotina îmamekî zû,",
+   "ckb": "مەئسور: قسەی ئیمامێکی سەرەتایی،",
+   "bs": "Me’sur: iskaz jednog ranog imama,",
+   "fr": "Maʾṯūr : parole d’un imam ancien,",
+   "es": "Maʾṯūr: declaración de un imām temprano,"
+  },
+  ". Eine eigenständige Gesamtbewertung sämtlicher Überlieferer wurde hier nicht vorgenommen.": {
+   "ar": ". ولم يُجرَ هنا تقييم إجمالي مستقل لجميع الرواة.",
+   "en": ". An independent overall assessment of all the transmitters was not undertaken here.",
+   "tr": ". Bütün râvilerin bağımsız bir toplam değerlendirmesi burada yapılmamıştır.",
+   "ku": ". Nirxandineke giştî ya serbixwe ya hemû ragihanderan li vir nehatiye kirin.",
+   "ckb": ". هەڵسەنگاندنێکی گشتی و سەربەخۆ بۆ هەموو گێڕەرەوەکان لێرە نەکراوە.",
+   "bs": ". Samostalna ukupna ocjena svih prenosilaca ovdje nije izvršena.",
+   "fr": ". Une évaluation globale et indépendante de tous les transmetteurs n’a pas été faite ici.",
+   "es": ". Aquí no se ha hecho una valoración global e independiente de todos los transmisores."
+  },
+  "Originalwortlaut und Übersetzung": {
+   "ar": "اللفظ الأصلي والترجمة",
+   "en": "Original wording and translation",
+   "tr": "Özgün lafız ve çeviri",
+   "ku": "Gotina resen û werger",
+   "ckb": "دەقی ڕەسەن و وەرگێڕان",
+   "bs": "Izvorni tekst i prijevod",
+   "fr": "Texte original et traduction",
+   "es": "Texto original y traducción"
+  },
+  "Deutsch sinngemäß: „Schmückt das Wissen durch euch selbst – und schmückt nicht euch selbst mit dem Wissen.“ Dies ist eine Aussage von Sufyān ath-Thawrī, nicht eine direkte Aussage des Propheten ﷺ.": {
+   "ar": "بالألمانية بالمعنى: «زيّنوا العلم بأنفسكم، ولا تزيّنوا أنفسكم بالعلم.» هذا قول سفيان الثوري، وليس قولًا مباشرًا للنبي ﷺ.",
+   "en": "In German, according to the meaning: “Adorn knowledge through yourselves – and do not adorn yourselves with knowledge.” This is a statement of Sufyān ath-Thawrī, not a direct statement of the Prophet ﷺ.",
+   "tr": "Almanca, anlamca: “İlmi kendinizle süsleyin – ve kendinizi ilimle süslemeyin.” Bu, Sufyān ath-Thawrī’nin sözüdür, Peygamber ﷺ’in doğrudan sözü değildir.",
+   "ku": "Bi almanî li gorî wateyê: “Zanînê bi xwe ve xeml bikin – û xwe bi zanînê xeml nekin.” Ev gotina Sufyān ath-Thawrī ye, ne gotineke rasterast a Pêxember ﷺ e.",
+   "ckb": "بە ئەڵمانی بە واتە: «زانست بە خۆتان ڕازێننەوە – و خۆتان بە زانست ڕازێننەوە.» ئەمە قسەی سفیان الثورییە، نەک قسەیەکی ڕاستەوخۆی پێغەمبەر ﷺ.",
+   "bs": "Na njemačkom, po smislu: “Ukrasite znanje sobom – i ne kite sebe znanjem.” Ovo je iskaz Sufyāna ath-Thawrīja, ne izravan iskaz Vjerovjesnika ﷺ.",
+   "fr": "En allemand, selon le sens : « Ornez le savoir par vous-mêmes – et ne vous ornez pas vous-mêmes du savoir. » Ceci est une parole de Sufyān ath-Thawrī, non une parole directe du Prophète ﷺ.",
+   "es": "En alemán, según el sentido: “Adornad el conocimiento por medio de vosotros mismos – y no os adornéis con el conocimiento.” Esta es una declaración de Sufyān ath-Thawrī, no una declaración directa del Profeta ﷺ."
+  },
+  "Überlieferungsweg in Ḥilyat al-Awliyāʾ": {
+   "ar": "طريق الرواية في حلية الأولياء",
+   "en": "The path of transmission in Ḥilyat al-Awliyāʾ",
+   "tr": "Ḥilyat al-Awliyāʾdaki rivayet yolu",
+   "ku": "Rêya ragihandinê di Ḥilyat al-Awliyāʾ de",
+   "ckb": "ڕێگای گێڕانەوە لە حلية الأولياء",
+   "bs": "Put prenošenja u Ḥilyat al-Awliyāʾ",
+   "fr": "La voie de transmission dans Ḥilyat al-Awliyāʾ",
+   "es": "La vía de transmisión en Ḥilyat al-Awliyāʾ"
+  },
+  "Abū Nuʿaym berichtet durch zwei Eingangswege über Hadiyyah ibn ʿAbd al-Wahhāb und Muḥammad ibn ʿUbayd aṭ-Ṭanāfisī. Letzterer formuliert ausdrücklich: „Ich hörte Sufyān ath-Thawrī sagen …“": {
+   "ar": "يروي أبو نعيم من طريقين في المدخل عن هدية بن عبد الوهاب ومحمد بن عبيد الطنافسي. ويصرّح الأخير: «سمعت سفيان الثوري يقول …»",
+   "en": "Abū Nuʿaym reports through two opening paths, via Hadiyyah ibn ʿAbd al-Wahhāb and Muḥammad ibn ʿUbayd aṭ-Ṭanāfisī. The latter states expressly: “I heard Sufyān ath-Thawrī say …”",
+   "tr": "Abū Nuʿaym, Hadiyyah ibn ʿAbd al-Wahhāb ve Muḥammad ibn ʿUbayd aṭ-Ṭanāfisī üzerinden iki giriş yoluyla nakleder. İkincisi açıkça şöyle der: “Sufyān ath-Thawrī’yi şöyle derken işittim …”",
+   "ku": "Abū Nuʿaym bi du rêyên destpêkê bi rêya Hadiyyah ibn ʿAbd al-Wahhāb û Muḥammad ibn ʿUbayd aṭ-Ṭanāfisī radigihîne. Yê dawî bi eşkere dibêje: “Min bihîst ku Sufyān ath-Thawrī dibêje …”",
+   "ckb": "ئەبوو نوعەیم لە دوو ڕێگای دەستپێکەوە لە ڕێگەی هەدیە کوڕی عەبدولوەههاب و محەممەد کوڕی عوبەیدی تەنافسی دەگێڕێتەوە. ئەم دواییە بە ڕاشکاوی دەڵێت: «گوێم لە سفیان الثوری بوو دەیگوت …»",
+   "bs": "Abū Nuʿaym prenosi dvama ulaznim putevima preko Hadiyyaha ibn ʿAbd al-Wahhāba i Muḥammada ibn ʿUbayda aṭ-Ṭanāfisīja. Ovaj drugi izričito kaže: “Čuo sam Sufyāna ath-Thawrīja da kaže …”",
+   "fr": "Abū Nuʿaym rapporte par deux voies d’entrée, par Hadiyyah ibn ʿAbd al-Wahhāb et Muḥammad ibn ʿUbayd aṭ-Ṭanāfisī. Ce dernier formule expressément : « J’ai entendu Sufyān ath-Thawrī dire … »",
+   "es": "Abū Nuʿaym transmite por dos vías de entrada, por Hadiyyah ibn ʿAbd al-Wahhāb y Muḥammad ibn ʿUbayd aṭ-Ṭanāfisī. Este último formula expresamente: “Oí a Sufyān ath-Thawrī decir …”"
+  },
+  ", Bd. 6, S. 361, im Kapitel über Sufyān ath-Thawrī. Die ausdrückliche Hörformel unterstützt die unmittelbare Zuschreibung innerhalb dieses Überlieferungsweges; sie ersetzt keine vollständige eigenständige Isnād-Bewertung.": {
+   "ar": "، المجلد 6، ص 361، في باب سفيان الثوري. وصيغة السماع الصريحة تؤيّد النسبة المباشرة داخل طريق الرواية هذا؛ وهي لا تغني عن تقييم كامل مستقل للإسناد.",
+   "en": ", vol. 6, p. 361, in the chapter on Sufyān ath-Thawrī. The explicit hearing formula supports the direct attribution within this path of transmission; it does not replace a complete, independent assessment of the isnād.",
+   "tr": ", cilt 6, s. 361, Sufyān ath-Thawrī bölümünde. Açık işitme ifadesi, bu rivayet yolu içinde doğrudan nispeti destekler; tam ve bağımsız bir isnad değerlendirmesinin yerini tutmaz.",
+   "ku": ", cild 6, rûpel 361, di beşa Sufyān ath-Thawrī de. Formula bihîstinê ya eşkere nisbeta rasterast di nav vê rêya ragihandinê de piştgirî dike; ew şûna nirxandineke isnadê ya temam û serbixwe nagire.",
+   "ckb": "، بەرگی 6، لاپەڕە 361، لە بەشی سفیان الثوری. فۆرمولەی بیستنی ڕاشکاو پشتگیریی ڕێدانە ڕاستەوخۆکە دەکات لەناو ئەم ڕێگای گێڕانەوەیەدا؛ جێگەی هەڵسەنگاندنێکی تەواو و سەربەخۆی ئیسناد ناگرێتەوە.",
+   "bs": ", sv. 6, str. 361, u poglavlju o Sufyānu ath-Thawrīju. Izričita formula slušanja podupire neposredno pripisivanje unutar ovog puta prenošenja; ona ne zamjenjuje potpunu nezavisnu ocjenu seneda.",
+   "fr": ", vol. 6, p. 361, dans le chapitre sur Sufyān ath-Thawrī. La formule d’audition explicite appuie l’attribution directe à l’intérieur de cette voie de transmission ; elle ne remplace pas une évaluation complète et indépendante de l’isnâd.",
+   "es": ", vol. 6, p. 361, en el capítulo sobre Sufyān ath-Thawrī. La fórmula explícita de audición apoya la atribución directa dentro de esta vía de transmisión; no sustituye una valoración completa e independiente del isnad."
+  },
+  "Die Aussage richtet sich gegen die": {
+   "ar": "يتوجه القول ضد",
+   "en": "The statement is directed against",
+   "tr": "Söz şuna karşıdır",
+   "ku": "Gotin li dijî vî ye",
+   "ckb": "قسەکە دژی ئەمەیە",
+   "bs": "Iskaz je usmjeren protiv",
+   "fr": "La parole s’adresse contre",
+   "es": "La declaración se dirige contra"
+  },
+  "Selbstdarstellung durch religiöses Wissen": {
+   "ar": "إظهار النفس بالعلم الديني",
+   "en": "self-display by means of religious knowledge",
+   "tr": "dinî ilimle kendini gösterme",
+   "ku": "xwe-nîşandana bi zanîna dînî",
+   "ckb": "خۆنواندن بە زانستی ئایینی",
+   "bs": "samoprikazivanje vjerskim znanjem",
+   "fr": "l’exhibition de soi par le savoir religieux",
+   "es": "la exhibición de sí mediante el conocimiento religioso"
+  },
+  ". Wissen soll durch einen würdigen Charakter, Aufrichtigkeit und entsprechend gutes Handeln sichtbar werden – nicht als Mittel, um Ansehen oder Bewunderung zu erlangen.": {
+   "ar": ". ينبغي أن يظهر العلم بخلق كريم وإخلاص وعمل صالح يوافقه – لا وسيلة لنيل المكانة أو الإعجاب.",
+   "en": ". Knowledge should become visible through a worthy character, sincerity, and corresponding good action – not as a means of gaining standing or admiration.",
+   "tr": ". İlim, değerli bir karakter, ihlas ve buna uygun iyi amel ile görünür olmalıdır – mevki veya hayranlık kazanma aracı olarak değil.",
+   "ku": ". Divê zanîn bi exlaqekî birûmet, îxlas û kiryara baş a li gorî wê xuya bibe – ne wek amûrek ji bo bidestxistina qedr an heyranê.",
+   "ckb": ". دەبێت زانست بە خووێکی بەڕێز، دڵسۆزی و کردەوەیەکی چاکی هاوشێوە دیار بێت – نەک وەک ئامرازێک بۆ بەدەستهێنانی پێگە یان سەرسامی.",
+   "bs": ". Znanje treba postati vidljivo dostojnim karakterom, iskrenošću i odgovarajućim dobrim djelom – ne kao sredstvo za stjecanje položaja ili divljenja.",
+   "fr": ". Le savoir doit devenir visible par un caractère digne, la sincérité et une bonne action qui y correspond – non comme un moyen d’obtenir une position ou l’admiration.",
+   "es": ". El conocimiento debe hacerse visible por un carácter digno, la sinceridad y una buena acción acorde – no como medio para obtener prestigio o admiración."
+  },
+  ", dass Wissen geheim gehalten oder das Lehren aufgegeben werden soll. Die Aussage kritisiert, Wissen zum Schmuck der eigenen Person zu machen. Die Abgrenzung ist eine redaktionelle Erklärung des Sinnes,": {
+   "ar": "، أن يُكتم العلم أو يُترك التعليم. والقول ينتقد جعل العلم زينة لشخص الإنسان. والتمييز شرح تحريري للمعنى،",
+   "en": ", that knowledge should be kept secret or that teaching should be abandoned. The statement criticizes making knowledge an ornament of one’s own person. The distinction is an editorial explanation of the meaning,",
+   "tr": ", ilmin gizlenmesi veya öğretimin bırakılması gerektiğini. Söz, ilmi kişinin kendi süsü yapmak eleştirir. Ayrım, anlamın redaksiyonel bir açıklamasıdır,",
+   "ku": ", ku zanîn veşartî bimîne an hînkirin were berdan. Gotin rexne dike ku zanîn bibe xemla kesê mirov. Veqetandin ravekirineke edîtorî ya wateyê ye,",
+   "ckb": "، کە زانست شاردراوە بێت یان فێرکردن واز لێ بهێنرێت. قسەکە ڕەخنە دەگرێت لەوەی زانست بکرێتە ڕازاندنەوەی خودی مرۆڤ. جیاکردنەوەکە ڕوونکردنەوەیەکی سەرنووسەریی واتەیە،",
+   "bs": ", da se znanje krije ili da se poučavanje napusti. Iskaz kritikuje pravljenje znanja ukrasom vlastite osobe. Razgraničenje je redakcijsko objašnjenje smisla,",
+   "fr": ", que le savoir soit tenu secret ou que l’enseignement soit abandonné. La parole critique le fait de faire du savoir un ornement de sa propre personne. La distinction est une explication rédactionnelle du sens,",
+   "es": ", que el conocimiento se oculte o que se abandone la enseñanza. La declaración critica hacer del conocimiento un adorno de la propia persona. La distinción es una explicación editorial del sentido,"
+  },
+  "kein weiteres wörtliches Zitat": {
+   "ar": "ليس اقتباسًا حرفيًا آخر",
+   "en": "not a further verbatim quotation",
+   "tr": "başka bir harfî alıntı değil",
+   "ku": "ne vegotineke din a peyv bi peyv e",
+   "ckb": "گێڕانەوەیەکی وشەبەوشەی دیکە نییە",
+   "bs": "nije daljnji doslovan citat",
+   "fr": "non une autre citation littérale",
+   "es": "no otra cita literal"
+  },
+  "(Bd. 7, S. 244) steht eine ähnliche Fassung mit den Worten „Wissen und Ḥadīṯ“:": {
+   "ar": "(المجلد 7، ص 244) توجد صيغة مشابهة بألفاظ «العلم والحديث»:",
+   "en": "(Vol. 7, p. 244) there is a similar version with the words “knowledge and ḥadīth”:",
+   "tr": "(Cilt 7, s. 244) “ilim ve hadis” sözleriyle benzer bir lafız vardır:",
+   "ku": "(Cild 7, rûpel 244) guhertoyeke nêzîk bi gotinên “zanîn û hedîs” heye:",
+   "ckb": "(بەرگی 7، لاپەڕە 244) فۆرمێکی هاوشێوە بە ووشەکانی «زانست و حەدیس» هەیە:",
+   "bs": "(Sv. 7, str. 244) stoji slična verzija s riječima “znanje i hadis”:",
+   "fr": "(Vol. 7, p. 244) se trouve une version semblable avec les mots « savoir et hadith » :",
+   "es": "(Vol. 7, p. 244) hay una versión semejante con las palabras “conocimiento y hadiz”:"
+  },
+  "Die arabischen Online-Fundstellen führen direkt zum jeweiligen Wortlaut. Der vollständige PDF-Band ist als Scan verfügbar; die": {
+   "ar": "مواضع العربية على الشبكة تؤدي مباشرة إلى اللفظ المعني. ومجلد PDF الكامل متاح مسحًا؛ أما",
+   "en": "The Arabic online references lead directly to the respective wording. The complete PDF volume is available as a scan; the",
+   "tr": "Arapça çevrimiçi yerler ilgili lafzın doğrudan kendisine götürür. Tam PDF cildi tarama olarak mevcuttur; ",
+   "ku": "Cihên erebî yên ser înternetê rasterast dibin ber bi gotina têkildar. Cilda PDF’ê ya temam wek sken heye; ",
+   "ckb": "شوێنە عەرەبییەکانی سەر تۆڕ ڕاستەوخۆ دەبنە سەر دەقی پەیوەندیدار. بەرگی تەواوی PDF وەک سکان بەردەستە؛ ",
+   "bs": "Arapska mrežna mjesta vode izravno do dotičnog teksta. Cijeli PDF-svezak dostupan je kao sken; ",
+   "fr": "Les références arabes en ligne mènent directement au libellé concerné. Le volume PDF complet est disponible en scan ; ",
+   "es": "Las referencias árabes en línea llevan directamente al texto correspondiente. El volumen PDF completo está disponible como escaneo; "
+  },
+  "wurde im Text nachgewiesen, eine möglicherweise abweichende": {
+   "ar": "ثبت في النص، أما ما قد يختلف",
+   "en": "was demonstrated in the text; a possibly differing",
+   "tr": "metinde ortaya konmuştur; muhtemelen farklı olan",
+   "ku": "di nivîsê de hate isbatkirin; ya ku dibe cuda be",
+   "ckb": "لە دەقەکەدا سەلمێنرا، ئەوەی لەوانەیە جیاواز بێت",
+   "bs": "dokazano je u tekstu; ono što je možda drugačije",
+   "fr": "a été démontré dans le texte ; une possiblement différente",
+   "es": "quedó demostrado en el texto; una posiblemente distinta"
+  },
+  "wird nicht ohne Prüfung behauptet.": {
+   "ar": "لا يُدّعى بلا فحص.",
+   "en": "is not asserted without examination.",
+   "tr": "inceleme olmaksızın iddia edilmez.",
+   "ku": "bêyî pişkinînê nayê îdiakirin.",
+   "ckb": "بەبێ پشکنین ناوترێت.",
+   "bs": "ne tvrdi se bez provjere.",
+   "fr": "n’est pas affirmée sans examen.",
+   "es": "no se afirma sin examen."
+  },
+  "Islamweb · Ḥilyat al-Awliyāʾ 6/361": {
+   "ar": "إسلام ويب · حلية الأولياء 6/361",
+   "en": "Islamweb · Ḥilyat al-Awliyāʾ 6/361",
+   "tr": "Islamweb · Ḥilyat al-Awliyāʾ 6/361",
+   "ku": "Islamweb · Ḥilyat al-Awliyāʾ 6/361",
+   "ckb": "ئیسلامویب · حلية الأولياء 6/361",
+   "bs": "Islamweb · Ḥilyat al-Awliyāʾ 6/361",
+   "fr": "Islamweb · Ḥilyat al-Awliyāʾ 6/361",
+   "es": "Islamweb · Ḥilyat al-Awliyāʾ 6/361"
+  },
+  "Arabischer Wortlaut mit markiertem Textfragment und Hörformel": {
+   "ar": "اللفظ العربي مع موضع النص المحدد وصيغة السماع",
+   "en": "Arabic wording with the marked text fragment and the hearing formula",
+   "tr": "İşaretli metin parçası ve işitme ifadesiyle Arapça lafız",
+   "ku": "Gotina erebî bi perçeya nivîsê ya nîşankirî û formula bihîstinê",
+   "ckb": "دەقی عەرەبی لەگەڵ پارچەی دەقی دیاریکراو و فۆرمولەی بیستن",
+   "bs": "Arapski tekst s označenim fragmentom i formulom slušanja",
+   "fr": "Libellé arabe avec le fragment de texte marqué et la formule d’audition",
+   "es": "Texto árabe con el fragmento marcado y la fórmula de audición"
+  },
+  "Islamweb · Siyar Aʿlām an-Nubalāʾ 7/244": {
+   "ar": "إسلام ويب · سير أعلام النبلاء 7/244",
+   "en": "Islamweb · Siyar Aʿlām an-Nubalāʾ 7/244",
+   "tr": "Islamweb · Siyar Aʿlām an-Nubalāʾ 7/244",
+   "ku": "Islamweb · Siyar Aʿlām an-Nubalāʾ 7/244",
+   "ckb": "ئیسلامویب · سير أعلام النبلاء 7/244",
+   "bs": "Islamweb · Siyar Aʿlām an-Nubalāʾ 7/244",
+   "fr": "Islamweb · Siyar Aʿlām an-Nubalāʾ 7/244",
+   "es": "Islamweb · Siyar Aʿlām an-Nubalāʾ 7/244"
+  },
+  "Parallelüberlieferung; eigenständig markierter abweichender Wortlaut": {
+   "ar": "رواية موازية؛ لفظ مختلف محدد على حدة",
+   "en": "A parallel transmission; a differing wording marked on its own",
+   "tr": "Paralel rivayet; ayrı işaretlenmiş farklı lafız",
+   "ku": "Ragihandineke paralel; gotineke cuda ku bi serê xwe hatiye nîşankirin",
+   "ckb": "گێڕانەوەیەکی هاوتەریب؛ دەقێکی جیاواز کە بە جیا دیاری کراوە",
+   "bs": "Paralelna predaja; zasebno označeni različit tekst",
+   "fr": "Transmission parallèle ; libellé différent marqué à part",
+   "es": "Transmisión paralela; formulación distinta marcada por separado"
+  },
+  "Ḥilyat al-Awliyāʾ · Band 6 als Scan": {
+   "ar": "حلية الأولياء · المجلد 6 مسحًا",
+   "en": "Ḥilyat al-Awliyāʾ · volume 6 as a scan",
+   "tr": "Ḥilyat al-Awliyāʾ · cilt 6 tarama olarak",
+   "ku": "Ḥilyat al-Awliyāʾ · cild 6 wek sken",
+   "ckb": "حلية الأولياء · بەرگی 6 وەک سکان",
+   "bs": "Ḥilyat al-Awliyāʾ · svezak 6 kao sken",
+   "fr": "Ḥilyat al-Awliyāʾ · volume 6 en scan",
+   "es": "Ḥilyat al-Awliyāʾ · volumen 6 como escaneo"
+  },
+  "Archive.org · Druckseite 361 im Band suchen (PDF-Blattzahl nicht verifiziert)": {
+   "ar": "Archive.org · ابحث عن الصفحة المطبوعة 361 في المجلد (عدد أوراق PDF غير متحقق)",
+   "en": "Archive.org · look for printed page 361 in the volume (PDF leaf count not verified)",
+   "tr": "Archive.org · ciltte basılı sayfa 361’i ara (PDF yaprak sayısı doğrulanmamıştır)",
+   "ku": "Archive.org · di cildê de rûpela çapkirî 361 bigere (hejmara pelên PDF’ê nehatiye piştrastkirin)",
+   "ckb": "Archive.org · لە بەرگەکەدا لاپەڕەی چاپکراوی 361 بگەڕێ (ژمارەی پەڕەی PDF پشتڕاست نەکراوەتەوە)",
+   "bs": "Archive.org · u svesku traži štampanu stranicu 361 (broj PDF-listova nije provjeren)",
+   "fr": "Archive.org · chercher la page imprimée 361 dans le volume (nombre de feuillets du PDF non vérifié)",
+   "es": "Archive.org · buscar la página impresa 361 en el volumen (el número de hojas del PDF no está verificado)"
+  },
+  "Freiwillige Vertiefung: Ikhlāṣ und Aufrichtigkeit": {
+   "ar": "تعمّق اختياري: الإخلاص والصدق",
+   "en": "Optional deepening: ikhlāṣ and sincerity",
+   "tr": "İsteğe bağlı derinleşme: ihlas ve doğruluk",
+   "ku": "Kûrbûna bi dilxwazî: îxlas û rastbûn",
+   "ckb": "قووڵبوونەوەی ئارەزوومەندانە: ئیخلاس و دڵسۆزی",
+   "bs": "Neobavezno produbljivanje: ihlas i iskrenost",
+   "fr": "Approfondissement facultatif : ikhlāṣ et sincérité",
+   "es": "Profundización voluntaria: ijlás y sinceridad"
+  },
+  "Unabhängige, kostenfreie Lernseite mit vier Verständnisfragen. Dies ist ein Lernangebot, kein weiterer Quellenbeleg.": {
+   "ar": "صفحة تعلّم مستقلة ومجانية بأربعة أسئلة فهم. هذا عرض تعليمي، وليس شاهدًا إضافيًا.",
+   "en": "An independent, free learning page with four comprehension questions. This is a learning offer, not a further source reference.",
+   "tr": "Dört anlama sorusu olan bağımsız, ücretsiz bir öğrenme sayfası. Bu bir öğrenme sunumudur, ek bir kaynak delili değildir.",
+   "ku": "Rûpeleke hînbûnê ya serbixwe û belaş bi çar pirsên fêmkirinê. Ev pêşkêşeke hînbûnê ye, ne belgeyeke çavkaniyê ya zêde ye.",
+   "ckb": "پەڕەیەکی فێربوونی سەربەخۆ و خۆڕایی بە چوار پرسیاری تێگەیشتن. ئەمە پێشکەشێکی فێربوونە، بەڵگەیەکی سەرچاوەی زیادە نییە.",
+   "bs": "Nezavisna, besplatna stranica učenja s četiri pitanja razumijevanja. Ovo je ponuda učenja, ne dodatni dokaz izvora.",
+   "fr": "Une page d’apprentissage indépendante et gratuite, avec quatre questions de compréhension. C’est une offre d’apprentissage, non une référence de source supplémentaire.",
+   "es": "Una página de aprendizaje independiente y gratuita con cuatro preguntas de comprensión. Es una oferta de aprendizaje, no una referencia de fuente adicional."
   }
  }
 }
