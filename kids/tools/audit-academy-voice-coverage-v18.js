@@ -21,7 +21,7 @@ function validV4(entry){
    (
      ((entry.sourceLessonId==="akhlaq-sabr"||entry.sourceLessonId==="akhlaq-amanah")
        &&entry.sourceSubject==="akhlaq")
-     ||(entry.sourceLessonId==="adab-salam"&&entry.sourceSubject==="adab")
+     ||((entry.sourceLessonId==="adab-salam"||entry.sourceLessonId==="adab-worte")&&entry.sourceSubject==="adab")
    )
    &&entry.sourceType==="owner-V4-dialogue-segmented-de-ar"
  ){
