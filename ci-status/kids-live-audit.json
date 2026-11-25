@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-11-25T05:48:07Z",
+  "timestamp": "2026-11-25T05:51:16Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "failure",
-  "finishedDeployRun": "45555696452",
+  "finishedDeployConclusion": "success",
+  "finishedDeployRun": "45555979462",
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -90,21 +90,30 @@
   "lastDeployRuns": [
     {
       "conclusion": null,
+      "created_at": "2026-11-25T05:49:30Z",
+      "head_sha": "001bdc17d03cd8b44dde91a8c078807bf8b7b623",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45556228822",
+      "id": 45556228822,
+      "status": "in_progress",
+      "updated_at": "2026-11-25T05:51:04Z"
+    },
+    {
+      "conclusion": "cancelled",
       "created_at": "2026-11-25T05:47:57Z",
       "head_sha": "3527537471e83b2f7450fdc1a6511a192e12bede",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45556054021",
       "id": 45556054021,
-      "status": "pending",
-      "updated_at": "2026-11-25T05:48:01Z"
+      "status": "completed",
+      "updated_at": "2026-11-25T05:49:32Z"
     },
     {
-      "conclusion": null,
+      "conclusion": "success",
       "created_at": "2026-11-25T05:47:17Z",
       "head_sha": "02cc848967b168c095312f01fe75ae2739e51924",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45555979462",
       "id": 45555979462,
-      "status": "queued",
-      "updated_at": "2026-11-25T05:47:51Z"
+      "status": "completed",
+      "updated_at": "2026-11-25T05:51:01Z"
     },
     {
       "conclusion": "cancelled",
@@ -132,15 +141,6 @@
       "id": 45555891509,
       "status": "completed",
       "updated_at": "2026-11-25T05:47:12Z"
-    },
-    {
-      "conclusion": "failure",
-      "created_at": "2026-11-25T05:44:50Z",
-      "head_sha": "b7b1e20c21745135a1bdf9e77f1419772d870c81",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45555696452",
-      "id": 45555696452,
-      "status": "completed",
-      "updated_at": "2026-11-25T05:47:51Z"
     }
   ]
 }
