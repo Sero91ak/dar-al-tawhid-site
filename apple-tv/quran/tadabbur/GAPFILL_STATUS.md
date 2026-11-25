@@ -30,11 +30,11 @@ Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-271` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4777
-totalVerifiedEntries: 4777
-loadedEntries: 4777
-uniqueVerifiedReferences: 4777
-missingCount: 1459
+entriesCount: 4778
+totalVerifiedEntries: 4778
+loadedEntries: 4778
+uniqueVerifiedReferences: 4778
+missingCount: 1458
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -46,7 +46,7 @@ letzter Gap-Fill-Batch: entries-gap-06-271.json
 nächster Gap-Fill-Batch: entries-gap-06-272.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `587` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `588` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -710,4 +710,8 @@ Qurʾān 8:39: die authentische mawqūf-Auslegung von ʿAbdullāh ibn ʿUmar im 
 
 ## Batch 06-271 — 25.11.2026 (neuer Prüfzweig)
 
-Drei tatsächlich offene Versreferenzen 4:69, 9:3, 9:12: Ṣaḥīḥ al-Buḫārī 4586/4435, 4656, 4658. Geplanter Katalogstand 4777/6236, 1459 Lücken. Alter PR #1704 nicht mergebar, neu auf aktuellem main aufgebaut. Quellenprüfung und Legacy-Hinweis in SOURCE_REVIEW_06-271.md. Vollvalidator, PR-Gates und Produktionsnachweis ausstehend. Nächster Batch erst nach Integration: 06-272.
+Drei tatsächlich offene Versreferenzen 4:69, 9:3, 9:12: Ṣaḥīḥ al-Buḫārī 4586/4435, 4656, 4658. Geplanter Katalogstand 4778/6236, 1458 Lücken. Alter PR #1704 nicht mergebar, neu auf aktuellem main aufgebaut. Quellenprüfung und Legacy-Hinweis in SOURCE_REVIEW_06-271.md. Vollvalidator, PR-Gates und Produktionsnachweis ausstehend. Nächster Batch erst nach Integration: 06-272.
+
+## Ergänzung 25.11.2026
+
+4:23 über Umm Ḥabībah, Buḫārī 5106 (Kapitel mit Verszitat), hinzugefügt. Batch 06-271 umfasst nun 4:23, 4:69, 9:3 und 9:12. Zielstand 4778/6236, 1458 offen. Weitere Quellenkandidaten im Review dokumentiert; nicht künstlich gefüllt. PR #1879; vollständige CI und Live-Nachweis offen.
