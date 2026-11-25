@@ -155,6 +155,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "q67-owner-source-release-20261125",
+      "at": "2026-11-25T12:52:00+01:00",
+      "approvedBy": "user-explicit-20261125-q67-complete-source-learning-release",
+      "reason": "Explicit request to complete Q67 source dossier, learning and visitor publication. Only the listed Q67 files and three exact verified source destinations; all general source, global, deployment, push and privacy gates remain enforced. No global host or OneSignal unlock.",
+      "paths": [
+        "q/67/index.html",
+        "lernen/abu-hanifa-hand-ohne-tashbih/index.html",
+        "q/_registry/shortlinks.json",
+        "q/_registry/next-number.txt",
+        "q/README.md",
+        "assets/q67-locales.json",
+        "q/_registry/check-qsource-standard.mjs"
+      ],
+      "expiresAt": "2026-11-26T23:59:00+01:00"
+    },
+    {
       "id": "kids-academy-worte-owner-release-20261125",
       "at": "2026-11-25T09:38:00+01:00",
       "approvedBy": "user-explicit-20261125-global-topic-audio-publication",
