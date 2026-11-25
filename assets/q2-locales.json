@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,138 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Beständigkeit der Taten – DAR AL TAWḤĪD": {
+   "ar": "مداومة الأعمال – DAR AL TAWḤĪD",
+   "en": "Constancy in deeds – DAR AL TAWḤĪD",
+   "tr": "Amellerde devamlılık – DAR AL TAWḤĪD",
+   "ku": "Berdewamiya kirinan – DAR AL TAWḤĪD",
+   "ckb": "بەردەوامیی کردارەکان – DAR AL TAWḤĪD",
+   "bs": "Postojanost djela – DAR AL TAWḤĪD",
+   "fr": "La constance des œuvres – DAR AL TAWḤĪD",
+   "es": "La constancia de las obras – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "كتابات وفق القرآن والسنّة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre yazılar",
+   "ku": "Nivîs li gorî Qurʾān, Sunnah û Āthār",
+   "ckb": "بابەتەکان بەپێی قورئان، سوننەت و ئاسار",
+   "bs": "Prilozi prema Qurʾānu, Sunni i Āthāru",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Aportes según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Ḥadīṯ · Mudāwamah · ʿAmal": {
+   "ar": "Ḥadīṯ · Mudāwamah · ʿAmal",
+   "en": "Ḥadīṯ · Mudāwamah · ʿAmal",
+   "tr": "Ḥadīṯ · Mudāwamah · ʿAmal",
+   "ku": "Ḥadīṯ · Mudāwamah · ʿAmal",
+   "ckb": "Ḥadīṯ · Mudāwamah · ʿAmal",
+   "bs": "Ḥadīṯ · Mudāwamah · ʿAmal",
+   "fr": "Ḥadīṯ · Mudāwamah · ʿAmal",
+   "es": "Ḥadīṯ · Mudāwamah · ʿAmal"
+  },
+  "„Die Allah liebsten Taten sind diejenigen, die am beständigsten sind, auch wenn sie gering sind.“": {
+   "ar": "«أحبُّ الأعمال إلى الله أدومُها وإن قلَّت.»",
+   "en": "“The deeds most beloved to Allah are those that are most constant, even if they are small.”",
+   "tr": "“Allah’a en sevimli ameller, az da olsalar en devamlı olanlardır.”",
+   "ku": "“Kirinên herî bijarte li cem Allah ew in ku herî berdewam in, her çend kêm bin.”",
+   "ckb": "«خۆشەویستترین کردارەکان لای الله ئەوانەن کە بەردەوامترینن، ئەگەر کەمیش بن.»",
+   "bs": "„Allah najdraža djela su ona koja su najpostojanija, makar bila mala.“",
+   "fr": "« Les œuvres les plus aimées d’Allah sont celles qui sont les plus constantes, même si elles sont peu de chose. »",
+   "es": "«Las obras más amadas por Allah son las más constantes, aunque sean pequeñas.»"
+  },
+  "Der Gesandte Allahs ﷺ, überliefert von ʿĀʾišah (رضي الله عنها).": {
+   "ar": "رسول الله ﷺ، من رواية ʿĀʾišah (رضي الله عنها).",
+   "en": "The Messenger of Allah ﷺ, narrated by ʿĀʾišah (رضي الله عنها).",
+   "tr": "Allah’ın Elçisi ﷺ, ʿĀʾišah (رضي الله عنها) rivayetiyle.",
+   "ku": "Resûlê Allah ﷺ, ji ʿĀʾišah (رضي الله عنها) hatiye ragihandin.",
+   "ckb": "ڕەسوولی الله ﷺ، گێڕدراوەتەوە لە ʿĀʾišah (رضي الله عنها).",
+   "bs": "Allahov Poslanik ﷺ, prenosi ʿĀʾišah (رضي الله عنها).",
+   "fr": "Le Messager d’Allah ﷺ, transmis par ʿĀʾišah (رضي الله عنها).",
+   "es": "El Mensajero de Allah ﷺ, transmitido por ʿĀʾišah (رضي الله عنها)."
+  },
+  "Beständigkeit, Maßhalten und geliebte Taten.": {
+   "ar": "المداومة، والاقتصاد، والأعمال المحبوبة.",
+   "en": "Constancy, moderation, and beloved deeds.",
+   "tr": "Devamlılık, ölçülü olmak ve sevimli ameller.",
+   "ku": "Berdewamî, navînî û kirinên bijarte.",
+   "ckb": "بەردەوامی، ناوەندگیری و کردارە خۆشەویستەکان.",
+   "bs": "Postojanost, umjerenost i voljena djela.",
+   "fr": "Constance, mesure et œuvres aimées.",
+   "es": "Constancia, moderación y obras amadas."
+  },
+  "Ṣaḥīḥ al-Bukhārī, Nr. 6465; Ṣaḥīḥ Muslim, Nr. 783.": {
+   "ar": "Ṣaḥīḥ al-Bukhārī، رقم 6465؛ Ṣaḥīḥ Muslim، رقم 783.",
+   "en": "Ṣaḥīḥ al-Bukhārī, no. 6465; Ṣaḥīḥ Muslim, no. 783.",
+   "tr": "Ṣaḥīḥ al-Bukhārī, no. 6465; Ṣaḥīḥ Muslim, no. 783.",
+   "ku": "Ṣaḥīḥ al-Bukhārī, nr. 6465; Ṣaḥīḥ Muslim, nr. 783.",
+   "ckb": "Ṣaḥīḥ al-Bukhārī، ژمارە 6465؛ Ṣaḥīḥ Muslim، ژمارە 783.",
+   "bs": "Ṣaḥīḥ al-Bukhārī, br. 6465; Ṣaḥīḥ Muslim, br. 783.",
+   "fr": "Ṣaḥīḥ al-Bukhārī, n° 6465 ; Ṣaḥīḥ Muslim, n° 783.",
+   "es": "Ṣaḥīḥ al-Bukhārī, n.º 6465; Ṣaḥīḥ Muslim, n.º 783."
+  },
+  "Ṣaḥīḥ al-Bukhārī, Kitāb ar-Riqāq, Bāb al-Qaṣd wa-l-Mudāwamah ʿalā al-ʿAmal, Nr. 6465.": {
+   "ar": "Ṣaḥīḥ al-Bukhārī، Kitāb ar-Riqāq، Bāb al-Qaṣd wa-l-Mudāwamah ʿalā al-ʿAmal، رقم 6465.",
+   "en": "Ṣaḥīḥ al-Bukhārī, Kitāb ar-Riqāq, Bāb al-Qaṣd wa-l-Mudāwamah ʿalā al-ʿAmal, no. 6465.",
+   "tr": "Ṣaḥīḥ al-Bukhārī, Kitāb ar-Riqāq, Bāb al-Qaṣd wa-l-Mudāwamah ʿalā al-ʿAmal, no. 6465.",
+   "ku": "Ṣaḥīḥ al-Bukhārī, Kitāb ar-Riqāq, Bāb al-Qaṣd wa-l-Mudāwamah ʿalā al-ʿAmal, nr. 6465.",
+   "ckb": "Ṣaḥīḥ al-Bukhārī، Kitāb ar-Riqāq، Bāb al-Qaṣd wa-l-Mudāwamah ʿalā al-ʿAmal، ژمارە 6465.",
+   "bs": "Ṣaḥīḥ al-Bukhārī, Kitāb ar-Riqāq, Bāb al-Qaṣd wa-l-Mudāwamah ʿalā al-ʿAmal, br. 6465.",
+   "fr": "Ṣaḥīḥ al-Bukhārī, Kitāb ar-Riqāq, Bāb al-Qaṣd wa-l-Mudāwamah ʿalā al-ʿAmal, n° 6465.",
+   "es": "Ṣaḥīḥ al-Bukhārī, Kitāb ar-Riqāq, Bāb al-Qaṣd wa-l-Mudāwamah ʿalā al-ʿAmal, n.º 6465."
+  },
+  "Ṣaḥīḥ · bei al-Bukhārī und Muslim überliefert.": {
+   "ar": "Ṣaḥīḥ · مروي عند al-Bukhārī وMuslim.",
+   "en": "Ṣaḥīḥ · transmitted in al-Bukhārī and Muslim.",
+   "tr": "Ṣaḥīḥ · al-Bukhārī ve Muslim’de rivayet edilmiştir.",
+   "ku": "Ṣaḥīḥ · li cem al-Bukhārī û Muslim hatiye ragihandin.",
+   "ckb": "Ṣaḥīḥ · لای al-Bukhārī و Muslim گێڕدراوەتەوە.",
+   "bs": "Ṣaḥīḥ · preneseno kod al-Bukhārīja i Muslima.",
+   "fr": "Ṣaḥīḥ · transmis chez al-Bukhārī et Muslim.",
+   "es": "Ṣaḥīḥ · transmitido en al-Bukhārī y Muslim."
+  },
+  "Dorar · Nr. 6465 mit Takhrīǧ": {
+   "ar": "Dorar · رقم 6465 مع التخريج",
+   "en": "Dorar · no. 6465 with Takhrīǧ",
+   "tr": "Dorar · no. 6465, Takhrīǧ ile",
+   "ku": "Dorar · nr. 6465 bi Takhrīǧ",
+   "ckb": "Dorar · ژمارە 6465 لەگەڵ تەخریج",
+   "bs": "Dorar · br. 6465 s Takhrīǧom",
+   "fr": "Dorar · n° 6465 avec Takhrīǧ",
+   "es": "Dorar · n.º 6465 con Takhrīǧ"
+  },
+  "Textnachweis mit Markierung": {
+   "ar": "شاهد نصي مع تمييز",
+   "en": "Text evidence with highlighting",
+   "tr": "İşaretli metin şahidi",
+   "ku": "Şahidiya nivîsê bi nîşankirinê",
+   "ckb": "بەڵگەی دەق لەگەڵ نیشانکردن",
+   "bs": "Tekstualni dokaz s označavanjem",
+   "fr": "Preuve textuelle avec surlignage",
+   "es": "Prueba textual con marcado"
+  },
+  "Islamweb · Ṣaḥīḥ Muslim Nr. 783": {
+   "ar": "Islamweb · Ṣaḥīḥ Muslim رقم 783",
+   "en": "Islamweb · Ṣaḥīḥ Muslim no. 783",
+   "tr": "Islamweb · Ṣaḥīḥ Muslim no. 783",
+   "ku": "Islamweb · Ṣaḥīḥ Muslim nr. 783",
+   "ckb": "Islamweb · Ṣaḥīḥ Muslim ژمارە 783",
+   "bs": "Islamweb · Ṣaḥīḥ Muslim br. 783",
+   "fr": "Islamweb · Ṣaḥīḥ Muslim n° 783",
+   "es": "Islamweb · Ṣaḥīḥ Muslim n.º 783"
+  },
+  "Zusätzliche interne Seite": {
+   "ar": "صفحة داخلية إضافية",
+   "en": "Additional internal page",
+   "tr": "Ek iç sayfa",
+   "ku": "Rûpela navxweyî ya zêde",
+   "ckb": "پەڕەی ناوخۆییی زیادە",
+   "bs": "Dodatna unutrašnja stranica",
+   "fr": "Page interne supplémentaire",
+   "es": "Página interna adicional"
   }
  }
 }

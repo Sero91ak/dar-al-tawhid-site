@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,198 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Die Sunnah vor der eigenen Meinung – DAR AL TAWḤĪD": {
+   "ar": "السنّة قبل الرأي – DAR AL TAWḤĪD",
+   "en": "The Sunnah before one’s own opinion – DAR AL TAWḤĪD",
+   "tr": "Kendi görüşünden önce Sunnah – DAR AL TAWḤĪD",
+   "ku": "Sunnah beriya nêrîna xwe – DAR AL TAWḤĪD",
+   "ckb": "سوننەت پێش بۆچوونی خۆ – DAR AL TAWḤĪD",
+   "bs": "Sunna prije vlastitog mišljenja – DAR AL TAWḤĪD",
+   "fr": "La Sunnah avant sa propre opinion – DAR AL TAWḤĪD",
+   "es": "La Sunnah antes de la propia opinión – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "كتابات وفق القرآن والسنّة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre yazılar",
+   "ku": "Nivîs li gorî Qurʾān, Sunnah û Āthār",
+   "ckb": "بابەتەکان بەپێی قورئان، سوننەت و ئاسار",
+   "bs": "Prilozi prema Qurʾānu, Sunni i Āthāru",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Aportes según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "aš-Šāfiʿī · Sunnah · Manhaj": {
+   "ar": "aš-Šāfiʿī · Sunnah · Manhaj",
+   "en": "aš-Šāfiʿī · Sunnah · Manhaj",
+   "tr": "aš-Šāfiʿī · Sunnah · Manhaj",
+   "ku": "aš-Šāfiʿī · Sunnah · Manhaj",
+   "ckb": "aš-Šāfiʿī · Sunnah · Manhaj",
+   "bs": "aš-Šāfiʿī · Sunnah · Manhaj",
+   "fr": "aš-Šāfiʿī · Sunnah · Manhaj",
+   "es": "aš-Šāfiʿī · Sunnah · Manhaj"
+  },
+  "Die Sunnah vor der eigenen Meinung": {
+   "ar": "السنّة قبل الرأي",
+   "en": "The Sunnah before one’s own opinion",
+   "tr": "Kendi görüşünden önce Sunnah",
+   "ku": "Sunnah beriya nêrîna xwe",
+   "ckb": "سوننەت پێش بۆچوونی خۆ",
+   "bs": "Sunna prije vlastitog mišljenja",
+   "fr": "La Sunnah avant sa propre opinion",
+   "es": "La Sunnah antes de la propia opinión"
+  },
+  "„Wenn ihr in meinem Buch etwas findet, das der": {
+   "ar": "«إذا وجدتم في كتابي شيئًا، ذلك الذي للـ",
+   "en": "“If you find in my book something that the",
+   "tr": "“Kitabımda bir şey bulursanız, o ki",
+   "ku": "“Heke hûn di pirtûka min de tiştekî bibînin, ew a",
+   "ckb": "«ئەگەر لە کتێبەکەمدا شتێکتان دۆزییەوە، ئەو",
+   "bs": "„Ako u mojoj knjizi nađete nešto što se",
+   "fr": "« Si vous trouvez dans mon livre quelque chose qui, à la",
+   "es": "«Si encontráis en mi libro algo que a la"
+  },
+  "des Gesandten Allahs ﷺ widerspricht, dann nehmt die": {
+   "ar": "رسول الله ﷺ يخالفه، فخذوا",
+   "en": "of the Messenger of Allah ﷺ contradicts, then take the",
+   "tr": "Allah’ın Elçisi ﷺ’ninkine aykırı düşer, o zaman onu alın",
+   "ku": "ya Resûlê Allah ﷺ re dibe dijber, wê demê wê bigirin",
+   "ckb": "ی ڕەسوولی الله ﷺ دژایەتی دەکات، ئەوا ئەوە وەربگرن",
+   "bs": "Allahovog Poslanika ﷺ protivi, onda uzmite",
+   "fr": "du Messager d’Allah ﷺ contredit, alors prenez la",
+   "es": "del Mensajero de Allah ﷺ contradice, entonces tomad la"
+  },
+  "des Gesandten Allahs ﷺ und lasst": {
+   "ar": "رسول الله ﷺ واتركوا",
+   "en": "of the Messenger of Allah ﷺ and leave",
+   "tr": "Allah’ın Elçisi ﷺ’ninkini ve bırakın",
+   "ku": "ya Resûlê Allah ﷺ û bihêlin",
+   "ckb": "ی ڕەسوولی الله ﷺ و وازی لێ بێنن",
+   "bs": "Allahovog Poslanika ﷺ i ostavite",
+   "fr": "du Messager d’Allah ﷺ et laissez",
+   "es": "del Mensajero de Allah ﷺ y dejad"
+  },
+  "Vorrang der Sunnah vor jeder eigenen Aussage.": {
+   "ar": "تقديم السنّة على كل قول خاص.",
+   "en": "The priority of the Sunnah over every personal statement.",
+   "tr": "Her kendi sözünün önünde Sunnah’ın önceliği.",
+   "ku": "Pêşîtiya Sunnah li ber her gotina xwe.",
+   "ckb": "پێشەنگیی سوننەت بەسەر هەموو قسەیەکی خۆ.",
+   "bs": "Prednost Sunne nad svakom vlastitom izjavom.",
+   "fr": "La priorité de la Sunnah sur toute parole personnelle.",
+   "es": "La prioridad de la Sunnah sobre toda declaración propia."
+  },
+  "al-Bayhaqī, Manāqib aš-Šāfiʿī, Bd. 1, S. 472–473.": {
+   "ar": "al-Bayhaqī، Manāqib aš-Šāfiʿī، المجلد 1، ص 472–473.",
+   "en": "al-Bayhaqī, Manāqib aš-Šāfiʿī, vol. 1, pp. 472–473.",
+   "tr": "al-Bayhaqī, Manāqib aš-Šāfiʿī, c. 1, s. 472–473.",
+   "ku": "al-Bayhaqī, Manāqib aš-Šāfiʿī, c. 1, r. 472–473.",
+   "ckb": "al-Bayhaqī، Manāqib aš-Šāfiʿī، بەرگی 1، لاپەڕە 472–473.",
+   "bs": "al-Bayhaqī, Manāqib aš-Šāfiʿī, sv. 1, str. 472–473.",
+   "fr": "al-Bayhaqī, Manāqib aš-Šāfiʿī, t. 1, p. 472–473.",
+   "es": "al-Bayhaqī, Manāqib aš-Šāfiʿī, vol. 1, pp. 472–473."
+  },
+  "Wenn ihr in meinem Buch etwas findet, das der Sunnah des Gesandten Allahs ﷺ widerspricht, dann nehmt die Sunnah des Gesandten Allahs ﷺ und lasst meine Aussage.": {
+   "ar": "إذا وجدتم في كتابي شيئًا يخالف سنّة رسول الله ﷺ فخذوا سنّة رسول الله ﷺ واتركوا قولي.",
+   "en": "If you find in my book something that contradicts the Sunnah of the Messenger of Allah ﷺ, then take the Sunnah of the Messenger of Allah ﷺ and leave my statement.",
+   "tr": "Kitabımda Allah’ın Elçisi ﷺ’in Sunnah’ına aykırı bir şey bulursanız, Allah’ın Elçisi ﷺ’in Sunnah’ını alın ve benim sözümü bırakın.",
+   "ku": "Heke hûn di pirtûka min de tiştekî bibînin ku dijî Sunnah ya Resûlê Allah ﷺ be, wê demê Sunnah ya Resûlê Allah ﷺ bigirin û gotina min bihêlin.",
+   "ckb": "ئەگەر لە کتێبەکەمدا شتێکتان دۆزییەوە کە دژی سوننەتی ڕەسوولی الله ﷺ بێت، ئەوا سوننەتی ڕەسوولی الله ﷺ وەربگرن و واز لە قسەکەم بێنن.",
+   "bs": "Ako u mojoj knjizi nađete nešto što se protivi Sunni Allahovog Poslanika ﷺ, onda uzmite Sunnu Allahovog Poslanika ﷺ i ostavite moju izjavu.",
+   "fr": "Si vous trouvez dans mon livre quelque chose qui contredit la Sunnah du Messager d’Allah ﷺ, alors prenez la Sunnah du Messager d’Allah ﷺ et laissez ma parole.",
+   "es": "Si encontráis en mi libro algo que contradiga la Sunnah del Mensajero de Allah ﷺ, entonces tomad la Sunnah del Mensajero de Allah ﷺ y dejad mi dicho."
+  },
+  "Dies ist eine Aussage von Imām aš-Šāfiʿī, nicht eine prophetische Überlieferung.": {
+   "ar": "هذا قول الإمام aš-Šāfiʿī، وليس رواية نبوية.",
+   "en": "This is a statement of Imām aš-Šāfiʿī, not a prophetic report.",
+   "tr": "Bu, İmâm aš-Šāfiʿī’nin sözüdür, nebevî bir rivayet değildir.",
+   "ku": "Ev gotineke Imām aš-Šāfiʿī ye, ne ragihandineke pêxemberî ye.",
+   "ckb": "ئەمە قسەی ئیمام aš-Šāfiʿī یە، نەک گێڕانەوەیەکی پێغەمبەرانە.",
+   "bs": "Ovo je izjava Imāma aš-Šāfiʿīja, a ne vjerovjesničko predanje.",
+   "fr": "Ceci est un propos de l’Imām aš-Šāfiʿī, non une transmission prophétique.",
+   "es": "Esto es un dicho del Imām aš-Šāfiʿī, no una transmisión profética."
+  },
+  "al-Bayhaqī berichtet über Abū ʿAbdillāh al-Ḥāfiẓ, Abū ʿAbd ar-Raḥmān as-Sulamī und Abū Saʿīd ibn Abī ʿAmr.": {
+   "ar": "يروي al-Bayhaqī عن Abū ʿAbdillāh al-Ḥāfiẓ وAbū ʿAbd ar-Raḥmān as-Sulamī وAbū Saʿīd ibn Abī ʿAmr.",
+   "en": "al-Bayhaqī reports through Abū ʿAbdillāh al-Ḥāfiẓ, Abū ʿAbd ar-Raḥmān as-Sulamī and Abū Saʿīd ibn Abī ʿAmr.",
+   "tr": "al-Bayhaqī, Abū ʿAbdillāh al-Ḥāfiẓ, Abū ʿAbd ar-Raḥmān as-Sulamī ve Abū Saʿīd ibn Abī ʿAmr yoluyla nakleder.",
+   "ku": "al-Bayhaqī bi rêya Abū ʿAbdillāh al-Ḥāfiẓ, Abū ʿAbd ar-Raḥmān as-Sulamī û Abū Saʿīd ibn Abī ʿAmr radigihîne.",
+   "ckb": "al-Bayhaqī دەگێڕێتەوە لە ڕێگەی Abū ʿAbdillāh al-Ḥāfiẓ و Abū ʿAbd ar-Raḥmān as-Sulamī و Abū Saʿīd ibn Abī ʿAmr.",
+   "bs": "al-Bayhaqī prenosi preko Abū ʿAbdillāh al-Ḥāfiẓa, Abū ʿAbd ar-Raḥmān as-Sulamīja i Abū Saʿīd ibn Abī ʿAmra.",
+   "fr": "al-Bayhaqī rapporte par Abū ʿAbdillāh al-Ḥāfiẓ, Abū ʿAbd ar-Raḥmān as-Sulamī et Abū Saʿīd ibn Abī ʿAmr.",
+   "es": "al-Bayhaqī transmite a través de Abū ʿAbdillāh al-Ḥāfiẓ, Abū ʿAbd ar-Raḥmān as-Sulamī y Abū Saʿīd ibn Abī ʿAmr."
+  },
+  "Diese hörten Abū al-ʿAbbās Muḥammad ibn Yaʿqūb.": {
+   "ar": "هؤلاء سمعوا Abū al-ʿAbbās Muḥammad ibn Yaʿqūb.",
+   "en": "These heard Abū al-ʿAbbās Muḥammad ibn Yaʿqūb.",
+   "tr": "Bunlar Abū al-ʿAbbās Muḥammad ibn Yaʿqūb’dan işittiler.",
+   "ku": "Vana ji Abū al-ʿAbbās Muḥammad ibn Yaʿqūb bihîstin.",
+   "ckb": "ئەمانەیان بیست لە Abū al-ʿAbbās Muḥammad ibn Yaʿqūb.",
+   "bs": "Ovi su čuli Abū al-ʿAbbās Muḥammad ibn Yaʿqūba.",
+   "fr": "Ceux-ci ont entendu Abū al-ʿAbbās Muḥammad ibn Yaʿqūb.",
+   "es": "Estos oyeron a Abū al-ʿAbbās Muḥammad ibn Yaʿqūb."
+  },
+  "Er hörte ar-Rabīʿ ibn Sulaymān al-Murādī.": {
+   "ar": "وهو سمع ar-Rabīʿ ibn Sulaymān al-Murādī.",
+   "en": "He heard ar-Rabīʿ ibn Sulaymān al-Murādī.",
+   "tr": "O, ar-Rabīʿ ibn Sulaymān al-Murādī’den işitti.",
+   "ku": "Wî ji ar-Rabīʿ ibn Sulaymān al-Murādī bihîst.",
+   "ckb": "ئەو بیستییە لە ar-Rabīʿ ibn Sulaymān al-Murādī.",
+   "bs": "On je čuo ar-Rabīʿ ibn Sulaymān al-Murādīja.",
+   "fr": "Il a entendu ar-Rabīʿ ibn Sulaymān al-Murādī.",
+   "es": "Él oyó a ar-Rabīʿ ibn Sulaymān al-Murādī."
+  },
+  "ar-Rabīʿ sagte: „Ich hörte aš-Šāfiʿī sagen ...“": {
+   "ar": "قال ar-Rabīʿ: «سمعت aš-Šāfiʿī يقول ...»",
+   "en": "ar-Rabīʿ said: “I heard aš-Šāfiʿī say ...”",
+   "tr": "ar-Rabīʿ dedi: “aš-Šāfiʿī’yi şöyle derken işittim ...”",
+   "ku": "ar-Rabīʿ got: “Min bihîst ku aš-Šāfiʿī dibêje ...”",
+   "ckb": "ar-Rabīʿ گوتی: «بیستم aš-Šāfiʿī دەڵێت ...»",
+   "bs": "ar-Rabīʿ reče: „Čuo sam aš-Šāfiʿīja kako kaže ...“",
+   "fr": "ar-Rabīʿ a dit : « J’ai entendu aš-Šāfiʿī dire ... »",
+   "es": "ar-Rabīʿ dijo: «Oí a aš-Šāfiʿī decir ...»"
+  },
+  "Shamela · Manāqib aš-Šāfiʿī, Bd. 1, S. 472–473": {
+   "ar": "Shamela · Manāqib aš-Šāfiʿī، المجلد 1، ص 472–473",
+   "en": "Shamela · Manāqib aš-Šāfiʿī, vol. 1, pp. 472–473",
+   "tr": "Shamela · Manāqib aš-Šāfiʿī, c. 1, s. 472–473",
+   "ku": "Shamela · Manāqib aš-Šāfiʿī, c. 1, r. 472–473",
+   "ckb": "Shamela · Manāqib aš-Šāfiʿī، بەرگی 1، لاپەڕە 472–473",
+   "bs": "Shamela · Manāqib aš-Šāfiʿī, sv. 1, str. 472–473",
+   "fr": "Shamela · Manāqib aš-Šāfiʿī, t. 1, p. 472–473",
+   "es": "Shamela · Manāqib aš-Šāfiʿī, vol. 1, pp. 472–473"
+  },
+  "Islamweb · Aussage von Imām aš-Šāfiʿī": {
+   "ar": "Islamweb · قول الإمام aš-Šāfiʿī",
+   "en": "Islamweb · statement of Imām aš-Šāfiʿī",
+   "tr": "Islamweb · İmâm aš-Šāfiʿī’nin sözü",
+   "ku": "Islamweb · gotina Imām aš-Šāfiʿī",
+   "ckb": "Islamweb · قسەی ئیمام aš-Šāfiʿī",
+   "bs": "Islamweb · izjava Imāma aš-Šāfiʿīja",
+   "fr": "Islamweb · propos de l’Imām aš-Šāfiʿī",
+   "es": "Islamweb · dicho del Imām aš-Šāfiʿī"
+  },
+  "Archive.org · Manāqib aš-Šāfiʿī, Band 1": {
+   "ar": "Archive.org · Manāqib aš-Šāfiʿī، المجلد 1",
+   "en": "Archive.org · Manāqib aš-Šāfiʿī, volume 1",
+   "tr": "Archive.org · Manāqib aš-Šāfiʿī, 1. cilt",
+   "ku": "Archive.org · Manāqib aš-Šāfiʿī, berg 1",
+   "ckb": "Archive.org · Manāqib aš-Šāfiʿī، بەرگی 1",
+   "bs": "Archive.org · Manāqib aš-Šāfiʿī, svezak 1",
+   "fr": "Archive.org · Manāqib aš-Šāfiʿī, tome 1",
+   "es": "Archive.org · Manāqib aš-Šāfiʿī, tomo 1"
+  },
+  "Die Sunnah steht über jeder eigenen Meinung. Die Aussagen der Imāme werden geehrt, aber nicht über den Beweis gestellt.": {
+   "ar": "السنّة فوق كل رأي خاص. أقوال الأئمة تُكرَم، ولكن لا تُقدَّم على الدليل.",
+   "en": "The Sunnah stands above every personal opinion. The statements of the Imāms are honored, but not placed above the evidence.",
+   "tr": "Sunnah her kendi görüşünün üstündedir. İmâmların sözlerine saygı gösterilir, fakat delilin üstüne konulmaz.",
+   "ku": "Sunnah li ser her nêrîna xwe ye. Gotinên Îmaman tên rêz kirin, lê li ser delîl nayên danîn.",
+   "ckb": "سوننەت لە سەرووی هەموو بۆچوونێکی خۆیە. قسەی ئیمامان ڕێزیان لێ دەگیرێت، بەڵام لە سەرووی بەڵگە دانانرێن.",
+   "bs": "Sunna stoji iznad svakog vlastitog mišljenja. Izjave imāma se poštuju, ali se ne stavljaju iznad dokaza.",
+   "fr": "La Sunnah est au-dessus de toute opinion personnelle. Les propos des Imāms sont honorés, mais non placés au-dessus de la preuve.",
+   "es": "La Sunnah está por encima de toda opinión propia. Los dichos de los Imāms se honran, pero no se colocan por encima de la prueba."
   }
  }
 }

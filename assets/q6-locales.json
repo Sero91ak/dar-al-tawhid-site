@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,128 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Aufrichtig und richtig – DAR AL TAWḤĪD": {
+   "ar": "خالص وصواب – DAR AL TAWḤĪD",
+   "en": "Sincere and correct – DAR AL TAWḤĪD",
+   "tr": "İhlaslı ve doğru – DAR AL TAWḤĪD",
+   "ku": "Dilpak û rast – DAR AL TAWḤĪD",
+   "ckb": "دڵسۆز و ڕاست – DAR AL TAWḤĪD",
+   "bs": "Iskreno i ispravno – DAR AL TAWḤĪD",
+   "fr": "Sincère et correct – DAR AL TAWḤĪD",
+   "es": "Sincero y correcto – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "كتابات وفق القرآن والسنّة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre yazılar",
+   "ku": "Nivîs li gorî Qurʾān, Sunnah û Āthār",
+   "ckb": "بابەتەکان بەپێی قورئان، سوننەت و ئاسار",
+   "bs": "Prilozi prema Qurʾānu, Sunni i Āthāru",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Aportes según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "al-Fuḍayl · Ikhlāṣ · Sunnah": {
+   "ar": "al-Fuḍayl · Ikhlāṣ · Sunnah",
+   "en": "al-Fuḍayl · Ikhlāṣ · Sunnah",
+   "tr": "al-Fuḍayl · Ikhlāṣ · Sunnah",
+   "ku": "al-Fuḍayl · Ikhlāṣ · Sunnah",
+   "ckb": "al-Fuḍayl · Ikhlāṣ · Sunnah",
+   "bs": "al-Fuḍayl · Ikhlāṣ · Sunnah",
+   "fr": "al-Fuḍayl · Ikhlāṣ · Sunnah",
+   "es": "al-Fuḍayl · Ikhlāṣ · Sunnah"
+  },
+  "„Wenn eine Tat aufrichtig ist, aber nicht richtig, wird sie nicht angenommen; und wenn sie richtig ist, aber nicht aufrichtig, wird sie nicht angenommen, bis sie aufrichtig und richtig ist. Aufrichtig ist, wenn sie für Allah ist; und richtig ist, wenn sie gemäß der Sunnah ist.“": {
+   "ar": "«إذا كان العمل خالصًا ولم يكن صوابًا لم يُقبل، وإذا كان صوابًا ولم يكن خالصًا لم يُقبل، حتى يكون خالصًا صوابًا. والخالص أن يكون لله، والصواب أن يكون على السنّة.»",
+   "en": "“If a deed is sincere but not correct, it is not accepted; and if it is correct but not sincere, it is not accepted, until it is sincere and correct. Sincere means that it is for Allah; and correct means that it is according to the Sunnah.”",
+   "tr": "“Bir amel ihlaslı olup doğru değilse kabul edilmez; doğru olup ihlaslı değilse, ihlaslı ve doğru oluncaya kadar kabul edilmez. İhlaslı olması Allah için olmasıdır; doğru olması ise Sunnah’a uygun olmasıdır.”",
+   "ku": "“Heke kirinek dilpak be lê ne rast be, nayê qebûlkirin; û heke rast be lê ne dilpak be, nayê qebûlkirin heta ku dilpak û rast be. Dilpak ew e ku ji bo Allah be; û rast ew e ku li gor Sunnah be.”",
+   "ckb": "«ئەگەر کردارێک دڵسۆز بێت بەڵام ڕاست نەبێت، وەرناگیرێت؛ و ئەگەر ڕاست بێت بەڵام دڵسۆز نەبێت، وەرناگیرێت هەتا دڵسۆز و ڕاست بێت. دڵسۆز ئەوەیە کە بۆ Allah بێت؛ و ڕاست ئەوەیە کە بەپێی سوننەت بێت.»",
+   "bs": "„Ako je djelo iskreno, ali nije ispravno, neće biti primljeno; a ako je ispravno, ali nije iskreno, neće biti primljeno dok ne bude iskreno i ispravno. Iskreno je kada je radi Allaha; a ispravno je kada je u skladu sa Sunnom.“",
+   "fr": "« Si une œuvre est sincère mais n’est pas correcte, elle n’est pas acceptée ; et si elle est correcte mais n’est pas sincère, elle n’est pas acceptée, jusqu’à ce qu’elle soit sincère et correcte. Sincère, c’est lorsqu’elle est pour Allah ; et correcte, c’est lorsqu’elle est conforme à la Sunnah. »",
+   "es": "«Si una obra es sincera pero no es correcta, no es aceptada; y si es correcta pero no es sincera, no es aceptada hasta que sea sincera y correcta. Sincera es cuando es por Allah; y correcta es cuando es conforme a la Sunnah.»"
+  },
+  "Ikhlāṣ und das Befolgen der Sunnah als Bedingung der Annahme.": {
+   "ar": "الإخلاص واتباع السنّة شرط القبول.",
+   "en": "Ikhlāṣ and following the Sunnah as the condition of acceptance.",
+   "tr": "Kabulün şartı olarak Ikhlāṣ ve Sunnah’a uymak.",
+   "ku": "Ikhlāṣ û şopandina Sunnah wek şerta qebûlkirinê.",
+   "ckb": "ئیخلاس و شوێنکەوتنی سوننەت وەک مەرجی وەرگرتن.",
+   "bs": "Ikhlāṣ i slijeđenje Sunne kao uvjet primanja.",
+   "fr": "L’Ikhlāṣ et le suivi de la Sunnah comme condition de l’acceptation.",
+   "es": "El Ikhlāṣ y el seguimiento de la Sunnah como condición de la aceptación."
+  },
+  "Ibn Abī ad-Dunyā, al-Ikhlāṣ wa-n-Niyyah, Nr. 22; Abū Nuʿaym, Ḥilyat al-Awliyāʾ, Bd. 8, S. 95.": {
+   "ar": "Ibn Abī ad-Dunyā، al-Ikhlāṣ wa-n-Niyyah، رقم 22؛ Abū Nuʿaym، Ḥilyat al-Awliyāʾ، المجلد 8، ص 95.",
+   "en": "Ibn Abī ad-Dunyā, al-Ikhlāṣ wa-n-Niyyah, no. 22; Abū Nuʿaym, Ḥilyat al-Awliyāʾ, vol. 8, p. 95.",
+   "tr": "Ibn Abī ad-Dunyā, al-Ikhlāṣ wa-n-Niyyah, no. 22; Abū Nuʿaym, Ḥilyat al-Awliyāʾ, c. 8, s. 95.",
+   "ku": "Ibn Abī ad-Dunyā, al-Ikhlāṣ wa-n-Niyyah, nr. 22; Abū Nuʿaym, Ḥilyat al-Awliyāʾ, c. 8, r. 95.",
+   "ckb": "Ibn Abī ad-Dunyā، al-Ikhlāṣ wa-n-Niyyah، ژمارە 22؛ Abū Nuʿaym، Ḥilyat al-Awliyāʾ، بەرگی 8، لاپەڕە 95.",
+   "bs": "Ibn Abī ad-Dunyā, al-Ikhlāṣ wa-n-Niyyah, br. 22; Abū Nuʿaym, Ḥilyat al-Awliyāʾ, sv. 8, str. 95.",
+   "fr": "Ibn Abī ad-Dunyā, al-Ikhlāṣ wa-n-Niyyah, n° 22 ; Abū Nuʿaym, Ḥilyat al-Awliyāʾ, t. 8, p. 95.",
+   "es": "Ibn Abī ad-Dunyā, al-Ikhlāṣ wa-n-Niyyah, n.º 22; Abū Nuʿaym, Ḥilyat al-Awliyāʾ, vol. 8, p. 95."
+  },
+  "Aussage eines frühen Imāms · nicht als Ḥadīṯ ausgeben.": {
+   "ar": "قول إمام متقدم · لا يُخرَج على أنه حديث",
+   "en": "Statement of an early Imām · do not present it as a Ḥadīṯ.",
+   "tr": "Erken dönem bir İmâm’ın sözü · Ḥadīṯ olarak sunulmasın.",
+   "ku": "Gotina Îmamekî yê pêşîn · wek Ḥadīṯ neyê danîn.",
+   "ckb": "قسەی ئیمامێکی پێشین · وەک حەدیث دەرنەخرێت.",
+   "bs": "Izjava ranog imāma · ne iznositi je kao ḥadīṯ.",
+   "fr": "Propos d’un Imām ancien · ne pas le présenter comme un Ḥadīṯ.",
+   "es": "Dicho de un Imām temprano · no presentarlo como un Ḥadīṯ."
+  },
+  "Dorar · Nr. 22 und Ḥilyah 8/95": {
+   "ar": "Dorar · رقم 22 وḤilyah 8/95",
+   "en": "Dorar · no. 22 and Ḥilyah 8/95",
+   "tr": "Dorar · no. 22 ve Ḥilyah 8/95",
+   "ku": "Dorar · nr. 22 û Ḥilyah 8/95",
+   "ckb": "Dorar · ژمارە 22 و Ḥilyah 8/95",
+   "bs": "Dorar · br. 22 i Ḥilyah 8/95",
+   "fr": "Dorar · n° 22 et Ḥilyah 8/95",
+   "es": "Dorar · n.º 22 y Ḥilyah 8/95"
+  },
+  "Wikisource · Ḥilyat al-Awliyāʾ, Band 8": {
+   "ar": "Wikisource · Ḥilyat al-Awliyāʾ، المجلد 8",
+   "en": "Wikisource · Ḥilyat al-Awliyāʾ, volume 8",
+   "tr": "Wikisource · Ḥilyat al-Awliyāʾ, 8. cilt",
+   "ku": "Wikisource · Ḥilyat al-Awliyāʾ, berg 8",
+   "ckb": "Wikisource · Ḥilyat al-Awliyāʾ، بەرگی 8",
+   "bs": "Wikisource · Ḥilyat al-Awliyāʾ, svezak 8",
+   "fr": "Wikisource · Ḥilyat al-Awliyāʾ, tome 8",
+   "es": "Wikisource · Ḥilyat al-Awliyāʾ, tomo 8"
+  },
+  "Zusätzliche interne Seite": {
+   "ar": "صفحة داخلية إضافية",
+   "en": "Additional internal page",
+   "tr": "Ek iç sayfa",
+   "ku": "Rûpela navxweyî ya zêde",
+   "ckb": "پەڕەی ناوخۆییی زیادە",
+   "bs": "Dodatna unutrašnja stranica",
+   "fr": "Page interne supplémentaire",
+   "es": "Página interna adicional"
+  },
+  "Freiwillige Ikhlāṣ-Übung öffnen": {
+   "ar": "افتح تمرين Ikhlāṣ الاختياري",
+   "en": "Open the voluntary Ikhlāṣ exercise",
+   "tr": "Gönüllü Ikhlāṣ alıştırmasını aç",
+   "ku": "Rahênana Ikhlāṣ a dilxwaz veke",
+   "ckb": "ڕاهێنانی ئیخلاسی ئارەزوومەندانە بکەرەوە",
+   "bs": "Otvori dobrovoljnu vježbu Ikhlāṣa",
+   "fr": "Ouvrir l’exercice volontaire d’Ikhlāṣ",
+   "es": "Abrir el ejercicio voluntario de Ikhlāṣ"
+  },
+  "Vier Verständnisfragen · private Selbstprüfung · kein weiteres Gelehrtenzitat": {
+   "ar": "أربعة أسئلة فهم · مراجعة خاصة للنفس · لا اقتباس إضافي لعالم",
+   "en": "Four comprehension questions · private self-examination · no further scholar quotation",
+   "tr": "Dört anlama sorusu · özel nefis muhasebesi · başka bir âlim sözü yok",
+   "ku": "Çar pirsên têgihiştinê · lêkolîna taybet a xwe · bê gotina zanyarekî din",
+   "ckb": "چوار پرسیاری تێگەیشتن · پشکنینی تایبەتیی خود · هیچ وتەیەکی تری زانایان نییە",
+   "bs": "Četiri pitanja razumijevanja · privatno samoispitivanje · nema daljnjeg citata učenjaka",
+   "fr": "Quatre questions de compréhension · examen de soi privé · aucune autre citation de savant",
+   "es": "Cuatro preguntas de comprensión · autoexamen privado · ninguna cita más de un sabio"
   }
  }
 }

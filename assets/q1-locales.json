@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,118 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Wissen verlangt Handeln – DAR AL TAWḤĪD": {
+   "ar": "العلم يقتضي العمل – DAR AL TAWḤĪD",
+   "en": "Knowledge requires action – DAR AL TAWḤĪD",
+   "tr": "İlim amel ister – DAR AL TAWḤĪD",
+   "ku": "Zanîn kirinê dixwaze – DAR AL TAWḤĪD",
+   "ckb": "زانین کردار دەخوازێت – DAR AL TAWḤĪD",
+   "bs": "Znanje traži djelo – DAR AL TAWḤĪD",
+   "fr": "Le savoir exige l’action – DAR AL TAWḤĪD",
+   "es": "El conocimiento exige la acción – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "كتابات وفق القرآن والسنّة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre yazılar",
+   "ku": "Nivîs li gorî Qurʾān, Sunnah û Āthār",
+   "ckb": "بابەتەکان بەپێی قورئان، سوننەت و ئاسار",
+   "bs": "Prilozi prema Qurʾānu, Sunni i Āthāru",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Aportes según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Ibn Masʿūd · ʿIlm · ʿAmal": {
+   "ar": "Ibn Masʿūd · ʿIlm · ʿAmal",
+   "en": "Ibn Masʿūd · ʿIlm · ʿAmal",
+   "tr": "Ibn Masʿūd · ʿIlm · ʿAmal",
+   "ku": "Ibn Masʿūd · ʿIlm · ʿAmal",
+   "ckb": "Ibn Masʿūd · ʿIlm · ʿAmal",
+   "bs": "Ibn Masʿūd · ʿIlm · ʿAmal",
+   "fr": "Ibn Masʿūd · ʿIlm · ʿAmal",
+   "es": "Ibn Masʿūd · ʿIlm · ʿAmal"
+  },
+  "„Lernt, lernt! Wenn ihr dann Wissen erlangt habt, handelt danach.“": {
+   "ar": "«تعلَّموا، تعلَّموا! فإذا حصَّلتم العلم فاعملوا به.»",
+   "en": "“Learn, learn! Then, once you have gained knowledge, act upon it.”",
+   "tr": "“Öğrenin, öğrenin! İlim elde ettiğinizde ona göre amel edin.”",
+   "ku": "“Fêr bibin, fêr bibin! Gava we zanîn bi dest xist, li gor wê bikin.”",
+   "ckb": "«فێربن، فێربن! کاتێک زانینتان بەدەستهێنا، ئەوا پێی کار بکەن.»",
+   "bs": "„Učite, učite! Kad zatim steknete znanje, postupajte po njemu.“",
+   "fr": "« Apprenez, apprenez ! Lorsque vous aurez acquis le savoir, agissez en conséquence. »",
+   "es": "«¡Aprended, aprended! Cuando hayáis alcanzado el conocimiento, obrad conforme a él.»"
+  },
+  "ʿAbdullāh ibn Masʿūd (رضي الله عنه).": {
+   "ar": "ʿAbdullāh ibn Masʿūd (رضي الله عنه).",
+   "en": "ʿAbdullāh ibn Masʿūd (رضي الله عنه).",
+   "tr": "ʿAbdullāh ibn Masʿūd (رضي الله عنه).",
+   "ku": "ʿAbdullāh ibn Masʿūd (رضي الله عنه).",
+   "ckb": "ʿAbdullāh ibn Masʿūd (رضي الله عنه).",
+   "bs": "ʿAbdullāh ibn Masʿūd (رضي الله عنه).",
+   "fr": "ʿAbdullāh ibn Masʿūd (رضي الله عنه).",
+   "es": "ʿAbdullāh ibn Masʿūd (رضي الله عنه)."
+  },
+  "Wissen und Handeln, Verantwortung nach dem Lernen.": {
+   "ar": "العلم والعمل، والمسؤولية بعد التعلّم.",
+   "en": "Knowledge and action, responsibility after learning.",
+   "tr": "İlim ve amel, öğrenmeden sonraki sorumluluk.",
+   "ku": "Zanîn û kirin, berpirsiyarî piştî fêrbûnê.",
+   "ckb": "زانین و کردار، بەرپرسیارێتی دوای فێربوون.",
+   "bs": "Znanje i djelo, odgovornost nakon učenja.",
+   "fr": "Savoir et action, responsabilité après l’apprentissage.",
+   "es": "Conocimiento y acción, responsabilidad después de aprender."
+  },
+  "al-Khaṭīb al-Baghdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, Nr. 10; Parallel bei ad-Dārimī und aṭ-Ṭabarānī.": {
+   "ar": "al-Khaṭīb al-Baghdādī، Iqtiḍāʾ al-ʿIlm al-ʿAmal، رقم 10؛ وما يوازيه عند ad-Dārimī وaṭ-Ṭabarānī.",
+   "en": "al-Khaṭīb al-Baghdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, no. 10; a parallel in ad-Dārimī and aṭ-Ṭabarānī.",
+   "tr": "al-Khaṭīb al-Baghdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, no. 10; ad-Dārimī ve aṭ-Ṭabarānī’de paralel nakil.",
+   "ku": "al-Khaṭīb al-Baghdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, nr. 10; hevwate li cem ad-Dārimī û aṭ-Ṭabarānī.",
+   "ckb": "al-Khaṭīb al-Baghdādī، Iqtiḍāʾ al-ʿIlm al-ʿAmal، ژمارە 10؛ هاوتەریب لای ad-Dārimī و aṭ-Ṭabarānī.",
+   "bs": "al-Khaṭīb al-Baghdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, br. 10; paralelno kod ad-Dārimīja i aṭ-Ṭabarānīja.",
+   "fr": "al-Khaṭīb al-Baghdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, n° 10 ; parallèle chez ad-Dārimī et aṭ-Ṭabarānī.",
+   "es": "al-Khaṭīb al-Baghdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, n.º 10; paralelo en ad-Dārimī y aṭ-Ṭabarānī."
+  },
+  "ʿAbdullāh ibn Masʿūd (رضي الله عنه)": {
+   "ar": "ʿAbdullāh ibn Masʿūd (رضي الله عنه)",
+   "en": "ʿAbdullāh ibn Masʿūd (رضي الله عنه)",
+   "tr": "ʿAbdullāh ibn Masʿūd (رضي الله عنه)",
+   "ku": "ʿAbdullāh ibn Masʿūd (رضي الله عنه)",
+   "ckb": "ʿAbdullāh ibn Masʿūd (رضي الله عنه)",
+   "bs": "ʿAbdullāh ibn Masʿūd (رضي الله عنه)",
+   "fr": "ʿAbdullāh ibn Masʿūd (رضي الله عنه)",
+   "es": "ʿAbdullāh ibn Masʿūd (رضي الله عنه)"
+  },
+  "Diese Riwāyah ist mawqūf überliefert und im Nachweis als ḥasan eingestuft.": {
+   "ar": "هذه الرواية موقوفة، وقد صُنِّفت في الشاهد بأنها حسنة.",
+   "en": "This Riwāyah is transmitted as mawqūf and is graded ḥasan in the reference.",
+   "tr": "Bu rivayet mevkuf olarak nakledilmiştir ve kaynakta hasen diye derecelendirilmiştir.",
+   "ku": "Ev Riwāyah mawqūf hatiye ragihandin û di şahidê de wek ḥasan hatiye nirxandin.",
+   "ckb": "ئەم ڕیوایەتە بە شێوەی مەوقوف گێڕدراوەتەوە و لە بەڵگەکەدا بە حەسەن هەڵسەنگێندراوە.",
+   "bs": "Ova rivāja je prenesena kao mawqūf i u navodu je ocijenjena kao ḥasan.",
+   "fr": "Cette Riwāyah est transmise en mawqūf et classée ḥasan dans la référence.",
+   "es": "Esta Riwāyah se transmite como mawqūf y en la referencia se clasifica como ḥasan."
+  },
+  "Originalquelle ohne Markierung": {
+   "ar": "المصدر الأصلي دون تمييز",
+   "en": "Original source without highlighting",
+   "tr": "İşaretsiz asıl kaynak",
+   "ku": "Çavkaniya resen bê nîşankirin",
+   "ckb": "سەرچاوەی ڕەسەن بەبێ نیشانکردن",
+   "bs": "Izvorni izvor bez označavanja",
+   "fr": "Source originale sans surlignage",
+   "es": "Fuente original sin marcado"
+  },
+  "Islamweb · Ibn ʿAbd al-Barr, Nr. 1266": {
+   "ar": "Islamweb · Ibn ʿAbd al-Barr، رقم 1266",
+   "en": "Islamweb · Ibn ʿAbd al-Barr, no. 1266",
+   "tr": "Islamweb · Ibn ʿAbd al-Barr, no. 1266",
+   "ku": "Islamweb · Ibn ʿAbd al-Barr, nr. 1266",
+   "ckb": "Islamweb · Ibn ʿAbd al-Barr، ژمارە 1266",
+   "bs": "Islamweb · Ibn ʿAbd al-Barr, br. 1266",
+   "fr": "Islamweb · Ibn ʿAbd al-Barr, n° 1266",
+   "es": "Islamweb · Ibn ʿAbd al-Barr, n.º 1266"
   }
  }
 }

@@ -28,8 +28,8 @@
  "pendingReviewLocales": [],
  "review": "machine-translation-owner-approved",
  "humanReligiousReview": false,
- "scope": "primary-quote-and-title",
- "note": "Machine translation of the card title and the displayed German statement. Longer commentary on the card is not claimed as translated here.",
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
  "sourceArabicImmutable": true,
  "locales": {
   "de": {
@@ -93,6 +93,118 @@
    "dir": "ltr",
    "status": "machine-translation-owner-approved",
    "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Wodurch die Ummah wieder gerade wird – DAR AL TAWḤĪD": {
+   "ar": "بما تستقيم به الأمة – DAR AL TAWḤĪD",
+   "en": "By what the Ummah is set right again – DAR AL TAWḤĪD",
+   "tr": "Ummah’ın yeniden doğrulacağı şey – DAR AL TAWḤĪD",
+   "ku": "Tişta ku Ummah pê dîsa rast dibe – DAR AL TAWḤĪD",
+   "ckb": "ئەوەی ئوممەتی پێ ڕاست دەبێتەوە – DAR AL TAWḤĪD",
+   "bs": "Ono čime se ummet ponovo ispravlja – DAR AL TAWḤĪD",
+   "fr": "Ce par quoi l’Ummah redevient droite – DAR AL TAWḤĪD",
+   "es": "Aquello con lo que la Ummah vuelve a enderezarse – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "كتابات وفق القرآن والسنّة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre yazılar",
+   "ku": "Nivîs li gorî Qurʾān, Sunnah û Āthār",
+   "ckb": "بابەتەکان بەپێی قورئان، سوننەت و ئاسار",
+   "bs": "Prilozi prema Qurʾānu, Sunni i Āthāru",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Aportes según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Imām Mālik · Ummah · Salaf": {
+   "ar": "Imām Mālik · Ummah · Salaf",
+   "en": "Imām Mālik · Ummah · Salaf",
+   "tr": "Imām Mālik · Ummah · Salaf",
+   "ku": "Imām Mālik · Ummah · Salaf",
+   "ckb": "Imām Mālik · Ummah · Salaf",
+   "bs": "Imām Mālik · Ummah · Salaf",
+   "fr": "Imām Mālik · Ummah · Salaf",
+   "es": "Imām Mālik · Ummah · Salaf"
+  },
+  "Wodurch die Ummah wieder gerade wird": {
+   "ar": "بما تستقيم به الأمة",
+   "en": "By what the Ummah is set right again",
+   "tr": "Ummah’ın yeniden doğrulacağı şey",
+   "ku": "Tişta ku Ummah pê dîsa rast dibe",
+   "ckb": "ئەوەی ئوممەتی پێ ڕاست دەبێتەوە",
+   "bs": "Ono čime se ummet ponovo ispravlja",
+   "fr": "Ce par quoi l’Ummah redevient droite",
+   "es": "Aquello con lo que la Ummah vuelve a enderezarse"
+  },
+  "„Der letzte Teil dieser Ummah wird nicht gerade gebracht, außer durch das, wodurch ihr erster Teil gerade gebracht wurde.“": {
+   "ar": "«لا يُصلَح آخر هذه الأمة إلا بما صَلَح به أولها.»",
+   "en": "“The latter part of this Ummah will not be set right except by that by which its first part was set right.”",
+   "tr": "“Bu Ummah’ın son kısmı, ancak ilk kısmının kendisiyle doğrulduğu şeyle doğrulur.”",
+   "ku": "“Beşa dawî ya vê Ummahê rast nabe, ji bilî bi wê yekê ku beşa wê ya pêşîn pê rast bû.”",
+   "ckb": "«کۆتاییی ئەم ئوممەتە ڕاست نابێتەوە، مەگەر بەوەی سەرەتاکەی پێی ڕاست بووەتەوە.»",
+   "bs": "„Posljednji dio ovog ummeta neće biti ispravljen osim onim čime je ispravljen njegov prvi dio.“",
+   "fr": "« La dernière partie de cette Ummah ne sera redressée que par ce par quoi sa première partie a été redressée. »",
+   "es": "«La última parte de esta Ummah no será enderezada sino por aquello con lo que fue enderezada su primera parte.»"
+  },
+  "Imām Mālik ibn Anas (رحمه الله).": {
+   "ar": "Imām Mālik ibn Anas (رحمه الله).",
+   "en": "Imām Mālik ibn Anas (رحمه الله).",
+   "tr": "Imām Mālik ibn Anas (رحمه الله).",
+   "ku": "Imām Mālik ibn Anas (رحمه الله).",
+   "ckb": "Imām Mālik ibn Anas (رحمه الله).",
+   "bs": "Imām Mālik ibn Anas (رحمه الله).",
+   "fr": "Imām Mālik ibn Anas (رحمه الله).",
+   "es": "Imām Mālik ibn Anas (رحمه الله)."
+  },
+  "Aufrichtung der Ummah durch denselben Weg wie ihre erste Generation.": {
+   "ar": "استقامة الأمة بالطريق نفسه الذي استقامت به جيلها الأول.",
+   "en": "The setting right of the Ummah by the same path as its first generation.",
+   "tr": "Ummah’ın, ilk neslinin yolu ile doğrulması.",
+   "ku": "Rastbûna Ummahê bi heman rêya nifşê wê yê yekem.",
+   "ckb": "ڕاستبوونەوەی ئوممەت بە هەمان ڕێگەی نەوەی یەکەمی.",
+   "bs": "Ispravljanje ummeta istim putem kao i njegove prve generacije.",
+   "fr": "Le redressement de l’Ummah par le même chemin que sa première génération.",
+   "es": "El enderezamiento de la Ummah por el mismo camino que su primera generación."
+  },
+  "al-Qāḍī ʿIyāḍ, ash-Shifāʾ, Bd. 2, S. 448 nach Islamweb-Ausgabe.": {
+   "ar": "al-Qāḍī ʿIyāḍ، ash-Shifāʾ، المجلد 2، ص 448 حسب طبعة Islamweb.",
+   "en": "al-Qāḍī ʿIyāḍ, ash-Shifāʾ, vol. 2, p. 448 according to the Islamweb edition.",
+   "tr": "al-Qāḍī ʿIyāḍ, ash-Shifāʾ, c. 2, s. 448, Islamweb baskısına göre.",
+   "ku": "al-Qāḍī ʿIyāḍ, ash-Shifāʾ, c. 2, r. 448 li gor çapê Islamweb.",
+   "ckb": "al-Qāḍī ʿIyāḍ، ash-Shifāʾ، بەرگی 2، لاپەڕە 448 بەپێی چاپی Islamweb.",
+   "bs": "al-Qāḍī ʿIyāḍ, ash-Shifāʾ, sv. 2, str. 448 prema izdanju Islamweba.",
+   "fr": "al-Qāḍī ʿIyāḍ, ash-Shifāʾ, t. 2, p. 448 d’après l’édition Islamweb.",
+   "es": "al-Qāḍī ʿIyāḍ, ash-Shifāʾ, vol. 2, p. 448 según la edición de Islamweb."
+  },
+  "Aussage eines Imāms · nicht als Ḥadīṯ ausgeben.": {
+   "ar": "قول إمام · لا يُخرَج على أنه حديث",
+   "en": "Statement of an Imām · do not present it as a Ḥadīṯ.",
+   "tr": "Bir İmâm’ın sözü · Ḥadīṯ olarak sunulmasın.",
+   "ku": "Gotina Îmamekî · wek Ḥadīṯ neyê danîn.",
+   "ckb": "قسەی ئیمامێک · وەک حەدیث دەرنەخرێت.",
+   "bs": "Izjava jednog imāma · ne iznositi je kao ḥadīṯ.",
+   "fr": "Propos d’un Imām · ne pas le présenter comme un Ḥadīṯ.",
+   "es": "Dicho de un Imām · no presentarlo como un Ḥadīṯ."
+  },
+  "Islamweb · Aussage von Mālik": {
+   "ar": "Islamweb · قول Mālik",
+   "en": "Islamweb · statement of Mālik",
+   "tr": "Islamweb · Mālik’in sözü",
+   "ku": "Islamweb · gotina Mālik",
+   "ckb": "Islamweb · قسەی Mālik",
+   "bs": "Islamweb · izjava Mālika",
+   "fr": "Islamweb · propos de Mālik",
+   "es": "Islamweb · dicho de Mālik"
+  },
+  "Zusätzliche interne Seite": {
+   "ar": "صفحة داخلية إضافية",
+   "en": "Additional internal page",
+   "tr": "Ek iç sayfa",
+   "ku": "Rûpela navxweyî ya zêde",
+   "ckb": "پەڕەی ناوخۆییی زیادە",
+   "bs": "Dodatna unutrašnja stranica",
+   "fr": "Page interne supplémentaire",
+   "es": "Página interna adicional"
   }
  }
 }
