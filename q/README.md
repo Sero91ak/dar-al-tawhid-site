@@ -109,3 +109,5 @@ Neue nummerierte Quellenlinks gehören immer in `q/<nummer>/`.
 
 | `q/64` | Fitnah und unwahrhaftige Schmeichelei | `ʿAbdullāh ibn Masʿūd` | al-Ḥākim, al-Mustadrak Nr. 8348; Ibn al-Mubārak Nr. 382; aṭ-Ṭabarānī Nr. 8562 (Variante). Entwurf zur Quellenprüfung. |
 | `q/65` | Maßhalten in Liebe und Hass | `ʿUmar ibn al-Ḫaṭṭāb` | al-Adab al-Mufrad Nr. 1322; al-Albānī Nr. 993. Entwurf zur Quellenprüfung. |
+
+| `q/66` | Fitnah und Bewahrung der Religion | `Muṭarrif ibn ʿAbdillāh ibn aš-Šiḫḫīr` | Ḥilyat al-Awliyāʾ 2/204; zwei Überlieferungswege, abschließende Isnād-Wertung offen. |
