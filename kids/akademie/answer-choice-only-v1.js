@@ -130,6 +130,24 @@
       wrong="Wir dürfen andere absichtlich mit unseren Worten verletzen.";
     }
   }
+  // Respekt: age-specific choices, canonical lesson IDs and saved progress unchanged.
+  if(lesson?.id==="adab-respekt"){
+    if(age==="6-8"&&index===1){
+      prompt="Wie kannst du deiner Familie im Alltag Respekt zeigen?";
+      correct="Ich höre zu, spreche freundlich und helfe, soweit ich kann.";
+      wrong="Ich störe absichtlich und weigere mich, zuzuhören.";
+    }
+    else if(age==="9-10"&&index===1){
+      prompt="Was kannst du tun, wenn du anderer Meinung bist als deine Eltern?";
+      correct="Ich sage ruhig und respektvoll, was ich denke.";
+      wrong="Ich beschimpfe sie, damit ich recht bekomme.";
+    }
+    else if(age==="9-10"&&index===2){
+      prompt="Was lehren Qurʾān 17:23 und die Sunnah über unsere Eltern?";
+      correct="Wir beten Allah allein an und behandeln unsere Eltern mit besonderer Güte.";
+      wrong="Wir brauchen unseren Eltern keine Güte zu zeigen.";
+    }
+  }
   const result={...q,type:"choice",prompt,options:[correct,wrong],correct:0,
    explain:clean(q.sample||q.explain||lesson?.goal||correct),
    hint:clean(q.hint||lesson?.hint||"Denke an unseren Unterricht."),
