@@ -352,7 +352,7 @@ window.DARKidsAcademyCurriculum=Object.freeze({
   "lines": [
    "Meine Worte können andere freuen oder verletzen.",
    "Ich spreche ruhig und höflich.",
-   "Ich muss niemanden verspotten oder beleidigen.",
+   "Ich verspotte und beleidige niemanden.",
    "Auch bei einem Streit kann ich freundlich bleiben."
   ],
   "hint": "Gute Worte sind besser als verletzende Worte.",
@@ -437,6 +437,38 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah."
     }
    ]
+  },
+  "ageText": {
+   "4-5": {
+    "intro": "Heute lernen wir, freundlich zu sprechen. Auch wenn wir uns ärgern, können wir gute Worte sagen.",
+    "lines": [
+     "Meine Worte können andere freuen.",
+     "Ich spreche ruhig und freundlich.",
+     "Ich verspotte und beleidige niemanden.",
+     "Wenn ich Hilfe brauche, darf ich darum bitten."
+    ],
+    "evidence": "Wir sollen gute Worte sagen. Der Prophet ﷺ lehrte uns, Gutes zu sagen oder zu schweigen."
+   },
+   "6-8": {
+    "intro": "Wir lernen, wie wir auch bei Streit freundlich und ehrlich sprechen. Wir denken nach, bevor wir etwas sagen.",
+    "lines": [
+     "Meine Worte können andere freuen oder verletzen.",
+     "Wenn ich mich ärgere, denke ich kurz nach.",
+     "Ich verspotte und beleidige niemanden.",
+     "Ich kann sagen, was mich stört, ohne gemein zu werden."
+    ],
+    "evidence": "Im Qurʾān werden wir angeleitet, die besten Worte zu wählen. Der Prophet ﷺ lehrte uns, Gutes zu sagen oder zu schweigen."
+   },
+   "9-10": {
+    "intro": "Wir lernen, warum gute Worte zum islamischen Benehmen gehören und wie wir sie auch bei Meinungsverschiedenheiten wählen.",
+    "lines": [
+     "Gute Worte können Streit verhindern und Beziehungen stärken.",
+     "Wir sprechen ehrlich und respektvoll, auch wenn wir anderer Meinung sind.",
+     "Wir verzichten auf Spott und Beleidigungen.",
+     "Schweigen bedeutet nicht, Unrecht hinzunehmen. Wenn jemand verletzt oder bedroht wird, holen wir Hilfe."
+    ],
+    "evidence": "Im Qurʾān wird uns aufgetragen, die besten Worte zu wählen. Die Sunnah lehrt: Wer an Allah und den Jüngsten Tag glaubt, soll Gutes sagen oder schweigen."
+   }
   }
  },
  "adab-respekt": {
