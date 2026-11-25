@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-25",
+  "batchSize": 10,
+  "range": "HAD-3445–HAD-3454",
+  "type": "athar",
+  "previousBlock": "HAD-3435–HAD-3444",
+  "sourceBook": "Mālik, al-Muwaṭṭaʾ",
+  "sourceArabicNumbers": [
+    333,
+    334,
+    338,
+    339,
+    344,
+    346,
+    349,
+    353,
+    432,
+    1772
+  ],
+  "excludedParallel": {
+    "350": 349
+  },
+  "review": {
+    "primarySources": "Original Arabic and Arabic/English reference numbers independently inspected on https://sunnah.com/malik/9, /10, /54; each chain and translation documented. No print edition or exhaustive ʿilal grade claimed.",
+    "duplicateCheck": "Full existing generated shell (3434 records, blob 6789f895143a41ed0ca2486af01a95045c9b3512) fetched using blob endpoint. Normalized German token-overlap ranking and exact Muwaṭṭaʾ number across corpus, compared top results for 20 candidates including prior batch. Targeted Arabic and German repository searches. No clear match surfaced. Parallel 349/350 combined; distinction from HAD-0440 documented. Full semantic equivalence cannot be guaranteed, generated shell still omits prior 10 so those were compared separately by their source numbers and subject.",
+    "previousCorrection": "HAD-3444 chapter corrected to Kitāb al-Ǧāmiʿ, book 54 report 5, Arabic numbering 1770. All ten prior original references located in corresponding books 18/19/48/53/54.",
+    "delivery": "Canonical source records and audit only; generated counts remain workflow-owned. No OneSignal, kids or UI modifications. Previous global live rebuild not confirmed; no claim of delivery before CI."
+  },
+  "targetTotals": {
+    "total": 3454,
+    "hadith": 2408,
+    "athar": 1046
+  },
+  "nextId": "HAD-3455"
+}
