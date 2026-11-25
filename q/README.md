@@ -113,3 +113,5 @@ Neue nummerierte Quellenlinks gehören immer in `q/<nummer>/`.
 | `q/66` | Fitnah und Bewahrung der Religion | `Muṭarrif ibn ʿAbdillāh ibn aš-Šiḫḫīr` | Ḥilyat al-Awliyāʾ 2/204; zwei Überlieferungswege, abschließende Isnād-Wertung offen. |
 
 | `q/67` | Die Hand ohne Verähnlichung | Abū Ḥanīfah (zugeschriebener Text) | al-Fiqh al-Absaṭ S. 56; Parallelstellen, direkter Šarḥ von al-Bayāḍī und Šarḥ al-Akbar von al-Qārī; vier Fragen in neun Sprachen; Zuschreibung nicht gesichert. |
+
+| `q/68` | Wenn der Charakter verloren geht | Abū Bakr al-Wāsiṭī | Ḥilyat al-Awliyāʾ 10/349; al-Muntaẓam, Biographie 2329 |
