@@ -9680,6 +9680,19 @@
         "lernen/umar-liebe-hass-gerechtigkeit/index.html"
       ],
       "expiresAt": "2026-11-26T23:59:00+01:00"
+    },
+    {
+      "id": "owner-q64-q65-adult-content-20261125",
+      "at": "2026-11-25T12:44:00+01:00",
+      "approvedBy": "owner-explicit-20261125-push-both-individually",
+      "reason": "Explizite Freigabe für zwei getrennte kanonische Erwachsenenbeiträge und ihre vorhandenen neun Sprachfassungen; bestehender Admin-Publisher zunächst nur Inhalt, separate bereits genehmigte OneSignal-Nachrichten erst nach bestätigter Beitrags-Liveprüfung. Keine Änderung am Push-System.",
+      "paths": [
+        "assets/q64-locales.json",
+        "content/admin/chat-publish-requests/ibn-masud-religion-schmeichelei-20261124-q64.json",
+        "assets/q65-locales.json",
+        "content/admin/chat-publish-requests/umar-liebe-hass-gerechtigkeit-20261124-q65.json"
+      ],
+      "expiresAt": "2026-11-26T23:59:00+01:00"
     }
   ],
   "enabled": true
