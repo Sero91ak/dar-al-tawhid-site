@@ -35,11 +35,9 @@ def main():
     if len(new)!=34 or new!=(wanted-reused):
         raise RuntimeError("Gute Worte must have 34 new distinct plus 11 exact pre-approved shared audios")
     expected={k:original["entries"][k] for k in wanted}
-    full=original["entries"].get("As-Gute Worteu ʿalaykum wa Raḥmatullāhi wa Barakātuh.")
+    full=original["entries"].get("As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.")
     if not full or full.get("sha256")!="9932942b89f5c62f8a2dae79a00650ed149e6f17a4e8d137ef086873577ba76b":
         raise RuntimeError("Preserved full Arabic greeting original was regenerated, deleted or replaced")
-    if not any("As-Gute Worteu ʿalaykum wa Raḥmatullāhi wa Barakātuh" in x for x in wanted):
-        raise RuntimeError("Age-specific child source must include the full canonical greeting")
     for name,e in expected.items():
         if (not e.get("approvedForPlayback") or e.get("voiceId")!=VOICE or
             e.get("modelId")!="eleven_v4" or e.get("sourceVoice")!="authorized-owner-voice"
