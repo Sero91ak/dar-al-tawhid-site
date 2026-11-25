@@ -111,3 +111,5 @@ Neue nummerierte Quellenlinks gehören immer in `q/<nummer>/`.
 | `q/65` | Maßhalten in Liebe und Hass | `ʿUmar ibn al-Ḫaṭṭāb` | al-Adab al-Mufrad Nr. 1322; al-Albānī Nr. 993. Entwurf zur Quellenprüfung. |
 
 | `q/66` | Fitnah und Bewahrung der Religion | `Muṭarrif ibn ʿAbdillāh ibn aš-Šiḫḫīr` | Ḥilyat al-Awliyāʾ 2/204; zwei Überlieferungswege, abschließende Isnād-Wertung offen. |
+
+| `q/67` | Die Hand ohne Verähnlichung | Abū Ḥanīfah (zugeschriebener Text) | al-Fiqh al-Absaṭ S. 56; Parallelstellen, direkter Šarḥ von al-Bayāḍī und Šarḥ al-Akbar von al-Qārī; vier Fragen in neun Sprachen; Zuschreibung nicht gesichert. |
