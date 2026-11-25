@@ -46,3 +46,53 @@ Stand 06.11.2026. Zwei zuvor fehlende Verse im Kitāb at-Tafsīr des Ṣaḥī�
 - 3:47 Nr. 7079: Ibn Ḥumayd; alternative Sīrah-Überlieferung gesondert prüfen.
 
 Zusätzlich 3:21, 3:54, 3:76, 3:104, 2:244 gesichtet; kein neuer freigegebener Eintrag. 3:104 Nr. 7596 betrifft eine überlieferte abweichende Lesefassung; keine Verwechslung mit Ḥafṣ-Text. 3:15 Quelle nicht erreichbar. Diese Kandidaten bleiben offen. Insgesamt 23 erreichbare Tafsīr-Abschnitte gesichtet, eine weitere Verslücke durch authentischen Ḥadīṯ geschlossen. Katalog auf dem Prüfzweig: 4778/6236, offen 1458. Vollprüfung und Produktion noch nicht bestätigt.
+
+## Zehnerblock vollständig – 25.11.2026
+
+Sechs zusätzliche tatsächlich fehlende Referenzen; nun zehn Einträge in Batch 06-271. Die Bewertungen früher Tafsīr-Ketten sind eigene nachvollziehbare Isnād-Einschätzungen, nicht als wörtliche externe Gelehrtenurteile ausgegeben. Alle Originalstellen mit Wortlaut abgeglichen. Details:
+
+### 5:5
+Tafsīr aṭ-Ṭabarī zu Qurʾān 5:5, Nr. 11227 – https://quran.ksu.edu.sa/tafseer/tabary/sura5-aya5.html
+
+Yaʿqūb ibn Ibrāhīm ad-Dawraqī → Ismāʿīl ibn ʿUlayyah → Šuʿbah ibn al-Ḥaǧǧāǧ: «سألت الحكم وحمادًا وقتادة عن ذبائح نصارى بني تغلب، فقالوا: لا بأس بها». Explizite Befragung, vertrauenswürdige Überlieferer. Maqṭūʿ. Die anderen in aṭ-Ṭabarī dokumentierten Auffassungen bleiben unberührt; keine pauschale Entscheidung über heutige Schlachtverfahren.
+
+Einstufung: isnād ṣaḥīḥ. Frühe Rechtsauffassung zur Auslegung von 5:5, nicht behaupteter Konsens.
+
+### 5:12
+Tafsīr aṭ-Ṭabarī zu Qurʾān 5:12, Nr. 11569 – https://quran.ksu.edu.sa/tafseer/tabary/sura5-aya12.html
+
+Original: «من كل سبط رجل شاهد على قومه». Bišr ibn Muʿāḏ al-ʿAqadī (ṣadūq) → Yazīd ibn Zurayʿ (ṯiqah, ṯabt, hörte vor Saʿīds Iḫtilāṭ) → Saʿīd ibn Abī ʿArūbah (besonders zuverlässig in Qatādahs Tafsīr) → Qatādah. Vgl. die Kettenanalyse bei al-Ṣaḥīḥ al-masbūr min at-tafsīr bi-l-maʾṯūr, Bd. 1, S. 52, https://quranpedia.net/book/305/1/52. Vorsichtige eigene Bewertung als ḥasan bis zum Tābiʿī, nicht als marfūʿer Ḥadīṯ.
+
+Einstufung: isnād ḥasan. Direkte frühe Worterklärung zu 5:12.
+
+### 5:32
+Tafsīr aṭ-Ṭabarī zu Qurʾān 5:32, Nr. 11793 – https://quran.ksu.edu.sa/tafseer/tabary/sura5-aya32.html
+
+Verwendeter Weg (nicht der parallele Weg über Ibn Wakīʿ): Hannād ibn as-Sarī → Wakīʿ ibn al-Ǧarrāḥ → Sufyān aṯ-Ṯawrī → Manṣūr ibn al-Muʿtamir → Muǧāhid. «من غرق أو حرق أو هدم». Anerkannte Kūfer Überlieferer; Manṣūrs Überlieferung von Muǧāhid ist etabliert. Eigene Isnād-Bewertung bis Muǧāhid, maqṭūʿ. Aṭ-Ṭabarī dokumentiert mehrere Deutungen, die hier nicht ausgeschlossen werden.
+
+Einstufung: isnād ṣaḥīḥ. Direkte frühe Auslegung der Wendung ومن أحياها.
+
+### 5:35
+Tafsīr aṭ-Ṭabarī zu Qurʾān 5:35, Nr. 11902 (Weg über Bišr) – https://quran.ksu.edu.sa/tafseer/tabary/sura5-aya35.html
+
+Original: «تقربوا إليه بطاعته والعمل بما يرضيه». Die KSU-Edition führt die Nummer 11902 zweimal; gemeint ist ausdrücklich der Weg über Bišr, nicht der nachfolgende Muǧāhid-Bericht. Bišr ibn Muʿāḏ al-ʿAqadī (ṣadūq) → Yazīd ibn Zurayʿ (ṯiqah, ṯabt, hörte vor Saʿīds Iḫtilāṭ) → Saʿīd ibn Abī ʿArūbah (besonders zuverlässig in Qatādahs Tafsīr) → Qatādah. Vgl. die Kettenanalyse bei al-Ṣaḥīḥ al-masbūr min at-tafsīr bi-l-maʾṯūr, Bd. 1, S. 52, https://quranpedia.net/book/305/1/52. Vorsichtige eigene Bewertung als ḥasan bis zum Tābiʿī, nicht als marfūʿer Ḥadīṯ.
+
+Einstufung: isnād ḥasan. Direkte Auslegung der Wasīlah im Vers.
+
+### 5:38
+Ṣaḥīḥ al-Buḫārī 6789, Kitāb al-Ḥudūd, Kapitel zu 5:38; Tafsīr aṭ-Ṭabarī zu 5:38, Nr. 11912 – https://sunnah.com/bukhari:6789
+
+ʿAbd Allāh ibn Maslamah al-Qaʿnabī → Ibrāhīm ibn Saʿd → Ibn Šihāb az-Zuhrī → ʿAmrah bint ʿAbd ar-Raḥmān → ʿĀʾišah. Aṭ-Ṭabarī führt denselben Bericht bei 5:38 an: https://quran.ksu.edu.sa/tafseer/tabary/sura5-aya38.html. Historischer rechtswissenschaftlicher Kontext, keine Handlungsanleitung, keine Verkürzung der weiteren rechtlichen Voraussetzungen.
+
+Einstufung: ṣaḥīḥ. Marfūʿer Bericht, expliziter Versbezug durch Kapitelüberschrift und aṭ-Ṭabarī.
+
+### 5:45
+Ṣaḥīḥ al-Buḫārī 4611, Kitāb Tafsīr al-Qurʾān, Kapitel zu 5:45 – https://sunnah.com/bukhari:4611
+
+Muḥammad ibn Salām → al-Fazārī (Marwān ibn Muʿāwiyah) → Ḥumayd aṭ-Ṭawīl → Anas. Kapiteltitel «والجروح قصاص». Der Bericht unterscheidet den gerichtlichen Anspruch und die freiwillige Annahme eines Ausgleichs. Keine private Vergeltung und keine allgemeine rechtliche Handlungsanweisung.
+
+Einstufung: ṣaḥīḥ. Authentischer marfūʿer Bericht zur konkreten gerichtlichen Anwendung und Einigung.
+
+**Nicht freigegeben:** 5:8 (Nr. 11556, mursal/historische Zuschreibung), 5:9–10 (hier vorwiegend eigene Erklärung aṭ-Ṭabarīs), 5:11 (historische mursal-Berichte, alternative Wege gesondert prüfen), 5:16 (as-Suddī-Weg), 5:39 (u.a. Ibn Lahīʿah), 4:125 (Ǧuwaybir-Weg). Die Lücken bleiben im Report. 5:95 bleibt für den nächsten Durchgang offen; Bukhārī 1821 erklärt einen anderen konkreten Teil des Jagdthemas.
+
+Stand des Prüfzweigs 4784/6236; offen 1452. Alle zehn Referenzen aus dem main-Lückenreport; inkrementelle Katalog-, Index- und Referenzprüfung erfolgreich. Vollvalidator und globale Auslieferung gesondert nachweisen. Kein UI-, Kids- oder OneSignal-Eingriff.
