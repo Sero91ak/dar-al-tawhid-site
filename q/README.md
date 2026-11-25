@@ -113,3 +113,5 @@ Neue nummerierte Quellenlinks gehören immer in `q/<nummer>/`.
 | `q/66` | Fitnah und Bewahrung der Religion | `Muṭarrif ibn ʿAbdillāh ibn aš-Šiḫḫīr` | Ḥilyat al-Awliyāʾ 2/204; zwei Überlieferungswege, abschließende Isnād-Wertung offen. |
 
 | `q/67` | Die Hand ohne Verähnlichung | Abū Ḥanīfah (zugeschriebener Text) | al-Fiqh al-Absaṭ S. 56; Parallelstellen, direkter Šarḥ von al-Bayāḍī und Šarḥ al-Akbar von al-Qārī; vier Fragen in neun Sprachen; Zuschreibung nicht gesichert. |
+
+| `q/69` | Zuhd, Dunyā und Āḫirah | `ʿAbdullāh ibn Masʿūd` | Āṯar mawqūf: mehr Gebet und Fasten, und doch waren die Gefährten besser, weil sie enthaltsamer in der Dunyā und sehnsüchtiger nach der Āḫirah waren. al-Mustadrak 4/350 Nr. 7880; Wortlautvarianten getrennt. |
