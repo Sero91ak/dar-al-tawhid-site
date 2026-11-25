@@ -1,0 +1,196 @@
+{
+  "status": "editorial-draft-not-published",
+  "proposedQ": 67,
+  "canonical": "/q/67/",
+  "rtl": [
+    "ar",
+    "ckb"
+  ],
+  "pending": [
+    "Full catalogue and semantic duplicate review",
+    "Full independent isnad and rijal assessment",
+    "Review each translation and learning explanation",
+    "Verify bibliographic edition and PDF anchors for all additional works",
+    "Check Q66 merge and rebase before reserving Q67",
+    "Scoped release approval, CI, Cloudflare HTTP and device checks"
+  ],
+  "sources": [
+    {
+      "work": "al-Fiqh al-Absaṭ",
+      "page": "56",
+      "scan": "https://mc.dlib.nyu.edu/files/books/nyu_aco000330/nyu_aco000330_lo.pdf#page=60",
+      "text": "https://usul.ai/ar/t/fiqh-absat/50",
+      "scanVerified": true
+    },
+    {
+      "work": "al-Fiqh al-Akbar and Sharḥ by Mullā ʿAlī al-Qārī",
+      "page": "67",
+      "text": "https://ablibrary.net/book_content/b/9306/67?lang=ar",
+      "alternative": "https://books.rafed.net/view/3451/page/67"
+    },
+    {
+      "work": "Uṣūl al-Bazdawī",
+      "page": "9",
+      "text": "https://thahabi.org/book/9523/read/9",
+      "note": "Compare Kashf al-Asrar 1/60; digital transcription has a possible dropped negation, verify against scan."
+    },
+    {
+      "work": "Išārāt al-Marām min ʿIbārāt al-Imām, al-Bayāḍī",
+      "page": "149",
+      "text": "https://thahabi.org/book/25200/read/149",
+      "note": "Explicit later commentary of al-Fiqh al-Absaṭ; paraphrase, not a direct early isnad."
+    }
+  ],
+  "quizCorrect": [
+    true,
+    false,
+    true,
+    false
+  ],
+  "locales": {
+    "de": {
+      "title": "Die Hand ohne Verähnlichung",
+      "absat": "Die Hand Allahs ist über ihren Händen. Sie ist nicht wie die Hände Seiner Geschöpfe, sie ist kein Körperglied, und Er ist der Schöpfer der Hände.",
+      "akbar": "Man sagt nicht, dass Seine Hand Seine Macht oder Seine Gunst sei, denn darin liegt die Aufhebung der Eigenschaft. […] Vielmehr ist Seine Hand Seine Eigenschaft ohne Wie.",
+      "bazdawi": "Ebenso ist die Bestätigung der Hand und des Angesichts bei uns wahr: ihrem Grund nach bekannt, in ihrer Beschaffenheit mehrdeutig. Es ist nicht zulässig, das Grundlegende aufzuheben, weil man die Beschaffenheit nicht erfassen kann.",
+      "qari": "Al-Qārī erläutert »ohne Wie« als »ohne Kenntnis ihrer Beschaffenheit«. Seine Erklärung bezieht sich auf al-Fiqh al-Akbar.",
+      "bayadi": "Al-Bayāḍī erklärt die Aussage in al-Fiqh al-Absaṭ damit, dass der Schöpfer dem Geschöpf nicht gleicht. Er verneint Körperglieder, Körperlichkeit und Ähnlichkeit.",
+      "status": "Die beiden Werke werden Abū Ḥanīfah zugeschrieben. Die Überlieferung von al-Fiqh al-Absaṭ über Abū Muṭīʿ al-Balḫī ist überlieferungskritisch umstritten; die sichere Zuschreibung ist nicht nachgewiesen. Spätere Kommentare sind keine unabhängigen frühen Überlieferungsketten.",
+      "conclusion": "Der überlieferte Text bestätigt die Eigenschaft und verneint die Ähnlichkeit mit Geschöpfen. Die Passage allein entscheidet nicht jede Debatte über Tafwīḍ.",
+      "quiz": [
+        "Der Wortlaut verneint die Ähnlichkeit mit Geschöpfen.",
+        "Der Wortlaut beschreibt ein Körperglied.",
+        "Al-Qārī kommentiert hier al-Fiqh al-Akbar.",
+        "Die Zuschreibung an Abū Ḥanīfah ist zweifelsfrei authentisch."
+      ]
+    },
+    "ar": {
+      "title": "إثبات اليد بلا تشبيه",
+      "absat": "يد الله فوق أيديهم ليست كأيدي خلقه وليست بجارحة وهو خالق الأيدي.",
+      "akbar": "ولا يقال إن يده قدرته أو نعمته لأن فيه إبطال الصفة […] ولكن يده صفته بلا كيف.",
+      "bazdawi": "وكذلك إثبات اليد والوجه حق عندنا معلوم بأصله متشابه بوصفه، ولا يجوز إبطال الأصل بالعجز عن درك الوصف.",
+      "qari": "فسر علي القاري عبارة «بلا كيف» بقوله «بلا معرفة كيفيته». وهذا الشرح متعلق بالفقه الأكبر.",
+      "bayadi": "علل البياضي كلام الفقه الأبسط بأن الخالق لا يشابه المخلوق، ونفى الجوارح والتجسم ومشابهة المخلوقات.",
+      "status": "الكتابان منسوبان إلى أبي حنيفة. ورواية الفقه الأبسط عن أبي مطيع البلخي محل خلاف من جهة النقد الحديثي؛ ولم تثبت النسبة على وجه القطع. والشروح المتأخرة ليست أسانيد مبكرة مستقلة.",
+      "conclusion": "النص المنقول يثبت الصفة وينفي مشابهة المخلوقات. ولا يحسم هذا النص وحده كل مسائل التفويض.",
+      "quiz": [
+        "ينفي النص مشابهة المخلوقات.",
+        "يصف النص اليد بأنها جارحة.",
+        "يشرح القاري هنا الفقه الأكبر.",
+        "ثبتت نسبة النص إلى أبي حنيفة بلا أي شك."
+      ]
+    },
+    "en": {
+      "title": "Affirming the Hand without resemblance",
+      "absat": "Allah’s Hand is above their hands. It is not like the hands of His creatures, it is not a bodily limb, and He is the Creator of hands.",
+      "akbar": "It is not said that His Hand is His power or His favour, for that would negate the attribute. […] Rather, His Hand is His attribute without asking how.",
+      "bazdawi": "Affirming the Hand and the Face is likewise true according to us: known in its basis, ambiguous in its modality. The basis may not be negated because its modality cannot be grasped.",
+      "qari": "Al-Qārī explains ‘without how’ as ‘without knowledge of its modality’. This commentary concerns al-Fiqh al-Akbar.",
+      "bayadi": "Al-Bayāḍī explains the passage of al-Fiqh al-Absaṭ by stating that the Creator does not resemble the creature. He denies bodily limbs, corporeality and resemblance.",
+      "status": "Both works are attributed to Abū Ḥanīfah. The transmission of al-Fiqh al-Absaṭ through Abū Muṭīʿ al-Balḫī is disputed in transmission criticism; certain attribution has not been established. Later commentaries are not independent early chains.",
+      "conclusion": "The transmitted text affirms the attribute and denies resemblance to creatures. This passage alone does not settle every debate about tafwīḍ.",
+      "quiz": [
+        "The text denies resemblance to creatures.",
+        "The text describes a bodily limb.",
+        "Al-Qārī is commenting on al-Fiqh al-Akbar here.",
+        "The attribution to Abū Ḥanīfah is unquestionably authentic."
+      ]
+    },
+    "tr": {
+      "title": "Teşbih olmaksızın el sıfatının ispatı",
+      "absat": "Allah’ın eli onların ellerinin üzerindedir. Yarattıklarının elleri gibi değildir; bir organ değildir. O, ellerin yaratıcısıdır.",
+      "akbar": "O’nun elinin kudreti veya nimeti olduğu söylenmez; çünkü bunda sıfatın iptali vardır. […] Bilakis eli, keyfiyeti belirtilmeksizin O’nun sıfatıdır.",
+      "bazdawi": "El ve yüzün ispatı da bize göre haktır; aslı bilinir, keyfiyeti müteşabihtir. Keyfiyeti kavrayamamaktan dolayı aslı iptal etmek caiz değildir.",
+      "qari": "Ali el-Kārî, ‘bilâ keyf’ ifadesini ‘keyfiyetini bilmeksizin’ diye açıklar. Bu şerh el-Fıkhü’l-Ekber’e aittir.",
+      "bayadi": "Beyâzî, el-Fıkhü’l-Ebsat’taki ifadeyi Yaratıcı’nın yaratılana benzememesiyle açıklar; organları, cisim olmayı ve benzerliği reddeder.",
+      "status": "Her iki eser Ebû Hanîfe’ye nispet edilir. El-Fıkhü’l-Ebsat’ın Ebû Mutîʿ el-Belhî yoluyla rivayeti tenkit açısından ihtilaflıdır; kesin nispet ispatlanmamıştır. Sonraki şerhler bağımsız erken dönem isnatları değildir.",
+      "conclusion": "Nakledilen metin sıfatı ispat eder ve yaratılmışlara benzerliği reddeder. Bu pasaj tek başına tefviz hakkındaki bütün tartışmaları çözmez.",
+      "quiz": [
+        "Metin yaratılmışlara benzerliği reddeder.",
+        "Metin bir organ tarif eder.",
+        "Kārî burada el-Fıkhü’l-Ekber’i şerh eder.",
+        "Ebû Hanîfe’ye nispet kesin olarak sahihtir."
+      ]
+    },
+    "ku": {
+      "title": "Îsbata destê bêyî şibandinê",
+      "absat": "Destê Allah li ser destên wan e. Ew ne wek destên mexlûqên Wî ye, ne endamekî bedenê ye û Ew Afirînerê destan e.",
+      "akbar": "Nayê gotin ku destê Wî hêza Wî an nimeta Wî ye, ji ber ku ev sifetê betal dike. […] Belkî destê Wî sifeta Wî ye, bêyî diyarkirina çawaniyê.",
+      "bazdawi": "Li cem me îsbata dest û rû rast e; eslê wê tê zanîn, çawaniya wê nezelal e. Ji ber ku em nikarin çawaniyê fêm bikin, em nikarin eslê betal bikin.",
+      "qari": "El-Qarî ‘bêyî çawan’ bi ‘bêyî zanîna çawaniya wê’ şîrove dike. Ev şîrove ji bo el-Fiqh el-Ekber e.",
+      "bayadi": "El-Beyadî gotina el-Fiqh el-Ebsat bi vê yekê rave dike ku Afirîner naşibe mexlûqê. Ew endamên bedenê, cism û şibandinê red dike.",
+      "status": "Her du berhem bi Ebû Henîfe ve tên nisbetkirin. Veguhastina el-Fiqh el-Ebsat bi rêya Ebû Mutî el-Belxî ji aliyê rexneya rivayetê ve cihê nîqaşê ye; nisbetkirina teqez nehatiye îspatkirin. Şîroveyên paşîn isnadên destpêkê yên serbixwe nînin.",
+      "conclusion": "Nivîsa veguhastî sifetê îsbat dike û şibandina bi mexlûqan red dike. Ev beş bi tenê hemû nîqaşên tefwîdê çareser nake.",
+      "quiz": [
+        "Nivîs şibandina bi mexlûqan red dike.",
+        "Nivîs endamekî bedenê rave dike.",
+        "El-Qarî li vir el-Fiqh el-Ekber şîrove dike.",
+        "Nisbeta Ebû Henîfe bêguman rast e."
+      ]
+    },
+    "ckb": {
+      "title": "سەلماندنی دەست بەبێ هاوشێوەکردن",
+      "absat": "دەستی الله لە سەر دەستەکانیانە. وەک دەستی دروستکراوەکانی نییە، ئەندامێکی جەستەش نییە، و ئەو دروستکەری دەستەکانە.",
+      "akbar": "ناگوترێت دەستی ئەو توانای ئەو یان نیعمەتی ئەوە، چونکە ئەمە هەڵوەشاندنەوەی سیفەتەکەیە. […] بەڵکو دەستی ئەو سیفەتی ئەوە بەبێ دیاریکردنی چۆنیەتی.",
+      "bazdawi": "لە لای ئێمە سەلماندنی دەست و ڕوو ڕاستە؛ بنەماکەی زانراوە و چۆنیەتییەکەی ناڕوونە. بەهۆی نەتوانینی تێگەیشتن لە چۆنیەتی نابێت بنەماکە هەڵبوەشێندرێتەوە.",
+      "qari": "قاری «بەبێ چۆنیەتی» بە «بەبێ زانینی چۆنیەتییەکەی» ڕوون دەکاتەوە. ئەم شەرەحە بۆ الفقه الأكبر ـە.",
+      "bayadi": "بەیازی وتەکەی الفقه الأبسط بەوە ڕوون دەکاتەوە کە دروستکەر هاوشێوەی دروستکراو نییە؛ ئەندامی جەستە و جەستەبوون و هاوشێوەیی ڕەت دەکاتەوە.",
+      "status": "هەردوو بەرهەمەکە بە ئەبو حەنیفە دەدرێنە پاڵ. گواستنەوەی الفقه الأبسط لە ڕێگەی ئەبو موتیع بەڵخییەوە لە ڕووی ڕەخنەی ڕیوایەتەوە جێی مشتومڕە؛ پاڵپێوەدانەکە بە دڵنیایی نەسەلمێنراوە. شەرەحەکانی دواتر زنجیرەی گواستنەوەی سەربەخۆی سەرەتایی نین.",
+      "conclusion": "دەقە گێڕدراوەکە سیفەتەکە دەسەلمێنێت و هاوشێوەیی لەگەڵ دروستکراوەکان ڕەت دەکاتەوە. ئەم دەقە بە تەنها هەموو مشتومڕەکانی تەفویز یەکلایی ناکاتەوە.",
+      "quiz": [
+        "دەقەکە هاوشێوەیی لەگەڵ دروستکراوەکان ڕەت دەکاتەوە.",
+        "دەقەکە باس لە ئەندامێکی جەستە دەکات.",
+        "قاری لێرە الفقه الأكبر شەرەح دەکات.",
+        "پاڵپێوەدانی وتەکە بە ئەبو حەنیفە بەبێ هیچ گومانێک سەلمێنراوە."
+      ]
+    },
+    "bs": {
+      "title": "Potvrđivanje Ruke bez poistovjećivanja",
+      "absat": "Allahova Ruka je iznad njihovih ruku. Nije poput ruku Njegovih stvorenja, nije tjelesni ud, a On je Stvoritelj ruku.",
+      "akbar": "Ne kaže se da je Njegova Ruka Njegova moć ili blagodat, jer se time poništava svojstvo. […] Naprotiv, Njegova Ruka je Njegovo svojstvo bez određivanja kakvoće.",
+      "bazdawi": "Isto tako, potvrđivanje Ruke i Lica kod nas je istina: poznato u osnovi, nejasno u kakvoći. Nije dopušteno poništiti osnovu zato što se kakvoća ne može dokučiti.",
+      "qari": "El-Kari pojašnjava izraz ‘bez kakvoće’ riječima ‘bez poznavanja njene kakvoće’. Ovaj komentar odnosi se na el-Fikh el-ekber.",
+      "bayadi": "El-Bejadi objašnjava iskaz iz el-Fikh el-ebsata time da Stvoritelj nije sličan stvorenju. Negira tjelesne udove, tjelesnost i sličnost.",
+      "status": "Oba djela pripisuju se Ebu Hanifi. Predaja el-Fikh el-ebsata preko Ebu Mutiʿ el-Belhija predmet je kritičkog spora; sigurna atribucija nije dokazana. Kasniji komentari nisu nezavisni rani lanci prenošenja.",
+      "conclusion": "Preneseni tekst potvrđuje svojstvo i negira sličnost sa stvorenjima. Sam ovaj odlomak ne rješava svaku raspravu o tefvidu.",
+      "quiz": [
+        "Tekst negira sličnost sa stvorenjima.",
+        "Tekst opisuje tjelesni ud.",
+        "El-Kari ovdje komentariše el-Fikh el-ekber.",
+        "Pripisivanje Ebu Hanifi nesumnjivo je vjerodostojno."
+      ]
+    },
+    "fr": {
+      "title": "Affirmer la Main sans assimilation",
+      "absat": "La Main d’Allah est au-dessus de leurs mains. Elle n’est pas comme les mains de Ses créatures, elle n’est pas un membre corporel, et Il est le Créateur des mains.",
+      "akbar": "On ne dit pas que Sa Main est Sa puissance ou Sa faveur, car cela annule l’attribut. […] Sa Main est plutôt Son attribut sans en déterminer le comment.",
+      "bazdawi": "L’affirmation de la Main et du Visage est également vraie selon nous : connue dans son principe, ambiguë quant à sa modalité. Il n’est pas permis d’annuler le principe faute de pouvoir saisir la modalité.",
+      "qari": "Al-Qārī explique « sans comment » par « sans connaissance de sa modalité ». Ce commentaire concerne al-Fiqh al-Akbar.",
+      "bayadi": "Al-Bayāḍī explique le passage d’al-Fiqh al-Absaṭ par le fait que le Créateur ne ressemble pas à la créature. Il nie les membres corporels, la corporéité et la ressemblance.",
+      "status": "Les deux ouvrages sont attribués à Abū Ḥanīfah. La transmission d’al-Fiqh al-Absaṭ par Abū Muṭīʿ al-Balḫī est contestée au regard de la critique des transmissions ; l’attribution certaine n’est pas établie. Les commentaires tardifs ne sont pas des chaînes anciennes indépendantes.",
+      "conclusion": "Le texte transmis affirme l’attribut et nie la ressemblance aux créatures. Ce passage seul ne tranche pas tous les débats sur le tafwīḍ.",
+      "quiz": [
+        "Le texte nie la ressemblance aux créatures.",
+        "Le texte décrit un membre corporel.",
+        "Al-Qārī commente ici al-Fiqh al-Akbar.",
+        "L’attribution à Abū Ḥanīfah est incontestablement authentique."
+      ]
+    },
+    "es": {
+      "title": "Afirmar la Mano sin semejanza",
+      "absat": "La Mano de Allah está sobre sus manos. No es como las manos de Sus criaturas, no es un miembro corporal y Él es el Creador de las manos.",
+      "akbar": "No se dice que Su Mano sea Su poder o Su favor, pues eso anularía el atributo. […] Más bien, Su Mano es Su atributo sin determinar cómo.",
+      "bazdawi": "La afirmación de la Mano y del Rostro también es verdadera según nosotros: conocida en su fundamento, ambigua en su modalidad. No es lícito anular el fundamento por no poder comprender la modalidad.",
+      "qari": "Al-Qārī explica «sin cómo» como «sin conocer su modalidad». Este comentario se refiere a al-Fiqh al-Akbar.",
+      "bayadi": "Al-Bayāḍī explica el pasaje de al-Fiqh al-Absaṭ señalando que el Creador no se asemeja a la criatura. Niega los miembros corporales, la corporeidad y la semejanza.",
+      "status": "Ambas obras se atribuyen a Abū Ḥanīfah. La transmisión de al-Fiqh al-Absaṭ a través de Abū Muṭīʿ al-Balḫī es discutida desde la crítica de la transmisión; no se ha establecido una atribución segura. Los comentarios posteriores no son cadenas tempranas independientes.",
+      "conclusion": "El texto transmitido afirma el atributo y niega la semejanza con las criaturas. Este pasaje por sí solo no resuelve todos los debates sobre el tafwīḍ.",
+      "quiz": [
+        "El texto niega la semejanza con las criaturas.",
+        "El texto describe un miembro corporal.",
+        "Al-Qārī comenta aquí al-Fiqh al-Akbar.",
+        "La atribución a Abū Ḥanīfah es indudablemente auténtica."
+      ]
+    }
+  }
+}
