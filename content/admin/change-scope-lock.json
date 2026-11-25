@@ -155,6 +155,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-academy-worte-owner-release-20261125",
+      "at": "2026-11-25T09:38:00+01:00",
+      "approvedBy": "user-explicit-20261125-global-topic-audio-publication",
+      "reason": "Explicit owner request for complete Kids Academy Gute Worte audio release; exact one-topic workflow only. Existing global lock and all other scopes unchanged.",
+      "paths": [
+        ".github/workflows/academy-worte-v4-produce-once.yml",
+        ".github/workflows/academy-worte-v4-cloudflare-proof.yml"
+      ],
+      "expiresAt": "2026-11-26T23:59:00+01:00"
+    },
+    {
       "id": "dar-admin-bildstudio-owner-live-release-20261124",
       "at": "2026-11-24T15:25:00+01:00",
       "approvedBy": "user-explicit-20261124-push-live-dar-admin-bildstudio",
