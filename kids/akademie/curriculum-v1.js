@@ -578,6 +578,38 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah."
     }
    ]
+  },
+  "ageText": {
+   "4-5": {
+    "intro": "Heute lernen wir, freundlich zu unserer Familie zu sein und anderen zu helfen.",
+    "lines": [
+     "Ich höre Mama und Papa zu.",
+     "Ich antworte freundlich.",
+     "Ich helfe, wenn ich kann.",
+     "Wenn ich Hilfe brauche, darf ich darum bitten."
+    ],
+    "evidence": "Allah lehrt uns, unsere Eltern gut zu behandeln. Der Prophet ﷺ lehrte uns, besonders gut zur Mutter und auch zum Vater zu sein."
+   },
+   "6-8": {
+    "intro": "Wir lernen, wie wir Eltern und anderen Menschen mit Respekt begegnen und ihnen im Alltag helfen können.",
+    "lines": [
+     "Ich höre aufmerksam zu, wenn jemand mit mir spricht.",
+     "Ich antworte freundlich, auch wenn ich anderer Meinung bin.",
+     "Ich helfe zu Hause, soweit ich kann.",
+     "Wenn mich etwas verletzt, darf ich einer vertrauten Person davon erzählen."
+    ],
+    "evidence": "Im Qurʾān wird uns aufgetragen, Allah allein anzubeten und die Eltern gut zu behandeln. Der Prophet ﷺ betonte die besondere Stellung der Mutter und danach die des Vaters."
+   },
+   "9-10": {
+    "intro": "Wir lernen anhand von Qurʾān und Sunnah, weshalb Respekt gegenüber den Eltern besonders wichtig ist und wie wir Fürsorge im Alltag zeigen.",
+    "lines": [
+     "Wir begegnen unseren Eltern mit freundlichen Worten und guten Taten.",
+     "Wir achten auf die Bedürfnisse unserer Familie, auch wenn jemand älter wird.",
+     "Wir können anderer Meinung sein und trotzdem respektvoll sprechen.",
+     "Respekt bedeutet nicht, dass wir Verletzungen oder Bedrohungen verheimlichen müssen. Wir holen Hilfe."
+    ],
+    "evidence": "Der Qurʾān verbindet die alleinige Anbetung Allahs mit der guten Behandlung der Eltern. Als ein Mann nach der besten Gesellschaft fragte, nannte der Prophet ﷺ dreimal die Mutter und danach den Vater."
+   }
   }
  },
  "fiqh-taharah": {
