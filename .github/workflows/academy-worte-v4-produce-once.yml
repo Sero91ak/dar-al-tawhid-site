@@ -1,0 +1,55 @@
+name: KIDS Academy Gute Worte - guarded V4 production
+on:
+  push:
+    branches: [academy/adab-worte-v4-20261125]
+    paths:
+      - '.github/workflows/academy-worte-v4-produce-once.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kids-academy-worte-v4-20261125
+  cancel-in-progress: false
+jobs:
+  produce-and-verify:
+    if: github.ref == 'refs/heads/academy/adab-worte-v4-20261125'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: academy/adab-worte-v4-20261125
+          fetch-depth: 2
+          persist-credentials: true
+      - name: Verify media tools and immutable paid branch
+        run: |
+          set -euo pipefail
+          command -v ffmpeg
+          command -v ffprobe
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          test "$(git branch --show-current)" = "academy/adab-worte-v4-20261125"
+      - name: Zero-credit source, exact child phrases and original audio SHA audit
+        run: |
+          set -euo pipefail
+          node kids/tools/audit-academy-worte-v4-v1.cjs
+          python3 -m py_compile kids/tools/produce-academy-worte-v4-v1.py
+          python3 kids/tools/produce-academy-worte-v4-v1.py --audit
+          node kids/tools/test-academy-salam-choice-v1.cjs
+          node kids/tools/test-academy-sabr-choice-v1.cjs
+          node scripts/test-kids-academy-v9.js
+      - name: Generate only missing owner V4 originals with durable no-retry ledger
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          python3 kids/tools/produce-academy-worte-v4-v1.py --produce
+      - name: Verify all 45 real M4A topic phrases and preserve prior releases
+        run: |
+          set -euo pipefail
+          node kids/tools/audit-academy-worte-v4-v1.cjs --require-complete
+          node kids/tools/test-academy-salam-choice-v1.cjs
+          node kids/tools/test-academy-sabr-choice-v1.cjs
+          node scripts/test-kids-academy-v9.js
+          git diff --check
+          echo "Production branch only; main and public Cloudflare must be separately verified."
