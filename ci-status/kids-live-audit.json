@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-11-25T08:59:25Z",
+  "timestamp": "2026-11-25T09:02:10Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "failure",
-  "finishedDeployRun": "45580897341",
+  "finishedDeployRun": "45581268584",
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -89,6 +89,24 @@
   },
   "lastDeployRuns": [
     {
+      "conclusion": null,
+      "created_at": "2026-11-25T09:01:40Z",
+      "head_sha": "a954f772fdf0784cfa29a4ce35442b0b0402de8c",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45581505672",
+      "id": 45581505672,
+      "status": "in_progress",
+      "updated_at": "2026-11-25T09:02:02Z"
+    },
+    {
+      "conclusion": "failure",
+      "created_at": "2026-11-25T09:00:13Z",
+      "head_sha": "11cae035f5a2569f64732188cd4d8e62d783063d",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45581268584",
+      "id": 45581268584,
+      "status": "completed",
+      "updated_at": "2026-11-25T09:02:00Z"
+    },
+    {
       "conclusion": "failure",
       "created_at": "2026-11-25T08:57:42Z",
       "head_sha": "adfe38d5e59d57e5e4b213707867ee9fc0bc75e4",
@@ -123,24 +141,6 @@
       "id": 45556228822,
       "status": "completed",
       "updated_at": "2026-11-25T05:53:38Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-11-25T05:47:57Z",
-      "head_sha": "3527537471e83b2f7450fdc1a6511a192e12bede",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45556054021",
-      "id": 45556054021,
-      "status": "completed",
-      "updated_at": "2026-11-25T05:49:32Z"
-    },
-    {
-      "conclusion": "success",
-      "created_at": "2026-11-25T05:47:17Z",
-      "head_sha": "02cc848967b168c095312f01fe75ae2739e51924",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45555979462",
-      "id": 45555979462,
-      "status": "completed",
-      "updated_at": "2026-11-25T05:51:01Z"
     }
   ]
 }
