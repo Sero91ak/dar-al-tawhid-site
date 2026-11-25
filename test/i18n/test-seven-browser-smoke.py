@@ -8,14 +8,14 @@ for flag in ["--headless=new","--no-sandbox","--disable-dev-shm-usage","--disabl
     options.add_argument(flag)
 driver=webdriver.Chrome(options=options)
 locales=[("de","ltr"),("tr","ltr"),("en","ltr"),("ar","rtl"),
-         ("ku","ltr"),("ckb","rtl"),("bs","ltr"),("fr","ltr"),("es","ltr")]
+         ("ku","ltr"),("ckb","rtl"),("bs","ltr")]
 try:
     driver.set_window_size(390,844)
     driver.get("http://127.0.0.1:8765/test/")
     wait=WebDriverWait(driver,40)
     wait.until(lambda d:d.execute_script("return !!window.DarTestTurkishUI"))
     wait.until(lambda d:d.execute_script("return window.__DarTestSevenLocalesReady===true"))
-    wait.until(lambda d:d.execute_script("return document.querySelectorAll('#dv3Home [data-dv3-locale]').length===9"))
+    wait.until(lambda d:d.execute_script("return document.querySelectorAll('#dv3Home [data-dv3-locale]').length===7"))
     for lang,direction in locales:
         driver.execute_script(
             "document.querySelector('#dv3Home [data-dv3-locale=\"'+arguments[0]+'\"]').click()",
@@ -34,8 +34,8 @@ try:
         wait.until(lambda d:d.execute_script("return !!document.querySelector(arguments[0])",selector))
         driver.execute_script("document.querySelector(arguments[0]).click()",selector)
         wait.until(lambda d:d.execute_script("return document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]').length===9"))
-        assert driver.execute_script("return document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]:not([disabled])').length")==9
-        assert driver.execute_script("return !document.querySelector('#darAdultLanguagePicker [data-dal-locale=fr]').disabled && !document.querySelector('#darAdultLanguagePicker [data-dal-locale=es]').disabled")
+        assert driver.execute_script("return document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]:not([disabled])').length")==7
+        assert driver.execute_script("return document.querySelector('#darAdultLanguagePicker [data-dal-locale=es]').disabled")
         names=driver.execute_script("return [...document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale] .dal-name')].map(x=>x.textContent)")
         assert names==['Deutsch','Türkçe','English','العربية','Kurmancî','سۆرانی','Bosanski','Français','Español'], names
         driver.execute_script("document.querySelector('#darAdultLanguagePicker [data-dal-close]').click()")

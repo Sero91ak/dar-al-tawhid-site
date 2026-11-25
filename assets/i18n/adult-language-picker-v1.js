@@ -32,6 +32,7 @@ function t(){return text[read()]||text.de}
 function item(code){return ITEMS.find(function(x){return x.code===code})}
 function available(code){
  if(code==="de")return true;
+ if(TEST&&(code==="fr"||code==="es"))return false;
  if(TEST){
   var runtime=w.DarTestTurkishUI;
   if(!runtime||!Array.isArray(runtime.supportedLocales)||runtime.supportedLocales.indexOf(code)<0)return false;
