@@ -124,7 +124,12 @@ for (const n of files) {
     }
     realEvidence++;
     if (href.includes('#:~:text=') || /#page=[1-9]\d*/i.test(href)) hasMarkedEvidence = true;
-    if (n >= minStrict && !permitted(url.hostname))
+    // Q67: three exact, editorially checked source destinations only. No global host allowance.
+    const q67Evidence = n === 67 && url.protocol === 'https:' && (
+      (url.hostname === 'mc.dlib.nyu.edu' && url.pathname === '/files/books/nyu_aco000330/nyu_aco000330_lo.pdf' && /^#page=(60|61)$/.test(url.hash)) ||
+      (url.hostname === 'thahabi.org' && ['/book/9523/read/9','/book/25200/read/149'].includes(url.pathname) && url.hash.startsWith('#:~:text='))
+    );
+    if (n >= minStrict && !permitted(url.hostname) && !q67Evidence)
       fail.push(label + 'neue externe Nachweisdomain nicht freigegeben: ' + url.hostname);
   }
   // SOURCE_CARD_FOOTER_AND_LEARNING_GATE_V1
