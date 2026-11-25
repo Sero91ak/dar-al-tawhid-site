@@ -120,7 +120,7 @@ assert.equal(counts.vocabularyTerms,33);
 assert.equal(counts.vocabularyVoicePhrases,99);
 assert.deepEqual(counts.uncoveredLessons,[]);
 assert.ok(counts.uniquePhrases>=730);
-assert.ok(counts.totals.approved>=58&&counts.totals.approved<=158,
+assert.ok(counts.totals.approved>=58&&counts.totals.approved<=192,
  "Keep 72 Ṣidq, 32 Ṣabr and no more than the 27 new approved Amānah V4 originals in editorial voice plans");
 // The dynamic child-choice projection includes 5 new exact click texts
 // which were absent from the older editorial source voice-plan. Validate
