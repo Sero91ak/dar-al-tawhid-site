@@ -9653,6 +9653,22 @@
         "scripts/app-health-check.js"
       ],
       "expiresAt": "2026-11-21T23:59:00+01:00"
+    },
+    {
+      "id": "q64-q65-owner-source-release-20261124",
+      "at": "2026-11-24T21:55:00+01:00",
+      "approvedBy": "owner-explicit-20261124-complete-q64-q65-source-links",
+      "reason": "Eigentümer fordert ausdrücklich funktionierende Q64 und Q65 Quellenkarten mit neun Sprachen und Lernbereichen. Nur diese sieben konkreten Quellen-/Lern-/Registerdateien für den bestehenden CI- und Cloudflare-Release freigeben. globalLock, sämtliche anderen Spuren und OneSignal unverändert.",
+      "paths": [
+        "q/64/index.html",
+        "q/65/index.html",
+        "q/_registry/shortlinks.json",
+        "q/_registry/next-number.txt",
+        "q/README.md",
+        "lernen/ibn-masud-religion-schmeichelei/index.html",
+        "lernen/umar-liebe-hass-gerechtigkeit/index.html"
+      ],
+      "expiresAt": "2026-11-26T23:59:00+01:00"
     }
   ],
   "enabled": true
