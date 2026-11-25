@@ -16,5 +16,35 @@
     "title": "Duʿāʾ um Rettung vor Schande am Jüngsten Tag",
     "snippet": "Unser Herr, wen Du ins Feuer eintreten lässt, den hast Du wahrlich beschämt; und die Ungerechten haben keine Helfer.",
     "category": "Schutz vor dem Feuer"
+  },
+  "verse": {
+    "reference": "3:192",
+    "surah": 3,
+    "ayah": 192,
+    "ar": "رَبَّنَآ إِنَّكَ مَن تُدۡخِلِ ٱلنَّارَ فَقَدۡ أَخۡزَيۡتَهُۥۖ وَمَا لِلظَّـٰلِمِينَ مِنۡ أَنصَارٖ",
+    "de": "Unser Herr, gewiß, wen Du ins (Höllen)feuer eingehen läßt, den hast Du (damit) in Schande gestürzt. Und die Ungerechten werden keine Helfer haben.",
+    "transliteration": "rabbanā innaka man tud'khili l-nāra faqad akhzaytahu wamā lilẓẓālimīna min anṣārin",
+    "arabicEdition": "content/quran/003.json",
+    "germanEdition": "content/quran/003.json",
+    "tadabburReference": "3:192",
+    "tadabburCatalog": "/apple-tv/quran/tadabbur/catalog.json"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 495,
+      "remaining": 459
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 62,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
