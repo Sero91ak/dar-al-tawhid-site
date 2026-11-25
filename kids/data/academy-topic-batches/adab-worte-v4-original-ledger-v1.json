@@ -3,7 +3,17 @@
   "topic": "adab-worte",
   "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "modelId": "eleven_v4",
-  "requests": {},
+  "requests": {
+    "0504dd2d34e8cffffbfffa72": {
+      "state": "attempt-started-never-auto-retry",
+      "lang": "de",
+      "textSha256": "922b50dcdd43634275725aad0480640f5d3e66b5ad56cf350128a2cac18ec931",
+      "createdAt": "2026-11-25T08:34:17.197049+00:00",
+      "sequence": 1,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4"
+    }
+  },
   "policy": "mark-paid-attempt-and-commit-before-POST; never auto-retry uncertain request",
   "createdAt": "2026-11-25T08:34:14.636540+00:00",
   "publicLiveVerified": false,
