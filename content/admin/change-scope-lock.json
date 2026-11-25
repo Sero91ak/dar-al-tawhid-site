@@ -155,6 +155,26 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-nine-locale-visitor-20261125",
+      "at": "2026-11-25T20:40:00+01:00",
+      "approvedBy": "owner-serhat-20261125-nine-locale-adult-app",
+      "reason": "Owner decision: show the adult visitor app and PWA in all nine languages from existing machine translations and in-repo gap fills. No Kids, OneSignal, push, Apple TV, or Waṣiyyah testament text changes.",
+      "paths": [
+        "assets/i18n/",
+        "assets/dar-home-v31-visitor.js",
+        "assets/dar-more-v15.js",
+        "content/i18n/",
+        "desktop-preview/i18n-core-v1/",
+        ".github/workflows/dar-test-seven-free-ui.yml",
+        ".github/workflows/dar-test-turkish-language-smoke.yml",
+        "pwa/service-worker.js",
+        "test/i18n/",
+        "test/assets/dar-test-turkish-ui.js",
+        "test/assets/dar-home-v3-compact.js"
+      ],
+      "expiresAt": "2026-12-02T23:59:00+01:00"
+    },
+    {
       "id": "q67-owner-source-release-20261125",
       "at": "2026-11-25T12:52:00+01:00",
       "approvedBy": "user-explicit-20261125-q67-complete-source-learning-release",

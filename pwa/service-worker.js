@@ -94,6 +94,7 @@ function cacheable(u,request){
     /\.(?:css|js|json|png|jpe?g|webp|svg|woff2?|mp3|m4a|aac|ogg)$/i.test(u.pathname);
 }
 function liveLocaleAsset(u){
+  if(String(u.pathname||"").indexOf("/assets/i18n/")===0)return true;
   return new Set([
     '/assets/i18n/adult-language-picker-v1.js',
     '/assets/i18n/adult-ui-translate.js',

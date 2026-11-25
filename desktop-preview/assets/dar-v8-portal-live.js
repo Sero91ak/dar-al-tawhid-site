@@ -2,7 +2,7 @@
  * Adult public browser only. No fabricated answers, translations, locations or Quran verses. */
 (function(w,d){"use strict";
 const supported=["de","ar","en","tr","ku","ckb","bs","fr","es"],KEY="darAdultPreferredLocaleV1";
-const langNames={de:"Deutsch",ar:"العربية الفصحى",en:"English",tr:"Türkçe",ku:"Kurmancî",ckb:"سۆرانی",bs:"Bosanski",fr:"Français",es:"Español"};
+const langNames={de:"Deutsch",ar:"العربية",en:"English",tr:"Türkçe",ku:"Kurmancî",ckb:"سۆرانی",bs:"Bosanski",fr:"Français",es:"Español"};
 let languageData=null,languagePromise=null,aliasPromise=null,aliasMap=new Map(),quranIndexPromise=null,currentPage="";
 const norm=v=>String(v||"").toLocaleLowerCase("und").normalize("NFKD")
  .replace(/[\u0300-\u036f\u064b-\u065f\u0670\u0640]/g,"").replace(/[أإآٱ]/g,"ا").replace(/ى/g,"ي")
@@ -11,7 +11,7 @@ const norm=v=>String(v||"").toLocaleLowerCase("und").normalize("NFKD")
  .replace(/ṣ/g,"s").replace(/ḍ/g,"d").replace(/ṭ/g,"t").replace(/ẓ/g,"z").replace(/ġ/g,"gh")
  .replace(/š/g,"sh").replace(/ğ/g,"g").replace(/[^a-z0-9\u0600-\u06ff]+/g," ").trim().replace(/\s+/g," ");
 const escape=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const fallback={searchExplain:"Stelle eine Frage – wir durchsuchen ausschließlich unsere vorhandenen Quellen.",searchButton:"Quellen finden",searchPlaceholder:"Frage zu Qurʾān, Sunnah und Āṯār …",noResults:"Keine belegte Fundstelle in unserem indexierten Bestand.",unverified:"Diese Sprachfassung ist noch nicht fachlich geprüft. Der deutsche Originaltext bleibt maßgeblich.",langPicker:"Sprache",awaiting:"Fachübersetzung in Vorbereitung",readGerman:"Deutschen Originaltext lesen",sources:"Fundstellen",back:"Zurück",searchTitle:"Quellenbasierter Wissenschat",open:"Fundstelle öffnen"};
+const fallback={searchExplain:"Stelle eine Frage – wir durchsuchen ausschließlich unsere vorhandenen Quellen.",searchButton:"Quellen finden",searchPlaceholder:"Frage zu Qurʾān, Sunnah und Āṯār …",noResults:"Keine belegte Fundstelle in unserem indexierten Bestand.",unverified:"Maschinelle Übersetzung, vom Eigentümer zur Anzeige freigegeben. Keine menschliche Fachprüfung. Fehlt eine Fassung, bleibt Deutsch.",langPicker:"Sprache",awaiting:"Fachübersetzung in Vorbereitung",readGerman:"Deutschen Originaltext lesen",sources:"Fundstellen",back:"Zurück",searchTitle:"Quellenbasierter Wissenschat",open:"Fundstelle öffnen"};
 function locale(){try{const v=localStorage.getItem(KEY);return supported.includes(v)?v:"de"}catch(e){return"de"}}
 function t(k){const l=locale();return languageData?.locales?.[l]?.messages?.[k]||languageData?.locales?.de?.messages?.[k]||fallback[k]||k}
 function fetchLanguages(){if(languagePromise)return languagePromise;
@@ -59,7 +59,8 @@ function colorLocale(){
  const label=d.getElementById("darV8SourceSearchLabel");if(label)label.textContent=t("searchExplain");
 }
 function selectLanguage(code){if(!supported.includes(code))return;try{localStorage.setItem(KEY,code)}catch(e){}
- colorLocale();w.dispatchEvent(new CustomEvent("dar-v8-locale-changed",{detail:{locale:code}}));
+ colorLocale();w.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:code}}));
+ w.dispatchEvent(new CustomEvent("dar-v8-locale-changed",{detail:{locale:code}}));
  const m=d.getElementById("darV8LangMenu");if(m)m.hidden=true;
 }
 function setupLanguages(){
@@ -70,7 +71,8 @@ function setupLanguages(){
  const menu=d.createElement("section");menu.id="darV8LangMenu";menu.className="dar-v8-language-menu";menu.hidden=true;menu.setAttribute("role","group");menu.setAttribute("aria-label","Sprache wählen");
  const heading=d.createElement("strong");heading.textContent="Sprache · Language";menu.append(heading);
  supported.forEach(code=>{const btn=d.createElement("button");btn.type="button";btn.textContent=langNames[code];btn.dataset.lang=code;btn.addEventListener("click",()=>{selectLanguage(code);toggle.setAttribute("aria-expanded","false")});menu.append(btn)});
- const notice=d.createElement("small");notice.textContent="UI-Sprache: Fachbeiträge bleiben in der überprüften Originalfassung, bis eine Fachübersetzung freigegeben ist.";menu.append(notice);d.body.append(menu);
+ const notice=d.createElement("small");notice.textContent="Maschinelle Übersetzung, vom Eigentümer zur Anzeige freigegeben. Keine menschliche Fachprüfung.";menu.append(notice);d.body.append(menu);
+ w.addEventListener("dar-adult-locale-changed",()=>colorLocale());
  toggle.addEventListener("click",()=>{menu.hidden=!menu.hidden;toggle.setAttribute("aria-expanded",String(!menu.hidden))});
  d.addEventListener("click",e=>{if(!menu.hidden&&!menu.contains(e.target)&&!toggle.contains(e.target)){menu.hidden=true;toggle.setAttribute("aria-expanded","false")}});
  d.addEventListener("keydown",e=>{if(e.key==="Escape"){menu.hidden=true;toggle.setAttribute("aria-expanded","false");if(d.body.classList.contains("dar-v8-player-fullscreen"))togglePlayer(false)}});
