@@ -129,7 +129,11 @@ for (const n of files) {
       (url.hostname === 'mc.dlib.nyu.edu' && url.pathname === '/files/books/nyu_aco000330/nyu_aco000330_lo.pdf' && /^#page=(60|61)$/.test(url.hash)) ||
       (url.hostname === 'thahabi.org' && ['/book/9523/read/9','/book/25200/read/149'].includes(url.pathname) && url.hash.startsWith('#:~:text='))
     );
-    if (n >= minStrict && !permitted(url.hostname) && !q67Evidence)
+    // Q69: one exact HadithUnlocked page for al-Mustadrak 7880. No global host allowance.
+    const q69Evidence = n === 69 && url.protocol === 'https:' &&
+      url.hostname === 'hadithunlocked.com' && url.pathname === '/hakim:7880' &&
+      url.hash.startsWith('#:~:text=');
+    if (n >= minStrict && !permitted(url.hostname) && !q67Evidence && !q69Evidence)
       fail.push(label + 'neue externe Nachweisdomain nicht freigegeben: ' + url.hostname);
   }
   // SOURCE_CARD_FOOTER_AND_LEARNING_GATE_V1
