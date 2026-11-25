@@ -3,7 +3,7 @@
   "topicId": "adab-worte",
   "topic": "Gute Worte – freundlich sprechen",
   "createdAt": "2026-11-25",
-  "productionPhase": "age-differentiated-source-backed-preflight",
+  "productionPhase": "owner-authorized-45-real-v4-complete-pending-live",
   "priorTopic": "adab-salam",
   "priorTechnicalLiveProof": "kids/data/academy-topic-batches/adab-salam-v4-live-proof-v1.json",
   "ageBands": [
@@ -98,7 +98,7 @@
     "hardwarePlaybackVerified": false,
     "humanAcousticReviewPerformed": false
   },
-  "liveDeploymentAllowed": false,
+  "liveDeploymentAllowed": true,
   "paymentGenerationAllowed": false,
   "notes": "Three distinct age narrations, source-backed choice questions, shared greetings separately verified, runtime audit still required. No production media claims.",
   "projectionStaged": true,
@@ -130,9 +130,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-bf577822586fa63c88931d62.m4a",
+      "sha256": "bf577822586fa63c88931d62f53bb47311f7ea1651d2e2187c7ce2d52f8eb2fb"
     },
     {
       "visibleText": "Antwort 1: Ich spreche ruhig und freundlich.",
@@ -154,9 +156,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-40c393ce1d2f0cb60ac82cfd.m4a",
+      "sha256": "40c393ce1d2f0cb60ac82cfdb8b2d30e4fccea024af18e8d941d45b687bb3ee9"
     },
     {
       "visibleText": "Antwort 2: Ich beleidige ihn.",
@@ -178,9 +182,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-5084cb54fc3c410eecc12867.m4a",
+      "sha256": "5084cb54fc3c410eecc128679d55f09bce74fe92077deb2257c2c099e91b33e3"
     },
     {
       "visibleText": "Was möchten wir uns heute merken?",
@@ -194,12 +200,14 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": true,
-      "providerGenerated": false,
-      "mediaImported": false,
+      "providerGenerated": true,
+      "mediaImported": true,
       "liveVerified": false,
       "existingMediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-0eb818f6d5a880454b476051.m4a",
       "existingSha256": "0eb818f6d5a880454b47605189d9bf12012267ca9eddac2cf3f21eaf3ea97681",
-      "existingSourceLessonId": "akhlaq-sabr"
+      "existingSourceLessonId": "akhlaq-sabr",
+      "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-0eb818f6d5a880454b476051.m4a",
+      "sha256": "0eb818f6d5a880454b47605189d9bf12012267ca9eddac2cf3f21eaf3ea97681"
     },
     {
       "visibleText": "Antwort 1: Ich will ruhig und freundlich sprechen.",
@@ -213,9 +221,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-e4bb8a413cccfa4e64f41517.m4a",
+      "sha256": "e4bb8a413cccfa4e64f41517689580d443afaec163b3656d4ad4676570fb63dc"
     },
     {
       "visibleText": "Antwort 2: Ich muss das Gelernte nicht beachten.",
@@ -229,12 +239,14 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": true,
-      "providerGenerated": false,
-      "mediaImported": false,
+      "providerGenerated": true,
+      "mediaImported": true,
       "liveVerified": false,
       "existingMediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-79134e3b3b9825627c7fe233.m4a",
       "existingSha256": "79134e3b3b9825627c7fe23314e427f5bde0f94ad54171a79214a931a61dacbc",
-      "existingSourceLessonId": "akhlaq-sabr"
+      "existingSourceLessonId": "akhlaq-sabr",
+      "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-79134e3b3b9825627c7fe233.m4a",
+      "sha256": "79134e3b3b9825627c7fe23314e427f5bde0f94ad54171a79214a931a61dacbc"
     },
     {
       "visibleText": "Sunnah bedeutet: Was der Prophet ﷺ uns gelehrt hat.",
@@ -248,12 +260,14 @@
       ],
       "arabicFushaSegmentationRequired": true,
       "existingApprovedManifestCandidate": true,
-      "providerGenerated": false,
-      "mediaImported": false,
+      "providerGenerated": true,
+      "mediaImported": true,
       "liveVerified": false,
       "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-80f0a4da4fc7aa015afa065d.m4a",
       "existingSha256": "80f0a4da4fc7aa015afa065db1e45c7404e434930e0607408ee1897d6bf58b7b",
-      "existingSourceLessonId": "sidq"
+      "existingSourceLessonId": "sidq",
+      "mediaUrl": "/kids/assets/kids-academy-audio/sidq-click-80f0a4da4fc7aa015afa065d.m4a",
+      "sha256": "80f0a4da4fc7aa015afa065db1e45c7404e434930e0607408ee1897d6bf58b7b"
     },
     {
       "visibleText": "Qurʾān bedeutet: Allahs Wort.",
@@ -267,12 +281,14 @@
       ],
       "arabicFushaSegmentationRequired": true,
       "existingApprovedManifestCandidate": true,
-      "providerGenerated": false,
-      "mediaImported": false,
+      "providerGenerated": true,
+      "mediaImported": true,
       "liveVerified": false,
       "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-49d90c213b2dfeea113417d3.m4a",
       "existingSha256": "49d90c213b2dfeea113417d3bfb660401e12c1512d095ded937ad351bc29dc61",
-      "existingSourceLessonId": "sidq"
+      "existingSourceLessonId": "sidq",
+      "mediaUrl": "/kids/assets/kids-academy-audio/sidq-click-49d90c213b2dfeea113417d3.m4a",
+      "sha256": "49d90c213b2dfeea113417d3bfb660401e12c1512d095ded937ad351bc29dc61"
     },
     {
       "visibleText": "Wie kannst du freundlich sprechen, wenn du dich ärgerst?",
@@ -286,9 +302,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-127d9fa735c566ad33c80cc7.m4a",
+      "sha256": "127d9fa735c566ad33c80cc7a63dc25d09deed073e8cea167a1ef53fc00b70a2"
     },
     {
       "visibleText": "Antwort 1: Ich denke kurz nach und antworte ruhig.",
@@ -302,9 +320,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-546a461a4ec2c0f2363c42fa.m4a",
+      "sha256": "546a461a4ec2c0f2363c42faa8c4ee0fe6d1c8fc5dd41acf95a726651a7b846a"
     },
     {
       "visibleText": "Antwort 2: Ich beleidige die andere Person.",
@@ -318,9 +338,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-78565531f99dbcb8e4b15b66.m4a",
+      "sha256": "78565531f99dbcb8e4b15b661231f67e17d1b7f2a2f82fcde935a48979a5d543"
     },
     {
       "visibleText": "Wo lernen wir mehr über dieses Thema?",
@@ -334,12 +356,14 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": true,
-      "providerGenerated": false,
-      "mediaImported": false,
+      "providerGenerated": true,
+      "mediaImported": true,
       "liveVerified": false,
       "existingMediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-873f4d49eb7e46d4000b9b36.m4a",
       "existingSha256": "873f4d49eb7e46d4000b9b36e859bf153ce6bafdd79c1647dbd8bcb5012a54b8",
-      "existingSourceLessonId": "akhlaq-sabr"
+      "existingSourceLessonId": "akhlaq-sabr",
+      "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-873f4d49eb7e46d4000b9b36.m4a",
+      "sha256": "873f4d49eb7e46d4000b9b36e859bf153ce6bafdd79c1647dbd8bcb5012a54b8"
     },
     {
       "visibleText": "Antwort 1: Im Qurʾān und in der authentischen Sunnah.",
@@ -353,12 +377,14 @@
       ],
       "arabicFushaSegmentationRequired": true,
       "existingApprovedManifestCandidate": true,
-      "providerGenerated": false,
-      "mediaImported": false,
+      "providerGenerated": true,
+      "mediaImported": true,
       "liveVerified": false,
       "existingMediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-414553471cb676c7be7c52a4.m4a",
       "existingSha256": "414553471cb676c7be7c52a47b6fce6ebb1ff94975a2a2e20de84dd5e651700d",
-      "existingSourceLessonId": "akhlaq-sabr"
+      "existingSourceLessonId": "akhlaq-sabr",
+      "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-414553471cb676c7be7c52a4.m4a",
+      "sha256": "414553471cb676c7be7c52a47b6fce6ebb1ff94975a2a2e20de84dd5e651700d"
     },
     {
       "visibleText": "Antwort 2: Wir müssen uns die Regeln selbst ausdenken.",
@@ -372,12 +398,14 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": true,
-      "providerGenerated": false,
-      "mediaImported": false,
+      "providerGenerated": true,
+      "mediaImported": true,
       "liveVerified": false,
       "existingMediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-ef5d43874fef6004ef3b0a16.m4a",
       "existingSha256": "ef5d43874fef6004ef3b0a16359862ce83253270df6a066943adee2edd787b52",
-      "existingSourceLessonId": "akhlaq-sabr"
+      "existingSourceLessonId": "akhlaq-sabr",
+      "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-ef5d43874fef6004ef3b0a16.m4a",
+      "sha256": "ef5d43874fef6004ef3b0a16359862ce83253270df6a066943adee2edd787b52"
     },
     {
       "visibleText": "Sunnah nennen wir die überlieferte Lehre und das Vorbild des Propheten Muḥammad ﷺ.",
@@ -391,12 +419,14 @@
       ],
       "arabicFushaSegmentationRequired": true,
       "existingApprovedManifestCandidate": true,
-      "providerGenerated": false,
-      "mediaImported": false,
+      "providerGenerated": true,
+      "mediaImported": true,
       "liveVerified": false,
       "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-5bf1a4cb17c174923cb45696.m4a",
       "existingSha256": "5bf1a4cb17c174923cb45696d61093126170fd5a4f22282dd6f37407b2b1480d",
-      "existingSourceLessonId": "sidq"
+      "existingSourceLessonId": "sidq",
+      "mediaUrl": "/kids/assets/kids-academy-audio/sidq-click-5bf1a4cb17c174923cb45696.m4a",
+      "sha256": "5bf1a4cb17c174923cb45696d61093126170fd5a4f22282dd6f37407b2b1480d"
     },
     {
       "visibleText": "Qurʾān bedeutet: Der Qurʾān ist Allahs Offenbarung, die wir auf Arabisch hören und lesen.",
@@ -410,12 +440,14 @@
       ],
       "arabicFushaSegmentationRequired": true,
       "existingApprovedManifestCandidate": true,
-      "providerGenerated": false,
-      "mediaImported": false,
+      "providerGenerated": true,
+      "mediaImported": true,
       "liveVerified": false,
       "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-9f84cdeb4cbbbeadcee86185.m4a",
       "existingSha256": "9f84cdeb4cbbbeadcee861859f55162c748364af28e19ca855f0c440f50ac26d",
-      "existingSourceLessonId": "sidq"
+      "existingSourceLessonId": "sidq",
+      "mediaUrl": "/kids/assets/kids-academy-audio/sidq-click-9f84cdeb4cbbbeadcee86185.m4a",
+      "sha256": "9f84cdeb4cbbbeadcee861859f55162c748364af28e19ca855f0c440f50ac26d"
     },
     {
       "visibleText": "Wie kannst du bei einem Streit gute Worte wählen?",
@@ -429,9 +461,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-aa11210fd2aa04f8fa52b9cb.m4a",
+      "sha256": "aa11210fd2aa04f8fa52b9cb81a9d22b7a94d6c1f1152229983ae0a7e3c96676"
     },
     {
       "visibleText": "Antwort 1: Ich sage ehrlich und respektvoll, was mich stört.",
@@ -445,9 +479,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-743e0853ae07d4ea828ebdfa.m4a",
+      "sha256": "743e0853ae07d4ea828ebdfa1f60cb7d2c9ce714d355fc1191cf7888d193b860"
     },
     {
       "visibleText": "Antwort 2: Ich verspotte die andere Person, damit ich gewinne.",
@@ -461,9 +497,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-d56da3d77196ce9481aae4bb.m4a",
+      "sha256": "d56da3d77196ce9481aae4bb9a8af1775e7f3fc154a22941c63b4f5ea67998f5"
     },
     {
       "visibleText": "Was lehren Qurʾān 17:53 und die Sunnah über unsere Worte?",
@@ -477,9 +515,11 @@
       ],
       "arabicFushaSegmentationRequired": true,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-afe4adde98c55e18fd0ffc5b.m4a",
+      "sha256": "afe4adde98c55e18fd0ffc5b38aef32b22d47575944184c098fa7fb65d60f5bf"
     },
     {
       "visibleText": "Antwort 1: Wir wählen gute Worte und verzichten auf verletzende Worte.",
@@ -493,9 +533,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-8c6655ca2a94e1841131e162.m4a",
+      "sha256": "8c6655ca2a94e1841131e162700dc4c0f1f712023bd3a4a2f89202c4fb0ea291"
     },
     {
       "visibleText": "Antwort 2: Wir dürfen andere absichtlich mit unseren Worten verletzen.",
@@ -509,9 +551,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-7ac2ecef98c463f63f45c178.m4a",
+      "sha256": "7ac2ecef98c463f63f45c178a68c2f5b162a13387e95906ca0562521350180ad"
     },
     {
       "visibleText": "Sunnah umfasst die authentisch überlieferten Aussagen, Handlungen und Bestätigungen des Propheten ﷺ.",
@@ -525,12 +569,14 @@
       ],
       "arabicFushaSegmentationRequired": true,
       "existingApprovedManifestCandidate": true,
-      "providerGenerated": false,
-      "mediaImported": false,
+      "providerGenerated": true,
+      "mediaImported": true,
       "liveVerified": false,
       "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-bf23b416663c26641f417b63.m4a",
       "existingSha256": "bf23b416663c26641f417b63bbdf102b5e95a4aece147c0dfd7257e504f97a89",
-      "existingSourceLessonId": "sidq"
+      "existingSourceLessonId": "sidq",
+      "mediaUrl": "/kids/assets/kids-academy-audio/sidq-click-bf23b416663c26641f417b63.m4a",
+      "sha256": "bf23b416663c26641f417b63bbdf102b5e95a4aece147c0dfd7257e504f97a89"
     },
     {
       "visibleText": "Qurʾān bedeutet: Der Qurʾān ist die von Allah offenbarte Schrift. Der arabische Vers und seine deutsche Übersetzung sind nicht dasselbe.",
@@ -544,12 +590,14 @@
       ],
       "arabicFushaSegmentationRequired": true,
       "existingApprovedManifestCandidate": true,
-      "providerGenerated": false,
-      "mediaImported": false,
+      "providerGenerated": true,
+      "mediaImported": true,
       "liveVerified": false,
       "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-3db8cc45cbe58428e98def3c.m4a",
       "existingSha256": "3db8cc45cbe58428e98def3c1d6d3261e99bf171f01add410af45e99f146b7ae",
-      "existingSourceLessonId": "sidq"
+      "existingSourceLessonId": "sidq",
+      "mediaUrl": "/kids/assets/kids-academy-audio/sidq-click-3db8cc45cbe58428e98def3c.m4a",
+      "sha256": "3db8cc45cbe58428e98def3c1d6d3261e99bf171f01add410af45e99f146b7ae"
     },
     {
       "visibleText": "Heute lernen wir, freundlich zu sprechen. Auch wenn wir uns ärgern, können wir gute Worte sagen.",
@@ -563,9 +611,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-2d337c31be5b143af210215e.m4a",
+      "sha256": "2d337c31be5b143af210215e15f7998c8c41e63dc1a52130bfad8e50de2e85a5"
     },
     {
       "visibleText": "Meine Worte können andere freuen.",
@@ -579,9 +629,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-804c0d1b2306db9779052d61.m4a",
+      "sha256": "804c0d1b2306db9779052d61ae4d36f5ab22d9b872f171d1b3e4abcbb1c933d1"
     },
     {
       "visibleText": "Ich spreche ruhig und freundlich.",
@@ -595,9 +647,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-40c393ce1d2f0cb60ac82cfd.m4a",
+      "sha256": "40c393ce1d2f0cb60ac82cfdb8b2d30e4fccea024af18e8d941d45b687bb3ee9"
     },
     {
       "visibleText": "Ich verspotte und beleidige niemanden.",
@@ -615,9 +669,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-7ef03a13212e4a1b9a4dd02f.m4a",
+      "sha256": "7ef03a13212e4a1b9a4dd02f54c822a3975dcaf4cada046f9fe275e7cb0320fb"
     },
     {
       "visibleText": "Wenn ich Hilfe brauche, darf ich darum bitten.",
@@ -631,9 +687,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-853e6ad60d3fe5624ffc54c3.m4a",
+      "sha256": "853e6ad60d3fe5624ffc54c31fd81bed6bb0236f9cac8280d0c29b385382b61e"
     },
     {
       "visibleText": "Wir sollen gute Worte sagen. Der Prophet ﷺ lehrte uns, Gutes zu sagen oder zu schweigen.",
@@ -647,9 +705,11 @@
       ],
       "arabicFushaSegmentationRequired": true,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-c21010d0628309073aaf233c.m4a",
+      "sha256": "c21010d0628309073aaf233c61b67f96fc5483659bbee6c4b98df8b1d205a764"
     },
     {
       "visibleText": "Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
@@ -671,9 +731,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-8f293ea47158c1132ec7325e.m4a",
+      "sha256": "8f293ea47158c1132ec7325e3243aafef94d28db08aa726201907a0ad8c459a9"
     },
     {
       "visibleText": "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
@@ -695,9 +757,11 @@
       ],
       "arabicFushaSegmentationRequired": true,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-0f30f2d64b9da00d829958b7.m4a",
+      "sha256": "0f30f2d64b9da00d829958b749d84609c19aec464a6cb8884938ae4ca4cb1d33"
     },
     {
       "visibleText": "Ich will ruhig und freundlich sprechen.",
@@ -719,9 +783,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-e4bb8a413cccfa4e64f41517.m4a",
+      "sha256": "e4bb8a413cccfa4e64f41517689580d443afaec163b3656d4ad4676570fb63dc"
     },
     {
       "visibleText": "Freundliche Worte sind Teil guten Benehmens.",
@@ -743,9 +809,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-c0aa8672048965a3d7253257.m4a",
+      "sha256": "c0aa8672048965a3d7253257bfed2ef6b597d3bb23be88642ac29bf0d8867516"
     },
     {
       "visibleText": "Wir lernen, wie wir auch bei Streit freundlich und ehrlich sprechen. Wir denken nach, bevor wir etwas sagen.",
@@ -759,9 +827,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-ff6602a5206d8a03fec1a7e2.m4a",
+      "sha256": "ff6602a5206d8a03fec1a7e2f234de7c56ccdab41d5639fe18733d651a3a98a5"
     },
     {
       "visibleText": "Meine Worte können andere freuen oder verletzen.",
@@ -775,9 +845,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-471e1eb51eaccbdbcaca1514.m4a",
+      "sha256": "471e1eb51eaccbdbcaca151449a1c140b8630f7545db97c71ae8a6e85fa67d90"
     },
     {
       "visibleText": "Wenn ich mich ärgere, denke ich kurz nach.",
@@ -791,9 +863,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-f45ee11a19cd26a7642bb3f6.m4a",
+      "sha256": "f45ee11a19cd26a7642bb3f60637dfd8e5364cd4215c71fff586adf00d1912bb"
     },
     {
       "visibleText": "Ich kann sagen, was mich stört, ohne gemein zu werden.",
@@ -807,9 +881,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-3e88130c31da2c061ea96af5.m4a",
+      "sha256": "3e88130c31da2c061ea96af5d994190d3aff3e22534c31eaaed5988bc748c892"
     },
     {
       "visibleText": "Im Qurʾān werden wir angeleitet, die besten Worte zu wählen. Der Prophet ﷺ lehrte uns, Gutes zu sagen oder zu schweigen.",
@@ -823,9 +899,11 @@
       ],
       "arabicFushaSegmentationRequired": true,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-86be7da5ea0e07f5c0cea582.m4a",
+      "sha256": "86be7da5ea0e07f5c0cea5824d9106b5491105ef200510444ab8d06b107f40e9"
     },
     {
       "visibleText": "Wir lernen, warum gute Worte zum islamischen Benehmen gehören und wie wir sie auch bei Meinungsverschiedenheiten wählen.",
@@ -839,9 +917,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-695edcd11dd456d777becfbe.m4a",
+      "sha256": "695edcd11dd456d777becfbedcad9571a40614de6b2b7b67553bf4de49475b03"
     },
     {
       "visibleText": "Gute Worte können Streit verhindern und Beziehungen stärken.",
@@ -855,9 +935,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-10adc5a2ac05863abc020002.m4a",
+      "sha256": "10adc5a2ac05863abc020002fc2891bc71ed07842d50554450370ba94019af1f"
     },
     {
       "visibleText": "Wir sprechen ehrlich und respektvoll, auch wenn wir anderer Meinung sind.",
@@ -871,9 +953,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-6aaf9dd920467e5deb437156.m4a",
+      "sha256": "6aaf9dd920467e5deb437156930f5b0dc565bf8fa46507ac245a485208735ad0"
     },
     {
       "visibleText": "Wir verzichten auf Spott und Beleidigungen.",
@@ -887,9 +971,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-f37bdb07414e2611939fab67.m4a",
+      "sha256": "f37bdb07414e2611939fab67c5ab79fc057de25ce8fbf462328d06846ba2b99e"
     },
     {
       "visibleText": "Schweigen bedeutet nicht, Unrecht hinzunehmen. Wenn jemand verletzt oder bedroht wird, holen wir Hilfe.",
@@ -903,9 +989,11 @@
       ],
       "arabicFushaSegmentationRequired": false,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-fb9ce567620d3f5b0657c5d4.m4a",
+      "sha256": "fb9ce567620d3f5b0657c5d4ca8a5500b2083890b4e3eb9d3326c5b3c2144e39"
     },
     {
       "visibleText": "Im Qurʾān wird uns aufgetragen, die besten Worte zu wählen. Die Sunnah lehrt: Wer an Allah und den Jüngsten Tag glaubt, soll Gutes sagen oder schweigen.",
@@ -919,9 +1007,12 @@
       ],
       "arabicFushaSegmentationRequired": true,
       "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/worte-v4-bc403a10c9c3ccad7227ee03.m4a",
+      "sha256": "bc403a10c9c3ccad7227ee03df177476538736d9d0ad0c3abea99300ca9ec2d6"
     }
-  ]
+  ],
+  "status": "45-playable-owner-v4-audios-34-new-11-reused-live-verification-pending"
 }
