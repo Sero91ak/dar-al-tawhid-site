@@ -1,0 +1,862 @@
+{
+  "schemaVersion": 1,
+  "topicId": "adab-respekt",
+  "topic": "Respekt und Fürsorge",
+  "priorTopic": "adab-worte",
+  "ageBands": [
+    "4-5",
+    "6-8",
+    "9-10"
+  ],
+  "productionPhase": "age-differentiated-source-backed-preflight",
+  "sourceMaterial": [
+    {
+      "type": "quran",
+      "reference": "17:23",
+      "url": "https://corpus.quran.com/translation.jsp?chapter=17&verse=23",
+      "canonicalArabic": "وَقَضَىٰ رَبُّكَ أَلَّا تَعْبُدُوا إِلَّا إِيَّاهُ وَبِالْوَالِدَيْنِ إِحْسَانًا ۚ إِمَّا يَبْلُغَنَّ عِندَكَ الْكِبَرَ أَحَدُهُمَا أَوْ كِلَاهُمَا فَلَا تَقُل لَّهُمَا أُفٍّ وَلَا تَنْهَرْهُمَا وَقُل لَّهُمَا قَوْلًا كَرِيمًا",
+      "usage": "German pedagogical paraphrase; full original verse from real reciter"
+    },
+    {
+      "type": "hadith",
+      "reference": "Ṣaḥīḥ al-Buḫārī 5971",
+      "url": "https://sunnah.com/bukhari:5971",
+      "usage": "Mother named three times then father; German pedagogical paraphrase"
+    }
+  ],
+  "rules": {
+    "modelId": "eleven_v4",
+    "speaker": "Serhat Abu Malik – Master",
+    "originalFushaLibraryRequired": true,
+    "choiceOnly": true,
+    "preserveProgressAndQuestionIds": true,
+    "noSyntheticQuranRecitation": true,
+    "noPaidRetryForUncertainRequests": true
+  },
+  "candidateChoiceOverrides": [
+    {
+      "age": "6-8",
+      "index": 1,
+      "prompt": "Wie kannst du deiner Familie im Alltag Respekt zeigen?",
+      "options": [
+        "Ich höre zu, spreche freundlich und helfe, soweit ich kann.",
+        "Ich störe absichtlich und weigere mich, zuzuhören."
+      ],
+      "correct": 0
+    },
+    {
+      "age": "9-10",
+      "index": 1,
+      "prompt": "Was kannst du tun, wenn du anderer Meinung bist als deine Eltern?",
+      "options": [
+        "Ich sage ruhig und respektvoll, was ich denke.",
+        "Ich beschimpfe sie, damit ich recht bekomme."
+      ],
+      "correct": 0
+    },
+    {
+      "age": "9-10",
+      "index": 2,
+      "prompt": "Was lehren Qurʾān 17:23 und die Sunnah über unsere Eltern?",
+      "options": [
+        "Wir beten Allah allein an und behandeln unsere Eltern mit besonderer Güte.",
+        "Wir brauchen unseren Eltern keine Güte zu zeigen."
+      ],
+      "correct": 0
+    }
+  ],
+  "distinctStaticTopicPhrases": 46,
+  "existingApprovedManifestCandidates": 12,
+  "missingOrUnverified": 34,
+  "glossaryTerms": [
+    "sunnah",
+    "quran"
+  ],
+  "entries": [
+    {
+      "visibleText": "Menschen verdienen einen freundlichen Umgang.",
+      "spokenText": "Menschen verdienen einen freundlichen Umgang.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "optional introduction"
+        },
+        {
+          "age": "6-8",
+          "source": "optional introduction"
+        },
+        {
+          "age": "9-10",
+          "source": "optional introduction"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Heute lernen wir, freundlich zu unserer Familie zu sein und anderen zu helfen.",
+      "spokenText": "Heute lernen wir, freundlich zu unserer Familie zu sein und anderen zu helfen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "welcome"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich höre Mama und Papa zu.",
+      "spokenText": "Ich höre Mama und Papa zu.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "explanation 0"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich antworte freundlich.",
+      "spokenText": "Ich antworte freundlich.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "explanation 1"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich helfe, wenn ich kann.",
+      "spokenText": "Ich helfe, wenn ich kann.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "explanation 2"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wenn ich Hilfe brauche, darf ich darum bitten.",
+      "spokenText": "Wenn ich Hilfe brauche, darf ich darum bitten.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "explanation 3"
+        }
+      ],
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/worte-v4-853e6ad60d3fe5624ffc54c3.m4a",
+      "existingSha256": "853e6ad60d3fe5624ffc54c31fd81bed6bb0236f9cac8280d0c29b385382b61e",
+      "existingSourceLessonId": "adab-worte"
+    },
+    {
+      "visibleText": "Allah lehrt uns, unsere Eltern gut zu behandeln. Der Prophet ﷺ lehrte uns, besonders gut zur Mutter und auch zum Vater zu sein.",
+      "spokenText": "Allah lehrt uns, unsere Eltern gut zu behandeln. Der Prophet ﷺ lehrte uns, besonders gut zur Mutter und auch zum Vater zu sein.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "source explanation"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wir üben Respekt für Eltern, Familie und Mitmenschen.",
+      "spokenText": "Wir üben Respekt für Eltern, Familie und Mitmenschen.",
+      "kind": "summary",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "recap 0"
+        },
+        {
+          "age": "6-8",
+          "source": "recap 0"
+        },
+        {
+          "age": "9-10",
+          "source": "recap 0"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen. Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters.",
+      "spokenText": "Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen. Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters.",
+      "kind": "summary",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "recap 1"
+        },
+        {
+          "age": "6-8",
+          "source": "recap 1"
+        },
+        {
+          "age": "9-10",
+          "source": "recap 1"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich höre zu und gehe freundlich mit anderen um.",
+      "spokenText": "Ich höre zu und gehe freundlich mit anderen um.",
+      "kind": "summary",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "recap 2"
+        },
+        {
+          "age": "6-8",
+          "source": "recap 2"
+        },
+        {
+          "age": "9-10",
+          "source": "recap 2"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ein Elternteil bittet dich freundlich um Hilfe. Was tust du?",
+      "spokenText": "Ein Elternteil bittet dich freundlich um Hilfe. Was tust du?",
+      "kind": "question",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "question 0"
+        },
+        {
+          "age": "6-8",
+          "source": "question 0"
+        },
+        {
+          "age": "9-10",
+          "source": "question 0"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Ich antworte respektvoll und helfe, soweit ich kann.",
+      "spokenText": "Ich antworte respektvoll und helfe, soweit ich kann.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "option 0"
+        },
+        {
+          "age": "6-8",
+          "source": "option 0"
+        },
+        {
+          "age": "9-10",
+          "source": "option 0"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich beschimpfe ihn.",
+      "spokenText": "Ich beschimpfe ihn.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "option 1"
+        },
+        {
+          "age": "6-8",
+          "source": "option 1"
+        },
+        {
+          "age": "9-10",
+          "source": "option 1"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Was möchten wir uns heute merken?",
+      "spokenText": "Was möchten wir uns heute merken?",
+      "kind": "question",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "question 1"
+        }
+      ],
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-0eb818f6d5a880454b476051.m4a",
+      "existingSha256": "0eb818f6d5a880454b47605189d9bf12012267ca9eddac2cf3f21eaf3ea97681",
+      "existingSourceLessonId": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Antwort 1: Ich höre zu und gehe freundlich mit anderen um.",
+      "spokenText": "Ich höre zu und gehe freundlich mit anderen um.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "option 0"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich muss das Gelernte nicht beachten.",
+      "spokenText": "Ich muss das Gelernte nicht beachten.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "option 1"
+        }
+      ],
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-79134e3b3b9825627c7fe233.m4a",
+      "existingSha256": "79134e3b3b9825627c7fe23314e427f5bde0f94ad54171a79214a931a61dacbc",
+      "existingSourceLessonId": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Sunnah bedeutet: Was der Prophet ﷺ uns gelehrt hat.",
+      "spokenText": "Sunnah bedeutet: Was der Prophet ﷺ uns gelehrt hat.",
+      "kind": "glossary",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "sunnah"
+        }
+      ],
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-80f0a4da4fc7aa015afa065d.m4a",
+      "existingSha256": "80f0a4da4fc7aa015afa065db1e45c7404e434930e0607408ee1897d6bf58b7b",
+      "existingSourceLessonId": "sidq"
+    },
+    {
+      "visibleText": "Qurʾān bedeutet: Allahs Wort.",
+      "spokenText": "Qurʾān bedeutet: Allahs Wort.",
+      "kind": "glossary",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "quran"
+        }
+      ],
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-49d90c213b2dfeea113417d3.m4a",
+      "existingSha256": "49d90c213b2dfeea113417d3bfb660401e12c1512d095ded937ad351bc29dc61",
+      "existingSourceLessonId": "sidq"
+    },
+    {
+      "visibleText": "Wir lernen, wie wir Eltern und anderen Menschen mit Respekt begegnen und ihnen im Alltag helfen können.",
+      "spokenText": "Wir lernen, wie wir Eltern und anderen Menschen mit Respekt begegnen und ihnen im Alltag helfen können.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "welcome"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich höre aufmerksam zu, wenn jemand mit mir spricht.",
+      "spokenText": "Ich höre aufmerksam zu, wenn jemand mit mir spricht.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "explanation 0"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich antworte freundlich, auch wenn ich anderer Meinung bin.",
+      "spokenText": "Ich antworte freundlich, auch wenn ich anderer Meinung bin.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "explanation 1"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich helfe zu Hause, soweit ich kann.",
+      "spokenText": "Ich helfe zu Hause, soweit ich kann.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "explanation 2"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wenn mich etwas verletzt, darf ich einer vertrauten Person davon erzählen.",
+      "spokenText": "Wenn mich etwas verletzt, darf ich einer vertrauten Person davon erzählen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "explanation 3"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Im Qurʾān wird uns aufgetragen, Allah allein anzubeten und die Eltern gut zu behandeln. Der Prophet ﷺ betonte die besondere Stellung der Mutter und danach die des Vaters.",
+      "spokenText": "Im Qurʾān wird uns aufgetragen, Allah allein anzubeten und die Eltern gut zu behandeln. Der Prophet ﷺ betonte die besondere Stellung der Mutter und danach die des Vaters.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "source explanation"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wie kannst du deiner Familie im Alltag Respekt zeigen?",
+      "spokenText": "Wie kannst du deiner Familie im Alltag Respekt zeigen?",
+      "kind": "question",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "question 1"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Ich höre zu, spreche freundlich und helfe, soweit ich kann.",
+      "spokenText": "Ich höre zu, spreche freundlich und helfe, soweit ich kann.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "option 0"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich störe absichtlich und weigere mich, zuzuhören.",
+      "spokenText": "Ich störe absichtlich und weigere mich, zuzuhören.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "option 1"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wo lernen wir mehr über dieses Thema?",
+      "spokenText": "Wo lernen wir mehr über dieses Thema?",
+      "kind": "question",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "question 2"
+        }
+      ],
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-873f4d49eb7e46d4000b9b36.m4a",
+      "existingSha256": "873f4d49eb7e46d4000b9b36e859bf153ce6bafdd79c1647dbd8bcb5012a54b8",
+      "existingSourceLessonId": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Antwort 1: Im Qurʾān und in der authentischen Sunnah.",
+      "spokenText": "Im Qurʾān und in der authentischen Sunnah.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "option 0"
+        }
+      ],
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-414553471cb676c7be7c52a4.m4a",
+      "existingSha256": "414553471cb676c7be7c52a47b6fce6ebb1ff94975a2a2e20de84dd5e651700d",
+      "existingSourceLessonId": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Antwort 2: Wir müssen uns die Regeln selbst ausdenken.",
+      "spokenText": "Wir müssen uns die Regeln selbst ausdenken.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "option 1"
+        }
+      ],
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-ef5d43874fef6004ef3b0a16.m4a",
+      "existingSha256": "ef5d43874fef6004ef3b0a16359862ce83253270df6a066943adee2edd787b52",
+      "existingSourceLessonId": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Sunnah nennen wir die überlieferte Lehre und das Vorbild des Propheten Muḥammad ﷺ.",
+      "spokenText": "Sunnah nennen wir die überlieferte Lehre und das Vorbild des Propheten Muḥammad ﷺ.",
+      "kind": "glossary",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "sunnah"
+        }
+      ],
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-5bf1a4cb17c174923cb45696.m4a",
+      "existingSha256": "5bf1a4cb17c174923cb45696d61093126170fd5a4f22282dd6f37407b2b1480d",
+      "existingSourceLessonId": "sidq"
+    },
+    {
+      "visibleText": "Qurʾān bedeutet: Der Qurʾān ist Allahs Offenbarung, die wir auf Arabisch hören und lesen.",
+      "spokenText": "Qurʾān bedeutet: Der Qurʾān ist Allahs Offenbarung, die wir auf Arabisch hören und lesen.",
+      "kind": "glossary",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "quran"
+        }
+      ],
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-9f84cdeb4cbbbeadcee86185.m4a",
+      "existingSha256": "9f84cdeb4cbbbeadcee861859f55162c748364af28e19ca855f0c440f50ac26d",
+      "existingSourceLessonId": "sidq"
+    },
+    {
+      "visibleText": "Wir lernen anhand von Qurʾān und Sunnah, weshalb Respekt gegenüber den Eltern besonders wichtig ist und wie wir Fürsorge im Alltag zeigen.",
+      "spokenText": "Wir lernen anhand von Qurʾān und Sunnah, weshalb Respekt gegenüber den Eltern besonders wichtig ist und wie wir Fürsorge im Alltag zeigen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "welcome"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wir begegnen unseren Eltern mit freundlichen Worten und guten Taten.",
+      "spokenText": "Wir begegnen unseren Eltern mit freundlichen Worten und guten Taten.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "explanation 0"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wir achten auf die Bedürfnisse unserer Familie, auch wenn jemand älter wird.",
+      "spokenText": "Wir achten auf die Bedürfnisse unserer Familie, auch wenn jemand älter wird.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "explanation 1"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wir können anderer Meinung sein und trotzdem respektvoll sprechen.",
+      "spokenText": "Wir können anderer Meinung sein und trotzdem respektvoll sprechen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "explanation 2"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Respekt bedeutet nicht, dass wir Verletzungen oder Bedrohungen verheimlichen müssen. Wir holen Hilfe.",
+      "spokenText": "Respekt bedeutet nicht, dass wir Verletzungen oder Bedrohungen verheimlichen müssen. Wir holen Hilfe.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "explanation 3"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Der Qurʾān verbindet die alleinige Anbetung Allahs mit der guten Behandlung der Eltern. Als ein Mann nach der besten Gesellschaft fragte, nannte der Prophet ﷺ dreimal die Mutter und danach den Vater.",
+      "spokenText": "Der Qurʾān verbindet die alleinige Anbetung Allahs mit der guten Behandlung der Eltern. Als ein Mann nach der besten Gesellschaft fragte, nannte der Prophet ﷺ dreimal die Mutter und danach den Vater.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "source explanation"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Was kannst du tun, wenn du anderer Meinung bist als deine Eltern?",
+      "spokenText": "Was kannst du tun, wenn du anderer Meinung bist als deine Eltern?",
+      "kind": "question",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "question 1"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Ich sage ruhig und respektvoll, was ich denke.",
+      "spokenText": "Ich sage ruhig und respektvoll, was ich denke.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "option 0"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich beschimpfe sie, damit ich recht bekomme.",
+      "spokenText": "Ich beschimpfe sie, damit ich recht bekomme.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "option 1"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Was lehren Qurʾān 17:23 und die Sunnah über unsere Eltern?",
+      "spokenText": "Was lehren der Qurʾān und die Sunnah über unsere Eltern?",
+      "kind": "question",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "question 2"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Wir beten Allah allein an und behandeln unsere Eltern mit besonderer Güte.",
+      "spokenText": "Wir beten Allah allein an und behandeln unsere Eltern mit besonderer Güte.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "option 0"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Wir brauchen unseren Eltern keine Güte zu zeigen.",
+      "spokenText": "Wir brauchen unseren Eltern keine Güte zu zeigen.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "option 1"
+        }
+      ],
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Sunnah umfasst die authentisch überlieferten Aussagen, Handlungen und Bestätigungen des Propheten ﷺ.",
+      "spokenText": "Sunnah umfasst die authentisch überlieferten Aussagen, Handlungen und Bestätigungen des Propheten ﷺ.",
+      "kind": "glossary",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "sunnah"
+        }
+      ],
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-bf23b416663c26641f417b63.m4a",
+      "existingSha256": "bf23b416663c26641f417b63bbdf102b5e95a4aece147c0dfd7257e504f97a89",
+      "existingSourceLessonId": "sidq"
+    },
+    {
+      "visibleText": "Qurʾān bedeutet: Der Qurʾān ist die von Allah offenbarte Schrift. Der arabische Vers und seine deutsche Übersetzung sind nicht dasselbe.",
+      "spokenText": "Qurʾān bedeutet: Der Qurʾān ist die von Allah offenbarte Schrift. Der arabische Vers und seine deutsche Übersetzung sind nicht dasselbe.",
+      "kind": "glossary",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "quran"
+        }
+      ],
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-3db8cc45cbe58428e98def3c.m4a",
+      "existingSha256": "3db8cc45cbe58428e98def3c1d6d3261e99bf171f01add410af45e99f146b7ae",
+      "existingSourceLessonId": "sidq"
+    }
+  ],
+  "liveDeploymentAllowed": false,
+  "paymentGenerationAllowed": false,
+  "notes": "Static inventory; prior public live proof and runtime/media audit required before paid generation. All three ages distinct."
+}
