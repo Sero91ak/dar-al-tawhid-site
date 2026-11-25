@@ -26,7 +26,7 @@ for(const age of plan.ageBands){
  }
  assert.equal(JSON.stringify(original),before);
  const a=l.ageText?.[age];
- add(a?.intro||l.lead+" "+l.goal);
+ add(l.lead);add(a?.intro||l.lead+" "+l.goal);
  (a?.lines||l.lines).forEach(add);
  add(a?.evidence||"Qurʾān: "+l.quran.meaning+" Sunnah: "+l.hadith.text);
  [l.goal,l.quran.meaning+" "+l.hadith.text,l.sample].forEach(add);
@@ -34,6 +34,10 @@ for(const age of plan.ageBands){
  for(const section of ["lesson","sources"])for(const term of g.termsFor(l,age,7,section))add(g.phrase(term,age));
 }
 assert.deepEqual([...texts].sort(),plan.entries.map(e=>e.visibleText).sort(),"Static phrase inventory drift");
+for(const t of ["As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.","Lieber Bruder.","Liebe Schwester.","Schön, dass du da bist!","Schön, dass du heute mitlernst!","Schön, dass du dein Wissen heute erweiterst!"]){
+ const e=manifest[t];assert.ok(e?.approvedForPlayback&&e.modelId==="eleven_v4"&&e.voiceId==="DkU7j9uO4ZEtLD2iRZSH");
+ assert.equal(crypto.createHash("sha256").update(fs.readFileSync(path.resolve(ROOT,e.url.replace(/^\/+/, "")))).digest("hex"),e.sha256);
+}
 let verified=0,missing=[];
 for(const t of texts){
  const e=manifest[t];
