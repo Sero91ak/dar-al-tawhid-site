@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-25",
+  "range": "HAD-3435–HAD-3444",
+  "batchSize": 10,
+  "recordType": "athar",
+  "sourceBook": "Mālik ibn Anas, al-Muwaṭṭaʾ",
+  "records": [
+    {
+      "id": "HAD-3435",
+      "source": "Mālik ibn Anas, al-Muwaṭṭaʾ, Kitāb aṣ-Ṣiyām, Nr. 637 (arabische Online-Zählung)",
+      "grade": "Mawqūf; starker, verbundener Isnād Mālik → Nāfiʿ → Ibn ʿUmar."
+    },
+    {
+      "id": "HAD-3436",
+      "source": "Mālik ibn Anas, al-Muwaṭṭaʾ, Kitāb aṣ-Ṣiyām, Nr. 659 (arabische Online-Zählung)",
+      "grade": "Mawqūf; starker, verbundener Isnād Mālik → Nāfiʿ → Ibn ʿUmar."
+    },
+    {
+      "id": "HAD-3437",
+      "source": "Mālik ibn Anas, al-Muwaṭṭaʾ, Kitāb aṣ-Ṣiyām, Nr. 660 (arabische Online-Zählung)",
+      "grade": "Maqṭūʿ; äußerlich verbundener Isnād über die bekannte Vater-Sohn-Überlieferung."
+    },
+    {
+      "id": "HAD-3438",
+      "source": "Mālik ibn Anas, al-Muwaṭṭaʾ, Kitāb aṣ-Ṣiyām, Nr. 686 (arabische Online-Zählung)",
+      "grade": "Maqṭūʿ; äußerlich verbundener Isnād über die Vater-Sohn-Überlieferung."
+    },
+    {
+      "id": "HAD-3439",
+      "source": "Mālik ibn Anas, al-Muwaṭṭaʾ, Kitāb al-Iʿtikāf, Nr. 694 (arabische Online-Zählung)",
+      "grade": "Mawqūf; äußerlich verbundener bekannter Überlieferungsweg über ʿAmrah."
+    },
+    {
+      "id": "HAD-3440",
+      "source": "Mālik ibn Anas, al-Muwaṭṭaʾ, Kitāb al-Libās, Nr. 1657 (arabische Online-Zählung)",
+      "grade": "Mawqūf; starker, verbundener Isnād Mālik → Nāfiʿ → Ibn ʿUmar."
+    },
+    {
+      "id": "HAD-3441",
+      "source": "Mālik ibn Anas, al-Muwaṭṭaʾ, Kitāb as-Salām, Nr. 1760 (arabische Online-Zählung)",
+      "grade": "Mawqūf; äußerlich verbundener Isnād mit ausdrücklich bezeugter Begegnung."
+    },
+    {
+      "id": "HAD-3442",
+      "source": "Mālik ibn Anas, al-Muwaṭṭaʾ, Kitāb as-Salām, Nr. 1763 (arabische Online-Zählung)",
+      "grade": "Mawqūf; äußerlich verbundener Isnād mit ausdrücklich bezeugtem Hören durch Anas."
+    },
+    {
+      "id": "HAD-3443",
+      "source": "Mālik ibn Anas, al-Muwaṭṭaʾ, Kitāb as-Salām, Nr. 1764 (arabische Online-Zählung)",
+      "grade": "Mawqūf; äußerlich verbundener Isnād; Parallelüberlieferung im Tahḏīb al-Kamāl, Bd. 13, S. 389."
+    },
+    {
+      "id": "HAD-3444",
+      "source": "Mālik ibn Anas, al-Muwaṭṭaʾ, Kitāb al-Istiʾḏān, Nr. 1770 (arabische Online-Zählung)",
+      "grade": "Mawqūf; starker, verbundener Isnād Mālik → Nāfiʿ → Ibn ʿUmar."
+    }
+  ],
+  "verification": {
+    "original": "Arabic primary text on Sunnah.com read for all ten, German translations independently rendered; Arabic online numbering, printed edition not established.",
+    "isnad": "Individual chains documented; four Nāfiʿ–Ibn ʿUmar transmissions have a notably strong connected route, remaining six described as outwardly connected, no exhaustive ʿilal judgment asserted.",
+    "duplicate": "Ten targeted Arabic and German GitHub searches, no matching canonical record surfaced; full library-shell retrieval returned empty, exhaustive semantic matching not proven.",
+    "links": "Chapter URLs inspected; text fragment anchors not individually tested.",
+    "publication": "Source records only; existing canonical workflow rebuilds index/catalog/manifest and screensaver; no OneSignal, no Kids, no UI or native changes.",
+    "qa": "Ten unique IDs and source numbers, required fields present; full repository CI and deployment not yet run."
+  },
+  "targetTotals": {
+    "total": 3444,
+    "hadith": 2408,
+    "athar": 1036
+  },
+  "nextId": "HAD-3445"
+}
