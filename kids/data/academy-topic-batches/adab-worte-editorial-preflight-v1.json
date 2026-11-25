@@ -3,7 +3,7 @@
   "topicId": "adab-worte",
   "topic": "Gute Worte – freundlich sprechen",
   "createdAt": "2026-11-25",
-  "productionPhase": "branch-choice-projection-and-static-inventory-prepared",
+  "productionPhase": "age-differentiated-source-backed-preflight",
   "priorTopic": "adab-salam",
   "priorTechnicalLiveProof": "kids/data/academy-topic-batches/adab-salam-v4-live-proof-v1.json",
   "ageBands": [
@@ -23,7 +23,7 @@
     {
       "type": "hadith",
       "reference": "Ṣaḥīḥ al-Buḫārī 6018",
-      "url": "https://sunnah.com/bukhari/78/49",
+      "url": "https://sunnah.com/bukhari:6018",
       "canonicalArabicExcerpt": "وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ",
       "usage": "German age-appropriate paraphrase, not verbatim quotation",
       "sourceCheckedDate": "2026-11-25"
@@ -100,232 +100,16 @@
   },
   "liveDeploymentAllowed": false,
   "paymentGenerationAllowed": false,
-  "notes": "Static inventory from renderer source, canonical lesson, staged projection and glossary lookup. Shared welcome followup/profile greeting and dynamic browser coverage still require runtime audit; manifest candidates require media hash verification. No paid requests, playback approvals or live deployment.",
+  "notes": "Three distinct age narrations, source-backed choice questions, shared greetings separately verified, runtime audit still required. No production media claims.",
   "projectionStaged": true,
-  "distinctStaticTopicPhrases": 33,
+  "distinctStaticTopicPhrases": 45,
   "existingApprovedManifestCandidates": 11,
-  "missingOrUnverified": 22,
+  "missingOrUnverified": 34,
   "glossaryTerms": [
     "sunnah",
     "quran"
   ],
   "entries": [
-    {
-      "visibleText": "Freundliche Worte sind Teil guten Benehmens. Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
-      "spokenText": "Freundliche Worte sind Teil guten Benehmens. Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
-      "kind": "narration",
-      "contexts": [
-        {
-          "age": "4-5",
-          "source": "welcome body"
-        },
-        {
-          "age": "6-8",
-          "source": "welcome body"
-        },
-        {
-          "age": "9-10",
-          "source": "welcome body"
-        }
-      ],
-      "arabicFushaSegmentationRequired": false,
-      "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
-    },
-    {
-      "visibleText": "Meine Worte können andere freuen oder verletzen.",
-      "spokenText": "Meine Worte können andere freuen oder verletzen.",
-      "kind": "narration",
-      "contexts": [
-        {
-          "age": "4-5",
-          "source": "explanation 0"
-        },
-        {
-          "age": "6-8",
-          "source": "explanation 0"
-        },
-        {
-          "age": "9-10",
-          "source": "explanation 0"
-        }
-      ],
-      "arabicFushaSegmentationRequired": false,
-      "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
-    },
-    {
-      "visibleText": "Ich spreche ruhig und höflich.",
-      "spokenText": "Ich spreche ruhig und höflich.",
-      "kind": "narration",
-      "contexts": [
-        {
-          "age": "4-5",
-          "source": "explanation 1"
-        },
-        {
-          "age": "6-8",
-          "source": "explanation 1"
-        },
-        {
-          "age": "9-10",
-          "source": "explanation 1"
-        }
-      ],
-      "arabicFushaSegmentationRequired": false,
-      "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
-    },
-    {
-      "visibleText": "Ich muss niemanden verspotten oder beleidigen.",
-      "spokenText": "Ich muss niemanden verspotten oder beleidigen.",
-      "kind": "narration",
-      "contexts": [
-        {
-          "age": "4-5",
-          "source": "explanation 2"
-        },
-        {
-          "age": "6-8",
-          "source": "explanation 2"
-        },
-        {
-          "age": "9-10",
-          "source": "explanation 2"
-        }
-      ],
-      "arabicFushaSegmentationRequired": false,
-      "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
-    },
-    {
-      "visibleText": "Auch bei einem Streit kann ich freundlich bleiben.",
-      "spokenText": "Auch bei einem Streit kann ich freundlich bleiben.",
-      "kind": "narration",
-      "contexts": [
-        {
-          "age": "4-5",
-          "source": "explanation 3"
-        },
-        {
-          "age": "6-8",
-          "source": "explanation 3"
-        },
-        {
-          "age": "9-10",
-          "source": "explanation 3"
-        }
-      ],
-      "arabicFushaSegmentationRequired": false,
-      "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
-    },
-    {
-      "visibleText": "Qurʾān: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Sunnah: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
-      "spokenText": "Qurʾān: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Sunnah: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
-      "kind": "narration",
-      "contexts": [
-        {
-          "age": "4-5",
-          "source": "source explanation"
-        },
-        {
-          "age": "6-8",
-          "source": "source explanation"
-        },
-        {
-          "age": "9-10",
-          "source": "source explanation"
-        }
-      ],
-      "arabicFushaSegmentationRequired": true,
-      "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
-    },
-    {
-      "visibleText": "Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
-      "spokenText": "Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
-      "kind": "summary",
-      "contexts": [
-        {
-          "age": "4-5",
-          "source": "recap 0"
-        },
-        {
-          "age": "6-8",
-          "source": "recap 0"
-        },
-        {
-          "age": "9-10",
-          "source": "recap 0"
-        }
-      ],
-      "arabicFushaSegmentationRequired": false,
-      "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
-    },
-    {
-      "visibleText": "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
-      "spokenText": "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
-      "kind": "summary",
-      "contexts": [
-        {
-          "age": "4-5",
-          "source": "recap 1"
-        },
-        {
-          "age": "6-8",
-          "source": "recap 1"
-        },
-        {
-          "age": "9-10",
-          "source": "recap 1"
-        }
-      ],
-      "arabicFushaSegmentationRequired": true,
-      "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
-    },
-    {
-      "visibleText": "Ich will ruhig und freundlich sprechen.",
-      "spokenText": "Ich will ruhig und freundlich sprechen.",
-      "kind": "summary",
-      "contexts": [
-        {
-          "age": "4-5",
-          "source": "recap 2"
-        },
-        {
-          "age": "6-8",
-          "source": "recap 2"
-        },
-        {
-          "age": "9-10",
-          "source": "recap 2"
-        }
-      ],
-      "arabicFushaSegmentationRequired": false,
-      "existingApprovedManifestCandidate": false,
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
-    },
     {
       "visibleText": "Du bist anderer Meinung als ein Freund. Was tust du?",
       "spokenText": "Du bist anderer Meinung als ein Freund. Was tust du?",
@@ -766,6 +550,378 @@
       "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-3db8cc45cbe58428e98def3c.m4a",
       "existingSha256": "3db8cc45cbe58428e98def3c1d6d3261e99bf171f01add410af45e99f146b7ae",
       "existingSourceLessonId": "sidq"
+    },
+    {
+      "visibleText": "Heute lernen wir, freundlich zu sprechen. Auch wenn wir uns ärgern, können wir gute Worte sagen.",
+      "spokenText": "Heute lernen wir, freundlich zu sprechen. Auch wenn wir uns ärgern, können wir gute Worte sagen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "welcome body"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Meine Worte können andere freuen.",
+      "spokenText": "Meine Worte können andere freuen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "explanation 0"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich spreche ruhig und freundlich.",
+      "spokenText": "Ich spreche ruhig und freundlich.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "explanation 1"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich verspotte und beleidige niemanden.",
+      "spokenText": "Ich verspotte und beleidige niemanden.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "explanation 2"
+        },
+        {
+          "age": "6-8",
+          "source": "explanation 2"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wenn ich Hilfe brauche, darf ich darum bitten.",
+      "spokenText": "Wenn ich Hilfe brauche, darf ich darum bitten.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "explanation 3"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wir sollen gute Worte sagen. Der Prophet ﷺ lehrte uns, Gutes zu sagen oder zu schweigen.",
+      "spokenText": "Wir sollen gute Worte sagen. Der Prophet ﷺ lehrte uns, Gutes zu sagen oder zu schweigen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "source explanation"
+        }
+      ],
+      "arabicFushaSegmentationRequired": true,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
+      "spokenText": "Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
+      "kind": "summary",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "recap 0"
+        },
+        {
+          "age": "6-8",
+          "source": "recap 0"
+        },
+        {
+          "age": "9-10",
+          "source": "recap 0"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
+      "spokenText": "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
+      "kind": "summary",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "recap 1"
+        },
+        {
+          "age": "6-8",
+          "source": "recap 1"
+        },
+        {
+          "age": "9-10",
+          "source": "recap 1"
+        }
+      ],
+      "arabicFushaSegmentationRequired": true,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich will ruhig und freundlich sprechen.",
+      "spokenText": "Ich will ruhig und freundlich sprechen.",
+      "kind": "summary",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "recap 2"
+        },
+        {
+          "age": "6-8",
+          "source": "recap 2"
+        },
+        {
+          "age": "9-10",
+          "source": "recap 2"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Freundliche Worte sind Teil guten Benehmens.",
+      "spokenText": "Freundliche Worte sind Teil guten Benehmens.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "optional introduction button"
+        },
+        {
+          "age": "6-8",
+          "source": "optional introduction button"
+        },
+        {
+          "age": "9-10",
+          "source": "optional introduction button"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wir lernen, wie wir auch bei Streit freundlich und ehrlich sprechen. Wir denken nach, bevor wir etwas sagen.",
+      "spokenText": "Wir lernen, wie wir auch bei Streit freundlich und ehrlich sprechen. Wir denken nach, bevor wir etwas sagen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "welcome body"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Meine Worte können andere freuen oder verletzen.",
+      "spokenText": "Meine Worte können andere freuen oder verletzen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "explanation 0"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wenn ich mich ärgere, denke ich kurz nach.",
+      "spokenText": "Wenn ich mich ärgere, denke ich kurz nach.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "explanation 1"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich kann sagen, was mich stört, ohne gemein zu werden.",
+      "spokenText": "Ich kann sagen, was mich stört, ohne gemein zu werden.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "explanation 3"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Im Qurʾān werden wir angeleitet, die besten Worte zu wählen. Der Prophet ﷺ lehrte uns, Gutes zu sagen oder zu schweigen.",
+      "spokenText": "Im Qurʾān werden wir angeleitet, die besten Worte zu wählen. Der Prophet ﷺ lehrte uns, Gutes zu sagen oder zu schweigen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "source explanation"
+        }
+      ],
+      "arabicFushaSegmentationRequired": true,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wir lernen, warum gute Worte zum islamischen Benehmen gehören und wie wir sie auch bei Meinungsverschiedenheiten wählen.",
+      "spokenText": "Wir lernen, warum gute Worte zum islamischen Benehmen gehören und wie wir sie auch bei Meinungsverschiedenheiten wählen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "welcome body"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Gute Worte können Streit verhindern und Beziehungen stärken.",
+      "spokenText": "Gute Worte können Streit verhindern und Beziehungen stärken.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "explanation 0"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wir sprechen ehrlich und respektvoll, auch wenn wir anderer Meinung sind.",
+      "spokenText": "Wir sprechen ehrlich und respektvoll, auch wenn wir anderer Meinung sind.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "explanation 1"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wir verzichten auf Spott und Beleidigungen.",
+      "spokenText": "Wir verzichten auf Spott und Beleidigungen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "explanation 2"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Schweigen bedeutet nicht, Unrecht hinzunehmen. Wenn jemand verletzt oder bedroht wird, holen wir Hilfe.",
+      "spokenText": "Schweigen bedeutet nicht, Unrecht hinzunehmen. Wenn jemand verletzt oder bedroht wird, holen wir Hilfe.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "explanation 3"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Im Qurʾān wird uns aufgetragen, die besten Worte zu wählen. Die Sunnah lehrt: Wer an Allah und den Jüngsten Tag glaubt, soll Gutes sagen oder schweigen.",
+      "spokenText": "Im Qurʾān wird uns aufgetragen, die besten Worte zu wählen. Die Sunnah lehrt: Wer an Allah und den Jüngsten Tag glaubt, soll Gutes sagen oder schweigen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "source explanation"
+        }
+      ],
+      "arabicFushaSegmentationRequired": true,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
     }
   ]
 }
