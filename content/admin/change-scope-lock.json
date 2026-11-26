@@ -155,6 +155,28 @@
   ],
   "unlockedScopes": [
     {
+      "id": "push-locale-ku-ckb-t32u-20261126",
+      "at": "2026-11-26T11:00:00+01:00",
+      "approvedBy": "owner-serhat-20261126-t32u-push-language",
+      "reason": "Owner t32u: language text only for ku/ckb delivery and prayer-push-admin copy until 2026-11-28T23:59:59Z. No prayer calculation, location, Qibla, schedule, segment, idempotency of already queued notifications, Kids or broadcast.",
+      "paths": [
+        "cloudflare/prayer-push-scheduler.js",
+        "cloudflare/prayer-push-admin.js",
+        "cloudflare/push-app-locale-delivery.js",
+        "cloudflare/push-locale-from-draft.js",
+        "cloudflare/push-locale-chrome.js",
+        "cloudflare/push-locale-chrome-data.json",
+        "cloudflare/daily-push-scheduler.js",
+        "cloudflare/daily-push-admin.js",
+        "cloudflare/jummah-push-scheduler.js",
+        "cloudflare/jummah-push-admin.js",
+        "scripts/check-push-locale-map.mjs",
+        "scripts/prepare-one-subscription-locale-check.mjs",
+        "scripts/push-locale-chrome.cjs"
+      ],
+      "expiresAt": "2026-11-28T23:59:59Z"
+    },
+    {
       "id": "revert-hadith-library-shelves-visitor-20261126",
       "at": "2026-11-26T10:12:00+01:00",
       "approvedBy": "owner-serhat-20261126-t29u-restore-app-clicks",
