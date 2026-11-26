@@ -308,7 +308,7 @@ function activateAdultGlobalBrandV2(html) {
       '<script defer id="darVisitorHomeParityPrimaryV2" src="/assets/dar-home-test-parity-visitor.js?v=20261126-single-home-landscape-v1"></' + 'script>']] : []),
     ['darVisitorHomeBootstrapV2',
       '<script defer id="darVisitorHomeBootstrapV2" src="/assets/dar-visitor-home-bootstrap-v2.js?v=20261126-single-home-landscape-v1"></' + 'script>'],
-    ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261126-header-language-v1">'],
+    ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261107-compact-safearea-header-v3">'],
     ['darVisitorSmartProfileCssV1','<link rel="stylesheet" id="darVisitorSmartProfileCssV1" href="/assets/dar-visitor-smart-profile-v1.css?v=20261030-my-dar-dashboard-v11">'],
     ['darVisitorProfilePickerCssV1','<link rel="stylesheet" id="darVisitorProfilePickerCssV1" href="/assets/dar-visitor-profile-picker-v1.css?v=20261126-header-language-v1">'],
     ['darVisitorDailyHubCssV1','<link rel="stylesheet" id="darVisitorDailyHubCssV1" href="/assets/dar-visitor-daily-hub-v1.css?v=20261030-mehr-responsive-v2">'],

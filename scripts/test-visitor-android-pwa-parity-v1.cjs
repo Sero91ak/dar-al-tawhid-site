@@ -38,7 +38,7 @@ assert.match(shell,/dar-home-test-parity-visitor\.js\?v=20261126-single-home-lan
 assert.match(shell,/adult-hero-height-runtime-v1403\.js\?v=visitor-hero-safearea-v1404-20261111-scroll-performance-v1/,
   "Android/iOS scroll runtime must use the refreshed immutable asset URL");
 assert.match(shell,/dar-noble-3d-icons\.js\?v=20261030-android-global-parity-v8/);
-assert.match(shell,/dar-adult-brand-header-v2\.css\?v=20261126-header-language-v1/);
+assert.match(shell,/dar-adult-brand-header-v2\.css\?v=20261107-compact-safearea-header-v3/);
 assert.match(shell,/dar-visitor-header-language-v1\.js\?v=20261126-header-language-v1/);
 const manifest=JSON.parse(get("manifest.json"));
 assert.ok(manifest.start_url.startsWith("/pwa/"));
