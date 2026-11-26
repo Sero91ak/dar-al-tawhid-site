@@ -98,6 +98,6 @@ for(const key of ['"resize",queue','"orientationchange",queue','"dar:layoutchang
 assert.ok(src.includes('root=create();')&&src.includes('lockLandscapeHome(root);'),'actual Home renderer is not protected');
 assert.ok(src.includes('restoreDarHomeScroll()'),'portrait navigation/scroll-back contract lost');
 const router=fs.readFileSync(path.join(__dirname,'../cloudflare/site-router.js'),'utf8');
-assert.ok(router.includes('dar-home-test-parity-visitor.js?v=20261124-single-home-boot-v2'),
+assert.ok(router.includes('dar-home-test-parity-visitor.js?v=20261126-single-home-landscape-v1'),
  'native iOS / Android asset pin must load the fixed Home, not cached legacy JS');
 console.log('Visitor landscape single Home ownership passed: phone, Fold, tablet, rotation, route, DOM replacement.');

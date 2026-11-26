@@ -293,7 +293,7 @@ function activateAdultGlobalBrandV2(html) {
   /* Native iOS and PWA must use the same fresh prayer presentation as Test.
      Keep desktop public browser, Kids and the original prayer engine isolated. */
   html = html.replace(/\/assets\/dar-home-test-parity-visitor\.js(?:\?v=[a-zA-Z0-9-]+)?/g,
-    "/assets/dar-home-test-parity-visitor.js?v=20261124-single-home-boot-v2");
+    "/assets/dar-home-test-parity-visitor.js?v=20261126-single-home-landscape-v1");
   // A URL rewrite cannot repair a missing script tag. Native iOS and the
   // dedicated Android PWA must both mount the canonical Home even when the
   // original bundle no longer embeds its script. Never create another Home.
@@ -305,9 +305,9 @@ function activateAdultGlobalBrandV2(html) {
    * Reuse the lazy-loader's IDs so each module is loaded at most once. */
   const addons = [
     ...(!parityScriptPresent ? [['darVisitorHomeParityPrimaryV2',
-      '<script defer id="darVisitorHomeParityPrimaryV2" src="/assets/dar-home-test-parity-visitor.js?v=20261124-single-home-boot-v2"></' + 'script>']] : []),
+      '<script defer id="darVisitorHomeParityPrimaryV2" src="/assets/dar-home-test-parity-visitor.js?v=20261126-single-home-landscape-v1"></' + 'script>']] : []),
     ['darVisitorHomeBootstrapV2',
-      '<script defer id="darVisitorHomeBootstrapV2" src="/assets/dar-visitor-home-bootstrap-v2.js?v=20261124-single-home-boot-v2"></' + 'script>'],
+      '<script defer id="darVisitorHomeBootstrapV2" src="/assets/dar-visitor-home-bootstrap-v2.js?v=20261126-single-home-landscape-v1"></' + 'script>'],
     ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261107-compact-safearea-header-v3">'],
     ['darVisitorSmartProfileCssV1','<link rel="stylesheet" id="darVisitorSmartProfileCssV1" href="/assets/dar-visitor-smart-profile-v1.css?v=20261030-my-dar-dashboard-v11">'],
     ['darVisitorProfilePickerCssV1','<link rel="stylesheet" id="darVisitorProfilePickerCssV1" href="/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-single-hub-v10">'],
@@ -1674,8 +1674,8 @@ export default {
         html = html.replace('/assets/fold-split.js?v=4', '/assets/fold-split.js?v=5');
         // Android installed PWA: bump URLs for the shared visitor home and 3D icon renderer.
         // An old v3 PWA worker may otherwise return a permanently stale cache-first asset.
-        html = html.replaceAll('/assets/dar-home-test-parity-visitor.js?v=20261107-wasiyyah-route-v1', '/assets/dar-home-test-parity-visitor.js?v=20261124-single-home-boot-v2');
-        html = html.replace('/assets/dar-home-test-parity-visitor.js?v=20261030-home-order-clock-v2', '/assets/dar-home-test-parity-visitor.js?v=20261124-single-home-boot-v2');
+        html = html.replaceAll('/assets/dar-home-test-parity-visitor.js?v=20261107-wasiyyah-route-v1', '/assets/dar-home-test-parity-visitor.js?v=20261126-single-home-landscape-v1');
+        html = html.replace('/assets/dar-home-test-parity-visitor.js?v=20261030-home-order-clock-v2', '/assets/dar-home-test-parity-visitor.js?v=20261126-single-home-landscape-v1');
         html = html.replaceAll('/assets/dar-noble-3d-icons.js?v=1095', '/assets/dar-noble-3d-icons.js?v=20261030-android-global-parity-v8');
         html = html.replace('/assets/dar-noble-3d-icons.css?v=1095', '/assets/dar-noble-3d-icons.css?v=20261030-android-global-parity-v8');
         // iPadOS desktop-class Safari identifies as Macintosh, even on a tablet.

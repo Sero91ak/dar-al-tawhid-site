@@ -155,6 +155,26 @@
   ],
   "unlockedScopes": [
     {
+      "id": "landscape-single-home-20261126",
+      "at": "2026-11-26T08:20:00+01:00",
+      "approvedBy": "owner-serhat-20261126-landscape-duplicate-home",
+      "reason": "Owner report: iPad and Fold landscape showed a second start page. Remove that leftover landscape split from the home route and keep one home, matching portrait. No OneSignal, no Zentrale, no push-lane change.",
+      "paths": [
+        "assets/dar-home-test-parity-visitor.js",
+        "assets/dar-visitor-home-bootstrap-v2.js",
+        "test/assets/dar-fold-workspace-v2.js",
+        "test/assets/dar-fold-workspace-v2.css",
+        "test/assets/dar-home-html-parity-v1.js",
+        "test/tools/dar-fold-workspace-v2-guard.cjs",
+        "test/index.html",
+        "test/version.json",
+        "scripts/check-visitor-home-landscape.cjs",
+        "scripts/check-visitor-home-bootstrap.cjs",
+        "scripts/check-adult-home-mutation-jank.cjs"
+      ],
+      "expiresAt": "2026-12-03T23:59:00+01:00"
+    },
+    {
       "id": "visitor-locale-zero-german-20261126",
       "at": "2026-11-26T08:10:00+01:00",
       "approvedBy": "owner-serhat-20261126-t16u-zero-german-when-locale-active",

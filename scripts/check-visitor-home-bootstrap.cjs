@@ -20,18 +20,18 @@ for(const html of [
  '<!doctype html><html><head></head><body></body></html>',
  '<html><body><script defer src="/assets/dar-home-test-parity-visitor.js?v=20261111-home-performance-v1"></script></body></html>',
  '<html><body><script src="/assets/dar-home-test-parity-visitor.js"></script></body></html>',
- '<html><body><script defer src="/assets/dar-home-test-parity-visitor.js?v=20261124-single-home-boot-v2"></script></body></html>'
+ '<html><body><script defer src="/assets/dar-home-test-parity-visitor.js?v=20261126-single-home-landscape-v1"></script></body></html>'
 ]){
  const after=activate(html);
  const parityTags=after.match(/<script[^>]*src="\/assets\/dar-home-test-parity-visitor\.js[^"]*"/g)||[];
  const bootTags=after.match(/<script[^>]*src="\/assets\/dar-visitor-home-bootstrap-v2\.js[^"]*"/g)||[];
  assert.equal(parityTags.length,1,'native shell needs one canonical parity loader');
  assert.equal(bootTags.length,1,'native shell needs one bounded recovery boot');
- assert.match(parityTags[0],/20261124-single-home-boot-v2/,'stale script path');
+ assert.match(parityTags[0],/20261126-single-home-landscape-v1/,'stale script path');
  assert.equal(activate(after),after,'native router injection is not idempotent');
 }
 assert.match(router,/if \(assetResponse\.ok\) html = activateAdultGlobalBrandV2\(html\)/,'production native/PWA branch must inject boot');
-assert.match(router,/20261124-single-home-boot-v2/,'Android PWA parity URL not upgraded');
+assert.match(router,/20261126-single-home-landscape-v1/,'Android PWA parity URL not upgraded');
 
 let currentPath='/',isHome=true,hasParity=false,loadedParity=false;
 const listeners={},scripts=[],events=[];
@@ -58,7 +58,7 @@ const context={window:win,document:doc,location:{pathname:currentPath},
  clearTimeout:()=>{}};
 vm.runInNewContext(boot,context);
 assert.equal(scripts.length,1,'without the canonical renderer the boot must load it');
-assert.match(scripts[0].src,/20261124-single-home-boot-v2/);
+assert.match(scripts[0].src,/20261126-single-home-landscape-v1/);
 assert.equal(scripts[0].id,'darVisitorParityRescueV2');
 listeners.resize();
 assert.equal(scripts.length,1,'repeated resize must never import a second renderer');
