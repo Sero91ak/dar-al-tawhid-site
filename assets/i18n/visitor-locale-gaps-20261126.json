@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-11-26",
+  "measurement": "2026-11-26 Playwright, ?app=1, eight locales, 34 routes after DARAdultUI18n.apply. Every cell is 0 visible German leftovers. Unsoursed ritual glosses are the language notice, not a new religious text. Talbiyah Arabic formula stays.",
+  "rule": "No invented Qurʾān or Ḥadīṯ wording. UI chrome is machine-translation-owner-approved. The Ibn Masʿūd quote uses assets/q69-locales.json. The Talbiyah German gloss is replaced by the language notice until a sourced translation is approved; the Arabic formula in umrah/ stays untouched.",
+  "previousAuditsDidNotOpen": [
+    "PR 1890 visual pass: home, post list, one post, duʿāʾ, quiz, Q49, mainly tr/ar/fr",
+    "PR 1896: homepage plus a few DOM samples, not inner routes",
+    "PR 1898: PWA home while the Qurʾān player rewrote the page",
+    "PR 1900: the single word öffnen",
+    "Not opened before this crawl: Mein DĀR / account, profile labels, settings notifications, frauen, ilm, books, hadith library, scholars, topics, ramadan, jumuah, umrah, impressum, surah list"
+  ],
+  "needsSourcedTranslation": [
+    {
+      "id": "talbiyah-gloss",
+      "where": "umrah/index.html dua.de",
+      "reason": "German gloss of the talbiyah. Arabic in the same record is the source. No approved non-German gloss is stored in the repo, so the runtime shows the language notice instead of German."
+    },
+    {
+      "id": "umrah-rite-prose",
+      "where": "umrah/index.html long rite instructions",
+      "reason": "Procedural ʿUmrah guidance beyond short labels. Not a stored nine-language manuscript. Remaining German sentences become the language notice, not a new fiqh text."
+    },
+    {
+      "id": "quran-verse-meanings",
+      "where": "visitor Qurʾān reader",
+      "reason": "Verse meanings stay on the open PR 1899. This change does not invent them."
+    }
+  ]
+}

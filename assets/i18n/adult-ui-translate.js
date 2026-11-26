@@ -13,6 +13,44 @@ var TEST=/^\/test(?:\/|$)/.test(path);
 var KEY="darAdultPreferredLocaleV1";
 var LOCALES=["de","ar","en","tr","ku","ckb","bs","fr","es"];
 var RTL={"ar":1,"ckb":1};
+var GENDER={
+ ar:{Frau:"امرأة",Mann:"رجل",Neutral:"محايد"},
+ en:{Frau:"Woman",Mann:"Man",Neutral:"General"},
+ tr:{Frau:"Kadın",Mann:"Erkek",Neutral:"Nötr"},
+ ku:{Frau:"Jin",Mann:"Mêr",Neutral:"Bêalî"},
+ ckb:{Frau:"ئافرەت",Mann:"پیاو",Neutral:"بێلایەن"},
+ bs:{Frau:"Žena",Mann:"Muškarac",Neutral:"Neutralno"},
+ fr:{Frau:"Femme",Mann:"Homme",Neutral:"Neutre"},
+ es:{Frau:"Mujer",Mann:"Hombre",Neutral:"Neutro"}
+};
+var OPEN_PREFIX={ar:"فتح ",en:"Open ",tr:"Aç: ",ku:"Veke: ",ckb:"بیکەرەوە: ",bs:"Otvori ",fr:"Ouvrir ",es:"Abrir "};
+var WEEKDAY={
+ ar:{Montag:"الاثنين",Dienstag:"الثلاثاء",Mittwoch:"الأربعاء",Donnerstag:"الخميس",Freitag:"الجمعة",Samstag:"السبت",Sonntag:"الأحد"},
+ en:{Montag:"Monday",Dienstag:"Tuesday",Mittwoch:"Wednesday",Donnerstag:"Thursday",Freitag:"Friday",Samstag:"Saturday",Sonntag:"Sunday"},
+ tr:{Montag:"Pazartesi",Dienstag:"Salı",Mittwoch:"Çarşamba",Donnerstag:"Perşembe",Freitag:"Cuma",Samstag:"Cumartesi",Sonntag:"Pazar"},
+ ku:{Montag:"Duşem",Dienstag:"Sêşem",Mittwoch:"Çarşem",Donnerstag:"Pêncşem",Freitag:"În",Samstag:"Şemî",Sonntag:"Yekşem"},
+ ckb:{Montag:"دووشەممە",Dienstag:"سێشەممە",Mittwoch:"چوارشەممە",Donnerstag:"پێنجشەممە",Freitag:"هەینی",Samstag:"شەممە",Sonntag:"یەکشەممە"},
+ bs:{Montag:"ponedjeljak",Dienstag:"utorak",Mittwoch:"srijeda",Donnerstag:"četvrtak",Freitag:"petak",Samstag:"subota",Sonntag:"nedjelja"},
+ fr:{Montag:"lundi",Dienstag:"mardi",Mittwoch:"mercredi",Donnerstag:"jeudi",Freitag:"vendredi",Samstag:"samedi",Sonntag:"dimanche"},
+ es:{Montag:"lunes",Dienstag:"martes",Mittwoch:"miércoles",Donnerstag:"jueves",Freitag:"viernes",Samstag:"sábado",Sonntag:"domingo"}
+};
+var MONTH={
+ ar:{Januar:"يناير",Februar:"فبراير","März":"مارس",April:"أبريل",Mai:"مايو",Juni:"يونيو",Juli:"يوليو",August:"أغسطس",September:"سبتمبر",Oktober:"أكتوبر",November:"نوفمبر",Dezember:"ديسمبر"},
+ en:{Januar:"January",Februar:"February","März":"March",April:"April",Mai:"May",Juni:"June",Juli:"July",August:"August",September:"September",Oktober:"October",November:"November",Dezember:"December"},
+ tr:{Januar:"ocak",Februar:"şubat","März":"mart",April:"nisan",Mai:"mayıs",Juni:"haziran",Juli:"temmuz",August:"ağustos",September:"eylül",Oktober:"ekim",November:"kasım",Dezember:"aralık"},
+ ku:{Januar:"rêbendan",Februar:"reşemî","März":"adar",April:"avrêl",Mai:"gulan",Juni:"pûşper",Juli:"tîrmeh",August:"tebax",September:"îlon",Oktober:"cotmeh",November:"mijdar",Dezember:"kanûn"},
+ ckb:{Januar:"کانوونی دووەم",Februar:"شوبات","März":"ئازار",April:"نیسان",Mai:"ئایار",Juni:"حوزەیران",Juli:"تەممووز",August:"ئاب",September:"ئەیلوول",Oktober:"تشرینی یەکەم",November:"تشرینی دووەم",Dezember:"کانوونی یەکەم"},
+ bs:{Januar:"januar",Februar:"februar","März":"mart",April:"april",Mai:"maj",Juni:"juni",Juli:"juli",August:"august",September:"septembar",Oktober:"oktobar",November:"novembar",Dezember:"decembar"},
+ fr:{Januar:"janvier",Februar:"février","März":"mars",April:"avril",Mai:"mai",Juni:"juin",Juli:"juillet",August:"août",September:"septembre",Oktober:"octobre",November:"novembre",Dezember:"décembre"},
+ es:{Januar:"enero",Februar:"febrero","März":"marzo",April:"abril",Mai:"mayo",Juni:"junio",Juli:"julio",August:"agosto",September:"septiembre",Oktober:"octubre",November:"noviembre",Dezember:"diciembre"}
+};
+function dateRest(rest,code){
+ var out=rest;
+ var days=WEEKDAY[code]||WEEKDAY.en, months=MONTH[code]||MONTH.en, key;
+ for(key in days) if(out.indexOf(key)>=0) out=out.split(key).join(days[key]);
+ for(key in months) if(out.indexOf(key)>=0) out=out.split(key).join(months[key]);
+ return out;
+}
 var NOTICE={
  de:"",
  ar:"هذا القسم غير متاح باللغة المختارة.",
@@ -82,7 +120,6 @@ function locale(){
 }
 function excluded(el){
  if(!el||typeof el.closest!=="function")return false;
- if(el.closest("select,option"))return true;
  if(el.closest("[data-dar-no-translate]"))return true;
  var hit=el.closest(deny);
  if(!hit)return false;
@@ -99,7 +136,7 @@ function translate(value){
  var v=catalog.get(value);
  return v===undefined?null:v;
 }
-var UI_DE=/(^|[^\p{L}\p{N}])(Standort|Startseite|Vollansicht|Wissenschat|Wissensfinder|Quellenarchiv|Gebetszeiten|Einstellungen|Demnächst|Impressum|Datenschutz|Überlieferung|Rezitation|Fundamente|Aussage|Gelehrten|Installieren|Installationshilfe|Kurzfazit|Originalwortlaut|Einordnung|Fundstellen|richtig|Beiträge|Schließen|Zurück|Weiter|Lernbereich|Frage|Hinweis|Sprecher|Quellen|Teilen|öffnen|Suche|Gebet|Antwort|auswählen|wiederholen|gearbeitet|Verständnis|Anmeldung|Originalquelle|Themen|Gelehrte|Werkzeuge|Sammlungen|Bittgebete|Fachbegriffe|Fundstelle|Nachweis|Überlieferungen|Bewertung|Sprache|Wähle|Waehle|Erscheinungsbild|Willkommen|Veröffentlichung)(?=$|[^\p{L}\p{N}])/iu;
+var UI_DE=/(^|[^\p{L}\p{N}])(Standort|Startseite|Vollansicht|Wissenschat|Wissensfinder|Wissensweg|Wissensprofil|Wissensraum|Wissensgebiete|Quellenarchiv|Gebetszeiten|Einstellungen|Demnächst|Impressum|Datenschutz|Überlieferung|Rezitation|Fundamente|Aussage|Gelehrten|Installieren|Installationshilfe|Kurzfazit|Originalwortlaut|Einordnung|Fundstellen|richtig|Beiträge|Beiträgen|Kapitel|Schließen|Zurück|Weiter|Lernbereich|Frage|Hinweis|Sprecher|Quellen|Teilen|öffnen|Suche|Gebet|Antwort|auswählen|wiederholen|gearbeitet|Verständnis|Anmeldung|Anmelden|Originalquelle|Themen|Thema|Gelehrte|Werkzeuge|Sammlungen|Bittgebete|Fachbegriffe|Fundstelle|Nachweis|Überlieferungen|Bewertung|Sprache|Wähle|Waehle|Erscheinungsbild|Willkommen|Veröffentlichung|Notizen|Merkliste|Interessen|ausgewählt|gewählt|Übersicht|Schnellzugriff|Schnellzugriffe|Tage|Favoriten|filtern|Scroll|Reisetag|Tagebuch|löschen|exportieren)(?=$|[^\p{L}\p{N}])/iu;
 function letterAt(s,i){
  if(i<0||i>=s.length)return false;
  return /\p{L}/u.test(s.charAt(i));
@@ -133,6 +170,23 @@ function rememberBlocked(source){
  if(blocked.indexOf(s)>=0)return;
  if(blocked.length<500)blocked.push(s);
 }
+function openTopic(code,name,n){
+ var word=code==="ar"?"موضوع ":code==="tr"?"Konu ":code==="ku"?"Mijar ":code==="ckb"?"بابەت ":code==="bs"?"Tema ":code==="fr"?"Thème ":code==="es"?"Tema ":"Topic ";
+ var posts=n==="1"?(code==="ar"?" مشاركة":code==="tr"?" yazı":code==="ku"?" beşdarî":code==="ckb"?" بەشداری":code==="bs"?" doprinos":code==="fr"?" contribution":code==="es"?" aporte":" post"):(code==="ar"?" مشاركات":code==="tr"?" yazı":code==="ku"?" beşdarî":code==="ckb"?" بەشداری":code==="bs"?" doprinosa":code==="fr"?" contributions":code==="es"?" aportes":" posts");
+ return (OPEN_PREFIX[code]||"Open ")+word+name+" · "+n+posts;
+}
+function seasonTail(rest,code){
+ var pairs=[
+  ["Beginn des Fastenmonats, abhängig von Mondsichtung.",{ar:"بداية شهر الصيام، وقد تختلف الرؤية المحلية.",en:"Start of the fasting month; local moon sighting can differ.",tr:"Oruç ayının başlangıcı; yerel hilal farklı olabilir.",ku:"Destpêka meha rojiyê; dîtina heyvê dikare cuda be.",ckb:"دەستپێکی مانگی ڕۆژوو؛ بینینی مانگ دەکرێت جیاواز بێت.",bs:"Početak mjeseca posta; lokalno viđenje mjeseca može se razlikovati.",fr:"Début du mois de jeûne ; la vision locale du croissant peut différer.",es:"Inicio del mes de ayuno; el avistamiento local puede variar."}],
+  ["Besonders wichtige Nächte im Ramaḍān.",{ar:"ليالٍ ذات أهمية خاصة في رمضان.",en:"Especially important nights in Ramaḍān.",tr:"Ramazan’da özellikle önemli geceler.",ku:"Şevên bi taybetî girîng di Remezanê de.",ckb:"شەوانی گرنگی تایبەت لە ڕەمەزان.",bs:"Posebno važne noći u ramazanu.",fr:"Nuits particulièrement importantes du Ramaḍān.",es:"Noches especialmente importantes del Ramaḍān."}],
+  ["Fest nach Ramaḍān, abhängig von Mondsichtung.",{ar:"العيد بعد رمضان، بحسب رؤية الهلال.",en:"The feast after Ramaḍān, depending on moon sighting.",tr:"Ramazan sonrası bayram, hilale bağlı.",ku:"Cejna piştî Remezanê, li gor dîtina heyvê.",ckb:"جەژن دوای ڕەمەزان، بەپێی بینینی مانگ.",bs:"Bajram poslije ramazana, zavisno od viđenja mjeseca.",fr:"La fête après le Ramaḍān, selon la vision du croissant.",es:"La fiesta tras el Ramaḍān, según el avistamiento."}]
+ ];
+ var out=rest;
+ for(var i=0;i<pairs.length;i++){
+  if(out.indexOf(pairs[i][0])>=0)out=out.split(pairs[i][0]).join(pairs[i][1][code]||pairs[i][1].en);
+ }
+ return out;
+}
 function applyTemplates(core){
  var code=locale();
  var m=core.match(/^FRAGE\s+(\d+)\s+VON\s+(\d+)$/i);
@@ -145,6 +199,89 @@ function applyTemplates(core){
  if(m&&QREF[code])return QREF[code](m[1]);
  m=core.match(/^Originalquelle Q(\d+) lesen\s*↗?$/i);
  if(m&&QREF[code])return QREF[code](m[1])+" ↗";
+ m=core.match(/^Thema (.+) mit (\d+) Beiträgen öffnen$/);
+ if(m)return openTopic(code,m[1],m[2]);
+ m=core.match(/^(.+), (\d+) Beiträge?, öffnen$/);
+ if(m)return openTopic(code,m[1],m[2]);
+ m=core.match(/^(\d+) Kapitel · (\d+) /);
+ if(m){
+  var chapters=code==="ar"?m[1]+" فصول":code==="tr"?m[1]+" bölüm":code==="ku"?m[1]+" beş":code==="ckb"?m[1]+" بەش":code==="bs"?m[1]+" poglavlja":code==="fr"?m[1]+" chapitres":code==="es"?m[1]+" capítulos":m[1]+" chapters";
+  var items=code==="ar"?m[2]+" مادة":code==="tr"?m[2]+" içerik":code==="ku"?m[2]+" naverok":code==="ckb"?m[2]+" بابەت":code==="bs"?m[2]+" sadržaja":code==="fr"?m[2]+" contenus":code==="es"?m[2]+" contenidos":m[2]+" items";
+  return chapters+" · "+items;
+ }
+ m=core.match(/^Islamisches Datum heute: (.+)$/);
+ if(m){
+  var todayLabel=code==="ar"?"التاريخ الإسلامي اليوم: ":code==="tr"?"Bugünün hicri tarihi: ":code==="ku"?"Dîroka îslamî ya îro: ":code==="ckb"?"بەرواری ئیسلامی ئەمڕۆ: ":code==="bs"?"Islamski datum danas: ":code==="fr"?"Date islamique aujourd’hui : ":code==="es"?"Fecha islámica hoy: ":"Islamic date today: ";
+  return todayLabel+dateRest(m[1],code);
+ }
+ m=core.match(/^(?:Heute|Islamic date heute): (.+)$/);
+ if(m){
+  var todayWord=code==="ar"?"اليوم: ":code==="tr"?"Bugün: ":code==="ku"?"Îro: ":code==="ckb"?"ئەمڕۆ: ":code==="bs"?"Danas: ":code==="fr"?"Aujourd’hui : ":code==="es"?"Hoy: ":"Today: ";
+  return todayWord+dateRest(m[1],code);
+ }
+ m=core.match(/^Sūrah (.+) öffnen$/);
+ if(m&&OPEN_PREFIX[code])return OPEN_PREFIX[code]+m[1];
+ m=core.match(/^(.+) öffnen$/);
+ if(m&&OPEN_PREFIX[code]){
+  var stem=catalog.get(m[1]);
+  if(stem)return OPEN_PREFIX[code]+stem;
+ }
+ m=core.match(/^(.{2,90}) öffnen$/);
+ if(m&&OPEN_PREFIX[code]&&m[1].indexOf(".")<0&&!looksGerman(m[1])&&!residualGerman(m[1]))return OPEN_PREFIX[code]+m[1];
+ m=core.match(/^Wissensprofil: (Frau|Mann|Neutral)$/);
+ if(m&&GENDER[code])return (code==="en"?"Knowledge profile: ":code==="ar"?"الملف المعرفي: ":code==="tr"?"Bilgi profili: ":code==="ku"?"Profîla zanînê: ":code==="ckb"?"پرۆفایلی زانست: ":code==="bs"?"Profil znanja: ":code==="fr"?"Profil de savoir : ": "Perfil de conocimiento: ")+GENDER[code][m[1]];
+ m=core.match(/^Wissen · (\d+)$/);
+ if(m){
+  var label=code==="ar"?"علم":code==="tr"?"İlim":code==="ku"?"Zanîn":code==="ckb"?"زانست":code==="bs"?"Znanje":code==="fr"?"Savoir":code==="es"?"Saber":"Knowledge";
+  return label+" · "+m[1];
+ }
+ m=core.match(/^(Fajr|Dhuhr|ʿAṣr|Maghrib|ʿIshāʾ) gewählt$/);
+ if(m){
+  var chosen=code==="ar"?"مختار":code==="tr"?"seçildi":code==="ku"?"hatiye hilbijartin":code==="ckb"?"هەڵبژێردرا":code==="bs"?"odabrano":code==="fr"?"choisi":code==="es"?"elegido":"selected";
+  return m[1]+" "+chosen;
+ }
+ m=core.match(/^(\d+) von (\d+) Sūren$/);
+ if(m)return code==="ar"?m[1]+" من "+m[2]+" سورة":code==="tr"?m[1]+" / "+m[2]+" sure":code==="ku"?m[1]+" ji "+m[2]+" sûreyan":code==="ckb"?m[1]+" لە "+m[2]+" سوورە":code==="bs"?m[1]+" od "+m[2]+" sura":code==="fr"?m[1]+" sur "+m[2]+" sourates":code==="es"?m[1]+" de "+m[2]+" suras":m[1]+" of "+m[2]+" sūrahs";
+ m=core.match(/^(\d+) von (\d+) Werken$/);
+ if(m)return code==="ar"?m[1]+" من "+m[2]+" كتب":code==="tr"?m[1]+" / "+m[2]+" eser":code==="ku"?m[1]+" ji "+m[2]+" berheman":code==="ckb"?m[1]+" لە "+m[2]+" بەرهەم":code==="bs"?m[1]+" od "+m[2]+" djela":code==="fr"?m[1]+" sur "+m[2]+" ouvrages":code==="es"?m[1]+" de "+m[2]+" obras":m[1]+" of "+m[2]+" works";
+ m=core.match(/^(\d+) von (\d+) ausgewählt · (\d+) Minuten vorher$/);
+ if(m){
+  if(code==="ar")return m[1]+" من "+m[2]+" محددة · قبل "+m[3]+" دقيقة";
+  if(code==="tr")return m[1]+" / "+m[2]+" seçili · "+m[3]+" dk önce";
+  if(code==="ku")return m[1]+" ji "+m[2]+" · "+m[3]+" deqe berê";
+  if(code==="ckb")return m[1]+" لە "+m[2]+" · "+m[3]+" خولەک پێشتر";
+  if(code==="bs")return m[1]+" od "+m[2]+" odabrano · "+m[3]+" min ranije";
+  if(code==="fr")return m[1]+" sur "+m[2]+" sélectionnés · "+m[3]+" min avant";
+  if(code==="es")return m[1]+" de "+m[2]+" seleccionados · "+m[3]+" min antes";
+  return m[1]+" of "+m[2]+" selected · "+m[3]+" min before";
+ }
+ m=core.match(/^(\d+) von (\d+) ausgewählt$/);
+ m=core.match(/^(\d+) ausgewählt$/);
+ if(m)return code==="ar"?m[1]+" محددة":code==="tr"?m[1]+" seçili":code==="ku"?m[1]+" hilbijartî":code==="ckb"?m[1]+" هەڵبژێردراو":code==="bs"?m[1]+" odabrano":code==="fr"?m[1]+" sélectionnés":code==="es"?m[1]+" seleccionados":m[1]+" selected";
+ m=core.match(/^(\d+) lokale Einträge$/);
+ if(m)return code==="ar"?m[1]+" إدخالات محلية":code==="tr"?m[1]+" yerel kayıt":code==="ku"?m[1]+" tomarên herêmî":code==="ckb"?m[1]+" تۆماری ناوخۆیی":code==="bs"?m[1]+" lokalnih unosa":code==="fr"?m[1]+" entrées locales":code==="es"?m[1]+" entradas locales":m[1]+" local entries";
+ m=core.match(/^(\d+) Themen gewählt$/);
+ if(m)return code==="ar"?m[1]+" موضوعات محددة":code==="tr"?m[1]+" konu seçili":code==="ku"?m[1]+" mijar hilbijartî":code==="ckb"?m[1]+" بابەت هەڵبژێردرا":code==="bs"?m[1]+" tema odabrano":code==="fr"?m[1]+" thèmes choisis":code==="es"?m[1]+" temas elegidos":m[1]+" topics selected";
+ m=core.match(/^(\d+) Aussagen mit Quellen\.$/);
+ if(m)return code==="ar"?m[1]+" أقوال بمصادر.":code==="tr"?m[1]+" kaynaklı söz.":code==="ku"?m[1]+" gotin bi çavkanî.":code==="ckb"?m[1]+" وتە بە سەرچاوە.":code==="bs"?m[1]+" izjava s izvorima.":code==="fr"?m[1]+" paroles avec sources.":code==="es"?m[1]+" dichos con fuentes.":m[1]+" statements with sources.";
+ m=core.match(/^(\d+) bekannte Duʿāʾ nach Themen\.$/);
+ if(m)return code==="ar"?m[1]+" أدعية معروفة حسب الموضوع.":code==="tr"?m[1]+" bilinen dua, konulara göre.":code==="fr"?m[1]+" invocations connues par thème.":code==="es"?m[1]+" súplicas conocidas por tema.":m[1]+" known supplications by topic.";
+ m=core.match(/^(\d+) Namen und Zuordnungen\.$/);
+ if(m)return code==="ar"?m[1]+" أسماء وانتسابات.":code==="tr"?m[1]+" isim ve bağ.":code==="fr"?m[1]+" noms et attributions.":code==="es"?m[1]+" nombres y atribuciones.":m[1]+" names and attributions.";
+ m=core.match(/^(\d+) bekannte Duʿāʾ – nach Themen geordnet\.$/);
+ if(m)return code==="ar"?m[1]+" أدعية معروفة، مرتبة حسب الموضوع.":code==="en"?m[1]+" known supplications, arranged by topic.":code==="tr"?m[1]+" bilinen dua, konulara göre sıralı.":code==="ku"?m[1]+" duayên naskirî, li gor mijaran.":code==="ckb"?m[1]+" نزای ناسراو، بەپێی بابەت.":code==="bs"?m[1]+" poznatih dova, poredanih po temama.":code==="fr"?m[1]+" invocations connues, classées par thème.":m[1]+" súplicas conocidas, ordenadas por tema.";
+ m=core.match(/^(?:Heute|Islamic date heute): (.+)$/);
+ if(m){
+  var today=code==="ar"?"اليوم: ":code==="tr"?"Bugün: ":code==="ku"?"Îro: ":code==="ckb"?"ئەمڕۆ: ":code==="bs"?"Danas: ":code==="fr"?"Aujourd’hui : ":code==="es"?"Hoy: ":"Today: ";
+  return today+dateRest(m[1],code);
+ }
+ m=core.match(/^Noch ca\. (\d+) Tage(.*)$/);
+ if(m){
+  var about=code==="ar"?"بعد نحو "+m[1]+" يومًا":code==="tr"?"Yaklaşık "+m[1]+" gün":code==="ku"?"Nêzîkî "+m[1]+" rojan":code==="ckb"?"نزیکەی "+m[1]+" ڕۆژ":code==="bs"?"Oko "+m[1]+" dana":code==="fr"?"Environ "+m[1]+" jours":code==="es"?"Unos "+m[1]+" días":"About "+m[1]+" days";
+  return about+seasonTail(m[2],code);
+ }
+ m=core.match(/^Noch (\d+) Tage$/);
+ if(m)return code==="ar"?"بعد "+m[1]+" يومًا":code==="tr"?m[1]+" gün kaldı":code==="ku"?m[1]+" roj man":code==="ckb"?m[1]+" ڕۆژ ماوە":code==="bs"?m[1]+" dana":code==="fr"?m[1]+" jours":code==="es"?m[1]+" días":m[1]+" days";
  return null;
 }
 function phraseReplace(core){
@@ -260,6 +397,15 @@ function setRoot(){
  }
  var nextTitle=code==="de"?titleSource:renderSource(titleSource);
  if(nextTitle&&nextTitle!==currentTitle)global.document.title=nextTitle;
+ if(code==="ku"&&global.document.querySelectorAll){
+  var blocks=global.document.querySelectorAll("p,li,h1,h2,h3,blockquote,figcaption");
+  for(var bi=0;bi<blocks.length&&bi<400;bi++){
+   var sample=String(blocks[bi].textContent||"");
+   var arN=(sample.match(/[\u0600-\u06ff]/g)||[]).length;
+   var latN=(sample.match(/[A-Za-z]/g)||[]).length;
+   if(arN>12&&arN>latN)blocks[bi].setAttribute("dir","rtl");
+  }
+ }
 }
 function note(){
  if(TEST||!global.document.body)return;
