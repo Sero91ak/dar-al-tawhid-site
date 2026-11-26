@@ -53,6 +53,15 @@ Im Repository **Settings → Rules → Rulesets** eine aktive Branch-Regel für 
 
 Eigentümer Serhat, t28u, 26.11.2026. Die befristete Sprachfreigabe für den Gebets-Push-Planer und die zwei iOS-Push-Dateien ist geschlossen. Dieselben Dateien sind wieder voll gesperrt. Ein Kennwort hebt diese Sperre nicht auf.
 
+## Befristete Sprach-Ausnahme T32U_PUSH_LANGUAGE_LOCK
+
+Eigentümer Serhat, t32u, 26.11.2026: nur Sprache, nur bis 28.11.2026 23:59 UTC, nur diese Dateien.
+
+- `cloudflare/prayer-push-scheduler.js`
+- `cloudflare/prayer-push-admin.js`
+
+Keine Gebetszeit-Berechnung, kein Standort, keine Qibla, kein Zeitplan, kein Segment, kein Idempotenzschlüssel der bereits geplanten Meldungen. Ein Kennwort hebt diese Sperre nicht auf. Danach schließt ein eigener Commit den Pfad.
+
 ## Stand bei Einrichtung
 
 PR #1452 (GPS-/Gebetszeiten-Reparatur) ist eine noch nicht freigegebene Änderung an den nun gesperrten Bereichen. Nicht unbemerkt mergen oder global veröffentlichen. Zuerst gesonderte Eigentümerentscheidung und Prüfung. Diese Sicherheitsänderung betrifft ausschließlich GitHub-Policies und CI; sie verändert weder GPS-Verhalten noch installierte Apps.

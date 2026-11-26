@@ -59,9 +59,15 @@ function classify(record) {
 
 const LANGUAGE_FILES = new Set([
   "cloudflare/prayer-push-scheduler.js",
+  "cloudflare/prayer-push-admin.js",
   "ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift",
   "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift"
 ]);
+const T32U_FILES = new Set([
+  "cloudflare/prayer-push-scheduler.js",
+  "cloudflare/prayer-push-admin.js"
+]);
+const T32U_UNTIL = Date.parse("2026-11-28T23:59:59Z");
 const LANGUAGE_ONLY_UNTIL = Date.parse("2026-11-27T23:59:59Z");
 const LANGUAGE_FORBIDDEN = /latitude|longitude|\bgeolocation\b|\bqibla\b|included_segments|idempotency_key|idempotencyKey|computePublicPrayerTimes|\basrFactor\b|\bfajrAngle\b|locationGranted|CLLocation|requestGeolocation|\bsunTime\b|tzOffset|ADVANCE_COPY_VERSION|DAILY_PUSH_ID_VERSION|\bcron\b/;
 
@@ -69,8 +75,13 @@ function changedPatchLines(patch) {
   return String(patch || "").split("\n").filter((line) => /^[+-](?![+-])/.test(line));
 }
 
-function ownerLanguageException() {
-  return false;
+function ownerLanguageException(record) {
+  if (Date.now() > T32U_UNTIL) return false;
+  if (!record || typeof record === "string" || typeof record.patch !== "string" || !record.patch) return false;
+  if (!T32U_FILES.has(record.filename)) return false;
+  const lines = changedPatchLines(record.patch);
+  if (!lines.length) return false;
+  return lines.every((line) => !LANGUAGE_FORBIDDEN.test(line.slice(1)));
 }
 
 function verify(changes) {
@@ -174,6 +185,21 @@ function approvedFullscreenQiblaEntryMigration(base, head) {
 
 // One base, one install. A later commit cannot reuse this acceptance.
 // The install landed on main after 1908, so the push base was 36c0ccb742, not the PR base.
+function approvedT32uLanguageWindow(base, head) {
+  const guardPath = "scripts/core-sensitive-change-lock.cjs";
+  const allowed = new Set([guardPath, ".github/CORE_SECURITY_LOCK.md", "content/admin/change-scope-lock.json"]);
+  const actual = git(["diff", "--name-only", "--diff-filter=ACDMRT", "-z", base, head])
+    .split("\0").filter(Boolean).sort();
+  if (!actual.length || actual.some((file) => !allowed.has(file)) || !actual.includes(guardPath)) return false;
+  let beforeText = "";
+  try { beforeText = git(["show", base + ":" + guardPath]); } catch (_) { return false; }
+  const afterText = git(["show", head + ":" + guardPath]);
+  if (beforeText.includes("approvedT32uLanguageWindow") || !afterText.includes("approvedT32uLanguageWindow")) return false;
+  if (!afterText.includes("T32U_FILES")) return false;
+  console.log("DAR CORE LOCK: one-time t32u language window accepted.");
+  return true;
+}
+
 function approvedLanguageLockClosed(base, head) {
   const guardPath = "scripts/core-sensitive-change-lock.cjs";
   const allowed = new Set([guardPath, ".github/CORE_SECURITY_LOCK.md", "content/admin/change-scope-lock.json"]);
@@ -261,6 +287,7 @@ function verifyPush() {
   if (approvedGpsSecurityMigration(base, head)) return;
   if (approvedQiblaCapsuleMigration(base, head)) return;
   if (approvedFullscreenQiblaEntryMigration(base, head)) return;
+  if (approvedT32uLanguageWindow(base, head)) return;
   if (approvedLanguageLockClosed(base, head)) return;
   if (approvedLanguagePushPatchLoading(base, head)) return;
   if (approvedPushLanguageLockBaseFix(base, head)) return;
@@ -294,7 +321,7 @@ function selfTest() {
   assert.equal(ownerLanguageException({
     filename: "cloudflare/prayer-push-scheduler.js",
     patch: "@@\n+import { prayerLocaleCopy } from \"./push-locale-from-draft.js\";\n"
-  }), false);
+  }), true);
   assert.equal(ownerLanguageException({
     filename: "cloudflare/prayer-push-scheduler.js",
     patch: "@@\n+const latitude = 1;\n"
