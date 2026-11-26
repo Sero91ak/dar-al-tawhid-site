@@ -57,9 +57,42 @@ function classify(record) {
   return null;
 }
 
+// T28U_PUSH_LANGUAGE_LOCK — owner Serhat, 26.11.2026, language text only, until 27.11.2026 23:59 UTC.
+const LANGUAGE_FILES = new Set([
+  "cloudflare/prayer-push-scheduler.js",
+  "ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift",
+  "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift"
+]);
+const LANGUAGE_ONLY_UNTIL = Date.parse("2026-11-27T23:59:59Z");
+const LANGUAGE_FORBIDDEN = /latitude|longitude|\bgeolocation\b|\bqibla\b|included_segments|idempotency_key|idempotencyKey|computePublicPrayerTimes|\basrFactor\b|\bfajrAngle\b|locationGranted|CLLocation|requestGeolocation|\bsunTime\b|tzOffset|ADVANCE_COPY_VERSION|DAILY_PUSH_ID_VERSION|\bcron\b/;
+
+function changedPatchLines(patch) {
+  return String(patch || "").split("\n").filter((line) => /^[+-](?![+-])/.test(line));
+}
+
+function ownerLanguageException(record) {
+  if (Date.now() > LANGUAGE_ONLY_UNTIL) return false;
+  if (!record || typeof record === "string" || typeof record.patch !== "string" || !record.patch) return false;
+  const lines = changedPatchLines(record.patch);
+  if (!lines.length) return false;
+  if (LANGUAGE_FILES.has(record.filename)) {
+    return lines.every((line) => !LANGUAGE_FORBIDDEN.test(line.slice(1)));
+  }
+  if (record.filename === "scripts/core-sensitive-change-lock.cjs" || record.filename === ".github/CORE_SECURITY_LOCK.md") {
+    const removed = lines.some((line) => line.startsWith("-") && line.includes("T28U_PUSH_LANGUAGE_LOCK"));
+    const added = lines.some((line) => line.startsWith("+") && line.includes("T28U_PUSH_LANGUAGE_LOCK"));
+    if (!removed || added) return false;
+    return lines.filter((line) => line.startsWith("+")).every((line) => !/latitude|longitude|geolocation|\bqibla\b|CLLocation|computePublicPrayerTimes/.test(line.slice(1)));
+  }
+  return false;
+}
+
 function verify(changes) {
   if (!Array.isArray(changes)) throw new Error("Expected an array of GitHub changed files");
-  const blocked = [...new Set(changes.map(classify).filter(Boolean))];
+  const blocked = [...new Set(changes.map(function (record) {
+    if (ownerLanguageException(record)) return null;
+    return classify(record);
+  }).filter(Boolean))];
   if (blocked.length) {
     console.error("DAR CORE LOCK — BLOCKED. No location/Qibla/prayer/native security change without the repository owner's explicit approval.");
     blocked.forEach(function (f) { console.error("  - " + f); });
@@ -153,6 +186,25 @@ function approvedFullscreenQiblaEntryMigration(base, head) {
   return true;
 }
 
+// One base, one install. A later commit cannot reuse this acceptance.
+function approvedPushLanguageLockInstall(base, head) {
+  if (base !== "fc4c11d7e03e80c71bc4058077ac5b26194da440") return false;
+  const expected = {
+    ".github/CORE_SECURITY_LOCK.md": "64d4cce38e6f8157d5ad4f4108c3c5102d7f76ea",
+    "content/admin/change-scope-lock.json": "57afab3f8d6412531ae4a118e17fa8e828d2f5f2"
+  };
+  const guardPath = "scripts/core-sensitive-change-lock.cjs";
+  const actual = git(["diff", "--name-only", "--diff-filter=ACDMRT", "-z", base, head])
+    .split("\0").filter(Boolean).sort();
+  if (JSON.stringify(actual) !== JSON.stringify([...Object.keys(expected), guardPath].sort())) return false;
+  for (const [file, sha] of Object.entries(expected)) {
+    if (git(["rev-parse", head + ":" + file]).trim() !== sha) return false;
+  }
+  if (!/^[a-f0-9]{40}$/.test(git(["rev-parse", head + ":" + guardPath]).trim())) return false;
+  console.log("DAR CORE LOCK: one-time owner t28u language-lock install accepted.");
+  return true;
+}
+
 function verifyPush() {
   const base = process.env.DAR_CORE_BASE || "";
   const head = process.env.DAR_CORE_HEAD || "HEAD";
@@ -163,6 +215,7 @@ function verifyPush() {
   if (approvedGpsSecurityMigration(base, head)) return;
   if (approvedQiblaCapsuleMigration(base, head)) return;
   if (approvedFullscreenQiblaEntryMigration(base, head)) return;
+  if (approvedPushLanguageLockInstall(base, head)) return;
   const names = git(["diff", "--name-only", "--diff-filter=ACDMRT", "-z", base, head]).split("\0").filter(Boolean);
   const changes = names.map(function (filename) {
     const patch = HTML_FILES.has(filename) ? git(["diff", "--unified=0", base, head, "--", filename]) : "";
@@ -188,6 +241,20 @@ function selfTest() {
   assert.equal(classify({ filename: "index.html", patch: "@@ -9 +9 @@\n-<p>Old editorial paragraph</p>\n+<p>New editorial paragraph</p>\n" }), null);
   assert.equal(classify({ filename: "index.html" }), "index.html");
   assert.equal(classify({ filename: "test/assets/dar-setup-hub.js", patch: "" }), "test/assets/dar-setup-hub.js");
+  assert.equal(ownerLanguageException({
+    filename: "cloudflare/prayer-push-scheduler.js",
+    patch: "@@\n+import { prayerLocaleCopy } from \"./push-locale-from-draft.js\";\n"
+  }), true);
+  assert.equal(ownerLanguageException({
+    filename: "cloudflare/prayer-push-scheduler.js",
+    patch: "@@\n+const latitude = 1;\n"
+  }), false);
+  assert.equal(ownerLanguageException({
+    filename: "cloudflare/worker.js",
+    patch: "@@\n+setLanguage()\n"
+  }), false);
+  assert.equal(ownerLanguageException({ filename: "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift" }), false);
+  assert.equal(approvedPushLanguageLockInstall("0000000000000000000000000000000000000000", "HEAD"), false);
   console.log("DAR CORE LOCK self-test: PASS");
 }
 
