@@ -167,7 +167,7 @@ assert(main.includes('id="kids-academy-choice-only-v2"'));
 assert(!main.includes('$("#answerModeCaption").textContent=q.type==="choice"?'));
 console.log("PASS: 65 released curriculum lessons + Ṣidq: 523 choice questions; all 198 text prompts projected without editing source, including 6–8 Salām.");
 
-assert.ok(main.includes('school-progress-v11.js?v=20261012-30'));
+assert.ok(main.includes('school-progress-v11.js?v=20261012-31'));
 assert.ok(main.includes('function academySchoolState(){'));
 assert.ok(main.includes('academySchoolState().access(chosen)'));
 const pilot=JSON.parse(read("kids/data/academy-v12-audio-pilot-request.json"));

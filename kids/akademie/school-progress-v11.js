@@ -6,6 +6,33 @@
  */
 (function(root){
  "use strict";
+ function currentHostname(){
+  try{
+   const loc=typeof location!=="undefined"?location:null;
+   return String(loc&&loc.hostname||"").toLowerCase();
+  }catch(_){return "";}
+ }
+ const LIVE_REVIEW_UNLOCK_BLOCKED_HOSTS=Object.freeze(["dar-al-tawhid.de","www.dar-al-tawhid.de"]);
+ const REVIEW_UNLOCK_HOSTS=Object.freeze([
+  "dar-al-tawhid-kids-creator.sero91ak.workers.dev",
+  "dar-al-tawhid-test.sero91ak.workers.dev"
+ ]);
+ function isLiveUnlockBlockedHost(host){
+  return LIVE_REVIEW_UNLOCK_BLOCKED_HOSTS.includes(String(host||"").toLowerCase());
+ }
+ function isReviewUnlockAll(){
+  const host=currentHostname();
+  if(!host||isLiveUnlockBlockedHost(host))return false;
+  if(REVIEW_UNLOCK_HOSTS.includes(host))return true;
+  try{
+   const w=typeof window!=="undefined"?window:typeof globalThis!=="undefined"?globalThis:null;
+   if(w&&w.DAR_KIDS_TEST_CONTAINER===true)return true;
+   if(typeof document!=="undefined"&&document.documentElement
+     &&document.documentElement.getAttribute("data-kids-container")==="creator-test")return true;
+  }catch(_){}
+  return false;
+ }
+
  const WEEK=Object.freeze({
   0:{mode:"free",label:"Freies Lernen oder Pause"},
   1:{mode:"new",label:"Neues Thema"},
@@ -62,7 +89,8 @@
   const hasPrior=firstIndex===0||!!prerequisiteRecord;
   const newDay=firstIndex===0||(previousDay!==null&&today>previousDay);
   // A child's first class can start immediately on any weekday.
-  const canOpenNew=!!fresh&&hasPrior&&newDay&&(firstIndex===0&&forceFirst||mode==="new");
+  const unlockAll=isReviewUnlockAll();
+  const canOpenNew=unlockAll?!!fresh:(!!fresh&&hasPrior&&newDay&&(firstIndex===0&&forceFirst||mode==="new"));
   // A saved draft is resumable only if it belongs to the NEXT unfinished
   // lesson in the canonical sequence. An older draft of a later lesson must
   // never bypass unfinished prerequisites or unlock several classes.
@@ -82,14 +110,22 @@
   function access(lessonId){
    if(!ids.includes(lessonId))return "unknown";
    if(records[lessonId])return "review";
+   if(unlockAll){
+    const draft=drafts[lessonId];
+    const valid=!!draft&&Number.isFinite(Number(draft.savedAt))&&Number(draft.savedAt)>0
+     &&Number(draft.savedAt)<=date.getTime()&&(Number(draft.step)>0||Number(draft.qIndex)>0);
+    return valid?"resume":"new";
+   }
    if(lessonId===accessibleNew)return resumeId===lessonId?"resume":"new";
    return "locked";
   }
   return {ids,today,mode,weekday,completed:complete.length,total:ids.length,upcoming:fresh,
    active:accessibleNew,resumeId,canOpenNew,recommendation,kind,dueCount:due.length,
-   nextUnlockHint:mode==="new"&&!newDay?"Nach Abschluss frühestens am nächsten neuen Unterrichtstag":
+   unlockAll,
+   nextUnlockHint:unlockAll?"Hörprüfung: alle Lektionen in der Test-App freigeschaltet":
+    mode==="new"&&!newDay?"Nach Abschluss frühestens am nächsten neuen Unterrichtstag":
     mode!=="new"&&firstIndex>0?"Am nächsten neuen Unterrichtstag (Mo, Di, Do oder Fr)":"Nach Abschluss der vorherigen Lektion",
    access};
  }
- root.DARKidsAcademySchool=Object.freeze({version:"v11-20261010",WEEK,dayKey,sequence,evaluate});
+ root.DARKidsAcademySchool=Object.freeze({version:"v11-20261010",WEEK,dayKey,sequence,evaluate,isReviewUnlockAll,isLiveUnlockBlockedHost,REVIEW_UNLOCK_HOSTS,LIVE_REVIEW_UNLOCK_BLOCKED_HOSTS});
 })(typeof window!=="undefined"?window:globalThis);

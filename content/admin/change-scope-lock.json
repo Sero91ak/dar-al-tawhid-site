@@ -10008,6 +10008,17 @@
         "content/tafsir/de/"
       ],
       "expiresAt": "2026-12-31T23:59:00+01:00"
+    },
+    {
+      "id": "kids-audio-review-library-academy-deen-20261126",
+      "at": "2026-11-26T17:40:00+01:00",
+      "approvedBy": "owner-explicit-pt4u-review-library-and-creator-unlock",
+      "reason": "Nutzer beauftragt ausdrücklich (pt4u / t4u): Review-Bibliothek um alle Akademie-Clips (~1903) und 30 Den-Dīn-Lektionen erweitern, damit die Hörprüfseite sie anzeigt. Dafür den bestehenden Builder scripts/build-kids-audio-review-library.cjs anpassen. globalLock bleibt aktiv. Keine Änderung der Live-Progressionssperre auf dar-al-tawhid.de. Zusätzlich Cache-Buster-Assertion in scripts/test-kids-academy-v9.js an die neue school-progress-URL anpassen, damit der Unlock-Code in der Test-App nicht aus einem alten Cache geladen wird.",
+      "paths": [
+        "scripts/build-kids-audio-review-library.cjs",
+        "scripts/test-kids-academy-v9.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00+01:00"
     }
   ],
   "enabled": true

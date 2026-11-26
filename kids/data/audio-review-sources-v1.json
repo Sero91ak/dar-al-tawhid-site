@@ -100,9 +100,16 @@
     {
       "id": "academy",
       "title": "Akademie / Lernbereich",
-      "subtitle": "Lernaufnahmen",
+      "subtitle": "Alle Lernaufnahmen, nach Bereich und Lektion gruppiert",
       "path": "kids/data/academy-audio.json",
       "order": 120
+    },
+    {
+      "id": "deen",
+      "title": "Den Dīn lernen",
+      "subtitle": "30 Lektionen mit vorhandener V4-Masterstimme",
+      "path": "kids/data/deen-curriculum-v1.json",
+      "order": 125
     },
     {
       "id": "owner-voice",

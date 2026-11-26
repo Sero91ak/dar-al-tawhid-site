@@ -54,7 +54,7 @@ assert.equal(run(monday,{},validDraft).access(first),"resume");
 const app=read("kids/akademie/index.html");
 assert.ok(app.includes("score.done<questions().length"),"Lesson completion cannot skip questions");
 assert.ok(app.includes("if(!finished||score.done<questions().length||questions().length===0)return;"),"Storage must reject unfinished lesson");
-assert.ok(app.includes("school-progress-v11.js?v=20261012-30"),"New progression runtime must be cache-busted");
+assert.ok(app.includes("school-progress-v11.js?v=20261012-31"),"New progression runtime must be cache-busted");
 for(const version of ["v1","v2","v22","v25","v26","v27","v28"])assert.ok(app.includes("/kids/akademie/curriculum-"+version+".js"),"Missing release pack "+version);
 const year=JSON.parse(read("kids/data/academy-year-52weeks-v1.json"));
 assert.equal(year.goals.currentlyInCatalog,66);assert.equal(year.goals.additionalAuthenticallyVerifiedLessonsNeeded,142);
@@ -69,4 +69,45 @@ const data=JSON.parse(archive.slice(start+prefix.length,finish).trim().replace(/
 assert.equal(Object.keys(data.catalog).length,65);assert.equal(data.roadmap.plannedUnits.length,142);
 assert.equal(data.year.weeks.length,52);
 assert.ok(archive.includes("populateArchive(ARCHIVE_SNAPSHOT.year"),"Archive must show offline snapshot before network requests");
-console.log("KIDS OK: 66 ordered lessons, 48 new age texts (V27+V28+V29), 142 unproduced plans, strict locks, completion guards, offline-safe archive.");
+
+// Unlock-all may run only on creator/test hosts and is hard-blocked on the live domain.
+function withHost(hostname, flag, fn){
+  const prevLoc=sandbox.location, prevFlag=sandbox.window.DAR_KIDS_TEST_CONTAINER;
+  sandbox.location=hostname?{hostname}:undefined;
+  sandbox.window.DAR_KIDS_TEST_CONTAINER=flag;
+  try{return fn();}finally{
+    if(prevLoc===undefined)delete sandbox.location;else sandbox.location=prevLoc;
+    if(prevFlag===undefined)delete sandbox.window.DAR_KIDS_TEST_CONTAINER;
+    else sandbox.window.DAR_KIDS_TEST_CONTAINER=prevFlag;
+  }
+}
+assert.equal(school.isLiveUnlockBlockedHost("dar-al-tawhid.de"),true);
+assert.equal(school.isLiveUnlockBlockedHost("www.dar-al-tawhid.de"),true);
+assert.equal(school.isLiveUnlockBlockedHost("dar-al-tawhid-kids-creator.sero91ak.workers.dev"),false);
+assert.deepEqual(school.REVIEW_UNLOCK_HOSTS,Object.freeze?school.REVIEW_UNLOCK_HOSTS:school.REVIEW_UNLOCK_HOSTS);
+assert.ok(school.REVIEW_UNLOCK_HOSTS.includes("dar-al-tawhid-kids-creator.sero91ak.workers.dev"));
+assert.ok(school.REVIEW_UNLOCK_HOSTS.includes("dar-al-tawhid-test.sero91ak.workers.dev"));
+const liveLocked=withHost("dar-al-tawhid.de",true,()=>run(monday));
+assert.equal(liveLocked.unlockAll,false,"Live host must stay locked even if the creator flag is set");
+assert.equal(liveLocked.access(second),"locked");
+assert.equal(liveLocked.access(last),"locked");
+assert.equal(withHost("www.dar-al-tawhid.de",true,()=>run(monday).unlockAll),false);
+assert.equal(withHost("",false,()=>run(monday).unlockAll),false);
+assert.equal(withHost(undefined,false,()=>run(monday).unlockAll),false);
+for(const host of school.REVIEW_UNLOCK_HOSTS){
+  const opened=withHost(host,false,()=>run(monday));
+  assert.equal(opened.unlockAll,true,"Unlock must activate on "+host);
+  assert.equal(opened.access(first),"new");
+  assert.equal(opened.access(second),"new");
+  assert.equal(opened.access(last),"new");
+  const afterFirst=withHost(host,false,()=>run(monday,records));
+  assert.equal(afterFirst.access(first),"review");
+  assert.equal(afterFirst.access(second),"new","Same-day lock must not apply on the review host");
+}
+const flagged=withHost("example.invalid",true,()=>run(monday));
+assert.equal(flagged.unlockAll,true,"Creator-bundle flag may unlock only off the live domain");
+assert.equal(flagged.access(last),"new");
+assert.ok(app.includes("Hörprüfung: alle Lektionen offen"),"Academy UI must describe the test-only unlock");
+
+console.log("KIDS OK: 66 ordered lessons, 48 new age texts (V27+V28+V29), 142 unproduced plans, strict locks, live host hard-blocked, creator/test unlock-all, completion guards, offline-safe archive.");
+
