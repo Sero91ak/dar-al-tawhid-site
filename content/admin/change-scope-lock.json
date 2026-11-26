@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "visitor-quran-meaning-i18n-20261126",
+      "at": "2026-11-26T08:35:00+01:00",
+      "approvedBy": "owner-20261126-quranenc-per-locale-meanings",
+      "reason": "Owner request: import the approved QuranEnc meanings for the nine visitor locales and show them in the visitor Qurʾān reader. No Kids, prayer, Qibla, GPS, OneSignal, Jumuʿah or Zentrale change.",
+      "paths": [
+        "content/quran-i18n/",
+        "scripts/import-quranenc-meanings.cjs",
+        "scripts/check-quran-meaning-i18n.cjs",
+        "assets/quran-meaning-i18n-v1.js"
+      ],
+      "expiresAt": "2026-12-20T23:59:00+01:00"
+    },
+    {
       "id": "landscape-single-home-20261126",
       "at": "2026-11-26T08:20:00+01:00",
       "approvedBy": "owner-serhat-20261126-landscape-duplicate-home",

@@ -1,0 +1,222 @@
+{
+  "source": "https://quranenc.com/api/v1/translation/sura/{key}/{n}",
+  "updates": "https://quranenc.com/api/v1/translations/updates",
+  "importedAt": "2026-11-26T07:35:25.963Z",
+  "terms": "QuranEnc text and footnotes stored unchanged. Attribution keeps the published title, publisher and version.",
+  "expectedVerses": 6236,
+  "omittedMokhtasar": [
+    {
+      "locale": "de",
+      "key": "german_mokhtasar",
+      "reason": "QuranEnc /api/v1/translation/sura/german_mokhtasar and /translations/updates return no edition"
+    },
+    {
+      "locale": "ku",
+      "key": "kurmanji_mokhtasar",
+      "reason": "QuranEnc /api/v1/translation/sura/kurmanji_mokhtasar and /translations/updates return no edition"
+    }
+  ],
+  "locales": {
+    "de": {
+      "key": "german_rwwad",
+      "version": "1.0.16",
+      "last_update": 1793539555,
+      "direction": "ltr",
+      "role": "meaning",
+      "title": "German Translation",
+      "publisher": "Rowwad Translation Center",
+      "verseCount": 6236,
+      "surahs": 114,
+      "versionPublished": true,
+      "mokhtasar": null
+    },
+    "en": {
+      "key": "english_rwwad",
+      "version": "1.0.21",
+      "last_update": 1794213356,
+      "direction": "ltr",
+      "role": "meaning",
+      "title": "English Translation",
+      "publisher": "Rowwad Translation Center",
+      "verseCount": 6236,
+      "surahs": 114,
+      "versionPublished": true,
+      "mokhtasar": {
+        "key": "english_mokhtasar",
+        "version": null,
+        "last_update": null,
+        "direction": "ltr",
+        "title": "english_mokhtasar",
+        "publisher": "QuranEnc.com",
+        "titlePublished": false,
+        "versionPublished": false,
+        "versionNote": "updates endpoint status 400 {\"error\":\"Invalid translation id\"}",
+        "verseCount": 6236,
+        "surahs": 114
+      }
+    },
+    "tr": {
+      "key": "turkish_rwwad",
+      "version": "1.0.4",
+      "last_update": 1759071052,
+      "direction": "ltr",
+      "role": "meaning",
+      "title": "Turkish Translation",
+      "publisher": "Rowwad Translation Center",
+      "verseCount": 6236,
+      "surahs": 114,
+      "versionPublished": true,
+      "mokhtasar": {
+        "key": "turkish_mokhtasar",
+        "version": "1.1.0",
+        "last_update": 1629579600,
+        "direction": "ltr",
+        "title": "Turkish Translation of Al-Mukhtasar in Interpreting the Noble Quran",
+        "publisher": "QuranEnc.com",
+        "titlePublished": true,
+        "versionPublished": true,
+        "versionNote": "",
+        "verseCount": 6236,
+        "surahs": 114
+      }
+    },
+    "ku": {
+      "key": "kurmanji_ismail",
+      "version": "1.0.0",
+      "last_update": 1642021200,
+      "direction": "rtl",
+      "role": "meaning",
+      "title": "Kurdish (Kurmanji) Translation",
+      "publisher": "Ismail Sageri",
+      "verseCount": 6236,
+      "surahs": 114,
+      "versionPublished": true,
+      "mokhtasar": null
+    },
+    "ckb": {
+      "key": "kurdish_bamoki",
+      "version": "1.1.1",
+      "last_update": 1676535258,
+      "direction": "rtl",
+      "role": "meaning",
+      "title": "Kurdish Translation",
+      "publisher": "Muhammad Salih Bamoki",
+      "verseCount": 6236,
+      "surahs": 114,
+      "versionPublished": true,
+      "mokhtasar": {
+        "key": "kurdish_mokhtasar",
+        "version": "1.0.0",
+        "last_update": 1708376400,
+        "direction": "rtl",
+        "title": "Kurdish Translation of Al-Mukhtasar in Interpreting the Noble Quran",
+        "publisher": "QuranEnc.com",
+        "titlePublished": true,
+        "versionPublished": true,
+        "versionNote": "",
+        "verseCount": 6236,
+        "surahs": 114
+      }
+    },
+    "bs": {
+      "key": "bosnian_rwwad",
+      "version": "2.0.4",
+      "last_update": 1741051043,
+      "direction": "ltr",
+      "role": "meaning",
+      "title": "Bosnian Translation",
+      "publisher": "Rowwad Translation Centre",
+      "verseCount": 6236,
+      "surahs": 114,
+      "versionPublished": true,
+      "mokhtasar": {
+        "key": "bosnian_mokhtasar",
+        "version": "1.0.0",
+        "last_update": 1555275600,
+        "direction": "ltr",
+        "title": "Bosnian Translation of Al-Mukhtasar in Interpreting the Noble Quran",
+        "publisher": "QuranEnc.com",
+        "titlePublished": true,
+        "versionPublished": true,
+        "versionNote": "",
+        "verseCount": 6236,
+        "surahs": 114
+      }
+    },
+    "fr": {
+      "key": "french_rashid",
+      "version": "1.0.3",
+      "last_update": 1782043143,
+      "direction": "ltr",
+      "role": "meaning",
+      "title": "French Translation",
+      "publisher": "Rachid Maach",
+      "verseCount": 6236,
+      "surahs": 114,
+      "versionPublished": true,
+      "mokhtasar": {
+        "key": "french_mokhtasar",
+        "version": "1.0.0",
+        "last_update": 1570050000,
+        "direction": "ltr",
+        "title": "French Translation of Al-Mukhtasar in Interpreting the Noble Quran",
+        "publisher": "QuranEnc.com",
+        "titlePublished": true,
+        "versionPublished": true,
+        "versionNote": "",
+        "verseCount": 6236,
+        "surahs": 114
+      }
+    },
+    "es": {
+      "key": "spanish_garcia",
+      "version": "1.0.2",
+      "last_update": 1772054067,
+      "direction": "ltr",
+      "role": "meaning",
+      "title": "Spanish Translation",
+      "publisher": "Isa Garcia",
+      "verseCount": 6236,
+      "surahs": 114,
+      "versionPublished": true,
+      "mokhtasar": {
+        "key": "spanish_mokhtasar",
+        "version": "1.0.0",
+        "last_update": 1609362000,
+        "direction": "ltr",
+        "title": "Spanish Translation of Al-Mukhtasar in Interpreting the Noble Quran",
+        "publisher": "QuranEnc.com",
+        "titlePublished": true,
+        "versionPublished": true,
+        "versionNote": "",
+        "verseCount": 6236,
+        "surahs": 114
+      }
+    },
+    "ar": {
+      "key": "arabic_moyassar",
+      "version": "1.0.1",
+      "last_update": 1794228852,
+      "direction": "rtl",
+      "role": "explanation",
+      "title": "Arabic Language",
+      "publisher": "At-Tafsir Al-Muyassar",
+      "verseCount": 6236,
+      "surahs": 114,
+      "versionPublished": true,
+      "mokhtasar": {
+        "key": "arabic_mokhtasar",
+        "version": "1.0.0",
+        "last_update": 1487106000,
+        "direction": "rtl",
+        "title": "Arabic language - Al-Mukhtsar in Interpreting the Noble Quran",
+        "publisher": "QuranEnc.com",
+        "titlePublished": true,
+        "versionPublished": true,
+        "versionNote": "",
+        "verseCount": 6236,
+        "surahs": 114
+      }
+    }
+  }
+}

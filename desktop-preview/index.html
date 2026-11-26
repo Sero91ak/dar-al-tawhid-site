@@ -24,6 +24,7 @@
 <script src="/assets/dar-global-share-v1225.js?v=1268" defer></script>
 <script src="/assets/i18n/adult-language-picker-v1.js?v=20261125-nine1" defer></script>
 <script src="/assets/i18n/adult-ui-translate.js?v=20261126-locale0" defer></script>
+<script src="/assets/quran-meaning-i18n-v1.js?v=20261126-qenc1"></script>
 <title>DĀR AL TAWḤĪD</title>
 <style>
 :root{
@@ -2912,7 +2913,7 @@ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .dar-v8-qa-to
  function escBook(v){return String(v==null?"":v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
  function arabicDigits(n){return String(n).replace(/\d/g,function(d){return "٠١٢٣٤٥٦٧٨٩"[Number(d)]})}
  function pageWeight(v){
-  var ar=String(v.ar||"").length,de=String(v.de||"").length;
+  var ar=String(v.ar||"").length,de=String(v._meaning||v.de||"").length;
   return 54+(ar*1.28)+(de*.56);
  }
  function paginateQuranVerses(data){
@@ -2926,23 +2927,27 @@ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .dar-v8-qa-to
   return out
  }
  function verseHtml(v){
-  return '<section class="book-verse" data-book-ayah="'+Number(v.id)+'"><div class="book-verse-ar" dir="rtl">'+escBook(v.ar)+' <span class="ayah-marker">﴿'+arabicDigits(v.id)+'﴾</span></div><div class="book-verse-de">'+escBook(v.de)+'</div></section>'
+  var meaning=window.darQuranMeaningVerseHtml?darQuranMeaningVerseHtml(quranBookState.surah,v):escBook(v.de);
+  return '<section class="book-verse" data-book-ayah="'+Number(v.id)+'"><div class="book-verse-ar" dir="rtl">'+escBook(v.ar)+' <span class="ayah-marker">﴿'+arabicDigits(v.id)+'﴾</span></div><div class="book-verse-de" data-dar-no-translate="quran-meaning">'+meaning+'</div></section>'
  }
  function bookPage(side,verses,pageNo,data){
-  if(!verses||!verses.length)return '<article class="book-page '+side+'"><div class="book-surah">'+escBook(data.transliteration)+'</div><div class="book-verses" style="display:grid;place-items:center;min-height:520px;color:#9a8d7a;font:500 14px var(--serif)">Ende der Sūrah</div><div class="page-no">'+pageNo+'</div></article>';
+  if(!verses||!verses.length)return '<article class="book-page '+side+'"><div class="book-surah">'+escBook(data.transliteration)+'</div><div class="book-verses" style="display:grid;place-items:center;min-height:520px;color:#9a8d7a;font:500 14px var(--serif)">'+escBook(darQuranUi("endSurah"))+'</div><div class="page-no">'+pageNo+'</div></article>';
   var from=verses[0].id,to=verses[verses.length-1].id;
-  return '<article class="book-page '+side+'" data-book-page="'+pageNo+'"><div class="book-surah">'+escBook(data.transliteration)+' · '+escBook(data.name)+'</div><div class="book-verses">'+verses.map(verseHtml).join("")+'</div><div class="book-ref">Qurʾān · '+Number(data.id)+':'+from+(to!==from?"–"+to:"")+' · Übersetzung: Frank Bubenheim & Nadeem Elyas</div><div class="page-no">'+pageNo+'</div></article>'
+  var credit=window.darQuranMeaningAttributionHtml?darQuranMeaningAttributionHtml():"";
+  return '<article class="book-page '+side+'" data-book-page="'+pageNo+'"><div class="book-surah">'+escBook(data.transliteration)+' · '+escBook(data.name)+'</div><div class="book-verses">'+verses.map(verseHtml).join("")+'</div><div class="book-ref" data-dar-no-translate="quran-meaning">Qurʾān · '+Number(data.id)+':'+from+(to!==from?"–"+to:"")+' · '+credit+'</div><div class="page-no">'+pageNo+'</div></article>'
  }
  function spreadHtml(spread,data){
   var rightIndex=spread*2,leftIndex=rightIndex+1;
   return bookPage("left",quranBookState.pages[leftIndex],leftIndex+1,data)+bookPage("right",quranBookState.pages[rightIndex],rightIndex+1,data)
  }
  function quran(){
+  var L=window.darQuranUi?darQuranUi:function(k){return k};
+  var picker=window.darQuranMeaningPickerHtml?darQuranMeaningPickerHtml():"";
   return intro("quran")+
-  '<section class="dar-v8-quran-audio-launch" aria-label="Qurʾān hören"><div><span class="dar-v8-section-kicker">REZITATION · 114 SŪREN</span><strong>Qurʾān anhören</strong><small>Eine Audio-Engine · Sūrah · Āyah · Rezitator wählen</small></div><button type="button" id="darV8QuranAudioLaunch" aria-label="Qurʾān-Player öffnen">Player öffnen ↗</button></section>'+
-  '<section class="quran-reading-zone section parchment reveal"><div class="toolbar"><button class="tool active" type="button">Buchansicht</button><button class="tool" type="button">Arabisch + Deutsch</button><button class="tool" type="button">Lautschrift</button><button class="tool" type="button">Tafsīr</button><button class="tool" type="button">Tadabbur</button></div>'+
-  '<div class="quran-layout"><aside class="sidebar quran-sidebar"><div class="side-title">Sūrah auswählen</div><nav class="side-nav quran-surah-nav" id="bookSurahNav"><span style="font-size:10px;color:#8b8275">Sūrah-Verzeichnis wird geladen …</span></nav></aside>'+
-  '<div class="book-stage"><div class="book-rim"><div id="bookShell" class="book-shell"><div class="book-loading">Qurʾān wird geöffnet …</div></div></div><div class="book-controls"><button id="prevPage" class="book-btn" type="button">← Zurück</button><div id="bookPos" class="book-position">—</div><button id="nextPage" class="book-btn" type="button">Weiter →</button></div></div></div></section>'+footer()
+  '<section class="dar-v8-quran-audio-launch" aria-label="'+escBook(L("listen"))+'"><div><span class="dar-v8-section-kicker">114</span><strong>'+escBook(L("listen"))+'</strong><small>Sūrah · Āyah</small></div><button type="button" id="darV8QuranAudioLaunch" aria-label="'+escBook(L("openPlayer"))+'">'+escBook(L("openPlayer"))+'</button></section>'+
+  '<section class="quran-reading-zone section parchment reveal"><div class="toolbar"><button class="tool active" type="button">'+escBook(L("bookView"))+'</button><button class="tool" type="button">'+escBook(L("withMeaning"))+'</button><button class="tool" type="button">'+escBook(L("translit"))+'</button><button class="tool" type="button">Tafsīr</button><button class="tool" type="button">Tadabbur</button></div>'+picker+
+  '<div class="quran-layout"><aside class="sidebar quran-sidebar"><div class="side-title">'+escBook(L("chooseSurah"))+'</div><nav class="side-nav quran-surah-nav" id="bookSurahNav"><span style="font-size:10px;color:#8b8275">'+escBook(L("loadingList"))+'</span></nav></aside>'+
+  '<div class="book-stage"><div class="book-rim"><div id="bookShell" class="book-shell"><div class="book-loading">'+escBook(L("opening"))+'</div></div></div><div class="book-controls"><button id="prevPage" class="book-btn" type="button">'+escBook(L("back"))+'</button><div id="bookPos" class="book-position">—</div><button id="nextPage" class="book-btn" type="button">'+escBook(L("forward"))+'</button></div></div></div></section>'+footer()
  }
  function beitraege(){
   return intro("beitraege")+
@@ -3072,6 +3077,7 @@ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .dar-v8-qa-to
 
  function render(){
   var key=currentPage(); if(!renders[key])key="start";
+  if(key==="quran"&&window.darQuranUi)intros.quran=[darQuranUi("kicker"),darQuranUi("bookTitle"),darQuranUi("bookLead")];
   document.body.classList.toggle("dar-v8-home",key==="start");
   document.body.classList.toggle("dar-v8-quran-route",key==="quran");
   document.body.dataset.darV8Route=key;
@@ -3361,7 +3367,7 @@ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .dar-v8-qa-to
    quranBookState.spread=Math.max(0,Math.min(max,quranBookState.spread));
    shell.innerHTML=spreadHtml(quranBookState.spread,quranBookState.meta);
    var r=quranBookState.spread*2+1,l=Math.min(quranBookState.pages.length,quranBookState.spread*2+2);
-   pos.textContent="Seiten "+r+(l!==r?"–"+l:"")+" · "+quranBookState.meta.transliteration;
+   pos.textContent=darQuranUi("pages")+" "+r+(l!==r?"–"+l:"")+" · "+quranBookState.meta.transliteration;
    saveBook();bindVerses()
   }
   function leafFaceHtml(page,side,pageNo){
@@ -3395,6 +3401,13 @@ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .dar-v8-qa-to
    fetch("/content/quran/"+pad3(requested)+".json",{cache:"force-cache"}).then(function(r){if(!r.ok)throw new Error("Quran "+r.status);return r.json()})
   ]).then(function(all){
    var catalog=all[0].surahs||[],data=all[1];
+   var ready=window.darQuranMeaningEnsure?darQuranMeaningEnsure(data.id||requested):Promise.resolve();
+   return ready.then(function(){
+   (data.verses||[]).forEach(function(v){
+    if(!window.darQuranMeaningSearchText)return;
+    var text=darQuranMeaningSearchText({surahId:data.id||requested,ayah:v.id});
+    if(text)v._meaning=text;
+   });
    quranBookState.meta=data;quranBookState.pages=paginateQuranVerses(data);
    var requestedAyah=Math.max(0,Number(params.get("ayah")||0));
    if(requestedAyah){
@@ -3405,8 +3418,9 @@ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .dar-v8-qa-to
    if(nav)nav.innerHTML=catalog.map(function(x){return '<a class="desktop-link'+(Number(x.id)===requested?' active':'')+'" data-page="quran" href="'+p("quran","surah="+x.id)+'">'+x.id+' · '+escBook(x.transliteration)+'</a>'}).join("");
    paint();
    if(window.__initQuranSmartSearch)window.__initQuranSmartSearch(catalog,data,nav,paint,requestedAyah)
+   });
   }).catch(function(){
-   shell.innerHTML='<div class="book-loading">Der Qurʾān konnte gerade nicht geladen werden.</div>'
+   shell.innerHTML='<div class="book-loading">'+escBook(window.darQuranUi?darQuranUi("loadFailed"):"")+'</div>'
   })
  }
 
@@ -4380,12 +4394,14 @@ renders.beitraege=function(){
   input.oninput=function(){page=1;paint()};paint()
  }
  renders.quran=function(){
-  return realIntro("QURʾĀN","Lesen wie in einem aufgeschlagenen Buch.","Suche nach Sūrah, Āyah oder einem Begriff im geöffneten Text. Beispiel: 2:255.")+
-   '<section class="dar-v8-quran-audio-launch" aria-label="Qurʾān hören"><div><span class="dar-v8-section-kicker">REZITATION · 114 SŪREN</span><strong>Qurʾān anhören</strong><small>Eine Audio-Engine · Sūrah · Āyah · Rezitator wählen</small></div><button type="button" id="darV8QuranAudioLaunch" aria-label="Qurʾān-Player öffnen">Player öffnen ↗</button></section>'+
-   '<section class="quran-reading-zone section parchment reveal">'+smartSearchHtml("bookQuranSearch","Sūrah, Āyah (z. B. 2:255) oder Begriff suchen …","bookQuranSearchStatus")+
-   '<div class="toolbar"><button class="tool active" type="button">Buchansicht</button><button class="tool" type="button">Arabisch + Deutsch</button><button class="tool" type="button">Lautschrift</button><button class="tool" type="button">Tafsīr</button><button class="tool" type="button">Tadabbur</button></div>'+
-   '<div class="quran-layout"><aside class="sidebar quran-sidebar"><div class="side-title">Sūrah auswählen</div><nav class="side-nav quran-surah-nav" id="bookSurahNav"><span style="font-size:10px;color:#8b8275">Sūrah-Verzeichnis wird geladen …</span></nav></aside>'+
-   '<div class="book-stage"><div class="book-rim"><div id="bookShell" class="book-shell"><div class="book-loading">Qurʾān wird geöffnet …</div></div></div><div class="book-controls"><button id="prevPage" class="book-btn" type="button">← Zurück</button><div id="bookPos" class="book-position">—</div><button id="nextPage" class="book-btn" type="button">Weiter →</button></div></div></div></section>'+footer()
+  var L=window.darQuranUi?darQuranUi:function(k){return k};
+  var picker=window.darQuranMeaningPickerHtml?darQuranMeaningPickerHtml():"";
+  return realIntro(L("kicker"),L("bookTitle"),L("bookLead"))+
+   '<section class="dar-v8-quran-audio-launch" aria-label="'+escBook(L("listen"))+'"><div><span class="dar-v8-section-kicker">114</span><strong>'+escBook(L("listen"))+'</strong><small>Sūrah · Āyah</small></div><button type="button" id="darV8QuranAudioLaunch" aria-label="'+escBook(L("openPlayer"))+'">'+escBook(L("openPlayer"))+'</button></section>'+
+   '<section class="quran-reading-zone section parchment reveal">'+smartSearchHtml("bookQuranSearch",L("searchHint"),"bookQuranSearchStatus")+
+   '<div class="toolbar"><button class="tool active" type="button">'+escBook(L("bookView"))+'</button><button class="tool" type="button">'+escBook(L("withMeaning"))+'</button><button class="tool" type="button">'+escBook(L("translit"))+'</button><button class="tool" type="button">Tafsīr</button><button class="tool" type="button">Tadabbur</button></div>'+picker+
+   '<div class="quran-layout"><aside class="sidebar quran-sidebar"><div class="side-title">'+escBook(L("chooseSurah"))+'</div><nav class="side-nav quran-surah-nav" id="bookSurahNav"><span style="font-size:10px;color:#8b8275">'+escBook(L("loadingList"))+'</span></nav></aside>'+
+   '<div class="book-stage"><div class="book-rim"><div id="bookShell" class="book-shell"><div class="book-loading">'+escBook(L("opening"))+'</div></div></div><div class="book-controls"><button id="prevPage" class="book-btn" type="button">'+escBook(L("back"))+'</button><div id="bookPos" class="book-position">—</div><button id="nextPage" class="book-btn" type="button">'+escBook(L("forward"))+'</button></div></div></div></section>'+footer()
  };
  window.__initQuranSmartSearch=function(catalog,data,nav,paint,requestedAyah){
   var input=document.getElementById("bookQuranSearch"),status=document.getElementById("bookQuranSearchStatus");if(!input)return;
@@ -4404,21 +4420,21 @@ renders.beitraege=function(){
    if(!term){status.textContent="114 Sūrah";document.querySelectorAll("[data-book-ayah]").forEach(function(el){el.classList.remove("is-search-match")});return}
    var ref=raw.match(/^(\\d{1,3})\\s*[:.]\\s*(\\d{1,3})$/);
    if(ref){
-    var su=Number(ref[1]),ay=Number(ref[2]);status.textContent="Āyah "+su+":"+ay+" öffnen";
+    var su=Number(ref[1]),ay=Number(ref[2]);status.textContent="Āyah "+su+":"+ay;
     if(su===Number(quranBookState.surah)){
      var pi=quranBookState.pages.findIndex(function(pg){return pg.some(function(v){return Number(v.id)===ay})});
      if(pi>=0){quranBookState.spread=Math.floor(pi/2);paint();markAyah(ay)}
     }
     return
    }
-   var verses=(data.verses||[]),hit=verses.find(function(v){return normText([v.de,v.ar,v.tr,v.transliteration].join(" ")).indexOf(term)>=0});
+   var verses=(data.verses||[]),hit=verses.find(function(v){return normText([v._meaning,v.de,v.ar,v.tr,v.transliteration].join(" ")).indexOf(term)>=0});
    if(hit){
     var pageIndex=quranBookState.pages.findIndex(function(pg){return pg.some(function(v){return Number(v.id)===Number(hit.id)})});
     if(pageIndex>=0){quranBookState.spread=Math.floor(pageIndex/2);paint();markAyah(hit.id);status.textContent="Āyah "+data.id+":"+hit.id}
     return
    }
    var sHit=catalog.find(function(x){return normText([x.id,x.transliteration,x.name].join(" ")).indexOf(term)>=0});
-   status.textContent=sHit?"Sūrah "+sHit.id+" · "+sHit.transliteration:"Kein Treffer"
+   status.textContent=sHit?"Sūrah "+sHit.id+" · "+sHit.transliteration:"—"
   }
   input.oninput=search;
   input.onkeydown=function(e){
