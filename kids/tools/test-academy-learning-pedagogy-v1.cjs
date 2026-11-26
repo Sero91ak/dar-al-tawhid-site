@@ -23,7 +23,7 @@ for(const n of [2,3,4,5]){
 }
 assert(html.includes('choice=i;'),"Correctness must map to canonical answer index");
 assert(html.includes('q.type==="choice")academyDisplayChoices(q,qIndex,activeLessonId+":"+age).forEach(({text:t,originalIndex:i},visibleIndex)=>'),"Display order does not feed quiz");
-assert(html.includes('speak(3,["Antwort "+(i+1)+": "+t]);'),"Every shuffled answer must retrieve its real canonical source recording");
+assert(html.includes('speak(step,[["Antwort "+(i+1)+": "+t,t]])')||html.includes('speak(3,["Antwort "+(i+1)+": "+t]);'),"Every shuffled answer must retrieve its real canonical source recording, with a plain-text fallback");
 const sourceTime=JSON.parse(fs.readFileSync("kids/data/academy-topic-batches/akhlaq-sidq-answer-unnumbered-timings-v1.json","utf8"));
 const ownerVoice=fs.readFileSync("kids/owner-voice.js","utf8");
 const published=JSON.parse(fs.readFileSync("kids/data/academy-audio.json","utf8"));
