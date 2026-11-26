@@ -155,6 +155,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "core-lock-push-language-t28u-20261126",
+      "at": "2026-11-26T10:20:00+01:00",
+      "approvedBy": "owner-serhat-20261126-t28u-core-lock-language-only",
+      "reason": "Owner t28u releases the core lock only for language changes in prayer-push-scheduler.js, DarPushNotifications.swift and WebAppView.swift until 2026-11-27T23:59:59Z. No prayer calculation, location, Qibla, schedule or segment change. The exception is closed again after the language delivery.",
+      "paths": [
+        "scripts/core-sensitive-change-lock.cjs",
+        ".github/CORE_SECURITY_LOCK.md"
+      ],
+      "expiresAt": "2026-11-27T23:59:59Z"
+    },
+    {
       "id": "hadith-library-shelves-visitor-20261126",
       "at": "2026-11-26T09:20:00+01:00",
       "approvedBy": "owner-serhat-20261126-hadith-library-redesign-global-live-t21u",
