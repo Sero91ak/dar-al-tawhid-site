@@ -281,6 +281,14 @@ try {
   fail("Visitor canonical Home bootstrap for iOS / Android / Fold");
 }
 
+try {
+  require("child_process").execFileSync(process.execPath,
+    [path.join(__dirname, "check-visitor-locale-leftovers.cjs")],
+    { stdio: "inherit" });
+} catch (error) {
+  fail("Visitor locale leftover crawl");
+}
+
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);
