@@ -148,19 +148,3 @@
   bindHadithLibraryEvents=newBind;
   try{if(/^#\/?hadith(?:\/|$)/i.test(location.hash||""))requestAnimationFrame(()=>{try{render()}catch(e){console.error("Hadith reframe render",e)}})}catch(e){}
 })();
-(function(){
-  if (window.__DAR_HADITH_SHELVES_LOADER) return;
-  window.__DAR_HADITH_SHELVES_LOADER = true;
-  var head = document.head || document.documentElement;
-  if (!document.getElementById("darHadithShelvesV1Css")) {
-    var css = document.createElement("link");
-    css.id = "darHadithShelvesV1Css";
-    css.rel = "stylesheet";
-    css.href = "/test/assets/hadith-library-shelves-v1.css?v=20261126-shelves1";
-    head.appendChild(css);
-  }
-  var js = document.createElement("script");
-  js.id = "darHadithShelvesV1";
-  js.src = "/test/assets/hadith-library-shelves-v1.js?v=20261126-shelves1";
-  document.documentElement.appendChild(js);
-})();
