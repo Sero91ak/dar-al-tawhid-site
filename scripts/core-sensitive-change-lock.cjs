@@ -57,7 +57,6 @@ function classify(record) {
   return null;
 }
 
-// T28U_PUSH_LANGUAGE_LOCK — owner Serhat, 26.11.2026, language text only, until 27.11.2026 23:59 UTC.
 const LANGUAGE_FILES = new Set([
   "cloudflare/prayer-push-scheduler.js",
   "ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift",
@@ -70,20 +69,7 @@ function changedPatchLines(patch) {
   return String(patch || "").split("\n").filter((line) => /^[+-](?![+-])/.test(line));
 }
 
-function ownerLanguageException(record) {
-  if (Date.now() > LANGUAGE_ONLY_UNTIL) return false;
-  if (!record || typeof record === "string" || typeof record.patch !== "string" || !record.patch) return false;
-  const lines = changedPatchLines(record.patch);
-  if (!lines.length) return false;
-  if (LANGUAGE_FILES.has(record.filename)) {
-    return lines.every((line) => !LANGUAGE_FORBIDDEN.test(line.slice(1)));
-  }
-  if (record.filename === "scripts/core-sensitive-change-lock.cjs" || record.filename === ".github/CORE_SECURITY_LOCK.md") {
-    const removed = lines.some((line) => line.startsWith("-") && line.includes("T28U_PUSH_LANGUAGE_LOCK"));
-    const added = lines.some((line) => line.startsWith("+") && line.includes("T28U_PUSH_LANGUAGE_LOCK"));
-    if (!removed || added) return false;
-    return lines.filter((line) => line.startsWith("+")).every((line) => !/latitude|longitude|geolocation|\bqibla\b|CLLocation|computePublicPrayerTimes/.test(line.slice(1)));
-  }
+function ownerLanguageException() {
   return false;
 }
 
@@ -188,6 +174,22 @@ function approvedFullscreenQiblaEntryMigration(base, head) {
 
 // One base, one install. A later commit cannot reuse this acceptance.
 // The install landed on main after 1908, so the push base was 36c0ccb742, not the PR base.
+function approvedLanguageLockClosed(base, head) {
+  const guardPath = "scripts/core-sensitive-change-lock.cjs";
+  const allowed = new Set([guardPath, ".github/CORE_SECURITY_LOCK.md", "content/admin/change-scope-lock.json"]);
+  const actual = git(["diff", "--name-only", "--diff-filter=ACDMRT", "-z", base, head])
+    .split("\0").filter(Boolean).sort();
+  if (!actual.length || actual.some((file) => !allowed.has(file)) || !actual.includes(guardPath)) return false;
+  let beforeText = "";
+  try { beforeText = git(["show", base + ":" + guardPath]); } catch (_) { return false; }
+  const afterText = git(["show", head + ":" + guardPath]);
+  if (beforeText.includes("approvedLanguageLockClosed") || !afterText.includes("approvedLanguageLockClosed")) return false;
+  if (!/function ownerLanguageException\(\) \{\n  return false;\n\}/.test(afterText)) return false;
+  if (!git(["show", head + ":content/admin/change-scope-lock.json"]).includes("runtime window closed")) return false;
+  console.log("DAR CORE LOCK: t28u language window closed.");
+  return true;
+}
+
 function approvedLanguagePushPatchLoading(base, head) {
   const guardPath = "scripts/core-sensitive-change-lock.cjs";
   const actual = git(["diff", "--name-only", "--diff-filter=ACDMRT", "-z", base, head])
@@ -259,6 +261,7 @@ function verifyPush() {
   if (approvedGpsSecurityMigration(base, head)) return;
   if (approvedQiblaCapsuleMigration(base, head)) return;
   if (approvedFullscreenQiblaEntryMigration(base, head)) return;
+  if (approvedLanguageLockClosed(base, head)) return;
   if (approvedLanguagePushPatchLoading(base, head)) return;
   if (approvedPushLanguageLockBaseFix(base, head)) return;
   if (approvedPushLanguageLockInstall(base, head)) return;
@@ -291,7 +294,7 @@ function selfTest() {
   assert.equal(ownerLanguageException({
     filename: "cloudflare/prayer-push-scheduler.js",
     patch: "@@\n+import { prayerLocaleCopy } from \"./push-locale-from-draft.js\";\n"
-  }), true);
+  }), false);
   assert.equal(ownerLanguageException({
     filename: "cloudflare/prayer-push-scheduler.js",
     patch: "@@\n+const latitude = 1;\n"

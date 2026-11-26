@@ -49,15 +49,9 @@ Im Repository **Settings → Rules → Rulesets** eine aktive Branch-Regel für 
 
 **Ohne Ruleset** kann GitHub einen Push schon annehmen, bevor ein nachfolgender CI-Check fehlschlägt; dieser Guard allein kann das nicht verhindern. Das Ruleset kann über die aktuell verfügbare GitHub-Verbindung nicht gesetzt werden und erfordert den Repository-Eigentümer.
 
-## Befristete Sprach-Ausnahme T28U_PUSH_LANGUAGE_LOCK
+## Sprach-Ausnahme t28u geschlossen
 
-Eigentümer Serhat, t28u, 26.11.2026: nur Sprache, nur diese Dateien, bis 27.11.2026 23:59 UTC.
-
-- `cloudflare/prayer-push-scheduler.js`
-- `ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift`
-- `ios/DarAlTawhid/DarAlTawhid/WebAppView.swift`
-
-Keine Gebetszeit-Berechnung, kein Standort, keine Qibla, kein Zeitplan, kein Segment. Die Ausnahme steht im Guard und erlischt mit dem Datum. Danach schließt ein eigener Commit den Pfad. Ein Kennwort hebt diese Sperre nicht auf.
+Eigentümer Serhat, t28u, 26.11.2026. Die befristete Sprachfreigabe für den Gebets-Push-Planer und die zwei iOS-Push-Dateien ist geschlossen. Dieselben Dateien sind wieder voll gesperrt. Ein Kennwort hebt diese Sperre nicht auf.
 
 ## Stand bei Einrichtung
 
