@@ -20,7 +20,7 @@ TestFlight und App Store laden dieselbe Live-Seite (wie Store-/TestFlight-Build 
 
 `DarAppShell.usesStagingWeb` bleibt `false`. Dar Test (`/test/`) ist nur die Website zum Prüfen, nicht die native App.
 
-Vor jedem neuen TestFlight-Upload in Xcode die **Build-Nummer über der letzten Store-/TestFlight-Nummer** erhöhen (nach 111 also 112), dann Product → Archive → App Store Connect.
+Build-Nummer vor dem Archivieren in Xcode manuell auf 112 setzen (aktuell live/TestFlight: 111), dann Product → Archive → App Store Connect.
 
 ## Home-Screen-Widgets (iPhone / iPad / Mac Catalyst)
 
