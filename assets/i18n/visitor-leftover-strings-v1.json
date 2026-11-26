@@ -1,0 +1,1517 @@
+{
+ "review": "machine-translation-owner-approved",
+ "humanReligiousReview": false,
+ "publicDisplayAllowed": true,
+ "strings": {
+  "Standort": {
+   "ar": "الموقع",
+   "en": "Location",
+   "tr": "Konum",
+   "ku": "Cih",
+   "ckb": "شوێن",
+   "bs": "Lokacija",
+   "fr": "Lieu",
+   "es": "Ubicación"
+  },
+  "ISLAMISCHES WISSEN": {
+   "ar": "العلم الإسلامي",
+   "en": "Islamic knowledge",
+   "tr": "İslami ilim",
+   "ku": "Zanîna îslamî",
+   "ckb": "زانستی ئیسلامی",
+   "bs": "Islamsko znanje",
+   "fr": "Savoir islamique",
+   "es": "Conocimiento islámico"
+  },
+  "ISLAMISCHES WISSEN · FUNDAMENTE": {
+   "ar": "العلم الإسلامي · الأصول",
+   "en": "Islamic knowledge · foundations",
+   "tr": "İslami ilim · temeller",
+   "ku": "Zanîna îslamî · bingeh",
+   "ckb": "زانستی ئیسلامی · بنەڕەت",
+   "bs": "Islamsko znanje · temelji",
+   "fr": "Savoir islamique · fondements",
+   "es": "Conocimiento islámico · fundamentos"
+  },
+  "FORTLAUFENDE REZITATION": {
+   "ar": "تلاوة متصلة",
+   "en": "Continuous recitation",
+   "tr": "Sürekli tilavet",
+   "ku": "Xwendina berdewam",
+   "ckb": "خوێندنەوەی بەردەوام",
+   "bs": "Nastavak učenja",
+   "fr": "Récitation continue",
+   "es": "Recitación continua"
+  },
+  "QURʾĀN · FORTLAUFENDE REZITATION": {
+   "ar": "القرآن · تلاوة متصلة",
+   "en": "Qurʾān · continuous recitation",
+   "tr": "Kur’an · sürekli tilavet",
+   "ku": "Qurʾān · xwendina berdewam",
+   "ckb": "قورئان · خوێندنەوەی بەردەوام",
+   "bs": "Kur’an · nastavak učenja",
+   "fr": "Qurʾān · récitation continue",
+   "es": "Corán · recitación continua"
+  },
+  "Vollansicht": {
+   "ar": "عرض كامل",
+   "en": "Full view",
+   "tr": "Tam görünüm",
+   "ku": "Dîtina tevahî",
+   "ckb": "دیمەنی تەواو",
+   "bs": "Puni prikaz",
+   "fr": "Vue complète",
+   "es": "Vista completa"
+  },
+  "Alle Themen": {
+   "ar": "جميع المواضيع",
+   "en": "All topics",
+   "tr": "Tüm konular",
+   "ku": "Hemû mijar",
+   "ckb": "هەموو بابەتەکان",
+   "bs": "Sve teme",
+   "fr": "Tous les thèmes",
+   "es": "Todos los temas"
+  },
+  "Alle Themen ↗": {
+   "ar": "جميع المواضيع ↗",
+   "en": "All topics ↗",
+   "tr": "Tüm konular ↗",
+   "ku": "Hemû mijar ↗",
+   "ckb": "هەموو بابەتەکان ↗",
+   "bs": "Sve teme ↗",
+   "fr": "Tous les thèmes ↗",
+   "es": "Todos los temas ↗"
+  },
+  "Aussagen mit prüfbaren Quellen, Themen und Gelehrten.": {
+   "ar": "أقوال بمصادر يمكن التحقق منها وموضوعات وعلماء.",
+   "en": "Statements with verifiable sources, topics and scholars.",
+   "tr": "Doğrulanabilir kaynak, konu ve âlimlerle sözler.",
+   "ku": "Gotin bi çavkanî, mijar û alimên kontrolbar.",
+   "ckb": "وتە بە سەرچاوە و بابەت و زانایانی پشکنراو.",
+   "bs": "Izjave s provjerljivim izvorima, temama i učenjacima.",
+   "fr": "Propositions avec sources vérifiables, thèmes et savants.",
+   "es": "Dichos con fuentes comprobables, temas y sabios."
+  },
+  "Wissenschat öffnen": {
+   "ar": "فتح البحث في المصادر",
+   "en": "Open the source search",
+   "tr": "Kaynak aramasını aç",
+   "ku": "Lêgerîna çavkaniyan veke",
+   "ckb": "گەڕانی سەرچاوە بکەرەوە",
+   "bs": "Otvori pretragu izvora",
+   "fr": "Ouvrir la recherche de sources",
+   "es": "Abrir la búsqueda de fuentes"
+  },
+  "✦ Wissenschat öffnen": {
+   "ar": "✦ فتح البحث في المصادر",
+   "en": "✦ Open the source search",
+   "tr": "✦ Kaynak aramasını aç",
+   "ku": "✦ Lêgerîna çavkaniyan veke",
+   "ckb": "✦ گەڕانی سەرچاوە بکەرەوە",
+   "bs": "✦ Otvori pretragu izvora",
+   "fr": "✦ Ouvrir la recherche de sources",
+   "es": "✦ Abrir la búsqueda de fuentes"
+  },
+  "Quellenarchiv": {
+   "ar": "أرشيف المصادر",
+   "en": "Source archive",
+   "tr": "Kaynak arşivi",
+   "ku": "Arşîva çavkaniyan",
+   "ckb": "ئەرشیفی سەرچاوە",
+   "bs": "Arhiv izvora",
+   "fr": "Archives des sources",
+   "es": "Archivo de fuentes"
+  },
+  "Quellenarchiv ↗": {
+   "ar": "أرشيف المصادر ↗",
+   "en": "Source archive ↗",
+   "tr": "Kaynak arşivi ↗",
+   "ku": "Arşîva çavkaniyan ↗",
+   "ckb": "ئەرشیفی سەرچاوە ↗",
+   "bs": "Arhiv izvora ↗",
+   "fr": "Archives des sources ↗",
+   "es": "Archivo de fuentes ↗"
+  },
+  "Intelligenter Wissenschat": {
+   "ar": "بحث ذكي في المصادر",
+   "en": "Intelligent source search",
+   "tr": "Akıllı kaynak araması",
+   "ku": "Lêgerîna jîr a çavkaniyan",
+   "ckb": "گەڕانی زیرەکی سەرچاوە",
+   "bs": "Pametna pretraga izvora",
+   "fr": "Recherche intelligente des sources",
+   "es": "Búsqueda inteligente de fuentes"
+  },
+  "Aussage vollständig lesen": {
+   "ar": "اقرأ القول كاملاً",
+   "en": "Read the full statement",
+   "tr": "Sözün tamamını oku",
+   "ku": "Gotina tevahî bixwîne",
+   "ckb": "وتەکە بە تەواوی بخوێنەوە",
+   "bs": "Pročitaj cijelu izjavu",
+   "fr": "Lire l’énoncé en entier",
+   "es": "Leer la declaración completa"
+  },
+  "WEITER ENTDECKEN": {
+   "ar": "تابع الاكتشاف",
+   "en": "CONTINUE EXPLORING",
+   "tr": "KEŞFETMEYE DEVAM",
+   "ku": "BERDEWAM BIKE",
+   "ckb": "بەردەوام بە لە دۆزینەوە",
+   "bs": "NASTAVI ISTRAŽIVATI",
+   "fr": "CONTINUER À EXPLORER",
+   "es": "SEGUIR EXPLORANDO"
+  },
+  "SMART KNOWLEDGE": {
+   "ar": "معرفة موثوقة",
+   "en": "VERIFIED KNOWLEDGE",
+   "tr": "GÜVENİLİR İLİM",
+   "ku": "ZANÎNA PIŞTRAST",
+   "ckb": "زانینی پشتڕاست",
+   "bs": "POUZDANO ZNANJE",
+   "fr": "SAVOIR VÉRIFIÉ",
+   "es": "CONOCIMIENTO VERIFICADO"
+  },
+  "Überlieferungsweg und Quellenstatus": {
+   "ar": "طريق الرواية وحال المصدر",
+   "en": "Transmission path and source status",
+   "tr": "Rivayet yolu ve kaynak durumu",
+   "ku": "Rêça rivayetê û rewşa çavkaniyê",
+   "ckb": "ڕێڕەوی گێڕانەوە و دۆخی سەرچاوە",
+   "bs": "Lanac prenošenja i status izvora",
+   "fr": "Chaîne de transmission et statut de la source",
+   "es": "Vía de transmisión y estado de la fuente"
+  },
+  "Überlieferungsweg": {
+   "ar": "طريق الرواية",
+   "en": "Transmission path",
+   "tr": "Rivayet yolu",
+   "ku": "Rêça rivayetê",
+   "ckb": "ڕێڕەوی گێڕانەوە",
+   "bs": "Lanac prenošenja",
+   "fr": "Chaîne de transmission",
+   "es": "Vía de transmisión"
+  },
+  "Quellenstatus": {
+   "ar": "حال المصدر",
+   "en": "Source status",
+   "tr": "Kaynak durumu",
+   "ku": "Rewşa çavkaniyê",
+   "ckb": "دۆخی سەرچاوە",
+   "bs": "Status izvora",
+   "fr": "Statut de la source",
+   "es": "Estado de la fuente"
+  },
+  "Wissen erarbeiten": {
+   "ar": "طلب العلم",
+   "en": "Study the knowledge",
+   "tr": "İlmi öğren",
+   "ku": "Zanînê bistîne",
+   "ckb": "زانست وەربگرە",
+   "bs": "Usvajaj znanje",
+   "fr": "Étudier le savoir",
+   "es": "Estudiar el conocimiento"
+  },
+  "Wissen erarbeiten · by Serhat Abu Malik": {
+   "ar": "طلب العلم · by Serhat Abu Malik",
+   "en": "Study the knowledge · by Serhat Abu Malik",
+   "tr": "İlmi öğren · by Serhat Abu Malik",
+   "ku": "Zanînê bistîne · by Serhat Abu Malik",
+   "ckb": "زانست وەربگرە · by Serhat Abu Malik",
+   "bs": "Usvajaj znanje · by Serhat Abu Malik",
+   "fr": "Étudier le savoir · by Serhat Abu Malik",
+   "es": "Estudiar el conocimiento · by Serhat Abu Malik"
+  },
+  "FRAGE 1 VON 4": {
+   "ar": "السؤال 1 من 4",
+   "en": "QUESTION 1 OF 4",
+   "tr": "SORU 1 / 4",
+   "ku": "PIRS 1 JI 4",
+   "ckb": "پرسیاری ١ لە ٤",
+   "bs": "PITANJE 1 OD 4",
+   "fr": "QUESTION 1 SUR 4",
+   "es": "PREGUNTA 1 DE 4"
+  },
+  "0 richtig": {
+   "ar": "0 صحيحة",
+   "en": "0 correct",
+   "tr": "0 doğru",
+   "ku": "0 rast",
+   "ckb": "٠ ڕاست",
+   "bs": "0 tačno",
+   "fr": "0 correctes",
+   "es": "0 correctas"
+  },
+  "ADAB & WISSEN": {
+   "ar": "الأدب والعلم",
+   "en": "ADAB & KNOWLEDGE",
+   "tr": "EDEP VE İLİM",
+   "ku": "EDAB Û ZANÎN",
+   "ckb": "ئەدەب و زانست",
+   "bs": "ADAB I ZNANJE",
+   "fr": "ADAB ET SAVOIR",
+   "es": "ADAB Y CONOCIMIENTO"
+  },
+  "ADAB & WISSEN · LERNBEREICH": {
+   "ar": "الأدب والعلم · التعلم",
+   "en": "ADAB & KNOWLEDGE · LESSON",
+   "tr": "EDEP VE İLİM · DERS",
+   "ku": "EDAB Û ZANÎN · FÊRBÛN",
+   "ckb": "ئەدەب و زانست · فێربوون",
+   "bs": "ADAB I ZNANJE · UČENJE",
+   "fr": "ADAB ET SAVOIR · LEÇON",
+   "es": "ADAB Y CONOCIMIENTO · LECCIÓN"
+  },
+  "QUELLENBASIERTER WISSENSFINDER": {
+   "ar": "باحث مبني على المصادر",
+   "en": "SOURCE-BASED FINDER",
+   "tr": "KAYNAK TEMELLİ ARAMA",
+   "ku": "LÊGERÎNA LI SER ÇAVKANIYAN",
+   "ckb": "دۆزەرەوەی سەرچاوەیی",
+   "bs": "PRETRAGA NA IZVORIMA",
+   "fr": "RECHERCHE FONDÉE SUR LES SOURCES",
+   "es": "BUSCADOR BASADO EN FUENTES"
+  },
+  "Quellenbasierter Wissenschat": {
+   "ar": "بحث مبني على المصادر",
+   "en": "Source-based search",
+   "tr": "Kaynak temelli arama",
+   "ku": "Lêgerîna li ser çavkaniyan",
+   "ckb": "گەڕانی سەرچاوەیی",
+   "bs": "Pretraga na izvorima",
+   "fr": "Recherche fondée sur les sources",
+   "es": "Búsqueda basada en fuentes"
+  },
+  "Wissensfinder": {
+   "ar": "باحث المصادر",
+   "en": "Source finder",
+   "tr": "Kaynak bulucu",
+   "ku": "Dîtina çavkaniyan",
+   "ckb": "دۆزەرەوەی سەرچاوە",
+   "bs": "Tražilica izvora",
+   "fr": "Recherche de sources",
+   "es": "Buscador de fuentes"
+  },
+  "DĀR AL TAWḤĪD · Wissensfinder": {
+   "ar": "دار التوحيد · باحث المصادر",
+   "en": "DĀR AL TAWḤĪD · Source finder",
+   "tr": "DĀR AL TAWḤĪD · Kaynak bulucu",
+   "ku": "DĀR AL TAWḤĪD · Dîtina çavkaniyan",
+   "ckb": "دار التوحید · دۆزەرەوەی سەرچاوە",
+   "bs": "DĀR AL TAWḤĪD · Tražilica izvora",
+   "fr": "DĀR AL TAWḤĪD · Recherche de sources",
+   "es": "DĀR AL TAWḤĪD · Buscador de fuentes"
+  },
+  "Frage stellen oder suchen …": {
+   "ar": "اطرح سؤالاً أو ابحث …",
+   "en": "Ask a question or search …",
+   "tr": "Soru sor veya ara …",
+   "ku": "Pirs bike an bigere …",
+   "ckb": "پرسیار بکە یان بگەڕێ …",
+   "bs": "Postavi pitanje ili traži …",
+   "fr": "Poser une question ou chercher …",
+   "es": "Haz una pregunta o busca …"
+  },
+  "Beiträge, Gelehrte, Werk oder Begriff suchen …": {
+   "ar": "ابحث في المقالات والعلماء والكتب والمصطلحات …",
+   "en": "Search articles, scholars, books or terms …",
+   "tr": "Yazı, âlim, eser veya terim ara …",
+   "ku": "Li gotar, alim, berhem an terîman bigere …",
+   "ckb": "بگەڕێ لە وتار و زانا و کتێب و زاراوە …",
+   "bs": "Traži objave, učenjake, djela ili pojmove …",
+   "fr": "Chercher articles, savants, ouvrages ou termes …",
+   "es": "Busca artículos, sabios, obras o términos …"
+  },
+  "QURʾĀN HÖREN": {
+   "ar": "استمع إلى القرآن",
+   "en": "LISTEN TO THE QURʾĀN",
+   "tr": "KUR’AN DİNLE",
+   "ku": "QURʾĀN GUHDAR BIKE",
+   "ckb": "گوێ لە قورئان بگرە",
+   "bs": "SLUŠAJ KUR’AN",
+   "fr": "ÉCOUTER LE QURʾĀN",
+   "es": "ESCUCHAR EL CORÁN"
+  },
+  "Standort erlauben": {
+   "ar": "السماح بالموقع",
+   "en": "Allow location",
+   "tr": "Konuma izin ver",
+   "ku": "Destûrê bide cihî",
+   "ckb": "ڕێگە بە شوێن بدە",
+   "bs": "Dozvoli lokaciju",
+   "fr": "Autoriser la position",
+   "es": "Permitir la ubicación"
+  },
+  "Aktueller Standort": {
+   "ar": "الموقع الحالي",
+   "en": "Current location",
+   "tr": "Geçerli konum",
+   "ku": "Cihê niha",
+   "ckb": "شوێنی ئێستا",
+   "bs": "Trenutna lokacija",
+   "fr": "Position actuelle",
+   "es": "Ubicación actual"
+  },
+  "Gewählter Standort": {
+   "ar": "الموقع المختار",
+   "en": "Chosen location",
+   "tr": "Seçilen konum",
+   "ku": "Cihê hilbijartî",
+   "ckb": "شوێنی هەڵبژێردراو",
+   "bs": "Odabrana lokacija",
+   "fr": "Position choisie",
+   "es": "Ubicación elegida"
+  },
+  "Teilen": {
+   "ar": "مشاركة",
+   "en": "Share",
+   "tr": "Paylaş",
+   "ku": "Parve bike",
+   "ckb": "هاوبەش بکە",
+   "bs": "Podijeli",
+   "fr": "Partager",
+   "es": "Compartir"
+  },
+  "Impressum": {
+   "ar": "بيانات الناشر",
+   "en": "Legal notice",
+   "tr": "Künye",
+   "ku": "Agahiyên weşanê",
+   "ckb": "زانیاری بڵاوکەرەوە",
+   "bs": "Impresum",
+   "fr": "Mentions légales",
+   "es": "Aviso legal"
+  },
+  "Datenschutz": {
+   "ar": "الخصوصية",
+   "en": "Privacy",
+   "tr": "Gizlilik",
+   "ku": "Nepenî",
+   "ckb": "تایبەتمەندی",
+   "bs": "Privatnost",
+   "fr": "Confidentialité",
+   "es": "Privacidad"
+  },
+  "Keine Ergebnisse": {
+   "ar": "لا توجد نتائج",
+   "en": "No results",
+   "tr": "Sonuç yok",
+   "ku": "Encam tune",
+   "ckb": "ئەنجام نییە",
+   "bs": "Nema rezultata",
+   "fr": "Aucun résultat",
+   "es": "Sin resultados"
+  },
+  "Keine belegte Fundstelle in unserem indexierten Bestand.": {
+   "ar": "لا يوجد موضع موثق في فهرسنا.",
+   "en": "No documented passage in our indexed collection.",
+   "tr": "Dizinde belgeli bir yer yok.",
+   "ku": "Di navnîşa me de cihê belgekirî tune.",
+   "ckb": "لە پێڕستی ئێمە شوێنی بەڵگەدار نییە.",
+   "bs": "Nema dokumentovanog mjesta u našem indeksu.",
+   "fr": "Aucun passage documenté dans notre index.",
+   "es": "No hay un pasaje documentado en nuestro índice."
+  },
+  "Installieren": {
+   "ar": "تثبيت",
+   "en": "Install",
+   "tr": "Yükle",
+   "ku": "Saz bike",
+   "ckb": "دامەزراندن",
+   "bs": "Instaliraj",
+   "fr": "Installer",
+   "es": "Instalar"
+  },
+  "DĀR AL TAWḤĪD installieren": {
+   "ar": "تثبيت دار التوحيد",
+   "en": "Install DĀR AL TAWḤĪD",
+   "tr": "DĀR AL TAWḤĪD yükle",
+   "ku": "DĀR AL TAWḤĪD saz bike",
+   "ckb": "دار التوحید دابمەزرێنە",
+   "bs": "Instaliraj DĀR AL TAWḤĪD",
+   "fr": "Installer DĀR AL TAWḤĪD",
+   "es": "Instalar DĀR AL TAWḤĪD"
+  },
+  "Wie eine App auf dem Startbildschirm · ohne APK.": {
+   "ar": "مثل تطبيق على الشاشة الرئيسية · دون ملف APK.",
+   "en": "Like an app on the home screen · without an APK.",
+   "tr": "Ana ekranda bir uygulama gibi · APK olmadan.",
+   "ku": "Wek sepanekê li ser dîmenderê · bê APK.",
+   "ckb": "وەک ئەپێک لەسەر شاشەی سەرەکی · بەبێ APK.",
+   "bs": "Kao aplikacija na početnom ekranu · bez APK.",
+   "fr": "Comme une application sur l’écran d’accueil · sans APK.",
+   "es": "Como una app en la pantalla de inicio · sin APK."
+  },
+  "Installationshilfe": {
+   "ar": "مساعدة التثبيت",
+   "en": "Installation help",
+   "tr": "Kurulum yardımı",
+   "ku": "Alîkariya sazkirinê",
+   "ckb": "یارمەتی دامەزراندن",
+   "bs": "Pomoć za instalaciju",
+   "fr": "Aide à l’installation",
+   "es": "Ayuda de instalación"
+  },
+  "Originalwortlaut": {
+   "ar": "النص الأصلي",
+   "en": "Original wording",
+   "tr": "Özgün lafız",
+   "ku": "Gotina resen",
+   "ckb": "دەقی ڕەسەن",
+   "bs": "Izvorni tekst",
+   "fr": "Texte original",
+   "es": "Texto original"
+  },
+  "Einordnung der Aussage": {
+   "ar": "تصنيف القول",
+   "en": "How the statement is classified",
+   "tr": "Sözün değerlendirilmesi",
+   "ku": "Dabeşkirina gotinê",
+   "ckb": "هەڵسەنگاندنی وتە",
+   "bs": "Klasifikacija izjave",
+   "fr": "Classement de la proposition",
+   "es": "Clasificación de la declaración"
+  },
+  "Direkte Quellenstellen öffnen": {
+   "ar": "افتح مواضع المصادر",
+   "en": "Open the source passages",
+   "tr": "Kaynak yerlerini aç",
+   "ku": "Cihên çavkaniyê veke",
+   "ckb": "شوێنی سەرچاوەکان بکەرەوە",
+   "bs": "Otvori mjesta izvora",
+   "fr": "Ouvrir les passages sources",
+   "es": "Abrir los pasajes de la fuente"
+  },
+  "Kurzfazit": {
+   "ar": "خلاصة قصيرة",
+   "en": "Short conclusion",
+   "tr": "Kısa sonuç",
+   "ku": "Encama kurt",
+   "ckb": "کورتەی کۆتایی",
+   "bs": "Kratak zaključak",
+   "fr": "Brève conclusion",
+   "es": "Conclusión breve"
+  },
+  "Isnād und Fundstellen": {
+   "ar": "الإسناد ومواضع النص",
+   "en": "Isnād and passages",
+   "tr": "İsnad ve yerler",
+   "ku": "Îsnad û cih",
+   "ckb": "ئیسناد و شوێنەکان",
+   "bs": "Isnad i mjesta",
+   "fr": "Isnād et passages",
+   "es": "Isnād y pasajes"
+  },
+  "Isnād-Bereich": {
+   "ar": "قسم الإسناد",
+   "en": "Isnād section",
+   "tr": "İsnad bölümü",
+   "ku": "Beşa îsnadê",
+   "ckb": "بەشی ئیسناد",
+   "bs": "Odjeljak isnada",
+   "fr": "Section de l’isnād",
+   "es": "Sección del isnād"
+  },
+  "Hinweis": {
+   "ar": "تنبيه",
+   "en": "Note",
+   "tr": "Not",
+   "ku": "Nîşe",
+   "ckb": "تێبینی",
+   "bs": "Napomena",
+   "fr": "Note",
+   "es": "Nota"
+  },
+  "Sprecher": {
+   "ar": "القائل",
+   "en": "Speaker",
+   "tr": "Söyleyen",
+   "ku": "Gotûbêj",
+   "ckb": "گوێزەرەوە",
+   "bs": "Govornik",
+   "fr": "Locuteur",
+   "es": "Quien habla"
+  },
+  "Quellen": {
+   "ar": "المصادر",
+   "en": "Sources",
+   "tr": "Kaynaklar",
+   "ku": "Çavkanî",
+   "ckb": "سەرچاوەکان",
+   "bs": "Izvori",
+   "fr": "Sources",
+   "es": "Fuentes"
+  },
+  "Erklärungen aus Qurʾān, Sunnah und den überlieferten Aussagen der Salaf.": {
+   "ar": "شروح من القرآن والسنة وأقوال السلف المروية.",
+   "en": "Explanations from the Qurʾān, the Sunnah and the transmitted statements of the Salaf.",
+   "tr": "Kur’an, Sünnet ve Selef’in rivayetlerinden açıklamalar.",
+   "ku": "Şirove ji Qurʾān, Sunnah û gotinên Selef.",
+   "ckb": "ڕوونکردنەوە لە قورئان و سوننەت و وتەی سەلەف.",
+   "bs": "Objašnjenja iz Kur’ana, Sunneta i prenesених riječi selefa.",
+   "fr": "Explications du Qurʾān, de la Sunna et des propos transmis des Salaf.",
+   "es": "Explicaciones del Corán, la Sunnah y las palabras transmitidas de los Salaf."
+  },
+  "Dein täglicher Zugang zu Wissen und Quellen.": {
+   "ar": "مدخلك اليومي إلى العلم والمصادر.",
+   "en": "Your daily access to knowledge and sources.",
+   "tr": "İlim ve kaynaklara günlük girişin.",
+   "ku": "Gihandina te ya rojane bo zanîn û çavkaniyan.",
+   "ckb": "دەستگەیشتنی ڕۆژانەت بۆ زانست و سەرچاوە.",
+   "bs": "Tvoj dnevni pristup znanju i izvorima.",
+   "fr": "Votre accès quotidien au savoir et aux sources.",
+   "es": "Tu acceso diario al conocimiento y a las fuentes."
+  },
+  "Lesen, hören, Sūren suchen, Tafsīr und Tadabbur nutzen.": {
+   "ar": "اقرأ واستمع وابحث في السور واستفد من التفسير والتدبر.",
+   "en": "Read, listen, search sūrahs, and use tafsīr and tadabbur.",
+   "tr": "Oku, dinle, sûre ara, tefsir ve tedebbürden yararlan.",
+   "ku": "Bixwîne, guhdar bike, sûreyan bigere û tefsîr û tedebbur bi kar bîne.",
+   "ckb": "بخوێنەوە، گوێ بگرە، سورەت بگەڕێ و تەفسیر و تەدەببور بەکاربهێنە.",
+   "bs": "Čitaj, slušaj, traži sure i koristi tefsir i tedebbur.",
+   "fr": "Lire, écouter, chercher les sourates, utiliser tafsīr et tadabbur.",
+   "es": "Lee, escucha, busca suras y usa tafsīr y tadabbur."
+  },
+  "Originalbeitrag mit Nachweis und verwandten Aussagen.": {
+   "ar": "مقال أصلي مع دليل وأقوال مرتبطة.",
+   "en": "Original article with evidence and related statements.",
+   "tr": "Delil ve ilgili sözlerle özgün yazı.",
+   "ku": "Gotara resen bi delîl û gotinên têkildar.",
+   "ckb": "وتاری ڕەسەن لەگەڵ بەڵگە و وتەی پەیوەندیدار.",
+   "bs": "Izvorni tekst s dokazom i srodnim izjavama.",
+   "fr": "Article original avec preuve et propos liés.",
+   "es": "Artículo original con prueba y declaraciones relacionadas."
+  },
+  "Überlieferungen mit Sammlung, Nummer und Bewertung durchsuchen.": {
+   "ar": "ابحث في المرويات حسب المجموعة والرقم والحكم.",
+   "en": "Search reports by collection, number and grade.",
+   "tr": "Rivayetleri kitap, numara ve dereceye göre ara.",
+   "ku": "Rivayetan li gor berhevok, hejmar û dereceyê bigere.",
+   "ckb": "بگەڕێ لە گێڕانەوەکان بە کۆمەڵە و ژمارە و پلە.",
+   "bs": "Pretraži predaje po zbirci, broju i ocjeni.",
+   "fr": "Chercher les récits par recueil, numéro et degré.",
+   "es": "Busca relatos por colección, número y grado."
+  },
+  "Bittgebete mit Arabisch, Bedeutung und Quellenangabe.": {
+   "ar": "أدعية بالعربية والمعنى والمصدر.",
+   "en": "Supplications with Arabic, meaning and source.",
+   "tr": "Arapça, anlam ve kaynakla dualar.",
+   "ku": "Duayên bi erebî, wate û çavkanî.",
+   "ckb": "پاڕانەوە بە عەرەبی و واتە و سەرچاوە.",
+   "bs": "Dova s arapskim, značenjem i izvorom.",
+   "fr": "Invocations avec l’arabe, le sens et la source.",
+   "es": "Súplicas con árabe, significado y fuente."
+  },
+  "Fachbegriffe, Gelehrte und verknüpfte Wissensquellen.": {
+   "ar": "مصطلحات وعلماء ومصادر مرتبطة.",
+   "en": "Terms, scholars and linked sources.",
+   "tr": "Terimler, âlimler ve bağlı kaynaklar.",
+   "ku": "Term, alim û çavkaniyên girêdayî.",
+   "ckb": "زاراوە و زانا و سەرچاوەی پەیوەندیدار.",
+   "bs": "Pojmovi, učenjaci i povezani izvori.",
+   "fr": "Termes, savants et sources liées.",
+   "es": "Términos, sabios y fuentes vinculadas."
+  },
+  "Stelle eine Frage und öffne überprüfbare Fundstellen aus unserer Website.": {
+   "ar": "اطرح سؤالاً وافتح مواضع يمكن التحقق منها في موقعنا.",
+   "en": "Ask a question and open verifiable passages from our site.",
+   "tr": "Soru sor ve sitemizdeki doğrulanabilir yerleri aç.",
+   "ku": "Pirs bike û cihên kontrolbar ên malpera me veke.",
+   "ckb": "پرسیار بکە و شوێنە پشکنراوەکانی ماڵپەڕەکەمان بکەرەوە.",
+   "bs": "Postavi pitanje i otvori provjerljiva mjesta na našoj stranici.",
+   "fr": "Posez une question et ouvrez les passages vérifiables de notre site.",
+   "es": "Haz una pregunta y abre pasajes comprobables de nuestro sitio."
+  },
+  "Alle Werkzeuge, Sammlungen und Einstellungen an einem Ort.": {
+   "ar": "كل الأدوات والمجموعات والإعدادات في مكان واحد.",
+   "en": "All tools, collections and settings in one place.",
+   "tr": "Tüm araçlar, koleksiyonlar ve ayarlar bir arada.",
+   "ku": "Hemû amûr, berhevok û mîheng li cihekî.",
+   "ckb": "هەموو ئامراز و کۆمەڵە و ڕێکخستن لە یەک شوێن.",
+   "bs": "Svi alati, zbirke i postavke na jednom mjestu.",
+   "fr": "Tous les outils, collections et réglages au même endroit.",
+   "es": "Todas las herramientas, colecciones y ajustes en un lugar."
+  },
+  "Berechnet am freigegebenen Standort, mit nächstem Gebet und Countdown.": {
+   "ar": "يُحسب حسب الموقع المسموح به، مع الصلاة التالية والعد التنازلي.",
+   "en": "Calculated for the allowed location, with the next prayer and a countdown.",
+   "tr": "İzin verilen konuma göre, sonraki namaz ve geri sayımla hesaplanır.",
+   "ku": "Li gor cihê destûrdar, bi nimêja pêş û jimartina paşve tê hesibandin.",
+   "ckb": "بەپێی شوێنی ڕێپێدراو، لەگەڵ نوێژی داهاتوو و ژماردنەوە.",
+   "bs": "Računa se prema dozvoljenoj lokaciji, sa sljedećim namazom i odbrojavanjem.",
+   "fr": "Calculé pour le lieu autorisé, avec la prochaine prière et le compte à rebours.",
+   "es": "Calculado para la ubicación permitida, con la próxima oración y la cuenta atrás."
+  },
+  "Überprüfte Lernfragen und Erklärungen.": {
+   "ar": "أسئلة تعلم مراجعة وشروح.",
+   "en": "Reviewed learning questions and explanations.",
+   "tr": "Gözden geçirilmiş öğrenme soruları ve açıklamalar.",
+   "ku": "Pirsên fêrbûnê yên kontrolkirî û şirove.",
+   "ckb": "پرسیاری فێربوونی پشکنراو و ڕوونکردنەوە.",
+   "bs": "Provjerena pitanja i objašnjenja.",
+   "fr": "Questions d’apprentissage revues et explications.",
+   "es": "Preguntas de aprendizaje revisadas y explicaciones."
+  },
+  "Erkunde alle verfügbaren Inhalte und ihre belegten Quellen.": {
+   "ar": "استكشف كل المحتوى المتاح ومصادره الموثقة.",
+   "en": "Explore all available material and its documented sources.",
+   "tr": "Mevcut bütün içeriği ve belgeli kaynaklarını incele.",
+   "ku": "Hemû naveroka berdest û çavkaniyên wan ên belgekirî bibîne.",
+   "ckb": "هەموو ناوەڕۆکی بەردەست و سەرچاوە بەڵگەدارەکانی ببینە.",
+   "bs": "Istraži sav dostupan sadržaj i njegove dokumentovane izvore.",
+   "fr": "Explorez tout le contenu disponible et ses sources documentées.",
+   "es": "Explora todo el contenido disponible y sus fuentes documentadas."
+  },
+  "ʿUmrah, Schritt für Schritt.": {
+   "ar": "العمرة خطوة بخطوة.",
+   "en": "ʿUmrah, step by step.",
+   "tr": "Umre, adım adım.",
+   "ku": "ʿUmre, gav bi gav.",
+   "ckb": "عومرە، هەنگاو بە هەنگاو.",
+   "bs": "Umra, korak po korak.",
+   "fr": "ʿUmrah, étape par étape.",
+   "es": "ʿUmrah, paso a paso."
+  },
+  "Jetzt beginnen": {
+   "ar": "ابدأ الآن",
+   "en": "Start now",
+   "tr": "Şimdi başla",
+   "ku": "Niha dest pê bike",
+   "ckb": "ئێستا دەست پێبکە",
+   "bs": "Počni sada",
+   "fr": "Commencer maintenant",
+   "es": "Empezar ahora"
+  },
+  "Wichtig zu wissen": {
+   "ar": "مهم أن تعرف",
+   "en": "Important to know",
+   "tr": "Bilmen gereken",
+   "ku": "Girîng e bizanibî",
+   "ckb": "گرنگە بیزانیت",
+   "bs": "Važno je znati",
+   "fr": "Important à savoir",
+   "es": "Importante saber"
+  },
+  "Für wen?": {
+   "ar": "لمن؟",
+   "en": "For whom?",
+   "tr": "Kimin için?",
+   "ku": "Ji bo kê?",
+   "ckb": "بۆ کێ؟",
+   "bs": "Za koga?",
+   "fr": "Pour qui ?",
+   "es": "¿Para quién?"
+  },
+  "Seite zum Home-Bildschirm hinzufügen": {
+   "ar": "أضف الصفحة إلى الشاشة الرئيسية",
+   "en": "Add the page to the home screen",
+   "tr": "Sayfayı ana ekrana ekle",
+   "ku": "Rûpelê li ser dîmendera destpêkê zêde bike",
+   "ckb": "پەڕەکە بخەرە سەر شاشەی سەرەکی",
+   "bs": "Dodaj stranicu na početni ekran",
+   "fr": "Ajouter la page à l’écran d’accueil",
+   "es": "Añadir la página a la pantalla de inicio"
+  },
+  "Sprache": {
+   "ar": "اللغة",
+   "en": "Language",
+   "tr": "Dil",
+   "ku": "Ziman",
+   "ckb": "زمان",
+   "bs": "Jezik",
+   "fr": "Langue",
+   "es": "Idioma"
+  },
+  "Wähle eine Antwort aus.": {
+   "ar": "اختر إجابة.",
+   "en": "Choose an answer.",
+   "tr": "Bir cevap seç.",
+   "ku": "Bersivekê hilbijêre.",
+   "ckb": "وەڵامێک هەڵبژێرە.",
+   "bs": "Odaberi odgovor.",
+   "fr": "Choisis une réponse.",
+   "es": "Elige una respuesta."
+  },
+  "Antwort auswählen": {
+   "ar": "اختر الإجابة",
+   "en": "Choose the answer",
+   "tr": "Cevabı seç",
+   "ku": "Bersivê hilbijêre",
+   "ckb": "وەڵام هەڵبژێرە",
+   "bs": "Odaberi odgovor",
+   "fr": "Choisir la réponse",
+   "es": "Elegir la respuesta"
+  },
+  "Gut gearbeitet!": {
+   "ar": "أحسنت!",
+   "en": "Well done!",
+   "tr": "Aferin!",
+   "ku": "Karê te baş e!",
+   "ckb": "زۆر باشە!",
+   "bs": "Dobro urađeno!",
+   "fr": "Bien travaillé !",
+   "es": "¡Buen trabajo!"
+  },
+  "Fragen wiederholen": {
+   "ar": "أعد الأسئلة",
+   "en": "Repeat the questions",
+   "tr": "Soruları tekrarla",
+   "ku": "Pirsan dubare bike",
+   "ckb": "پرسیارەکان دووبارە بکەرەوە",
+   "bs": "Ponovi pitanja",
+   "fr": "Reprendre les questions",
+   "es": "Repetir las preguntas"
+  },
+  "LERNBEREICH ABGESCHLOSSEN": {
+   "ar": "اكتمل التعلم",
+   "en": "LESSON COMPLETE",
+   "tr": "DERS TAMAMLANDI",
+   "ku": "FÊRBÛN QEDIYA",
+   "ckb": "فێربوون تەواو بوو",
+   "bs": "UČENJE ZAVRŠENO",
+   "fr": "LEÇON TERMINÉE",
+   "es": "LECCIÓN TERMINADA"
+  },
+  "Vier Fragen · eine Frage pro Ansicht · keine Anmeldung": {
+   "ar": "أربعة أسئلة · سؤال في كل شاشة · دون تسجيل.",
+   "en": "Four questions · one per screen · no sign-in.",
+   "tr": "Dört soru · ekranda bir soru · kayıt yok.",
+   "ku": "Çar pirs · di her dîmenê de yek · bê tomarkirin.",
+   "ckb": "چوار پرسیار · یەک پرسیار لە هەر دیمەنێک · بەبێ خۆتۆمارکردن.",
+   "bs": "Četiri pitanja · jedno po ekranu · bez prijave.",
+   "fr": "Quatre questions · une par écran · sans inscription.",
+   "es": "Cuatro preguntas · una por pantalla · sin registro."
+  },
+  "Wissen und Adab": {
+   "ar": "العلم والأدب",
+   "en": "Knowledge and adab",
+   "tr": "İlim ve edep",
+   "ku": "Zanîn û edab",
+   "ckb": "زانست و ئەدەب",
+   "bs": "Znanje i adab",
+   "fr": "Savoir et adab",
+   "es": "Conocimiento y adab"
+  },
+  "Zurück": {
+   "ar": "رجوع",
+   "en": "Back",
+   "tr": "Geri",
+   "ku": "Vegere",
+   "ckb": "گەڕانەوە",
+   "bs": "Nazad",
+   "fr": "Retour",
+   "es": "Atrás"
+  },
+  "Weiter": {
+   "ar": "التالي",
+   "en": "Next",
+   "tr": "İleri",
+   "ku": "Pêşve",
+   "ckb": "دواتر",
+   "bs": "Dalje",
+   "fr": "Suivant",
+   "es": "Siguiente"
+  },
+  "Schließen": {
+   "ar": "إغلاق",
+   "en": "Close",
+   "tr": "Kapat",
+   "ku": "Bigire",
+   "ckb": "داخستن",
+   "bs": "Zatvori",
+   "fr": "Fermer",
+   "es": "Cerrar"
+  },
+  "Suche": {
+   "ar": "بحث",
+   "en": "Search",
+   "tr": "Ara",
+   "ku": "Lêgerîn",
+   "ckb": "گەڕان",
+   "bs": "Pretraga",
+   "fr": "Recherche",
+   "es": "Búsqueda"
+  },
+  "Demnächst verfügbar": {
+   "ar": "قريباً",
+   "en": "Coming soon",
+   "tr": "Yakında",
+   "ku": "Di nêz de",
+   "ckb": "بەم زووانە",
+   "bs": "Uskoro",
+   "fr": "Bientôt disponible",
+   "es": "Próximamente"
+  },
+  "Gebetszeiten": {
+   "ar": "أوقات الصلاة",
+   "en": "Prayer times",
+   "tr": "Namaz vakitleri",
+   "ku": "Demên nimêjê",
+   "ckb": "کاتەکانی نوێژ",
+   "bs": "Vaktovi namaza",
+   "fr": "Horaires de prière",
+   "es": "Horarios de oración"
+  },
+  "Einstellungen": {
+   "ar": "الإعدادات",
+   "en": "Settings",
+   "tr": "Ayarlar",
+   "ku": "Mîheng",
+   "ckb": "ڕێکخستنەکان",
+   "bs": "Postavke",
+   "fr": "Réglages",
+   "es": "Ajustes"
+  },
+  "Startseite": {
+   "ar": "الصفحة الرئيسية",
+   "en": "Home",
+   "tr": "Ana sayfa",
+   "ku": "Rûpela destpêkê",
+   "ckb": "پەڕەی سەرەکی",
+   "bs": "Početna",
+   "fr": "Accueil",
+   "es": "Inicio"
+  },
+  "Beiträge": {
+   "ar": "المقالات",
+   "en": "Posts",
+   "tr": "Yazılar",
+   "ku": "Gotar",
+   "ckb": "وتارەکان",
+   "bs": "Objave",
+   "fr": "Articles",
+   "es": "Artículos"
+  },
+  "Mehr": {
+   "ar": "المزيد",
+   "en": "More",
+   "tr": "Daha fazla",
+   "ku": "Zêdetir",
+   "ckb": "زیاتر",
+   "bs": "Više",
+   "fr": "Plus",
+   "es": "Más"
+  },
+  "WISSENSZENTRUM": {
+   "ar": "مركز العلم",
+   "en": "KNOWLEDGE CENTRE",
+   "tr": "İLİM MERKEZİ",
+   "ku": "NAVENDA ZANÎNÊ",
+   "ckb": "ناوەندی زانست",
+   "bs": "CENTAR ZNANJA",
+   "fr": "CENTRE DU SAVOIR",
+   "es": "CENTRO DE CONOCIMIENTO"
+  },
+  "Wissenszentrum": {
+   "ar": "مركز العلم",
+   "en": "Knowledge centre",
+   "tr": "İlim merkezi",
+   "ku": "Navenda zanînê",
+   "ckb": "ناوەندی زانست",
+   "bs": "Centar znanja",
+   "fr": "Centre du savoir",
+   "es": "Centro de conocimiento"
+  },
+  "VERNETZTES WISSENSZENTRUM": {
+   "ar": "مركز علم مترابط",
+   "en": "LINKED KNOWLEDGE CENTRE",
+   "tr": "BAĞLI İLİM MERKEZİ",
+   "ku": "NAVENDA ZANÎNÊ YA GIRÊDAYÎ",
+   "ckb": "ناوەندی زانستی پەیوەندیدار",
+   "bs": "POVEZANI CENTAR ZNANJA",
+   "fr": "CENTRE DU SAVOIR RELIÉ",
+   "es": "CENTRO DE CONOCIMIENTO CONECTADO"
+  },
+  "UNSER ÜBERLIEFERUNGSMASSSTAB": {
+   "ar": "ميزان روايتنا",
+   "en": "OUR TRANSMISSION STANDARD",
+   "tr": "RİVAYET ÖLÇÜMÜZ",
+   "ku": "PÎVANA RIVAYETA ME",
+   "ckb": "پێوەری گێڕانەوەمان",
+   "bs": "NAŠ MJERILO PREDAJE",
+   "fr": "NOTRE REPÈRE DE TRANSMISSION",
+   "es": "NUESTRA MEDIDA DE TRANSMISIÓN"
+  },
+  "114 Sūren · freie Auswahl": {
+   "ar": "114 سورة · اختيار حر",
+   "en": "114 sūrahs · free choice",
+   "tr": "114 sûre · serbest seçim",
+   "ku": "114 sûre · hilbijartina azad",
+   "ckb": "١١٤ سورەت · هەڵبژاردنی ئازاد",
+   "bs": "114 sura · slobodan izbor",
+   "fr": "114 sourates · choix libre",
+   "es": "114 suras · elección libre"
+  },
+  "Qurʾān hören": {
+   "ar": "استمع إلى القرآن",
+   "en": "Listen to the Qurʾān",
+   "tr": "Kur’an dinle",
+   "ku": "Guhdarî Qurʾān bike",
+   "ckb": "گوێ لە قورئان بگرە",
+   "bs": "Slušaj Kur’an",
+   "fr": "Écouter le Qurʾān",
+   "es": "Escuchar el Corán"
+  },
+  "Allah allein in der Anbetung verehren": {
+   "ar": "عبادة الله وحده",
+   "en": "Worship Allah alone",
+   "tr": "Yalnız Allah’a ibadet etmek",
+   "ku": "Tenê Allah bi perestin",
+   "ckb": "تەنها خوا بپەرسترێت",
+   "bs": "Ibadet samo Allahu",
+   "fr": "Adorer Allah seul",
+   "es": "Adorar solo a Allah"
+  },
+  "Glaube, Wort und Tat": {
+   "ar": "الإيمان والقول والعمل",
+   "en": "Faith, word and deed",
+   "tr": "İman, söz ve amel",
+   "ku": "Bawerî, gotin û kirin",
+   "ckb": "باوەڕ و قسە و کردار",
+   "bs": "Vjerovanje, riječ i djelo",
+   "fr": "Foi, parole et acte",
+   "es": "Fe, palabra y obra"
+  },
+  "Beigesellung in der Anbetung": {
+   "ar": "الإشراك في العبادة",
+   "en": "Associating partners in worship",
+   "tr": "İbadette ortak koşmak",
+   "ku": "Hevparî di perestina de",
+   "ckb": "هاوبەشکردن لە پەرستندا",
+   "bs": "Pridruživanje u ibadetu",
+   "fr": "Association dans l’adoration",
+   "es": "Asociación en la adoración"
+  },
+  "Frag uns zu Qurʾān, Sunnah und Āṯār": {
+   "ar": "اسألنا عن القرآن والسنة والآثار",
+   "en": "Ask us about the Qurʾān, the Sunnah and the āthār",
+   "tr": "Kur’an, Sünnet ve eserler hakkında sor",
+   "ku": "Ji me li ser Qurʾān, Sunnah û āṯār bipirse",
+   "ckb": "لەبارەی قورئان و سوننەت و ئاسەوار بپرسە",
+   "bs": "Pitaj nas o Kur’anu, Sunnetu i asarima",
+   "fr": "Interroge-nous sur le Qurʾān, la Sunna et les āthār",
+   "es": "Pregúntanos sobre el Corán, la Sunnah y los āthār"
+  },
+  "Heute bei DĀR AL TAWḤĪD": {
+   "ar": "اليوم في دار التوحيد",
+   "en": "Today at DĀR AL TAWḤĪD",
+   "tr": "Bugün DĀR AL TAWḤĪD’de",
+   "ku": "Îro li DĀR AL TAWḤĪD",
+   "ckb": "ئەمڕۆ لە دار التوحید",
+   "bs": "Danas u DĀR AL TAWḤĪD",
+   "fr": "Aujourd’hui à DĀR AL TAWḤĪD",
+   "es": "Hoy en DĀR AL TAWḤĪD"
+  },
+  "Lesen ↗": {
+   "ar": "اقرأ ↗",
+   "en": "Read ↗",
+   "tr": "Oku ↗",
+   "ku": "Bixwîne ↗",
+   "ckb": "بخوێنەوە ↗",
+   "bs": "Čitaj ↗",
+   "fr": "Lire ↗",
+   "es": "Leer ↗"
+  },
+  "Werk öffnen ↗": {
+   "ar": "افتح الكتاب ↗",
+   "en": "Open the work ↗",
+   "tr": "Eseri aç ↗",
+   "ku": "Berhemê veke ↗",
+   "ckb": "کتێبەکە بکەرەوە ↗",
+   "bs": "Otvori djelo ↗",
+   "fr": "Ouvrir l’ouvrage ↗",
+   "es": "Abrir la obra ↗"
+  },
+  "QURʾĀN · VERS ZUM NACHDENKEN": {
+   "ar": "القرآن · آية للتدبر",
+   "en": "QURʾĀN · A VERSE TO REFLECT ON",
+   "tr": "KUR’AN · TEDEBBÜR AYETİ",
+   "ku": "QURʾĀN · AYETEK JI BO HIFIRÎNÊ",
+   "ckb": "قورئان · ئایەتێک بۆ تێڕامان",
+   "bs": "KUR’AN · AJET ZA RAZMIŠLJANJE",
+   "fr": "QURʾĀN · UN VERSET À MÉDITER",
+   "es": "CORÁN · UN VERSÍCULO PARA MEDITAR"
+  },
+  "Alle Bereiche entdecken": {
+   "ar": "استكشف كل الأقسام",
+   "en": "Explore all sections",
+   "tr": "Tüm bölümleri keşfet",
+   "ku": "Hemû beşan bibîne",
+   "ckb": "هەموو بەشەکان ببینە",
+   "bs": "Istraži sve oblasti",
+   "fr": "Explorer toutes les sections",
+   "es": "Explorar todas las secciones"
+  },
+  "Ein zusammenhängender Zugang zu Inhalten und Belegen.": {
+   "ar": "مدخل مترابط إلى المحتوى والأدلة.",
+   "en": "One connected way into the material and its evidence.",
+   "tr": "İçerik ve delillere bağlı bir giriş.",
+   "ku": "Deriyek girêdayî bo naverok û delîlan.",
+   "ckb": "دەروازەیەکی پەیوەندیدار بۆ ناوەڕۆک و بەڵگە.",
+   "bs": "Povezan pristup sadržaju i dokazima.",
+   "fr": "Un accès relié aux contenus et aux preuves.",
+   "es": "Un acceso conectado al contenido y a las pruebas."
+  },
+  "Stadt oder PLZ auswählen": {
+   "ar": "اختر المدينة أو الرمز",
+   "en": "Choose city or postal code",
+   "tr": "Şehir veya posta kodu seç",
+   "ku": "Bajar an koda postê hilbijêre",
+   "ckb": "شار یان کۆدی پۆست هەڵبژێرە",
+   "bs": "Odaberi grad ili poštanski broj",
+   "fr": "Choisir la ville ou le code postal",
+   "es": "Elegir ciudad o código postal"
+  },
+  "Stadt oder PLZ eingeben": {
+   "ar": "أدخل المدينة أو الرمز",
+   "en": "Enter city or postal code",
+   "tr": "Şehir veya posta kodu gir",
+   "ku": "Bajar an koda postê binivîse",
+   "ckb": "شار یان کۆدی پۆست بنووسە",
+   "bs": "Unesi grad ili poštanski broj",
+   "fr": "Saisir la ville ou le code postal",
+   "es": "Introducir ciudad o código postal"
+  },
+  "Überlieferungen und ihre Fundstellen": {
+   "ar": "المرويات ومواضعها",
+   "en": "Reports and their passages",
+   "tr": "Rivayetler ve yerleri",
+   "ku": "Rivayet û cihên wan",
+   "ckb": "گێڕانەوەکان و شوێنەکانیان",
+   "bs": "Predaje i njihova mjesta",
+   "fr": "Récits et leurs passages",
+   "es": "Relatos y sus pasajes"
+  },
+  "Lesen, hören und verstehen": {
+   "ar": "اقرأ واستمع وافهم",
+   "en": "Read, listen and understand",
+   "tr": "Oku, dinle ve anla",
+   "ku": "Bixwîne, guhdar bike û fêm bike",
+   "ckb": "بخوێنەوە و گوێ بگرە و تێبگە",
+   "bs": "Čitaj, slušaj i razumij",
+   "fr": "Lire, écouter et comprendre",
+   "es": "Leer, escuchar y comprender"
+  },
+  "Aussagen mit Originalquellen": {
+   "ar": "أقوال مع المصادر الأصلية",
+   "en": "Statements with original sources",
+   "tr": "Özgün kaynaklı sözler",
+   "ku": "Gotin bi çavkaniyên resen",
+   "ckb": "وتە لەگەڵ سەرچاوەی ڕەسەن",
+   "bs": "Izjave s izvornim izvorima",
+   "fr": "Propositions avec sources originales",
+   "es": "Declaraciones con fuentes originales"
+  },
+  "Werke und Veröffentlichungen": {
+   "ar": "الكتب والمنشورات",
+   "en": "Works and publications",
+   "tr": "Eserler ve yayınlar",
+   "ku": "Berhem û weşan",
+   "ckb": "کتێب و بڵاوکراوەکان",
+   "bs": "Djela i izdanja",
+   "fr": "Ouvrages et publications",
+   "es": "Obras y publicaciones"
+  },
+  "Neueste Veröffentlichung": {
+   "ar": "أحدث منشور",
+   "en": "Latest publication",
+   "tr": "Son yayın",
+   "ku": "Weşana dawî",
+   "ckb": "دوایین بڵاوکراوە",
+   "bs": "Najnovije izdanje",
+   "fr": "Dernière publication",
+   "es": "Última publicación"
+  },
+  "Werke und Direktnachweise": {
+   "ar": "الكتب والأدلة المباشرة",
+   "en": "Works and direct evidence",
+   "tr": "Eserler ve doğrudan deliller",
+   "ku": "Berhem û delîlên rasterast",
+   "ckb": "کتێب و بەڵگەی ڕاستەوخۆ",
+   "bs": "Djela i izravni dokazi",
+   "fr": "Ouvrages et preuves directes",
+   "es": "Obras y pruebas directas"
+  },
+  "Werke und Direktnachweise.": {
+   "ar": "الكتب والأدلة المباشرة.",
+   "en": "Works and direct evidence.",
+   "tr": "Eserler ve doğrudan deliller.",
+   "ku": "Berhem û delîlên rasterast.",
+   "ckb": "کتێب و بەڵگەی ڕاستەوخۆ.",
+   "bs": "Djela i izravni dokazi.",
+   "fr": "Ouvrages et preuves directes.",
+   "es": "Obras y pruebas directas."
+  },
+  "Quellen nach Werk, Gelehrtem und Thema geordnet.": {
+   "ar": "مصادر مرتبة حسب الكتاب والعالم والموضوع.",
+   "en": "Sources arranged by work, scholar and topic.",
+   "tr": "Eser, âlim ve konuya göre sıralanmış kaynaklar.",
+   "ku": "Çavkanî li gor berhem, alim û mijarê.",
+   "ckb": "سەرچاوە بەپێی کتێب و زانا و بابەت.",
+   "bs": "Izvori poredani po djelu, učenjaku i temi.",
+   "fr": "Sources classées par ouvrage, savant et thème.",
+   "es": "Fuentes ordenadas por obra, sabio y tema."
+  },
+  "Gelehrte, Werke und Themen aus der Bibliothek": {
+   "ar": "علماء وكتب وموضوعات من المكتبة",
+   "en": "Scholars, works and topics from the library",
+   "tr": "Kütüphaneden âlimler, eserler ve konular",
+   "ku": "Alim, berhem û mijarên ji pirtûkxaneyê",
+   "ckb": "زانا و کتێب و بابەت لە کتێبخانە",
+   "bs": "Učenjaci, djela i teme iz biblioteke",
+   "fr": "Savants, ouvrages et thèmes de la bibliothèque",
+   "es": "Sabios, obras y temas de la biblioteca"
+  },
+  "Verifizierte Werke und ihre Verwendung": {
+   "ar": "كتب محققة واستخدامها",
+   "en": "Verified works and how they are used",
+   "tr": "Doğrulanmış eserler ve kullanımları",
+   "ku": "Berhemên piştrast û bikaranîna wan",
+   "ckb": "کتێبی پشتڕاست و بەکارهێنانیان",
+   "bs": "Provjerena djela i njihova upotreba",
+   "fr": "Ouvrages vérifiés et leur usage",
+   "es": "Obras verificadas y su uso"
+  },
+  "Erklärung & Belege ↗": {
+   "ar": "الشرح والأدلة ↗",
+   "en": "Explanation and evidence ↗",
+   "tr": "Açıklama ve deliller ↗",
+   "ku": "Şirove û delîl ↗",
+   "ckb": "ڕوونکردنەوە و بەڵگە ↗",
+   "bs": "Objašnjenje i dokazi ↗",
+   "fr": "Explication et preuves ↗",
+   "es": "Explicación y pruebas ↗"
+  },
+  "bei": {
+   "ar": "عند",
+   "en": "in",
+   "tr": "kaynağında",
+   "ku": "li",
+   "ckb": "لە",
+   "bs": "kod",
+   "fr": "chez",
+   "es": "en"
+  },
+  "Ein zusammenhängender Ort für Wissen und Quellen.": {
+   "ar": "مكان مترابط للعلم والمصادر.",
+   "en": "One connected place for knowledge and sources.",
+   "tr": "İlim ve kaynaklar için bağlı bir yer.",
+   "ku": "Cihê girêdayî yê zanîn û çavkaniyan.",
+   "ckb": "شوێنێکی پەیوەندیدار بۆ زانست و سەرچاوە.",
+   "bs": "Povezano mjesto za znanje i izvore.",
+   "fr": "Un lieu relié pour le savoir et les sources.",
+   "es": "Un lugar conectado para el conocimiento y las fuentes."
+  },
+  "Wissenschat und Quellenfinder öffnen": {
+   "ar": "افتح البحث والمصادر",
+   "en": "Open the search and source finder",
+   "tr": "Aramayı ve kaynak bulucuyu aç",
+   "ku": "Lêgerîn û dîtina çavkaniyan veke",
+   "ckb": "گەڕان و دۆزەرەوەی سەرچاوە بکەرەوە",
+   "bs": "Otvori pretragu i tražilicu izvora",
+   "fr": "Ouvrir la recherche et les sources",
+   "es": "Abrir la búsqueda y las fuentes"
+  },
+  "☾ GEBETSZEITEN": {
+   "ar": "☾ أوقات الصلاة",
+   "en": "☾ PRAYER TIMES",
+   "tr": "☾ NAMAZ VAKİTLERİ",
+   "ku": "☾ DEMÊN NIMÊJÊ",
+   "ckb": "☾ کاتەکانی نوێژ",
+   "bs": "☾ VAKTOVI NAMAZA",
+   "fr": "☾ HORAIRES DE PRIÈRE",
+   "es": "☾ HORARIOS DE ORACIÓN"
+  },
+  "bis zum nächsten Gebet": {
+   "ar": "حتى الصلاة التالية",
+   "en": "until the next prayer",
+   "tr": "sonraki namaza kadar",
+   "ku": "heta nimêja pêş",
+   "ckb": "تا نوێژی داهاتوو",
+   "bs": "do sljedećeg namaza",
+   "fr": "jusqu’à la prochaine prière",
+   "es": "hasta la próxima oración"
+  },
+  "Stadt oder Postleitzahl suchen": {
+   "ar": "ابحث عن مدينة أو رمز بريدي",
+   "en": "Search for a city or postal code",
+   "tr": "Şehir veya posta kodu ara",
+   "ku": "Li bajar an koda postê bigere",
+   "ckb": "بگەڕێ بۆ شار یان کۆدی پۆست",
+   "bs": "Traži grad ili poštanski broj",
+   "fr": "Chercher une ville ou un code postal",
+   "es": "Buscar una ciudad o un código postal"
+  },
+  "Stadtname oder PLZ": {
+   "ar": "اسم المدينة أو الرمز",
+   "en": "City or postal code",
+   "tr": "Şehir adı veya posta kodu",
+   "ku": "Navê bajar an koda postê",
+   "ckb": "ناوی شار یان کۆدی پۆست",
+   "bs": "Naziv grada ili poštanski broj",
+   "fr": "Nom de ville ou code postal",
+   "es": "Nombre de la ciudad o código postal"
+  },
+  "Ortsvorschläge": {
+   "ar": "اقتراحات الأماكن",
+   "en": "Place suggestions",
+   "tr": "Yer önerileri",
+   "ku": "Pêşniyarên cih",
+   "ckb": "پێشنیاری شوێن",
+   "bs": "Prijedlozi mjesta",
+   "fr": "Suggestions de lieu",
+   "es": "Sugerencias de lugar"
+  },
+  "· bei": {
+   "ar": "· عند",
+   "en": "· in",
+   "tr": "· kaynağında",
+   "ku": "· li",
+   "ckb": "· لە",
+   "bs": "· kod",
+   "fr": "· chez",
+   "es": "· en"
+  },
+  "Qurʾān-Player und Auswahl öffnen": {
+   "ar": "افتح قارئ القرآن والاختيار",
+   "en": "Open the Qurʾān player and the selection",
+   "tr": "Kur’an oynatıcıyı ve seçimi aç",
+   "ku": "Lêdera Qurʾān û hilbijartinê veke",
+   "ckb": "لێدەری قورئان و هەڵبژاردن بکەرەوە",
+   "bs": "Otvori Kur’an plejer i izbor",
+   "fr": "Ouvrir le lecteur du Qurʾān et le choix",
+   "es": "Abrir el reproductor del Corán y la selección"
+  },
+  "Qurʾān-Auswahl": {
+   "ar": "اختيار القرآن",
+   "en": "Qurʾān selection",
+   "tr": "Kur’an seçimi",
+   "ku": "Hilbijartina Qurʾān",
+   "ckb": "هەڵبژاردنی قورئان",
+   "bs": "Izbor Kur’ana",
+   "fr": "Choix du Qurʾān",
+   "es": "Selección del Corán"
+  },
+  "↻ Vers wiederholen: Aus": {
+   "ar": "↻ تكرار الآية: إيقاف",
+   "en": "↻ Repeat the verse: off",
+   "tr": "↻ Ayeti tekrarla: kapalı",
+   "ku": "↻ Ayetê dubare bike: girtî",
+   "ckb": "↻ ئایەت دووبارە بکەرەوە: کوژاوە",
+   "bs": "↻ Ponovi ajet: isključeno",
+   "fr": "↻ Répéter le verset : arrêt",
+   "es": "↻ Repetir el versículo: apagado"
+  },
+  "INTERAKTIVER WISSENSCHAT · QUELLENFINDER": {
+   "ar": "بحث تفاعلي · مصادر",
+   "en": "INTERACTIVE SEARCH · SOURCE FINDER",
+   "tr": "ETKİLEŞİMLİ ARAMA · KAYNAK BULUCU",
+   "ku": "LÊGERÎNA HEVkariyê · ÇAVKANÎ",
+   "ckb": "گەڕانی کارلێک · دۆزەرەوەی سەرچاوە",
+   "bs": "INTERAKTIVNA PRETRAGA · IZVORI",
+   "fr": "RECHERCHE INTERACTIVE · SOURCES",
+   "es": "BÚSQUEDA INTERACTIVA · FUENTES"
+  },
+  "Schreibe deine Frage. Wir suchen vorhandene Inhalte und überprüfbare Originalfundstellen auf unserer Website.": {
+   "ar": "اكتب سؤالك. نبحث في المحتوى الموجود والمواضع الأصلية التي يمكن التحقق منها في موقعنا.",
+   "en": "Write your question. We search existing material and verifiable passages on our site.",
+   "tr": "Sorunu yaz. Sitemizdeki mevcut içeriği ve doğrulanabilir yerleri ararız.",
+   "ku": "Pirsa xwe binivîse. Em li naveroka heyî û cihên kontrolbar ên malpera xwe digerin.",
+   "ckb": "پرسیارەکەت بنووسە. لە ناوەڕۆکی هەبوو و شوێنە پشکنراوەکانی ماڵپەڕەکەمان دەگەڕێین.",
+   "bs": "Napiši pitanje. Tražimo postojeći sadržaj i provjerljiva mjesta na našoj stranici.",
+   "fr": "Écris ta question. Nous cherchons le contenu existant et les passages vérifiables de notre site.",
+   "es": "Escribe tu pregunta. Buscamos el contenido existente y los pasajes comprobables de nuestro sitio."
+  },
+  "Hier Frage schreiben …": {
+   "ar": "اكتب السؤال هنا …",
+   "en": "Write the question here …",
+   "tr": "Soruyu buraya yaz …",
+   "ku": "Pirsa xwe li vir binivîse …",
+   "ckb": "پرسیارەکە لێرە بنووسە …",
+   "bs": "Ovdje napiši pitanje …",
+   "fr": "Écrire la question ici …",
+   "es": "Escribe la pregunta aquí …"
+  },
+  "Quellen finden ↗": {
+   "ar": "اعثر على المصادر ↗",
+   "en": "Find sources ↗",
+   "tr": "Kaynakları bul ↗",
+   "ku": "Çavkaniyan bibîne ↗",
+   "ckb": "سەرچاوەکان بدۆزەرەوە ↗",
+   "bs": "Pronađi izvore ↗",
+   "fr": "Trouver les sources ↗",
+   "es": "Encontrar fuentes ↗"
+  },
+  "TÄGLICH NEU AUS DEM BESTAND": {
+   "ar": "جديد كل يوم من المحتوى",
+   "en": "NEW EACH DAY FROM THE COLLECTION",
+   "tr": "HER GÜN MEVCUT İÇERİKTEN",
+   "ku": "HER ROJ JI NAVEROKA HEYÎ",
+   "ckb": "هەموو ڕۆژێک لە ناوەڕۆکی هەبوو",
+   "bs": "SVAKI DAN IZ POSTOJEĆEG FONDA",
+   "fr": "CHAQUE JOUR DEPUIS LE FONDS",
+   "es": "CADA DÍA DESDE EL FONDO"
+  },
+  "Beitrag und Duʿāʾ des Tages aus der bestehenden Rotation.": {
+   "ar": "مقال اليوم والدعاء من التدوير القائم.",
+   "en": "The article and the duʿāʾ of the day from the existing rotation.",
+   "tr": "Günün yazısı ve duası mevcut döngüden.",
+   "ku": "Gotar û duʿāʾ ya rojê ji zivirîna heyî.",
+   "ckb": "وتاری ڕۆژ و پاڕانەوە لە سوڕی هەبوو.",
+   "bs": "Objava i dova dana iz postojeće rotacije.",
+   "fr": "L’article et la duʿāʾ du jour, selon la rotation en place.",
+   "es": "El artículo y la duʿāʾ del día, de la rotación existente."
+  },
+  "Qurʾānvers mit Quellennachweis": {
+   "ar": "آية مع مصدرها",
+   "en": "A Qurʾān verse with its source",
+   "tr": "Kaynaklı Kur’an ayeti",
+   "ku": "Ayeta Qurʾān bi çavkaniya xwe",
+   "ckb": "ئایەتی قورئان لەگەڵ سەرچاوە",
+   "bs": "Ajet Kur’ana s izvorom",
+   "fr": "Verset du Qurʾān avec sa source",
+   "es": "Versículo del Corán con su fuente"
+  },
+  "Die Grundlage der Botschaft": {
+   "ar": "أصل الرسالة",
+   "en": "The foundation of the message",
+   "tr": "Mesajın temeli",
+   "ku": "Bingeha peyamê",
+   "ckb": "بنەڕەتی پەیام",
+   "bs": "Temelj poruke",
+   "fr": "Le fondement du message",
+   "es": "El fundamento del mensaje"
+  },
+  "Sūrah an-Naḥl · 16:36 im Qurʾān öffnen ↗": {
+   "ar": "افتح سورة النحل 16:36 ↗",
+   "en": "Open Sūrah an-Naḥl 16:36 ↗",
+   "tr": "Nahl suresi 16:36’yı aç ↗",
+   "ku": "Sûreyê en-Naḥl 16:36 veke ↗",
+   "ckb": "سورەتی نەحل ١٦:٣٦ بکەرەوە ↗",
+   "bs": "Otvori suru an-Nahl 16:36 ↗",
+   "fr": "Ouvrir la sourate an-Naḥl 16:36 ↗",
+   "es": "Abrir la sura an-Naḥl 16:36 ↗"
+  },
+  "Ausgewählte aktuelle Beiträge": {
+   "ar": "مقالات حالية مختارة",
+   "en": "Selected recent articles",
+   "tr": "Seçilmiş güncel yazılar",
+   "ku": "Gotarên nû yên hilbijartî",
+   "ckb": "وتارە هەڵبژێردراوە نوێیەکان",
+   "bs": "Odabrane aktuelne objave",
+   "fr": "Articles récents choisis",
+   "es": "Artículos recientes seleccionados"
+  },
+  "BEITRÄGE · QUELLENBASIERT": {
+   "ar": "مقالات · بالمصادر",
+   "en": "ARTICLES · WITH SOURCES",
+   "tr": "YAZILAR · KAYNAKLI",
+   "ku": "GOTAR · BI ÇAVKANIYAN",
+   "ckb": "وتار · بە سەرچاوە",
+   "bs": "OBJAVE · S IZVORIMA",
+   "fr": "ARTICLES · AVEC SOURCES",
+   "es": "ARTÍCULOS · CON FUENTES"
+  },
+  "Aus dem Beitragsbestand": {
+   "ar": "من مجموعة المقالات",
+   "en": "From the article collection",
+   "tr": "Yazı arşivinden",
+   "ku": "Ji arşîva gotaran",
+   "ckb": "لە کۆمەڵەی وتارەکان",
+   "bs": "Iz zbirke objava",
+   "fr": "Depuis le fonds d’articles",
+   "es": "Del fondo de artículos"
+  },
+  "Öffne Aussagen direkt mit ihren vorhandenen Quellen.": {
+   "ar": "افتح الأقوال مباشرة مع مصادرها الموجودة.",
+   "en": "Open statements directly with their existing sources.",
+   "tr": "Sözleri mevcut kaynaklarıyla doğrudan aç.",
+   "ku": "Gotinan rasterast bi çavkaniyên wan ên heyî veke.",
+   "ckb": "وتەکان ڕاستەوخۆ لەگەڵ سەرچاوە هەبووەکانیان بکەرەوە.",
+   "bs": "Otvori izjave izravno s njihovim izvorima.",
+   "fr": "Ouvre les propositions directement avec leurs sources.",
+   "es": "Abre las declaraciones directamente con sus fuentes."
+  },
+  "Dieses Wissen ist Dīn": {
+   "ar": "هذا العلم دين",
+   "en": "This knowledge is dīn",
+   "tr": "Bu ilim dîndir",
+   "ku": "Ev zanîn dîn e",
+   "ckb": "ئەم زانستە دینە",
+   "bs": "Ovo znanje je din",
+   "fr": "Ce savoir est dīn",
+   "es": "Este conocimiento es dīn"
+  },
+  "Der Qurʾān ist Allahs Wort": {
+   "ar": "القرآن كلام الله",
+   "en": "The Qurʾān is the speech of Allah",
+   "tr": "Kur’an Allah’ın kelamıdır",
+   "ku": "Qurʾān gotina Allah e",
+   "ckb": "قورئان وتەی خوایە",
+   "bs": "Kur’an je Allahov govor",
+   "fr": "Le Qurʾān est la parole d’Allah",
+   "es": "El Corán es la palabra de Allah"
+  },
+  "Die Besten sind die mit bestem Charakter": {
+   "ar": "خير الناس أحسنهم خلقاً",
+   "en": "The best people are those with the best character",
+   "tr": "İnsanların en hayırlısı ahlakı en güzel olandır",
+   "ku": "Baştirîn mirov ew in ku xulqê wan baştir e",
+   "ckb": "باشترین کەس ئەوانەن کە ڕەوشتیان باشترە",
+   "bs": "Najbolji ljudi su oni najljepšeg ahlaka",
+   "fr": "Les meilleurs sont ceux qui ont le meilleur caractère",
+   "es": "Los mejores son quienes tienen el mejor carácter"
+  },
+  "Strebe nach dem, was dir nützt": {
+   "ar": "احرص على ما ينفعك",
+   "en": "Seek what benefits you",
+   "tr": "Sana yararlı olana yönel",
+   "ku": "Li tiştê ku sûdê dide te bigerî",
+   "ckb": "بگەڕێ بۆ ئەوەی سوودت پێدەگەیەنێت",
+   "bs": "Teži onome što ti koristi",
+   "fr": "Recherche ce qui t’est utile",
+   "es": "Busca lo que te beneficia"
+  },
+  "Themen, Begriffe und Grundlagen": {
+   "ar": "موضوعات ومصطلحات وأصول",
+   "en": "Topics, terms and foundations",
+   "tr": "Konular, terimler ve temeller",
+   "ku": "Mijar, term û bingeh",
+   "ckb": "بابەت و زاراوە و بنەڕەت",
+   "bs": "Teme, pojmovi i temelji",
+   "fr": "Thèmes, termes et fondements",
+   "es": "Temas, términos y fundamentos"
+  },
+  "Sprache · Language": {
+   "ar": "اللغة",
+   "en": "Language",
+   "tr": "Dil",
+   "ku": "Ziman",
+   "ckb": "زمان",
+   "bs": "Jezik",
+   "fr": "Langue",
+   "es": "Idioma"
+  },
+  "Maschinelle Übersetzung, vom Eigentümer zur Anzeige freigegeben. Keine menschliche Fachprüfung.": {
+   "ar": "ترجمة آلية أذن المالك بعرضها. ليست مراجعة علمية بشرية.",
+   "en": "Machine translation approved by the owner for display. Not a human scholarly review.",
+   "tr": "Sahibinin gösterime onayladığı makine çevirisi. İnsani ilmî inceleme değildir.",
+   "ku": "Wergera makîneyê, xwedî ji bo nîşandanê pejirandiye. Ne vekolîna mirovî ya ilmî ye.",
+   "ckb": "وەرگێڕانی ئامێر، خاوەن بۆ پیشاندان ڕەزامەندی داوە. پشکنینی زانستی مرۆیی نییە.",
+   "bs": "Mašinski prijevod odobren za prikaz. Nije ljudska stručna provjera.",
+   "fr": "Traduction automatique autorisée à l’affichage par le propriétaire. Pas une revue savante humaine.",
+   "es": "Traducción automática autorizada por el propietario para mostrarse. No es una revisión erudita humana."
+  },
+  "Player schließen": {
+   "ar": "إغلاق المشغّل",
+   "en": "Close the player",
+   "tr": "Oynatıcıyı kapat",
+   "ku": "Lêderê bigire",
+   "ckb": "لێدەر دابخە",
+   "bs": "Zatvori plejer",
+   "fr": "Fermer le lecteur",
+   "es": "Cerrar el reproductor"
+  }
+ }
+}
