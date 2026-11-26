@@ -605,12 +605,13 @@
     return { kits: kits, nums: nums };
   }
   function scheduleCatalog() {
-    if (catalogStarted) return;
+    if (catalogStarted || !searchQuery()) return;
     catalogStarted = true;
     var idle = w.requestIdleCallback || function (fn) { w.setTimeout(fn, 80); };
     idle(function () { stepCatalog(); });
   }
   function stepCatalog() {
+    if (!searchQuery()) { catalogStarted = false; return; }
     var books = booksNow();
     if (!books.length) { catalogStarted = false; return; }
     if (catalogCursor >= books.length) return;
