@@ -2,6 +2,8 @@
  * Uses explicit app locale, never device/OS language after a user selection.
  * Updates existing OneSignal user only; NEVER calls optIn/requestPermission,
  * subscribes, changes schedules, or touches location.
+ * Publish marker 2026-11-26: the wording is already on main; this line only
+ * lets the visitor worker publish, because the merge commit cannot carry lane phrases.
  */
 (function(global){
 "use strict";
