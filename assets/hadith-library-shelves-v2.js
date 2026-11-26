@@ -127,7 +127,13 @@
     "gami bayan al ilm": "jami-bayan-al-ilm.webp",
     "hilyat al awliya": "hilyat-al-awliya.webp",
     "suab al iman": "shuab-al-iman.webp",
-    "abd ar razzaq al musannaf": "musannaf-abd-al-razzaq.webp"
+    "abd ar razzaq al musannaf": "musannaf-abd-al-razzaq.webp",
+    "sunan ad daraqutni": "sunan-ad-daraqutni.webp",
+    "ad dahabi siyar alam an nubala": "siyar-alam-an-nubala.webp",
+    "as safii ar risalah": "ar-risalah-shafii.webp",
+    "sarh usul itiqad ahl as sunnah": "sharh-usul-itiqad.webp",
+    "ahmad az zuhd": "ahmad-az-zuhd.webp",
+    "at tabari tarih ar rusul wa l muluk": "tarikh-tabari.webp"
   };
   var KITAB = {
     "Kitāb al-Īmān": ["الإيمان", "Der Glaube", "Faith", "İman", "Îman", "ئیمان", "Iman", "La foi", "La fe"],
@@ -161,6 +167,7 @@
   var catalogCursor = 0;
   var catalogBusy = false;
   var catalogStarted = false;
+  var catalogPaint = 0;
 
   function norm(v) {
     return String(v || "").toLowerCase()
@@ -367,6 +374,12 @@
   function shell(inner, loc) {
     return '<div class="hls" lang="' + esc(loc) + '" dir="' + (rtl(loc) ? "rtl" : "ltr") + '">' + inner + "</div>";
   }
+  function workMatch(book, q) {
+    var n = norm(q);
+    if (!n) return false;
+    var parts = [book.title, imamOf(book.title), arabicOf(book.title), yearsOf(book.title)].join(" ");
+    return (" " + norm(parts) + " ").indexOf(" " + n + " ") >= 0;
+  }
   function bookHint(book, q) {
     var n = norm(q);
     var f = fold(q);
@@ -386,8 +399,13 @@
   function home(books, q, loc) {
     var pending = false;
     var picked = [];
+    var workOnly = q ? books.filter(function (book) { return workMatch(book, q); }) : [];
     books.forEach(function (book) {
       if (!q) { picked.push({ book: book, hint: null }); return; }
+      if (workOnly.length) {
+        if (workMatch(book, q)) picked.push({ book: book, hint: { hit: true, kind: "work" } });
+        return;
+      }
       var hint = bookHint(book, q);
       if (hint.pending) pending = true;
       if (hint.hit) picked.push({ book: book, hint: hint });
@@ -560,8 +578,32 @@
     if (chapter && babs.length <= 1) return leaf(book, chapter, babs[0] || null, q, loc);
     return fihris(book, collection, route, q, loc);
   }
+  function writeSearch(v) {
+    try {
+      if (v) w.localStorage.setItem("darHadithSearchQueryV1", v);
+      else w.localStorage.removeItem("darHadithSearchQueryV1");
+    } catch (e) {}
+  }
   function bindShelves() {
     if (!w.document || !onHadith()) return;
+    var search = w.document.getElementById("hadithSearchInput");
+    if (search) {
+      search.oninput = function () {
+        w.__hadithSearchKeepUntil = Date.now() + 800;
+        writeSearch(search.value || "");
+        w.clearTimeout(w.__hadithSearchRenderTimer);
+        w.__hadithSearchRenderTimer = w.setTimeout(function () {
+          if (typeof w.render === "function") w.render();
+        }, 140);
+      };
+      if (w.__hadithSearchKeepUntil > Date.now()) {
+        try { search.focus({ preventScroll: true }); } catch (e) { try { search.focus(); } catch (e2) {} }
+        try { var pos = search.value.length; search.setSelectionRange(pos, pos); } catch (e3) {}
+      }
+    }
+    w.document.querySelectorAll(".hls-book").forEach(function (btn) {
+      btn.addEventListener("click", function () { writeSearch(""); });
+    });
     w.document.querySelectorAll("[data-hls-mode]").forEach(function (btn) {
       btn.addEventListener("click", function (ev) {
         ev.preventDefault();
@@ -604,8 +646,17 @@
     });
     return { kits: kits, nums: nums };
   }
+  function paintCatalog() {
+    if (catalogPaint) return;
+    catalogPaint = w.setTimeout(function () {
+      catalogPaint = 0;
+      if (searchQuery() && onHadith()) refreshOnce();
+    }, 480);
+  }
   function scheduleCatalog() {
-    if (catalogStarted || !searchQuery()) return;
+    var q = searchQuery();
+    if (catalogStarted || !q) return;
+    if (booksNow().some(function (book) { return workMatch(book, q); })) return;
     catalogStarted = true;
     var idle = w.requestIdleCallback || function (fn) { w.setTimeout(fn, 80); };
     idle(function () { stepCatalog(); });
@@ -624,7 +675,7 @@
       CATALOG.set(String(book.id), compactCatalog(col));
       catalogCursor++;
       var q = searchQuery();
-      if (q && onHadith() && (catalogCursor >= books.length || bookHint(book, q).hit)) refreshOnce();
+      if (q && onHadith() && (catalogCursor >= books.length || bookHint(book, q).hit)) paintCatalog();
       var idle = w.requestIdleCallback || function (fn) { w.setTimeout(fn, 70); };
       idle(function () { stepCatalog(); });
     }, function () {
