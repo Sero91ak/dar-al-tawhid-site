@@ -12,7 +12,8 @@
   var libraryWait = false;
   var libraryFailed = false;
   var refreshQueued = false;
-  var ARCH = "/assets/feed-backgrounds/auto/mosque/bg-auto-mosque-unsplash-JF3o8Ajk.webp";
+  var HERO_LIST = "/test/assets/ilm/hadith-library-overview-v1267.webp";
+  var HERO_WORK = "/test/assets/ilm/hadith-library-study-v1267.webp";
   var LANGS = ["de", "ar", "en", "tr", "ku", "ckb", "bs", "fr", "es"];
   var COPY = {
     de: { library: "Ḥadīṯ-Bibliothek", works: "Werke", byScholar: "nach Imām", byKind: "Ḥadīṯ und Āṯār", continueKicker: "Zuletzt gelesen", continueGo: "Weiterlesen", search: "Werk, Autor, Kitāb, Bāb oder Nummer", searching: "Die Kapitel werden noch geordnet…", hitKitab: "Kitāb", hitNumber: "Nummer", jump: "Nummer", jumpGo: "Öffnen", jumpMiss: "Diese Nummer ist in diesem Bereich nicht vorhanden.", kitab: "Kitāb", bab: "Bāb", hadithCount: "{n} Ḥadīṯe", noHits: "Keine Treffer in diesem Bereich.", unavailable: "Die Bibliothek ist gerade nicht erreichbar.", opening: "Die Bibliothek wird geöffnet…", crumbHome: "Bibliothek", openKitab: "Abwāb anzeigen", closeKitab: "Abwāb schließen", allInKitab: "Ḥadīṯe dieses Kitāb", sahihayn: "aṣ-Ṣaḥīḥān", sunan: "as-Sunan", musnad: "al-Musnad", muwatta: "al-Muwaṭṭaʾ", musannaf: "al-Muṣannafāt", masanid: "Masānīd und Muwaṭṭaʾ", aqidah: "ʿAqīdah", athar: "Āṯār der Salaf", hadithWorks: "Ḥadīṯ-Werke", atharWorks: "Āṯār und ʿAqīdah", otherWorks: "Weitere Werke", entries: "Einträge" },
@@ -100,6 +101,7 @@
     "suab al iman": "شعب الإيمان",
     "abd ar razzaq al musannaf": "مصنف عبد الرزاق",
     "al mustadrak": "المستدرك",
+    "al bayhaqi al asma wa s sifat": "الأسماء والصفات",
     "sarh usul itiqad ahl as sunnah": "شرح أصول اعتقاد أهل السنة"
   };
   var COVER_BASE = "/test/assets/hadith-covers/";
@@ -192,7 +194,40 @@
     var row = COPY[l] && COPY[l][key] ? COPY[l][key] : COPY.de[key];
     return row || "";
   }
-  function countLabel(n, loc) { return t("hadithCount", loc).replace("{n}", ornament(n, loc)); }
+  function hadithWord(n, loc) {
+    if (loc === "ar") {
+      if (n === 2) return "حديثان";
+      if (n >= 3 && n <= 10) return "أحاديث";
+      if (n > 10) return "حديثًا";
+      return "حديث";
+    }
+    if (loc === "bs") return (n % 10 === 1 && n % 100 !== 11) ? "hadis" : "hadisa";
+    var one = { de: "Ḥadīṯ", en: "ḥadīth", tr: "hadis", ku: "hedîs", ckb: "حەدیس", fr: "ḥadīth", es: "ḥadīṯ" };
+    var many = { de: "Ḥadīṯe", en: "ḥadīths", tr: "hadis", ku: "hedîs", ckb: "حەدیس", fr: "ḥadīths", es: "ḥadīṯes" };
+    return (n === 1 ? one : many)[loc] || (n === 1 ? one.de : many.de);
+  }
+  function kitabWord(n, loc) {
+    if (loc === "ar") {
+      if (n === 2) return "كتابان";
+      if (n >= 3 && n <= 10) return "كتب";
+      if (n > 10) return "كتابًا";
+      return "كتاب";
+    }
+    if (loc === "ckb") return n === 1 ? "کتاب" : "کتێب";
+    var one = { de: "Kitāb", en: "kitāb", tr: "kitâb", ku: "kitāb", bs: "kitab", fr: "kitāb", es: "kitāb" };
+    var many = { de: "Kutub", en: "kutub", tr: "kütüb", ku: "kutub", bs: "kutub", fr: "kutub", es: "kutub" };
+    return (n === 1 ? one : many)[loc] || (n === 1 ? one.de : many.de);
+  }
+  function countLabel(n, loc) { var num = Number(n) || 0; return ornament(num, loc) + " " + hadithWord(num, loc); }
+  function kitabLabel(n, loc) { var num = Number(n) || 0; return ornament(num, loc) + " " + kitabWord(num, loc); }
+  function worksLabel(n, loc) {
+    var num = Number(n) || 0;
+    if (loc === "ar") return ornament(num, loc) + " " + kitabWord(num, loc);
+    if (loc === "bs") return ornament(num, loc) + " " + ((num % 10 === 1 && num % 100 !== 11) ? "djelo" : "djela");
+    var one = { de: "Werk", en: "work", tr: "eser", ku: "berhem", ckb: "بەرهەم", fr: "ouvrage", es: "obra" };
+    var many = { de: "Werke", en: "works", tr: "eser", ku: "berhem", ckb: "بەرهەم", fr: "ouvrages", es: "obras" };
+    return ornament(num, loc) + " " + ((num === 1 ? one : many)[loc] || (num === 1 ? one.de : many.de));
+  }
   function ornament(n, loc) {
     var s = String(n);
     if (loc === "ar" || loc === "ckb") s = s.replace(/\d/g, function (d) { return "٠١٢٣٤٥٦٧٨٩"[d]; });
@@ -309,8 +344,10 @@
     var bits = [item.book, item.num, item.preview].filter(Boolean).join(" · ");
     return '<button type="button" class="hls-continue" data-nav="hadith" data-value="' + esc(item.path) + '"><span class="hls-continue-kicker">' + esc(t("continueKicker", loc)) + '</span><strong>' + esc(t("continueGo", loc)) + '</strong><span class="hls-continue-text">' + esc(publicText(bits)) + "</span></button>";
   }
-  function hero(title, sub, loc) {
-    return '<header class="hls-hero"><img class="hls-hero-img" alt="" width="1600" height="900" decoding="async" fetchpriority="low" src="' + ARCH + '"><div class="hls-hero-copy"><p class="hls-kicker">' + esc(t("library", loc)) + "</p><h1>" + esc(title) + "</h1>" + (sub ? "<p>" + esc(sub) + "</p>" : "") + "</div></header>";
+  function hero(title, sub, loc, src) {
+    var quiet = !title;
+    var copy = quiet ? "" : '<div class="hls-hero-copy"><p class="hls-kicker">' + esc(t("library", loc)) + "</p><h1>" + esc(title) + "</h1>" + (sub ? "<p>" + esc(sub) + "</p>" : "") + "</div>";
+    return '<header class="hls-hero' + (quiet ? " hls-hero--quiet" : "") + '"><img class="hls-hero-img" alt="" width="1600" height="900" decoding="async" src="' + (src || HERO_LIST) + '">' + copy + "</header>";
   }
   function modes(loc) {
     var current = mode();
@@ -415,7 +452,7 @@
     }).filter(function (group) { return group.rows.length; });
     var body = groups.map(function (group) {
       var latin = loc === "ar" ? SECTION_LATIN[group.key] : t(SECTION_KEY[group.key], loc);
-      var head = '<div class="hls-section-head"><div><p class="hls-section-ar" lang="ar" dir="rtl">' + esc(SECTION_AR[group.key]) + "</p><h2>" + esc(latin) + '</h2></div><span class="hls-section-count">' + esc(ornament(group.rows.length, loc)) + " " + esc(t("works", loc)) + "</span></div>";
+      var head = '<div class="hls-section-head"><div><p class="hls-section-ar" lang="ar" dir="rtl">' + esc(SECTION_AR[group.key]) + "</p><h2>" + esc(latin) + '</h2></div><span class="hls-section-count">' + esc(worksLabel(group.rows.length, loc)) + "</span></div>";
       return '<section class="hls-section">' + head + shelf(group.rows, loc) + "</section>";
     }).join("") || '<p class="hls-empty">' + esc(t("noHits", loc)) + "</p>";
     var note = q && pending ? '<p class="hls-searching" role="status">' + esc(t("searching", loc)) + "</p>" : "";
@@ -440,48 +477,103 @@
     });
     return found;
   }
+  function chevron() { return '<span class="hls-chevron" aria-hidden="true"></span>'; }
+  function babWord(n, loc) {
+    if (loc === "ar") {
+      if (n === 2) return "بابان";
+      if (n >= 3 && n <= 10) return "أبواب";
+      if (n > 10) return "بابًا";
+      return "باب";
+    }
+    var one = { de: "Bāb", en: "bāb", tr: "bâb", ku: "bāb", ckb: "باب", bs: "bab", fr: "bāb", es: "bāb" };
+    var many = { de: "Abwāb", en: "abwāb", tr: "bâb", ku: "bāb", ckb: "بابەکان", bs: "babova", fr: "abwāb", es: "abwāb" };
+    return (n === 1 ? one : many)[loc] || (n === 1 ? one.de : many.de);
+  }
+  function babLabel(n, loc) { var num = Number(n) || 0; return ornament(num, loc) + " " + babWord(num, loc); }
+  function displayKitab(chapter, loc) {
+    var face = kitabFace((chapter && chapter.title) || "", loc);
+    var primary = String(face.primary || "").trim();
+    var arabic = (loc === "ar" || loc === "ckb") ? "" : (face.arabic || "");
+    if (primary && norm(primary) !== "kitab") return { name: primary, arabic: arabic };
+    var babs = babsOf(chapter);
+    var i;
+    for (i = 0; i < babs.length; i++) {
+      var bab = cleanBab(babs[i].title || "");
+      if (bab && norm(bab) !== "bab") return { name: bab, arabic: face.arabic || "" };
+    }
+    if (face.arabic) return { name: face.arabic, arabic: "" };
+    if (face.gloss && norm(face.gloss) !== "kitab") return { name: face.gloss, arabic: "" };
+    return { name: "", arabic: "" };
+  }
+  function workFrame(book, loc, meta) {
+    var arabic = arabicOf(book.title);
+    var author = authorLine(book.title);
+    return hero("", "", loc, HERO_WORK) + crumbs(book, null, null, loc) +
+      '<header class="hls-work">' + faceHtml(book) + '<div class="hls-work-copy">' +
+      (arabic ? '<p class="hls-work-ar" lang="ar" dir="rtl">' + esc(arabic) + "</p>" : "") +
+      "<h1>" + esc(book.title || "") + "</h1>" +
+      (author ? '<p class="hls-work-imam">' + esc(author) + "</p>" : "") +
+      '<p class="hls-work-meta">' + esc(meta) + "</p></div></header>";
+  }
+  function navRow(value, name, arabic, meta) {
+    return '<li class="hls-group-item"><button type="button" class="hls-row" data-nav="hadith" data-value="' + esc(value) + '"><span class="hls-row-main">' +
+      (arabic ? '<span class="hls-row-ar" lang="ar" dir="rtl">' + esc(arabic) + "</span>" : "") +
+      "<strong>" + esc(name) + '</strong></span><span class="hls-row-count">' + esc(meta) + "</span>" + chevron() + "</button></li>";
+  }
+  function matchesQuery(blob, q) {
+    var nq = norm(q);
+    var fq = fold(q);
+    if (!nq && !fq) return true;
+    return (nq && norm(blob).indexOf(nq) >= 0) || (fq && fold(blob).indexOf(fq) >= 0);
+  }
   function fihris(book, collection, route, q, loc) {
     var chapters = (collection.chapters || []).slice();
     var digits = /^\d+$/.test(String(q || "").trim()) ? String(q).trim() : "";
     var numbered = digits ? findNumber(collection, digits) : null;
     var openId = (numbered && numbered.chapter && numbered.chapter.id) || route.chapterId || storeGet("darHadithShelfOpenKitabV1");
-    var nq = norm(q);
-    var fq = fold(q);
-    var blocks = chapters.map(function (chapter, index) {
-      var face = kitabFace(chapter.title || "", loc);
+    var items = chapters.map(function (chapter) {
+      var shown = displayKitab(chapter, loc);
       var babs = babsOf(chapter);
       var count = (chapter.hadiths || []).length;
-      var blob = (chapter.title || "") + " " + face.arabic + " " + face.gloss + " " + babs.map(function (bab) { return bab.title; }).join(" ");
-      var hay = norm(blob);
-      var raw = fold(blob);
-      if ((nq || fq) && !(nq && hay.indexOf(nq) >= 0) && !(fq && raw.indexOf(fq) >= 0) && String(openId) !== String(chapter.id)) return "";
+      var blob = (chapter.title || "") + " " + shown.name + " " + shown.arabic + " " + babs.map(function (bab) { return bab.title; }).join(" ");
+      if (!matchesQuery(blob, q) && String(openId) !== String(chapter.id)) return "";
+      var name = shown.name;
+      if (!name) name = babs.length ? cleanBab(babs[0].title || "") : "";
+      if (!name || norm(name) === "bab" || norm(name) === "kitab") name = countLabel(count, loc);
+      if (babs.length <= 1) return navRow(book.id + "/" + chapter.id, name, shown.arabic, countLabel(count, loc));
       var open = String(openId) === String(chapter.id);
-      var rows = "";
-      if (open) {
-        if (babs.length > 1) {
-          rows = '<ol class="hls-abwab">' + babs.map(function (bab, i) {
-            return '<li><button type="button" data-nav="hadith" data-value="' + esc(book.id + "/" + chapter.id + "/" + bab.id) + '"><span class="hls-num">' + esc(ornament(i + 1, loc)) + '</span><span><b>' + esc(cleanBab(bab.title || t("bab", loc))) + "</b><small>" + esc(countLabel((bab.hadiths || []).length, loc)) + "</small></span></button></li>";
-          }).join("") + "</ol>";
-        } else {
-          rows = '<p class="hls-direct"><button type="button" data-nav="hadith" data-value="' + esc(book.id + "/" + chapter.id) + '">' + esc(t("allInKitab", loc)) + " · " + esc(countLabel(count, loc)) + "</button></p>";
-        }
-      }
-      return '<article class="hls-kitab' + (open ? " is-open" : "") + '"><button type="button" class="hls-kitab-toggle" data-hls-kitab="' + esc(chapter.id) + '" aria-expanded="' + (open ? "true" : "false") + '"><span class="hls-num">' + esc(ornament(index + 1, loc)) + '</span><span class="hls-kitab-copy">' + (face.arabic ? '<span class="hls-kitab-ar" lang="ar" dir="rtl">' + esc(face.arabic) + "</span>" : "") + "<strong>" + esc(face.primary) + "</strong>" + (face.gloss ? "<small>" + esc(face.gloss) + "</small>" : "") + "<small>" + esc(countLabel(count, loc)) + '</small></span><span class="hls-kitab-action">' + esc(open ? t("closeKitab", loc) : t("openKitab", loc)) + "</span></button>" + rows + "</article>";
+      var inner = open ? '<ul class="hls-group hls-group--inner">' + babs.map(function (bab) {
+        var babName = cleanBab(bab.title || "");
+        if (!babName || norm(babName) === "bab") babName = countLabel((bab.hadiths || []).length, loc);
+        return navRow(book.id + "/" + chapter.id + "/" + bab.id, babName, "", countLabel((bab.hadiths || []).length, loc));
+      }).join("") + "</ul>" : "";
+      return '<li class="hls-group-item' + (open ? " is-open" : "") + '"><button type="button" class="hls-row" data-hls-kitab="' + esc(chapter.id) + '" aria-expanded="' + (open ? "true" : "false") + '"><span class="hls-row-main">' +
+        (shown.arabic ? '<span class="hls-row-ar" lang="ar" dir="rtl">' + esc(shown.arabic) + "</span>" : "") +
+        "<strong>" + esc(name) + '</strong></span><span class="hls-row-count">' + esc(countLabel(count, loc)) + "</span>" + chevron() + "</button>" + inner + "</li>";
     }).join("");
-    var author = authorLine(book.title);
-    var arabic = arabicOf(book.title);
-    var blurb = typeof book.verifiedDescription === "string" ? book.verifiedDescription.trim() : "";
     var numberGo = "";
     if (numbered && numbered.hadith && typeof w.hadithPath === "function") {
-      numberGo = '<p class="hls-direct"><button type="button" data-nav="hadith" data-value="' + esc(w.hadithPath(numbered.hadith)) + '">' + esc(t("hitNumber", loc) + " " + digits) + "</button></p>";
+      numberGo = navRow(w.hadithPath(numbered.hadith), t("hitNumber", loc) + " " + digits, "", "");
+      numberGo = '<ul class="hls-group">' + numberGo + "</ul>";
     }
-    var head = '<header class="hls-work-head">' + faceHtml(book) + (arabic ? '<p class="hls-work-ar" lang="ar" dir="rtl">' + esc(arabic) + "</p>" : "") + "<h1>" + esc(book.title || "") + "</h1>" + (author ? '<p class="hls-work-imam">' + esc(author) + "</p>" : "") + (blurb ? '<p class="hls-work-blurb">' + esc(blurb) + "</p>" : "") + "<p>" + esc(ornament(chapters.length, loc) + " " + t("kitab", loc) + " · " + countLabel(book.hadithCount || 0, loc)) + "</p></header>" + numberGo;
-    return shell(hero(book.title || t("library", loc), author, loc) + crumbs(book, null, null, loc) + tools(q, loc) + continueStrip(loc) + head + '<div class="hls-fihris">' + (blocks || '<p class="hls-empty">' + esc(t("noHits", loc)) + "</p>") + "</div>", loc);
+    var meta = kitabLabel(chapters.length, loc) + " · " + countLabel(book.hadithCount || 0, loc);
+    return shell(workFrame(book, loc, meta) + tools(q, loc) + numberGo + (items ? '<ul class="hls-group">' + items + "</ul>" : '<p class="hls-empty">' + esc(t("noHits", loc)) + "</p>"), loc);
   }
-  function leaf(book, chapter, section, q, loc) {
+  function babBoard(book, chapter, babs, q, loc) {
+    var items = babs.map(function (bab) {
+      var name = cleanBab(bab.title || "");
+      if (!matchesQuery((chapter.title || "") + " " + name, q)) return "";
+      if (!name || norm(name) === "bab") name = countLabel((bab.hadiths || []).length, loc);
+      return navRow(book.id + "/" + chapter.id + "/" + bab.id, name, "", countLabel((bab.hadiths || []).length, loc));
+    }).join("");
+    var meta = babLabel(babs.length, loc) + " · " + countLabel(book.hadithCount || 0, loc);
+    return shell(workFrame(book, loc, meta) + tools(q, loc) + (items ? '<ul class="hls-group">' + items + "</ul>" : '<p class="hls-empty">' + esc(t("noHits", loc)) + "</p>"), loc);
+  }
+  function leaf(book, chapter, section, q, loc, bare) {
     var pool = section ? (section.hadiths || []) : ((chapter && chapter.hadiths) || []);
     var rows = typeof w.filterHadithList === "function" ? w.filterHadithList(pool, q) : pool;
     var title = section ? cleanBab(section.title) : cleanKitab((chapter && chapter.title) || "");
+    if (!title || norm(title) === "kitab" || norm(title) === "bab") title = book.title || "";
     var list = rows.map(function (h, i) {
       var num = publicNum(h.hadithNumber);
       var preview = publicText(h.german || h.babTitle || "").replace(/\s+/g, " ").slice(0, 180);
@@ -489,9 +581,11 @@
       var grade = publicText(h.grade || "");
       if (grade.length > 32) grade = "";
       var value = typeof w.hadithPath === "function" ? w.hadithPath(h) : [book.id, chapter && chapter.id, section && section.id, h.id].filter(Boolean).join("/");
-      return '<li><button type="button" class="hls-leaf" data-nav="hadith" data-value="' + esc(value) + '"><span class="hls-num">' + esc(ornament(num || (i + 1), loc)) + '</span><span><strong>' + esc(preview || title) + "</strong>" + (who ? "<small>" + esc(who) + "</small>" : "") + (grade ? '<em class="hls-badge">' + esc(grade) + "</em>" : "") + "</span></button></li>";
+      return '<li class="hls-group-item"><button type="button" class="hls-row hls-leaf" data-nav="hadith" data-value="' + esc(value) + '"><span class="hls-row-main"><strong>' + esc(preview || title) + "</strong>" + (who ? "<small>" + esc(who) + "</small>" : "") + (grade ? '<em class="hls-badge">' + esc(grade) + "</em>" : "") + '</span><span class="hls-row-count">' + esc(ornament(num || (i + 1), loc)) + "</span>" + chevron() + "</button></li>";
     }).join("");
-    return shell(crumbs(book, chapter, section, loc) + '<header class="hls-work-head"><h1>' + esc(title) + "</h1><p>" + esc(countLabel(rows.length, loc)) + "</p></header>" + tools(q, loc) + '<ol class="hls-leaves">' + (list || '<li class="hls-empty">' + esc(t("noHits", loc)) + "</li>") + "</ol>", loc);
+    var group = '<ul class="hls-group">' + (list || '<li class="hls-empty">' + esc(t("noHits", loc)) + "</li>") + "</ul>";
+    if (bare) return shell(workFrame(book, loc, countLabel(rows.length, loc)) + tools(q, loc) + group, loc);
+    return shell(hero("", "", loc, HERO_WORK) + crumbs(book, chapter, section, loc) + '<header class="hls-leaf-head"><h1>' + esc(title) + '</h1><p class="hls-work-meta">' + esc(countLabel(rows.length, loc)) + "</p></header>" + tools(q, loc) + group, loc);
   }
   function onHadith() {
     try { return !!(w.readRoute && w.readRoute().view === "hadith"); } catch (e) { return false; }
@@ -574,6 +668,12 @@
     var chapter = route.chapterId ? (collection.chapters || []).filter(function (item) { return String(item.id) === String(route.chapterId); })[0] : null;
     var babs = babsOf(chapter);
     var section = route.babId ? babs.filter(function (item) { return String(item.id) === String(route.babId); })[0] : null;
+    if (!route.chapterId && (collection.chapters || []).length <= 1) {
+      var only = (collection.chapters || [])[0] || null;
+      var onlyBabs = babsOf(only);
+      if (only && onlyBabs.length > 1) return babBoard(book, only, onlyBabs, q, loc);
+      return leaf(book, only, (onlyBabs[0] || null), q, loc, true);
+    }
     if (route.babId && chapter) return leaf(book, chapter, section || babs[0] || null, q, loc);
     if (chapter && babs.length <= 1) return leaf(book, chapter, babs[0] || null, q, loc);
     return fihris(book, collection, route, q, loc);
