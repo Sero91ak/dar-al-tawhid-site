@@ -5,7 +5,8 @@
  */
 
 import { pickPrayerEntryVariant, buildAdvancePushBody, PRAYER_TITLE_EMOJI, sanitizePrayerPushText, hasBlockedPrayerPhrase } from "./prayer-push-copy.js";
-import { prayerLocaleCopy } from "./push-locale-from-draft.js";
+import { prayerLocaleCopy, prayerIndividualCopy } from "./push-locale-from-draft.js";
+import { loadAppLocaleSets, partitionSubscriptionIds, localeDeliveryBody } from "./push-app-locale-delivery.js";
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
 import { writePrayerStatusToStore } from "./prayer-status-store.js";
 
@@ -611,11 +612,12 @@ async function cancelDuplicateQueuedPushes(env, queued, stats) {
   }
 }
 
-async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
+async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun, appLocaleSets = null) {
   const deliveryName = prayerDeliveryName(prayer, sendAfter, mode, group.timeZone, group.advanceMinutes);
+  const claimNames = [deliveryName, deliveryName + "-ku", deliveryName + "-ckb"];
   const ids = uniqueSubscriptionIds(group).filter((id) => {
-    const claim = deliveryClaim(id, deliveryName, sendAfter.getTime());
-    if (alreadyTargetedSet && alreadyTargetedSet.has(claim)) {
+    const claimed = claimNames.some((name) => alreadyTargetedSet && alreadyTargetedSet.has(deliveryClaim(id, name, sendAfter.getTime())));
+    if (claimed) {
       stats.duplicates += 1;
       return false;
     }
@@ -669,14 +671,53 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
     body.send_after = stamp ? `${stamp[1]} ${stamp[2]} GMT+0000` : iso;
   }
 
-  const result = await postOneSignal(env, body);
-  const invalid = invalidSubscriptionIds(result.parsed);
+  const future = sendAfter.getTime() - Date.now() > 30 * 1000;
+  const rawParts = future && appLocaleSets ? partitionSubscriptionIds(ids, appLocaleSets) : [{ locale: null, ids }];
+  const parts = [];
+  const restIds = [];
+  for (const part of rawParts) {
+    if (!part.locale) {
+      restIds.push(...part.ids);
+      continue;
+    }
+    let one = null;
+    try {
+      one = prayerIndividualCopy(part.locale, prayer.key, mode, normAdvance(group.advanceMinutes), prayer.time == null ? "" : formatHour(prayer.time));
+    } catch (_) {
+      one = null;
+    }
+    if (!one) restIds.push(...part.ids);
+    else parts.push({ locale: part.locale, ids: part.ids, copy: one });
+  }
+  if (restIds.length) parts.unshift({ locale: null, ids: restIds, copy: null });
+  const invalid = new Set();
+  let posted = 0;
+  let result = { text: "" };
+  for (const part of parts) {
+    if (!part.ids.length) continue;
+    const next = part.locale
+      ? localeDeliveryBody(body, {
+        ids: part.ids,
+        headings: part.copy.headings,
+        contents: part.copy.contents,
+        name: `${deliveryName}-${part.locale}`,
+        key: await uuidFrom(`${idKey}|app-locale:${part.locale}`)
+      })
+      : (part.ids.length === ids.length ? body : { ...body, include_subscription_ids: part.ids });
+    result = await postOneSignal(env, next);
+    posted += 1;
+    for (const badId of invalidSubscriptionIds(result.parsed)) invalid.add(badId);
+    if (alreadyTargetedSet) {
+      const claimName = part.locale ? `${deliveryName}-${part.locale}` : deliveryName;
+      for (const id of part.ids) alreadyTargetedSet.add(deliveryClaim(id, claimName, sendAfter.getTime()));
+    }
+  }
   if (invalid.size) {
     stats.invalid = (stats.invalid || 0) + invalid.size;
     const disabled = await disableInvalidRegistrations(invalid);
     stats.invalidDisabled = (stats.invalidDisabled || 0) + disabled;
   }
-  stats.scheduled += 1;
+  stats.scheduled += posted;
   stats.recipients += ids.length;
   stats.planned.push({
     prayer: prayer.name,
@@ -696,9 +737,6 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
     late,
     response: String(result.text || "").slice(0, 200)
   });
-  if (alreadyTargetedSet) {
-    for (const id of ids) alreadyTargetedSet.add(deliveryClaim(id, deliveryName, sendAfter.getTime()));
-  }
 }
 
 function buildOverview(planned, skippedPast, ref = REFERENCE) {
@@ -801,6 +839,7 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
   };
   const sentInRun = new Set();
   alreadyTargetedSet = new Set();
+  let appLocaleSets = null;
 
   await cancelQueuedBadAdvancePushes(env, stats);
   try {
@@ -831,6 +870,12 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
   const userCount = dedupedRows.filter((r) => !onlySub || String(r.subscription_id) === onlySub).length;
   const duplicateRegistrationCount = Math.max(0, rawRows.length - dedupedRows.length);
   stats.duplicates += duplicateRegistrationCount;
+
+  try {
+    appLocaleSets = await loadAppLocaleSets(env);
+  } catch (_) {
+    appLocaleSets = null;
+  }
 
   for (const group of groups) {
     const local = todayLocal(group.timeZone);
@@ -903,7 +948,7 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
           if (lateEntry) stats.entryCatchups = (stats.entryCatchups || 0) + 1;
           group.lateEntry = lateEntry;
           try {
-            await sendPush(env, group, prayer, slot.sendAfter, slot.mode, stats, sentInRun);
+            await sendPush(env, group, prayer, slot.sendAfter, slot.mode, stats, sentInRun, appLocaleSets);
           } catch (err) {
             stats.errors += 1;
             stats.errorDetails.push(`${slot.mode} ${prayer.name}: ${err.message || err}`);
