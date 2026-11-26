@@ -99,7 +99,7 @@ function translate(value){
  var v=catalog.get(value);
  return v===undefined?null:v;
 }
-var UI_DE=/\b(Standort|Startseite|Vollansicht|Wissenschat|Wissensfinder|Quellenarchiv|Gebetszeiten|Einstellungen|Demnächst|Impressum|Datenschutz|Überlieferung|Rezitation|Fundamente|Aussage|Gelehrten|Installieren|Installationshilfe|Kurzfazit|Originalwortlaut|Einordnung|Fundstellen|richtig|Beiträge|Schließen|Zurück|Weiter|Lernbereich|Frage|Hinweis|Sprecher|Quellen|Teilen|öffnen|Suche|Gebet|Antwort|auswählen|wiederholen|gearbeitet|Verständnis|Anmeldung|Originalquelle|Themen|Gelehrte|Werkzeuge|Sammlungen|Bittgebete|Fachbegriffe|Fundstelle|Nachweis|Überlieferungen|Bewertung|Sprache|Wähle|Waehle)\b/i;
+var UI_DE=/(^|[^\p{L}\p{N}])(Standort|Startseite|Vollansicht|Wissenschat|Wissensfinder|Quellenarchiv|Gebetszeiten|Einstellungen|Demnächst|Impressum|Datenschutz|Überlieferung|Rezitation|Fundamente|Aussage|Gelehrten|Installieren|Installationshilfe|Kurzfazit|Originalwortlaut|Einordnung|Fundstellen|richtig|Beiträge|Schließen|Zurück|Weiter|Lernbereich|Frage|Hinweis|Sprecher|Quellen|Teilen|öffnen|Suche|Gebet|Antwort|auswählen|wiederholen|gearbeitet|Verständnis|Anmeldung|Originalquelle|Themen|Gelehrte|Werkzeuge|Sammlungen|Bittgebete|Fachbegriffe|Fundstelle|Nachweis|Überlieferungen|Bewertung|Sprache|Wähle|Waehle|Erscheinungsbild|Willkommen|Veröffentlichung)(?=$|[^\p{L}\p{N}])/iu;
 function letterAt(s,i){
  if(i<0||i>=s.length)return false;
  return /\p{L}/u.test(s.charAt(i));
