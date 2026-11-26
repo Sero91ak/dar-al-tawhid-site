@@ -731,7 +731,7 @@
     if (!title || norm(title) === "bab" || norm(title) === "kitab" || countish(title)) title = (book && book.title) || t("library", loc);
     var body = '<article class="hls-reading">' +
       ((latinWho || honor) ? '<p class="hls-reading-who" dir="ltr">' + (latinWho ? '<span class="hls-reading-name">' + esc(latinWho) + "</span>" : "") + (honor ? '<bdi class="hls-reading-honor" dir="rtl" lang="ar">' + esc(honor) + "</bdi>" : "") + "</p>" : "") +
-      (say && say !== who ? '<p class="hls-reading-say" dir="ltr">' + bidi(say) + "</p>" : "") +
+      (say && say !== latinWho ? '<p class="hls-reading-say" dir="ltr">' + bidi(say) + "</p>" : "") +
       (h.arabic ? '<p class="hls-reading-ar" lang="ar" dir="rtl">' + esc(String(h.arabic)) + "</p>" : "") +
       (german ? '<p class="hls-reading-matn" dir="ltr">' + bidi(german) + "</p>" : "") +
       (grade ? '<p class="hls-reading-grade">' + esc(grade) + "</p>" : "") +
@@ -774,7 +774,14 @@
     if (route.hadithId) {
       remember(route);
       var found = typeof w.findHadithById === "function" ? w.findHadithById(route.hadithId) : null;
-      if (found) return hadithReading(book, found, loc);
+      if (found && typeof w.renderHadithDetail === "function") {
+        var readChapter = found.chapterId ? { id: found.chapterId, title: found.chapterTitle || "" } : null;
+        var readSection = (found.babId || found.babTitle) ? { id: found.babId || "", title: found.babTitle || "" } : null;
+        var readTitle = cleanBab(found.babTitle || "") || cleanKitab(found.chapterTitle || "");
+        if (!readTitle || norm(readTitle) === "bab" || norm(readTitle) === "kitab" || countish(readTitle)) readTitle = (book && book.title) || t("library", loc);
+        var readSub = [book && book.title, publicNum(found.hadithNumber)].filter(Boolean).join(" · ");
+        return page(readTitle, readSub, tools(searchQuery(), loc), crumbs(book, readChapter, readSection, loc, readTitle) + w.renderHadithDetail(found), loc, true);
+      }
       if (typeof w.renderHadithBookPanel === "function") return w.renderHadithBookPanel(book, route);
     }
     var q = searchQuery();
