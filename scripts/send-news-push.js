@@ -6,6 +6,7 @@ const {
   postOneSignalNotification,
   siteOriginFromEnv
 } = require("./lib/onesignal-push");
+const { localizedNotification, chromePack } = require("./push-locale-chrome.cjs");
 
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const API_KEY = process.env.ONESIGNAL_API_KEY_NEW || process.env.ONESIGNAL_API_KEY || process.env.ONESIGNAL_APP_API_KEY;
@@ -54,8 +55,7 @@ function buildNewsPushUrl({ newsId, nav, value }) {
   const payload = withNotificationIcons({
     app_id: APP_ID,
     target_channel: "push",
-    headings: { en: title, de: title },
-    contents: { en: message, de: message },
+    ...localizedNotification(title, message, title === "Neu im Fokus" ? chromePack("news").title : null, null),
     url,
     data: {
       type: pushType,

@@ -9,6 +9,7 @@ const {
   withNotificationIcons,
   postOneSignalNotification
 } = require("./lib/onesignal-push");
+const { localizedNotification, dailyHeadings } = require("./push-locale-chrome.cjs");
 
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const API_KEY = process.env.ONESIGNAL_API_KEY_NEW || process.env.ONESIGNAL_APP_API_KEY || process.env.ONESIGNAL_API_KEY;
@@ -98,8 +99,7 @@ async function scheduleDailyNotification(kind, item, config, dateKey) {
     app_id: APP_ID,
     target_channel: "push",
     filters: [{ field: "tag", key: tagName, relation: "=", value: "true" }],
-    headings: { de: title, en: title },
-    contents: { de: body, en: body },
+    ...localizedNotification(title, body, (map => map.de === title ? map : null)(dailyHeadings(isDua ? "dua" : "recommendation")), null),
     url,
     delayed_option: "timezone",
     delivery_time_of_day: deliveryTime,

@@ -8,6 +8,7 @@
    Secret-Resync 2026-08-27T20:55: Publish GITHUB_TOKEN fehlt — Reclaim
    Jummah opt-out 2026-08-28: Scheduler nur jummah_notifications=true */
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
+import { localizedNotification, chromePack } from "./push-locale-chrome.js";
 import {
   parsePostForTelegram,
   validateTelegramPost,
@@ -3762,8 +3763,12 @@ async function sendNewsPush(env, { newsId, title, text, nav, value, pushTitle, p
   const basePayload = {
     app_id: appId,
     target_channel: "push",
-    headings: { en: resolvedTitle, de: resolvedTitle },
-    contents: { en: pushMessage, de: pushMessage },
+    ...localizedNotification(
+      resolvedTitle,
+      pushMessage,
+      resolvedTitle === "Neu im Fokus" ? chromePack("news").title : null,
+      null
+    ),
     url,
     data: pushData,
     chrome_web_icon: icon,

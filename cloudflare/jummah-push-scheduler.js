@@ -5,6 +5,7 @@
  */
 
 import { jummahCopyForMode } from "./jummah-push-copy.js";
+import { jummahLocale } from "./push-locale-chrome.js";
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
 import { writeNamedStatusToStore } from "./prayer-status-store.js";
 
@@ -290,12 +291,13 @@ async function sendJummahPush(env, group, slot, stats, sentInRun) {
   sentInRun.add(idKey);
 
   const copy = jummahCopyForMode(slot.mode);
+  const text = jummahLocale(slot.mode, copy);
   const body = withIcons({
     app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
     target_channel: "push",
     include_subscription_ids: ids,
-    headings: { de: copy.title, en: copy.title },
-    contents: { de: copy.body, en: copy.body },
+    headings: text.headings,
+    contents: text.contents,
     url: String(env.SITE_URL || DEFAULT_SITE_URL),
     data: { type: "jummah-push", mode: slot.mode, test: false },
     idempotency_key: await uuidFrom(idKey)

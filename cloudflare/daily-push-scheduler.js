@@ -439,9 +439,12 @@ function buildDailyPushPayload(env, kind, item, config, dateKey, subscriptionId,
   let contents = { de: body, en: body };
   try {
     const localized = dailyLocaleCopy(isDua ? "daily_dua" : "daily_recommendation");
-    if (localized.headings?.en && localized.headings?.de && localized.contents?.en && localized.contents?.de) {
+    if (localized.headings?.en && localized.headings?.de === title) {
       headings = localized.headings;
-      contents = localized.contents;
+      contents = {};
+      for (const code of Object.keys(localized.headings)) contents[code] = body;
+      if (!contents.en) contents.en = body;
+      if (!contents.de) contents.de = body;
     }
   } catch (_) {}
 

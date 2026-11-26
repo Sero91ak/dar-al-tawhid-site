@@ -5,6 +5,7 @@ import {
 import { readNamedStatusFromStore } from "./prayer-status-store.js";
 import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
+import { localizedNotification, chromePack } from "./push-locale-chrome.js";
 
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_DAILY_STATUS_PATH = "content/admin/daily-push-status.json";
@@ -175,8 +176,7 @@ async function sendWelcomePushOnce(env, subscriptionId, cached) {
     app_id: appId,
     target_channel: "push",
     include_subscription_ids: [subscriptionId],
-    headings: { de: title, en: title },
-    contents: { de: body, en: body },
+    ...localizedNotification(title, body, null, chromePack("welcome").body),
     url,
     collapse_id: `dar-welcome-${subscriptionId}`.slice(0, 64),
     idempotency_key: idempotencyKey,
@@ -287,8 +287,7 @@ export async function sendDailyTestPush(env, input = {}) {
     app_id: appId,
     target_channel: "push",
     include_subscription_ids: [subscriptionId],
-    headings: { de: title, en: title },
-    contents: { de: body, en: body },
+    ...localizedNotification(title, body, null, null),
     ios_sound: "default",
     ttl: 3600,
     url,
