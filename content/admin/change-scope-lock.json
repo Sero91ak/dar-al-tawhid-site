@@ -9954,6 +9954,17 @@
         "assets/hadith-covers/"
       ],
       "expiresAt": "2026-11-29T23:59:00+01:00"
+    },
+    {
+      "id": "quran-tadabbur-gapfill-06-271-20261126",
+      "at": "2026-11-26T14:00:00+01:00",
+      "approvedBy": "owner-sero91ak-explicit-complete-open-tadabbur",
+      "reason": "Eigentümerauftrag, offene Tadabbur-Verse nur mit abgerufenen frühen Quellen zu ergänzen. Nur der Tadabbur-Datenbaum und der kanonische Fortsetzungszeiger. globalLock, Gebet, Qibla, Kids, OneSignal und native Projekte bleiben unverändert.",
+      "paths": [
+        "apple-tv/quran/tadabbur/",
+        "content/admin/canonical-content-continuation-policy.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00+01:00"
     }
   ],
   "enabled": true
