@@ -318,7 +318,7 @@ function resetAudio(){
   const meta=audioMeta(active),note=$("#msVoiceNote");
   if(meta?.url){
     audio.src=meta.url;audio.preload="metadata";
-    if(note)note.textContent="Serhat-Stimme · geprüfte Fuṣḥā-Aussprache";
+    if(note)note.textContent="Aufnahme · geprüfte Fuṣḥā-Aussprache";
   }else{
     audio.removeAttribute("src");
     if(note)note.textContent=isAudioOnlyAge()?"Das Hörbuch ist gerade nicht verfügbar.":"Der Lesetext ist vollständig. Audio folgt, sobald es freigeschaltet ist.";

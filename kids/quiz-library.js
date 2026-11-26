@@ -279,7 +279,7 @@
     if(!listen)return;
     listen.disabled=!text;
     listen.textContent=text?"▶ Frage anhören":"Audio noch nicht freigegeben";
-    listen.setAttribute("aria-label",text?"Quizfrage mit Serhat-V4-Masterstimme abspielen":
+    listen.setAttribute("aria-label",text?"Quizfrage anhören":
       "Diese Quizfrage hat noch keine zum Abspielen freigegebene V4-Aufnahme");
   }
   function refreshLocalQuizAudioControls(q){
@@ -811,7 +811,7 @@
       audio.type="button";
       audio.className="quiz-library-audio "+(state==="missing"?"voice-missing":state==="loading"?"voice-loading":"voice-ready");
       if(state==="ready"){
-        audio.setAttribute("aria-label","Frage "+q.number+" mit Serhat-Stimme hören");
+        audio.setAttribute("aria-label","Frage "+q.number+" anhören");
         audio.innerHTML='<span aria-hidden="true">▶</span><small>Hören</small>';
         audio.addEventListener("click",function(){
           var newV4=window.DARKidsQuizV4Approved;

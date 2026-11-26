@@ -97,7 +97,7 @@ function showNotice(){
     hint.style.cssText="display:block;margin-top:6px;font-weight:500";
     note.appendChild(hint);
   }
-  hint.textContent="Nur Test-App · echte V4-MP3s, Masterstimme Serhat · keine Systemstimme. Nicht als endgültig hörgeprüft freigegeben.";
+  hint.textContent="Nur Test-App · echte Aufnahmen · keine Systemstimme. Nicht als endgültig hörgeprüft freigegeben.";
   var sample=note.querySelector("#kidsV4PreviewSample");
   if(!sample){
     sample=root.document.createElement("button");
