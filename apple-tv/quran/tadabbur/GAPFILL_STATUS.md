@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-271` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-272` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4788
-totalVerifiedEntries: 4788
-loadedEntries: 4788
-uniqueVerifiedReferences: 4788
-missingCount: 1448
+entriesCount: 4798
+totalVerifiedEntries: 4798
+loadedEntries: 4798
+uniqueVerifiedReferences: 4798
+missingCount: 1438
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-271.json
-nächster Gap-Fill-Batch: entries-gap-06-272.json
+letzter Gap-Fill-Batch: entries-gap-06-272.json
+nächster Gap-Fill-Batch: entries-gap-06-273.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `598` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `608` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -711,3 +711,7 @@ Qurʾān 8:39: die authentische mawqūf-Auslegung von ʿAbdullāh ibn ʿUmar im 
 ## Batch 06-271 — 26.11.2026
 
 Acht frühe Lücken ab 2:82 an Tafsīr aṭ-Ṭabarī geprüft und ohne zugelassene Einstufung offen gelassen. Vierzehn Verse aus Ṣaḥīḥ al-Buḫārī, Kitāb at-Tafsīr, aufgenommen: 4:69, 5:117, 7:158, 9:94, 9:95, 9:96, 9:128, 11:7, 11:18, 11:102, 12:18, 17:78, 18:103, 18:105. Katalog 4788/6236, Lücken 1448, erste Lücke weiterhin 2:82. Wortlaut, Ketten und zurückgestellte Stellen in SOURCE_REVIEW_06-271.md. Keine OneSignal-Benachrichtigung.
+
+## Batch 06-272 — 26.11.2026
+
+Zehn Verse aus Ṣaḥīḥ al-Buḫārī, Kitāb at-Tafsīr: 4:163, 5:45, 7:33, 7:143, 9:1, 9:3, 9:12, 9:60, 12:7, 12:21. Bereits geprüfte und nicht aufgenommene Referenzen stehen in blocked-inspected.json und werden nicht erneut geöffnet. Katalog 4798/6236, Lücken 1438. Details in SOURCE_REVIEW_06-272.md.

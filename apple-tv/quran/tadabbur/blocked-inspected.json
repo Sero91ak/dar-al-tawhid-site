@@ -1,0 +1,163 @@
+{
+  "schemaVersion": "1.0",
+  "purpose": "Bereits geprüfte und nicht registrierte Verse. Spätere Batches überspringen diese Referenzen und gehen im Lückenbericht weiter.",
+  "rule": "Ein Eintrag hier ist keine Behauptung, der Vers habe niemals eine frühe Auslegung. Er hält nur fest, welche konkret abgerufenen Stellen die zugelassene Stufe nicht erfüllten.",
+  "entries": [
+    {
+      "reference": "2:82",
+      "batch": "06-271",
+      "sourcesChecked": [
+        "https://api.quran.com/api/v4/tafsirs/15/by_ayah/2:82"
+      ],
+      "reason": "Tafsīr aṭ-Ṭabarī abgerufen. Ibn ʿAbbās über Ibn Isḥāq und Ibn Zayd ohne zugelassene ṣaḥīḥ- oder ḥasan-Einstufung. Kein Buḫārī-Tafsīr-Matn zu diesem Vers."
+    },
+    {
+      "reference": "2:92",
+      "batch": "06-271",
+      "sourcesChecked": [
+        "https://api.quran.com/api/v4/tafsirs/15/by_ayah/2:92"
+      ],
+      "reason": "Tafsīr aṭ-Ṭabarī abgerufen, ohne ṣaḥīḥ-, ḥasan- oder Buḫārī-Markierung."
+    },
+    {
+      "reference": "2:98",
+      "batch": "06-271",
+      "sourcesChecked": [
+        "https://api.quran.com/api/v4/tafsirs/15/by_ayah/2:98"
+      ],
+      "reason": "Bericht 1634 in der abgerufenen Ausgabe ausdrücklich منقطع ضعيف الإسناد. Bericht 1635 beginnt mit حدثت عن عمار."
+    },
+    {
+      "reference": "2:99",
+      "batch": "06-271",
+      "sourcesChecked": [
+        "https://api.quran.com/api/v4/tafsirs/15/by_ayah/2:99"
+      ],
+      "reason": "Das Wort صحيح steht in فطرة صحيحة, nicht als Isnād-Grad."
+    },
+    {
+      "reference": "2:107",
+      "batch": "06-271",
+      "sourcesChecked": [
+        "https://api.quran.com/api/v4/tafsirs/15/by_ayah/2:107"
+      ],
+      "reason": "Tafsīr aṭ-Ṭabarī ohne zugelassene Einstufung und ohne Buḫārī-Matn."
+    },
+    {
+      "reference": "2:110",
+      "batch": "06-271",
+      "sourcesChecked": [
+        "https://api.quran.com/api/v4/tafsirs/15/by_ayah/2:110"
+      ],
+      "reason": "Tafsīr aṭ-Ṭabarī ohne zugelassene Einstufung und ohne Buḫārī-Matn."
+    },
+    {
+      "reference": "2:119",
+      "batch": "06-271",
+      "sourcesChecked": [
+        "https://api.quran.com/api/v4/tafsirs/15/by_ayah/2:119"
+      ],
+      "reason": "Der abgerufene Ṭabarī-Text weist den Bericht über die Frage nach den Eltern in der Sache zurück. Keine übernommene frühe Auslegung mit zugelassener Stufe."
+    },
+    {
+      "reference": "2:122",
+      "batch": "06-271",
+      "sourcesChecked": [
+        "https://api.quran.com/api/v4/tafsirs/15/by_ayah/2:122"
+      ],
+      "reason": "Tafsīr aṭ-Ṭabarī ohne zugelassene Einstufung und ohne Buḫārī-Matn."
+    },
+    {
+      "reference": "6:150",
+      "batch": "06-272",
+      "sourcesChecked": [
+        "https://www.quransecrets.com/library/bukhari/65/129"
+      ],
+      "reason": "Das Kapitel enthält nur die kettenlose Sprachbemerkung, هلم gelte im Ḥiǧāz für einen, zwei und viele. Kein verbundener Salaf-Bericht."
+    },
+    {
+      "reference": "9:2",
+      "batch": "06-272",
+      "sourcesChecked": [
+        "https://www.quransecrets.com/library/bukhari/65/145",
+        "https://sunnah.com/bukhari:4655"
+      ],
+      "reason": "Der unter diesem Kapitel stehende Bericht 4655 verkündet die Barāʾah und nennt vier Monate nicht. Für 9:1 verwendet, hier nicht als Beleg der Frist."
+    },
+    {
+      "reference": "9:4",
+      "batch": "06-272",
+      "sourcesChecked": [
+        "https://www.quransecrets.com/library/bukhari/65/147",
+        "https://sunnah.com/bukhari:4657"
+      ],
+      "reason": "Der Bericht nennt die Ansage, danach verrichte kein Götzendiener den Ḥaǧǧ, und nicht die Vertragsausnahme von 9:4."
+    },
+    {
+      "reference": "9:35",
+      "batch": "06-272",
+      "sourcesChecked": [
+        "https://www.quransecrets.com/library/bukhari/65/150"
+      ],
+      "reason": "Buḫārī 4661 ist mit وقال أحمد بن شبيب angehängt und spricht davon, dass die Zakāh die Güter reinige. Keine verbundene Erklärung des Erhitzens der gehorteten Schätze."
+    },
+    {
+      "reference": "9:129",
+      "batch": "06-271",
+      "sourcesChecked": [
+        "https://sunnah.com/bukhari:4679"
+      ],
+      "reason": "Der Bericht sagt آيتين und zitiert den Anfang von 9:128 إلى آخرهما. Der zweite Vers wird nicht eigens zitiert."
+    },
+    {
+      "reference": "10:90",
+      "batch": "06-272",
+      "sourcesChecked": [
+        "https://www.quransecrets.com/library/bukhari/65/165",
+        "https://sunnah.com/bukhari:4680"
+      ],
+      "reason": "Buḫārī 4680 handelt vom Fasten am ʿĀšūrāʾ, weil Mūsā an diesem Tag über Firʿawn siegte. Der Wortlaut erklärt 10:90 nicht. Die weiteren Berichte der Seite gehören zu 11:5, das bereits registriert ist."
+    },
+    {
+      "reference": "12:51",
+      "batch": "06-272",
+      "sourcesChecked": [
+        "https://www.quransecrets.com/library/bukhari/65/174"
+      ],
+      "reason": "Buḫārī 4694 spricht von Yūsufs Gefängnis und zitiert Qurʾān 2:260. Er zitiert die Aussage der Frauen in 12:51 nicht. Die Glosse حاش ist kettenlos."
+    },
+    {
+      "reference": "15:99",
+      "batch": "06-272",
+      "sourcesChecked": [
+        "https://www.quransecrets.com/library/bukhari/65/184"
+      ],
+      "reason": "Nur قال سالم: اليقين الموت, ohne Kette."
+    },
+    {
+      "reference": "17:3",
+      "batch": "06-272",
+      "sourcesChecked": [
+        "https://www.quransecrets.com/library/bukhari/65/189"
+      ],
+      "reason": "Buḫārī 4712 ist der lange Fürsprachebericht. Der abgerufene Wortlaut enthält عبدا شكورا nicht."
+    },
+    {
+      "reference": "17:70",
+      "batch": "06-272",
+      "sourcesChecked": [
+        "https://www.quransecrets.com/library/bukhari/65/187"
+      ],
+      "reason": "Nur kettenlose Worterklärungen, darunter كرمنا وأكرمنا واحد."
+    },
+    {
+      "reference": "18:54",
+      "batch": "06-271",
+      "sourcesChecked": [
+        "https://sunnah.com/bukhari:4724",
+        "https://www.quransecrets.com/library/bukhari/65/199"
+      ],
+      "reason": "Buḫārī 4724 fordert ʿAlī und Fāṭimah zum Gebet auf und hängt kettenlose Worterklärungen an. Er erklärt أكثر شيء جدلا nicht."
+    }
+  ]
+}
