@@ -155,19 +155,6 @@
   ],
   "unlockedScopes": [
     {
-      "id": "hadith-library-shelves-visitor-20261126",
-      "at": "2026-11-26T09:20:00+01:00",
-      "approvedBy": "owner-serhat-20261126-hadith-library-redesign-global-live-t21u",
-      "reason": "Owner Serhat approved the Ḥadīṯ library redesign before the reading view and global live for the adult surfaces that show it. Shelves, fihris and the architecture header only. No Kids, OneSignal, prayer, Qibla, push or Zentrale.",
-      "paths": [
-        "assets/hadith-library-shelves-v1.js",
-        "assets/hadith-library-shelves-v1.css",
-        "scripts/check-hadith-library-shelves-v1.cjs",
-        "scripts/cf-pages-build.js"
-      ],
-      "expiresAt": "2026-11-28T23:59:00+01:00"
-    },
-    {
       "id": "visitor-header-language-20261126",
       "at": "2026-11-26T08:55:00+01:00",
       "approvedBy": "owner-serhat-20261126-port-test-header-language-selector",
