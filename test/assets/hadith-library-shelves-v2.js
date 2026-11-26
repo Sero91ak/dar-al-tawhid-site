@@ -589,12 +589,17 @@
     var search = w.document.getElementById("hadithSearchInput");
     if (search) {
       search.oninput = function () {
+        w.__hadithSearchKeepUntil = Date.now() + 800;
         writeSearch(search.value || "");
         w.clearTimeout(w.__hadithSearchRenderTimer);
         w.__hadithSearchRenderTimer = w.setTimeout(function () {
           if (typeof w.render === "function") w.render();
         }, 140);
       };
+      if (w.__hadithSearchKeepUntil > Date.now()) {
+        try { search.focus({ preventScroll: true }); } catch (e) { try { search.focus(); } catch (e2) {} }
+        try { var pos = search.value.length; search.setSelectionRange(pos, pos); } catch (e3) {}
+      }
     }
     w.document.querySelectorAll(".hls-book").forEach(function (btn) {
       btn.addEventListener("click", function () { writeSearch(""); });

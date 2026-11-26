@@ -21095,7 +21095,7 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
 
 <!-- DAR_HADITH_STATIC_AUTHORITY_V1288 -->
 <link rel="stylesheet" href="/test/assets/ilm-hadith-v1243.css?v=hadith-sharh-inline-v1308">
-<link rel="stylesheet" id="darHadithShelvesV2" href="/test/assets/hadith-library-shelves-v2.css?v=20261126-filter1">
+<link rel="stylesheet" id="darHadithShelvesV2" href="/test/assets/hadith-library-shelves-v2.css?v=20261126-filter1b">
 <style id="dar-quran-ayah-action-interaction-v1">
 body.is-quran-reader-route .quran-ayah-action-btn--bookmark,
 body.is-quran-reader-route .quran-ayah-action-btn--tafsir{position:relative!important;z-index:4!important;pointer-events:auto!important;touch-action:manipulation!important;-webkit-tap-highlight-color:transparent}
@@ -21176,6 +21176,15 @@ body.is-quran-reader-route .quran-ayah-action-btn--tafsir.is-loading::after{cont
 <script src="/test/assets/dar-noble-3d-icons.js?v=1165"></script><!-- DAR_NOBLE_3D_TEST -->
 <script>document.documentElement.classList.add("dar-test-performance-v1");</script>
 <script>!function(){try{if(!/DarAlTawhid-iOS/i.test(String(navigator.userAgent||"")))return;if(document.documentElement.classList.contains("dar-ios-native-tabs"))return;function show(){try{if(document.documentElement.classList.contains("is-quran-player-route")||document.body.classList.contains("dar-quran-player-open"))return;document.documentElement.classList.remove("dar-soft-booting");var n=document.getElementById("bottomNav");if(!n)return;n.removeAttribute("hidden");if(document.documentElement.classList.contains("dar-adult-text-entry-active")||document.documentElement.classList.contains("adaptive-keyboard-open"))return;n.style.setProperty("display","flex","important");n.style.removeProperty("visibility");n.style.removeProperty("opacity");n.style.removeProperty("pointer-events");n.style.setProperty("z-index","80","important");document.body&&document.body.classList.add("has-bottom-nav")}catch(e){}}show();document.addEventListener("DOMContentLoaded",show);setTimeout(show,200);setTimeout(show,800);setTimeout(show,2000)}catch(e){}}();</script>
+<style id="dar-adult-keyboard-nav-inline-css">
+/* DAR_ADULT_KEYBOARD_NAV_STABILITY_V1_20261111: the test worker removes assets/adaptive-layout.css, so this page carries the same hide rule. */
+html.dar-adult-text-entry-active body.has-bottom-nav #bottomNav.bottom-nav,
+html.adaptive-keyboard-open body.has-bottom-nav #bottomNav.bottom-nav{visibility:hidden!important;opacity:0!important;pointer-events:none!important;transition:none!important}
+</style>
+<script id="dar-adult-keyboard-nav-inline">
+(function(){if(window.__DAR_KEYBOARD_NAV_INLINE)return;window.__DAR_KEYBOARD_NAV_INLINE=true;var timer=0,session=false;function editable(t){if(!t||t.disabled||t.readOnly)return false;if(t.isContentEditable)return true;var tag=String(t.tagName||"").toUpperCase();if(tag==="TEXTAREA")return true;if(tag!=="INPUT")return false;return /^(?:text|search|email|url|tel|number|password)$/.test(String(t.type||"text").toLowerCase())}function touch(){if(!document.body||!document.body.classList.contains("has-bottom-nav"))return false;var root=document.documentElement;if(root.classList.contains("dar-ios-native-app")||root.classList.contains("dar-android-native-app"))return true;if(navigator.maxTouchPoints>0)return true;return !!(window.matchMedia&&window.matchMedia("(pointer:coarse)").matches)}function vvOpen(){var vv=window.visualViewport;if(!vv||!(vv.height>0)||(vv.scale&&vv.scale>1.1))return false;var h=document.documentElement.clientHeight||window.innerHeight||0;return h>0&&h-vv.height>120}function paint(){var on=!!(session&&touch());document.documentElement.classList.toggle("dar-adult-text-entry-active",on);if(!on)return;var n=document.getElementById("bottomNav");if(n){n.style.removeProperty("visibility");n.style.removeProperty("opacity");n.style.removeProperty("pointer-events")}}document.addEventListener("focusin",function(e){if(!touch()||!editable(e.target))return;clearTimeout(timer);session=true;paint()},true);document.addEventListener("focusout",function(e){if(!editable(e.target)||!session)return;clearTimeout(timer);timer=setTimeout(function(){var still=touch()&&editable(document.activeElement);session=!!(still||(session&&vvOpen()));paint()},220)},true);if(window.visualViewport)window.visualViewport.addEventListener("resize",function(){if(!session)return;session=!!(editable(document.activeElement)||vvOpen());paint()},{passive:true})})();
+</script>
+
 <div class="float-actions" id="floatActions" hidden aria-hidden="true" data-mode="disabled">
   <div class="float-actions-panel" id="floatActionsPanel">
     <button id="qiblaFloat" class="float-btn" type="button" tabindex="-1" aria-hidden="true"></button>
@@ -39009,7 +39018,7 @@ html[data-theme] body:not(.is-home-route) > .app > footer.footer {
 <link rel="stylesheet" href="/test/assets/dar-test-reading-overlay-v1.css?v=20261025-1" id="darTestReadingOverlayStyles">
 <link rel="stylesheet" id="darTestDuoResponsiveCSSV1" href="/test/assets/dar-duo-responsive-v1.css?v=20261025-1">
 <script defer id="darTestDuoResponsiveJSV1" src="/test/assets/dar-duo-responsive-v1.js?v=20261025-1"></script>
-<script defer id="darHadithShelvesV2" src="/test/assets/hadith-library-shelves-v2.js?v=20261126-filter1"></script>
+<script defer id="darHadithShelvesV2" src="/test/assets/hadith-library-shelves-v2.js?v=20261126-filter1b"></script>
 </html>
 
 <style id="DAR_MOBILE_HOME_EDGE_TO_EDGE_V1">
