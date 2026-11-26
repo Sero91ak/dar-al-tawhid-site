@@ -5227,11 +5227,13 @@ html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain #less
 }
 </style>
 
-<style id="kids-academy-dock-clearance-v1472">
-/* Keep the existing look. Last lesson controls must sit or scroll clear of the
-   real Kids tab bar on every aspect ratio, including folded phones and iPads. */
-html body[data-kids-portal="true"]{
-  /* Measured by the portal; 128px is the fallback before the first measure. */
+<style id="kids-academy-dock-clearance-v1473">
+/* Keep the existing look. The lesson column ends above the real Kids tab bar
+   so play buttons are never painted underneath it, on any aspect ratio. */
+html body[data-kids-portal="true"][data-academy-view="lesson"] > main.wrap > #lessonMain.lesson-main:not([hidden]){
+  /* Win over V1445 padding-bottom:0. Shrink the flex column so it stops above the dock. */
+  box-sizing:border-box!important;
+  padding-bottom:calc(var(--kids-academy-dock-clearance) + 8px + env(safe-area-inset-bottom,0px))!important;
 }
 html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain #stageSurface > .lesson-stage:not([hidden]){
   /* Do not vertically center a short card into the dock overlay zone. */
@@ -5243,12 +5245,18 @@ html body[data-kids-portal="true"] :is(#academyHome,#academySubject){
   scroll-padding-block-end:calc(var(--kids-academy-dock-clearance) + 24px + env(safe-area-inset-bottom,0px))!important;
 }
 html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain #stageSurface{
-  padding-bottom:calc(var(--kids-academy-dock-clearance) + 28px + env(safe-area-inset-bottom,0px))!important;
-  scroll-padding-block-end:calc(var(--kids-academy-dock-clearance) + 28px + env(safe-area-inset-bottom,0px))!important;
+  /* The scrollport itself now ends above the dock; only a modest inner gap remains. */
+  padding-bottom:24px!important;
+  scroll-padding-block-end:24px!important;
+}
+html body[data-kids-portal="true"][data-academy-view="lesson"][data-academy-step="0"] #lessonMain #stageSurface{
+  /* Welcome: room for the in-lesson primary action, without counting the dock twice. */
+  padding-bottom:98px!important;
+  scroll-padding-block-end:98px!important;
 }
 html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain .focus-page-navigation,
 html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain .stage-audio{
-  scroll-margin-bottom:calc(var(--kids-academy-dock-clearance) + 16px)!important;
+  scroll-margin-bottom:24px!important;
 }
 </style>
 
