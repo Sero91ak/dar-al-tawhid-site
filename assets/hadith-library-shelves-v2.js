@@ -325,11 +325,15 @@
     if (typeof w.navigate === "function") w.navigate("hadith", value || "");
     else if (w.location) w.location.hash = "#/hadith" + (value ? "/" + value : "");
   }
+  function bareShelfWord(label) {
+    var n = norm(publicText(label || ""));
+    return !n || n === "kitab" || n === "bab" || countish(publicText(label || ""));
+  }
   function crumbs(book, chapter, section, loc, title) {
     var rows = [{ label: t("crumbHome", loc), value: "" }];
     if (book) rows.push({ label: book.title || t("works", loc), value: String(book.id) });
-    if (book && chapter) rows.push({ label: cleanKitab(chapter.title || t("kitab", loc)), value: book.id + "/" + chapter.id });
-    if (book && chapter && section) rows.push({ label: cleanBab(section.title || t("bab", loc)), value: book.id + "/" + chapter.id + "/" + section.id });
+    if (book && chapter && !bareShelfWord(cleanKitab(chapter.title || ""))) rows.push({ label: cleanKitab(chapter.title || t("kitab", loc)), value: book.id + "/" + chapter.id });
+    if (book && chapter && section && !bareShelfWord(cleanBab(section.title || ""))) rows.push({ label: cleanBab(section.title || t("bab", loc)), value: book.id + "/" + chapter.id + "/" + section.id });
     if (title) {
       var shown = norm(title);
       rows = rows.filter(function (row) { return norm(publicText(row.label)) !== shown; });

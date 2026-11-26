@@ -10,15 +10,22 @@
  */
 html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
   #darFrauenHeroDockV1416 > .frauen-library-hero {
-  /* Approx. 12% less vertical space without image zoom or distortion. */
-  height:clamp(212px,46cqw,316px)!important;
-  min-height:max-content!important;
+  /* 03-erste-generationen.jpg: both covered heads sit right of center. */
+  height:clamp(132px,20svh,176px)!important;
+  min-height:0!important;
+  max-height:176px!important;
+  background-position:76% 50%!important;
+  background-size:cover!important;
 }
-/* Group pages contain a live Back button and often longer titles.
- * Give them the room they need; never overlap Back/title/content. */
 html[data-theme] body.is-frauen-route[data-frauen-view="group"]
   #darFrauenHeroDockV1416 > .frauen-library-hero {
-  height:clamp(224px,46cqw,316px)!important;
+  height:clamp(140px,20svh,176px)!important;
+  max-height:176px!important;
+}
+html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
+  #darFrauenHeroDockV1416 > .frauen-library-hero h2{
+  font-size:clamp(22px,5.6vw,32px)!important;
+  line-height:1.12!important;
 }
 html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
   #darFrauenHeroDockV1416 > .frauen-library-hero .frauen-library-hero__content {
