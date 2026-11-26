@@ -5,33 +5,39 @@
   "checkedOn": "2026-11-26",
   "counts": {
     "works": 113,
-    "found": 24,
-    "notFound": 89,
-    "files": 21
+    "found": 30,
+    "notFound": 83,
+    "files": 27
   },
-  "files": {
-    "al-mustadrak.webp": "ae9aaa3179dcf129beef67c629ed80a2d0a1517311be1054ca064b6442fc1d5e",
-    "al-muwatta.webp": "41873d0f4560862e21e8f07d3cd9f264ae56e3899590b4f36841f764d2a17f70",
-    "ash-shariah.webp": "f0759fe65f4a98aef72284e4f7efb51787962aaf88f722502343710ccb527537",
-    "asma-wa-sifat.webp": "de09025e7a889a002acb0594f61f697114eb3f4292f8074ca99c7ae4d6f1d826",
-    "ibn-sad-tabaqat.webp": "aa386c3e0c0384e8099231081a29d41f8df0ba5654cdd9d6d69ce2600cd9af9e",
-    "ilam-al-muwaqqiin.webp": "f754b161ab943f69389708b5c8b931ca2f09dbb54fb376ce72e6e0d7197c181f",
-    "jami-bayan-al-ilm.webp": "4703bca7498808f7a4100afcfc1b600de35b4d61720832ef7048e80775e9f09b",
-    "manaqib-ahmad.webp": "7f11df9c45f1a2cd42fb31249c1d3a15a2846874e1a0c9d454d7ad179f91de54",
-    "musannaf-ibn-abi-saybah.webp": "260789e9167d7dd3b7306c25a3491527ae8f80022e88557358654b3abe02ab55",
-    "musnad-ahmad.webp": "248040dd3a8a6dfdd616fea5f8a2a2d933c62b42e3ec08d2ca46ca4efea3172c",
-    "sahih-al-buhari.webp": "7bfeba27ad9d9bbb1df9d0b2fa94231c375e2fddaf3a817a67a579a8faf6eb59",
-    "sahih-muslim.webp": "2957351bcbe0bfe119ac9311473127524c9c9bd4bd7f7fc0d520ce442c876bef",
-    "sharh-as-sunnah.webp": "7229d9d31e0bb1628b06d3b1324faf6fdc931a8621bf3b18c57338ff762389a5",
-    "sunan-abi-dawud.webp": "cef0f14809733925be3c609ef5145078389dbdd2eee4f251d8a5be40905ba5fe",
-    "sunan-ad-darimi.webp": "4ee0e10e1f0b0a7f094faf3302d41990ad61c97d8946a0a193e5d5d6ea97cead",
-    "sunan-al-kubra.webp": "63f22b38603add14ea8141e3f65af4993f62238cfcaa7de2e0bac0195a88afd0",
-    "sunan-an-nasai.webp": "8bcf0c4f76018dbf36e51083c21cb59b00a565e9123857db04e5b3d978804e10",
-    "sunan-ibn-magah.webp": "f7678200b46fc1fbae908a81e835602b1d19d9cf935317494e9ae51d97529ae4",
-    "hilyat-al-awliya.webp": "e812056eea9b86773075fad0fd00d7102c268cf76b177eafba2edf4064023c96",
-    "shuab-al-iman.webp": "5b4f317369495bb3d9925d172d2b7efab9f2dc095c63b73400a73af4ad0605c9",
-    "musannaf-abd-al-razzaq.webp": "7d28515edb95da47ef393f2f81e38be13bc19f1e6768b527b58d561aad94e852"
-  },
+  "files": [
+    "sahih-muslim.webp",
+    "sahih-al-buhari.webp",
+    "sharh-usul-itiqad.webp",
+    "musannaf-ibn-abi-saybah.webp",
+    "sunan-ad-darimi.webp",
+    "jami-bayan-al-ilm.webp",
+    "sunan-abi-dawud.webp",
+    "hilyat-al-awliya.webp",
+    "al-muwatta.webp",
+    "ash-shariah.webp",
+    "sharh-as-sunnah.webp",
+    "ahmad-az-zuhd.webp",
+    "al-mustadrak.webp",
+    "manaqib-ahmad.webp",
+    "musnad-ahmad.webp",
+    "sunan-ibn-magah.webp",
+    "shuab-al-iman.webp",
+    "ilam-al-muwaqqiin.webp",
+    "sunan-ad-daraqutni.webp",
+    "siyar-alam-an-nubala.webp",
+    "ibn-sad-tabaqat.webp",
+    "sunan-an-nasai.webp",
+    "asma-wa-sifat.webp",
+    "sunan-al-kubra.webp",
+    "ar-risalah-shafii.webp",
+    "tarikh-tabari.webp",
+    "musannaf-abd-al-razzaq.webp"
+  ],
   "rejected": [
     {
       "title": "Ǧāmiʿ at-Tirmiḏī",
@@ -52,6 +58,31 @@
       "title": "Ǧāmiʿ at-Tirmiḏī",
       "reason": "Dār at-Taʾṣīl liegt nur als Titelblatt vor, nicht als Umschlag.",
       "sourceUrl": "https://archive.org/details/hadith-tirmidhi-pdf"
+    },
+    {
+      "title": "Ǧāmiʿ at-Tirmiḏī",
+      "reason": "Dār ar-Risālah al-ʿĀlamiyyah liegt nur als Titelblatt vor, Dār al-Gharb ohne Umschlagfund.",
+      "sourceUrl": "https://archive.org/details/jt06_20230903"
+    },
+    {
+      "title": "aš-Šāṭibī, al-Iʿtiṣām",
+      "reason": "Dār Ibn ʿAffān nur als Titelblatt, kein Umschlag.",
+      "sourceUrl": "https://archive.org/details/0571Pdf_20180403"
+    },
+    {
+      "title": "al-Ibānah al-Kubrā",
+      "reason": "Gefundene Scans sind Titelblätter, kein Umschlag.",
+      "sourceUrl": "https://archive.org/details/20240818_20240818_0222"
+    },
+    {
+      "title": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān",
+      "reason": "Gefundene Ausgabe nur als Titelblatt.",
+      "sourceUrl": "https://archive.org/details/talib-al-ilm-66a038ea-6f6f-4c80-8b4b-1a0f6d7aa5ae"
+    },
+    {
+      "title": "Ibn Hišām, as-Sīrah",
+      "reason": "Nur ein illustrierter moderner Einband mit Herzmotiv, keine klassische Ausgabe.",
+      "sourceUrl": "https://archive.org/details/sirns1"
     }
   ],
   "works": [
@@ -79,8 +110,11 @@
       "title": "Šarḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
       "slug": "sarh-usul-i-tiqad-ahl-as-sunnah",
       "entries": 126,
-      "status": "not-found",
-      "shelf": "placeholder"
+      "status": "found",
+      "file": "assets/hadith-covers/sharh-usul-itiqad.webp",
+      "sha256": "664662d01695378bd102659523a4635bc7c351edba349c62a3c15f31d6769a55",
+      "edition": "Šarḥ Uṣūl Iʿtiqād Ahl as-Sunnah, al-Lālakāʾī, Dār al-Baṣīrah / Dār Ṭaybah",
+      "sourceUrl": "https://archive.org/details/dar_709"
     },
     {
       "title": "Muṣannaf Ibn Abī Šaybah",
@@ -194,8 +228,11 @@
       "title": "Aḥmad, az-Zuhd",
       "slug": "ahmad-az-zuhd",
       "entries": 14,
-      "status": "not-found",
-      "shelf": "placeholder"
+      "status": "found",
+      "file": "assets/hadith-covers/ahmad-az-zuhd.webp",
+      "sha256": "e89d7b5a739dc3496db563017f92e6e36a4efd8ec994508f4e314796b107c21c",
+      "edition": "az-Zuhd von Aḥmad ibn Ḥanbal, Dār Ibn al-Qayyim, Umschlag ohne Person",
+      "sourceUrl": "https://archive.org/details/20200131_20200131_0742"
     },
     {
       "title": "al-Ḫaṭīb al-Baġdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal",
@@ -387,15 +424,21 @@
       "title": "Sunan ad-Dāraquṭnī",
       "slug": "sunan-ad-daraqutni",
       "entries": 4,
-      "status": "not-found",
-      "shelf": "placeholder"
+      "status": "found",
+      "file": "assets/hadith-covers/sunan-ad-daraqutni.webp",
+      "sha256": "602619d1d4e9b9808fb277b3509d35b065458f06fe0821eee3ba078c561730c2",
+      "edition": "Sunan ad-Dāraquṭnī, grüner Schmuckumschlag, Bandangabe 1",
+      "sourceUrl": "https://archive.org/details/sunan-al-daraqutni-vol-3"
     },
     {
       "title": "aḏ-Ḏahabī, Siyar Aʿlām an-Nubalāʾ",
       "slug": "ad-dahabi-siyar-a-lam-an-nubala",
       "entries": 3,
-      "status": "not-found",
-      "shelf": "placeholder"
+      "status": "found",
+      "file": "assets/hadith-covers/siyar-alam-an-nubala.webp",
+      "sha256": "54044f7e2ee56efdb88bbd39639ed2b9d267e189ff08731ded2dcf74506ad0a1",
+      "edition": "Siyar Aʿlām an-Nubalāʾ, Muʾassasat ar-Risālah, weinroter Umschlag",
+      "sourceUrl": "https://archive.org/details/Siyar_Alam_Nubala_Thahabi"
     },
     {
       "title": "al-Āǧurrī, Aḫlāq Ḥamalat al-Qurʾān",
@@ -651,8 +694,11 @@
       "title": "aš-Šāfiʿī, ar-Risālah",
       "slug": "as-safi-i-ar-risalah",
       "entries": 1,
-      "status": "not-found",
-      "shelf": "placeholder"
+      "status": "found",
+      "file": "assets/hadith-covers/ar-risalah-shafii.webp",
+      "sha256": "ddd01ea7ac42a697940fcf22c0566959858c0d8ff7bd40b64e2704212b6e10f0",
+      "edition": "ar-Risālah von aš-Šāfiʿī, Ausgabe Aḥmad Šākir, Umschlag mit Rücken",
+      "sourceUrl": "https://archive.org/details/risalashafii"
     },
     {
       "title": "aš-Šāṭibī, al-Iʿtiṣām, Bd. 1, digitale S. 112",
@@ -711,8 +757,11 @@
       "title": "aṭ-Ṭabarī, Tārīḫ ar-Rusul wa-l-Mulūk",
       "slug": "at-tabari-tarih-ar-rusul-wa-l-muluk",
       "entries": 1,
-      "status": "not-found",
-      "shelf": "placeholder"
+      "status": "found",
+      "file": "assets/hadith-covers/tarikh-tabari.webp",
+      "sha256": "c4cee3a05fa059cfa56ae07acf2744f872099f8212899c38dfc9bf6b1f5f3264",
+      "edition": "Tārīḫ aṭ-Ṭabarī, geprägter Ledereinband der Alexandrina, Band 1",
+      "sourceUrl": "https://archive.org/details/AAlexandrina-147042"
     },
     {
       "title": "Ibn Abī ad-Dunyā, al-Ǧūʿ",
