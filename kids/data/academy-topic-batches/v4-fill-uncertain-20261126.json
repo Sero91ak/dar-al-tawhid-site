@@ -9,7 +9,9 @@
       "chars": 2855,
       "error": "UNCERTAIN_TIMEOUT: TimeoutError: The read operation timed out",
       "createdAt": "2026-11-26T10:47:00.454725+00:00",
-      "originalFound": false
+      "originalFound": true,
+      "resolvedHow": "first-segment-from-history-remaining-segments-generated-once",
+      "recoveredAt": "2026-11-26T14:54:21.156381+00:00"
     },
     {
       "ident": "deen-eltern-ehren",
@@ -18,7 +20,9 @@
       "chars": 2780,
       "error": "UNCERTAIN_TIMEOUT: TimeoutError: The read operation timed out",
       "createdAt": "2026-11-26T11:04:09.710301+00:00",
-      "originalFound": false
+      "originalFound": true,
+      "resolvedHow": "first-segment-from-history-remaining-segments-generated-once",
+      "recoveredAt": "2026-11-26T14:54:21.156381+00:00"
     },
     {
       "ident": "deen-geduld-dankbarkeit",
@@ -27,8 +31,12 @@
       "chars": 2762,
       "error": "UNCERTAIN_TIMEOUT: TimeoutError: The read operation timed out",
       "createdAt": "2026-11-26T12:01:20.266717+00:00",
-      "originalFound": false
+      "originalFound": true,
+      "resolvedHow": "first-segment-from-history-remaining-segments-generated-once",
+      "recoveredAt": "2026-11-26T14:54:21.156381+00:00"
     }
   ],
-  "nextStepWhenKeyAvailable": "Check official ElevenLabs history/request log for these three texts. Only if clearly not billed, generate once with a new ident suffix. Do not auto-retry blindly. Then STT-spot-check Arabic-heavy clips."
+  "nextStepWhenKeyAvailable": "Check official ElevenLabs history/request log for these three texts. Only if clearly not billed, generate once with a new ident suffix. Do not auto-retry blindly. Then STT-spot-check Arabic-heavy clips.",
+  "updatedAt": "2026-11-26T14:54:21.156381+00:00",
+  "resolved": "All three first segments were found billed in ElevenLabs history and recovered. Remaining segments were generated once. No auto-retry of the timed-out POST. Coverage is now 30/30 Den Dīn lessons, technical-ready-awaiting-human-review, liveConfirmed unset."
 }

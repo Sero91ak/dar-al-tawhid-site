@@ -5,10 +5,10 @@
   "modelId": "eleven_v4",
   "dictionaryVersionId": "ahttb2VMxTltSTOr5cec",
   "createdAt": "2026-11-26T08:53:47.152116+00:00",
-  "charactersSpentThisRun": 180456,
-  "generated": 1738,
+  "charactersSpentThisRun": 185404,
+  "generated": 1741,
   "reused": 133,
-  "uncertain": 3,
+  "uncertain": 0,
   "requests": {
     "259670d53d996fe05b4bae06": {
       "state": "done",
@@ -36194,12 +36194,29 @@
       "completedAt": "2026-11-26T10:47:00.068923+00:00"
     },
     "deen-was-ist-ikhlas": {
-      "state": "uncertain-do-not-retry",
+      "state": "done",
       "kind": "deen",
       "id": "was-ist-ikhlas",
       "chars": 2855,
       "createdAt": "2026-11-26T10:47:00.454725+00:00",
-      "error": "UNCERTAIN_TIMEOUT: TimeoutError: The read operation timed out"
+      "error": "UNCERTAIN_TIMEOUT: TimeoutError: The read operation timed out",
+      "recoveredFromHistory": true,
+      "historyItemIdFirstSegment": "CTAdRrTEx77YZo7MTxP4",
+      "url": "/kids/assets/kids-deen-audio/206f37e83b250ac5bee2.m4a",
+      "sha256": "581b115c176800d68768701f17a56b9d40b508b09fb2efd289b51d30161de786",
+      "durationSeconds": 172.8,
+      "charactersSpentNewSegments": 1858,
+      "providerRequestIds": [
+        "qbL3wmnnmWXuiyYJbOK1",
+        "HXjaoHTvF72Fzl5skfLj",
+        "NeA0ptFlrnL5ZVL7UT11",
+        "IL56WQ9EKpGEFaIZNKNU",
+        "nDS14zNUzfE6Nb5YNzBl"
+      ],
+      "usedDictionary": true,
+      "languageCode": "mixed",
+      "completedAt": "2026-11-26T14:49:49.390879+00:00",
+      "note": "First segment recovered from billed ElevenLabs history after client timeout; remaining segments generated once."
     },
     "deen-gebet-ibadah": {
       "state": "done",
@@ -36307,20 +36324,50 @@
       "completedAt": "2026-11-26T11:04:09.331703+00:00"
     },
     "deen-eltern-ehren": {
-      "state": "uncertain-do-not-retry",
+      "state": "done",
       "kind": "deen",
       "id": "eltern-ehren",
       "chars": 2780,
       "createdAt": "2026-11-26T11:04:09.710301+00:00",
-      "error": "UNCERTAIN_TIMEOUT: TimeoutError: The read operation timed out"
+      "error": "UNCERTAIN_TIMEOUT: TimeoutError: The read operation timed out",
+      "recoveredFromHistory": true,
+      "historyItemIdFirstSegment": "hKbo5yYIodUMI3UXlTAS",
+      "url": "/kids/assets/kids-deen-audio/d87c118f904dd4582462.m4a",
+      "sha256": "2f5fb147d3bf618a8f9c8775a94e73dd419bafb5333b19020b24f1226b43889a",
+      "durationSeconds": 172.08,
+      "charactersSpentNewSegments": 1920,
+      "providerRequestIds": [
+        "LPKwhXADDx7uhGqnVJ95",
+        "55Me6Euqby5vIW3UGVAs",
+        "IVGUwjtT453UG5lJl4FE"
+      ],
+      "usedDictionary": true,
+      "languageCode": "mixed",
+      "completedAt": "2026-11-26T14:50:36.812496+00:00",
+      "note": "First segment recovered from billed ElevenLabs history after client timeout; remaining segments generated once."
     },
     "deen-geduld-dankbarkeit": {
-      "state": "uncertain-do-not-retry",
+      "state": "done",
       "kind": "deen",
       "id": "geduld-dankbarkeit",
       "chars": 2762,
       "createdAt": "2026-11-26T12:01:20.266717+00:00",
-      "error": "UNCERTAIN_TIMEOUT: TimeoutError: The read operation timed out"
+      "error": "UNCERTAIN_TIMEOUT: TimeoutError: The read operation timed out",
+      "recoveredFromHistory": true,
+      "historyItemIdFirstSegment": "I8NERaz3itrGl24Hamny",
+      "url": "/kids/assets/kids-deen-audio/7ece377df54fe14c7b37.m4a",
+      "sha256": "800a433019fbfb630e6c745cfb48c4f905b3b34d9918957c8a3a35e04037e52d",
+      "durationSeconds": 175.6,
+      "charactersSpentNewSegments": 1170,
+      "providerRequestIds": [
+        "W6RInElLj0yUsb6XMkiS",
+        "ZvB9hc1yat5PJbTfAQMR",
+        "mRgUNm5IJ8of6xFuZDV7"
+      ],
+      "usedDictionary": true,
+      "languageCode": "mixed",
+      "completedAt": "2026-11-26T14:51:07.262467+00:00",
+      "note": "First segment recovered from billed ElevenLabs history after client timeout; remaining segments generated once."
     },
     "deen-freundlichkeit": {
       "state": "done",
@@ -36429,6 +36476,102 @@
       "usedDictionary": false,
       "languageCode": "de",
       "completedAt": "2026-11-26T12:25:37.830042+00:00"
+    },
+    "deen-was-ist-ikhlas-seg1-ar": {
+      "state": "done",
+      "kind": "deen-remaining-segment",
+      "id": "was-ist-ikhlas",
+      "seg": 1,
+      "lang": "ar",
+      "chars": 1,
+      "createdAt": "2026-11-26T14:49:06.592982+00:00",
+      "charactersSpent": 1,
+      "providerRequestId": "HXjaoHTvF72Fzl5skfLj",
+      "completedAt": "2026-11-26T14:49:08.588674+00:00"
+    },
+    "deen-was-ist-ikhlas-seg2-de": {
+      "state": "done",
+      "kind": "deen-remaining-segment",
+      "id": "was-ist-ikhlas",
+      "seg": 2,
+      "lang": "de",
+      "chars": 1358,
+      "createdAt": "2026-11-26T14:49:09.004095+00:00",
+      "charactersSpent": 1358,
+      "providerRequestId": "NeA0ptFlrnL5ZVL7UT11",
+      "completedAt": "2026-11-26T14:49:31.931172+00:00"
+    },
+    "deen-was-ist-ikhlas-seg3-ar": {
+      "state": "done",
+      "kind": "deen-remaining-segment",
+      "id": "was-ist-ikhlas",
+      "seg": 3,
+      "lang": "ar",
+      "chars": 1,
+      "createdAt": "2026-11-26T14:49:32.351441+00:00",
+      "charactersSpent": 1,
+      "providerRequestId": "IL56WQ9EKpGEFaIZNKNU",
+      "completedAt": "2026-11-26T14:49:34.363403+00:00"
+    },
+    "deen-was-ist-ikhlas-seg4-de": {
+      "state": "done",
+      "kind": "deen-remaining-segment",
+      "id": "was-ist-ikhlas",
+      "seg": 4,
+      "lang": "de",
+      "chars": 498,
+      "createdAt": "2026-11-26T14:49:34.778382+00:00",
+      "charactersSpent": 498,
+      "providerRequestId": "nDS14zNUzfE6Nb5YNzBl",
+      "completedAt": "2026-11-26T14:49:45.761768+00:00"
+    },
+    "deen-eltern-ehren-seg1-ar": {
+      "state": "done",
+      "kind": "deen-remaining-segment",
+      "id": "eltern-ehren",
+      "seg": 1,
+      "lang": "ar",
+      "chars": 1,
+      "createdAt": "2026-11-26T14:49:49.410033+00:00",
+      "charactersSpent": 1,
+      "providerRequestId": "55Me6Euqby5vIW3UGVAs",
+      "completedAt": "2026-11-26T14:49:51.114218+00:00"
+    },
+    "deen-eltern-ehren-seg2-de": {
+      "state": "done",
+      "kind": "deen-remaining-segment",
+      "id": "eltern-ehren",
+      "seg": 2,
+      "lang": "de",
+      "chars": 1919,
+      "createdAt": "2026-11-26T14:49:51.530623+00:00",
+      "charactersSpent": 1919,
+      "providerRequestId": "IVGUwjtT453UG5lJl4FE",
+      "completedAt": "2026-11-26T14:50:33.231974+00:00"
+    },
+    "deen-geduld-dankbarkeit-seg1-ar": {
+      "state": "done",
+      "kind": "deen-remaining-segment",
+      "id": "geduld-dankbarkeit",
+      "seg": 1,
+      "lang": "ar",
+      "chars": 1,
+      "createdAt": "2026-11-26T14:50:36.832714+00:00",
+      "charactersSpent": 1,
+      "providerRequestId": "ZvB9hc1yat5PJbTfAQMR",
+      "completedAt": "2026-11-26T14:50:38.501632+00:00"
+    },
+    "deen-geduld-dankbarkeit-seg2-de": {
+      "state": "done",
+      "kind": "deen-remaining-segment",
+      "id": "geduld-dankbarkeit",
+      "seg": 2,
+      "lang": "de",
+      "chars": 1169,
+      "createdAt": "2026-11-26T14:50:38.916713+00:00",
+      "charactersSpent": 1169,
+      "providerRequestId": "mRgUNm5IJ8of6xFuZDV7",
+      "completedAt": "2026-11-26T14:51:03.486295+00:00"
     }
   }
 }

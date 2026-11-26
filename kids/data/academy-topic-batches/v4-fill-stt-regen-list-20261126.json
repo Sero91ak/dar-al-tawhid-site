@@ -1,0 +1,41 @@
+{
+  "createdAt": "2026-11-26T14:53:16.483584+00:00",
+  "count": 2,
+  "items": [
+    {
+      "ident": "50bd67567f55f9eef810a7b1",
+      "kind": "academy",
+      "text": "Nūḥ عليه السلام blieb beharrlich, obwohl nicht jeder auf ihn hörte.",
+      "firstLesson": "sirah-nuh-geduldig-einladen",
+      "url": "/kids/assets/kids-academy-audio/105a5ec1d68956a92a78.m4a",
+      "reason": {
+        "missingArabic": [
+          "عليه",
+          "السلام"
+        ],
+        "missingHints": [],
+        "germanOverlap": 1.0,
+        "transcript": "Nuh, Alayhi Assalam, blieb beharrlich, obwohl nicht jeder auf ihn hörte"
+      }
+    },
+    {
+      "ident": "5682fb43216294dc2425a54c",
+      "kind": "academy",
+      "text": "Nūḥ عليه السلام rief seine Menschen beharrlich zu Allah.",
+      "firstLesson": "sirah-nuh-geduldig-einladen",
+      "url": "/kids/assets/kids-academy-audio/d561ece077d1ee4919c1.m4a",
+      "reason": {
+        "missingArabic": [
+          "عليه",
+          "السلام"
+        ],
+        "missingHints": [],
+        "germanOverlap": 1.0,
+        "transcript": "Nuh, Alayhi Assalam, rief seine Menschen beharrlich zu Allah"
+      }
+    }
+  ],
+  "decision": "do-not-regenerate",
+  "reason": "Both flagged clips were phonetically correct ʿalayhi as-salām heard as “Alayhi Assalam” by German Scribe. Confirmed false positives.",
+  "regenerated": 0
+}
