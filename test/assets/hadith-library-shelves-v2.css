@@ -1,21 +1,37 @@
 /* DĀR AL TAWḤĪD · Ḥadīṯ library shelves · index1b
    Owner heroes, restored: hadith-library-overview-v1267 (list) and hadith-library-study-v1267 (work).
    Reading typography stays with the existing detail view. */
-html[data-theme] body.is-hadith-route :is(.hadith-hub > .view-head, .hadith-detail > .post-reader-title){
+html[data-theme] body.is-hadith-route #appView.view > .hadith-hub.hadith-hub > .view-head{
+  position:sticky !important;
+  top:0 !important;
+  z-index:64 !important;
+  left:0 !important;
+  right:0 !important;
+  inset-inline:0 !important;
+  width:100% !important;
+  inline-size:100% !important;
+  max-inline-size:none !important;
+  margin:0 !important;
+  height:auto !important;
+  min-height:clamp(170px,21svh,235px) !important;
+  max-height:none !important;
+  block-size:auto !important;
+  min-block-size:clamp(170px,21svh,235px) !important;
+  max-block-size:none !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
   background-image:
     linear-gradient(100deg, color-mix(in srgb, var(--bg, #06140f) 86%, #06140f) 0%, color-mix(in srgb, var(--bg, #06140f) 42%, transparent) 48%, color-mix(in srgb, var(--bg, #06140f) 12%, transparent) 100%),
     url("/test/assets/ilm/hadith-library-overview-v1267.webp") !important;
-  background-size: cover, cover !important;
-  background-position: center, center 42% !important;
-  background-repeat: no-repeat !important;
+  background-size:cover, cover !important;
+  background-position:center, center 42% !important;
+  background-repeat:no-repeat !important;
 }
-html[data-theme] body.is-hadith-route .hadith-hub--nested > .view-head{
+html[data-theme] body.is-hadith-route #appView.view > .hadith-hub.hadith-hub--nested > .view-head{
   background-image:
     linear-gradient(100deg, color-mix(in srgb, var(--bg, #06140f) 86%, #06140f) 0%, color-mix(in srgb, var(--bg, #06140f) 42%, transparent) 48%, color-mix(in srgb, var(--bg, #06140f) 12%, transparent) 100%),
     url("/test/assets/ilm/hadith-library-study-v1267.webp") !important;
-  background-size: cover, cover !important;
-  background-position: center, center 46% !important;
-  background-repeat: no-repeat !important;
+  background-position:center, center 46% !important;
 }
 
 body.is-hadith-route{
@@ -337,9 +353,10 @@ html[data-theme] button.hls-row{
 .hls-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 18px;list-style:none;margin:0 0 8px;padding:0;}
 .hls-six{margin:0 0 8px;}
 .hls-six-label{margin:0 0 12px;font-family:Georgia,Palatino,serif;font-size:1.05rem;font-weight:650;color:var(--hls-ink);}
-html[data-theme] button.hls-card{
-  width:100%;display:flex;align-items:center;gap:10px;min-height:76px;padding:4px 0;
-  border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--hls-ink);text-align:start;
+html[data-theme] body.is-hadith-route #appView button.hls-card{
+  width:100%;display:flex;align-items:center;gap:12px;min-height:74px;padding:8px 0;
+  border:0 !important;border-radius:0 !important;background:transparent !important;box-shadow:none !important;
+  color:var(--hls-ink);text-align:start;
 }
 .hls-card .hls-thumb{width:52px;height:68px;}
 .hls-card-copy{min-width:0;display:flex;flex-direction:column;gap:2px;}
