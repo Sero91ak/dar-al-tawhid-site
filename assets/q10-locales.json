@@ -1,0 +1,340 @@
+{
+ "schemaVersion": 1,
+ "qSourceId": "qsource:10",
+ "canonicalUrl": "https://dar-al-tawhid.de/q/10/",
+ "localeStorageKey": "darAdultPreferredLocaleV1",
+ "supported": [
+  "de",
+  "ar",
+  "en",
+  "tr",
+  "ku",
+  "ckb",
+  "bs",
+  "fr",
+  "es"
+ ],
+ "approvedLocales": [
+  "de",
+  "ar",
+  "en",
+  "tr",
+  "ku",
+  "ckb",
+  "bs",
+  "fr",
+  "es"
+ ],
+ "pendingReviewLocales": [],
+ "review": "machine-translation-owner-approved",
+ "humanReligiousReview": false,
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
+ "sourceArabicImmutable": true,
+ "locales": {
+  "de": {
+   "title": "الله tut, was Er will",
+   "quote": "Wenn ein Jahmī zu dir sagt: Ich glaube nicht an einen Herrn, der von seinem Ort herabsteigt / sich bewegt, dann sage du: Ich glaube an einen Herrn, der tut, was Er will .",
+   "dir": "ltr",
+   "status": "source"
+  },
+  "ar": {
+   "title": "الله يفعل ما يشاء",
+   "quote": "إذا قال لك جهمي: لا أومن برب ينزل من مكانه / يتحرك، فقل أنت: أومن برب يفعل ما يشاء.",
+   "dir": "rtl",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "en": {
+   "title": "Allah does what He wills",
+   "quote": "If a Jahmī says to you: I do not believe in a Lord who descends from His place / moves, then you say: I believe in a Lord who does what He wills.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "tr": {
+   "title": "Allah dilediğini yapar",
+   "quote": "Bir Jahmī sana: Ben, yerinden inen / hareket eden bir Rabbe inanmam, derse, sen de de: Ben, dilediğini yapan bir Rabbe inanırım.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "ku": {
+   "title": "Allah tiştê ku bixwaze dike",
+   "quote": "Ger Jahmīyek ji te re bibêje: Ez baweriyê bi Rebbekî nayînim ku ji cihê xwe dadikeve / dilive, hingê tu bibêje: Ez baweriyê bi Rebbekî tînim ku çi bivê dike.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "ckb": {
+   "title": "خوای گەورە ئەوە دەکات کە دەیەوێت",
+   "quote": "ئەگەر جهمییەک پێت بڵێت: باوەڕم بە پەروەردگارێک نییە کە لە شوێنی خۆیەوە دابەزێت / بجووڵێت، ئەوا تۆ بڵێ: باوەڕم بە پەروەردگارێک ھەیە کە ئەوە دەکات کە خۆی دەیەوێت.",
+   "dir": "rtl",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "bs": {
+   "title": "Allah čini ono što hoće",
+   "quote": "Ako ti jedan Jahmī kaže: Ne vjerujem u Gospodara koji silazi sa Svog mjesta / koji se kreće, ti reci: Vjerujem u Gospodara koji čini ono što On hoće.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "fr": {
+   "title": "Allah fait ce qu’Il veut",
+   "quote": "Si un Jahmī te dit : Je ne crois pas en un Seigneur qui descend de Son lieu / qui se meut, alors dis : Je crois en un Seigneur qui fait ce qu’Il veut.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "es": {
+   "title": "Alá hace lo que quiere",
+   "quote": "Si un Jahmī te dice: No creo en un Señor que desciende de Su lugar / que se mueve, entonces di tú: Creo en un Señor que hace lo que Él quiere.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "الله tut, was Er will – DAR AL TAWḤĪD": {
+   "ar": "الله يفعل ما يشاء – DAR AL TAWḤĪD",
+   "en": "الله does what He wills – DAR AL TAWḤĪD",
+   "tr": "الله dilediğini yapar – DAR AL TAWḤĪD",
+   "ku": "الله dike çi ku bixwaze – DAR AL TAWḤĪD",
+   "ckb": "الله ئەوە دەکات کە دەیەوێت – DAR AL TAWḤĪD",
+   "bs": "الله čini što hoće – DAR AL TAWḤĪD",
+   "fr": "الله fait ce qu’Il veut – DAR AL TAWḤĪD",
+   "es": "الله hace lo que quiere – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "كتابات وفق القرآن والسنّة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre yazılar",
+   "ku": "Nivîs li gorî Qurʾān, Sunnah û Āthār",
+   "ckb": "بابەتەکان بەپێی قورئان، سوننەت و ئاسار",
+   "bs": "Prilozi prema Qurʾānu, Sunni i Āthāru",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Aportes según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "al-Fuḍayl ibn ʿIyāḍ · Aqīdah · Jahmiyyah": {
+   "ar": "al-Fuḍayl ibn ʿIyāḍ · Aqīdah · Jahmiyyah",
+   "en": "al-Fuḍayl ibn ʿIyāḍ · Aqīdah · Jahmiyyah",
+   "tr": "al-Fuḍayl ibn ʿIyāḍ · Aqīdah · Jahmiyyah",
+   "ku": "al-Fuḍayl ibn ʿIyāḍ · Aqīdah · Jahmiyyah",
+   "ckb": "al-Fuḍayl ibn ʿIyāḍ · Aqīdah · Jahmiyyah",
+   "bs": "al-Fuḍayl ibn ʿIyāḍ · Aqīdah · Jahmiyyah",
+   "fr": "al-Fuḍayl ibn ʿIyāḍ · Aqīdah · Jahmiyyah",
+   "es": "al-Fuḍayl ibn ʿIyāḍ · Aqīdah · Jahmiyyah"
+  },
+  "„Wenn ein Jahmī zu dir sagt: Ich glaube nicht an einen Herrn, der von seinem Ort herabsteigt / sich bewegt, dann sage du: Ich glaube an einen Herrn, der": {
+   "ar": "«إذا قال لك جهمي: أنا لا أؤمن بربّ ينزل من مكانه / يتحرّك، فقل أنت: أنا أؤمن بربّ",
+   "en": "“If a Jahmī says to you: I do not believe in a Lord who descends from His place / moves, then you say: I believe in a Lord who",
+   "tr": "“Bir Cehmî sana: Ben yerinden inen / hareket eden bir Rabbe iman etmem, derse, sen de: Ben öyle bir Rabbe iman ederim ki",
+   "ku": "“Heke Jahmîyek ji te re bibêje: Ez bi Rebbekî bawer nakim ku ji cihê xwe dadikeve / dilive, wê demê tu bibêje: Ez bi Rebbekî bawer dikim ku",
+   "ckb": "«ئەگەر جەهمییەک پێت بڵێت: بڕوام بە پەروەردگارێک نییە کە لە شوێنەکەیەوە دادەبەزێت / دەجوڵێت، ئەوا تۆ بڵێ: بڕوام بە پەروەردگارێک هەیە کە",
+   "bs": "„Ako ti džahmija kaže: Ne vjerujem u Gospodara koji silazi sa Svog mjesta / koji se kreće, onda ti reci: Vjerujem u Gospodara koji",
+   "fr": "« Si un Jahmī te dit : Je ne crois pas en un Seigneur qui descend de Son lieu / qui se meut, alors dis : Je crois en un Seigneur qui",
+   "es": "«Si un Jahmī te dice: No creo en un Señor que desciende de Su lugar / que se mueve, entonces di tú: Creo en un Señor que"
+  },
+  "al-Fuḍayl ibn ʿIyāḍ (رحمه الله), gest. 187 H.": {
+   "ar": "al-Fuḍayl ibn ʿIyāḍ (رحمه الله)، ت. 187 H.",
+   "en": "al-Fuḍayl ibn ʿIyāḍ (رحمه الله), d. 187 H.",
+   "tr": "al-Fuḍayl ibn ʿIyāḍ (رحمه الله), ö. 187 H.",
+   "ku": "al-Fuḍayl ibn ʿIyāḍ (رحمه الله), w. 187 H.",
+   "ckb": "al-Fuḍayl ibn ʿIyāḍ (رحمه الله، کۆچی دوایی 187 H).",
+   "bs": "al-Fuḍayl ibn ʿIyāḍ (رحمه الله), umro 187. H.",
+   "fr": "al-Fuḍayl ibn ʿIyāḍ (رحمه الله), m. 187 H.",
+   "es": "al-Fuḍayl ibn ʿIyāḍ (رحمه الله), m. 187 H."
+  },
+  "Bestätigung der überlieferten Eigenschaften von": {
+   "ar": "إثبات الصفات المروية لـ",
+   "en": "Affirmation of the transmitted attributes of",
+   "tr": "Rivayet edilen sıfatların tasdiki:",
+   "ku": "Pejirandina sifetên ragihandî yên",
+   "ckb": "پشتڕاستکردنەوەی سیفەتە گێڕدراوەکانی",
+   "bs": "Potvrda prenesenih svojstava",
+   "fr": "Affirmation des attributs transmis de",
+   "es": "Afirmación de los atributos transmitidos de"
+  },
+  "ohne Taḥrīf, Taʿṭīl, Takyīf oder Tamthīl.": {
+   "ar": "بلا تحريف، ولا تعطيل، ولا تكييف، ولا تمثيل.",
+   "en": "without Taḥrīf, Taʿṭīl, Takyīf or Tamthīl.",
+   "tr": "Taḥrīf, Taʿṭīl, Takyīf veya Tamthīl olmaksızın.",
+   "ku": "bê Taḥrīf, Taʿṭīl, Takyīf an Tamthīl.",
+   "ckb": "بەبێ تەحریف، تەعطیل، تەکیف یان تەمثیل.",
+   "bs": "bez Taḥrīfa, Taʿṭīla, Takyīfa ili Tamthīla.",
+   "fr": "sans Taḥrīf, Taʿṭīl, Takyīf ni Tamthīl.",
+   "es": "sin Taḥrīf, Taʿṭīl, Takyīf ni Tamthīl."
+  },
+  "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah": {
+   "ar": "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
+   "en": "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
+   "tr": "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
+   "ku": "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
+   "ckb": "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
+   "bs": "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
+   "fr": "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
+   "es": "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah"
+  },
+  "ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth": {
+   "ar": "ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth",
+   "en": "ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth",
+   "tr": "ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth",
+   "ku": "ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth",
+   "ckb": "ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth",
+   "bs": "ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth",
+   "fr": "ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth",
+   "es": "ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth"
+  },
+  "Die Formulierungen der Überlieferungswege unterscheiden sich leicht: „يَزُولُ“, „يَنْزِلُ“ oder „يَنْزِلُ، يَزُولُ“. Der Kern der Aussage bleibt:": {
+   "ar": "تختلف ألفاظ طرق الرواية اختلافًا يسيرًا: «يَزُولُ»، «يَنْزِلُ» أو «يَنْزِلُ، يَزُولُ». ويبقى لُبّ القول:",
+   "en": "The wordings of the transmission paths differ slightly: “يَزُولُ”, “يَنْزِلُ” or “يَنْزِلُ، يَزُولُ”. The core of the statement remains:",
+   "tr": "Rivayet yollarının lafızları biraz farklıdır: “يَزُولُ”, “يَنْزِلُ” veya “يَنْزِلُ، يَزُولُ”. Sözün özü şudur:",
+   "ku": "Gotinên rêyên ragihandinê hinekî ji hev cuda ne: “يَزُولُ”, “يَنْزِلُ” an “يَنْزِلُ، يَزُولُ”. Navika gotinê dimîne:",
+   "ckb": "داڕشتنەکانی ڕێگەکانی گێڕانەوە کەمێک جیاوازن: «يَزُولُ»، «يَنْزِلُ» یان «يَنْزِلُ، يَزُولُ». ناوەڕۆکی قسەکە دەمێنێت:",
+   "bs": "Formulacije puteva predaje se malo razlikuju: „يَزُولُ“, „يَنْزِلُ“ ili „يَنْزِلُ، يَزُولُ“. Srž izjave ostaje:",
+   "fr": "Les formulations des voies de transmission diffèrent légèrement : « يَزُولُ », « يَنْزِلُ » ou « يَنْزِلُ، يَزُولُ ». Le cœur du propos demeure :",
+   "es": "Las formulaciones de las vías de transmisión difieren ligeramente: «يَزُولُ», «يَنْزِلُ» o «يَنْزِلُ، يَزُولُ». El núcleo del dicho permanece:"
+  },
+  "al-Buḫārī führt die Aussage in": {
+   "ar": "يورد al-Buḫārī القول في",
+   "en": "al-Buḫārī cites the statement in",
+   "tr": "al-Buḫārī sözü şurada aktarır:",
+   "ku": "al-Buḫārī gotinê tîne di",
+   "ckb": "al-Buḫārī قسەکە دەهێنێت لە",
+   "bs": "al-Buḫārī navodi izjavu u",
+   "fr": "al-Buḫārī cite le propos dans",
+   "es": "al-Buḫārī cita el dicho en"
+  },
+  "im Abschnitt gegen die Muʿaṭṭilah an.": {
+   "ar": "في القسم الذي يردّ على المعطّلة.",
+   "en": "in the section against the Muʿaṭṭilah.",
+   "tr": "Muʿaṭṭilah’a karşı olan bölümde.",
+   "ku": "di beşa li dijî Muʿaṭṭilah de.",
+   "ckb": "لە بەشی دژی موئەتتیلەدا.",
+   "bs": "u odjeljku protiv Muʿaṭṭilah.",
+   "fr": "dans la section contre les Muʿaṭṭilah.",
+   "es": "en la sección contra los Muʿaṭṭilah."
+  },
+  "al-Lālikāʾī überliefert sie unter Nr. 775 mit dem Weg: Aḥmad → ʿUmar → Aḥmad b. al-Ḥasan → Aḥmad b. ʿAlī al-Abbār → Abū Muḥammad al-Balkhī → al-Fuḍayl ibn ʿIyāḍ.": {
+   "ar": "يرويها al-Lālikāʾī تحت رقم 775 بالطريق: Aḥmad → ʿUmar → Aḥmad b. al-Ḥasan → Aḥmad b. ʿAlī al-Abbār → Abū Muḥammad al-Balkhī → al-Fuḍayl ibn ʿIyāḍ.",
+   "en": "al-Lālikāʾī transmits it under no. 775 by the path: Aḥmad → ʿUmar → Aḥmad b. al-Ḥasan → Aḥmad b. ʿAlī al-Abbār → Abū Muḥammad al-Balkhī → al-Fuḍayl ibn ʿIyāḍ.",
+   "tr": "al-Lālikāʾī onu no. 775 altında şu yolla rivayet eder: Aḥmad → ʿUmar → Aḥmad b. al-Ḥasan → Aḥmad b. ʿAlī al-Abbār → Abū Muḥammad al-Balkhī → al-Fuḍayl ibn ʿIyāḍ.",
+   "ku": "al-Lālikāʾī wê di bin nr. 775 de bi vê rêyê radigihîne: Aḥmad → ʿUmar → Aḥmad b. al-Ḥasan → Aḥmad b. ʿAlī al-Abbār → Abū Muḥammad al-Balkhī → al-Fuḍayl ibn ʿIyāḍ.",
+   "ckb": "al-Lālikāʾī لە ژێر ژمارە 775 بەم ڕێگەیە دەیگێڕێتەوە: Aḥmad → ʿUmar → Aḥmad b. al-Ḥasan → Aḥmad b. ʿAlī al-Abbār → Abū Muḥammad al-Balkhī → al-Fuḍayl ibn ʿIyāḍ.",
+   "bs": "al-Lālikāʾī je prenosi pod br. 775 putem: Aḥmad → ʿUmar → Aḥmad b. al-Ḥasan → Aḥmad b. ʿAlī al-Abbār → Abū Muḥammad al-Balkhī → al-Fuḍayl ibn ʿIyāḍ.",
+   "fr": "al-Lālikāʾī la transmet sous le n° 775 par la voie : Aḥmad → ʿUmar → Aḥmad b. al-Ḥasan → Aḥmad b. ʿAlī al-Abbār → Abū Muḥammad al-Balkhī → al-Fuḍayl ibn ʿIyāḍ.",
+   "es": "al-Lālikāʾī la transmite bajo el n.º 775 por la vía: Aḥmad → ʿUmar → Aḥmad b. al-Ḥasan → Aḥmad b. ʿAlī al-Abbār → Abū Muḥammad al-Balkhī → al-Fuḍayl ibn ʿIyāḍ."
+  },
+  "im Zusammenhang der überlieferten Eigenschaften.": {
+   "ar": "في سياق الصفات المروية.",
+   "en": "in the context of the transmitted attributes.",
+   "tr": "rivayet edilen sıfatlar bağlamında.",
+   "ku": "di çarçova sifetên ragihandî de.",
+   "ckb": "لە پەیوەندی سیفەتە گێڕدراوەکاندا.",
+   "bs": "u kontekstu prenesenih svojstava.",
+   "fr": "dans le contexte des attributs transmis.",
+   "es": "en el contexto de los atributos transmitidos."
+  },
+  ", Bāb „mā dhakara ahl al-ʿilm lil-muʿaṭṭilah...“, S. 14/17 je nach Druck.": {
+   "ar": "، Bāb «mā dhakara ahl al-ʿilm lil-muʿaṭṭilah...»، ص 14/17 حسب الطبعة.",
+   "en": ", Bāb “mā dhakara ahl al-ʿilm lil-muʿaṭṭilah...”, p. 14/17 depending on the printing.",
+   "tr": ", Bāb “mā dhakara ahl al-ʿilm lil-muʿaṭṭilah...”, s. 14/17 baskıya göre.",
+   "ku": ", Bāb “mā dhakara ahl al-ʿilm lil-muʿaṭṭilah...”, r. 14/17 li gor çapê.",
+   "ckb": "، Bāb «mā dhakara ahl al-ʿilm lil-muʿaṭṭilah...»، لاپەڕە 14/17 بەپێی چاپ.",
+   "bs": ", Bāb „mā dhakara ahl al-ʿilm lil-muʿaṭṭilah...“, str. 14/17 zavisno od izdanja.",
+   "fr": ", Bāb « mā dhakara ahl al-ʿilm lil-muʿaṭṭilah... », p. 14/17 selon l’impression.",
+   "es": ", Bāb “mā dhakara ahl al-ʿilm lil-muʿaṭṭilah...”, p. 14/17 según la impresión."
+  },
+  ", S. 228 nach genannter Druckausgabe.": {
+   "ar": "، ص 228 حسب الطبعة المذكورة.",
+   "en": ", p. 228 according to the stated printed edition.",
+   "tr": ", anılan baskıya göre s. 228.",
+   "ku": ", r. 228 li gor çapê navborî.",
+   "ckb": "، لاپەڕە 228 بەپێی چاپی باسکراو.",
+   "bs": ", str. 228 prema navedenom štampanom izdanju.",
+   "fr": ", p. 228 d’après l’édition imprimée mentionnée.",
+   "es": ", p. 228 según la edición impresa mencionada."
+  },
+  "Khalq Afʿāl al-ʿIbād öffnen": {
+   "ar": "افتح Khalq Afʿāl al-ʿIbād",
+   "en": "Open Khalq Afʿāl al-ʿIbād",
+   "tr": "Khalq Afʿāl al-ʿIbād’ı aç",
+   "ku": "Khalq Afʿāl al-ʿIbād veke",
+   "ckb": "Khalq Afʿāl al-ʿIbād بکەرەوە",
+   "bs": "Otvori Khalq Afʿāl al-ʿIbād",
+   "fr": "Ouvrir Khalq Afʿāl al-ʿIbād",
+   "es": "Abrir Khalq Afʿāl al-ʿIbād"
+  },
+  "Islamweb · al-Buḫārī · markierte Stelle": {
+   "ar": "Islamweb · al-Buḫārī · موضع مميَّز",
+   "en": "Islamweb · al-Buḫārī · highlighted passage",
+   "tr": "Islamweb · al-Buḫārī · işaretli yer",
+   "ku": "Islamweb · al-Buḫārī · cihê nîşankirî",
+   "ckb": "Islamweb · al-Buḫārī · شوێنی نیشانکراو",
+   "bs": "Islamweb · al-Buḫārī · označeno mjesto",
+   "fr": "Islamweb · al-Buḫārī · passage marqué",
+   "es": "Islamweb · al-Buḫārī · pasaje marcado"
+  },
+  "al-Lālikāʾī Nr. 775 öffnen": {
+   "ar": "افتح al-Lālikāʾī رقم 775",
+   "en": "Open al-Lālikāʾī no. 775",
+   "tr": "al-Lālikāʾī no. 775’i aç",
+   "ku": "al-Lālikāʾī nr. 775 veke",
+   "ckb": "al-Lālikāʾī ژمارە 775 بکەرەوە",
+   "bs": "Otvori al-Lālikāʾī br. 775",
+   "fr": "Ouvrir al-Lālikāʾī n° 775",
+   "es": "Abrir al-Lālikāʾī n.º 775"
+  },
+  "Islamweb · Sharḥ Uṣūl Iʿtiqād · Isnād sichtbar": {
+   "ar": "Islamweb · Sharḥ Uṣūl Iʿtiqād · الإسناد ظاهر",
+   "en": "Islamweb · Sharḥ Uṣūl Iʿtiqād · Isnād visible",
+   "tr": "Islamweb · Sharḥ Uṣūl Iʿtiqād · isnad görünür",
+   "ku": "Islamweb · Sharḥ Uṣūl Iʿtiqād · Isnād xuya ye",
+   "ckb": "Islamweb · Sharḥ Uṣūl Iʿtiqād · ئیسناد دیارە",
+   "bs": "Islamweb · Sharḥ Uṣūl Iʿtiqād · isnād vidljiv",
+   "fr": "Islamweb · Sharḥ Uṣūl Iʿtiqād · Isnād visible",
+   "es": "Islamweb · Sharḥ Uṣūl Iʿtiqād · Isnād visible"
+  },
+  "Bestätigenden Wortlaut öffnen": {
+   "ar": "افتح اللفظ المؤيِّد",
+   "en": "Open the confirming wording",
+   "tr": "Doğrulayan lafzı aç",
+   "ku": "Gotina piştrastker veke",
+   "ckb": "دەقی پشتڕاستکەرەوە بکەرەوە",
+   "bs": "Otvori potvrđujući tekst",
+   "fr": "Ouvrir le texte confirmant",
+   "es": "Abrir el texto que confirma"
+  },
+  "Shamela · Überlieferungsweg über al-Athram": {
+   "ar": "Shamela · طريق الرواية عن al-Athram",
+   "en": "Shamela · transmission path through al-Athram",
+   "tr": "Shamela · al-Athram üzerinden rivayet yolu",
+   "ku": "Shamela · rêya ragihandinê bi rêya al-Athram",
+   "ckb": "Shamela · ڕێگەی گێڕانەوە لە ڕێگەی al-Athram",
+   "bs": "Shamela · put predaje preko al-Athrama",
+   "fr": "Shamela · voie de transmission par al-Athram",
+   "es": "Shamela · vía de transmisión a través de al-Athram"
+  },
+  "Archive.org · ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth": {
+   "ar": "Archive.org · ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth",
+   "en": "Archive.org · ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth",
+   "tr": "Archive.org · ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth",
+   "ku": "Archive.org · ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth",
+   "ckb": "Archive.org · ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth",
+   "bs": "Archive.org · ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth",
+   "fr": "Archive.org · ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth",
+   "es": "Archive.org · ʿAqīdat as-Salaf wa Aṣḥāb al-Ḥadīth"
+  },
+  "Dieser Athar der Salaf wird gegen die Umdeutung der überlieferten Eigenschaften angeführt: Man bestätigt, was in der Offenbarung und in den Āthār überliefert wurde, ohne die Art und Weise zu bestimmen.": {
+   "ar": "يُستشهَد بهذا الأثر من السلف ضد تأويل الصفات المروية: يُثبَت ما ورد في الوحي وفي الآثار، من غير تحديد للكيفية.",
+   "en": "This Athar of the Salaf is cited against the reinterpretation of the transmitted attributes: one affirms what was transmitted in the revelation and in the Āthār, without specifying the how.",
+   "tr": "Salaf’ın bu eseri, rivayet edilen sıfatların teviline karşı anılır: Vahiyde ve Āthār’da nakledilen tasdik edilir, keyfiyet belirlenmeksizin.",
+   "ku": "Ev Atharê Salaf li dijî wergêrana sifetên ragihandî tê anîn: Tiştê ku di wehyê û di Āthār de hatiye ragihandin tê pejirandin, bêyî ku awayê wê bê diyarkirin.",
+   "ckb": "ئەم ئەسەرەی سەلەف دژی لێکدانەوەی سیفەتە گێڕدراوەکان دەهێنرێت: ئەوەی لە وەحی و لە ئاساردا گێڕدراوەتەوە پشتڕاست دەکرێتەوە، بەبێ دیاریکردنی چۆنیەتی.",
+   "bs": "Ovaj athar Salafa navodi se protiv preinačavanja prenesenih svojstava: potvrđuje se ono što je preneseno u objavi i u āthāru, bez određivanja načina.",
+   "fr": "Cet Athar des Salaf est avancé contre la réinterprétation des attributs transmis : on affirme ce qui a été transmis dans la révélation et dans les Āthār, sans déterminer le comment.",
+   "es": "Este Athar de los Salaf se aduce contra la reinterpretación de los atributos transmitidos: se afirma lo transmitido en la revelación y en los Āthār, sin determinar el cómo."
+  }
+ }
+}
