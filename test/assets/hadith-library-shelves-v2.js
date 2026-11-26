@@ -454,9 +454,17 @@
   }
   var BY_KEY = { sahihayn: "bySahihayn", sunan: "bySunan", musnad: "byMusnad", muwatta: "byMuwatta", musannaf: "byMusannaf", weitere: "byWeitere" };
   function page(title, sub, search, body, loc, nested) {
-    var head = '<div class="view-head"><h2>' + esc(title || "") + "</h2>" + (sub ? '<div class="view-desc">' + esc(sub) + "</div>" : "") + "</div>";
-    return '<div class="dua-hub hadith-hub' + (nested ? " hadith-hub--nested" : "") + '" lang="' + esc(loc) + '" dir="' + (rtl(loc) ? "rtl" : "ltr") + '">' +
-      head + (search || "") + '<div class="hls">' + (body || "") + "</div></div>";
+    var img = nested ? HERO_WORK : HERO_LIST;
+    var dir = rtl(loc) ? "rtl" : "ltr";
+    var hero = '<section class="frauen-library-hero frauen-library-hero--' + (nested ? "section" : "hub") + '" data-hero-readable="true" style="--frauen-hero-img:url(\'' + img + '\')">' +
+      '<div class="frauen-library-hero__shade" aria-hidden="true"></div>' +
+      '<div class="frauen-library-hero__content"><h2>' + esc(title || "") + "</h2>" +
+      (sub ? '<p class="frauen-library-hero__subtitle">' + esc(sub) + "</p>" : "") +
+      "</div></section>";
+    var dock = '<div id="darHadithHeroDockV1416" class="dar-frauen-herodock" data-dar-frauen-stage="v1416" lang="' + esc(loc) + '" dir="' + dir + '">' +
+      hero + '<div class="frauen-library-search-wrap">' + (search || "") + "</div></div>";
+    return '<div class="dua-hub hadith-hub' + (nested ? " hadith-hub--nested" : "") + '" lang="' + esc(loc) + '" dir="' + dir + '">' +
+      dock + '<div class="dar-frauen-dock-spacer" aria-hidden="true"></div><div class="hls">' + (body || "") + "</div></div>";
   }
   function workMatch(book, q) {
     var n = norm(q);
@@ -749,51 +757,66 @@
       else w.localStorage.removeItem("darHadithSearchQueryV1");
     } catch (e) {}
   }
-  function brandBottom() {
-    var nodes = w.document.querySelectorAll("header");
-    var i, cs, rect;
-    for (i = 0; i < nodes.length; i++) {
-      cs = w.getComputedStyle(nodes[i]);
-      if (cs.position !== "fixed" && cs.position !== "sticky") continue;
-      rect = nodes[i].getBoundingClientRect();
-      if (rect.height > 20 && rect.top < 40) return Math.round(rect.bottom);
-    }
-    return 0;
+  var DOCK_ID = "darHadithHeroDockV1416";
+  function parkedDock() {
+    var nodes = w.document.querySelectorAll("#" + DOCK_ID);
+    var i;
+    for (i = 0; i < nodes.length; i++) if (nodes[i].parentElement === w.document.body) return nodes[i];
+    return null;
   }
-  function pinHero() {
+  function unmountHadithDock() {
+    var stage = parkedDock();
+    if (stage) stage.remove();
+    if (w.document.body) w.document.body.style.removeProperty("--frauen-dock-reserved");
+  }
+  /* Same body dock as Frauen HERODOCK_V1416: one fixed stage on BODY,
+   * width from #appView, one in-flow spacer, no scroll listener. */
+  function syncHadithDock() {
     if (!w.document || !onHadith()) return;
+    var stage = parkedDock();
     var app = w.document.getElementById("appView");
-    var head = w.document.querySelector("#appView .hadith-hub > .view-head");
-    if (!app || !head) return;
+    var spacer = w.document.querySelector("#appView .dar-frauen-dock-spacer");
+    if (!stage || !app) return;
     var box = app.getBoundingClientRect();
-    var top = brandBottom();
-    head.style.position = "fixed";
-    head.style.top = top + "px";
-    head.style.left = Math.round(box.left) + "px";
-    head.style.width = Math.round(box.width) + "px";
-    head.style.maxWidth = "none";
-    head.style.margin = "0";
-    head.style.right = "auto";
-    head.style.zIndex = "64";
-    head.style.borderRadius = "0";
-    var h = Math.round(head.getBoundingClientRect().height);
-    var hub = head.parentElement;
-    if (h > 40 && hub) {
-      var pad = Math.max(0, Math.round(top + h - hub.getBoundingClientRect().top));
-      hub.style.paddingTop = pad + "px";
-      w.document.documentElement.style.setProperty("--dar-immersive-hero-height", (top + h) + "px");
+    var viewport = w.document.documentElement.clientWidth || w.innerWidth;
+    var left = Math.max(0, Math.min(viewport - 1, Math.round(box.left)));
+    var width = Math.max(1, Math.min(Math.round(box.width), viewport - left));
+    if (stage.style.left !== left + "px") stage.style.left = left + "px";
+    if (stage.style.width !== width + "px") stage.style.width = width + "px";
+    if (spacer && Math.abs(w.scrollY || w.document.documentElement.scrollTop || 0) < 2) {
+      var need = Math.round(stage.getBoundingClientRect().bottom - spacer.getBoundingClientRect().top);
+      if (need > 40 && need < 980) w.document.body.style.setProperty("--frauen-dock-reserved", need + "px");
     }
+  }
+  function mountHadithDock() {
+    var fresh = w.document.querySelector("#appView #" + DOCK_ID);
+    var parked = parkedDock();
+    var active = w.document.activeElement;
+    var keep = parked && fresh && active && parked.contains(active) && active.id === "hadithSearchInput";
+    if (keep) {
+      var hero = fresh.querySelector(".frauen-library-hero");
+      var oldHero = parked.querySelector(".frauen-library-hero");
+      if (hero && oldHero) oldHero.replaceWith(hero);
+      fresh.remove();
+    } else if (fresh) {
+      if (parked && parked !== fresh) parked.remove();
+      w.document.body.appendChild(fresh);
+    }
+    syncHadithDock();
   }
   function bindShelves() {
-    if (!w.document || !onHadith()) return;
-    pinHero();
-    if (!w.__hlsHeroPin) {
-      w.__hlsHeroPin = true;
+    if (!w.document) return;
+    if (!onHadith()) { unmountHadithDock(); return; }
+    mountHadithDock();
+    if (!w.__hlsHeroDock) {
+      w.__hlsHeroDock = true;
+      w.addEventListener("hashchange", function () { if (!onHadith()) unmountHadithDock(); });
+      w.addEventListener("resize", syncHadithDock, { passive: true });
+      w.addEventListener("orientationchange", syncHadithDock, { passive: true });
       if (typeof w.ResizeObserver === "function") {
         var app = w.document.getElementById("appView");
-        if (app) new w.ResizeObserver(function () { pinHero(); }).observe(app);
+        if (app) new w.ResizeObserver(function () { syncHadithDock(); }).observe(app);
       }
-      w.addEventListener("resize", pinHero, { passive: true });
     }
     var search = w.document.getElementById("hadithSearchInput");
     if (search) {
