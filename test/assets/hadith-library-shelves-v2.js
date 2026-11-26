@@ -14,15 +14,15 @@
   var ARCH = "/assets/feed-backgrounds/auto/mosque/bg-auto-mosque-unsplash-JF3o8Ajk.webp";
   var LANGS = ["de", "ar", "en", "tr", "ku", "ckb", "bs", "fr", "es"];
   var COPY = {
-    de: { library: "Ḥadīṯ-Bibliothek", works: "Werke", byScholar: "nach Imām", byKind: "Ḥadīṯ und Āṯār", continueKicker: "Zuletzt gelesen", continueGo: "Weiterlesen", search: "Werk, Kitāb oder Bāb suchen", jump: "Nummer", jumpGo: "Öffnen", jumpMiss: "Diese Nummer ist in diesem Bereich nicht vorhanden.", kitab: "Kitāb", bab: "Bāb", hadithCount: "{n} Ḥadīṯe", noHits: "Keine Treffer in diesem Bereich.", unavailable: "Die Bibliothek ist gerade nicht erreichbar.", opening: "Die Bibliothek wird geöffnet…", crumbHome: "Bibliothek", openKitab: "Abwāb anzeigen", closeKitab: "Abwāb schließen", allInKitab: "Ḥadīṯe dieses Kitāb", sahihayn: "aṣ-Ṣaḥīḥān", sunan: "Sunan · al-Arbaʿah", masanid: "Masānīd und Muwaṭṭaʾ", aqidah: "ʿAqīdah", athar: "Āṯār der Salaf", hadithWorks: "Ḥadīṯ-Werke", atharWorks: "Āṯār und ʿAqīdah", otherWorks: "Weitere Werke", entries: "Einträge" },
-    ar: { library: "مكتبة الحديث", works: "الكتب", byScholar: "حسب الإمام", byKind: "الحديث والآثار", continueKicker: "آخر قراءة", continueGo: "متابعة", search: "ابحث عن كتاب أو باب", jump: "الرقم", jumpGo: "فتح", jumpMiss: "هذا الرقم غير موجود في هذا القسم.", kitab: "كتاب", bab: "باب", hadithCount: "{n} حديثًا", noHits: "لا توجد نتائج في هذا القسم.", unavailable: "المكتبة غير متاحة الآن.", opening: "جارٍ فتح المكتبة…", crumbHome: "المكتبة", openKitab: "عرض الأبواب", closeKitab: "إخفاء الأبواب", allInKitab: "أحاديث هذا الكتاب", sahihayn: "الصحيحان", sunan: "السنن الأربعة", masanid: "المسانيد والموطأ", aqidah: "العقيدة", athar: "آثار السلف", hadithWorks: "كتب الحديث", atharWorks: "الآثار والعقيدة", otherWorks: "كتب أخرى", entries: "مداخل" },
-    en: { library: "Ḥadīth library", works: "Works", byScholar: "By imam", byKind: "Ḥadīth and āthār", continueKicker: "Last read", continueGo: "Continue", search: "Search a work, kitāb or bāb", jump: "Number", jumpGo: "Open", jumpMiss: "This number is not in this section.", kitab: "Kitāb", bab: "Bāb", hadithCount: "{n} ḥadīths", noHits: "No matches in this section.", unavailable: "The library cannot be reached just now.", opening: "Opening the library…", crumbHome: "Library", openKitab: "Show the abwāb", closeKitab: "Hide the abwāb", allInKitab: "Ḥadīths of this kitāb", sahihayn: "The two Ṣaḥīḥs", sunan: "Sunan · the four", masanid: "Masānīd and Muwaṭṭaʾ", aqidah: "ʿAqīdah", athar: "Āthār of the Salaf", hadithWorks: "Ḥadīth works", atharWorks: "Āthār and ʿaqīdah", otherWorks: "Further works", entries: "Entries" },
-    tr: { library: "Hadis kitaplığı", works: "Eserler", byScholar: "İmama göre", byKind: "Hadis ve âsâr", continueKicker: "Son okunan", continueGo: "Sürdür", search: "Eser, kitâb veya bâb ara", jump: "Numara", jumpGo: "Aç", jumpMiss: "Bu numara bu bölümde yok.", kitab: "Kitâb", bab: "Bâb", hadithCount: "{n} hadis", noHits: "Bu bölümde sonuç yok.", unavailable: "Kitaplığa şu an ulaşılamıyor.", opening: "Kitaplık açılıyor…", crumbHome: "Kitaplık", openKitab: "Bâbları göster", closeKitab: "Bâbları gizle", allInKitab: "Bu kitâbın hadisleri", sahihayn: "İki Sahîh", sunan: "Sünen · dört kitap", masanid: "Mesânîd ve Muvatta", aqidah: "Akîde", athar: "Selef âsârı", hadithWorks: "Hadis eserleri", atharWorks: "Âsâr ve akîde", otherWorks: "Diğer eserler", entries: "Kayıtlar" },
-    ku: { library: "Pirtûkxaneya hedîsê", works: "Berhem", byScholar: "Li gorî îmam", byKind: "Hedîs û asar", continueKicker: "Dawî xwendin", continueGo: "Bidomîne", search: "Berhem, kitāb an bāb bigere", jump: "Hejmar", jumpGo: "Veke", jumpMiss: "Ev hejmar di vê beşê de nîne.", kitab: "Kitāb", bab: "Bāb", hadithCount: "{n} hedîs", noHits: "Di vê beşê de encam tune.", unavailable: "Pirtûkxane niha nayê vekirin.", opening: "Pirtûkxane tê vekirin…", crumbHome: "Pirtûkxane", openKitab: "Bāb nîşan bide", closeKitab: "Bāb veşêre", allInKitab: "Hedîsên vî kitābî", sahihayn: "Du Sahîh", sunan: "Sunen · çar pirtûk", masanid: "Mesânîd û Muwatta", aqidah: "Aqîde", athar: "Asarên selef", hadithWorks: "Berhemên hedîsê", atharWorks: "Asar û aqîde", otherWorks: "Berhemên din", entries: "Tomar" },
-    ckb: { library: "کتێبخانەی حەدیس", works: "بەرهەمەکان", byScholar: "بەپێی ئیمام", byKind: "حەدیس و ئاسار", continueKicker: "دوایین خوێندنەوە", continueGo: "بەردەوامبە", search: "بەرهەم، کتاب یان باب بگەڕێ", jump: "ژمارە", jumpGo: "بیکەرەوە", jumpMiss: "ئەم ژمارەیە لەم بەشەدا نییە.", kitab: "کتاب", bab: "باب", hadithCount: "{n} حەدیس", noHits: "لەم بەشەدا ئەنجام نییە.", unavailable: "کتێبخانە ئێستا بەردەست نییە.", opening: "کتێبخانە دەکرێتەوە…", crumbHome: "کتێبخانە", openKitab: "بابەکان پیشان بدە", closeKitab: "بابەکان بشارەوە", allInKitab: "حەدیسەکانی ئەم کتابە", sahihayn: "دوو سەحیح", sunan: "سونەن · چوار پەرتووک", masanid: "مەسانید و موطأ", aqidah: "عەقیدە", athar: "ئاساری سەلەف", hadithWorks: "بەرهەمی حەدیس", atharWorks: "ئاسار و عەقیدە", otherWorks: "بەرهەمی تر", entries: "تۆمار" },
-    bs: { library: "Biblioteka hadisa", works: "Djela", byScholar: "Po imamu", byKind: "Hadis i asari", continueKicker: "Zadnje čitano", continueGo: "Nastavi", search: "Traži djelo, kitab ili bab", jump: "Broj", jumpGo: "Otvori", jumpMiss: "Ovaj broj nije u ovom dijelu.", kitab: "Kitab", bab: "Bab", hadithCount: "{n} hadisa", noHits: "Nema rezultata u ovom dijelu.", unavailable: "Biblioteka trenutno nije dostupna.", opening: "Biblioteka se otvara…", crumbHome: "Biblioteka", openKitab: "Prikaži babove", closeKitab: "Sakrij babove", allInKitab: "Hadisi ovog kitaba", sahihayn: "Dva Sahiha", sunan: "Sunen · četiri djela", masanid: "Mesanidi i Muvetta", aqidah: "Akaid", athar: "Asari selefa", hadithWorks: "Hadiska djela", atharWorks: "Asari i akaid", otherWorks: "Ostala djela", entries: "Unosi" },
-    fr: { library: "Bibliothèque du ḥadīth", works: "Ouvrages", byScholar: "Par imam", byKind: "Ḥadīth et āthār", continueKicker: "Dernière lecture", continueGo: "Continuer", search: "Chercher un ouvrage, un kitāb ou un bāb", jump: "Numéro", jumpGo: "Ouvrir", jumpMiss: "Ce numéro n’est pas dans cette section.", kitab: "Kitāb", bab: "Bāb", hadithCount: "{n} ḥadīths", noHits: "Aucun résultat dans cette section.", unavailable: "La bibliothèque est indisponible pour le moment.", opening: "Ouverture de la bibliothèque…", crumbHome: "Bibliothèque", openKitab: "Afficher les abwāb", closeKitab: "Masquer les abwāb", allInKitab: "Ḥadīths de ce kitāb", sahihayn: "Les deux Ṣaḥīḥ", sunan: "Sunan · les quatre", masanid: "Masānīd et Muwaṭṭaʾ", aqidah: "ʿAqīda", athar: "Āthār des Salaf", hadithWorks: "Ouvrages de ḥadīth", atharWorks: "Āthār et ʿaqīda", otherWorks: "Autres ouvrages", entries: "Entrées" },
-    es: { library: "Biblioteca del ḥadīṯ", works: "Obras", byScholar: "Por imām", byKind: "Ḥadīṯ y āṯār", continueKicker: "Última lectura", continueGo: "Continuar", search: "Buscar obra, kitāb o bāb", jump: "Número", jumpGo: "Abrir", jumpMiss: "Este número no está en esta sección.", kitab: "Kitāb", bab: "Bāb", hadithCount: "{n} ḥadīṯes", noHits: "No hay resultados en esta sección.", unavailable: "La biblioteca no está disponible ahora.", opening: "Abriendo la biblioteca…", crumbHome: "Biblioteca", openKitab: "Mostrar los abwāb", closeKitab: "Ocultar los abwāb", allInKitab: "Ḥadīṯes de este kitāb", sahihayn: "Los dos Ṣaḥīḥ", sunan: "Sunan · los cuatro", masanid: "Masānīd y Muwaṭṭaʾ", aqidah: "ʿAqīdah", athar: "Āṯār de los Salaf", hadithWorks: "Obras de ḥadīṯ", atharWorks: "Āṯār y ʿaqīdah", otherWorks: "Otras obras", entries: "Entradas" }
+    de: { library: "Ḥadīṯ-Bibliothek", works: "Werke", byScholar: "nach Imām", byKind: "Ḥadīṯ und Āṯār", continueKicker: "Zuletzt gelesen", continueGo: "Weiterlesen", search: "Werk, Kitāb oder Bāb suchen", jump: "Nummer", jumpGo: "Öffnen", jumpMiss: "Diese Nummer ist in diesem Bereich nicht vorhanden.", kitab: "Kitāb", bab: "Bāb", hadithCount: "{n} Ḥadīṯe", noHits: "Keine Treffer in diesem Bereich.", unavailable: "Die Bibliothek ist gerade nicht erreichbar.", opening: "Die Bibliothek wird geöffnet…", crumbHome: "Bibliothek", openKitab: "Abwāb anzeigen", closeKitab: "Abwāb schließen", allInKitab: "Ḥadīṯe dieses Kitāb", sahihayn: "aṣ-Ṣaḥīḥān", sunan: "as-Sunan", musnad: "al-Musnad", muwatta: "al-Muwaṭṭaʾ", musannaf: "al-Muṣannafāt", masanid: "Masānīd und Muwaṭṭaʾ", aqidah: "ʿAqīdah", athar: "Āṯār der Salaf", hadithWorks: "Ḥadīṯ-Werke", atharWorks: "Āṯār und ʿAqīdah", otherWorks: "Weitere Werke", entries: "Einträge" },
+    ar: { library: "مكتبة الحديث", works: "الكتب", byScholar: "حسب الإمام", byKind: "الحديث والآثار", continueKicker: "آخر قراءة", continueGo: "متابعة", search: "ابحث عن كتاب أو باب", jump: "الرقم", jumpGo: "فتح", jumpMiss: "هذا الرقم غير موجود في هذا القسم.", kitab: "كتاب", bab: "باب", hadithCount: "{n} حديثًا", noHits: "لا توجد نتائج في هذا القسم.", unavailable: "المكتبة غير متاحة الآن.", opening: "جارٍ فتح المكتبة…", crumbHome: "المكتبة", openKitab: "عرض الأبواب", closeKitab: "إخفاء الأبواب", allInKitab: "أحاديث هذا الكتاب", sahihayn: "الصحيحان", sunan: "السنن", musnad: "المسند", muwatta: "الموطأ", musannaf: "المصنفات", masanid: "المسانيد والموطأ", aqidah: "العقيدة", athar: "آثار السلف", hadithWorks: "كتب الحديث", atharWorks: "الآثار والعقيدة", otherWorks: "كتب أخرى", entries: "مداخل" },
+    en: { library: "Ḥadīth library", works: "Works", byScholar: "By imam", byKind: "Ḥadīth and āthār", continueKicker: "Last read", continueGo: "Continue", search: "Search a work, kitāb or bāb", jump: "Number", jumpGo: "Open", jumpMiss: "This number is not in this section.", kitab: "Kitāb", bab: "Bāb", hadithCount: "{n} ḥadīths", noHits: "No matches in this section.", unavailable: "The library cannot be reached just now.", opening: "Opening the library…", crumbHome: "Library", openKitab: "Show the abwāb", closeKitab: "Hide the abwāb", allInKitab: "Ḥadīths of this kitāb", sahihayn: "The two Ṣaḥīḥs", sunan: "The Sunan", musnad: "al-Musnad", muwatta: "al-Muwaṭṭaʾ", musannaf: "The Muṣannafs", masanid: "Masānīd and Muwaṭṭaʾ", aqidah: "ʿAqīdah", athar: "Āthār of the Salaf", hadithWorks: "Ḥadīth works", atharWorks: "Āthār and ʿaqīdah", otherWorks: "Further works", entries: "Entries" },
+    tr: { library: "Hadis kitaplığı", works: "Eserler", byScholar: "İmama göre", byKind: "Hadis ve âsâr", continueKicker: "Son okunan", continueGo: "Sürdür", search: "Eser, kitâb veya bâb ara", jump: "Numara", jumpGo: "Aç", jumpMiss: "Bu numara bu bölümde yok.", kitab: "Kitâb", bab: "Bâb", hadithCount: "{n} hadis", noHits: "Bu bölümde sonuç yok.", unavailable: "Kitaplığa şu an ulaşılamıyor.", opening: "Kitaplık açılıyor…", crumbHome: "Kitaplık", openKitab: "Bâbları göster", closeKitab: "Bâbları gizle", allInKitab: "Bu kitâbın hadisleri", sahihayn: "İki Sahîh", sunan: "Sünen", musnad: "Müsned", muwatta: "Muvatta", musannaf: "Musannefler", masanid: "Mesânîd ve Muvatta", aqidah: "Akîde", athar: "Selef âsârı", hadithWorks: "Hadis eserleri", atharWorks: "Âsâr ve akîde", otherWorks: "Diğer eserler", entries: "Kayıtlar" },
+    ku: { library: "Pirtûkxaneya hedîsê", works: "Berhem", byScholar: "Li gorî îmam", byKind: "Hedîs û asar", continueKicker: "Dawî xwendin", continueGo: "Bidomîne", search: "Berhem, kitāb an bāb bigere", jump: "Hejmar", jumpGo: "Veke", jumpMiss: "Ev hejmar di vê beşê de nîne.", kitab: "Kitāb", bab: "Bāb", hadithCount: "{n} hedîs", noHits: "Di vê beşê de encam tune.", unavailable: "Pirtûkxane niha nayê vekirin.", opening: "Pirtûkxane tê vekirin…", crumbHome: "Pirtûkxane", openKitab: "Bāb nîşan bide", closeKitab: "Bāb veşêre", allInKitab: "Hedîsên vî kitābî", sahihayn: "Du Sahîh", sunan: "Sunen", musnad: "Musned", muwatta: "Muwetta", musannaf: "Musannef", masanid: "Mesânîd û Muwatta", aqidah: "Aqîde", athar: "Asarên selef", hadithWorks: "Berhemên hedîsê", atharWorks: "Asar û aqîde", otherWorks: "Berhemên din", entries: "Tomar" },
+    ckb: { library: "کتێبخانەی حەدیس", works: "بەرهەمەکان", byScholar: "بەپێی ئیمام", byKind: "حەدیس و ئاسار", continueKicker: "دوایین خوێندنەوە", continueGo: "بەردەوامبە", search: "بەرهەم، کتاب یان باب بگەڕێ", jump: "ژمارە", jumpGo: "بیکەرەوە", jumpMiss: "ئەم ژمارەیە لەم بەشەدا نییە.", kitab: "کتاب", bab: "باب", hadithCount: "{n} حەدیس", noHits: "لەم بەشەدا ئەنجام نییە.", unavailable: "کتێبخانە ئێستا بەردەست نییە.", opening: "کتێبخانە دەکرێتەوە…", crumbHome: "کتێبخانە", openKitab: "بابەکان پیشان بدە", closeKitab: "بابەکان بشارەوە", allInKitab: "حەدیسەکانی ئەم کتابە", sahihayn: "دوو سەحیح", sunan: "سونەن", musnad: "موسنەد", muwatta: "موطأ", musannaf: "موسەننەفەکان", masanid: "مەسانید و موطأ", aqidah: "عەقیدە", athar: "ئاساری سەلەف", hadithWorks: "بەرهەمی حەدیس", atharWorks: "ئاسار و عەقیدە", otherWorks: "بەرهەمی تر", entries: "تۆمار" },
+    bs: { library: "Biblioteka hadisa", works: "Djela", byScholar: "Po imamu", byKind: "Hadis i asari", continueKicker: "Zadnje čitano", continueGo: "Nastavi", search: "Traži djelo, kitab ili bab", jump: "Broj", jumpGo: "Otvori", jumpMiss: "Ovaj broj nije u ovom dijelu.", kitab: "Kitab", bab: "Bab", hadithCount: "{n} hadisa", noHits: "Nema rezultata u ovom dijelu.", unavailable: "Biblioteka trenutno nije dostupna.", opening: "Biblioteka se otvara…", crumbHome: "Biblioteka", openKitab: "Prikaži babove", closeKitab: "Sakrij babove", allInKitab: "Hadisi ovog kitaba", sahihayn: "Dva Sahiha", sunan: "Sunen", musnad: "Musned", muwatta: "Muvetta", musannaf: "Musannefi", masanid: "Mesanidi i Muvetta", aqidah: "Akaid", athar: "Asari selefa", hadithWorks: "Hadiska djela", atharWorks: "Asari i akaid", otherWorks: "Ostala djela", entries: "Unosi" },
+    fr: { library: "Bibliothèque du ḥadīth", works: "Ouvrages", byScholar: "Par imam", byKind: "Ḥadīth et āthār", continueKicker: "Dernière lecture", continueGo: "Continuer", search: "Chercher un ouvrage, un kitāb ou un bāb", jump: "Numéro", jumpGo: "Ouvrir", jumpMiss: "Ce numéro n’est pas dans cette section.", kitab: "Kitāb", bab: "Bāb", hadithCount: "{n} ḥadīths", noHits: "Aucun résultat dans cette section.", unavailable: "La bibliothèque est indisponible pour le moment.", opening: "Ouverture de la bibliothèque…", crumbHome: "Bibliothèque", openKitab: "Afficher les abwāb", closeKitab: "Masquer les abwāb", allInKitab: "Ḥadīths de ce kitāb", sahihayn: "Les deux Ṣaḥīḥ", sunan: "Les Sunan", musnad: "al-Musnad", muwatta: "al-Muwaṭṭaʾ", musannaf: "Les Muṣannaf", masanid: "Masānīd et Muwaṭṭaʾ", aqidah: "ʿAqīda", athar: "Āthār des Salaf", hadithWorks: "Ouvrages de ḥadīth", atharWorks: "Āthār et ʿaqīda", otherWorks: "Autres ouvrages", entries: "Entrées" },
+    es: { library: "Biblioteca del ḥadīṯ", works: "Obras", byScholar: "Por imām", byKind: "Ḥadīṯ y āṯār", continueKicker: "Última lectura", continueGo: "Continuar", search: "Buscar obra, kitāb o bāb", jump: "Número", jumpGo: "Abrir", jumpMiss: "Este número no está en esta sección.", kitab: "Kitāb", bab: "Bāb", hadithCount: "{n} ḥadīṯes", noHits: "No hay resultados en esta sección.", unavailable: "La biblioteca no está disponible ahora.", opening: "Abriendo la biblioteca…", crumbHome: "Biblioteca", openKitab: "Mostrar los abwāb", closeKitab: "Ocultar los abwāb", allInKitab: "Ḥadīṯes de este kitāb", sahihayn: "Los dos Ṣaḥīḥ", sunan: "Las Sunan", musnad: "al-Musnad", muwatta: "al-Muwaṭṭaʾ", musannaf: "Los Muṣannaf", masanid: "Masānīd y Muwaṭṭaʾ", aqidah: "ʿAqīdah", athar: "Āṯār de los Salaf", hadithWorks: "Obras de ḥadīṯ", atharWorks: "Āṯār y ʿaqīdah", otherWorks: "Otras obras", entries: "Entradas" }
   };
   var IMAMS = {
     "sahih al buhari": "Imām al-Buḫārī",
@@ -54,6 +54,30 @@
     "gami bayan al ilm": "جامع بيان العلم",
     "sunan ad daraqutni": "سنن الدارقطني"
   };
+  var COVER_BASE = "/test/assets/hadith-covers/";
+  var COVERS = {
+    "sahih al buhari": "sahih-al-buhari.webp",
+    "sahih muslim": "sahih-muslim.webp",
+    "sunan abi dawud": "sunan-abi-dawud.webp",
+    "sunan an nasai": "sunan-an-nasai.webp",
+    "sunan ibn magah": "sunan-ibn-magah.webp",
+    "ibn magah": "sunan-ibn-magah.webp",
+    "sunan ad darimi": "sunan-ad-darimi.webp",
+    "al muwatta": "al-muwatta.webp",
+    "musnad ahmad": "musnad-ahmad.webp",
+    "musannaf ibn abi saybah": "musannaf-ibn-abi-saybah.webp",
+    "al mustadrak": "al-mustadrak.webp",
+    "ibn sad at tabaqat": "ibn-sad-tabaqat.webp",
+    "ibn sad at tabaqat al kubra": "ibn-sad-tabaqat.webp",
+    "al bayhaqi al asma wa s sifat": "asma-wa-sifat.webp",
+    "ibn al qayyim ilam al muwaqqiin": "ilam-al-muwaqqiin.webp",
+    "ibn al gawzi manaqib al imam ahmad": "manaqib-ahmad.webp",
+    "al bayhaqi as sunan al kubra": "sunan-al-kubra.webp",
+    "as sunan al kubra": "sunan-al-kubra.webp",
+    "as sariah": "ash-shariah.webp",
+    "sarh as sunnah": "sharh-as-sunnah.webp",
+    "gami bayan al ilm": "jami-bayan-al-ilm.webp"
+  };
   var KITAB = {
     "Kitāb al-Īmān": ["الإيمان", "Der Glaube", "Faith", "İman", "Îman", "ئیمان", "Iman", "La foi", "La fe"],
     "Kitāb al-ʿIlm": ["العلم", "Das Wissen", "Knowledge", "İlim", "Zanîn", "زانست", "Znanje", "La science", "El conocimiento"],
@@ -77,8 +101,8 @@
     "Kitāb al-Birr wa-ṣ-Ṣilah wa-l-Ādāb": ["البر والصلة والآداب", "Güte, Verwandtschaft und Adab", "Goodness, kinship and conduct", "İyilik, sıla ve edep", "Qencî, sila û adab", "چاکە، سیلە و ئەدەب", "Dobrota, rodbina i adab", "Bienfaisance, liens et conduite", "Bondad, parentesco y conducta"]
   };
   var GLOSS_LOC = { de: 1, en: 2, tr: 3, ku: 4, ckb: 5, bs: 6, fr: 7, es: 8 };
-  var ORDER = ["sahihayn", "sunan", "masanid", "aqidah", "athar", "other"];
-  var SECTION_KEY = { sahihayn: "sahihayn", sunan: "sunan", masanid: "masanid", aqidah: "aqidah", athar: "athar", other: "otherWorks" };
+  var ORDER = ["sahihayn", "sunan", "musnad", "muwatta", "musannaf", "weitere"];
+  var SECTION_KEY = { sahihayn: "sahihayn", sunan: "sunan", musnad: "musnad", muwatta: "muwatta", musannaf: "musannaf", weitere: "otherWorks" };
   var SPINE = ["green", "bordeaux", "navy"];
   var jumpMiss = "";
 
@@ -120,12 +144,16 @@
     var n = norm(title);
     if (n === "sahih al buhari" || n === "sahih muslim") return "sahihayn";
     if (n === "sunan abi dawud" || n === "gami at tirmidi" || n === "sunan an nasai" || n === "sunan ibn magah" || n === "ibn magah") return "sunan";
-    if (n === "sunan ad darimi" || n === "sunan ad daraqutni" || n === "as sunan al kubra") return "sunan";
+    if (n === "sunan ad darimi" || n === "sunan ad daraqutni" || n === "as sunan al kubra" || n === "al bayhaqi as sunan al kubra") return "sunan";
     if (/^sunan /.test(n) && n.indexOf("zuhd") < 0) return "sunan";
-    if (n === "al muwatta" || n === "musnad ahmad" || n.indexOf("musannaf") >= 0) return "masanid";
-    if (/itiqad|usul as sunnah|sarh as sunnah|ibanah|sariah|asma wa s sifat|itisam|\bbida\b|hujjah|tabshir|\bal iman\b/.test(n)) return "aqidah";
-    if (/zuhd|hilyat|dunya|safwah|tabaqat|manaqib|iqtid|akhlaq|bayan al ilm|\badab\b|sirah|sira\b/.test(n)) return "athar";
-    return "other";
+    if (n === "musnad ahmad" || n.indexOf("musnad") === 0) return "musnad";
+    if (n === "al muwatta") return "muwatta";
+    if (n.indexOf("musannaf") >= 0) return "musannaf";
+    return "weitere";
+  }
+  function coverOf(title) {
+    var file = COVERS[norm(title)];
+    return file ? COVER_BASE + file : "";
   }
   function imamOf(title) {
     var n = norm(title);
@@ -225,8 +253,12 @@
     var imam = imamOf(book.title);
     var arabic = arabicOf(book.title);
     var badge = badgeFor(book);
+    var cover = coverOf(book.title);
     var blurb = typeof book.verifiedDescription === "string" ? book.verifiedDescription.trim() : "";
-    return '<li class="hls-spine-slot"><button type="button" class="hls-spine hls-spine--' + tone + '" data-nav="hadith" data-value="' + esc(book.id) + '"><span class="hls-spine-ornament" aria-hidden="true"></span><span class="hls-spine-index" aria-hidden="true">' + esc(ornament(index + 1, loc)) + "</span>" + (arabic ? '<span class="hls-spine-ar" lang="ar" dir="rtl">' + esc(arabic) + "</span>" : "") + '<span class="hls-spine-title">' + esc(book.title || "") + "</span>" + (imam ? '<span class="hls-spine-imam">' + esc(imam) + "</span>" : "") + '<span class="hls-spine-count">' + esc(countLabel(book.hadithCount || 0, loc)) + "</span>" + (badge ? '<span class="hls-badge">' + esc(badge) + "</span>" : "") + (blurb ? '<span class="hls-sr">' + esc(blurb) + "</span>" : "") + "</button></li>";
+    var face = cover
+      ? '<img class="hls-cover" alt="" width="140" height="132" loading="lazy" decoding="async" src="' + esc(cover) + '">'
+      : '<span class="hls-spine-ornament" aria-hidden="true"></span><span class="hls-spine-index" aria-hidden="true">' + esc(ornament(index + 1, loc)) + "</span>";
+    return '<li class="hls-spine-slot"><button type="button" class="hls-spine hls-spine--' + tone + (cover ? " hls-spine--cover" : "") + '" data-nav="hadith" data-value="' + esc(book.id) + '">' + face + (arabic && !cover ? '<span class="hls-spine-ar" lang="ar" dir="rtl">' + esc(arabic) + "</span>" : "") + '<span class="hls-spine-title">' + esc(book.title || "") + "</span>" + (imam ? '<span class="hls-spine-imam">' + esc(imam) + "</span>" : "") + '<span class="hls-spine-count">' + esc(countLabel(book.hadithCount || 0, loc)) + "</span>" + (badge ? '<span class="hls-badge">' + esc(badge) + "</span>" : "") + (blurb ? '<span class="hls-sr">' + esc(blurb) + "</span>" : "") + "</button></li>";
   }
   function shelf(books, loc) {
     if (!books.length) return '<p class="hls-empty">' + esc(t("noHits", loc)) + "</p>";
@@ -248,7 +280,7 @@
       var hadith = [], athar = [];
       books.forEach(function (book) {
         var section = sectionFor(book.title);
-        if (section === "athar" || section === "aqidah") athar.push(book);
+        if (section === "weitere") athar.push(book);
         else hadith.push(book);
       });
       return [
@@ -304,7 +336,8 @@
     var imam = imamOf(book.title);
     var arabic = arabicOf(book.title);
     var blurb = typeof book.verifiedDescription === "string" ? book.verifiedDescription.trim() : "";
-    var head = '<header class="hls-work-head">' + (arabic ? '<p class="hls-work-ar" lang="ar" dir="rtl">' + esc(arabic) + "</p>" : "") + "<h1>" + esc(book.title || "") + "</h1>" + (imam ? '<p class="hls-work-imam">' + esc(imam) + "</p>" : "") + (blurb ? '<p class="hls-work-blurb">' + esc(blurb) + "</p>" : "") + "<p>" + esc(ornament(chapters.length, loc) + " " + t("kitab", loc) + " · " + countLabel(book.hadithCount || 0, loc)) + "</p></header>";
+    var cover = coverOf(book.title);
+    var head = '<header class="hls-work-head">' + (cover ? '<img class="hls-work-cover" alt="" width="72" height="104" loading="lazy" decoding="async" src="' + esc(cover) + '">' : "") + (arabic ? '<p class="hls-work-ar" lang="ar" dir="rtl">' + esc(arabic) + "</p>" : "") + "<h1>" + esc(book.title || "") + "</h1>" + (imam ? '<p class="hls-work-imam">' + esc(imam) + "</p>" : "") + (blurb ? '<p class="hls-work-blurb">' + esc(blurb) + "</p>" : "") + "<p>" + esc(ornament(chapters.length, loc) + " " + t("kitab", loc) + " · " + countLabel(book.hadithCount || 0, loc)) + "</p></header>";
     return shell(hero(book.title || t("library", loc), imam, loc) + crumbs(book, null, null, loc) + tools(q, loc) + continueStrip(loc) + head + '<div class="hls-fihris">' + (blocks || '<p class="hls-empty">' + esc(t("noHits", loc)) + "</p>") + "</div>", loc);
   }
   function leaf(book, chapter, section, q, loc) {
