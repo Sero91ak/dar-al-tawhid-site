@@ -1,0 +1,34 @@
+{
+  "createdAt": "2026-11-26T14:27:01.934632+00:00",
+  "policy": "Never auto-retry uncertain timeouts; they may have been billed. No original MP3 or segment parts landed. ELEVENLABS_API_KEY is missing in the post-processing shell, so ElevenLabs history could not be checked and no new TTS was started.",
+  "items": [
+    {
+      "ident": "deen-was-ist-ikhlas",
+      "id": "was-ist-ikhlas",
+      "kind": "deen",
+      "chars": 2855,
+      "error": "UNCERTAIN_TIMEOUT: TimeoutError: The read operation timed out",
+      "createdAt": "2026-11-26T10:47:00.454725+00:00",
+      "originalFound": false
+    },
+    {
+      "ident": "deen-eltern-ehren",
+      "id": "eltern-ehren",
+      "kind": "deen",
+      "chars": 2780,
+      "error": "UNCERTAIN_TIMEOUT: TimeoutError: The read operation timed out",
+      "createdAt": "2026-11-26T11:04:09.710301+00:00",
+      "originalFound": false
+    },
+    {
+      "ident": "deen-geduld-dankbarkeit",
+      "id": "geduld-dankbarkeit",
+      "kind": "deen",
+      "chars": 2762,
+      "error": "UNCERTAIN_TIMEOUT: TimeoutError: The read operation timed out",
+      "createdAt": "2026-11-26T12:01:20.266717+00:00",
+      "originalFound": false
+    }
+  ],
+  "nextStepWhenKeyAvailable": "Check official ElevenLabs history/request log for these three texts. Only if clearly not billed, generate once with a new ident suffix. Do not auto-retry blindly. Then STT-spot-check Arabic-heavy clips."
+}

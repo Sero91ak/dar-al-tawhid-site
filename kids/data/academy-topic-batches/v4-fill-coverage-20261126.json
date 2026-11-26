@@ -1,0 +1,368 @@
+{
+  "createdAt": "2026-11-26T14:27:01.934632+00:00",
+  "dictionaryVersionId": "ahttb2VMxTltSTOr5cec",
+  "academy": {
+    "manifestEntriesBefore": 193,
+    "manifestEntriesAfter": 1903,
+    "uniquePlanPhrases": 1844,
+    "v4PresentBeforeUnique": 133,
+    "v4PresentAfterUnique": 1844,
+    "lessons66": {
+      "count": 66,
+      "completeBefore": 0,
+      "completeAfter": 66
+    },
+    "vocabPlans": {
+      "count": 33,
+      "completeBefore": 6,
+      "completeAfter": 33
+    },
+    "areas": {
+      "aqidah": {
+        "uniquePhrases": 537,
+        "presentBefore": 0,
+        "presentAfter": 537,
+        "lessons": 20,
+        "lessonsCompleteAfter": 20
+      },
+      "adab-other": {
+        "uniquePhrases": 246,
+        "presentBefore": 0,
+        "presentAfter": 246,
+        "lessons": 9,
+        "lessonsCompleteAfter": 9
+      },
+      "akhlaq-other": {
+        "uniquePhrases": 355,
+        "presentBefore": 0,
+        "presentAfter": 355,
+        "lessons": 9,
+        "lessonsCompleteAfter": 9
+      },
+      "fiqh": {
+        "uniquePhrases": 210,
+        "presentBefore": 0,
+        "presentAfter": 210,
+        "lessons": 11,
+        "lessonsCompleteAfter": 11
+      },
+      "vocabulary": {
+        "uniquePhrases": 99,
+        "presentBefore": 18,
+        "presentAfter": 99,
+        "lessons": 33,
+        "lessonsCompleteAfter": 33
+      },
+      "akhlaq-sabr": {
+        "uniquePhrases": 51,
+        "presentBefore": 20,
+        "presentAfter": 51,
+        "lessons": 3,
+        "lessonsCompleteAfter": 3
+      },
+      "akhlaq-amanah": {
+        "uniquePhrases": 41,
+        "presentBefore": 15,
+        "presentAfter": 41,
+        "lessons": 3,
+        "lessonsCompleteAfter": 3
+      },
+      "adab-salam": {
+        "uniquePhrases": 40,
+        "presentBefore": 13,
+        "presentAfter": 40,
+        "lessons": 3,
+        "lessonsCompleteAfter": 3
+      },
+      "adab-worte": {
+        "uniquePhrases": 41,
+        "presentBefore": 9,
+        "presentAfter": 41,
+        "lessons": 3,
+        "lessonsCompleteAfter": 3
+      },
+      "academy-other": {
+        "uniquePhrases": 123,
+        "presentBefore": 0,
+        "presentAfter": 123,
+        "lessons": 3,
+        "lessonsCompleteAfter": 3
+      },
+      "family": {
+        "uniquePhrases": 41,
+        "presentBefore": 0,
+        "presentAfter": 41,
+        "lessons": 1,
+        "lessonsCompleteAfter": 1
+      },
+      "sidq": {
+        "uniquePhrases": 60,
+        "presentBefore": 58,
+        "presentAfter": 60,
+        "lessons": 1,
+        "lessonsCompleteAfter": 1
+      }
+    },
+    "priorityLessons": {
+      "sidq": {
+        "phrases": 60,
+        "presentBefore": 58,
+        "presentAfter": 60,
+        "completeAfter": true,
+        "area": "sidq",
+        "in66": true,
+        "vocab": false
+      },
+      "akhlaq-sabr": {
+        "phrases": 23,
+        "presentBefore": 20,
+        "presentAfter": 23,
+        "completeAfter": true,
+        "area": "akhlaq-sabr",
+        "in66": true,
+        "vocab": false
+      },
+      "akhlaq-amanah": {
+        "phrases": 23,
+        "presentBefore": 20,
+        "presentAfter": 23,
+        "completeAfter": true,
+        "area": "akhlaq-amanah",
+        "in66": true,
+        "vocab": false
+      },
+      "adab-salam": {
+        "phrases": 23,
+        "presentBefore": 18,
+        "presentAfter": 23,
+        "completeAfter": true,
+        "area": "adab-salam",
+        "in66": true,
+        "vocab": false
+      },
+      "adab-worte": {
+        "phrases": 23,
+        "presentBefore": 14,
+        "presentAfter": 23,
+        "completeAfter": true,
+        "area": "adab-worte",
+        "in66": true,
+        "vocab": false
+      }
+    },
+    "liveConfirmed": false,
+    "restoredExistingApprovals": 133
+  },
+  "deen": {
+    "lessons": 30,
+    "audioBefore": 0,
+    "audioAfter": 27,
+    "missing": [
+      "was-ist-ikhlas",
+      "eltern-ehren",
+      "geduld-dankbarkeit"
+    ],
+    "items": [
+      {
+        "id": "was-ist-tawhid",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 0
+      },
+      {
+        "id": "tawhid-ar-rububiyyah",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2487
+      },
+      {
+        "id": "tawhid-al-uluhiyyah",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2581
+      },
+      {
+        "id": "tawhid-al-asma-was-sifat",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2487
+      },
+      {
+        "id": "was-ist-shirk",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2606
+      },
+      {
+        "id": "was-ist-iman",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 0
+      },
+      {
+        "id": "sechs-saeulen-iman",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2924
+      },
+      {
+        "id": "iman-herz-wort-tat",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2731
+      },
+      {
+        "id": "iman-wachstum",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2744
+      },
+      {
+        "id": "iman-staerken",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2940
+      },
+      {
+        "id": "asma-wa-sifat",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 0
+      },
+      {
+        "id": "ar-rahman-ar-rahim",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2790
+      },
+      {
+        "id": "al-alim-as-sami",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2614
+      },
+      {
+        "id": "al-basir-al-hakim",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2579
+      },
+      {
+        "id": "eigenschaften-ohne-vergleich",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2876
+      },
+      {
+        "id": "was-ist-ibadah",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 0
+      },
+      {
+        "id": "was-ist-ikhlas",
+        "ok": false,
+        "status": null,
+        "chars": 2855
+      },
+      {
+        "id": "gebet-ibadah",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2590
+      },
+      {
+        "id": "dua-und-tawakkul",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2819
+      },
+      {
+        "id": "sunnah-folgen",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2932
+      },
+      {
+        "id": "adab-und-akhlaq",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 0
+      },
+      {
+        "id": "wahrhaftigkeit",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2754
+      },
+      {
+        "id": "eltern-ehren",
+        "ok": false,
+        "status": null,
+        "chars": 2780
+      },
+      {
+        "id": "geduld-dankbarkeit",
+        "ok": false,
+        "status": null,
+        "chars": 2762
+      },
+      {
+        "id": "freundlichkeit",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2761
+      },
+      {
+        "id": "al-akhirah",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 0
+      },
+      {
+        "id": "tod-und-auferstehung",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2695
+      },
+      {
+        "id": "die-abrechnung",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2769
+      },
+      {
+        "id": "paradies-und-hoellenfeuer",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2827
+      },
+      {
+        "id": "vorbereitung-akhirah",
+        "ok": true,
+        "status": "technical-ready-awaiting-human-review",
+        "chars": 2911
+      }
+    ]
+  },
+  "generation": {
+    "generated": 1738,
+    "reused": 133,
+    "uncertain": 3,
+    "charactersSpentThisRunLedger": 180456,
+    "creditsRemainingAtFinish": 238670,
+    "creditsUsedAtStart": 21434,
+    "characterLimit": 338110
+  },
+  "stt": {
+    "ran": false,
+    "reason": "ELEVENLABS_API_KEY missing in this shell (test -n failed). No STT and no regeneration attempted."
+  },
+  "originalsPolicy": {
+    "folder": "kids/original-media/v4-fill-20261126",
+    "totalFiles": 3863,
+    "mergedCommitted": 1738,
+    "segmentPartsLeftUntracked": 2125,
+    "reason": "Repo convention is to keep complete paid original MP3s (as in academy-*-v4-v1). Segment parts (*-N-de.mp3 / *-N-ar.mp3) stay local. No file exceeds 50 MB; merged originals ~198 MB, playback m4a ~95 MB."
+  }
+}
