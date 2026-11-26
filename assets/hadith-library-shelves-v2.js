@@ -346,7 +346,7 @@
   }
   function hero(title, sub, loc, src) {
     var quiet = !title;
-    var copy = quiet ? "" : '<div class="hls-hero-copy"><p class="hls-kicker">' + esc(t("library", loc)) + "</p><h1>" + esc(title) + "</h1>" + (sub ? "<p>" + esc(sub) + "</p>" : "") + "</div>";
+    var copy = quiet ? "" : '<div class="hls-hero-copy"><h1>' + esc(title) + "</h1>" + (sub ? "<p>" + esc(sub) + "</p>" : "") + "</div>";
     return '<header class="hls-hero' + (quiet ? " hls-hero--quiet" : "") + '"><img class="hls-hero-img" alt="" width="1600" height="900" decoding="async" src="' + (src || HERO_LIST) + '">' + copy + "</header>";
   }
   function modes(loc) {
