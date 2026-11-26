@@ -743,14 +743,14 @@ body.is-frauen-route[data-frauen-view="list"] #appView{
   --frauen-hero-img:url("/assets/home-v1194/study-runway.jpg");
   position:relative;
   isolation:isolate;
-  min-height:clamp(280px,39vw,420px);
+  min-height:clamp(132px,20svh,176px);
   margin:0 0 18px;
   overflow:hidden;
   border-radius:30px;
   border:1px solid color-mix(in srgb,var(--gold2,var(--gold,#d7bd7b)) 30%,transparent);
   background-image:var(--frauen-hero-img);
   background-size:cover;
-  background-position:center 48%;
+  background-position:74% 46%;
   box-shadow:
     0 24px 70px rgba(4,17,20,.22),
     inset 0 0 0 1px rgba(255,255,255,.04);
@@ -759,7 +759,7 @@ body.is-frauen-route[data-frauen-view="list"] #appView{
 .frauen-library-hero--group,
 .frauen-library-hero--section{
   --frauen-hero-img:url("/assets/home-v1194/hero-wide-adobe.jpg");
-  min-height:clamp(238px,31vw,340px);
+  min-height:clamp(120px,18svh,160px);
 }
 
 .frauen-library-hero--tone-din,
