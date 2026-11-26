@@ -29243,7 +29243,7 @@ function render(){
     else if(currentRoute.view==="post")html=renderPostFold(currentRoute.value);
     else if(currentRoute.view==="news-detail")html=renderNewsDetail(currentRoute.value);
     else if(currentRoute.view==="statistik"){navigate("quiz","stats",{skipPush:true,noAnim:true});return}
-    else if(currentRoute.view==="hadith")html=renderHadith();
+    else if(currentRoute.view==="hadith")html=(window.DARHadithShelvesV2&&typeof window.DARHadithShelvesV2.render==="function")?window.DARHadithShelvesV2.render():renderHadith();
     else html=renderHome();
     $("appView").innerHTML=html;
     markAppBootComplete();
@@ -29407,7 +29407,7 @@ function bindEvents(){
   bindPrayerEvents();
   if(currentRoute.view==="home"&&typeof bindHomeV380Events==="function")bindHomeV380Events();
   bindHighlightDailyPush();
-  if(currentRoute.view==="hadith")bindHadithLibraryEvents();
+  if(currentRoute.view==="hadith"){bindHadithLibraryEvents();if(window.DARHadithShelvesV2&&typeof window.DARHadithShelvesV2.bind==="function")window.DARHadithShelvesV2.bind()}
   if(currentRoute.view==="scholars"&&window.DARScholarsIndex&&typeof window.DARScholarsIndex.bindScholars==="function"){window.DARScholarsIndex.bindScholars(buildScholarCatalog(),esc);const polish=()=>polishScholarsOvalGlyphs();requestAnimationFrame(()=>{polish();setTimeout(polish,120);setTimeout(polish,400)});const root=document.querySelector(".scholars-index");if(root&&!root.dataset.glyphObserver){root.dataset.glyphObserver="1";new MutationObserver(()=>polish()).observe(root,{childList:true})}}
   bindThemeControls();
   bindAppIconPicker();
@@ -37095,8 +37095,10 @@ html[data-theme] body.is-post-route #appView .post-reader > :not(.post-reader-ti
 <link rel="stylesheet" id="darAdultGlobalHeroSurfaceInkV1" href="/assets/adult-global-hero-surface-ink-v1.css?v=20261017-1740">
 <link rel="stylesheet" id="darAdultVisualContinuityV1391" href="/assets/dar-adult-visual-continuity-v1391.css?v=20261017-v1394-fit">
 <link rel="stylesheet" id="darIlmHadithV1308" href="/assets/ilm-hadith-v1308.css?v=20261017-hadith-fit">
+<link rel="stylesheet" id="darHadithShelvesV2" href="/assets/hadith-library-shelves-v2.css?v=20261126-shelves2v">
 <link rel="stylesheet" id="darHeroScrollStandardV1" href="/assets/dar-hero-scroll-standard-v1.css?v=20261017-hero-standard-v1">
 <script defer id="darHadithVisitorParityV1397" src="/assets/hadith-visitor-parity-v1397.js?v=20261018-v1397"></script>
+<script defer id="darHadithShelvesV2" src="/assets/hadith-library-shelves-v2.js?v=20261126-shelves2v"></script>
 <!-- VISITOR: actual current DAR TEST V4.9 start-page renderer, not obsolete dashboard -->
 <script defer id="darVisitorFuzzyCore" src="/assets/dar-fuzzy-search-core-visitor.js?v=20261030-test-parity-v1"></script>
 <script defer id="darVisitorFuzzyAPI" src="/assets/dar-fuzzy-search-api-visitor.js?v=20261030-test-parity-v1"></script>
