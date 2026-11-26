@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-278` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-279` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4845
-totalVerifiedEntries: 4845
-loadedEntries: 4845
-uniqueVerifiedReferences: 4845
-missingCount: 1391
+entriesCount: 4846
+totalVerifiedEntries: 4846
+loadedEntries: 4846
+uniqueVerifiedReferences: 4846
+missingCount: 1390
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-278.json
-nächster Gap-Fill-Batch: entries-gap-06-279.json
+letzter Gap-Fill-Batch: entries-gap-06-279.json
+nächster Gap-Fill-Batch: entries-gap-06-280.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `655` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `656` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -739,3 +739,7 @@ Vier Verse: 5:5, 7:138, 8:75, 9:44. Sechsunddreißig geprüfte Stellen ohne zuge
 ## Batch 06-278 — 26.11.2026
 
 Drei Verse: 4:48, 10:25 und 16:7. Sechzehn geprüfte Stellen ohne zugelassene Stufe stehen in blocked-inspected.json, darunter 4:80, 4:118 und 9:31. Katalog 4845/6236, Lücken 1391. Details in SOURCE_REVIEW_06-278.md.
+
+## Batch 06-279 — 26.11.2026
+
+Ein Vers: 6:85, isnād ḥasan, mit aṭ-Ṭabarīs eigenem Vorbehalt. 239 Stellen von 4:121 bis 7:81 und zusätzlich 7:172 ohne zugelassene Stufe stehen in blocked-inspected.json. Katalog 4846/6236, Lücken 1390. Details in SOURCE_REVIEW_06-279.md.
