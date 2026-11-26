@@ -158,7 +158,7 @@
       "id": "core-lock-push-language-t28u-20261126",
       "at": "2026-11-26T10:20:00+01:00",
       "approvedBy": "owner-serhat-20261126-t28u-core-lock-language-only",
-      "reason": "Owner t28u releases the core lock only for language changes in prayer-push-scheduler.js, DarPushNotifications.swift and WebAppView.swift until 2026-11-27T23:59:59Z. No prayer calculation, location, Qibla, schedule or segment change. The exception is closed again after the language delivery.",
+      "reason": "Owner t28u language window is closed in the core lock. runtime window closed. This scope entry stays until its original expiry so the closing commit satisfies the scope guard. It does not reopen prayer calculation, location or Qibla.",
       "paths": [
         "scripts/core-sensitive-change-lock.cjs",
         ".github/CORE_SECURITY_LOCK.md"
