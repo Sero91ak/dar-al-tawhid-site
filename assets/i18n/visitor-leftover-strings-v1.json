@@ -2822,6 +2822,446 @@
    "bs": "Lični svijet znanja može se koristiti bez prijave · prijavi se da podatke koristiš na svim uređajima.",
    "fr": "Un espace de savoir personnel utilisable sans connexion · connecte-toi pour utiliser tes données sur tous les appareils.",
    "es": "Un espacio personal de conocimiento usable sin entrar · entra para usar tus datos en todos los dispositivos."
+  },
+  "Din-Quiz": {
+   "ar": "اختبار الدين",
+   "en": "Dīn quiz",
+   "tr": "Din sınavı",
+   "ku": "Quiza dîn",
+   "ckb": "تاقیکردنەوەی دین",
+   "bs": "Din kviz",
+   "fr": "Quiz du dīn",
+   "es": "Cuestionario del dīn"
+  },
+  "Sūren filtern": {
+   "ar": "تصفية السور",
+   "en": "Filter sūrahs",
+   "tr": "Sureleri süz",
+   "ku": "Sûreyan parzîne",
+   "ckb": "سوورەکان بپاڵێوە",
+   "bs": "Filtriraj sure",
+   "fr": "Filtrer les sourates",
+   "es": "Filtrar suras"
+  },
+  "Liste sortieren": {
+   "ar": "رتّب القائمة",
+   "en": "Sort the list",
+   "tr": "Listeyi sırala",
+   "ku": "Lîsteyê rêz bike",
+   "ckb": "لیستەکە ڕیزبکە",
+   "bs": "Sortiraj listu",
+   "fr": "Trier la liste",
+   "es": "Ordenar la lista"
+  },
+  "Generation & Sortierung — ohne Scroll": {
+   "ar": "الجيل والترتيب — دون تمرير",
+   "en": "Generation and sorting — without scrolling",
+   "tr": "Nesil ve sıralama — kaydırmadan",
+   "ku": "Nesil û rêzkirin — bê şûştin",
+   "ckb": "نەوە و ڕیزکردن — بەبێ سکرۆڵ",
+   "bs": "Generacija i sortiranje — bez pomicanja",
+   "fr": "Génération et tri — sans défilement",
+   "es": "Generación y orden — sin desplazamiento"
+  },
+  "📖 Buch": {
+   "ar": "📖 كتاب",
+   "en": "📖 Book",
+   "tr": "📖 Kitap",
+   "ku": "📖 Pirtûk",
+   "ckb": "📖 کتێب",
+   "bs": "📖 Knjiga",
+   "fr": "📖 Livre",
+   "es": "📖 Libro"
+  },
+  "Dein persönlicher Begleiter": {
+   "ar": "رفيقك الشخصي",
+   "en": "Your personal companion",
+   "tr": "Kişisel rehberin",
+   "ku": "Hevalê te yê kesane",
+   "ckb": "هاوڕێی کەسیی تۆ",
+   "bs": "Tvoj lični pratilac",
+   "fr": "Ton compagnon personnel",
+   "es": "Tu compañero personal"
+  },
+  "Qurʾān · Sunnah · Frühere Generationen": {
+   "ar": "القرآن · السنة · الأجيال الأولى",
+   "en": "Qurʾān · Sunnah · earlier generations",
+   "tr": "Kur’an · Sünnet · önceki nesiller",
+   "ku": "Qurʾān · Sunnah · nifşên berê",
+   "ckb": "قورئان · سوننەت · نەوەکانی پێشوو",
+   "bs": "Kur’an · Sunnet · ranije generacije",
+   "fr": "Qurʾān · Sunnah · générations antérieures",
+   "es": "Qurʾān · Sunnah · generaciones anteriores"
+  },
+  "Nach Reisetag": {
+   "ar": "حسب يوم الرحلة",
+   "en": "By travel day",
+   "tr": "Seyahat gününe göre",
+   "ku": "Li gor roja rêwîtiyê",
+   "ckb": "بەپێی ڕۆژی گەشت",
+   "bs": "Po danu putovanja",
+   "fr": "Par jour de voyage",
+   "es": "Por día de viaje"
+  },
+  "PERSÖNLICHES ARCHIV": {
+   "ar": "أرشيف شخصي",
+   "en": "PERSONAL ARCHIVE",
+   "tr": "KİŞİSEL ARŞİV",
+   "ku": "ARŞÎVA KESANE",
+   "ckb": "ئەرشیفی کەسی",
+   "bs": "LIČNI ARHIV",
+   "fr": "ARCHIVES PERSONNELLES",
+   "es": "ARCHIVO PERSONAL"
+  },
+  "Dein ʿUmrah-Buch": {
+   "ar": "كتاب عمرتك",
+   "en": "Your ʿUmrah book",
+   "tr": "Umre kitabın",
+   "ku": "Pirtûka Umreya te",
+   "ckb": "کتێبی عومرەکەت",
+   "bs": "Tvoja knjiga umre",
+   "fr": "Ton livre de ʿUmrah",
+   "es": "Tu libro de ʿUmrah"
+  },
+  "Dein Reisezeitraum": {
+   "ar": "مدة رحلتك",
+   "en": "Your travel period",
+   "tr": "Seyahat aralığın",
+   "ku": "Dema rêwîtiya te",
+   "ckb": "ماوەی گەشتەکەت",
+   "bs": "Trajanje putovanja",
+   "fr": "Ta période de voyage",
+   "es": "Tu periodo de viaje"
+  },
+  "Deine Reise als edles Buch": {
+   "ar": "رحلتك ككتاب نفيس",
+   "en": "Your journey as a fine book",
+   "tr": "Yolculuğun seçkin bir kitap olarak",
+   "ku": "Rêwîtiya te wek pirtûkeke hêja",
+   "ckb": "گەشتەکەت وەک کتێبێکی بەرز",
+   "bs": "Tvoje putovanje kao plemenita knjiga",
+   "fr": "Ton voyage comme un beau livre",
+   "es": "Tu viaje como un libro noble"
+  },
+  "Persönliche Daten exportieren": {
+   "ar": "تصدير البيانات الشخصية",
+   "en": "Export personal data",
+   "tr": "Kişisel verileri dışa aktar",
+   "ku": "Daneyên kesane derxe",
+   "ckb": "داتای کەسی هەناردە بکە",
+   "bs": "Izvezi lične podatke",
+   "fr": "Exporter les données personnelles",
+   "es": "Exportar datos personales"
+  },
+  "Lokale Daten löschen": {
+   "ar": "احذف البيانات المحلية",
+   "en": "Delete local data",
+   "tr": "Yerel verileri sil",
+   "ku": "Daneyên herêmî jê bibe",
+   "ckb": "داتای ناوخۆیی بسڕەوە",
+   "bs": "Obriši lokalne podatke",
+   "fr": "Effacer les données locales",
+   "es": "Borrar datos locales"
+  },
+  "Person für den Fortschritt wählen": {
+   "ar": "اختر الشخص لتتبع التقدم",
+   "en": "Choose the person for progress",
+   "tr": "İlerleme için kişiyi seç",
+   "ku": "Kesê ji bo pêşketinê hilbijêre",
+   "ckb": "کەس بۆ پێشکەوتن هەڵبژێرە",
+   "bs": "Odaberi osobu za napredak",
+   "fr": "Choisir la personne pour le suivi",
+   "es": "Elegir la persona para el progreso"
+  },
+  "Iḥrām vor Überqueren des Mīqāt": {
+   "ar": "الإحرام قبل مجاوزة الميقات",
+   "en": "Iḥrām before crossing the mīqāt",
+   "tr": "Mikatı geçmeden ihram",
+   "ku": "Iḥrām berî derbaskirina mîqatê",
+   "ckb": "ئیحرام پێش تێپەڕینی میقات",
+   "bs": "Ihram prije prelaska mikata",
+   "fr": "Iḥrām avant de dépasser le mīqāt",
+   "es": "Iḥrām antes de cruzar el mīqāt"
+  },
+  "Kartendienst wählen": {
+   "ar": "اختر خدمة الخريطة",
+   "en": "Choose the map service",
+   "tr": "Harita hizmetini seç",
+   "ku": "Xizmeta nexşeyê hilbijêre",
+   "ckb": "خزمەتی نەخشە هەڵبژێرە",
+   "bs": "Odaberi kartografski servis",
+   "fr": "Choisir le service de carte",
+   "es": "Elegir el servicio de mapa"
+  },
+  "Sprache der Ortsnamen wählen": {
+   "ar": "اختر لغة أسماء الأماكن",
+   "en": "Choose the language of place names",
+   "tr": "Yer adlarının dilini seç",
+   "ku": "Zimanê navên cih hilbijêre",
+   "ckb": "زمانی ناوی شوێن هەڵبژێرە",
+   "bs": "Odaberi jezik naziva mjesta",
+   "fr": "Choisir la langue des noms de lieux",
+   "es": "Elegir el idioma de los topónimos"
+  },
+  "Persönliches Tagebuch": {
+   "ar": "يوميات شخصية",
+   "en": "Personal journal",
+   "tr": "Kişisel günlük",
+   "ku": "Rojnameya kesane",
+   "ckb": "ڕۆژنامەی کەسی",
+   "bs": "Lični dnevnik",
+   "fr": "Journal personnel",
+   "es": "Diario personal"
+  },
+  "Weiteren Reisetag hinzufügen": {
+   "ar": "أضف يوم رحلة آخر",
+   "en": "Add another travel day",
+   "tr": "Başka bir seyahat günü ekle",
+   "ku": "Rojeke din a rêwîtiyê zêde bike",
+   "ckb": "ڕۆژێکی تری گەشت زیاد بکە",
+   "bs": "Dodaj još jedan dan putovanja",
+   "fr": "Ajouter un autre jour de voyage",
+   "es": "Añadir otro día de viaje"
+  },
+  "Was habt ihr erlebt? Was war euch besonders wichtig? Welche Duʿāʾ und Erinnerungen möchtet ihr festhalten?": {
+   "ar": "ماذا عايشتهم؟ ما الذي كان مهماً لكم؟ أي أدعية وذكريات تريدون حفظها؟",
+   "en": "What did you experience? What mattered most to you? Which supplications and memories do you want to keep?",
+   "tr": "Neler yaşadınız? Sizin için ne önemliydi? Hangi duaları ve anıları saklamak istersiniz?",
+   "ku": "Hûn çi dîtin? Çi ji we re girîng bû? Kîjan dua û bîranîn dixwazin bigirin?",
+   "ckb": "چی بەسەرهات؟ چی گرنگ بوو؟ کام نزا و یادەوەری دەتانهەوێت بپارێزن؟",
+   "bs": "Šta ste doživjeli? Šta vam je bilo važno? Koje dove i uspomene želite sačuvati?",
+   "fr": "Qu’avez-vous vécu ? Qu’est-ce qui comptait pour vous ? Quelles invocations et quels souvenirs voulez-vous garder ?",
+   "es": "¿Qué vivisteis? ¿Qué os importó? ¿Qué súplicas y recuerdos queréis guardar?"
+  },
+  "Preview des creme-goldenen Erinnerungsbuchs": {
+   "ar": "معاينة كتاب الذكرى بلون كريمي وذهبي",
+   "en": "Preview of the cream-and-gold memory book",
+   "tr": "Krem-altın hatıra kitabının önizlemesi",
+   "ku": "Pêşdîtina pirtûka bîranînê ya krem-zêrîn",
+   "ckb": "پێشبینینی کتێبی یادەوەریی کرێم و زێڕ",
+   "bs": "Pregled krem-zlatne knjige uspomena",
+   "fr": "Aperçu du livre-souvenir crème et or",
+   "es": "Vista previa del libro de recuerdos crema y oro"
+  },
+  "Abū Mūsā, ʿUmar und Abū Saʿīd": {
+   "ar": "أبو موسى وعمر وأبو سعيد",
+   "en": "Abū Mūsā, ʿUmar and Abū Saʿīd",
+   "tr": "Ebû Mûsâ, Ömer ve Ebû Saîd",
+   "ku": "Ebû Mûsa, Umer û Ebû Seîd",
+   "ckb": "ئەبو موسا و عومەر و ئەبو سەعید",
+   "bs": "Ebu Musa, Omer i Ebu Seid",
+   "fr": "Abū Mūsā, ʿUmar et Abū Saʿīd",
+   "es": "Abū Mūsā, ʿUmar y Abū Saʿīd"
+  },
+  "Abū Shurayḥ oder Abū Hurayrah, je nach geprüfter Fassung": {
+   "ar": "أبو شريح أو أبو هريرة، بحسب الرواية المراجعة",
+   "en": "Abū Shurayḥ or Abū Hurayrah, depending on the reviewed wording",
+   "tr": "Ebû Şureyh veya Ebû Hüreyre, incelenen lafzına göre",
+   "ku": "Ebû Şureyh an Ebû Hureyre, li gor lafza kontrolkirî",
+   "ckb": "ئەبو شورەیح یان ئەبو هوڕەیرە، بەپێی دەقی پشکنراو",
+   "bs": "Ebu Šurejh ili Ebu Hurejre, prema provjerenoj verziji",
+   "fr": "Abū Shurayḥ ou Abū Hurayrah, selon la version vérifiée",
+   "es": "Abū Shurayḥ o Abū Hurayrah, según la versión revisada"
+  },
+  "Die kranke Frau im Bericht von Ibn ʿAbbās": {
+   "ar": "المرأة المريضة في خبر ابن عباس",
+   "en": "The ill woman in the report of Ibn ʿAbbās",
+   "tr": "İbn Abbâs rivayetindeki hasta kadın",
+   "ku": "Jina nexweş di ragihandina Îbn Ebbas de",
+   "ckb": "ژنی نەخۆش لە گێڕانەوەی ئیبن عەبباس",
+   "bs": "Bolesna žena u predaji Ibn Abbasa",
+   "fr": "La femme malade dans le récit d’Ibn ʿAbbās",
+   "es": "La mujer enferma en el relato de Ibn ʿAbbās"
+  },
+  "Eine der Mütter der Gläubigen (im Wortlaut nicht namentlich bestimmt)": {
+   "ar": "إحدى أمهات المؤمنين (لم يُسمَّ اسمها في اللفظ)",
+   "en": "One of the Mothers of the believers (not named in this wording)",
+   "tr": "Müminlerin annelerinden biri (bu lafızda adı geçmez)",
+   "ku": "Yek ji dayikên bawermendan (di vê lafzê de nav nehatiye)",
+   "ckb": "یەکێک لە دایکانی ئیمانداران (لەم دەقەدا ناو نەهاتووە)",
+   "bs": "Jedna od majki vjernika (ime nije navedeno u ovom tekstu)",
+   "fr": "L’une des Mères des croyants (non nommée dans ce libellé)",
+   "es": "Una de las Madres de los creyentes (no nombrada en este texto)"
+  },
+  "Eine Frau am Grab": {
+   "ar": "امرأة عند القبر",
+   "en": "A woman at the grave",
+   "tr": "Kabir başındaki kadın",
+   "ku": "Jineke li ser gorê",
+   "ckb": "ژنێک لەسەر گۆڕ",
+   "bs": "Žena na grobu",
+   "fr": "Une femme auprès de la tombe",
+   "es": "Una mujer junto a la tumba"
+  },
+  "Eine Frau, die die Moschee reinigte": {
+   "ar": "امرأة كانت تنظّف المسجد",
+   "en": "A woman who cleaned the mosque",
+   "tr": "Mescidi temizleyen kadın",
+   "ku": "Jineke ku mizgeft paqij dikir",
+   "ckb": "ژنێک کە مزگەوتی خاوێن دەکردەوە",
+   "bs": "Žena koja je čistila džamiju",
+   "fr": "Une femme qui nettoyait la mosquée",
+   "es": "Una mujer que limpiaba la mezquita"
+  },
+  "Frauen zur Zeit des Propheten ﷺ": {
+   "ar": "نساء في زمن النبي ﷺ",
+   "en": "Women in the time of the Prophet ﷺ",
+   "tr": "Peygamber ﷺ döneminde kadınlar",
+   "ku": "Jinên di dema Pêxember ﷺ de",
+   "ckb": "ژنان لە سەردەمی پێغەمبەر ﷺ",
+   "bs": "Žene u vrijeme Vjerovjesnika ﷺ",
+   "fr": "Des femmes à l’époque du Prophète ﷺ",
+   "es": "Mujeres en la época del Profeta ﷺ"
+  },
+  "Ṯawbān, Freigelassener des Propheten ﷺ": {
+   "ar": "ثوبان مولى النبي ﷺ",
+   "en": "Thawbān, freedman of the Prophet ﷺ",
+   "tr": "Sevbân, Peygamberin ﷺ azatlısı",
+   "ku": "Sewban, azadkiriyê Pêxember ﷺ",
+   "ckb": "سەوبان، ئازادکراوی پێغەمبەر ﷺ",
+   "bs": "Sevban, oslobođenik Vjerovjesnika ﷺ",
+   "fr": "Thawbān, affranchi du Prophète ﷺ",
+   "es": "Thawbān, liberto del Profeta ﷺ"
+  },
+  "Umm Ḥabībah / Zaynab bint Ǧaḥš, je nach Fassung": {
+   "ar": "أم حبيبة / زينب بنت جحش، بحسب الرواية",
+   "en": "Umm Ḥabībah / Zaynab bint Jaḥsh, depending on the wording",
+   "tr": "Ümmü Habîbe / Zeyneb bint Cahş, rivayete göre",
+   "ku": "Ummu Hebîbe / Zeyneb bint Cehş, li gor lafzê",
+   "ckb": "ئوممو حەبیبە / زەینەبی کچی جەحش، بەپێی دەق",
+   "bs": "Ummi Habiba / Zejneb bint Džahš, prema verziji",
+   "fr": "Umm Ḥabībah / Zaynab bint Jaḥsh, selon la version",
+   "es": "Umm Ḥabībah / Zaynab bint Jaḥsh, según la versión"
+  },
+  "ʿĀʾišah oder Ibn ʿUmar, je nach geprüfter Fassung": {
+   "ar": "عائشة أو ابن عمر، بحسب الرواية المراجعة",
+   "en": "ʿĀʾišah or Ibn ʿUmar, depending on the reviewed wording",
+   "tr": "Âişe veya İbn Ömer, incelenen lafzına göre",
+   "ku": "Aiše an Îbn Umer, li gor lafza kontrolkirî",
+   "ckb": "عائیشە یان ئیبن عومەر، بەپێی دەقی پشکنراو",
+   "bs": "Aiša ili Ibn Omer, prema provjerenoj verziji",
+   "fr": "ʿĀʾišah ou Ibn ʿUmar, selon la version vérifiée",
+   "es": "ʿĀʾišah o Ibn ʿUmar, según la versión revisada"
+  },
+  "ʿĀʾišah über die Frauen der Anṣār": {
+   "ar": "عائشة عن نساء الأنصار",
+   "en": "ʿĀʾišah about the women of the Anṣār",
+   "tr": "Âişe, Ensar kadınları hakkında",
+   "ku": "Aiše der barê jinên Ensar",
+   "ckb": "عائیشە دەربارەی ژنانی ئەنسار",
+   "bs": "Aiša o ženama ensarija",
+   "fr": "ʿĀʾišah au sujet des femmes des Anṣār",
+   "es": "ʿĀʾišah sobre las mujeres de los Anṣār"
+  },
+  "ʿĀʾišah über Frauen der Anṣār": {
+   "ar": "عائشة عن نساء الأنصار",
+   "en": "ʿĀʾišah about women of the Anṣār",
+   "tr": "Âişe, Ensar kadınları hakkında",
+   "ku": "Aiše der barê jinên Ensar",
+   "ckb": "عائیشە دەربارەی ژنانی ئەنسار",
+   "bs": "Aiša o ženama ensarija",
+   "fr": "ʿĀʾišah au sujet de femmes des Anṣār",
+   "es": "ʿĀʾišah sobre mujeres de los Anṣār"
+  },
+  "ʿĀʾišah und Umm Sulaym": {
+   "ar": "عائشة وأم سليم",
+   "en": "ʿĀʾišah and Umm Sulaym",
+   "tr": "Âişe ve Ümmü Süleym",
+   "ku": "Aiše û Ummu Suleym",
+   "ckb": "عائیشە و ئوممو سولەیم",
+   "bs": "Aiša i Ummi Sulejm",
+   "fr": "ʿĀʾišah et Umm Sulaym",
+   "es": "ʿĀʾišah y Umm Sulaym"
+  },
+  "Erinnerung vor Jumuʿah": {
+   "ar": "تذكير قبل الجمعة",
+   "en": "Reminder before Jumuʿah",
+   "tr": "Cuma öncesi hatırlatma",
+   "ku": "Bîrxistin berî Înê",
+   "ckb": "بیرهێنانەوە پێش هەینی",
+   "bs": "Podsjetnik prije džume",
+   "fr": "Rappel avant le Jumuʿah",
+   "es": "Recordatorio antes del Jumuʿah"
+  },
+  "al-Muṣannaf von Ibn Abī Shaybah": {
+   "ar": "مصنف ابن أبي شيبة",
+   "en": "al-Muṣannaf of Ibn Abī Shaybah",
+   "tr": "İbn Ebî Şeybe’nin Musannef’i",
+   "ku": "Musennefa Îbn Ebî Şeybe",
+   "ckb": "موسەنەفی ئیبن ئەبی شەیبە",
+   "bs": "Musannef Ibn Ebi Šejbe",
+   "fr": "al-Muṣannaf d’Ibn Abī Shaybah",
+   "es": "al-Muṣannaf de Ibn Abī Shaybah"
+  },
+  "Der Gesandte Allahs ﷺ; Erklärungen von aṭ-Ṭaḥāwī": {
+   "ar": "رسول الله ﷺ؛ شروح الطحاوي",
+   "en": "The Messenger of Allah ﷺ; explanations by aṭ-Ṭaḥāwī",
+   "tr": "Allah’ın Elçisi ﷺ; Tahâvî’nin açıklamaları",
+   "ku": "Qasidê Allah ﷺ; şiroveyên Tehawî",
+   "ckb": "پێغەمبەری خوا ﷺ؛ ڕوونکردنەوەکانی تەحاوی",
+   "bs": "Allahov Poslanik ﷺ; objašnjenja Tahavija",
+   "fr": "Le Messager d’Allah ﷺ ; explications d’aṭ-Ṭaḥāwī",
+   "es": "El Mensajero de Allah ﷺ; explicaciones de aṭ-Ṭaḥāwī"
+  },
+  "Wann ist ein Herrscher Muslim und wann Taghut": {
+   "ar": "متى يكون الحاكم مسلماً ومتى طاغوتاً",
+   "en": "When is a ruler a Muslim and when a ṭāghūt",
+   "tr": "Bir yönetici ne zaman Müslüman ne zaman tağuttur",
+   "ku": "Kengî hakimek misilman e û kengî tağût e",
+   "ckb": "کەی حاکمێک موسڵمانە و کەی تاغوتە",
+   "bs": "Kada je vladar musliman a kada tagut",
+   "fr": "Quand un gouvernant est-il musulman et quand est-il ṭāghūt",
+   "es": "Cuándo un gobernante es musulmán y cuándo ṭāghūt"
+  },
+  "Der Hukm der Jumuah und ihrer Unterlassung": {
+   "ar": "حكم الجمعة وتركها",
+   "en": "The ruling on Jumuʿah and on omitting it",
+   "tr": "Cuma ve onu terk etmenin hükmü",
+   "ku": "Hukmê Înê û terkê wê",
+   "ckb": "حوکمی هەینی و وازهێنان لێی",
+   "bs": "Hukm džume i njenog ostavljanja",
+   "fr": "Le statut du Jumuʿah et de son délaissement",
+   "es": "El dictamen del Jumuʿah y de dejarlo"
+  },
+  "as-Sunnah von al-Khallāl": {
+   "ar": "السنة للخلال",
+   "en": "as-Sunnah of al-Khallāl",
+   "tr": "Hallâl’ın es-Sünne’si",
+   "ku": "es-Sunne ya Xellal",
+   "ckb": "سوننەی خەلال",
+   "bs": "es-Sunne od Hallala",
+   "fr": "as-Sunnah d’al-Khallāl",
+   "es": "as-Sunnah de al-Khallāl"
+  },
+  "Lernbereich Wissen und Adab mit Verständnisfragen": {
+   "ar": "تعلّم العلم والأدب بأسئلة فهم",
+   "en": "Learning area: knowledge and adab, with questions",
+   "tr": "İlim ve edep öğrenme alanı, anlayış sorularıyla",
+   "ku": "Qada fêrbûnê Zanîn û edab bi pirsan",
+   "ckb": "بەشی فێربوون: زانست و ئەدەب لەگەڵ پرسیار",
+   "bs": "Područje učenja: znanje i adab, s pitanjima",
+   "fr": "Espace d’apprentissage savoir et adab, avec questions",
+   "es": "Área de aprendizaje: saber y adab, con preguntas"
+  },
+  "Die Talbiyah sprechen und wiederholen, bis der Ṭawāf beginnt.": {
+   "ar": "انطق التلبية وكررها حتى يبدأ الطواف.",
+   "en": "Recite the talbiyah and repeat it until the ṭawāf begins.",
+   "tr": "Telbiyeyi söyle ve tavâf başlayana kadar tekrarla.",
+   "ku": "Telbiyeyê bêje û heta destpêka tewafê dubare bike.",
+   "ckb": "تەلبیە بڵێ و دووبارەی بکەرەوە تا تەواف دەست پێدەکات.",
+   "bs": "Izgovaraj telbiju i ponavljaj je dok tavaf ne počne.",
+   "fr": "Prononce la talbiyah et répète-la jusqu’au début du ṭawāf.",
+   "es": "Recita la talbiyah y repítela hasta que empiece el ṭawāf."
+  },
+  "Direkte Google-, Apple- und OSM-Links. Keine erfundenen Laufwege.": {
+   "ar": "روابط مباشرة لخرائط Google وApple وOSM. لا مسارات مختلقة.",
+   "en": "Direct Google, Apple and OSM links. No invented routes.",
+   "tr": "Doğrudan Google, Apple ve OSM bağlantıları. Uydurma güzergâh yok.",
+   "ku": "Girêdanên rasterast ên Google, Apple û OSM. Rêyên çêkirî tune ne.",
+   "ckb": "بەستەری ڕاستەوخۆی Google و Apple و OSM. ڕێچکەی داڕێژراو نییە.",
+   "bs": "Direktni linkovi Google, Apple i OSM. Nema izmišljenih staza.",
+   "fr": "Liens directs Google, Apple et OSM. Aucun itinéraire inventé.",
+   "es": "Enlaces directos de Google, Apple y OSM. Sin recorridos inventados."
   }
  }
 }

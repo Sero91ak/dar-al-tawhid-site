@@ -120,7 +120,6 @@ function locale(){
 }
 function excluded(el){
  if(!el||typeof el.closest!=="function")return false;
- if(el.closest("select,option"))return true;
  if(el.closest("[data-dar-no-translate]"))return true;
  var hit=el.closest(deny);
  if(!hit)return false;
@@ -137,7 +136,7 @@ function translate(value){
  var v=catalog.get(value);
  return v===undefined?null:v;
 }
-var UI_DE=/(^|[^\p{L}\p{N}])(Standort|Startseite|Vollansicht|Wissenschat|Wissensfinder|Wissensweg|Wissensprofil|Wissensraum|Wissensgebiete|Quellenarchiv|Gebetszeiten|Einstellungen|Demnächst|Impressum|Datenschutz|Überlieferung|Rezitation|Fundamente|Aussage|Gelehrten|Installieren|Installationshilfe|Kurzfazit|Originalwortlaut|Einordnung|Fundstellen|richtig|Beiträge|Schließen|Zurück|Weiter|Lernbereich|Frage|Hinweis|Sprecher|Quellen|Teilen|öffnen|Suche|Gebet|Antwort|auswählen|wiederholen|gearbeitet|Verständnis|Anmeldung|Anmelden|Originalquelle|Themen|Gelehrte|Werkzeuge|Sammlungen|Bittgebete|Fachbegriffe|Fundstelle|Nachweis|Überlieferungen|Bewertung|Sprache|Wähle|Waehle|Erscheinungsbild|Willkommen|Veröffentlichung|Notizen|Merkliste|Interessen|ausgewählt|gewählt|Übersicht|Schnellzugriff|Schnellzugriffe|Tage|Favoriten)(?=$|[^\p{L}\p{N}])/iu;
+var UI_DE=/(^|[^\p{L}\p{N}])(Standort|Startseite|Vollansicht|Wissenschat|Wissensfinder|Wissensweg|Wissensprofil|Wissensraum|Wissensgebiete|Quellenarchiv|Gebetszeiten|Einstellungen|Demnächst|Impressum|Datenschutz|Überlieferung|Rezitation|Fundamente|Aussage|Gelehrten|Installieren|Installationshilfe|Kurzfazit|Originalwortlaut|Einordnung|Fundstellen|richtig|Beiträge|Beiträgen|Kapitel|Schließen|Zurück|Weiter|Lernbereich|Frage|Hinweis|Sprecher|Quellen|Teilen|öffnen|Suche|Gebet|Antwort|auswählen|wiederholen|gearbeitet|Verständnis|Anmeldung|Anmelden|Originalquelle|Themen|Thema|Gelehrte|Werkzeuge|Sammlungen|Bittgebete|Fachbegriffe|Fundstelle|Nachweis|Überlieferungen|Bewertung|Sprache|Wähle|Waehle|Erscheinungsbild|Willkommen|Veröffentlichung|Notizen|Merkliste|Interessen|ausgewählt|gewählt|Übersicht|Schnellzugriff|Schnellzugriffe|Tage|Favoriten|filtern|Scroll|Reisetag|Tagebuch|löschen|exportieren)(?=$|[^\p{L}\p{N}])/iu;
 function letterAt(s,i){
  if(i<0||i>=s.length)return false;
  return /\p{L}/u.test(s.charAt(i));
@@ -171,6 +170,23 @@ function rememberBlocked(source){
  if(blocked.indexOf(s)>=0)return;
  if(blocked.length<500)blocked.push(s);
 }
+function openTopic(code,name,n){
+ var word=code==="ar"?"موضوع ":code==="tr"?"Konu ":code==="ku"?"Mijar ":code==="ckb"?"بابەت ":code==="bs"?"Tema ":code==="fr"?"Thème ":code==="es"?"Tema ":"Topic ";
+ var posts=n==="1"?(code==="ar"?" مشاركة":code==="tr"?" yazı":code==="ku"?" beşdarî":code==="ckb"?" بەشداری":code==="bs"?" doprinos":code==="fr"?" contribution":code==="es"?" aporte":" post"):(code==="ar"?" مشاركات":code==="tr"?" yazı":code==="ku"?" beşdarî":code==="ckb"?" بەشداری":code==="bs"?" doprinosa":code==="fr"?" contributions":code==="es"?" aportes":" posts");
+ return (OPEN_PREFIX[code]||"Open ")+word+name+" · "+n+posts;
+}
+function seasonTail(rest,code){
+ var pairs=[
+  ["Beginn des Fastenmonats, abhängig von Mondsichtung.",{ar:"بداية شهر الصيام، وقد تختلف الرؤية المحلية.",en:"Start of the fasting month; local moon sighting can differ.",tr:"Oruç ayının başlangıcı; yerel hilal farklı olabilir.",ku:"Destpêka meha rojiyê; dîtina heyvê dikare cuda be.",ckb:"دەستپێکی مانگی ڕۆژوو؛ بینینی مانگ دەکرێت جیاواز بێت.",bs:"Početak mjeseca posta; lokalno viđenje mjeseca može se razlikovati.",fr:"Début du mois de jeûne ; la vision locale du croissant peut différer.",es:"Inicio del mes de ayuno; el avistamiento local puede variar."}],
+  ["Besonders wichtige Nächte im Ramaḍān.",{ar:"ليالٍ ذات أهمية خاصة في رمضان.",en:"Especially important nights in Ramaḍān.",tr:"Ramazan’da özellikle önemli geceler.",ku:"Şevên bi taybetî girîng di Remezanê de.",ckb:"شەوانی گرنگی تایبەت لە ڕەمەزان.",bs:"Posebno važne noći u ramazanu.",fr:"Nuits particulièrement importantes du Ramaḍān.",es:"Noches especialmente importantes del Ramaḍān."}],
+  ["Fest nach Ramaḍān, abhängig von Mondsichtung.",{ar:"العيد بعد رمضان، بحسب رؤية الهلال.",en:"The feast after Ramaḍān, depending on moon sighting.",tr:"Ramazan sonrası bayram, hilale bağlı.",ku:"Cejna piştî Remezanê, li gor dîtina heyvê.",ckb:"جەژن دوای ڕەمەزان، بەپێی بینینی مانگ.",bs:"Bajram poslije ramazana, zavisno od viđenja mjeseca.",fr:"La fête après le Ramaḍān, selon la vision du croissant.",es:"La fiesta tras el Ramaḍān, según el avistamiento."}]
+ ];
+ var out=rest;
+ for(var i=0;i<pairs.length;i++){
+  if(out.indexOf(pairs[i][0])>=0)out=out.split(pairs[i][0]).join(pairs[i][1][code]||pairs[i][1].en);
+ }
+ return out;
+}
 function applyTemplates(core){
  var code=locale();
  var m=core.match(/^FRAGE\s+(\d+)\s+VON\s+(\d+)$/i);
@@ -183,10 +199,35 @@ function applyTemplates(core){
  if(m&&QREF[code])return QREF[code](m[1]);
  m=core.match(/^Originalquelle Q(\d+) lesen\s*↗?$/i);
  if(m&&QREF[code])return QREF[code](m[1])+" ↗";
+ m=core.match(/^Thema (.+) mit (\d+) Beiträgen öffnen$/);
+ if(m)return openTopic(code,m[1],m[2]);
+ m=core.match(/^(.+), (\d+) Beiträge?, öffnen$/);
+ if(m)return openTopic(code,m[1],m[2]);
+ m=core.match(/^(\d+) Kapitel · (\d+) /);
+ if(m){
+  var chapters=code==="ar"?m[1]+" فصول":code==="tr"?m[1]+" bölüm":code==="ku"?m[1]+" beş":code==="ckb"?m[1]+" بەش":code==="bs"?m[1]+" poglavlja":code==="fr"?m[1]+" chapitres":code==="es"?m[1]+" capítulos":m[1]+" chapters";
+  var items=code==="ar"?m[2]+" مادة":code==="tr"?m[2]+" içerik":code==="ku"?m[2]+" naverok":code==="ckb"?m[2]+" بابەت":code==="bs"?m[2]+" sadržaja":code==="fr"?m[2]+" contenus":code==="es"?m[2]+" contenidos":m[2]+" items";
+  return chapters+" · "+items;
+ }
+ m=core.match(/^Islamisches Datum heute: (.+)$/);
+ if(m){
+  var todayLabel=code==="ar"?"التاريخ الإسلامي اليوم: ":code==="tr"?"Bugünün hicri tarihi: ":code==="ku"?"Dîroka îslamî ya îro: ":code==="ckb"?"بەرواری ئیسلامی ئەمڕۆ: ":code==="bs"?"Islamski datum danas: ":code==="fr"?"Date islamique aujourd’hui : ":code==="es"?"Fecha islámica hoy: ":"Islamic date today: ";
+  return todayLabel+dateRest(m[1],code);
+ }
+ m=core.match(/^(?:Heute|Islamic date heute): (.+)$/);
+ if(m){
+  var todayWord=code==="ar"?"اليوم: ":code==="tr"?"Bugün: ":code==="ku"?"Îro: ":code==="ckb"?"ئەمڕۆ: ":code==="bs"?"Danas: ":code==="fr"?"Aujourd’hui : ":code==="es"?"Hoy: ":"Today: ";
+  return todayWord+dateRest(m[1],code);
+ }
  m=core.match(/^Sūrah (.+) öffnen$/);
  if(m&&OPEN_PREFIX[code])return OPEN_PREFIX[code]+m[1];
+ m=core.match(/^(.+) öffnen$/);
+ if(m&&OPEN_PREFIX[code]){
+  var stem=catalog.get(m[1]);
+  if(stem)return OPEN_PREFIX[code]+stem;
+ }
  m=core.match(/^(.{2,90}) öffnen$/);
- if(m&&OPEN_PREFIX[code]&&m[1].indexOf(".")<0)return OPEN_PREFIX[code]+m[1];
+ if(m&&OPEN_PREFIX[code]&&m[1].indexOf(".")<0&&!looksGerman(m[1])&&!residualGerman(m[1]))return OPEN_PREFIX[code]+m[1];
  m=core.match(/^Wissensprofil: (Frau|Mann|Neutral)$/);
  if(m&&GENDER[code])return (code==="en"?"Knowledge profile: ":code==="ar"?"الملف المعرفي: ":code==="tr"?"Bilgi profili: ":code==="ku"?"Profîla zanînê: ":code==="ckb"?"پرۆفایلی زانست: ":code==="bs"?"Profil znanja: ":code==="fr"?"Profil de savoir : ": "Perfil de conocimiento: ")+GENDER[code][m[1]];
  m=core.match(/^Wissen · (\d+)$/);
@@ -237,7 +278,7 @@ function applyTemplates(core){
  m=core.match(/^Noch ca\. (\d+) Tage(.*)$/);
  if(m){
   var about=code==="ar"?"بعد نحو "+m[1]+" يومًا":code==="tr"?"Yaklaşık "+m[1]+" gün":code==="ku"?"Nêzîkî "+m[1]+" rojan":code==="ckb"?"نزیکەی "+m[1]+" ڕۆژ":code==="bs"?"Oko "+m[1]+" dana":code==="fr"?"Environ "+m[1]+" jours":code==="es"?"Unos "+m[1]+" días":"About "+m[1]+" days";
-  return about+m[2];
+  return about+seasonTail(m[2],code);
  }
  m=core.match(/^Noch (\d+) Tage$/);
  if(m)return code==="ar"?"بعد "+m[1]+" يومًا":code==="tr"?m[1]+" gün kaldı":code==="ku"?m[1]+" roj man":code==="ckb"?m[1]+" ڕۆژ ماوە":code==="bs"?m[1]+" dana":code==="fr"?m[1]+" jours":code==="es"?m[1]+" días":m[1]+" days";
