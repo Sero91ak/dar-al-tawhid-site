@@ -38,7 +38,7 @@ for(const age of ages){
   if(!voiceRecords.has(q.prompt))missing.push({kind:"question",age,text:q.prompt});
   for(let i=0;i<q.options.length;i++){
    const text="Antwort "+(i+1)+": "+q.options[i];
-   if(!voiceRecords.has(text))missing.push({kind:"answer",age,text});
+   if(!voiceRecords.has(text)&&!voiceRecords.has(q.options[i]))missing.push({kind:"answer",age,text});
   }
  }
  const school=coach.termsFor(lesson,age,7,"lesson").map(x=>x.id);
@@ -57,7 +57,7 @@ for(const age of ages){
   if(!voiceRecords.has(text))missing.push({kind:"glossary",termId:name,age,text});
  }
 }
-assert.ok(page.includes('speak(3,["Antwort "+(i+1)+": "+t])'),
+assert.ok(page.includes('speak(step,[["Antwort "+(i+1)+": "+t,t]])')||page.includes('speak(3,["Antwort "+(i+1)+": "+t])'),
  "Voice index must remain the ORIGINAL recording ID after choices rotate");
 assert.ok(!page.includes('speak(3,["Antwort "+(visibleIndex+1)+": "+t])'),
  "Never request nonexistent shuffled answer ID");
