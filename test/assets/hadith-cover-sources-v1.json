@@ -5,9 +5,9 @@
   "checkedOn": "2026-11-26",
   "counts": {
     "works": 113,
-    "found": 24,
-    "notFound": 89,
-    "files": 21
+    "found": 30,
+    "notFound": 83,
+    "files": 27
   },
   "files": {
     "al-mustadrak.webp": "ae9aaa3179dcf129beef67c629ed80a2d0a1517311be1054ca064b6442fc1d5e",
@@ -30,7 +30,13 @@
     "sunan-ibn-magah.webp": "f7678200b46fc1fbae908a81e835602b1d19d9cf935317494e9ae51d97529ae4",
     "hilyat-al-awliya.webp": "e812056eea9b86773075fad0fd00d7102c268cf76b177eafba2edf4064023c96",
     "shuab-al-iman.webp": "5b4f317369495bb3d9925d172d2b7efab9f2dc095c63b73400a73af4ad0605c9",
-    "musannaf-abd-al-razzaq.webp": "7d28515edb95da47ef393f2f81e38be13bc19f1e6768b527b58d561aad94e852"
+    "musannaf-abd-al-razzaq.webp": "7d28515edb95da47ef393f2f81e38be13bc19f1e6768b527b58d561aad94e852",
+    "sunan-ad-daraqutni.webp": "602619d1d4e9b9808fb277b3509d35b065458f06fe0821eee3ba078c561730c2",
+    "siyar-alam-an-nubala.webp": "54044f7e2ee56efdb88bbd39639ed2b9d267e189ff08731ded2dcf74506ad0a1",
+    "ar-risalah-shafii.webp": "ddd01ea7ac42a697940fcf22c0566959858c0d8ff7bd40b64e2704212b6e10f0",
+    "sharh-usul-itiqad.webp": "664662d01695378bd102659523a4635bc7c351edba349c62a3c15f31d6769a55",
+    "ahmad-az-zuhd.webp": "e89d7b5a739dc3496db563017f92e6e36a4efd8ec994508f4e314796b107c21c",
+    "tarikh-tabari.webp": "c4cee3a05fa059cfa56ae07acf2744f872099f8212899c38dfc9bf6b1f5f3264"
   },
   "rejected": [
     {
@@ -52,6 +58,31 @@
       "title": "Ǧāmiʿ at-Tirmiḏī",
       "reason": "Dār at-Taʾṣīl liegt nur als Titelblatt vor, nicht als Umschlag.",
       "sourceUrl": "https://archive.org/details/hadith-tirmidhi-pdf"
+    },
+    {
+      "title": "Ǧāmiʿ at-Tirmiḏī",
+      "reason": "Dār ar-Risālah al-ʿĀlamiyyah liegt nur als Titelblatt vor, Dār al-Gharb ohne Umschlagfund.",
+      "sourceUrl": "https://archive.org/details/jt06_20230903"
+    },
+    {
+      "title": "aš-Šāṭibī, al-Iʿtiṣām",
+      "reason": "Dār Ibn ʿAffān nur als Titelblatt, kein Umschlag.",
+      "sourceUrl": "https://archive.org/details/0571Pdf_20180403"
+    },
+    {
+      "title": "al-Ibānah al-Kubrā",
+      "reason": "Gefundene Scans sind Titelblätter, kein Umschlag.",
+      "sourceUrl": "https://archive.org/details/20240818_20240818_0222"
+    },
+    {
+      "title": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān",
+      "reason": "Gefundene Ausgabe nur als Titelblatt.",
+      "sourceUrl": "https://archive.org/details/talib-al-ilm-66a038ea-6f6f-4c80-8b4b-1a0f6d7aa5ae"
+    },
+    {
+      "title": "Ibn Hišām, as-Sīrah",
+      "reason": "Nur ein illustrierter moderner Einband mit Herzmotiv, keine klassische Ausgabe.",
+      "sourceUrl": "https://archive.org/details/sirns1"
     }
   ],
   "works": [
@@ -79,8 +110,11 @@
       "title": "Šarḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
       "slug": "sarh-usul-i-tiqad-ahl-as-sunnah",
       "entries": 126,
-      "status": "not-found",
-      "shelf": "placeholder"
+      "status": "found",
+      "file": "test/assets/hadith-covers/sharh-usul-itiqad.webp",
+      "sha256": "664662d01695378bd102659523a4635bc7c351edba349c62a3c15f31d6769a55",
+      "edition": "Šarḥ Uṣūl Iʿtiqād Ahl as-Sunnah, al-Lālakāʾī, Dār al-Baṣīrah / Dār Ṭaybah",
+      "sourceUrl": "https://archive.org/details/dar_709"
     },
     {
       "title": "Muṣannaf Ibn Abī Šaybah",
@@ -194,8 +228,11 @@
       "title": "Aḥmad, az-Zuhd",
       "slug": "ahmad-az-zuhd",
       "entries": 14,
-      "status": "not-found",
-      "shelf": "placeholder"
+      "status": "found",
+      "file": "test/assets/hadith-covers/ahmad-az-zuhd.webp",
+      "sha256": "e89d7b5a739dc3496db563017f92e6e36a4efd8ec994508f4e314796b107c21c",
+      "edition": "az-Zuhd von Aḥmad ibn Ḥanbal, Dār Ibn al-Qayyim, Umschlag ohne Person",
+      "sourceUrl": "https://archive.org/details/20200131_20200131_0742"
     },
     {
       "title": "al-Ḫaṭīb al-Baġdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal",
@@ -387,15 +424,21 @@
       "title": "Sunan ad-Dāraquṭnī",
       "slug": "sunan-ad-daraqutni",
       "entries": 4,
-      "status": "not-found",
-      "shelf": "placeholder"
+      "status": "found",
+      "file": "test/assets/hadith-covers/sunan-ad-daraqutni.webp",
+      "sha256": "602619d1d4e9b9808fb277b3509d35b065458f06fe0821eee3ba078c561730c2",
+      "edition": "Sunan ad-Dāraquṭnī, grüner Schmuckumschlag, Bandangabe 1",
+      "sourceUrl": "https://archive.org/details/sunan-al-daraqutni-vol-3"
     },
     {
       "title": "aḏ-Ḏahabī, Siyar Aʿlām an-Nubalāʾ",
       "slug": "ad-dahabi-siyar-a-lam-an-nubala",
       "entries": 3,
-      "status": "not-found",
-      "shelf": "placeholder"
+      "status": "found",
+      "file": "test/assets/hadith-covers/siyar-alam-an-nubala.webp",
+      "sha256": "54044f7e2ee56efdb88bbd39639ed2b9d267e189ff08731ded2dcf74506ad0a1",
+      "edition": "Siyar Aʿlām an-Nubalāʾ, Muʾassasat ar-Risālah, weinroter Umschlag",
+      "sourceUrl": "https://archive.org/details/Siyar_Alam_Nubala_Thahabi"
     },
     {
       "title": "al-Āǧurrī, Aḫlāq Ḥamalat al-Qurʾān",
@@ -651,8 +694,11 @@
       "title": "aš-Šāfiʿī, ar-Risālah",
       "slug": "as-safi-i-ar-risalah",
       "entries": 1,
-      "status": "not-found",
-      "shelf": "placeholder"
+      "status": "found",
+      "file": "test/assets/hadith-covers/ar-risalah-shafii.webp",
+      "sha256": "ddd01ea7ac42a697940fcf22c0566959858c0d8ff7bd40b64e2704212b6e10f0",
+      "edition": "ar-Risālah von aš-Šāfiʿī, Ausgabe Aḥmad Šākir, Umschlag mit Rücken",
+      "sourceUrl": "https://archive.org/details/risalashafii"
     },
     {
       "title": "aš-Šāṭibī, al-Iʿtiṣām, Bd. 1, digitale S. 112",
@@ -711,8 +757,11 @@
       "title": "aṭ-Ṭabarī, Tārīḫ ar-Rusul wa-l-Mulūk",
       "slug": "at-tabari-tarih-ar-rusul-wa-l-muluk",
       "entries": 1,
-      "status": "not-found",
-      "shelf": "placeholder"
+      "status": "found",
+      "file": "test/assets/hadith-covers/tarikh-tabari.webp",
+      "sha256": "c4cee3a05fa059cfa56ae07acf2744f872099f8212899c38dfc9bf6b1f5f3264",
+      "edition": "Tārīḫ aṭ-Ṭabarī, geprägter Ledereinband der Alexandrina, Band 1",
+      "sourceUrl": "https://archive.org/details/AAlexandrina-147042"
     },
     {
       "title": "Ibn Abī ad-Dunyā, al-Ǧūʿ",
