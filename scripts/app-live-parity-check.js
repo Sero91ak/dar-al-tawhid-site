@@ -68,38 +68,56 @@ async function checkBuildSyncParity() {
   };
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function checkPostsIndexParity() {
-  const bust = Date.now();
   const repoIndex = JSON.parse(
     fs.readFileSync(path.join(ROOT, "content/posts/posts-index.json"), "utf8")
   );
   const repoCount = Number(repoIndex.count) || (repoIndex.files || []).length;
   const repoGenerated = String(repoIndex.generated || "");
+  let last = null;
 
-  const liveText = await fetchText(
-    `${SITE_URL}/content/posts/posts-index.json?v=${bust}`
-  );
-  const liveIndex = JSON.parse(liveText);
-  const liveCount = Number(liveIndex.count) || (liveIndex.files || []).length;
-  const liveGenerated = String(liveIndex.generated || "");
-
-  const stale = repoGenerated && liveGenerated && repoGenerated !== liveGenerated;
-  const countDrift = liveCount < repoCount;
-  const ok = !stale && !countDrift;
-
-  return {
-    ok,
-    id: "posts-index",
-    repoCount,
-    liveCount,
-    repoGenerated,
-    liveGenerated,
-    diagnosis: ok
-      ? ""
-      : stale
-        ? "Beitrags-Index live veraltet (Deploy fehlgeschlagen oder Cache)."
-        : `Beitrags-Index live hat weniger Einträge (${liveCount} < ${repoCount})`
-  };
+  // A new Worker version can be current in Wrangler while the public edge
+  // still serves the previous posts index for a few seconds. One immediate
+  // miss used to roll a good publish back. Retry only this comparison.
+  for (let attempt = 1; attempt <= 12; attempt += 1) {
+    const bust = Date.now();
+    const liveText = await fetchText(
+      `${SITE_URL}/content/posts/posts-index.json?v=${bust}`
+    );
+    const liveIndex = JSON.parse(liveText);
+    const liveCount = Number(liveIndex.count) || (liveIndex.files || []).length;
+    const liveGenerated = String(liveIndex.generated || "");
+    const stale = repoGenerated && liveGenerated && repoGenerated !== liveGenerated;
+    const countDrift = liveCount < repoCount;
+    const ok = !stale && !countDrift;
+    last = {
+      ok,
+      id: "posts-index",
+      repoCount,
+      liveCount,
+      repoGenerated,
+      liveGenerated,
+      attempts: attempt,
+      diagnosis: ok
+        ? ""
+        : stale
+          ? "Beitrags-Index live veraltet (Deploy fehlgeschlagen oder Cache)."
+          : `Beitrags-Index live hat weniger Einträge (${liveCount} < ${repoCount})`
+    };
+    if (ok) {
+      if (attempt > 1) console.log(`${MARKER} posts-index sichtbar nach Versuch ${attempt}`);
+      return last;
+    }
+    if (attempt < 12) {
+      console.log(`${MARKER} posts-index noch nicht aktuell (Versuch ${attempt}/12): ${last.diagnosis}`);
+      await sleep(5000);
+    }
+  }
+  return last;
 }
 
 async function runDomainParity(domain) {
