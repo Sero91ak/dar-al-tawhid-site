@@ -767,15 +767,20 @@
     if (!app || !head) return;
     var box = app.getBoundingClientRect();
     var top = brandBottom();
-    head.style.position = "fixed";
-    head.style.top = top + "px";
-    head.style.left = Math.round(box.left) + "px";
-    head.style.width = Math.round(box.width) + "px";
-    head.style.maxWidth = "none";
-    head.style.margin = "0";
-    head.style.right = "auto";
-    head.style.zIndex = "64";
-    head.style.borderRadius = "0";
+    function place(prop, value) { head.style.setProperty(prop, value, "important"); }
+    place("position", "fixed");
+    place("top", top + "px");
+    place("left", Math.round(box.left) + "px");
+    place("width", Math.round(box.width) + "px");
+    place("max-width", "none");
+    place("margin", "0");
+    place("right", "auto");
+    place("z-index", "64");
+    place("border-radius", "0");
+    if (!head.dataset.pinned) {
+      head.dataset.pinned = "1";
+      w.requestAnimationFrame(pinHero);
+    }
     var h = Math.round(head.getBoundingClientRect().height);
     var hub = head.parentElement;
     if (h > 40 && hub) {
