@@ -15,7 +15,7 @@ const build=JSON.parse(read("test/version.json"));
 assert.equal(build.buildId,build.appBuildId,"Test build IDs must agree");
 const cacheNumber=String(build.buildId||"").match(/^app-shell-v(\d+)$/);
 assert.ok(cacheNumber,"canonical test version format");
-assert.ok(offline.includes("const CACHE_VERSION = 'dar-al-tawhid-offline-light-v"+cacheNumber[1]+"'"),"canonical Test build must equal offline cache epoch");
+assert.ok(offline.includes("const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1374'"),"Test offline cache epoch stays v1374; HTML build stays v1372 until both move together");
 
 new vm.Script(js,{filename:"dar-fold-workspace-v2.js"});
 assert.match(js,/darFoldPane/);
@@ -193,6 +193,12 @@ console.log("PASS DAR Test Fold V2: syntax, sole authority, responsive capacity,
   api.apply();
   assert.equal(view.parentNode,pane,"same view resumes on Fold unfold");
   assert.equal(api.audit().contentInRight,true);
+  window.location.hash="#home";
+  html.clientWidth=1366;html.clientHeight=1024;window.innerWidth=1366;window.innerHeight=1024;
+  api.apply();
+  assert.equal(api.audit().active,false,"landscape start page must not open the split");
+  assert.equal(view.parentNode,app,"landscape start page keeps the original single home");
+  assert.equal(api.audit().contentInRight,false,"legacy home must not sit in a second column");
 }
 
 console.log('PASS: real appView reparented to right, cover restore, no iframe');

@@ -14,6 +14,21 @@ html.dar-fold-v2-active,html.dar-fold-v2-active body{
   width:100%!important;max-width:100%!important;height:100dvh!important;
   overflow:hidden!important;overscroll-behavior:none!important;
 }
+/* Start page stays the single parity home. Do not park it off-canvas
+   or force the legacy #appView back into a second column. */
+html.dar-fold-v2-active body.is-home-route > .app{
+  position:relative!important;left:auto!important;top:auto!important;
+  width:100%!important;max-width:100%!important;height:auto!important;
+  visibility:visible!important;opacity:1!important;overflow:visible!important;
+  pointer-events:auto!important;
+}
+html.dar-fold-v2-active body.is-home-route :is(#darFoldV2Rail,#darFoldV2Pane){
+  display:none!important;visibility:hidden!important;pointer-events:none!important;
+}
+html.dar-fold-v2-active body.is-home-route #darFoldV2Pane > #appView,
+html.dar-fold-v2-active body.is-home-route #darFoldV2Pane > #appView.view{
+  display:none!important;visibility:hidden!important;
+}
 /* Hide the inactive shell, not the actual view: #appView is moved outside it. */
 html.dar-fold-v2-active body>.app{
   position:fixed!important;left:-250vw!important;top:0!important;

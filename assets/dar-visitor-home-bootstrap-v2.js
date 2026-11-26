@@ -12,7 +12,7 @@
   if(window.__DAR_VISITOR_HOME_BOOT_V2)return;
   window.__DAR_VISITOR_HOME_BOOT_V2=true;
   var attempts=0,pending=false,timer=0,ownScript=null;
-  var PARITY="/assets/dar-home-test-parity-visitor.js?v=20261124-single-home-boot-v2";
+  var PARITY="/assets/dar-home-test-parity-visitor.js?v=20261126-single-home-landscape-v1";
   function isHome(){return !!(document.body&&document.body.classList.contains("is-home-route"))}
   function found(){return !!document.getElementById("darHomeHtmlParityV1")}
   function retry(){

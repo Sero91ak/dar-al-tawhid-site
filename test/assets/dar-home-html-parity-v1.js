@@ -358,6 +358,10 @@ function stylesheet(){
  "#darHomeHtmlParityV1 .dhp-greeting{white-space:normal!important;}",
  "#darHomeHtmlParityV1 .dhp-intro{max-width:70ch!important;line-height:1.48!important;white-space:normal!important;height:auto!important;max-height:none!important;}",
  "html,html body{overscroll-behavior-y:none!important;}",
+ "html.dar-fold-v2-active body.is-home-route > .app{position:relative!important;left:auto!important;top:auto!important;width:100%!important;max-width:100%!important;height:auto!important;visibility:visible!important;opacity:1!important;overflow:visible!important;pointer-events:auto!important;}",
+ "html.dar-fold-v2-active body.is-home-route :is(#darFoldV2Rail,#darFoldV2Pane){display:none!important;visibility:hidden!important;pointer-events:none!important;}",
+ "html body.is-home-route #appView,html body.is-home-route #appView.view,html.dar-fold-v2-active body.is-home-route #darFoldV2Pane > #appView,html.dar-fold-v2-active body.is-home-route #darFoldV2Pane > #appView.view{display:none!important;visibility:hidden!important;}",
+ "html body.is-home-route #darHomeHtmlParityV1{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;left:auto!important;right:auto!important;transform:none!important;}",
  ].join("\n");
 }
 function create(){
