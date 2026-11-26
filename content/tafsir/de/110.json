@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "tafsir-de-v2",
+  "source": "Deutsche Übertragung nach dem abgerufenen arabischen Tafsīr Ibn Kathīr (quran.com resource 14) und Tafsīr as-Saʿdī (resource 91). Verswortlaut: Frank Bubenheim und Nadeem (resource 27). Kein Ibn-ʿAbbās-Eintrag.",
+  "updated": "2026-11-26",
+  "fetchedAt": "2026-11-26",
+  "works": [
+    {
+      "id": "ibn-kathir",
+      "work": "Tafsīr Ibn Kathīr",
+      "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+      "deathYear": 774,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+      "edition": "quran.com, arabische Fassung, resource 14",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/110"
+    },
+    {
+      "id": "sadi",
+      "work": "Tafsīr as-Saʿdī",
+      "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+      "deathYear": 1376,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+      "edition": "quran.com, arabische Fassung, resource 91",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/110"
+    }
+  ],
+  "blocked": [
+    "Ibn ʿAbbās: resource 15 ohne erlaubte Isnād-Wertung. Die bei Ibn Kathīr genannten Ketten werden nicht zusätzlich bewertet."
+  ],
+  "verses": [
+    {
+      "id": 1,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Wenn Allahs Hilfe kommt und der Sieg",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=110&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Die Sūra ist medinensisch. Ibn Kathīr sagt, es sei bereits vorausgegangen, dass sie einem Viertel des Qurʾān entspreche und „iḏā zulzilat“ einem Viertel. Danach beginnt ein Isnād an-Nasāʾīs, der im Auszug abbricht. Er wird nicht vervollständigt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/110",
+          "verseKey": "110:1"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. In dieser Sūra liegen eine frohe Botschaft, ein Befehl an seinen Gesandten, wenn sie eintritt, und ein Hinweis auf das, was sich daraus ergibt. Die frohe Botschaft ist die Hilfe Allahs für seinen Gesandten und die Eroberung Mekkas.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/110",
+          "verseKey": "110:1"
+        }
+      ],
+      "sabab": "Ibn Kathīr bezeichnet diese Sūra in der abgerufenen Fassung als medinensisch.",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 2,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): und du die Menschen in Allahs Religion in Scharen eintreten siehst,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=110&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Ibn Kathīr sagt, Ibn Ǧarīr habe über Muḥammad ibn Ḥumayd, von Mihrān, von ath-Thawrī, von ʿĀṣim, von Abū Razīn, von Ibn ʿAbbās eine ähnliche Geschichte überliefert. Danach beginnt ein Bericht Aḥmads: als „iḏā ǧāʾa naṣru Llāhi wal-fatḥ“ herabkam, sagte der Gesandte Allahs. Der Auszug bricht ab. Die Kette wird nicht bewertet, und der Bericht wird nicht als eigener Ibn-ʿAbbās-Beleg geführt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/110",
+          "verseKey": "110:2"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Und dass die Menschen scharenweise in die Religion Allahs eintreten, sodass viele von ihnen zu seinen Angehörigen und Helfern werden, nachdem sie zu seinen Feinden gehört hatten. Das Angekündigte ist eingetreten.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/110",
+          "verseKey": "110:2"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 3,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): dann lobpreise deinen Herrn und bitte Ihn um Vergebung; gewiß, Er ist Reue-Annehmend.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=110&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Deshalb sagt Er: lobpreise deinen Herrn und bitte Ihn um Vergebung; Er ist gewiss Reue annehmend. Ibn Kathīr führt einen Isnād an-Nasāʾīs an: ʿAmr ibn Manṣūr, Muḥammad ibn Maḥbūb, Abū ʿAwāna, von Hilāl ibn Ḫabbāb, von ʿIkrima, von Ibn ʿAbbās: als die Sūra bis zu ihrem Ende herabkam, sagte er, dem Gesandten Allahs sei sein eigenes Sterben angekündigt worden. Der Auszug bricht ab. Die Kette wird so wiedergegeben, wie sie steht, ohne zusätzliche Wertung.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/110",
+          "verseKey": "110:3"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der Befehl nach Hilfe und Eroberung ist, dass sein Gesandter seinem Herrn dafür dankt, Ihn lobpreisend preist und Ihn um Vergebung bittet. As-Saʿdī nennt zwei Hinweise. Der erste: die Hilfe für diese Religion bleibt und nimmt zu, wenn der Gesandte Allah mit seinem Lob preist und Ihn um Vergebung bittet, denn das ist Dank, und Allah sagt: „Wenn ihr dankbar seid, vermehre Ich euch gewiss.“ Das fand sich zur Zeit der rechtgeleiteten Kalifen und danach, bis der Islam dorthin gelangte, wohin keine Religion gelangt war. Dann trat von der Gemeinschaft an Ungehorsam ein, was eintrat, und Allah prüfte sie mit der Spaltung des Wortes. Der zweite: das Lebensende des Gesandten Allahs war nahe. Sein Leben ist ein vorzügliches Leben, bei dem Allah geschworen hat. Vorzügliche Angelegenheiten werden mit der Bitte um Vergebung abgeschlossen, wie das Gebet und die Wallfahrt. Der Befehl, in diesem Zustand zu loben und um Vergebung zu bitten, weist darauf hin, dass seine Frist zu Ende gegangen ist. Der Gesandte Allahs legte den Qurʾān so aus und sagte in seiner Verbeugung und seiner Niederwerfung oft: „Subḥānaka Llāhumma wa-bi-ḥamdika, Allāhumma ghfir lī.“",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/110",
+          "verseKey": "110:3"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    }
+  ]
+}

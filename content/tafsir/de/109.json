@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "tafsir-de-v2",
+  "source": "Deutsche Übertragung nach dem abgerufenen arabischen Tafsīr Ibn Kathīr (quran.com resource 14) und Tafsīr as-Saʿdī (resource 91). Verswortlaut: Frank Bubenheim und Nadeem (resource 27). Kein Ibn-ʿAbbās-Eintrag.",
+  "updated": "2026-11-26",
+  "fetchedAt": "2026-11-26",
+  "works": [
+    {
+      "id": "ibn-kathir",
+      "work": "Tafsīr Ibn Kathīr",
+      "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+      "deathYear": 774,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+      "edition": "quran.com, arabische Fassung, resource 14",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/109"
+    },
+    {
+      "id": "sadi",
+      "work": "Tafsīr as-Saʿdī",
+      "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+      "deathYear": 1376,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+      "edition": "quran.com, arabische Fassung, resource 91",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/109"
+    }
+  ],
+  "blocked": [
+    "Ibn ʿAbbās: resource 15 ohne erlaubte Isnād-Wertung.",
+    "109:4: resource 91 liefert keinen Text as-Saʿdīs. Der Eintrag bleibt leer."
+  ],
+  "verses": [
+    {
+      "id": 1,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Sag: O ihr Ungläubigen,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=109&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Die Sūra ist mekkanisch. Ibn Kathīr sagt, in Ṣaḥīḥ Muslim sei von Ǧābir festgelegt, dass der Gesandte Allahs diese Sūra und „qul huwa Llāhu aḥad“ in den beiden Rakʿa des Umlaufs las, und im Bericht Abū Hurayras in Ṣaḥīḥ Muslim, dass er beide in den beiden Rakʿa des Morgengebets las. Danach beginnt ein Isnād Aḥmads, der abbricht. Nummern stehen im Auszug nicht und werden nicht ergänzt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/109",
+          "verseKey": "109:1"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Sprich zu den Ungläubigen, indem du es bekanntmachst und offen sagst.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/109",
+          "verseKey": "109:1"
+        }
+      ],
+      "sabab": "Ibn Kathīr bezeichnet diese Sūra in der abgerufenen Fassung als mekkanisch. Ein einzelner Offenbarungsanlass ist in diesem Auszug nicht festgelegt.",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 2,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): ich diene nicht dem, dem ihr dient,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=109&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Von den Götzenbildern und den Nebengöttern.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/109",
+          "verseKey": "109:2"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Ich diene nicht dem, dem ihr dient: er sagt sich von dem los, was sie außer Allah anbeteten, äußerlich und innerlich.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/109",
+          "verseKey": "109:2"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 3,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): und ihr dient nicht Dem, Dem ich diene.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=109&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Das ist Allah allein, der keinen Teilhaber hat.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/109",
+          "verseKey": "109:3"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Und ihr dient nicht dem, dem ich diene, weil eure Anbetung nicht aufrichtig ist. Eure Anbetung, die mit Beigesellung verbunden ist, heißt keine Anbetung. Dann wiederholt Er das, damit das erste das Nichtvorhandensein der Tat zeigt und das zweite, dass dies eine fest anhaftende Eigenschaft geworden ist.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/109",
+          "verseKey": "109:3"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 4,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Und ich werde (auch) nicht dem dienen, dem ihr gedient habt,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=109&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. „Mā“ bedeutet hier „man“. Ibn Kathīr führt an: und ich bin nicht ein Diener dessen, dem ihr dient habt, und ihr seid nicht Diener dessen, dem ich diene. Das heißt: ich diene nicht eure Anbetung, ich gehe sie nicht und folge ihr nicht. Ich diene Allah nur so, wie Er es liebt und wie es Ihm wohlgefällt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/109",
+          "verseKey": "109:4"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 5,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Und ihr werdet nicht Dem dienen, Dem ich diene.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=109&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Deshalb sagt Er: und ihr seid nicht Diener dessen, dem ich diene. Das heißt: ihr folgt den Befehlen Allahs und seinem Gesetz in seiner Anbetung nicht, sondern ihr habt etwas von euch selbst her erfunden. Ibn Kathīr verweist auf 53:23. Der Gesandte sagt sich von allem los, worin sie sind. Der Auszug bricht ab.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/109",
+          "verseKey": "109:5"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Das zeigt, dass dies eine fest anhaftende Eigenschaft geworden ist.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/109",
+          "verseKey": "109:5"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 6,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Euch eure Religion und mir meine Religion.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=109&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der Gesandte sagte ihnen: euch eure Religion und mir meine Religion. Ibn Kathīr verweist auf 10:41 und 28:55. Al-Buḫārī sagt: es wird gesagt, euch eure Religion, der Unglaube, und mir meine Religion, der Islam. Der Auszug bricht ab.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/109",
+          "verseKey": "109:6"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Deshalb unterscheidet Er die beiden Gruppen und trennt die beiden Scharen: euch eure Religion und mir meine Religion. As-Saʿdī verweist auf das Wort „Sprich: Jeder handelt nach seiner Art“ und auf „Ihr seid unschuldig an dem, was ich tue, und ich bin unschuldig an dem, was ihr tut.“",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/109",
+          "verseKey": "109:6"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    }
+  ]
+}

@@ -1,0 +1,221 @@
+{
+  "schemaVersion": "tafsir-de-v2",
+  "source": "Deutsche Übertragung nach dem abgerufenen arabischen Tafsīr Ibn Kathīr (quran.com resource 14) und Tafsīr as-Saʿdī (resource 91). Verswortlaut: Frank Bubenheim und Nadeem (resource 27). Kein Ibn-ʿAbbās-Eintrag.",
+  "updated": "2026-11-26",
+  "fetchedAt": "2026-11-26",
+  "works": [
+    {
+      "id": "ibn-kathir",
+      "work": "Tafsīr Ibn Kathīr",
+      "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+      "deathYear": 774,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+      "edition": "quran.com, arabische Fassung, resource 14",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/105"
+    },
+    {
+      "id": "sadi",
+      "work": "Tafsīr as-Saʿdī",
+      "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+      "deathYear": 1376,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+      "edition": "quran.com, arabische Fassung, resource 91",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/105"
+    }
+  ],
+  "blocked": [
+    "Ibn ʿAbbās: resource 15 ohne erlaubte Isnād-Wertung."
+  ],
+  "verses": [
+    {
+      "id": 1,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Siehst du nicht, wie dein Herr mit den Leuten des Elefanten verfuhr?",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=105&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Die Sūra ist mekkanisch. Dies gehört zu den Gnadenerweisen, mit denen Allah die Qurayš beschenkt hat, indem Er die Leute des Elefanten von ihnen abwandte. Sie waren entschlossen, die Kaʿba zu zerstören und ihre Spur auszulöschen. Allah vernichtete sie, demütigte sie, ließ ihr Bemühen scheitern, ließ ihr Werk irregehen und schickte sie mit dem schlimmsten Misserfolg zurück. Sie waren Christen, und ihre Religion war damals dem Zustand nach näher. Der Auszug bricht hier ab; der Vergleich wird nicht ergänzt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/105",
+          "verseKey": "105:1"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Hast du nicht die Macht Allahs, die Größe seiner Sache, seine Barmherzigkeit mit seinen Dienern, die Belege seines Tawḥīd und die Wahrhaftigkeit seines Gesandten Muḥammad gesehen, in dem, was Allah mit den Leuten des Elefanten tat? Sie planten gegen sein heiliges Haus und wollten es zerstören, rüsteten sich dazu, nahmen Elefanten mit, um es niederzureißen, und kamen mit einer Schar, der die Araber nichts entgegenzusetzen hatten, aus Abessinien und dem Jemen. Als sie nahe Mekka ankamen und die Araber sie nicht abwehren konnten, zogen die Leute von Mekka aus Furcht um sich selbst aus Mekka hinaus.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/105",
+          "verseKey": "105:1"
+        }
+      ],
+      "sabab": "Ibn Kathīr bezeichnet diese Sūra in der abgerufenen Fassung als mekkanisch. Ein einzelner Offenbarungsanlass ist in diesem Auszug nicht festgelegt.",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 2,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Ließ Er nicht ihre List verlorengehen",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=105&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Allah vernichtete sie, zerstörte sie und schickte sie mit ihrer List und ihrem Zorn zurück. Sie erlangten nichts Gutes.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/105",
+          "verseKey": "105:2"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Allah genügte gegen ihr Übel und warf ihre List auf sie selbst zurück.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/105",
+          "verseKey": "105:2"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 3,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): und sandte gegen sie Vögel in aufeinanderfolgenden Schwärmen,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=105&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Allah sandte gegen sie Vögel vom Meer, ähnlich den Schwalben und dem balsān. Das Wort balsān bleibt so, wie es im Auszug steht.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/105",
+          "verseKey": "105:3"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Allah sandte gegen sie Vögel in Schwärmen, das heißt getrennt, einen nach dem anderen.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/105",
+          "verseKey": "105:3"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 4,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): die sie mit Steinen aus gebranntem Lehm bewarfen,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=105&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Jeder dieser Vögel trug drei Steine: einen im Schnabel und zwei in den Füßen, ähnlich Kichererbsen und Linsen. Wen von ihnen einer traf, der kam um, und nicht alle wurden getroffen. Sie zogen fliehend hinaus, eilten auf den Weg und fragten nach Nufayl, damit er ihnen den Weg zeige. Nufayl stand auf dem Berg mit den Qurayš und den Arabern des Ḥiǧāz und sah zu, was Allah mit den Leuten des Elefanten tat. Der Auszug bricht mitten im Satz ab.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/105",
+          "verseKey": "105:4"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Sie trugen erhitzte Steine aus siǧǧīl, bewarfen sie damit und verfolgten den Fernen und den Nahen, sodass sie erloschen und reglos wurden.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/105",
+          "verseKey": "105:4"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 5,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): und sie so wie abgefressene Halme machte?",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=105&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Er machte sie wie abgefressene Halme. Saʿīd ibn Ǧubayr: das Stroh, das die Leute habūr nennen. In einer Überlieferung von Saʿīd: das Blatt des Weizens. Von ihm auch: ʿaṣf ist das Stroh, und das Gegessene ist das Grünfutter, das für die Tiere geschnitten wird. So auch al-Ḥasan al-Baṣrī. Von Ibn ʿAbbās: ʿaṣf ist die Hülse auf dem Korn, wie die Hülle auf dem Weizen. Der Auszug bricht ab. Die Zuschreibung an Ibn ʿAbbās steht ohne Isnād-Wertung.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/105",
+          "verseKey": "105:5"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Sie wurden wie abgefressene Halme. Allah genügte gegen ihr Übel und warf ihre List auf sie selbst zurück. Ihre Geschichte ist bekannt. Es war das Jahr, in dem der Gesandte Allahs geboren wurde, und so wurde es zu den Vorzeichen seines Rufes und den Vorläufern seiner Botschaft.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/105",
+          "verseKey": "105:5"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    }
+  ]
+}

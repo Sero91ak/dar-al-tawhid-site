@@ -1,0 +1,183 @@
+{
+  "schemaVersion": "tafsir-de-v2",
+  "source": "Deutsche Übertragung nach dem abgerufenen arabischen Tafsīr Ibn Kathīr (quran.com resource 14) und Tafsīr as-Saʿdī (resource 91). Verswortlaut: Frank Bubenheim und Nadeem (resource 27). Kein Ibn-ʿAbbās-Eintrag.",
+  "updated": "2026-11-26",
+  "fetchedAt": "2026-11-26",
+  "works": [
+    {
+      "id": "ibn-kathir",
+      "work": "Tafsīr Ibn Kathīr",
+      "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+      "deathYear": 774,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+      "edition": "quran.com, arabische Fassung, resource 14",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/106"
+    },
+    {
+      "id": "sadi",
+      "work": "Tafsīr as-Saʿdī",
+      "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+      "deathYear": 1376,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+      "edition": "quran.com, arabische Fassung, resource 91",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/106"
+    }
+  ],
+  "blocked": [
+    "Ibn ʿAbbās: resource 15 ohne erlaubte Isnād-Wertung. Der bei Ibn Kathīr beginnende Bayhaqī-Isnād ist abgebrochen und nicht bewertet."
+  ],
+  "verses": [
+    {
+      "id": 1,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Für die Vereinigung der Qurais",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=106&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Die Sūra ist mekkanisch. Ibn Kathīr sagt, er erwähne einen seltenen Bericht über ihren Vorzug, und beginnt einen Isnād aus al-Bayhaqīs Ḫilāfiyyāt, der im Auszug abbricht. Der Bericht wird nicht vervollständigt und nicht bewertet.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/106",
+          "verseKey": "106:1"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Viele der Erklärer sagten: die Präpositionalphrase hängt mit der vorherigen Sūra zusammen. Das heißt: Wir taten, was wir mit den Leuten des Elefanten taten, um der Qurayš, ihrer Sicherheit, des Bestands ihrer Angelegenheiten und der Ordnung ihrer Reise im Winter nach dem Jemen und im Sommer nach aš-Šām willen, für Handel und Erwerb.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/106",
+          "verseKey": "106:1"
+        }
+      ],
+      "sabab": "Ibn Kathīr bezeichnet diese Sūra in der abgerufenen Fassung als mekkanisch. Den Bericht über ihren Vorzug, den er als selten bezeichnet, bricht der Auszug im Isnād ab.",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 2,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): ihre Vereinigung während der Reise des Winters und des Sommers.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=106&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Es wird gesagt: gemeint ist, woran sie gewöhnt waren, die Reise im Winter nach dem Jemen und im Sommer nach aš-Šām für den Handel und anderes. Dann kehrten sie sicher in ihre Stadt zurück, weil die Menschen sie achteten, denn sie waren Bewohner des Heiligtums Allahs. Wer sie kannte, achtete sie. Wer sich ihnen anschloss und mit ihnen zog, war durch sie sicher. Das war ihr Zustand auf ihren Reisen. Der Auszug bricht ab.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/106",
+          "verseKey": "106:2"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der abgerufene Text as-Saʿdīs zu diesem Vers ist derselbe Abschnitt wie zu 106:1: die Reise im Winter nach dem Jemen und im Sommer nach aš-Šām für Handel und Erwerb.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/106",
+          "verseKey": "106:2"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 3,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): So sollen sie dem Herrn dieses Hauses dienen,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=106&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Dann wies Er sie an, diese große Gunst dankbar anzuerkennen: sie sollen dem Herrn dieses Hauses dienen, das heißt Ihn allein in der Anbetung einen, so wie Er ihnen ein sicheres Heiligtum und ein geschütztes Haus gemacht hat. Ibn Kathīr verweist auf 27:91.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/106",
+          "verseKey": "106:3"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Allah vernichtete, wer ihnen Böses wollte, und machte die Sache des Heiligtums und seiner Bewohner in den Herzen der Araber groß, sodass sie sie achteten und ihnen auf keiner Reise entgegentraten, die sie wollten. Deshalb befahl Allah ihnen den Dank: sie sollen dem Herrn dieses Hauses dienen, das heißt Ihn einen und die Anbetung Ihm aufrichtig machen.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/106",
+          "verseKey": "106:3"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 4,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Der ihnen Speise nach ihrem Hunger gegeben und ihnen Sicherheit nach ihrer Furcht gewährt hat.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=106&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der ihnen Speise nach Hunger gab, das ist der Herr des Hauses, der ihnen Speise nach Hunger und Sicherheit nach Furcht gab. Er beschenkte sie mit Sicherheit und günstigem Unterhalt. Sie sollen Ihm allein dienen, ohne Teilhaber, und neben Ihm kein Götzenbild anbeten. Wer diesem Befehl folgt, dem vereint Allah die Sicherheit des Diesseits und die des Jenseits. Wer Ihm ungehorsam ist, dem entzieht Er. Der Auszug bricht hier ab.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/106",
+          "verseKey": "106:4"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der ihnen Speise nach Hunger gab und ihnen Sicherheit nach Furcht gewährte. Reichlicher Unterhalt und Sicherheit vor dem, was man fürchtet, gehören zu den größten Gaben des Diesseits, die Dank gegenüber Allah verpflichten. Er hat das Haus eigens mit der Herrenbezeichnung genannt wegen seines Vorzugs und seiner Ehre. Sonst ist Er der Herr aller Dinge.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/106",
+          "verseKey": "106:4"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    }
+  ]
+}
