@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-270` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-280` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4774
-totalVerifiedEntries: 4774
-loadedEntries: 4774
-uniqueVerifiedReferences: 4774
-missingCount: 1462
+entriesCount: 4852
+totalVerifiedEntries: 4852
+loadedEntries: 4852
+uniqueVerifiedReferences: 4852
+missingCount: 1384
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-270.json
-nächster Gap-Fill-Batch: entries-gap-06-271.json
+letzter Gap-Fill-Batch: entries-gap-06-280.json
+nächster Gap-Fill-Batch: entries-gap-06-281.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `583` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `662` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -707,3 +707,43 @@ Zwei direkt versbezogene authentische Auslegungen aus Ṣaḥīḥ al-Buḫārī
 ## Batch 06-270 — 06.11.2026 (Prüfzweig)
 
 Qurʾān 8:39: die authentische mawqūf-Auslegung von ʿAbdullāh ibn ʿUmar im Ṣaḥīḥ al-Buḫārī 4650 und 4651. Er ordnet die religiöse Verfolgung der Muslime dem frühen historischen Verskontext zu und grenzt sie von Machtkämpfen unter Muslimen ab. Kein eigenständiger Prophetenwortlaut, keine heutige Gewaltaufforderung. Katalog nach Freigabe 4774/6236, Lücken 1462. Details in SOURCE_REVIEW_06-270.md.
+
+## Batch 06-271 — 26.11.2026
+
+Acht frühe Lücken ab 2:82 an Tafsīr aṭ-Ṭabarī geprüft und ohne zugelassene Einstufung offen gelassen. Vierzehn Verse aus Ṣaḥīḥ al-Buḫārī, Kitāb at-Tafsīr, aufgenommen: 4:69, 5:117, 7:158, 9:94, 9:95, 9:96, 9:128, 11:7, 11:18, 11:102, 12:18, 17:78, 18:103, 18:105. Katalog 4788/6236, Lücken 1448, erste Lücke weiterhin 2:82. Wortlaut, Ketten und zurückgestellte Stellen in SOURCE_REVIEW_06-271.md. Keine OneSignal-Benachrichtigung.
+
+## Batch 06-272 — 26.11.2026
+
+Zehn Verse aus Ṣaḥīḥ al-Buḫārī, Kitāb at-Tafsīr: 4:163, 5:45, 7:33, 7:143, 9:1, 9:3, 9:12, 9:60, 12:7, 12:21. Bereits geprüfte und nicht aufgenommene Referenzen stehen in blocked-inspected.json und werden nicht erneut geöffnet. Katalog 4798/6236, Lücken 1438. Details in SOURCE_REVIEW_06-272.md.
+
+## Batch 06-273 — 26.11.2026
+
+Zehn weitere Verse aus Ṣaḥīḥ al-Buḫārī, Kitāb at-Tafsīr: 12:23, 13:8, 15:18, 15:80, 15:90, 15:91, 16:70, 17:16, 17:56, 17:81. Die in blocked-inspected.json geführten Referenzen bleiben übersprungen. Katalog 4808/6236, Lücken 1428. Details in SOURCE_REVIEW_06-273.md.
+
+## Batch 06-274 — 26.11.2026
+
+Zehn Verse mit abgerufenem Wortlaut und zugelassener Stufe: 4:34, 5:116, 6:79, 11:15, 11:16, 12:50, 13:38, 14:25, 14:37, 14:48. Frühe Ṭabarī-Stellen ab 2:123 ohne Stufe und bloße Wortgleichklänge stehen in blocked-inspected.json. Katalog 4818/6236, Lücken 1418. Details in SOURCE_REVIEW_06-274.md.
+
+## Batch 06-275 — 26.11.2026
+
+Dreizehn Verse aus Ṣaḥīḥ Muslim, Sunan Abī Dāwūd und Sunan an-Nasāʾī: 4:77, 5:41, 5:47, 6:163, 7:43, 9:19, 9:39, 9:92, 9:120, 10:58, 10:62, 14:36, 19:72. Acht Ṭabarī-Stellen ab 3:9 ohne Stufe stehen in blocked-inspected.json. Katalog 4831/6236, Lücken 1405. Details in SOURCE_REVIEW_06-275.md.
+
+## Batch 06-276 — 26.11.2026
+
+Sieben Verse: 5:48, 5:88, 10:94, 11:80, 13:39, 16:101, 18:109. Einundzwanzig geprüfte Stellen ohne zugelassene Stufe stehen in blocked-inspected.json, darunter at-Tirmiḏī 3036. Katalog 4838/6236, Lücken 1398. Details in SOURCE_REVIEW_06-276.md.
+
+## Batch 06-277 — 26.11.2026
+
+Vier Verse: 5:5, 7:138, 8:75, 9:44. Sechsunddreißig geprüfte Stellen ohne zugelassene Stufe, vor allem Ṭabarī-Seiten ab 3:76, stehen in blocked-inspected.json. Katalog 4842/6236, Lücken 1394. Details in SOURCE_REVIEW_06-277.md.
+
+## Batch 06-278 — 26.11.2026
+
+Drei Verse: 4:48, 10:25 und 16:7. Sechzehn geprüfte Stellen ohne zugelassene Stufe stehen in blocked-inspected.json, darunter 4:80, 4:118 und 9:31. Katalog 4845/6236, Lücken 1391. Details in SOURCE_REVIEW_06-278.md.
+
+## Batch 06-279 — 26.11.2026
+
+Ein Vers: 6:85, isnād ḥasan, mit aṭ-Ṭabarīs eigenem Vorbehalt. 239 Stellen von 4:121 bis 7:81 und zusätzlich 7:172 ohne zugelassene Stufe stehen in blocked-inspected.json. Katalog 4846/6236, Lücken 1390. Details in SOURCE_REVIEW_06-279.md.
+
+## Batch 06-280 — 26.11.2026
+
+Sechs Verse aus Tafsīr aṭ-Ṭabarī: 9:65, 9:66, 9:74, 9:107, 13:13, 13:30. Der Durchgang von 7:83 bis 19:98 ist sonst ohne zugelassene Stufe im Prüfprotokoll. 15:86 und 16:105 haben in der erreichbaren Ṭabarī-Fassung keinen Text und in den sechs Hadithbüchern keinen Treffer. Sie stehen ebenfalls im Prüfprotokoll. Der offene Rest ab 7:83 ist damit durchgesehen. Katalog 4852/6236, Lücken 1384. Details in SOURCE_REVIEW_06-280.md.
