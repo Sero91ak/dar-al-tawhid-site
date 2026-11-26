@@ -475,6 +475,8 @@ html[data-theme] body.is-hadith-route #appView button.hls-continue{
 html[data-theme] body.is-hadith-route #appView button.hls-row,
 html[data-theme] body.is-hadith-route #appView button.hls-compact,
 html[data-theme] body.is-hadith-route #appView button.hls-card{min-height:52px!important;}
+html[data-theme] body.is-hadith-route #appView .hls-group > .hls-group-item > button.hls-row{min-height:68px!important;padding:16px 18px!important;}
+html[data-theme] body.is-hadith-route #appView .hls-row-no{flex:0 0 1.8rem;color:var(--hls-gold);font-variant-numeric:tabular-nums;font-size:.95rem;}
 html[data-theme] body.is-hadith-route #appView .hls-crumbs{
   display:block!important;
   padding:2px 0 10px!important;
