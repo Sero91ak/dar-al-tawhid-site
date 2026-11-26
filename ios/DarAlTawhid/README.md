@@ -14,13 +14,13 @@ Kids ist eine **eigene** App: `../DarAlTawhidKids/DarAlTawhidKids.xcodeproj` (Bu
 6. Distribute App > App Store Connect > Upload.
 7. In App Store Connect, create a TestFlight external group and public invite link.
 
-TestFlight und App Store laden dieselbe Live-Seite (wie Store-Build 89, ohne Glas-Split):
+TestFlight und App Store laden dieselbe Live-Seite (wie Store-/TestFlight-Build 111, ohne Glas-Split):
 
 `https://dar-al-tawhid.de/#home`
 
 `DarAppShell.usesStagingWeb` bleibt `false`. Dar Test (`/test/`) ist nur die Website zum Prüfen, nicht die native App.
 
-Vor jedem neuen TestFlight-Upload in Xcode die **Build-Nummer über der letzten Store-/TestFlight-Nummer** erhöhen (nach 89 also 90), dann Product → Archive → App Store Connect.
+Vor jedem neuen TestFlight-Upload in Xcode die **Build-Nummer über der letzten Store-/TestFlight-Nummer** erhöhen (nach 111 also 112), dann Product → Archive → App Store Connect.
 
 ## Home-Screen-Widgets (iPhone / iPad / Mac Catalyst)
 
