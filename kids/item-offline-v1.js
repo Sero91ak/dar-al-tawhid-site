@@ -136,8 +136,8 @@ function story(card,{category,item,sourceUrl,artwork,hero,audioMeta,readerUrl},i
 function deen(card,{item,audioMeta,cover,hero},inline=false){
  if(!item?.id)return;
  const audio=allowed(String(audioMeta?.url||""));
- const urls=["/kids/data/deen-lessons.json?v=3","/kids/data/deen-curriculum-v1.json?v=3",
-  "/kids/deen-lessons.js?v=13","/kids/deen-curriculum-v1.css?v=1",
+ const urls=["/kids/data/deen-lessons.json?v=3","/kids/data/deen-curriculum-v1.json?v=20261126-v4-fill",
+  "/kids/deen-lessons.js?v=14","/kids/deen-curriculum-v1.css?v=1",
   "/kids/deen-lessons.css?v=2","/kids/deen-learning-v1199.css?v=1199",
   "/kids/story-follow-reader.css?v=11","/kids/story-follow-reader.js?v=18",
   "/kids/story-policy.js?v=2",cover,hero,audio];
@@ -163,7 +163,7 @@ function academy(card,{id,title,subject}){
   "/kids/akademie/curriculum-v29.js?v=20261012-29",
   "/kids/akademie/school-progress-v11.js?v=20261012-30",
   "/kids/owner-voice.js?v=academy-serhat-v1-20261010",
-  "/kids/data/academy-audio.json?v=1",
+  "/kids/data/academy-audio.json?v=20261126-v4-fill",
   "/kids/data/owner-voice-audio.json?v=2",
   "/kids/data/quiz-audio.json?v=2",
   "/kids/data/dua-audio.json?v=8",

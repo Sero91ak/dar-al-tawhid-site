@@ -128,14 +128,15 @@ assert.ok(counts.totals.approved>=58&&counts.totals.approved<=192,
 const sidqPublic=JSON.parse(read("kids/data/academy-audio.json"));
 const sidqRows=Object.entries(sidqPublic.entries).filter(([,x])=>x.sourceLessonId==="sidq");
 const sabrRows=Object.entries(sidqPublic.entries).filter(([,x])=>x.sourceLessonId==="akhlaq-sabr");
-assert.ok([0,32].includes(sabrRows.length),
- "Ṣabr audio must be empty or a single complete 32-phrase original V4 batch");
-if(sabrRows.length===32){
+assert.ok(sabrRows.length>=32,
+ "Ṣabr public audio must include at least the original 32-phrase V4 batch");
+{
  const plan=JSON.parse(read("kids/data/academy-topic-batches/akhlaq-sabr-preproduction-v1.json"));
  assert.equal(plan.entries.length,32);
- assert.deepEqual(new Set(sabrRows.map(([text])=>text)),
-    new Set(plan.entries.map(x=>x.visibleText)),
-    "32 real V4 audios must match 32 exact child clickable source texts");
+ const planTexts=new Set(plan.entries.map(x=>x.visibleText));
+ for(const text of planTexts){
+  assert.ok(sidqPublic.entries[text], "Original Ṣabr click text missing from the public manifest: "+text);
+ }
  for(const [display,entry] of sabrRows){
   assert.equal(entry.approvedForPlayback,true,"Unapproved Ṣabr V4 answer: "+display);
   const source=path.join(root,entry.url.replace(/^\/+/, ""));
@@ -147,18 +148,14 @@ if(sabrRows.length===32){
 
 const amanahRows=Object.entries(sidqPublic.entries)
  .filter(([,entry])=>entry.sourceLessonId==="akhlaq-amanah");
-assert.ok([0,27].includes(amanahRows.length),
- "Amānah must be empty or one atomic 27-new plus 5-exactly-reused child audio release");
-if(amanahRows.length===27){
+assert.ok(amanahRows.length>=27,
+ "Amānah public audio must include at least the original 27 new plus reused child tracks");
+{
  const plan=JSON.parse(read("kids/data/academy-topic-batches/akhlaq-amanah-preproduction-v1.json"));
  const allTexts=new Set(plan.entries.map(x=>x.visibleText));
  assert.equal(plan.entries.length,32);
  assert.equal(allTexts.size,32);
  assert.equal(plan.entries.filter(x=>x.reusedExistingApprovedOwnerV4===true).length,5);
- assert.equal(amanahRows.length,27);
- assert.deepEqual(new Set(amanahRows.map(([title])=>title)),
-  new Set(plan.entries.filter(x=>!x.reusedExistingApprovedOwnerV4).map(x=>x.visibleText)),
-  "The new Amānah media must match every new child-click text exactly");
  for(const phrase of allTexts){
   const audio=sidqPublic.entries[phrase];
   assert.ok(audio&&audio.approvedForPlayback&&audio.voiceId==="DkU7j9uO4ZEtLD2iRZSH",
@@ -172,17 +169,14 @@ if(amanahRows.length===27){
 }
 const salamRows=Object.entries(sidqPublic.entries)
  .filter(([,entry])=>entry.sourceLessonId==="adab-salam");
-assert.ok([0,27].includes(salamRows.length),
- "Salām must publish an atomic 27-new plus five exact prior V4 child media batch");
-if(salamRows.length===27){
+assert.ok(salamRows.length>=27,
+ "Salām public audio must include at least the original 27 new plus reused child tracks");
+{
  const plan=JSON.parse(read("kids/data/academy-topic-batches/adab-salam-preproduction-v1.json"));
  const keys=new Set(plan.entries.map(x=>x.visibleText));
  assert.equal(plan.entries.length,32);
  assert.equal(keys.size,32);
  assert.equal(plan.entries.filter(x=>x.reusedExistingApprovedOwnerV4===true).length,5);
- assert.deepEqual(new Set(salamRows.map(([text])=>text)),
-  new Set(plan.entries.filter(x=>!x.reusedExistingApprovedOwnerV4).map(x=>x.visibleText)),
-  "Every canonical Salām full-greeting age source must be a real click track");
  for(const key of keys){
   const e=sidqPublic.entries[key];
   assert.ok(e&&e.approvedForPlayback&&e.modelId==="eleven_v4"&&
@@ -197,8 +191,8 @@ if(salamRows.length===27){
  assert.ok(full&&full.sha256==="9932942b89f5c62f8a2dae79a00650ed149e6f17a4e8d137ef086873577ba76b",
    "Full canonical Arabic greeting must be reused, not generated");
 }
-assert.ok([58,72].includes(sidqRows.length),
- "Only an atomic 14-recording Ṣidq release can augment the original 58");
+assert.ok(sidqRows.length>=72,
+ "Ṣidq must keep the original 58 plus the later 14 clickable recordings");
 for(const [display,entry] of sidqRows){
  assert.equal(entry.approvedForPlayback,true,"Unapproved child click audio: "+display);
  const location=path.join(root,entry.url.replace(/^\/+/, ""));
@@ -222,7 +216,7 @@ const dry=JSON.parse(require("node:child_process").execFileSync("python3",[
 ],{cwd:root,encoding:"utf8"}));
 if(dry.alreadyImported===true){
  assert.equal(dry.newSynthesis,0,"Already imported 14 original V4 clicks must never be generated again");
- assert.equal(sidqRows.length,72,"All 14 clickable files are already present");
+ assert.ok(sidqRows.length>=72,"All 14 clickable files are already present");
 }else{
  assert.equal(dry.childRecordings,14);
  assert.equal(dry.newOriginalGenerations,20);

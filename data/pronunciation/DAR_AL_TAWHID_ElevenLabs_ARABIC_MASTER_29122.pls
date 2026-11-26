@@ -7973,19 +7973,19 @@
   </lexeme>
 <lexeme>
     <grapheme>al-Bukhārī</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-Bukhari</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-bukhārī</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-bukhari</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>Muslim ibn al-Ḥajjāǧ</grapheme>
@@ -8949,51 +8949,51 @@
   </lexeme>
 <lexeme>
     <grapheme>ʿIbādah</grapheme>
-    <alias>-Ibaadah</alias>
+    <alias>Ibaadah</alias>
   </lexeme>
 <lexeme>
     <grapheme>'Ibadah</grapheme>
-    <alias>-Ibaadah</alias>
+    <alias>Ibaadah</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ibadah</grapheme>
-    <alias>-Ibaadah</alias>
+    <alias>Ibaadah</alias>
   </lexeme>
 <lexeme>
     <grapheme>ʿibādah</grapheme>
-    <alias>-Ibaadah</alias>
+    <alias>Ibaadah</alias>
   </lexeme>
 <lexeme>
     <grapheme>'ibadah</grapheme>
-    <alias>-Ibaadah</alias>
+    <alias>Ibaadah</alias>
   </lexeme>
 <lexeme>
     <grapheme>ibadah</grapheme>
-    <alias>-Ibaadah</alias>
+    <alias>Ibaadah</alias>
   </lexeme>
 <lexeme>
     <grapheme>ʿIbādāt</grapheme>
-    <alias>-Ibaadaat</alias>
+    <alias>Ibaadaat</alias>
   </lexeme>
 <lexeme>
     <grapheme>'Ibadat</grapheme>
-    <alias>-Ibaadaat</alias>
+    <alias>Ibaadaat</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ibadat</grapheme>
-    <alias>-Ibaadaat</alias>
+    <alias>Ibaadaat</alias>
   </lexeme>
 <lexeme>
     <grapheme>ʿibādāt</grapheme>
-    <alias>-Ibaadaat</alias>
+    <alias>Ibaadaat</alias>
   </lexeme>
 <lexeme>
     <grapheme>'ibadat</grapheme>
-    <alias>-Ibaadaat</alias>
+    <alias>Ibaadaat</alias>
   </lexeme>
 <lexeme>
     <grapheme>ibadat</grapheme>
-    <alias>-Ibaadaat</alias>
+    <alias>Ibaadaat</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ṭahārah</grapheme>
@@ -13021,11 +13021,11 @@
   </lexeme>
 <lexeme>
     <grapheme>Ghibah</grapheme>
-    <alias>Ghibah</alias>
+    <alias>Ghiibah</alias>
   </lexeme>
 <lexeme>
     <grapheme>ghibah</grapheme>
-    <alias>Ghibah</alias>
+    <alias>Ghiibah</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ġībah</grapheme>
@@ -13033,6 +13033,26 @@
   </lexeme>
 <lexeme>
     <grapheme>ġībah</grapheme>
+    <alias>Ghiibah</alias>
+  </lexeme>
+<lexeme>
+    <grapheme>Ghībah</grapheme>
+    <alias>Ghiibah</alias>
+  </lexeme>
+<lexeme>
+    <grapheme>ghībah</grapheme>
+    <alias>Ghiibah</alias>
+  </lexeme>
+<lexeme>
+    <grapheme>Gheebah</grapheme>
+    <alias>Ghiibah</alias>
+  </lexeme>
+<lexeme>
+    <grapheme>gheebah</grapheme>
+    <alias>Ghiibah</alias>
+  </lexeme>
+<lexeme>
+    <grapheme>غِيبَة</grapheme>
     <alias>Ghiibah</alias>
   </lexeme>
 <lexeme>
@@ -24337,27 +24357,27 @@
   </lexeme>
 <lexeme>
     <grapheme>al Bukhari</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>al bukhari</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>Al Bukhari</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>al Bukhārī</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>al bukhārī</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>Al Bukhārī</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>al Dhahabi</grapheme>
@@ -24789,11 +24809,11 @@
   </lexeme>
 <lexeme>
     <grapheme>Al-Bukhari</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>Al-Bukhārī</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-Dhahabi</grapheme>
@@ -25305,15 +25325,15 @@
   </lexeme>
 <lexeme>
     <grapheme>al Buḫārī</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>al buḫārī</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>Al Buḫārī</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>al Dukhan</grapheme>
@@ -25865,15 +25885,15 @@
   </lexeme>
 <lexeme>
     <grapheme>al-Buḫārī</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-buḫārī</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>Al-Buḫārī</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-Dukhan</grapheme>
@@ -30305,19 +30325,19 @@
   </lexeme>
 <lexeme>
     <grapheme>Buchari</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>buchari</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>Bukhari</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>bukhari</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>Dhahabi</grapheme>
@@ -30777,7 +30797,7 @@
   </lexeme>
 <lexeme>
     <grapheme>البخاري</grapheme>
-    <alias>al-Buchaarii</alias>
+    <alias>al-Bukhaarii</alias>
   </lexeme>
 <lexeme>
     <grapheme>التأويل</grapheme>
@@ -31897,7 +31917,35 @@
   </lexeme>
 <lexeme>
     <grapheme>الآخرة</grapheme>
-    <alias>Aachirah</alias>
+    <alias>Aakhirah</alias>
+  </lexeme>
+<lexeme>
+    <grapheme>Āḫirah</grapheme>
+    <alias>Aakhirah</alias>
+  </lexeme>
+<lexeme>
+    <grapheme>āḫirah</grapheme>
+    <alias>Aakhirah</alias>
+  </lexeme>
+<lexeme>
+    <grapheme>al-Āḫirah</grapheme>
+    <alias>al-Aakhirah</alias>
+  </lexeme>
+<lexeme>
+    <grapheme>al-āḫirah</grapheme>
+    <alias>al-Aakhirah</alias>
+  </lexeme>
+<lexeme>
+    <grapheme>Al-Āḫirah</grapheme>
+    <alias>al-Aakhirah</alias>
+  </lexeme>
+<lexeme>
+    <grapheme>Ākhirah</grapheme>
+    <alias>Aakhirah</alias>
+  </lexeme>
+<lexeme>
+    <grapheme>al-Ākhirah</grapheme>
+    <alias>al-Aakhirah</alias>
   </lexeme>
 <lexeme>
     <grapheme>الأذان</grapheme>

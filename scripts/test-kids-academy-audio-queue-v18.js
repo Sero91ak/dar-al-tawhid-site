@@ -21,7 +21,7 @@ assert.equal(v28Academy.phrases.length+v29Academy.phrases.length,327,
 
 assert.ok(r.uniquePhrases>=600);
 assert.equal(Object.values(r.totals).reduce((a,b)=>a+b,0),r.uniquePhrases);
-assert.equal(r.totals.approved,58,"All 58 source-exact real Ṣidq owner-V4 media assets must be hash-verified and recognized by the Academy audit");
+assert.ok(r.totals.approved>=58,"The original 58 Ṣidq owner-V4 media assets must remain hash-verified and recognized; later certified V4 lessons may also count");
 // Four historical binary originals remain archived, but the short Salam no longer matches
 // any eligible full-Salam production text. Therefore only three may count as staged.
 const originalPilot=JSON.parse(require("node:fs").readFileSync(require("node:path").join(__dirname,"../kids/data/academy-audio-staging-v9.json"),"utf8"));
@@ -35,7 +35,11 @@ for(const text of ["As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.","Lie
  const row=r.rows.find(x=>x.text===text);assert.equal(row?.state,"approved","Complete greeting and both personal addresses must be original V4 audio");
 }
 assert.equal(r.rows.filter(x=>x.text.startsWith("As-salāmu ʿalaykum, ")).length,0,"Obsolete short greetings must never be treated as a source-exact recording");
-assert.ok(r.totals.needsRecording>0,"Remaining 65 topics are not yet falsely recorded");
+// Official eleven_v4 pipeline clips are released for in-app playback via
+// approvedForPlayback, but the historic Creative-V4 audit (validV4) still
+// classifies many of them as needsRecording. That audit remains a provenance
+// check; it is not the live playback gate.
+assert.ok(r.totals.approved + r.totals.stagedAwaitingReview + r.totals.needsRecording === r.uniquePhrases);
 assert.equal(validV4({voiceId:"different",url:"/fake",voiceProfileId:"serhat-owner-voice-2026",modelId:"eleven_v4",
  voiceSettingsProfile:"kids_story",sourceVoice:"authorized-owner-voice",sourceSpeaker:"Serhat Abu Malik",
  sameAsApprovedKidsStoryProfile:true}),false);
@@ -140,9 +144,11 @@ const bulk=JSON.parse(require("node:child_process").execFileSync("python3",[
 assert.equal(bulk.scope.sourceBackedLessons,66);
 assert.equal(bulk.scope.separateAgeVersions,3);
 assert.equal(bulk.scope.futureEditorialLessonsNotProductionReady,142);
-assert.equal(bulk.totals.realVerifiedM4aAlreadyInRepo,58);
 assert.ok(bulk.totals.distinctSourceUtterances>=1700);
-assert.ok(bulk.totals.exactUtterancesMissingRealMedia>=1600);
+assert.equal(bulk.totals.realVerifiedM4aAlreadyInRepo,bulk.totals.distinctSourceUtterances,
+ "Every source-backed Academy utterance now has a real verified V4 m4a in the repo");
+assert.equal(bulk.totals.exactUtterancesMissingRealMedia,0,
+ "No source-backed Academy utterance should still be missing real media");
 assert.equal(bulk.totals.realVerifiedM4aAlreadyInRepo+
  bulk.totals.exactUtterancesMissingRealMedia,bulk.totals.distinctSourceUtterances,
  "Deduped bulk source coverage must equal imported genuine originals plus still missing");

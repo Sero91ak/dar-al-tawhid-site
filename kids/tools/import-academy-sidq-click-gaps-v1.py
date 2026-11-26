@@ -117,15 +117,17 @@ def production_plan():
         raise ValueError("Public audio manifest mismatch")
     old = {t: v for t, v in manifest["entries"].items()
            if isinstance(v, dict) and v.get("sourceLessonId") == "sidq"}
-    if len(old) not in (58, 72):
+    if len(old) < 58:
         raise ValueError("Unexpected number of existing Ṣidq clips")
     if any(e.get("approvedForPlayback") is not True for e in old.values()):
         raise ValueError("Previously approved canonical Ṣidq clips were altered")
-    if len(old) == 72:
+    if len(old) >= 72:
         for t in tasks:
             if t["visibleText"] not in old:
                 raise ValueError("Partial 14-item release; refusing to overwrite")
         return plan, gaps, manifest, True
+    if len(old) != 58:
+        raise ValueError("Partial Ṣidq release; refusing to import")
     if set(old) & {t["visibleText"] for t in tasks}:
         raise ValueError("A new source text already has a recorded voice; avoid duplicate import")
     return plan, gaps, manifest, False

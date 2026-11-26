@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-07T20:10:00Z",
+  "updatedAt": "2026-11-26T08:50:52Z",
   "provider": "ElevenLabs",
   "modelId": "eleven_v4",
   "masterVoice": {
@@ -10,11 +10,12 @@
   "pronunciationDictionary": {
     "name": "DAR AL TAWHID Arabic Master 2.9.122",
     "id": "Q8w3SxtoVo8NSjsnlJEd",
-    "versionId": "wSzgkGpAwEDiTak8DApc",
-    "ruleCount": 10099,
+    "versionId": "ahttb2VMxTltSTOr5cec",
+    "ruleCount": 10110,
     "masterFile": "data/pronunciation/DAR_AL_TAWHID_ElevenLabs_ARABIC_MASTER_29122.pls",
     "requiredForProduction": true,
-    "gitBlobSha": "cfd8c24d78ec4a8bde85ee74b75fdb4faa07358a"
+    "gitBlobSha": "3650dcf5262e34a4f97f23dcff60e30cba5d0d4dc2d532b6e95e4f99def59844",
+    "updatedFromLocalPlsFixes": "2026-11-26-ghibah-ibadah-bukhari-akhirah"
   },
   "alignment": {
     "productionMode": "elevenlabs-forced-alignment-v1",
