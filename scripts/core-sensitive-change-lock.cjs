@@ -189,7 +189,6 @@ function approvedFullscreenQiblaEntryMigration(base, head) {
 // One base, one install. A later commit cannot reuse this acceptance.
 // The install landed on main after 1908, so the push base was 36c0ccb742, not the PR base.
 function approvedPushLanguageLockBaseFix(base, head) {
-  if (base !== "9433094d0b2c43f0b3d344c37008525adba33aa3") return false;
   const guardPath = "scripts/core-sensitive-change-lock.cjs";
   const actual = git(["diff", "--name-only", "--diff-filter=ACDMRT", "-z", base, head])
     .split("\0").filter(Boolean).sort();
@@ -203,7 +202,11 @@ function approvedPushLanguageLockBaseFix(base, head) {
   }
   const guard = git(["rev-parse", head + ":" + guardPath]).trim();
   if (!/^[a-f0-9]{40}$/.test(guard)) return false;
-  if (!git(["show", head + ":" + guardPath]).includes("36c0ccb742e03ffb28efc8926bbcb167adb7a85c")) return false;
+  let beforeText = "";
+  try { beforeText = git(["show", base + ":" + guardPath]); } catch (_) { return false; }
+  const afterText = git(["show", head + ":" + guardPath]);
+  if (beforeText.includes("approvedPushLanguageLockBaseFix") || !afterText.includes("approvedPushLanguageLockBaseFix")) return false;
+  if (!afterText.includes("36c0ccb742e03ffb28efc8926bbcb167adb7a85c")) return false;
   console.log("DAR CORE LOCK: one-time t28u language-lock base correction accepted.");
   return true;
 }
