@@ -397,17 +397,19 @@ function applyContent(rerender){
 }
 var scheduleTimer=0;
 var applying=false;
+function flushLocale(){
+ scheduleTimer=0;
+ if(applying){queued=true;return}
+ applying=true;
+ try{
+  if(!TEST){applyContent(false);applyUi();mountSettingsChooser()}
+  setRoot();note();
+ }finally{applying=false}
+ if(queued){queued=false;schedule()}
+}
 function schedule(){
- if(scheduleTimer)global.clearTimeout(scheduleTimer);
- scheduleTimer=global.setTimeout(function(){
-  scheduleTimer=0;
-  if(applying)return;
-  applying=true;
-  try{
-   if(!TEST){applyContent(false);applyUi();mountSettingsChooser()}
-   setRoot();note();
-  }finally{applying=false}
- },80);
+ if(scheduleTimer){queued=true;return}
+ scheduleTimer=global.setTimeout(flushLocale,80);
 }
 function hook(){
  if(typeof global.applyPostsList==="function"&&!global.applyPostsList.__darLocale){
@@ -444,7 +446,7 @@ function setLocale(code){
  if(LOCALES.indexOf(code)<0)return false;
  try{global.localStorage.setItem(KEY,code)}catch(_){}
  global.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:code}}));
- loadPacks().then(function(){applyContent(true);schedule()});
+ loadPacks().then(function(){applyContent(true);flushLocale();schedule()});
  return true;
 }
 function loadJson(url){
@@ -506,7 +508,7 @@ function boot(){
   global.document.head.appendChild(script);
  }
  hook();
- loadPacks().then(function(){applyContent(true);schedule()});
+ loadPacks().then(function(){applyContent(true);flushLocale();schedule()});
  if(!TEST&&global.MutationObserver&&global.document.body){
   new MutationObserver(function(){schedule()}).observe(global.document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:attrs});
  }
@@ -514,8 +516,8 @@ function boot(){
  var timer=setInterval(function(){hook();if(++tries>20)clearInterval(timer)},500);
  schedule();
 }
-global.addEventListener("dar-adult-locale-changed",function(){loadPacks().then(function(){applyContent(true);schedule()})});
-global.addEventListener("storage",function(e){if(e.key===KEY)loadPacks().then(function(){applyContent(true);schedule()})});
+global.addEventListener("dar-adult-locale-changed",function(){loadPacks().then(function(){applyContent(true);flushLocale();schedule()})});
+global.addEventListener("storage",function(e){if(e.key===KEY)loadPacks().then(function(){applyContent(true);flushLocale();schedule()})});
 global.document.addEventListener("dar:view-rendered",function(){applyContent(false);schedule()});
 global.document.addEventListener("click",function(e){
  var b=e.target&&e.target.closest&&e.target.closest("[data-dar-adult-locale]");
