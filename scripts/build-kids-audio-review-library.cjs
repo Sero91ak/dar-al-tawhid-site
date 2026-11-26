@@ -116,7 +116,7 @@ function pushEntry(entries,seenKeys,src,doc,{idKey,title,text,group,url,sha256,d
 }
 
 function gatherAcademy(src,doc){
-  const entries=[],seenKeys=new Set();
+  const entries=[],seenKeys=new Set(),seenUrls=new Set();
   const bag=doc&&doc.entries&&typeof doc.entries==="object"?doc.entries:{};
   const rows=[];
   for(const [clipKey,node] of Object.entries(bag)){
@@ -142,11 +142,19 @@ function gatherAcademy(src,doc){
     const ao=AREA_ORDER.indexOf(a.area),bo=AREA_ORDER.indexOf(b.area);
     const ak=ao<0?99:ao,bk=bo<0?99:bo;
     if(ak!==bk)return ak-bk;
-    return String(a.group).localeCompare(String(b.group),"de")||String(a.title).localeCompare(String(b.title),"de");
+    const groupCmp=String(a.group).localeCompare(String(b.group),"de");
+    if(groupCmp)return groupCmp;
+    const aAns=/^Antwort\s+\d+:/i.test(String(a.idKey||""));
+    const bAns=/^Antwort\s+\d+:/i.test(String(b.idKey||""));
+    if(aAns!==bAns)return aAns?1:-1;
+    return String(a.title).localeCompare(String(b.title),"de");
   });
   for(const row of rows){
+    const audioPath=String(row.url||"").split("?")[0];
+    if(seenUrls.has(audioPath))continue;
     const start=entries.length;
     pushEntry(entries,seenKeys,src,doc,row);
+    if(entries.length>start)seenUrls.add(audioPath);
     if(entries.length>start){
       const last=entries[entries.length-1];
       const node=row.approval||{};
