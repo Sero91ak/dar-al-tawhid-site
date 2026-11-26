@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1471";
+const CACHE_NAME="dar-al-tawhid-kids-v1472";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -15,7 +15,7 @@ const CORE_PRECACHE=[
   "/kids/kids-motion-v1422.css?v=1422",
   "/kids/kids-girl-palette-authority-v1427.css?v=1428",
   "/kids/kids-academy-girl-seam-v1421.css?v=1422",
-  "/kids/kids-academy-portal-v1421.js?v=1427-sidq68",
+  "/kids/kids-academy-portal-v1421.js?v=1428-dock",
   "/kids/assets/kids-icons/learning-book-3d-v1422.png?v=1422",
   "/kids/assets/kids-icons/dua-real-v12.png?v=1421",
   "/kids/kids-ui-contract-v1420.css?v=1425",
@@ -307,7 +307,7 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/global-detail-dock-v1247.css?v=1428",
   "/kids/global-detail-dock-v1247.js?v=1428",
   "/kids/kids-ui-contract-v1420.css?v=1425",
-  "/kids/kids-academy-portal-v1421.js?v=1427-sidq68",
+  "/kids/kids-academy-portal-v1421.js?v=1428-dock",
   "/kids/kids-academy-girl-seam-v1421.css?v=1422",
   "/kids/kids-nav-v1421.css?v=1422",
   "/kids/start",

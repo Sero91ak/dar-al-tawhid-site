@@ -262,7 +262,7 @@ function addGlossary(target,l,a,record){
  const matches=defs.filter(x=>[x.term,...(x.aliases||[])].some(alias=>alias&&words.includes(clean(alias))));
  if(!matches.length)return;
  const b=block(target,"Arabische Begriffe einfach erklärt");
- line(b,"p","Diese Erklärungen sind kindgerechte Bedeutungen, keine wörtlichen Gelehrtenzitate. Die passende Serhat-Aufnahme wird nur nach Freigabe im Kinderunterricht abgespielt.","meta");
+ line(b,"p","Diese Erklärungen sind kindgerechte Bedeutungen, keine wörtlichen Gelehrtenzitate. Die passende Aufnahme wird nur nach Freigabe im Kinderunterricht abgespielt.","meta");
  const grid=el("div","","glossary");
  for(const t of matches.slice(0,14)){
   const item=el("section","","term");line(item,"strong",t.term);

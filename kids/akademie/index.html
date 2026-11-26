@@ -3951,7 +3951,7 @@ body[data-kids-portal="true"][data-profile="girl"] .academy-header.kids-detail-a
  <div class="stage-tracker" role="group" aria-label="Unterrichtsschritte"><button class="tracker-item is-current" data-jump-step="0"><b>1</b><span>Willkommen</span></button><button class="tracker-item" data-jump-step="1"><b>2</b><span>Verstehen</span></button><button class="tracker-item" data-jump-step="2"><b>3</b><span>Belege</span></button><button class="tracker-item" data-jump-step="3"><b>4</b><span>Mitdenken</span></button><button class="tracker-item" data-jump-step="4"><b>5</b><span>Merken</span></button></div>
  <p class="academy-audio-feedback" id="audioFeedback" role="status" aria-live="polite">Tippe auf „Anhören“, wenn du etwas hören möchtest.</p><div class="stage-surface" id="stageSurface">
   <section class="lesson-stage" data-lesson-step="0" aria-labelledby="welcomeTitle"><span class="kicker">Schritt 1 · Willkommen</span><h2 id="welcomeTitle">Schön, dass du da bist!</h2><p class="stage-lead welcome-greeting" id="welcomeGreeting"><span id="welcomeSalam" class="stage-greeting-salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.</span><span id="welcomeAddress" class="stage-greeting-address">Lieber Bruder.</span><span id="welcomeFollowup" class="stage-greeting-followup">Schön, dass du heute mitlernst!</span></p><p class="stage-body" id="lessonWelcomeBody">Heute sprechen wir darüber, weshalb <strong>Wahrhaftigkeit</strong> wichtig ist. Du kannst jederzeit anhalten, noch einmal zuhören oder etwas in deinem eigenen Tempo lesen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="0">Begrüßung anhören</button><span class="voice-note" id="voiceStatus" aria-live="polite">Du kannst die Begrüßung noch einmal anhören.</span></div></section>
-  <section class="lesson-stage" data-lesson-step="1" aria-labelledby="explainTitle" hidden><span class="kicker">Schritt 2 · Heute lernen wir</span><h2 id="explainTitle">Was bedeutet Wahrhaftigkeit?</h2><p class="stage-lead">Die <strong>Wahrheit sagen</strong> – auch wenn es manchmal Mut kostet.</p><button type="button" class="pill soft-gold academy-serhat-lead" id="academySerhatLead" hidden aria-label="Einführung anhören">▶ Serhat hören</button><span class="academy-serhat-status" id="academySerhatStatus" aria-live="polite" hidden></span><div class="spoken-paragraph" id="explainWords"><p data-spoken>Manchmal passiert uns aus Versehen ein Fehler.</p><p data-spoken>Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.</p><p data-spoken>Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.</p><p data-spoken>Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.</p></div><div id="academyTermCoach" class="academy-term-coach" hidden aria-label="Arabische Wörter leicht erklärt"></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="1">Erklärung anhören</button><span class="voice-note">Beim Hören wird der aktuelle Satz sanft hervorgehoben.</span></div></section>
+  <section class="lesson-stage" data-lesson-step="1" aria-labelledby="explainTitle" hidden><span class="kicker">Schritt 2 · Heute lernen wir</span><h2 id="explainTitle">Was bedeutet Wahrhaftigkeit?</h2><p class="stage-lead">Die <strong>Wahrheit sagen</strong> – auch wenn es manchmal Mut kostet.</p><button type="button" class="pill soft-gold academy-serhat-lead" id="academySerhatLead" hidden aria-label="Einführung anhören">▶ Anhören</button><span class="academy-serhat-status" id="academySerhatStatus" aria-live="polite" hidden></span><div class="spoken-paragraph" id="explainWords"><p data-spoken>Manchmal passiert uns aus Versehen ein Fehler.</p><p data-spoken>Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.</p><p data-spoken>Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.</p><p data-spoken>Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.</p></div><div id="academyTermCoach" class="academy-term-coach" hidden aria-label="Arabische Wörter leicht erklärt"></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="1">Erklärung anhören</button><span class="voice-note">Beim Hören wird der aktuelle Satz sanft hervorgehoben.</span></div></section>
   <section class="lesson-stage" data-lesson-step="2" aria-labelledby="evidenceTitle" hidden><span class="kicker">Schritt 3 · Qurʾān und Sunnah</span><h2 id="evidenceTitle">Was lernen wir aus den Quellen?</h2><div class="spoken-line"><p class="stage-lead" id="evidenceLead">Wir hören zuerst einen Vers aus dem Qurʾān und betrachten danach eine authentische Überlieferung.</p><button type="button" class="choice-listen" id="evidenceLeadListen" aria-label="Einleitung anhören">Hören</button></div><div class="evidence-region"><section class="lesson-source-block">
   <div class="eyebrow">Qurʾān · Sūrat at-Tawbah · Vers 119</div>
   <div class="arabic-listen-row">
@@ -4349,19 +4349,28 @@ function refreshSerhatLessonClip(){
  }).catch(()=>{button.hidden=true;});
 }
 function playSerhatLessonClip(){
- const button=$("#academySerhatLead"),status=$("#academySerhatStatus"),t=button.dataset.masterText||"";
- const owner=window.DARKidsOwnerVoice;
- if(!t||!owner||!isAcademyStoryMaster(t))return;
- pauseVoiceClip();stopSpeech();stopAudio();status.hidden=false;
+ const button=$("#academySerhatLead"),status=$("#academySerhatStatus");
+ const t=String(button.dataset.masterText||$('[data-lesson-step="1"] .stage-lead')?.textContent||"").trim();
+ if(!t||!isAcademyStoryMaster(t))return;
+ stopAll();
+ status.hidden=false;
  status.textContent="Du hörst die Erklärung.";
  const failed=()=>{status.hidden=false;status.textContent="Diese Aufnahme lässt sich gerade nicht abspielen.";};
+ const owner=window.DARKidsOwnerVoice;
  try{
-  const ok=owner.play(t,{source:"kids-academy-tawhid-verified-serhat",
-   rate:1, /* Serhat story voice remains at normal original playback rate */
-   onended:()=>{status.textContent="Du kannst den Satz noch einmal anhören.";},
-   onerror:failed});
-  if(!ok)failed();
- }catch(_){failed();}
+  if(owner&&typeof owner.play==="function"){
+   const ok=owner.play(t,{source:"kids-academy-lesson-intro",
+    rate:1,
+    onended:()=>{status.textContent="Du kannst den Satz noch einmal anhören.";},
+    onerror:failed});
+   if(ok)return;
+  }
+ }catch(_){}
+ try{
+  // Same one-clip player as the other lesson buttons; no undefined helpers.
+  if(typeof speak==="function"){speak(step,[t]);return;}
+ }catch(_){}
+ failed();
 }
 
 let academyMasterReady=false;
@@ -4883,7 +4892,7 @@ function speak(index,custom){
    return;
   }
   if(certifiedOwnerHas(owner,t)){
-   setAudioFeedback("Serhat-Masteraufnahme für diesen Satz startet.");
+   setAudioFeedback("Die Aufnahme für diesen Satz startet.");
    let failed=false;
    const fallback=()=>{if(failed||!live())return;failed=true;deviceRead(t)};
    try{
@@ -5218,5 +5227,29 @@ html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain #less
 }
 </style>
 
+<style id="kids-academy-dock-clearance-v1472">
+/* Keep the existing look. Last lesson controls must sit or scroll clear of the
+   real Kids tab bar on every aspect ratio, including folded phones and iPads. */
+html body[data-kids-portal="true"]{
+  /* Measured by the portal; 128px is the fallback before the first measure. */
+}
+html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain #stageSurface > .lesson-stage:not([hidden]){
+  /* Do not vertically center a short card into the dock overlay zone. */
+  margin-top:0!important;
+  margin-bottom:0!important;
+}
+html body[data-kids-portal="true"] :is(#academyHome,#academySubject){
+  padding-bottom:calc(var(--kids-academy-dock-clearance) + 24px + env(safe-area-inset-bottom,0px))!important;
+  scroll-padding-block-end:calc(var(--kids-academy-dock-clearance) + 24px + env(safe-area-inset-bottom,0px))!important;
+}
+html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain #stageSurface{
+  padding-bottom:calc(var(--kids-academy-dock-clearance) + 28px + env(safe-area-inset-bottom,0px))!important;
+  scroll-padding-block-end:calc(var(--kids-academy-dock-clearance) + 28px + env(safe-area-inset-bottom,0px))!important;
+}
+html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain .focus-page-navigation,
+html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain .stage-audio{
+  scroll-margin-bottom:calc(var(--kids-academy-dock-clearance) + 16px)!important;
+}
+</style>
 
 </body></html>

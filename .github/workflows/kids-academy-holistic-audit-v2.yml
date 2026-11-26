@@ -25,6 +25,8 @@ jobs:
           node kids/tools/test-academy-learning-pedagogy-v1.cjs
           node kids/tools/test-academy-five-recap-focus-v1.cjs
           node kids/tools/test-academy-merken-exit-persist-v1.cjs
+          node kids/tools/test-kids-no-serhat-in-ui-v1.cjs
+          node kids/tools/test-kids-academy-play-buttons-resolve-v1.cjs
           node kids/tools/test-academy-speak-lookup-fallback-v1.cjs
           node kids/tools/test-academy-full-salam-v1.cjs
           node scripts/test-kids-academy-school-v11.js

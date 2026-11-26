@@ -12,5 +12,5 @@ assert.ok(page.includes('function mode(){')&&page.includes('dataset.answerMode="
 assert.ok(page.includes('function scrollAcademyViewTop(){'),"Existing screen scrolling missing");
 assert.ok(page.includes('id="lessonNavigation"')&&page.includes('id="stageSurface"'),"Existing lesson layout missing");
 new vm.Script(portal,{filename:"kids-academy-portal-v1421.js"});
-assert.ok(portal.includes('edgeScroll=1427'),"Existing portal docking missing");
+assert.ok(portal.includes('edgeScroll=1428'),"Existing portal docking missing");
 console.log("PASS Kids Academy: no text input or microphone; original focus layout remains.");

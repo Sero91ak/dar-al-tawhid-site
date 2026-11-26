@@ -51,8 +51,8 @@
    const track=clips[indices[index]];
    player.src=track.src+"?v=kids-serhat-v13-20261010";
    player.playbackRate=1;
-   status("Serhat-Masteraufnahme lädt: "+track.text);
-   player.onplaying=()=>{if(runId===id&&current===player)status("Du hörst Serhats Masterstimme: "+track.text)};
+   status("Aufnahme lädt.");
+   player.onplaying=()=>{if(runId===id&&current===player)status("Du hörst die Aufnahme.")};
    player.onerror=()=>fail({name:"Audiodatei nicht erreichbar"});
    player.onended=()=>{index++;next()};
    try{
