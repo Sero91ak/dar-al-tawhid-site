@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-11-26T06:52:00.000Z",
+  "generated": "2026-11-26T22:10:00.000Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -2043,6 +2043,50 @@
           "en": "New post"
         },
         "idempotencyKey": "b17ce6ea-2c48-4339-90d3-08df16239904"
+      }
+    },
+    "shafii-gefahr-der-ahwa-20261126-q70-499": {
+      "postId": "shafii-gefahr-der-ahwa-20261126-q70-499",
+      "filename": "shafii-gefahr-der-ahwa-20261126-q70.md",
+      "postTitle": "Die Gefahr der Ahwāʾ",
+      "postPath": "content/posts/shafii-gefahr-der-ahwa-20261126-q70.md",
+      "publishedAt": "2026-11-26T21:50:00.000Z",
+      "status": "sent",
+      "pushApproved": true,
+      "pushApprovedAt": "2026-11-26T22:08:56.000Z",
+      "sentAt": "2026-11-26T22:08:56.000Z",
+      "updatedAt": "2026-11-26T22:08:56.000Z",
+      "lastError": "",
+      "mustNotResend": true,
+      "liveCheck": {
+        "ok": true,
+        "deploymentRun": 45902465018,
+        "sourceLive": true,
+        "postsIndexParity": true,
+        "qUrl": "https://dar-al-tawhid.de/q/70/",
+        "learnUrl": "https://dar-al-tawhid.de/lernen/shafii-gefahr-der-ahwa/"
+      },
+      "pushResult": {
+        "target": "DAR_PUSH",
+        "notificationId": "6d503c9e-4fa9-4055-af7b-3425a4db05bf",
+        "successful": 121,
+        "failed": 0,
+        "remaining": 0,
+        "targetUrl": "https://dar-al-tawhid.de/?post=shafii-gefahr-der-ahwa-20261126-q70-499#post/shafii-gefahr-der-ahwa-20261126-q70-499",
+        "headings": {
+          "de": "Neuer Beitrag",
+          "en": "New post"
+        },
+        "contents": {
+          "de": "Die Gefahr der Ahwāʾ",
+          "en": "The danger of the ahwāʾ"
+        },
+        "platforms": {
+          "ios": 107,
+          "safari_web_push": 9,
+          "chrome_web_push": 5
+        },
+        "idempotencyKey": "68edc165-e896-4741-8907-8ea48874421a"
       }
     }
   }
