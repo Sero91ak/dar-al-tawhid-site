@@ -10,6 +10,7 @@ const config=fs.readFileSync(path.join(root,"kids/creator-test/wrangler.toml"),"
 assert.match(config,/name\s*=\s*"dar-al-tawhid-kids-creator"/);
 assert.match(config,/routes\s*=\s*\[\s*\]/);
 assert.match(config,/run_worker_first\s*=\s*true/);
+assert.match(config,/html_handling\s*=\s*"none"/);
 assert.doesNotMatch(config,/dar-al-tawhid\.de\/kids/);
 const program=new vm.Script(source.replace("export default {","const worker = {")+"\nworker", {filename:"kids-creator-worker.js"});
 const handler=program.runInNewContext({URL,Headers,Response});
