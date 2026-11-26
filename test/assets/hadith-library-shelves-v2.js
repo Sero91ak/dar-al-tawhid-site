@@ -749,8 +749,15 @@
       else w.localStorage.removeItem("darHadithSearchQueryV1");
     } catch (e) {}
   }
+  function syncHeroHeight() {
+    var head = w.document.querySelector("#appView .hadith-hub > .view-head");
+    if (!head) return;
+    var h = Math.round(head.getBoundingClientRect().height);
+    if (h > 40) w.document.documentElement.style.setProperty("--dar-immersive-hero-height", h + "px");
+  }
   function bindShelves() {
     if (!w.document || !onHadith()) return;
+    syncHeroHeight();
     var search = w.document.getElementById("hadithSearchInput");
     if (search) {
       search.oninput = function () {
