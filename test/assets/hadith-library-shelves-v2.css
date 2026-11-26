@@ -1,4 +1,4 @@
-/* DĀR AL TAWḤĪD · Ḥadīṯ library shelves · detail1
+/* DĀR AL TAWḤĪD · Ḥadīṯ library shelves · detail1c · title once
    Owner heroes, restored: hadith-library-overview-v1267 (list) and hadith-library-study-v1267 (work).
    Reading typography stays with the existing detail view. */
 html[data-theme] body.is-hadith-route :is(.hadith-hub > .view-head, .hadith-detail > .post-reader-title){
@@ -84,11 +84,10 @@ html[data-theme="aurora"] body.is-hadith-route{ --hls-panel:#102420; --hls-panel
   position:absolute;
   inset:0;
   background:
-    linear-gradient(90deg, rgba(8,22,16,.88), rgba(8,22,16,.42) 58%, rgba(8,22,16,.2)),
-    repeating-linear-gradient(45deg, transparent 0 10px, rgba(240,222,176,.08) 10px 11px);
+    linear-gradient(90deg, rgba(8,22,16,.72), rgba(8,22,16,.28) 62%, rgba(8,22,16,.08));
   pointer-events:none;
 }
-.hls[dir="rtl"] .hls-hero::after{background:linear-gradient(270deg, rgba(8,22,16,.88), rgba(8,22,16,.42) 58%, rgba(8,22,16,.2)), repeating-linear-gradient(45deg, transparent 0 10px, rgba(240,222,176,.08) 10px 11px);}
+.hls[dir="rtl"] .hls-hero::after{background:linear-gradient(270deg, rgba(8,22,16,.72), rgba(8,22,16,.28) 62%, rgba(8,22,16,.08));}
 .hls-hero-copy{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;padding:18px 18px 16px;box-sizing:border-box;}
 .hls-kicker,.hls-hero h1,.hls-hero p{margin:0;color:#f8f1e2;text-shadow:0 1px 2px rgba(0,0,0,.45);}
 .hls-kicker{letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;color:#f0deb0;}
@@ -271,3 +270,9 @@ html[data-theme] button.hls-row{
   background:color-mix(in srgb, var(--hls-panel-2) 70%, transparent);
 }
 .hls-group--inner .hls-row{padding-inline-start:22px;}
+
+/* lane quiet 1 */
+
+/* lane quiet 2 */
+
+/* lane quiet 3 */
