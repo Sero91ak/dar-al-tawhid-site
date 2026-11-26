@@ -9988,6 +9988,16 @@
         "content/tafsir/de/"
       ],
       "expiresAt": "2026-12-31T23:59:00+01:00"
+    },
+    {
+      "id": "tafsir-kathir-sadi-gaps-20261126",
+      "at": "2026-11-26T16:20:00+01:00",
+      "approvedBy": "owner-explicit-20261126-phase2-tafsir-next-block",
+      "reason": "Owner Phase 2 next block: fill missing Ibn Kathir and as-Sadi passages in existing content/tafsir/de files from fetched Arabic only, and log Ibn Abbas verses without an allowed chain. globalLock stays on. No prayer, Qibla, location, push, Kids or native project changes.",
+      "paths": [
+        "content/tafsir/de/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00+01:00"
     }
   ],
   "enabled": true
