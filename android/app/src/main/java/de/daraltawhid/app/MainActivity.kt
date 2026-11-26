@@ -230,6 +230,11 @@ class MainActivity : AppCompatActivity() {
 
     private inner class DarJsBridge {
         @JavascriptInterface
+        fun setAppLocale(code: String) {
+            DarPush.setAppLocale(code)
+        }
+
+        @JavascriptInterface
         fun pushSettings(json: String) {
             DarPush.applyWebSettings(json)
         }

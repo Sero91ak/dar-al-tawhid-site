@@ -217,7 +217,7 @@ async function postOneSignalAttempt(env, payload) {
 async function buildPostPushPayload(env, { postTitle, postId, filename, publishedAt, cacheVersion, test = false, subscriptionId = "", audienceKey = "all-v1" }) {
   const site = siteOrigin(env);
   const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
-  const title = test ? "[Test] Neuer Beitrag online" : "Neuer Beitrag online";
+  const title = test ? "[Test] Neuer Beitrag online" : "Neuer Beitrag";
   const message = String(postTitle || "Neuer Beitrag").trim();
   const slug = String(postId || "").trim();
   const fileKey = String(filename || "").trim();
@@ -246,8 +246,24 @@ async function buildPostPushPayload(env, { postTitle, postId, filename, publishe
     payload: {
       app_id: appId,
       target_channel: "push",
-      headings: { en: title, de: title },
-      contents: { en: message, de: message },
+      headings: {
+        de: title,
+        en: test ? title : "New post",
+        ar: test ? title : "منشور جديد",
+        tr: test ? title : "Yeni yazı",
+        bs: test ? title : "Nova objava",
+        fr: test ? title : "Nouvelle publication",
+        es: test ? title : "Nueva publicación"
+      },
+      contents: {
+        de: message,
+        en: message,
+        ar: message,
+        tr: message,
+        bs: message,
+        fr: message,
+        es: message
+      },
       url,
       data: pushData,
       idempotency_key: idempotencyKey,

@@ -6,6 +6,7 @@
 
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
 import { writeNamedStatusToStore } from "./prayer-status-store.js";
+import { dailyLocaleCopy } from "./push-locale-from-draft.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
@@ -434,13 +435,22 @@ function buildDailyPushPayload(env, kind, item, config, dateKey, subscriptionId,
   const url = isDua
     ? `${origin}/#dua/${encodeURIComponent(item.id)}`
     : `${origin}/#post/${encodeURIComponent(item.id)}`;
+  let headings = { de: title, en: title };
+  let contents = { de: body, en: body };
+  try {
+    const localized = dailyLocaleCopy(isDua ? "daily_dua" : "daily_recommendation");
+    if (localized.headings?.en && localized.headings?.de && localized.contents?.en && localized.contents?.de) {
+      headings = localized.headings;
+      contents = localized.contents;
+    }
+  } catch (_) {}
 
   return withNotificationIcons({
     app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
     target_channel: "push",
     include_subscription_ids: [subscriptionId],
-    headings: { de: title, en: title },
-    contents: { de: body, en: body },
+    headings,
+    contents,
     ios_sound: "default",
     ttl: 3600,
     url,
