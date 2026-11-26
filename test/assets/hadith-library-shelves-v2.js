@@ -458,7 +458,7 @@
       numberGo = '<p class="hls-direct"><button type="button" data-nav="hadith" data-value="' + esc(w.hadithPath(numbered.hadith)) + '">' + esc(t("hitNumber", loc) + " " + digits) + "</button></p>";
     }
     var head = '<header class="hls-work-head">' + faceHtml(book) + (arabic ? '<p class="hls-work-ar" lang="ar" dir="rtl">' + esc(arabic) + "</p>" : "") + "<h1>" + esc(book.title || "") + "</h1>" + (author ? '<p class="hls-work-imam">' + esc(author) + "</p>" : "") + (blurb ? '<p class="hls-work-blurb">' + esc(blurb) + "</p>" : "") + "<p>" + esc(ornament(chapters.length, loc) + " " + t("kitab", loc) + " · " + countLabel(book.hadithCount || 0, loc)) + "</p></header>" + numberGo;
-    return shell(hero(book.title || t("library", loc), imam, loc) + crumbs(book, null, null, loc) + tools(q, loc) + continueStrip(loc) + head + '<div class="hls-fihris">' + (blocks || '<p class="hls-empty">' + esc(t("noHits", loc)) + "</p>") + "</div>", loc);
+    return shell(hero(book.title || t("library", loc), author, loc) + crumbs(book, null, null, loc) + tools(q, loc) + continueStrip(loc) + head + '<div class="hls-fihris">' + (blocks || '<p class="hls-empty">' + esc(t("noHits", loc)) + "</p>") + "</div>", loc);
   }
   function leaf(book, chapter, section, q, loc) {
     var pool = section ? (section.hadiths || []) : ((chapter && chapter.hadiths) || []);
