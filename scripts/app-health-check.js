@@ -289,6 +289,14 @@ try {
   fail("Visitor locale leftover crawl");
 }
 
+try {
+  require("child_process").execFileSync(process.execPath,
+    [path.join(__dirname, "check-quran-meaning-i18n.cjs")],
+    { stdio: "inherit" });
+} catch (error) {
+  fail("Visitor Qurʾān per-locale meaning regression");
+}
+
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);
