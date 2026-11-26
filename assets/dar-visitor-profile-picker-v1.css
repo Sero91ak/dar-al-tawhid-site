@@ -21,12 +21,12 @@
 
 
 /* VISITOR_HEADER_SINGLE_ROW_V5 · 2026-10-30
-   Mirrors the compact Test brand rail, with visitor-only profile + appearance.
-   Replaces conflicting historical two-row rules; no language shortcut here.
+   Mirrors the compact Test brand rail: language, profile, appearance.
+   Replaces conflicting historical two-row rules.
    Scope: adult visitor shell; Kids and /test keep their own components. */
 html body #darAdultBrandHeaderV2 .dtbh-row{
  display:grid!important;
- grid-template-columns:clamp(35px,10vw,45px) minmax(0,1fr) clamp(36px,9.2vw,42px) clamp(36px,9.2vw,42px)!important;
+ grid-template-columns:clamp(35px,10vw,45px) minmax(0,1fr) clamp(36px,9.2vw,42px) clamp(36px,9.2vw,42px) clamp(36px,9.2vw,42px)!important;
  grid-template-rows:minmax(44px,auto)!important;
  align-items:center!important;
  justify-content:stretch!important;
@@ -69,15 +69,16 @@ html body #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle{
  height:clamp(40px,9.2vw,44px)!important;
  margin:0!important;align-self:center!important;justify-self:center!important;
 }
-html body #darAdultBrandHeaderV2 #darVisitorProfileButtonV1{grid-column:3!important}
-html body #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle{grid-column:4!important}
+html body #darAdultBrandHeaderV2 .dtbh-row > #darVisitorLanguageButtonV1{grid-column:3!important}
+html body #darAdultBrandHeaderV2 #darVisitorProfileButtonV1{grid-column:4!important}
+html body #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle{grid-column:5!important}
 html body #darAdultBrandHeaderV2 .dtbh-toggle .dvp-palette-icon{
  display:block!important;max-width:100%!important;max-height:100%!important;
  object-fit:contain!important;pointer-events:none!important;
 }
 @media(min-width:700px){
  html body #darAdultBrandHeaderV2 .dtbh-row{
-  grid-template-columns:54px minmax(0,1fr) 48px 48px!important;
+  grid-template-columns:54px minmax(0,1fr) 48px 48px 48px!important;
   grid-template-rows:54px!important;min-height:54px!important;
   column-gap:clamp(12px,1.5vw,20px)!important;
  }
@@ -90,7 +91,7 @@ html body #darAdultBrandHeaderV2 .dtbh-toggle .dvp-palette-icon{
 }
 @media(max-width:355px){
  html body #darAdultBrandHeaderV2 .dtbh-row{
-  grid-template-columns:34px minmax(0,1fr) 36px 36px!important;
+  grid-template-columns:34px minmax(0,1fr) 36px 36px 36px!important;
   grid-template-rows:minmax(40px,auto)!important;
   column-gap:4px!important;
  }
@@ -479,3 +480,67 @@ html body #darAdultBrandHeaderV2 .dvp-chooser{
 /* Stable one-button portal for small front displays: no inner carousel, no second row. */
 html body #darAdultBrandHeaderV2 .dvp-chooser{overscroll-behavior:contain!important;scrollbar-gutter:stable;}
 #darAdultBrandHeaderV2 .dvp-hub-entry{touch-action:manipulation!important;}
+
+/* VISITOR_HEADER_LANGUAGE_V1 · globe capsule immediately before the profile button.
+   Arabic and Sorani mirror the whole rail; the language control stays beside profile. */
+html body #darAdultBrandHeaderV2 .dtbh-row > #darVisitorLanguageButtonV1{
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  box-sizing:border-box!important;
+  position:relative!important;
+  display:grid!important;
+  place-items:center!important;
+  grid-column:3!important;
+  grid-row:1!important;
+  width:clamp(36px,9.2vw,42px)!important;
+  height:clamp(40px,9.2vw,44px)!important;
+  min-width:0!important;
+  min-height:40px!important;
+  margin:0!important;
+  padding:3px!important;
+  border:1px solid var(--dtbh-line,rgba(128,91,104,.28))!important;
+  border-radius:13px!important;
+  background:var(--dtbh-btn,rgba(128,91,104,.10))!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+  cursor:pointer!important;
+  touch-action:manipulation!important;
+  align-self:center!important;
+  justify-self:center!important;
+}
+html body #darAdultBrandHeaderV2 .dtbh-row > #darVisitorLanguageButtonV1 > img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:35px!important;
+  max-height:35px!important;
+  margin:0!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  pointer-events:none!important;
+}
+html body #darAdultBrandHeaderV2 .dtbh-row > #darVisitorLanguageButtonV1:focus-visible{
+  outline:2px solid var(--dtbh-muted,var(--gold2,#b69c69))!important;
+  outline-offset:2px!important;
+}
+html body #darAdultBrandHeaderV2 .dtbh-row > #darVisitorLanguageButtonV1[aria-expanded="true"]{
+  border-color:var(--dtbh-muted,var(--gold2,#b69c69))!important;
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--dtbh-muted,#b69c69) 15%,transparent)!important;
+}
+@media(min-width:700px){
+  html body #darAdultBrandHeaderV2 .dtbh-row > #darVisitorLanguageButtonV1{
+    width:48px!important;height:48px!important;max-width:48px!important;max-height:48px!important;padding:4px!important;
+  }
+  html body #darAdultBrandHeaderV2 .dtbh-row > #darVisitorLanguageButtonV1 > img{max-width:38px!important;max-height:38px!important}
+}
+@media (min-width:520px) and (max-height:920px) and (orientation:landscape),
+       (min-width:600px) and (max-width:900px) and (orientation:portrait){
+  html body #darAdultBrandHeaderV2 .dtbh-row > #darVisitorLanguageButtonV1{
+    width:44px!important;height:44px!important;max-width:44px!important;max-height:44px!important;
+  }
+}
+@media(max-width:355px){
+  html body #darAdultBrandHeaderV2 .dtbh-row > #darVisitorLanguageButtonV1{width:36px!important;height:40px!important;max-width:36px!important}
+}
+html[dir="rtl"] body #darAdultBrandHeaderV2 .dtbh-row{direction:rtl!important}

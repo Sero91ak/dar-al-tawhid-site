@@ -64,6 +64,16 @@ function selectLanguage(code){if(!supported.includes(code))return;try{localStora
  const m=d.getElementById("darV8LangMenu");if(m)m.hidden=true;
 }
 function setupLanguages(){
+ if(d.getElementById("darVisitorLanguageButtonV1")){
+  var legacyToggle=d.getElementById("darV8LangToggle");
+  var legacyMenu=d.getElementById("darV8LangMenu");
+  if(legacyToggle)legacyToggle.remove();
+  if(legacyMenu)legacyMenu.remove();
+  colorLocale();
+  fetchLanguages().then(colorLocale);
+  fetchAliases();
+  return;
+ }
  if(d.getElementById("darV8LangToggle"))return;
  const mount=d.querySelector(".dar-v8-top-actions");if(!mount)return;
  const toggle=d.createElement("button");toggle.id="darV8LangToggle";toggle.type="button";toggle.className="dar-v8-lang-toggle";toggle.setAttribute("aria-controls","darV8LangMenu");toggle.setAttribute("aria-expanded","false");

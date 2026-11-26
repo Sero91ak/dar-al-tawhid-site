@@ -308,9 +308,9 @@ function activateAdultGlobalBrandV2(html) {
       '<script defer id="darVisitorHomeParityPrimaryV2" src="/assets/dar-home-test-parity-visitor.js?v=20261126-single-home-landscape-v1"></' + 'script>']] : []),
     ['darVisitorHomeBootstrapV2',
       '<script defer id="darVisitorHomeBootstrapV2" src="/assets/dar-visitor-home-bootstrap-v2.js?v=20261126-single-home-landscape-v1"></' + 'script>'],
-    ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261107-compact-safearea-header-v3">'],
+    ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261126-header-language-v1">'],
     ['darVisitorSmartProfileCssV1','<link rel="stylesheet" id="darVisitorSmartProfileCssV1" href="/assets/dar-visitor-smart-profile-v1.css?v=20261030-my-dar-dashboard-v11">'],
-    ['darVisitorProfilePickerCssV1','<link rel="stylesheet" id="darVisitorProfilePickerCssV1" href="/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-single-hub-v10">'],
+    ['darVisitorProfilePickerCssV1','<link rel="stylesheet" id="darVisitorProfilePickerCssV1" href="/assets/dar-visitor-profile-picker-v1.css?v=20261126-header-language-v1">'],
     ['darVisitorDailyHubCssV1','<link rel="stylesheet" id="darVisitorDailyHubCssV1" href="/assets/dar-visitor-daily-hub-v1.css?v=20261030-mehr-responsive-v2">'],
     ['darVisitorOnboardingCssV1','<link rel="stylesheet" id="darVisitorOnboardingCssV1" href="/assets/dar-visitor-onboarding-v1.css?v=20261030-mehr-responsive-v2">'],
     ['darAdultGlobalBrandScriptV2','<script defer id="darAdultGlobalBrandScriptV2" src="/assets/dar-adult-brand-header-v2.js?v=20261106-global-salam-v1"></' + 'script>'],
@@ -318,6 +318,8 @@ function activateAdultGlobalBrandV2(html) {
     ['darAdultHomeWelcomeCopyV1','<script defer id="darAdultHomeWelcomeCopyV1" src="/assets/i18n/adult-home-welcome-v1.js?v=20261107-welcome-editorial-v3"></' + 'script>'],
     ['darVisitorSmartProfileJsV1','<script defer id="darVisitorSmartProfileJsV1" src="/assets/dar-visitor-smart-profile-v1.js?v=20261031-neutral-hooded-v14"></' + 'script>'],
     ['darVisitorProfilePickerJsV1','<script defer id="darVisitorProfilePickerJsV1" src="/assets/dar-visitor-profile-picker-v1.js?v=20261030-left-select-v12"></' + 'script>'],
+    ['darVisitorHeaderLanguageCssV1','<link rel="stylesheet" id="darVisitorHeaderLanguageCssV1" href="/assets/dar-visitor-header-language-v1.css?v=20261126-header-language-v1">'],
+    ['darVisitorHeaderLanguageJsV1','<script defer id="darVisitorHeaderLanguageJsV1" src="/assets/dar-visitor-header-language-v1.js?v=20261126-header-language-v1"></' + 'script>'],
     ['darVisitorDailyHubJsV1','<script defer id="darVisitorDailyHubJsV1" src="/assets/dar-visitor-daily-hub-v1.js?v=20261102-men-discovery-v1"></' + 'script>'],
     ['darVisitorOnboardingJsV1','<script defer id="darVisitorOnboardingJsV1" src="/assets/dar-visitor-onboarding-v1.js?v=20261030-profile-single-hub-v10"></' + 'script>']
   ];

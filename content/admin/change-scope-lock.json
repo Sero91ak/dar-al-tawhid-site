@@ -155,6 +155,29 @@
   ],
   "unlockedScopes": [
     {
+      "id": "visitor-header-language-20261126",
+      "at": "2026-11-26T08:55:00+01:00",
+      "approvedBy": "owner-serhat-20261126-port-test-header-language-selector",
+      "reason": "Owner request: port the DAR Test header language selector into the official adult visitor header (website, PWA, desktop-preview, iOS/Android shells). Same icon and position beside profile, existing nine-locale runtime. No Kids, prayer, Qibla, push, OneSignal or Zentrale changes.",
+      "paths": [
+        "assets/header-icons/language-classic-v7.png",
+        "assets/dar-visitor-header-language-v1.js",
+        "assets/dar-visitor-header-language-v1.css",
+        "assets/dar-visitor-profile-picker-v1.css",
+        "assets/dar-adult-brand-header-v2.css",
+        "assets/dar-home-test-parity-visitor.js",
+        "cloudflare/site-router.js",
+        "index.html",
+        "scripts/check-visitor-header-single-row.cjs",
+        "scripts/check-fixed-header-occlusion.cjs",
+        "scripts/check-adult-hero-seam.cjs",
+        "scripts/check-adult-hero-route-matrix.cjs",
+        "scripts/check-adult-duo-prayer-layout.cjs",
+        "scripts/test-visitor-android-pwa-parity-v1.cjs"
+      ],
+      "expiresAt": "2026-11-28T23:59:00+01:00"
+    },
+    {
       "id": "landscape-single-home-20261126",
       "at": "2026-11-26T08:20:00+01:00",
       "approvedBy": "owner-serhat-20261126-landscape-duplicate-home",

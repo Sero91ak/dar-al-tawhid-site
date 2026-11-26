@@ -120,6 +120,9 @@ const ADULT_VISITOR_LIVE_UI=new Set([
  '/assets/dar-visitor-onboarding-v1.css',
  '/assets/dar-adult-brand-header-v2.js',
  '/assets/dar-adult-brand-header-v2.css',
+ '/assets/dar-visitor-header-language-v1.js',
+ '/assets/dar-visitor-header-language-v1.css',
+ '/assets/header-icons/language-classic-v7.png',
  '/assets/dar-noble-3d-icons.js',
  '/assets/dar-noble-3d-icons.css'
 ]);
