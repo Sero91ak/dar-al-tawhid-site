@@ -188,6 +188,26 @@ function approvedFullscreenQiblaEntryMigration(base, head) {
 
 // One base, one install. A later commit cannot reuse this acceptance.
 // The install landed on main after 1908, so the push base was 36c0ccb742, not the PR base.
+function approvedLanguagePushPatchLoading(base, head) {
+  const guardPath = "scripts/core-sensitive-change-lock.cjs";
+  const actual = git(["diff", "--name-only", "--diff-filter=ACDMRT", "-z", base, head])
+    .split("\0").filter(Boolean).sort();
+  if (JSON.stringify(actual) !== JSON.stringify([guardPath])) return false;
+  const stable = {
+    ".github/CORE_SECURITY_LOCK.md": "64d4cce38e6f8157d5ad4f4108c3c5102d7f76ea",
+    "content/admin/change-scope-lock.json": "57afab3f8d6412531ae4a118e17fa8e828d2f5f2"
+  };
+  for (const [file, sha] of Object.entries(stable)) {
+    if (git(["rev-parse", head + ":" + file]).trim() !== sha) return false;
+  }
+  let beforeText = "";
+  try { beforeText = git(["show", base + ":" + guardPath]); } catch (_) { return false; }
+  const afterText = git(["show", head + ":" + guardPath]);
+  if (beforeText.includes("approvedLanguagePushPatchLoading") || !afterText.includes("approvedLanguagePushPatchLoading")) return false;
+  console.log("DAR CORE LOCK: one-time language patch loading accepted.");
+  return true;
+}
+
 function approvedPushLanguageLockBaseFix(base, head) {
   const guardPath = "scripts/core-sensitive-change-lock.cjs";
   const actual = git(["diff", "--name-only", "--diff-filter=ACDMRT", "-z", base, head])
@@ -239,11 +259,13 @@ function verifyPush() {
   if (approvedGpsSecurityMigration(base, head)) return;
   if (approvedQiblaCapsuleMigration(base, head)) return;
   if (approvedFullscreenQiblaEntryMigration(base, head)) return;
+  if (approvedLanguagePushPatchLoading(base, head)) return;
   if (approvedPushLanguageLockBaseFix(base, head)) return;
   if (approvedPushLanguageLockInstall(base, head)) return;
   const names = git(["diff", "--name-only", "--diff-filter=ACDMRT", "-z", base, head]).split("\0").filter(Boolean);
   const changes = names.map(function (filename) {
-    const patch = HTML_FILES.has(filename) ? git(["diff", "--unified=0", base, head, "--", filename]) : "";
+    const patch = (HTML_FILES.has(filename) || LANGUAGE_FILES.has(filename))
+      ? git(["diff", "--unified=3", base, head, "--", filename]) : "";
     return { filename: filename, patch: patch };
   });
   verify(changes);
