@@ -1,7 +1,8 @@
 (function(){
   "use strict";
 
-  var manifest={entries:{}};
+  var manifest={entries:{}}
+  var spokenIndex={};
   var entryPriority={};
   var loaded=false;
   var pending=null;
@@ -72,7 +73,12 @@
       var clean=key.replace(/([.!?؟])\.+(?=\s|$)/g,"$1");
       if(clean!==key&&entries[clean])return entries[clean];
     }
-    return entries[key]||null;
+    if(entries[key])return entries[key];
+    var stripped=key.replace(/^Antwort\s+\d+\s*:\s*/,"");
+    if(stripped&&stripped!==key&&entries[stripped])return entries[stripped];
+    if(spokenIndex[key])return spokenIndex[key];
+    if(stripped&&stripped!==key&&spokenIndex[stripped])return spokenIndex[stripped];
+    return null;
   }
   function emitMissing(text,source){
     try{
@@ -172,6 +178,8 @@
       if(current>Number(priority||0))return;
       manifest.entries[key]=data.entries[k];
       entryPriority[key]=Number(priority||0);
+      var spoken=normalize((data.entries[k]&&data.entries[k].spokenText)||"");
+      if(spoken&&!manifest.entries[spoken]) spokenIndex[spoken]=data.entries[k];
     });
     flushPendingIfReady();
   }
@@ -211,7 +219,7 @@
   // allgemeiner Pack < Quiz < Duʿāʾ. So überschreibt nie wieder ein alter
   // generischer Clip einen frisch gerenderten Bereichs-Clip.
   // Akademie-Minipack wird vor den großen Archiven unabhängig freigegeben.
-  var academyPublic=loadManifest("/kids/data/academy-audio.json?v=20261126-sidq68",5,function(data){
+  var academyPublic=loadManifest("/kids/data/academy-audio.json?v=20261126-ui-areas",5,function(data){
     return !!(data&&data.id==="KIDS_ACADEMY_SERHAT_MASTER_V1"&&
       data.voiceProfileId==="serhat-owner-voice-2026"&&
       data.speaker==="Serhat Abu Malik"&&

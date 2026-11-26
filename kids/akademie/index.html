@@ -4392,7 +4392,7 @@ function prepareOwnerVoice(){
  window.__academyOwnerVoiceRequested=true;
  window.__academyOwnerVoicePromise=new Promise(resolve=>{
   const script=document.createElement("script");
-  script.src="/kids/owner-voice.js?v=academy-sidq68-20261126";script.async=true;
+  script.src="/kids/owner-voice.js?v=academy-ui-areas-20261126";script.async=true;
   script.onload=()=>resolve(window.DARKidsOwnerVoice||null);
   script.onerror=()=>{
    window.__academyOwnerVoiceRequested=false;
@@ -4478,7 +4478,7 @@ function lessonLead(lessonId){
 
 
 function plainSpeakText(value){
- return String(value||"").replace(/^[„"«]+|[“"»]+$/g,"").trim();
+ return String(value||"").replace(/^[„"«]+|[“"»]+$/g,"").replace(/^Antwort\s+\d+\s*:\s*/,"").trim();
 }
 function fillChildExplain(rowId,textId,text){
  const row=$("#"+rowId),el=$("#"+textId);
@@ -5088,7 +5088,21 @@ bindTextListen($("#hadithChildListen"),()=>$("#hadithChildExplain")?.textContent
 bindTextListen($("#evidenceLeadListen"),()=>$("#evidenceLead")?.textContent);
 bindTextListen($("#buddyListen"),()=>(($("#academyBuddyTitle")?.textContent||"")+" "+($("#academyBuddyText")?.textContent||"")).trim());
 bindTextListen($("#questionBridgeListen"),()=>$("#questionBridgeText")?.textContent);
-bindTextListen($("#feedbackListen"),()=>$("#feedback")?.textContent);
+$("#feedbackListen").onclick=()=>{
+  if($("#feedbackListen").dataset.boundSpeak!=="1")$("#feedbackListen").dataset.boundSpeak="1";
+  const shown=String($("#feedback")?.textContent||"").trim();
+  if(!shown)return;
+  const prefixes=["Sehr schön, liebe Schwester!","Sehr schön, lieber Bruder!","Das war noch nicht richtig. Gemeinsam verstehen wir es:"];
+  const nice=prefixes.find(p=>shown===p||shown.startsWith(p+" ")||shown.startsWith(p));
+  if(nice){
+    const rest=shown.slice(nice.length).trim();
+    const later="Du darfst diese Frage später erneut üben.";
+    const explain=rest.endsWith(later)?rest.slice(0,Math.max(0,rest.length-later.length)).trim():rest;
+    autoplayFeedbackText(/sehr schön/i.test(nice),explain);
+    return;
+  }
+  speak(step,[resolveSpeakLine(shown)]);
+};
 bindTextListen($("#teachBackListen"),()=>$("#academyTeachBackPrompt")?.textContent);
 initFocusControls();syncProfile(true);hideLesson();updateAcademyAppbar();
 let __schoolLastDate=academyDay().day;
