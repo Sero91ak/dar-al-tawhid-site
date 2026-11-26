@@ -1,0 +1,350 @@
+{
+ "schemaVersion": 1,
+ "qSourceId": "qsource:20",
+ "canonicalUrl": "https://dar-al-tawhid.de/q/20/",
+ "localeStorageKey": "darAdultPreferredLocaleV1",
+ "supported": [
+  "de",
+  "ar",
+  "en",
+  "tr",
+  "ku",
+  "ckb",
+  "bs",
+  "fr",
+  "es"
+ ],
+ "approvedLocales": [
+  "de",
+  "ar",
+  "en",
+  "tr",
+  "ku",
+  "ckb",
+  "bs",
+  "fr",
+  "es"
+ ],
+ "pendingReviewLocales": [],
+ "review": "machine-translation-owner-approved",
+ "humanReligiousReview": false,
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
+ "sourceArabicImmutable": true,
+ "locales": {
+  "de": {
+   "title": "Der gerade Weg und die Warnung vor den Gelüsten",
+   "quote": "Lernt den Islam … haltet euch an den geraden Weg … und hütet euch vor diesen Gelüsten.",
+   "dir": "ltr",
+   "status": "source"
+  },
+  "ar": {
+   "title": "الصراط المستقيم والتحذير من الأهواء",
+   "quote": "تعلّموا الإسلام … الزموا الطريق المستقيم … وإياكم وهذه الأهواء.",
+   "dir": "rtl",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "en": {
+   "title": "The straight path and the warning against desires",
+   "quote": "Learn Islam … hold to the straight path … and beware of these desires.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "tr": {
+   "title": "Dosdoğru yol ve hevaya karşı uyarı",
+   "quote": "İslam’ı öğrenin … dosdoğru yola sarılın … ve bu heveslerden sakının.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "ku": {
+   "title": "Rêya rast û hişyariya li hember hewê",
+   "quote": "Îslamê hîn bibin … bi rêya rast ve girêdayî bimînin … û ji van hewesan haydar bin.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "ckb": {
+   "title": "ڕێگای ڕاست و ئاگادارکردنەوە لە هەوا",
+   "quote": "ئیسلام فێربن … پابەندی ڕێگای ڕاست بن … و خۆتان لەم ئارەزووانە بپارێزن.",
+   "dir": "rtl",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "bs": {
+   "title": "Pravi put i upozorenje od strasti",
+   "quote": "Učite islam … držite se pravog puta … i čuvajte se ovih prohtjeva.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "fr": {
+   "title": "La voie droite et la mise en garde contre les passions",
+   "quote": "Apprenez l’islam … tenez-vous au chemin droit … et gardez-vous de ces passions.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "es": {
+   "title": "El camino recto y la advertencia contra los deseos",
+   "quote": "Aprended el islam … aferraos al camino recto … y guardaos de estos deseos.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Abū al-ʿĀliyah – Der gerade Weg – DAR AL TAWḤĪD": {
+   "ar": "Abū al-ʿĀliyah – الطريق المستقيم – DAR AL TAWḤĪD",
+   "en": "Abū al-ʿĀliyah – The straight path – DAR AL TAWḤĪD",
+   "tr": "Abū al-ʿĀliyah – Dosdoğru yol – DAR AL TAWḤĪD",
+   "ku": "Abū al-ʿĀliyah – Rêya rast – DAR AL TAWḤĪD",
+   "ckb": "Abū al-ʿĀliyah – ڕێگای ڕاست – DAR AL TAWḤĪD",
+   "bs": "Abū al-ʿĀliyah – Pravi put – DAR AL TAWḤĪD",
+   "fr": "Abū al-ʿĀliyah – Le chemin droit – DAR AL TAWḤĪD",
+   "es": "Abū al-ʿĀliyah – El camino recto – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "مساهمات وفق القرآن والسنة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre katkılar",
+   "ku": "Beşdarî li gor Qurʾān, Sunnah û Āthār",
+   "ckb": "بەشدارییەکان بەپێی القرآن و السنة و الآثار",
+   "bs": "Prilozi prema Qurʾānu, Sunni i Āthāru",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Contribuciones según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Manhaj · Sunnah · Salaf · Ahwāʾ": {
+   "ar": "Manhaj · Sunnah · Salaf · Ahwāʾ",
+   "en": "Manhaj · Sunnah · Salaf · Ahwāʾ",
+   "tr": "Manhaj · Sunnah · Salaf · Ahwāʾ",
+   "ku": "Manhaj · Sunnah · Salaf · Ahwāʾ",
+   "ckb": "Manhaj · Sunnah · Salaf · Ahwāʾ",
+   "bs": "Manhaj · Sunnah · Salaf · Ahwāʾ",
+   "fr": "Manhaj · Sunnah · Salaf · Ahwāʾ",
+   "es": "Manhaj · Sunnah · Salaf · Ahwāʾ"
+  },
+  "Der gerade Weg und die Warnung vor den Gelüsten": {
+   "ar": "الطريق المستقيم والتحذير من الأهواء",
+   "en": "The straight path and the warning against the desires",
+   "tr": "Dosdoğru yol ve arzulara karşı uyarı",
+   "ku": "Rêya rast û hişyariya li hember xwestekan",
+   "ckb": "ڕێگای ڕاست و ئاگاداری لە ئارەزووەکان",
+   "bs": "Pravi put i upozorenje od prohtjeva",
+   "fr": "Le chemin droit et la mise en garde contre les passions",
+   "es": "El camino recto y la advertencia contra los deseos"
+  },
+  "„Lernt den Islam … haltet euch an den geraden Weg … und hütet euch vor diesen Gelüsten.“": {
+   "ar": "«تعلّموا الإسلام … الزموا الطريق المستقيم … واحذروا هذه الأهواء.»",
+   "en": "“Learn Islam … hold to the straight path … and beware of these desires.”",
+   "tr": "“İslam’ı öğrenin … dosdoğru yola tutunun … ve bu arzulardan sakının.”",
+   "ku": "“Îslamê fêr bibin … bi rêya rast ve girêdayî bimînin … û ji van xwestekan haydar bin.”",
+   "ckb": "«ئیسلام فێر بن … بە ڕێگای ڕاستەوە ببەستن … و لەم ئارەزووانە ئاگادار بن.»",
+   "bs": "“Učite islam … držite se pravog puta … i čuvajte se ovih prohtjeva.”",
+   "fr": "« Apprenez l’Islam … tenez-vous au chemin droit … et gardez-vous de ces passions. »",
+   "es": "“Aprendan el Islam … aténganse al camino recto … y cuídense de estos deseos.”"
+  },
+  "Abū al-ʿĀliyah ar-Riyāḥī رحمه الله": {
+   "ar": "Abū al-ʿĀliyah ar-Riyāḥī رحمه الله",
+   "en": "Abū al-ʿĀliyah ar-Riyāḥī رحمه الله",
+   "tr": "Abū al-ʿĀliyah ar-Riyāḥī رحمه الله",
+   "ku": "Abū al-ʿĀliyah ar-Riyāḥī رحمه الله",
+   "ckb": "Abū al-ʿĀliyah ar-Riyāḥī رحمه الله",
+   "bs": "Abū al-ʿĀliyah ar-Riyāḥī رحمه الله",
+   "fr": "Abū al-ʿĀliyah ar-Riyāḥī رحمه الله",
+   "es": "Abū al-ʿĀliyah ar-Riyāḥī رحمه الله"
+  },
+  "Islam, Ṣirāṭ al-Mustaqīm, Sunnah des Propheten ﷺ, Weg der Ṣaḥābah und Warnung vor Ahwāʾ.": {
+   "ar": "الإسلام، وṢirāṭ al-Mustaqīm، وSunnah النبي ﷺ، وطريق الصحابة، والتحذير من Ahwāʾ.",
+   "en": "Islam, Ṣirāṭ al-Mustaqīm, the Sunnah of the Prophet ﷺ, the way of the Ṣaḥābah and the warning against Ahwāʾ.",
+   "tr": "İslam, Ṣirāṭ al-Mustaqīm, Peygamber ﷺ’in Sunnah’ı, Ṣaḥābah’ın yolu ve Ahwāʾ’a karşı uyarı.",
+   "ku": "Îslam, Ṣirāṭ al-Mustaqīm, Sunnah a Peyamber ﷺ, rêya Ṣaḥābah û hişyarî li hember Ahwāʾ.",
+   "ckb": "ئیسلام، Ṣirāṭ al-Mustaqīm، Sunnahی پێغەمبەر ﷺ، ڕێگای Ṣaḥābah و ئاگاداری لە Ahwāʾ.",
+   "bs": "Islam, Ṣirāṭ al-Mustaqīm, Sunnah Poslanika ﷺ, put Ṣaḥābe i upozorenje od Ahwāʾa.",
+   "fr": "L’Islam, le Ṣirāṭ al-Mustaqīm, la Sunnah du Prophète ﷺ, la voie des Ṣaḥābah et la mise en garde contre les Ahwāʾ.",
+   "es": "El Islam, el Ṣirāṭ al-Mustaqīm, la Sunnah del Profeta ﷺ, el camino de los Ṣaḥābah y la advertencia contra los Ahwāʾ."
+  },
+  "Aussage von Abū al-ʿĀliyah": {
+   "ar": "قول Abū al-ʿĀliyah",
+   "en": "Statement of Abū al-ʿĀliyah",
+   "tr": "Abū al-ʿĀliyah’ın sözü",
+   "ku": "Gotina Abū al-ʿĀliyah",
+   "ckb": "وتەی Abū al-ʿĀliyah",
+   "bs": "Izjava Abū al-ʿĀliyah",
+   "fr": "Parole d’Abū al-ʿĀliyah",
+   "es": "Afirmación de Abū al-ʿĀliyah"
+  },
+  "Abū al-ʿĀliyah رحمه الله sagte sinngemäß:": {
+   "ar": "قال Abū al-ʿĀliyah رحمه الله بالمعنى:",
+   "en": "Abū al-ʿĀliyah رحمه الله said in substance:",
+   "tr": "Abū al-ʿĀliyah رحمه الله mealen dedi:",
+   "ku": "Abū al-ʿĀliyah رحمه الله bi wateyê got:",
+   "ckb": "Abū al-ʿĀliyah رحمه الله بە مانا گوتی:",
+   "bs": "Abū al-ʿĀliyah رحمه الله reče u smislu:",
+   "fr": "Abū al-ʿĀliyah رحمه الله dit en substance :",
+   "es": "Abū al-ʿĀliyah رحمه الله dijo en el sentido:"
+  },
+  ". Wenn ihr ihn gelernt habt, dann wendet euch nicht von ihm ab. Haltet euch an den": {
+   "ar": ". فإذا تعلمتموه فلا تعرضوا عنه. الزموا",
+   "en": ". When you have learned it, do not turn away from it. Hold to the",
+   "tr": ". Onu öğrendiğinizde ondan yüz çevirmeyin. Tutunun",
+   "ku": ". Gava hûn fêr bûn, jê venegerin. Bi",
+   "ckb": ". کاتێک فێری بوون، لێی وەرنەگەڕێن. پابەند بن بە",
+   "bs": ". Kada ga naučite, ne okrećite se od njega. Držite se",
+   "fr": ". Lorsque vous l’avez appris, ne vous en détournez pas. Tenez-vous au",
+   "es": ". Cuando lo hayan aprendido, no se aparten de él. Aténganse al"
+  },
+  ", denn er ist der Islam. Weicht nicht vom geraden Weg ab, weder nach rechts noch nach links. Und haltet euch an die": {
+   "ar": "، فإنه هو الإسلام. لا تحيدوا عن الطريق المستقيم، لا يمينًا ولا شمالًا. والزموا",
+   "en": ", for it is Islam. Do not deviate from the straight path, neither to the right nor to the left. And hold to the",
+   "tr": ", çünkü o İslam’dır. Dosdoğru yoldan sapmayın, ne sağa ne sola. Ve tutunun",
+   "ku": ", ji ber ku ew Îslam e. Ji rêya rast dernekevin, ne ber bi rastê û ne ber bi çepê. Û bi",
+   "ckb": "، چونکە ئەو ئیسلامە. لە ڕێگای ڕاست لامەدەن، نە بۆ ڕاست و نە بۆ چەپ. و پابەند بن بە",
+   "bs": ", jer je to islam. Ne skrećite s pravog puta, ni desno ni lijevo. I držite se",
+   "fr": ", car c’est l’Islam. Ne vous écartez pas du chemin droit, ni à droite ni à gauche. Et tenez-vous à",
+   "es": ", porque él es el Islam. No se desvíen del camino recto, ni a la derecha ni a la izquierda. Y aténganse a"
+  },
+  "eures Propheten ﷺ und an das, worauf seine Gefährten waren. Und hütet euch vor diesen": {
+   "ar": "نبيكم ﷺ وما كان عليه أصحابه. واحذروا هذه",
+   "en": "of your Prophet ﷺ and to that upon which his Companions were. And beware of these",
+   "tr": "Peygamberinizin ﷺ ve ashâbının üzerinde bulunduğuna. Ve bunlardan sakının:",
+   "ku": "ya Peyamberê we ﷺ û ya wê yekê ku hevalên wî li ser bûn. Û ji van haydar bin",
+   "ckb": "پێغەمبەرەکەتان ﷺ و ئەوەی هاوەڵەکانی لەسەری بوون. و لەمانە ئاگادار بن",
+   "bs": "vašeg Poslanika ﷺ i onoga na čemu su bili njegovi drugovi. I čuvajte se ovih",
+   "fr": "de votre Prophète ﷺ et de ce sur quoi étaient ses Compagnons. Et gardez-vous de ces",
+   "es": "de vuestro Profeta ﷺ y de aquello sobre lo que estaban sus Compañeros. Y cuídense de estos"
+  },
+  ", die Feindschaft und Hass zwischen den Menschen hervorbringen.“": {
+   "ar": "، التي تُحدث العداوة والبغضاء بين الناس.»",
+   "en": ", which bring forth enmity and hatred between people.”",
+   "tr": ", ki insanlar arasında düşmanlık ve kin doğurur.”",
+   "ku": ", yên ku dijminahî û kînê di nav mirovan de derdixin.”",
+   "ckb": "، کە دژایەتی و ڕق لە نێوان خەڵکدا دروست دەکەن.»",
+   "bs": ", koje izazivaju neprijateljstvo i mržnju među ljudima.”",
+   "fr": ", qui suscitent l’inimitié et la haine entre les gens. »",
+   "es": ", que producen enemistad y odio entre la gente.”"
+  },
+  ", Bd. 1, S. 69, Nr. 76; Muḥammad ibn Naṣr al-Marwazī,": {
+   "ar": "، ج 1، ص 69، رقم 76؛ Muḥammad ibn Naṣr al-Marwazī،",
+   "en": ", vol. 1, p. 69, no. 76; Muḥammad ibn Naṣr al-Marwazī,",
+   "tr": ", c. 1, s. 69, no. 76; Muḥammad ibn Naṣr al-Marwazī,",
+   "ku": ", berg 1, r. 69, hejmar 76; Muḥammad ibn Naṣr al-Marwazī,",
+   "ckb": "، بەرگ 1، لاپەڕە 69، ژمارە 76؛ Muḥammad ibn Naṣr al-Marwazī،",
+   "bs": ", sv. 1, str. 69, br. 76; Muḥammad ibn Naṣr al-Marwazī,",
+   "fr": ", vol. 1, p. 69, n° 76 ; Muḥammad ibn Naṣr al-Marwazī,",
+   "es": ", vol. 1, p. 69, n.º 76; Muḥammad ibn Naṣr al-Marwazī,"
+  },
+  "Die folgenden Links führen direkt zu den belegten Textstellen. Die Weblinks sind mit Textmarkierung gesetzt; die PDF-Links öffnen die angegebene Belegseite per Seitenanker.": {
+   "ar": "الروابط التالية تؤدي مباشرة إلى المواضع المثبتة. روابط الويب معلَّمة بتعليم النص؛ وروابط PDF تفتح صفحة الدليل المحددة بواسطة مرساة الصفحة.",
+   "en": "The following links lead directly to the documented text passages. The web links are set with a text marker; the PDF links open the stated source page by a page anchor.",
+   "tr": "Aşağıdaki bağlantılar belgelenmiş metin yerlerine doğrudan götürür. Web bağlantıları metin işaretiyle konulmuştur; PDF bağlantıları belirtilen delil sayfasını sayfa çıpasıyla açar.",
+   "ku": "Girêdanên jêrîn rasterast dibin cihên tekstê yên îsbatkirî. Girêdanên webê bi nîşana tekstê hatine danîn; girêdanên PDF rûpela delîlê ya diyarkirî bi lengera rûpelê vedikin.",
+   "ckb": "بەستەرەکانی خوارەوە ڕاستەوخۆ دەچنە شوێنە دەقە سەلمێنراوەکان. بەستەرەکانی وێب بە نیشانەی دەق دانراون؛ بەستەرەکانی PDF لاپەڕەی بەڵگەی دیاریکراو بە لنگی لاپەڕە دەکەنەوە.",
+   "bs": "Sljedeći linkovi vode izravno na potvrđena mjesta teksta. Web-linkovi su postavljeni s oznakom teksta; PDF-linkovi otvaraju navedenu stranicu dokaza putem sidra stranice.",
+   "fr": "Les liens suivants mènent directement aux passages attestés. Les liens web sont posés avec un marquage de texte ; les liens PDF ouvrent la page de preuve indiquée par une ancre de page.",
+   "es": "Los siguientes enlaces llevan directamente a los pasajes documentados. Los enlaces web están puestos con marca de texto; los enlaces PDF abren la página de prueba indicada mediante un ancla de página."
+  },
+  "Islamweb · ash-Sharīʿah · Nr. 19 · Textmarkierung": {
+   "ar": "Islamweb · ash-Sharīʿah · رقم 19 · تعليم النص",
+   "en": "Islamweb · ash-Sharīʿah · no. 19 · text marker",
+   "tr": "Islamweb · ash-Sharīʿah · no. 19 · metin işareti",
+   "ku": "Islamweb · ash-Sharīʿah · hejmar 19 · nîşana tekstê",
+   "ckb": "Islamweb · ash-Sharīʿah · ژمارە 19 · نیشانەی دەق",
+   "bs": "Islamweb · ash-Sharīʿah · br. 19 · oznaka teksta",
+   "fr": "Islamweb · ash-Sharīʿah · n° 19 · marquage de texte",
+   "es": "Islamweb · ash-Sharīʿah · n.º 19 · marca de texto"
+  },
+  "Islamweb · al-Ibānah al-Kubrā · Nr. 202 · Textmarkierung": {
+   "ar": "Islamweb · al-Ibānah al-Kubrā · رقم 202 · تعليم النص",
+   "en": "Islamweb · al-Ibānah al-Kubrā · no. 202 · text marker",
+   "tr": "Islamweb · al-Ibānah al-Kubrā · no. 202 · metin işareti",
+   "ku": "Islamweb · al-Ibānah al-Kubrā · hejmar 202 · nîşana tekstê",
+   "ckb": "Islamweb · al-Ibānah al-Kubrā · ژمارە 202 · نیشانەی دەق",
+   "bs": "Islamweb · al-Ibānah al-Kubrā · br. 202 · oznaka teksta",
+   "fr": "Islamweb · al-Ibānah al-Kubrā · n° 202 · marquage de texte",
+   "es": "Islamweb · al-Ibānah al-Kubrā · n.º 202 · marca de texto"
+  },
+  "al-Mawsūʿah al-ʿAqadiyyah · Verweis auf Ibn Waḍḍāḥ, 1/69, Nr. 76": {
+   "ar": "al-Mawsūʿah al-ʿAqadiyyah · إحالة إلى Ibn Waḍḍāḥ، 1/69، رقم 76",
+   "en": "al-Mawsūʿah al-ʿAqadiyyah · reference to Ibn Waḍḍāḥ, 1/69, no. 76",
+   "tr": "al-Mawsūʿah al-ʿAqadiyyah · Ibn Waḍḍāḥ’a atıf, 1/69, no. 76",
+   "ku": "al-Mawsūʿah al-ʿAqadiyyah · veguhastin bo Ibn Waḍḍāḥ, 1/69, hejmar 76",
+   "ckb": "al-Mawsūʿah al-ʿAqadiyyah · ئاماژە بۆ Ibn Waḍḍāḥ، 1/69، ژمارە 76",
+   "bs": "al-Mawsūʿah al-ʿAqadiyyah · uputa na Ibn Waḍḍāḥa, 1/69, br. 76",
+   "fr": "al-Mawsūʿah al-ʿAqadiyyah · renvoi à Ibn Waḍḍāḥ, 1/69, n° 76",
+   "es": "al-Mawsūʿah al-ʿAqadiyyah · remisión a Ibn Waḍḍāḥ, 1/69, n.º 76"
+  },
+  "as-Sunnah · Nr. 26 · Textmarkierung": {
+   "ar": "as-Sunnah · رقم 26 · تعليم النص",
+   "en": "as-Sunnah · no. 26 · text marker",
+   "tr": "as-Sunnah · no. 26 · metin işareti",
+   "ku": "as-Sunnah · hejmar 26 · nîşana tekstê",
+   "ckb": "as-Sunnah · ژمارە 26 · نیشانەی دەق",
+   "bs": "as-Sunnah · br. 26 · oznaka teksta",
+   "fr": "as-Sunnah · n° 26 · marquage de texte",
+   "es": "as-Sunnah · n.º 26 · marca de texto"
+  },
+  "ash-Sharīʿah direkt zur Belegseite": {
+   "ar": "ash-Sharīʿah مباشرة إلى صفحة الدليل",
+   "en": "ash-Sharīʿah directly to the source page",
+   "tr": "ash-Sharīʿah doğrudan delil sayfasına",
+   "ku": "ash-Sharīʿah rasterast bo rûpela delîlê",
+   "ckb": "ash-Sharīʿah ڕاستەوخۆ بۆ لاپەڕەی بەڵگە",
+   "bs": "ash-Sharīʿah izravno na stranicu dokaza",
+   "fr": "ash-Sharīʿah directement vers la page de preuve",
+   "es": "ash-Sharīʿah directamente a la página de prueba"
+  },
+  "PDF · al-Ājurrī · Seitenanker #page=301": {
+   "ar": "PDF · al-Ājurrī · مرساة الصفحة #page=301",
+   "en": "PDF · al-Ājurrī · page anchor #page=301",
+   "tr": "PDF · al-Ājurrī · sayfa çıpası #page=301",
+   "ku": "PDF · al-Ājurrī · lengera rûpelê #page=301",
+   "ckb": "PDF · al-Ājurrī · لنگی لاپەڕە #page=301",
+   "bs": "PDF · al-Ājurrī · sidro stranice #page=301",
+   "fr": "PDF · al-Ājurrī · ancre de page #page=301",
+   "es": "PDF · al-Ājurrī · ancla de página #page=301"
+  },
+  "al-Bidaʿ wa-n-Nahy ʿanhā direkt zur Fundstelle": {
+   "ar": "al-Bidaʿ wa-n-Nahy ʿanhā مباشرة إلى موضع الورود",
+   "en": "al-Bidaʿ wa-n-Nahy ʿanhā directly to the source location",
+   "tr": "al-Bidaʿ wa-n-Nahy ʿanhā doğrudan geçtiği yere",
+   "ku": "al-Bidaʿ wa-n-Nahy ʿanhā rasterast bo cihê jêderê",
+   "ckb": "al-Bidaʿ wa-n-Nahy ʿanhā ڕاستەوخۆ بۆ شوێنی سەرچاوە",
+   "bs": "al-Bidaʿ wa-n-Nahy ʿanhā izravno na mjesto navođenja",
+   "fr": "al-Bidaʿ wa-n-Nahy ʿanhā directement vers le lieu de la source",
+   "es": "al-Bidaʿ wa-n-Nahy ʿanhā directamente al lugar de la fuente"
+  },
+  "PDF · Ibn Waḍḍāḥ · Dorar-Verweis: Bd. 1, S. 69, Nr. 76": {
+   "ar": "PDF · Ibn Waḍḍāḥ · إحالة Dorar: ج 1، ص 69، رقم 76",
+   "en": "PDF · Ibn Waḍḍāḥ · Dorar reference: vol. 1, p. 69, no. 76",
+   "tr": "PDF · Ibn Waḍḍāḥ · Dorar atfı: c. 1, s. 69, no. 76",
+   "ku": "PDF · Ibn Waḍḍāḥ · veguhastina Dorar: berg 1, r. 69, hejmar 76",
+   "ckb": "PDF · Ibn Waḍḍāḥ · ئاماژەی Dorar: بەرگ 1، لاپەڕە 69، ژمارە 76",
+   "bs": "PDF · Ibn Waḍḍāḥ · Dorar-uputa: sv. 1, str. 69, br. 76",
+   "fr": "PDF · Ibn Waḍḍāḥ · renvoi Dorar : vol. 1, p. 69, n° 76",
+   "es": "PDF · Ibn Waḍḍāḥ · remisión de Dorar: vol. 1, p. 69, n.º 76"
+  },
+  "Die Aussage verbindet drei Grundlagen: den": {
+   "ar": "يجمع القول ثلاثة أصول:",
+   "en": "The statement joins three foundations: the",
+   "tr": "Söz üç esası birleştirir:",
+   "ku": "Gotin sê bingehan bi hev ve girê dide:",
+   "ckb": "وتەکە سێ بنەما کۆ دەکاتەوە:",
+   "bs": "Izjava spaja tri temelja:",
+   "fr": "La parole relie trois fondements :",
+   "es": "La afirmación une tres fundamentos:"
+  },
+  "hüten, weil sie Feindschaft und Hass zwischen den Menschen hervorrufen.": {
+   "ar": "احذروا، لأنها تُحدث العداوة والبغضاء بين الناس.",
+   "en": "beware, because they bring forth enmity and hatred between people.",
+   "tr": "sakının, çünkü insanlar arasında düşmanlık ve kin doğururlar.",
+   "ku": "haydar bin, ji ber ku ew dijminahî û kînê di nav mirovan de derdixin.",
+   "ckb": "ئاگادار بن، چونکە دژایەتی و ڕق لە نێوان خەڵکدا دروست دەکەن.",
+   "bs": "čuvajte se, jer izazivaju neprijateljstvo i mržnju među ljudima.",
+   "fr": "gardez-vous, parce qu’elles suscitent l’inimitié et la haine entre les gens.",
+   "es": "cuídense, porque producen enemistad y odio entre la gente."
+  }
+ }
+}

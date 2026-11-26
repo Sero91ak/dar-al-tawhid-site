@@ -5,6 +5,9 @@ import {
 import { readNamedStatusFromStore } from "./prayer-status-store.js";
 import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
+import { localizedNotification, chromePack, individualChrome } from "./push-locale-chrome.js";
+import { dailyIndividualTitle } from "./push-locale-from-draft.js";
+import { loadAppLocaleSets, localeForSubscription } from "./push-app-locale-delivery.js";
 
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
 const DEFAULT_DAILY_STATUS_PATH = "content/admin/daily-push-status.json";
@@ -146,7 +149,8 @@ export async function sendWelcomePush(env, input = {}) {
     return welcomeInflightBySub.get(subscriptionId);
   }
 
-  const job = sendWelcomePushOnce(env, subscriptionId, cached);
+  const requestedLocale = String(input.locale || input.dar_app_locale || "").toLowerCase();
+  const job = sendWelcomePushOnce(env, subscriptionId, cached, requestedLocale);
   welcomeInflightBySub.set(subscriptionId, job);
   try {
     return await job;
@@ -155,7 +159,7 @@ export async function sendWelcomePush(env, input = {}) {
   }
 }
 
-async function sendWelcomePushOnce(env, subscriptionId, cached) {
+async function sendWelcomePushOnce(env, subscriptionId, cached, locale = "") {
   const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
   const appId = String(env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e").trim();
   const title = "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh";
@@ -175,8 +179,7 @@ async function sendWelcomePushOnce(env, subscriptionId, cached) {
     app_id: appId,
     target_channel: "push",
     include_subscription_ids: [subscriptionId],
-    headings: { de: title, en: title },
-    contents: { de: body, en: body },
+    ...localizedNotification(title, body, null, chromePack("welcome").body),
     url,
     collapse_id: `dar-welcome-${subscriptionId}`.slice(0, 64),
     idempotency_key: idempotencyKey,
@@ -184,6 +187,16 @@ async function sendWelcomePushOnce(env, subscriptionId, cached) {
     chrome_web_icon: `${site}/notification-icon-192.png?v=3`,
     chrome_web_badge: `${site}/notification-badge-96.png?v=3`
   };
+
+  let resolved = locale === "ku" || locale === "ckb" ? locale : null;
+  if (!resolved) {
+    try { resolved = localeForSubscription(subscriptionId, await loadAppLocaleSets(env)); } catch (_) { resolved = null; }
+  }
+  const welcomeText = individualChrome("welcome", resolved);
+  if (welcomeText?.body) {
+    payload.headings = { de: title, en: title };
+    payload.contents = { de: welcomeText.body, en: welcomeText.body };
+  }
 
   try {
     const result = await postOneSignal(env, payload);
@@ -282,13 +295,25 @@ export async function sendDailyTestPush(env, input = {}) {
   const idempotencyKey = await deterministicUuid(
     `daily-test:${kind}:${subscriptionId}:${url}:${Date.now()}`
   );
+  const testLocale = String(input.locale || input.dar_app_locale || "").toLowerCase();
+  let testText = null;
+  if (testLocale === "ku" || testLocale === "ckb") {
+    if (kind === "device") {
+      const pack = individualChrome("deviceTest", testLocale);
+      if (pack?.title && pack?.body) testText = { headings: { de: pack.title, en: pack.title }, contents: { de: pack.body, en: pack.body } };
+    } else {
+      try {
+        const oneTitle = dailyIndividualTitle(testLocale, kind === "recommendation" ? "daily_recommendation" : "daily_dua");
+        if (oneTitle) testText = { headings: { de: oneTitle, en: oneTitle }, contents: { de: body, en: body } };
+      } catch (_) {}
+    }
+  }
 
   const payload = {
     app_id: appId,
     target_channel: "push",
     include_subscription_ids: [subscriptionId],
-    headings: { de: title, en: title },
-    contents: { de: body, en: body },
+    ...(testText || localizedNotification(title, body, null, null)),
     ios_sound: "default",
     ttl: 3600,
     url,

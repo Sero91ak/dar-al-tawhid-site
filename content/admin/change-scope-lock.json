@@ -155,6 +155,147 @@
   ],
   "unlockedScopes": [
     {
+      "id": "push-locale-ku-ckb-t32u-20261126",
+      "at": "2026-11-26T11:00:00+01:00",
+      "approvedBy": "owner-serhat-20261126-t32u-push-language",
+      "reason": "Owner t32u: language text only for ku/ckb delivery and prayer-push-admin copy until 2026-11-28T23:59:59Z. No prayer calculation, location, Qibla, schedule, segment, idempotency of already queued notifications, Kids or broadcast.",
+      "paths": [
+        "cloudflare/prayer-push-scheduler.js",
+        "cloudflare/prayer-push-admin.js",
+        "cloudflare/push-app-locale-delivery.js",
+        "cloudflare/push-locale-from-draft.js",
+        "cloudflare/push-locale-chrome.js",
+        "cloudflare/push-locale-chrome-data.json",
+        "cloudflare/daily-push-scheduler.js",
+        "cloudflare/daily-push-admin.js",
+        "cloudflare/jummah-push-scheduler.js",
+        "cloudflare/jummah-push-admin.js",
+        "scripts/check-push-locale-map.mjs",
+        "scripts/prepare-one-subscription-locale-check.mjs",
+        "scripts/push-locale-chrome.cjs"
+      ],
+      "expiresAt": "2026-11-28T23:59:59Z"
+    },
+    {
+      "id": "revert-hadith-library-shelves-visitor-20261126",
+      "at": "2026-11-26T10:12:00+01:00",
+      "approvedBy": "owner-serhat-20261126-t29u-restore-app-clicks",
+      "reason": "Owner Serhat t29u: the live adult app stopped opening every area except the Hadith library after PR 1903. Approved immediate revert of that visitor shelves release so Qur'an, Dua, More and posts are clickable again. Removes the shelves script, stylesheet and its build check only.",
+      "paths": [
+        "assets/hadith-library-shelves-v1.js",
+        "assets/hadith-library-shelves-v1.css",
+        "scripts/check-hadith-library-shelves-v1.cjs",
+        "scripts/cf-pages-build.js"
+      ],
+      "expiresAt": "2026-11-28T23:59:00+01:00"
+    },
+    {
+      "id": "core-lock-push-language-t28u-20261126",
+      "at": "2026-11-26T10:20:00+01:00",
+      "approvedBy": "owner-serhat-20261126-t28u-core-lock-language-only",
+      "reason": "Owner t28u language window is closed in the core lock. runtime window closed. This scope entry stays until its original expiry so the closing commit satisfies the scope guard. It does not reopen prayer calculation, location or Qibla.",
+      "paths": [
+        "scripts/core-sensitive-change-lock.cjs",
+        ".github/CORE_SECURITY_LOCK.md"
+      ],
+      "expiresAt": "2026-11-27T23:59:59Z"
+    },
+    {
+      "id": "push-locale-delivery-20261126",
+      "at": "2026-11-26T09:40:00+01:00",
+      "approvedBy": "owner-serhat-20261126-t27u-and-t28u-push-language",
+      "reason": "Owner t27u and t28u: language only for prayer, daily, post, jumuah, focus, news, library and welcome. German fallback, en key, dar_app_locale. No schedule, segment, prayer-calculation, location, idempotency, Kids or broadcast change. No send in this commit.",
+      "paths": [
+        "cloudflare/push-locale-from-draft.js",
+        "cloudflare/push-nine-language-copy.js",
+        "cloudflare/prayer-push-scheduler.js",
+        "cloudflare/daily-push-scheduler.js",
+        "cloudflare/post-push-admin.js",
+        "scripts/send-post-push.js",
+        "scripts/send-news-push.js",
+        "scripts/send-quiz-focus-push.js",
+        "scripts/send-prophets-focus-push.js",
+        "scripts/send-zakat-focus-push.js",
+        "scripts/send-library-publication-push.js",
+        "scripts/send-library-focus-push.js",
+        "scripts/send-daily-content-push.js",
+        "scripts/send-daily-live-repair.js",
+        "scripts/push-locale-chrome.cjs",
+        "scripts/check-push-locale-map.mjs",
+        "cloudflare/push-locale-chrome.js",
+        "cloudflare/push-locale-chrome-data.json",
+        "cloudflare/jummah-push-scheduler.js",
+        "cloudflare/jummah-push-admin.js",
+        "cloudflare/library-push-admin.js",
+        "cloudflare/daily-push-admin.js",
+        "cloudflare/worker.js",
+        "assets/dar-onesignal-language-sync.js",
+        "ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "ios/DarAlTawhid/DarAlTawhid/FreshWebAppView.swift",
+        "android/app/src/main/java/de/daraltawhid/app/DarPush.kt",
+        "android/app/src/main/java/de/daraltawhid/app/MainActivity.kt"
+      ],
+      "expiresAt": "2026-12-03T23:59:00+01:00"
+    },
+    {
+      "id": "visitor-header-language-20261126",
+      "at": "2026-11-26T08:55:00+01:00",
+      "approvedBy": "owner-serhat-20261126-port-test-header-language-selector",
+      "reason": "Owner request: port the DAR Test header language selector into the official adult visitor header (website, PWA, desktop-preview, iOS/Android shells). Same icon and position beside profile, existing nine-locale runtime. No Kids, prayer, Qibla, push, OneSignal or Zentrale changes.",
+      "paths": [
+        "assets/header-icons/language-classic-v7.png",
+        "assets/dar-visitor-header-language-v1.js",
+        "assets/dar-visitor-header-language-v1.css",
+        "assets/dar-visitor-profile-picker-v1.css",
+        "assets/dar-adult-brand-header-v2.css",
+        "assets/dar-home-test-parity-visitor.js",
+        "cloudflare/site-router.js",
+        "index.html",
+        "scripts/check-visitor-header-single-row.cjs",
+        "scripts/check-fixed-header-occlusion.cjs",
+        "scripts/check-adult-hero-seam.cjs",
+        "scripts/check-adult-hero-route-matrix.cjs",
+        "scripts/check-adult-duo-prayer-layout.cjs",
+        "scripts/test-visitor-android-pwa-parity-v1.cjs"
+      ],
+      "expiresAt": "2026-11-28T23:59:00+01:00"
+    },
+    {
+      "id": "landscape-single-home-20261126",
+      "at": "2026-11-26T08:20:00+01:00",
+      "approvedBy": "owner-serhat-20261126-landscape-duplicate-home",
+      "reason": "Owner report: iPad and Fold landscape showed a second start page. Remove that leftover landscape split from the home route and keep one home, matching portrait. No OneSignal, no Zentrale, no push-lane change.",
+      "paths": [
+        "assets/dar-home-test-parity-visitor.js",
+        "assets/dar-visitor-home-bootstrap-v2.js",
+        "test/assets/dar-fold-workspace-v2.js",
+        "test/assets/dar-fold-workspace-v2.css",
+        "test/assets/dar-home-html-parity-v1.js",
+        "test/tools/dar-fold-workspace-v2-guard.cjs",
+        "test/index.html",
+        "test/version.json",
+        "scripts/check-visitor-home-landscape.cjs",
+        "scripts/check-visitor-home-bootstrap.cjs",
+        "scripts/check-adult-home-mutation-jank.cjs"
+      ],
+      "expiresAt": "2026-12-03T23:59:00+01:00"
+    },
+    {
+      "id": "visitor-locale-zero-german-20261126",
+      "at": "2026-11-26T08:10:00+01:00",
+      "approvedBy": "owner-serhat-20261126-t16u-zero-german-when-locale-active",
+      "reason": "Owner t16u: when a non-de locale is active the visitor app, PWA and desktop must not show German. Runtime notice, catalog leftovers and the crawl test only. No OneSignal, no prayer or Jumuʿah or Kids push, no Kids lane, no ZENTRALE automation.",
+      "paths": [
+        "assets/i18n/",
+        "scripts/check-visitor-locale-leftovers.cjs",
+        "lernen/",
+        "q/",
+        "umrah/index.html"
+      ],
+      "expiresAt": "2026-12-03T23:59:00+01:00"
+    },
+    {
       "id": "q69-home-latest-post-20261126",
       "at": "2026-11-26T07:40:00+01:00",
       "approvedBy": "owner-follow-up-20261126-q69-must-appear-in-neueste-beitraege",
@@ -181,7 +322,55 @@
         "test/i18n/",
         "test/assets/dar-test-turkish-ui.js",
         "test/assets/dar-home-v3-compact.js",
-        "scripts/repo-integrity-guard.js"
+        "scripts/repo-integrity-guard.js",
+        "assets/q1-locales.json",
+        "assets/q2-locales.json",
+        "assets/q3-locales.json",
+        "assets/q4-locales.json",
+        "assets/q5-locales.json",
+        "assets/q6-locales.json",
+        "assets/q7-locales.json",
+        "assets/q8-locales.json",
+        "assets/q9-locales.json",
+        "assets/q10-locales.json",
+        "assets/q11-locales.json",
+        "assets/q12-locales.json",
+        "assets/q13-locales.json",
+        "assets/q14-locales.json",
+        "assets/q15-locales.json",
+        "assets/q16-locales.json",
+        "assets/q17-locales.json",
+        "assets/q18-locales.json",
+        "assets/q19-locales.json",
+        "assets/q20-locales.json",
+        "assets/q21-locales.json",
+        "assets/q22-locales.json",
+        "assets/q23-locales.json",
+        "assets/q24-locales.json",
+        "assets/q25-locales.json",
+        "assets/q26-locales.json",
+        "assets/q27-locales.json",
+        "assets/q28-locales.json",
+        "assets/q29-locales.json",
+        "assets/q30-locales.json",
+        "assets/q31-locales.json",
+        "assets/q32-locales.json",
+        "assets/q33-locales.json",
+        "assets/q34-locales.json",
+        "assets/q35-locales.json",
+        "assets/q36-locales.json",
+        "assets/q37-locales.json",
+        "assets/q38-locales.json",
+        "assets/q39-locales.json",
+        "assets/q40-locales.json",
+        "assets/q41-locales.json",
+        "assets/q42-locales.json",
+        "assets/q43-locales.json",
+        "assets/q44-locales.json",
+        "assets/q45-locales.json",
+        "assets/q46-locales.json",
+        "assets/q47-locales.json",
+        "assets/q48-locales.json"
       ],
       "expiresAt": "2026-12-02T23:59:00+01:00"
     },
@@ -9740,6 +9929,75 @@
         "content/admin/chat-publish-requests/umar-liebe-hass-gerechtigkeit-20261124-q65.json"
       ],
       "expiresAt": "2026-11-26T23:59:00+01:00"
+    },
+    {
+      "id": "hadith-library-shelves-v2-visitor-20261126",
+      "at": "2026-11-26T11:55:00+01:00",
+      "approvedBy": "owner-explicit-t30u-hadith-shelves-rebuild",
+      "reason": "Owner t30u: rebuild the Hadith library shelves on the visitor lane after the test lane was live-verified. Exact new shelf stylesheet, script and precomputed badge map only. No prayer, Qibla, location, push, Kids or native Swift changes. globalLock stays on.",
+      "paths": [
+        "assets/hadith-library-shelves-v2.css",
+        "assets/hadith-library-shelves-v2.js",
+        "assets/hadith-shelf-badges-v1.json"
+      ],
+      "expiresAt": "2026-11-28T23:59:00+01:00"
+    },
+    {
+      "id": "hadith-covers-visitor-20261126",
+      "at": "2026-11-26T12:55:00+01:00",
+      "approvedBy": "owner-explicit-t30u-t42u-hadith-covers",
+      "reason": "Owner t30u/t42u: visitor lane receives the same verified local hadith covers already live on the test app. Exact shelf script, stylesheet, provenance JSON and assets/hadith-covers/ only. No prayer, Qibla, location, push, Kids or native Swift changes. globalLock stays on.",
+      "paths": [
+        "assets/hadith-library-shelves-v2.css",
+        "assets/hadith-library-shelves-v2.js",
+        "assets/hadith-cover-sources-v1.json",
+        "assets/hadith-covers/"
+      ],
+      "expiresAt": "2026-11-29T23:59:00+01:00"
+    },
+    {
+      "id": "hadith-library-atelier-visitor-20261126",
+      "at": "2026-11-26T13:40:00+01:00",
+      "approvedBy": "owner-explicit-t30u-t47u-hadith-library-atelier",
+      "reason": "Owner t47u: visitor lane receives the ordered library atelier already live-verified on the test app. Exact shelf script, stylesheet, provenance JSON and assets/hadith-covers/ only. No prayer, Qibla, location, push, Kids or native Swift changes. globalLock stays on.",
+      "paths": [
+        "assets/hadith-library-shelves-v2.css",
+        "assets/hadith-library-shelves-v2.js",
+        "assets/hadith-cover-sources-v1.json",
+        "assets/hadith-covers/"
+      ],
+      "expiresAt": "2026-11-30T23:59:00+01:00"
+    },
+    {
+      "id": "quran-tadabbur-gapfill-06-271-20261126",
+      "at": "2026-11-26T14:00:00+01:00",
+      "approvedBy": "owner-sero91ak-explicit-complete-open-tadabbur",
+      "reason": "Eigentümerauftrag, offene Tadabbur-Verse nur mit abgerufenen frühen Quellen zu ergänzen. Nur der Tadabbur-Datenbaum und der kanonische Fortsetzungszeiger. globalLock, Gebet, Qibla, Kids, OneSignal und native Projekte bleiben unverändert.",
+      "paths": [
+        "apple-tv/quran/tadabbur/",
+        "content/admin/canonical-content-continuation-policy.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00+01:00"
+    },
+    {
+      "id": "tafsir-phase2-short-surahs-20261126",
+      "at": "2026-11-26T15:10:00+01:00",
+      "approvedBy": "owner-explicit-20261126-phase2-tafsir-areas",
+      "reason": "Owner Phase 2: fill content/tafsir/de for the missing and empty short surahs from fetched tafsir only. globalLock stays on. No prayer, Qibla, location, push, Kids or native project changes.",
+      "paths": [
+        "content/tafsir/de/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00+01:00"
+    },
+    {
+      "id": "tafsir-kathir-sadi-gaps-20261126",
+      "at": "2026-11-26T16:20:00+01:00",
+      "approvedBy": "owner-explicit-20261126-phase2-tafsir-next-block",
+      "reason": "Owner Phase 2 next block: fill missing Ibn Kathir and as-Sadi passages in existing content/tafsir/de files from fetched Arabic only, and log Ibn Abbas verses without an allowed chain. globalLock stays on. No prayer, Qibla, location, push, Kids or native project changes.",
+      "paths": [
+        "content/tafsir/de/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00+01:00"
     }
   ],
   "enabled": true

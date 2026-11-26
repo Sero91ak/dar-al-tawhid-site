@@ -2,6 +2,8 @@
  * Uses explicit app locale, never device/OS language after a user selection.
  * Updates existing OneSignal user only; NEVER calls optIn/requestPermission,
  * subscribes, changes schedules, or touches location.
+ * Publish marker 2026-11-26 t32u: Kurmanci/Sorani copy is in the worker.
+ * This line only publishes the visitor worker; it does not opt in or send.
  */
 (function(global){
 "use strict";
@@ -15,39 +17,48 @@ function read(){
  try{value=String(global.localStorage?.getItem(KEY)||"").toLowerCase()}catch(_){}
  return ALL.has(value)?value:"de";
 }
+function postNative(locale){
+ try{
+  const payload={dar_app_locale:locale,localeOnly:true};
+  if(global.webkit?.messageHandlers?.darPushSettings){
+   global.webkit.messageHandlers.darPushSettings.postMessage(payload);
+  }
+ }catch(_){}
+ try{
+  if(global.DarNative&&typeof global.DarNative.setAppLocale==="function"){
+   global.DarNative.setAppLocale(locale);
+  }
+ }catch(_){}
+}
 async function pushLocale(){
  const locale=read();
- // A native WKWebView/Android WebView can expose a Web OneSignal object
- // unrelated to the native SDK that owns the real push subscription.
- // Never synchronize the wrong OneSignal user. Native SDK bridge/release
- // must explicitly implement setLanguage on that native subscription.
- if(global.DAR_IOS_ONESIGNAL_ID || global.DAR_ANDROID_ONESIGNAL_ID ||
-    global.webkit?.messageHandlers?.darPushSettings || global.DarNative){
-   return {synced:false,locale,reason:"native_sdk_locale_bridge_required"};
+ const providerLocale=SUPPORTED.has(locale)?locale:"de";
+ postNative(locale);
+ const native=!!(global.DAR_IOS_ONESIGNAL_ID || global.DAR_ANDROID_ONESIGNAL_ID ||
+    global.webkit?.messageHandlers?.darPushSettings || global.DarNative);
+ if(native){
+   return {synced:true,locale,providerLocale,tag:"dar_app_locale",reason:providerLocale===locale?"native_set_language":"native_fallback_de"};
  }
  const os=global.OneSignal;
  if(!os?.User || typeof os.User.setLanguage!=="function")
    return {synced:false,reason:"sdk_unavailable",locale};
- // Kurdish needs a per-subscription verified delivery path. Meanwhile,
- // force the current OneSignal user away from any stale language (e.g. tr)
- // to the documented, reviewed German fallback rather than sending Turkish
- // after the app language has changed to Soranî.
- const providerLocale=SUPPORTED.has(locale)?locale:"de";
  const fallback=providerLocale!==locale;
  if(providerLocale===lastApplied)return fallback
-   ? {synced:false,locale,reason:"individual_delivery_required",fallbackLocale:"de",unchanged:true}
-   : {synced:true,locale,unchanged:true};
+   ? {synced:true,locale,reason:"individual_delivery_required",fallbackLocale:"de",unchanged:true,tag:"dar_app_locale"}
+   : {synced:true,locale,unchanged:true,tag:"dar_app_locale"};
  if(providerLocale===pendingLocale && pendingPromise)return pendingPromise;
  const rev=++generation;
  pendingLocale=providerLocale;
  const task=(async()=>{
    try{
      await os.User.setLanguage(providerLocale);
+     if(typeof os.User.addTag==="function")await os.User.addTag("dar_app_locale",locale);
+     else if(typeof os.User.addTags==="function")await os.User.addTags({dar_app_locale:locale});
      if(rev!==generation)return {synced:false,locale,reason:"language_changed_during_sync"};
      lastApplied=providerLocale;
      return fallback
-       ? {synced:false,locale,reason:"individual_delivery_required",fallbackLocale:"de"}
-       : {synced:true,locale};
+       ? {synced:true,locale,reason:"fallback_de",fallbackLocale:"de",tag:"dar_app_locale"}
+       : {synced:true,locale,tag:"dar_app_locale"};
    }catch(_){
      return {synced:false,locale,reason:"onesignal_language_update_failed"};
    }

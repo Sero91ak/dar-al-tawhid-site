@@ -1,0 +1,183 @@
+{
+  "schemaVersion": "tafsir-de-v2",
+  "source": "Deutsche Übertragung nach dem abgerufenen arabischen Tafsīr Ibn Kathīr (quran.com resource 14) und Tafsīr as-Saʿdī (resource 91). Verswortlaut: Frank Bubenheim und Nadeem (resource 27). Kein Ibn-ʿAbbās-Eintrag.",
+  "updated": "2026-11-26",
+  "fetchedAt": "2026-11-26",
+  "works": [
+    {
+      "id": "ibn-kathir",
+      "work": "Tafsīr Ibn Kathīr",
+      "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+      "deathYear": 774,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+      "edition": "quran.com, arabische Fassung, resource 14",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/112"
+    },
+    {
+      "id": "sadi",
+      "work": "Tafsīr as-Saʿdī",
+      "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+      "deathYear": 1376,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+      "edition": "quran.com, arabische Fassung, resource 91",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/112"
+    }
+  ],
+  "blocked": [
+    "Ibn ʿAbbās: resource 15 ohne erlaubte Isnād-Wertung. Die zwei bei Ibn Kathīr genannten Erklärungen zu aṣ-Ṣamad werden nicht als eigene Belege geführt."
+  ],
+  "verses": [
+    {
+      "id": 1,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Sag: Er ist Allah, Einer,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=112&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Die Sūra ist mekkanisch. Ibn Kathīr nennt den Anlass und den Vorzug und führt einen Bericht Aḥmads an: Abū Saʿd Muḥammad ibn Muyassar aṣ-Ṣāghānī, Abū Ǧaʿfar ar-Rāzī, ar-Rabīʿ ibn Anas, von Abū l-ʿĀliya, von Ubayy ibn Kaʿb: die Beigeseller sagten zum Propheten: Muḥammad, nenne uns die Herkunft deines Herrn. Da sandte Allah herab: „qul huwa Llāhu aḥad“. Der Auszug bricht in der Fortsetzung ab. Die Kette wird so wiedergegeben, wie sie steht, und nicht zusätzlich bewertet.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/112",
+          "verseKey": "112:1"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Sprich es als festes Wort, glaube es und kenne seine Bedeutung: Er ist Allah, Einer. Die Einzigkeit ist auf Ihn beschränkt. Er ist der Eine, der allein die Vollkommenheit hat, dem die schönsten Namen, die vollkommenen höchsten Eigenschaften und die heiligen Handlungen gehören und der weder Gegenstück noch Gleichen hat.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/112",
+          "verseKey": "112:1"
+        }
+      ],
+      "sabab": "Ibn Kathīr bezeichnet diese Sūra in der abgerufenen Fassung als mekkanisch.",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 2,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Allah, der Überlegene.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=112&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Allah, aṣ-Ṣamad. ʿIkrima von Ibn ʿAbbās: der, zu dem die Geschöpfe in ihren Bedürfnissen und Fragen Zuflucht nehmen. ʿAlī ibn Abī Ṭalḥa von Ibn ʿAbbās: der Herr, der in seiner Herrschaft vollkommen ist, der Edle, der in seinem Adel vollkommen ist, der Gewaltige, der in seiner Gewalt vollkommen ist, der Nachsichtige, der in seiner Nachsicht vollkommen ist, der Wissende, der in seinem Wissen vollkommen ist. Der Auszug bricht ab. Beide Zuschreibungen stehen ohne die geforderte Isnād-Wertung und werden nicht als eigener Ibn-ʿAbbās-Beleg geführt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/112",
+          "verseKey": "112:2"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Allah, aṣ-Ṣamad: der in allen Bedürfnissen Angestrebte. Die Bewohner der oberen und der unteren Welt sind aufs äußerste auf Ihn angewiesen. Sie bitten Ihn um ihre Bedürfnisse und wenden sich in ihren wichtigen Angelegenheiten an Ihn, weil Er in seinen Eigenschaften vollkommen ist: der Wissende, dessen Wissen vollkommen ist, der Nachsichtige, dessen Nachsicht vollkommen ist, der Barmherzige, dessen Barmherzigkeit jedes Ding umfasst, und so seine übrigen Eigenschaften.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/112",
+          "verseKey": "112:2"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 3,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Er hat nicht gezeugt und ist nicht gezeugt worden,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=112&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Er hat nicht gezeugt und ist nicht gezeugt worden, und niemand ist Ihm gleich: Er hat kein Kind, keinen Vater und keine Gefährtin.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/112",
+          "verseKey": "112:3"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Zu seiner Vollkommenheit gehört, dass Er nicht gezeugt hat und nicht gezeugt worden ist, wegen der Vollkommenheit seines Reichseins.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/112",
+          "verseKey": "112:3"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 4,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): und niemand ist Ihm jemals gleich.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=112&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Muğāhid: niemand ist Ihm gleich, das heißt, Er hat keine Gefährtin. Das ist so, wie Er sagt, dass Er der Besitzer und Erschaffer aller Dinge ist (6:101). Wie sollte Er unter seinem Geschöpf ein Gegenstück haben, das Ihm gleichkommt, oder einen Nahen, der Ihm nahekommt. Der Auszug bricht ab.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/112",
+          "verseKey": "112:4"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Und niemand ist Ihm gleich, weder in seinen Namen noch in seinen Eigenschaften noch in seinen Handlungen. Diese Sūra umfasst den Tawḥīd der Namen und Eigenschaften.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/112",
+          "verseKey": "112:4"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    }
+  ]
+}

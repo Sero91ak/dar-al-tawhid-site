@@ -49,6 +49,14 @@ Im Repository **Settings → Rules → Rulesets** eine aktive Branch-Regel für 
 
 **Ohne Ruleset** kann GitHub einen Push schon annehmen, bevor ein nachfolgender CI-Check fehlschlägt; dieser Guard allein kann das nicht verhindern. Das Ruleset kann über die aktuell verfügbare GitHub-Verbindung nicht gesetzt werden und erfordert den Repository-Eigentümer.
 
+## Sprach-Ausnahme t28u geschlossen
+
+Eigentümer Serhat, t28u, 26.11.2026. Die befristete Sprachfreigabe für den Gebets-Push-Planer und die zwei iOS-Push-Dateien ist geschlossen. Dieselben Dateien sind wieder voll gesperrt. Ein Kennwort hebt diese Sperre nicht auf.
+
+## T32U_PUSH_LANGUAGE_LOCK geschlossen
+
+Eigentümer Serhat, t32u, 26.11.2026. Die befristete Sprachfreigabe für `cloudflare/prayer-push-scheduler.js` und `cloudflare/prayer-push-admin.js` ist nach der Live-Auslieferung wieder geschlossen. Dieselben Dateien sind voll gesperrt. Ein Kennwort hebt diese Sperre nicht auf.
+
 ## Stand bei Einrichtung
 
 PR #1452 (GPS-/Gebetszeiten-Reparatur) ist eine noch nicht freigegebene Änderung an den nun gesperrten Bereichen. Nicht unbemerkt mergen oder global veröffentlichen. Zuerst gesonderte Eigentümerentscheidung und Prüfung. Diese Sicherheitsänderung betrifft ausschließlich GitHub-Policies und CI; sie verändert weder GPS-Verhalten noch installierte Apps.

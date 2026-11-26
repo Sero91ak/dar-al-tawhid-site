@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "tafsir-de-v2",
+  "source": "Deutsche Übertragung nach dem abgerufenen arabischen Tafsīr Ibn Kathīr (quran.com resource 14) und Tafsīr as-Saʿdī (resource 91). Verswortlaut: Frank Bubenheim und Nadeem (resource 27). Kein Ibn-ʿAbbās-Eintrag.",
+  "updated": "2026-11-26",
+  "fetchedAt": "2026-11-26",
+  "works": [
+    {
+      "id": "ibn-kathir",
+      "work": "Tafsīr Ibn Kathīr",
+      "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+      "deathYear": 774,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+      "edition": "quran.com, arabische Fassung, resource 14",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/108"
+    },
+    {
+      "id": "sadi",
+      "work": "Tafsīr as-Saʿdī",
+      "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+      "deathYear": 1376,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+      "edition": "quran.com, arabische Fassung, resource 91",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/108"
+    }
+  ],
+  "blocked": [
+    "Ibn ʿAbbās: resource 15 ohne erlaubte Isnād-Wertung. Die Nennung al-ʿĀṣ ibn Wāʾils bleibt eine Zuschreibung Ibn Kathīrs ohne Kette."
+  ],
+  "verses": [
+    {
+      "id": 1,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Wir haben dir ja al-Kautar gegeben.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=108&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Ibn Kathīr schreibt: die Sūra gilt als medinensisch, und es wird auch gesagt, sie sei mekkanisch. Er führt einen Bericht Aḥmads an, Muḥammad ibn Fuḍayl von al-Muḫtār ibn Fulful von Anas: der Gesandte Allahs nickte ein, hob lächelnd den Kopf, und es wurde gefragt, warum er gelacht habe. Er sagte, soeben sei ihm eine Sūra herabgesandt worden, und er las „innā aʿṭaynāka l-kawthar“ bis zum Ende. Er fragte, ob sie wissen, was al-Kawthar ist. Sie sagten, Allah und sein Gesandter wissen es besser. Er sagte: ein Fluss, den mein Herr mir im Paradies gegeben hat; auf ihm ist viel Gutes; meine Gemeinschaft kommt am Tag der Auferstehung zu ihm; seine Gefäße sind an Zahl wie die Sterne. Ein Diener von ihnen wird weggezogen, und ich sage: Herr, er gehört zu meiner Gemeinschaft. Es wird gesagt: du weißt nicht, was sie nach dir neu eingeführt haben. Ibn Kathīr sagt, Aḥmad habe ihn mit diesem dreigliedrigen Isnād und diesem Wortlaut überliefert. Der Auszug bricht bei der Beschreibung des Beckens ab.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/108",
+          "verseKey": "108:1"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Allah sagt zu seinem Propheten Muḥammad, indem Er ihn beschenkt: Wir haben dir al-Kawthar gegeben, das ist das viele Gute und die reiche Gunst. Dazu gehört, was Allah seinem Propheten am Tag der Auferstehung gibt: der Fluss, der al-Kawthar genannt wird, und das Becken, dessen Länge ein Monat und dessen Breite ein Monat ist, dessen Wasser weißer als Milch und süßer als Honig ist und dessen Gefäße an Menge und Leuchten wie die Sterne des Himmels sind. Wer einen Zug daraus trinkt, dürstet danach niemals.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/108",
+          "verseKey": "108:1"
+        }
+      ],
+      "sabab": "Ibn Kathīr schreibt: die Sūra gilt als medinensisch, und es wird auch gesagt, sie sei mekkanisch. Der Ort bleibt in der Quelle offen.",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 2,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): So bete zu deinem Herrn und opfere.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=108&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. So wie Wir dir das viele Gute im Diesseits und Jenseits gegeben haben, und dazu den Fluss, dessen Beschreibung vorausging: mache dein Pflichtgebet, dein freiwilliges Gebet und dein Opfern deinem Herrn aufrichtig. Diene Ihm allein und opfere auf seinen Namen allein. Ibn Kathīr verweist auf 6:162. Der Auszug bricht ab.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/108",
+          "verseKey": "108:2"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Nachdem Er seine Gunst an ihn genannt hat, befiehlt Er ihm, sie dankbar anzuerkennen: bete zu deinem Herrn und opfere. Er nennt diese beiden Anbetungen eigens, weil sie zu den besten Anbetungen und den erhabensten Annäherungen gehören. Das Gebet enthält die Demut des Herzens und der Glieder vor Allah. Im Opfern liegt die Annäherung an Allah mit dem Besten, was der Diener an Opfertieren hat, und das Herausgeben des Besitzes, den die Seelen zu lieben und mit dem sie zu geizen geschaffen sind.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/108",
+          "verseKey": "108:2"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 3,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Gewiß, derjenige, der dich haßt, - er ist vom Guten abgetrennt .",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=108&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der dich hasst, Muḥammad, und das hasst, womit du gekommen bist an Rechtleitung, Wahrheit, klarem Beweis und deutlichem Licht, der ist al-abtar: der Geringere, der Erniedrigte, dessen Erwähnung abgeschnitten ist. Ibn ʿAbbās, Muğāhid, Saʿīd ibn Ǧubayr und Qatāda: sie wurde über al-ʿĀṣ ibn Wāʾil herabgesandt. Danach beginnt ein Wort Muḥammad ibn Isḥāqs von Yazīd ibn Rūmān, das im Auszug abbricht. Die Zuschreibung an Ibn ʿAbbās steht ohne Isnād-Wertung.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/108",
+          "verseKey": "108:3"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der dich hasst, das ist der, der dich hasst, tadelt und herabsetzt. Der ist al-abtar: von allem Guten abgeschnitten, abgeschnittenen Werks und abgeschnittener Erwähnung. Muḥammad aber ist der wahrhaft Vollkommene, dem die für ein Geschöpf mögliche Vollkommenheit zukommt: erhobene Erwähnung und viele Helfer und Anhänger.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/108",
+          "verseKey": "108:3"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    }
+  ]
+}

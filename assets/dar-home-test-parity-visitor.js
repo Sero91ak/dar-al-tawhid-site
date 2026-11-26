@@ -415,6 +415,12 @@ function stylesheet(){
  "#darHomeHtmlParityV1 .dhp-greeting{overflow-wrap:break-word!important;max-width:100%!important;white-space:normal!important;}",
  "#darHomeHtmlParityV1 .dhp-intro{max-width:70ch!important;line-height:1.48!important;overflow-wrap:break-word!important;white-space:normal!important;height:auto!important;max-height:none!important;}",
  "html,html body{overscroll-behavior-y:none!important;}",
+ /* One start page in every orientation. A landscape split must not park this
+    home off-canvas or reveal the legacy #appView beside it. */
+ "html.dar-fold-v2-active body.is-home-route > .app{position:relative!important;left:auto!important;top:auto!important;width:100%!important;max-width:100%!important;height:auto!important;visibility:visible!important;opacity:1!important;overflow:visible!important;pointer-events:auto!important;}",
+ "html.dar-fold-v2-active body.is-home-route :is(#darFoldV2Rail,#darFoldV2Pane){display:none!important;visibility:hidden!important;pointer-events:none!important;}",
+ "html body.is-home-route #appView,html body.is-home-route #appView.view,html.dar-fold-v2-active body.is-home-route #darFoldV2Pane > #appView,html.dar-fold-v2-active body.is-home-route #darFoldV2Pane > #appView.view{display:none!important;visibility:hidden!important;}",
+ "html body.is-home-route #darHomeHtmlParityV1{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;left:auto!important;right:auto!important;transform:none!important;}",
  ].join("\n");
 }
 function create(){
@@ -720,7 +726,8 @@ function loadVisitorSmartDashboard(){
  var styles=[
   ["darVisitorSmartProfileCssV1","/assets/dar-visitor-smart-profile-v1.css?v=20261030-my-dar-dashboard-v11"],
   ["darVisitorDailyHubCssV1","/assets/dar-visitor-daily-hub-v1.css?v=20261030-mehr-responsive-v2"],
-  ["darVisitorProfilePickerCssV1","/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-single-hub-v10"],
+  ["darVisitorProfilePickerCssV1","/assets/dar-visitor-profile-picker-v1.css?v=20261126-header-language-v1"],
+  ["darVisitorHeaderLanguageCssV1","/assets/dar-visitor-header-language-v1.css?v=20261126-header-language-v1"],
   ["darVisitorOnboardingCssV1","/assets/dar-visitor-onboarding-v1.css?v=20261030-mehr-responsive-v2"]
  ];
  styles.forEach(function(pair){if(document.getElementById(pair[0]))return;
@@ -729,6 +736,7 @@ function loadVisitorSmartDashboard(){
  var scripts=[
   ["darVisitorSmartProfileJsV1","/assets/dar-visitor-smart-profile-v1.js?v=20261031-neutral-hooded-v14"],
   ["darVisitorProfilePickerJsV1","/assets/dar-visitor-profile-picker-v1.js?v=20261030-left-select-v12"],
+  ["darVisitorHeaderLanguageJsV1","/assets/dar-visitor-header-language-v1.js?v=20261126-header-language-v1"],
   ["darVisitorDailyHubJsV1","/assets/dar-visitor-daily-hub-v1.js?v=20261030-mehr-responsive-v2"],
   ["darVisitorOnboardingJsV1","/assets/dar-visitor-onboarding-v1.js?v=20261030-profile-single-hub-v10"]
  ];

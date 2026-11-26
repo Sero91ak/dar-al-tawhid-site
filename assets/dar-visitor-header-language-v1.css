@@ -1,0 +1,50 @@
+/* Visitor header language capsule. App rail sizing lives with the brand header.
+   This file styles the same control on the public desktop top bar and
+   mirrors Arabic/Sorani without touching the settings language row. */
+body.desktop-overhaul-v18 .dar-v8-top-actions > #darVisitorLanguageButtonV1{
+  -webkit-appearance:none;
+  appearance:none;
+  display:grid;
+  place-items:center;
+  flex:none;
+  width:40px;
+  height:40px;
+  min-width:40px;
+  min-height:40px;
+  margin:0;
+  padding:3px;
+  border:1px solid var(--v8-line,rgba(128,91,104,.28));
+  border-radius:13px;
+  background:color-mix(in srgb,var(--v8-gold,#b99a5d) 14%,transparent);
+  color:inherit;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+body.desktop-overhaul-v18 .dar-v8-top-actions > #darVisitorLanguageButtonV1 > img{
+  display:block;
+  width:100%;
+  height:100%;
+  max-width:32px;
+  max-height:32px;
+  object-fit:contain;
+  pointer-events:none;
+}
+body.desktop-overhaul-v18 .dar-v8-top-actions > #darVisitorLanguageButtonV1:focus-visible{
+  outline:2px solid var(--v8-gold,#b99a5d);
+  outline-offset:2px;
+}
+body.desktop-overhaul-v18 .dar-v8-top-actions > #darVisitorLanguageButtonV1[aria-expanded="true"]{
+  border-color:var(--v8-gold,#b99a5d);
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--v8-gold,#b99a5d) 18%,transparent);
+}
+body:has(#darVisitorLanguageButtonV1) #darV8LangToggle,
+body:has(#darVisitorLanguageButtonV1) #darV8LangMenu{display:none!important}
+html[dir="rtl"] body.desktop-overhaul-v18 .dar-v8-topbar{direction:rtl}
+@media(max-width:390px){
+  body.desktop-overhaul-v18 .dar-v8-top-actions > #darVisitorLanguageButtonV1{
+    width:36px;height:36px;min-width:36px;min-height:36px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #darVisitorLanguageButtonV1{transition:none!important}
+}

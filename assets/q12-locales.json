@@ -1,0 +1,410 @@
+{
+ "schemaVersion": 1,
+ "qSourceId": "qsource:12",
+ "canonicalUrl": "https://dar-al-tawhid.de/q/12/",
+ "localeStorageKey": "darAdultPreferredLocaleV1",
+ "supported": [
+  "de",
+  "ar",
+  "en",
+  "tr",
+  "ku",
+  "ckb",
+  "bs",
+  "fr",
+  "es"
+ ],
+ "approvedLocales": [
+  "de",
+  "ar",
+  "en",
+  "tr",
+  "ku",
+  "ckb",
+  "bs",
+  "fr",
+  "es"
+ ],
+ "pendingReviewLocales": [],
+ "review": "machine-translation-owner-approved",
+ "humanReligiousReview": false,
+ "scope": "title-quote-and-card-prose",
+ "note": "Machine translation of the visible German prose on this card, including the title, the displayed statement and the commentary lines. Arabic originals, isnād and source links stay unchanged. humanReligiousReview is false.",
+ "sourceArabicImmutable": true,
+ "locales": {
+  "de": {
+   "title": "",
+   "quote": "Dies haben die Salaf nicht getan … Wäre es reines oder überwiegendes Gutes gewesen, dann wären die Salaf eher dazu berechtigt gewesen als wir.",
+   "dir": "ltr",
+   "status": "source"
+  },
+  "ar": {
+   "title": "",
+   "quote": "هذا لم يفعله السلف … ولو كان خيرًا محضًا أو راجحًا لكان السلف أحق به منا.",
+   "dir": "rtl",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "en": {
+   "title": "",
+   "quote": "The Salaf did not do this … Had it been pure good or predominantly good, the Salaf would have had a greater right to it than we do.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "tr": {
+   "title": "",
+   "quote": "Bunu Salaf yapmamıştır … Eğer sırf ya da üstün gelen bir hayır olsaydı, Salaf buna bizden daha layık olurdu.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "ku": {
+   "title": "",
+   "quote": "Salaf vê yekê nekirine … Ger ew qenciyeke paqij an jî qenciyeke serdest bûya, Salaf ji me bêtir heqê wê hebûn.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "ckb": {
+   "title": "",
+   "quote": "سەلەف ئەمەیان نەکردووە … ئەگەر خێرێکی پاک یان خێرێکی زاڵ بووایە، ئەوا سەلەف لە ئێمە شایستەتر بوون پێی.",
+   "dir": "rtl",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "bs": {
+   "title": "",
+   "quote": "Ovo Salaf nisu činili … Da je to bilo čisto ili pretežno dobro, Salaf bi na to imali veće pravo od nas.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "fr": {
+   "title": "",
+   "quote": "Les Salaf n’ont pas fait cela … Si cela avait été un bien pur ou un bien prépondérant, les Salaf y auraient eu davantage droit que nous.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  },
+  "es": {
+   "title": "",
+   "quote": "Los Salaf no hicieron esto … Si hubiera sido un bien puro o un bien predominante, los Salaf habrían tenido más derecho a ello que nosotros.",
+   "dir": "ltr",
+   "status": "machine-translation-owner-approved",
+   "humanReligiousReview": false
+  }
+ },
+ "strings": {
+  "Mawlid: Keine Sunnah, sondern Bidʿah – DAR AL TAWḤĪD": {
+   "ar": "المولد: ليست سنّة، بل بدعة – DAR AL TAWḤĪD",
+   "en": "Mawlid: not Sunnah, but Bidʿah – DAR AL TAWḤĪD",
+   "tr": "Mawlid: Sunnah değil, Bidʿah – DAR AL TAWḤĪD",
+   "ku": "Mawlid: ne Sunnah e, Bidʿah e – DAR AL TAWḤĪD",
+   "ckb": "مەولید: سوننەت نییە، بەڵکو بیدعەیە – DAR AL TAWḤĪD",
+   "bs": "Mawlid: nije Sunna, nego Bidʿah – DAR AL TAWḤĪD",
+   "fr": "Mawlid : pas une Sunnah, mais une Bidʿah – DAR AL TAWḤĪD",
+   "es": "Mawlid: no es Sunnah, sino Bidʿah – DAR AL TAWḤĪD"
+  },
+  "Beiträge nach Qurʾān, Sunnah & Āthār": {
+   "ar": "كتابات وفق القرآن والسنّة والآثار",
+   "en": "Contributions according to the Qurʾān, the Sunnah and the Āthār",
+   "tr": "Qurʾān, Sunnah ve Āthār’a göre yazılar",
+   "ku": "Nivîs li gorî Qurʾān, Sunnah û Āthār",
+   "ckb": "بابەتەکان بەپێی قورئان، سوننەت و ئاسار",
+   "bs": "Prilozi prema Qurʾānu, Sunni i Āthāru",
+   "fr": "Contributions selon le Qurʾān, la Sunnah et les Āthār",
+   "es": "Aportes según el Qurʾān, la Sunnah y los Āthār"
+  },
+  "Mawlid · Sunnah · Salaf · Quellenarchiv": {
+   "ar": "Mawlid · Sunnah · Salaf · أرشيف المصادر",
+   "en": "Mawlid · Sunnah · Salaf · source archive",
+   "tr": "Mawlid · Sunnah · Salaf · kaynak arşivi",
+   "ku": "Mawlid · Sunnah · Salaf · arşîva çavkaniyan",
+   "ckb": "Mawlid · Sunnah · Salaf · ئەرشیفی سەرچاوەکان",
+   "bs": "Mawlid · Sunnah · Salaf · arhiv izvora",
+   "fr": "Mawlid · Sunnah · Salaf · archive des sources",
+   "es": "Mawlid · Sunnah · Salaf · archivo de fuentes"
+  },
+  "Mawlid: Keine Sunnah, sondern Bidʿah": {
+   "ar": "المولد: ليست سنّة، بل بدعة",
+   "en": "Mawlid: not Sunnah, but Bidʿah",
+   "tr": "Mawlid: Sunnah değil, Bidʿah",
+   "ku": "Mawlid: ne Sunnah e, Bidʿah e",
+   "ckb": "مەولید: سوننەت نییە، بەڵکو بیدعەیە",
+   "bs": "Mawlid: nije Sunna, nego Bidʿah",
+   "fr": "Mawlid : pas une Sunnah, mais une Bidʿah",
+   "es": "Mawlid: no es Sunnah, sino Bidʿah"
+  },
+  "… Wäre es reines oder überwiegendes Gutes gewesen, dann wären die Salaf eher dazu berechtigt gewesen als wir.“": {
+   "ar": "«… لو كان خيرًا محضًا أو راجحًا، لكان السلف أحق به منا.»",
+   "en": "“… Had it been a pure or a predominant good, the Salaf would have been more entitled to it than we are.”",
+   "tr": "“… Saf ya da üstün gelen bir hayır olsaydı, Salaf ona bizden daha layık olurdu.”",
+   "ku": "“… Heke qenciyeke paqij an serdest bûya, Salaf ji me zêdetir mafdarê wê bûn.”",
+   "ckb": "«… ئەگەر چاکەیەکی پاک یان زاڵ بووایە، ئەوا سەلەف لە ئێمە زیاتر شایستەی ئەو بوون.»",
+   "bs": "„… Da je to bilo čisto ili pretežno dobro, Salaf bi na to imali više prava nego mi.“",
+   "fr": "« … Si cela avait été un bien pur ou prépondérant, les Salaf y auraient eu plus de droit que nous. »",
+   "es": "«… Si hubiera sido un bien puro o predominante, los Salaf habrían tenido más derecho a ello que nosotros.»"
+  },
+  "Ibn Taymiyyah und Taj ad-Dīn al-Fākihānī al-Mālikī.": {
+   "ar": "Ibn Taymiyyah وTaj ad-Dīn al-Fākihānī al-Mālikī.",
+   "en": "Ibn Taymiyyah and Taj ad-Dīn al-Fākihānī al-Mālikī.",
+   "tr": "Ibn Taymiyyah ve Taj ad-Dīn al-Fākihānī al-Mālikī.",
+   "ku": "Ibn Taymiyyah û Taj ad-Dīn al-Fākihānī al-Mālikī.",
+   "ckb": "Ibn Taymiyyah و Taj ad-Dīn al-Fākihānī al-Mālikī.",
+   "bs": "Ibn Taymiyyah i Taj ad-Dīn al-Fākihānī al-Mālikī.",
+   "fr": "Ibn Taymiyyah et Taj ad-Dīn al-Fākihānī al-Mālikī.",
+   "es": "Ibn Taymiyyah y Taj ad-Dīn al-Fākihānī al-Mālikī."
+  },
+  "Mawlid als religiöses Fest: keine Sunnah, sondern eingeführte Bidʿah.": {
+   "ar": "المولد كعيد ديني: ليست سنّة، بل بدعة مُحدَثة.",
+   "en": "Mawlid as a religious festival: not Sunnah, but an introduced Bidʿah.",
+   "tr": "Dini bir bayram olarak Mawlid: Sunnah değil, sonradan çıkarılmış Bidʿah.",
+   "ku": "Mawlid wek cejneke dînî: ne Sunnah e, Bidʿaheke têxistî ye.",
+   "ckb": "مەولید وەک جەژنێکی ئایینی: سوننەت نییە، بەڵکو بیدعەیەکی داهێنراو.",
+   "bs": "Mawlid kao vjerski blagdan: nije Sunna, nego uvedena Bidʿah.",
+   "fr": "Le Mawlid comme fête religieuse : pas une Sunnah, mais une Bidʿah introduite.",
+   "es": "El Mawlid como festividad religiosa: no es Sunnah, sino una Bidʿah introducida."
+  },
+  "Über das Nehmen des Mawlid als Fest: Die": {
+   "ar": "في اتخاذ المولد عيدًا: الـ",
+   "en": "On taking the Mawlid as a festival: The",
+   "tr": "Mawlid’i bayram edinmek hakkında: ",
+   "ku": "Der barê girtina Mawlid wek cejn: ",
+   "ckb": "دەربارەی گرتنی مەولید وەک جەژن: ",
+   "bs": "O uzimanju Mawlida kao blagdana: ",
+   "fr": "Sur le fait de prendre le Mawlid pour une fête : Les",
+   "es": "Sobre tomar el Mawlid como festividad: Los"
+  },
+  "reines oder überwiegendes Gutes": {
+   "ar": "خير محض أو راجح",
+   "en": "pure or predominant good",
+   "tr": "saf veya üstün gelen hayır",
+   "ku": "qenciya paqij an serdest",
+   "ckb": "چاکەی پاک یان زاڵ",
+   "bs": "čisto ili pretežno dobro",
+   "fr": "bien pur ou prépondérant",
+   "es": "bien puro o predominante"
+  },
+  "eher dazu berechtigt gewesen.": {
+   "ar": "أحقّ به.",
+   "en": "had been more entitled to it.",
+   "tr": "ona daha layık olmuşlardı.",
+   "ku": "zêdetir mafdarê wê bûn.",
+   "ckb": "زیاتر شایستەی ئەو بوون.",
+   "bs": "imali su više prava na to.",
+   "fr": "y avaient eu davantage droit.",
+   "es": "habían tenido más derecho a ello."
+  },
+  "Iqtiḍāʾ aṣ-Ṣirāṭ al-Mustaqīm": {
+   "ar": "Iqtiḍāʾ aṣ-Ṣirāṭ al-Mustaqīm",
+   "en": "Iqtiḍāʾ aṣ-Ṣirāṭ al-Mustaqīm",
+   "tr": "Iqtiḍāʾ aṣ-Ṣirāṭ al-Mustaqīm",
+   "ku": "Iqtiḍāʾ aṣ-Ṣirāṭ al-Mustaqīm",
+   "ckb": "Iqtiḍāʾ aṣ-Ṣirāṭ al-Mustaqīm",
+   "bs": "Iqtiḍāʾ aṣ-Ṣirāṭ al-Mustaqīm",
+   "fr": "Iqtiḍāʾ aṣ-Ṣirāṭ al-Mustaqīm",
+   "es": "Iqtiḍāʾ aṣ-Ṣirāṭ al-Mustaqīm"
+  },
+  ", Bd. 2, S. 123; in verbreiteter Einband-Ausgabe auch S. 294–295.": {
+   "ar": "، المجلد 2، ص 123؛ وفي طبعة الغلاف الشائعة أيضًا ص 294–295.",
+   "en": ", vol. 2, p. 123; in the widespread bound edition also pp. 294–295.",
+   "tr": ", c. 2, s. 123; yaygın ciltli baskıda ayrıca s. 294–295.",
+   "ku": ", c. 2, r. 123; di çapa bergê ya belavbûyî de herweha r. 294–295.",
+   "ckb": "، بەرگی 2، لاپەڕە 123؛ لە چاپی بەرگی باودا هەروەها لاپەڕە 294–295.",
+   "bs": ", sv. 2, str. 123; u raširenom uvezenom izdanju također str. 294–295.",
+   "fr": ", t. 2, p. 123 ; dans l’édition reliée répandue aussi p. 294–295.",
+   "es": ", vol. 2, p. 123; en la edición encuadernada difundida también pp. 294–295."
+  },
+  "Er sagte sinngemäß, er kenne für diesen": {
+   "ar": "قال بالمعنى إنه يعرف لهذا",
+   "en": "He said, in substance, that he knew for this",
+   "tr": "Mealen, bunun için bildiğini söyledi",
+   "ku": "Wî bi wate got ku ew ji bo vî dizane",
+   "ckb": "بە مەعنا گوتی کە بۆ ئەم دەزانێت",
+   "bs": "Rekao je smisleno da za ovaj zna",
+   "fr": "Il a dit en substance qu’il connaissait pour ce",
+   "es": "Dijo, en sustancia, que conocía para este"
+  },
+  "al-Mawrid fī ʿAmal al-Mawlid": {
+   "ar": "al-Mawrid fī ʿAmal al-Mawlid",
+   "en": "al-Mawrid fī ʿAmal al-Mawlid",
+   "tr": "al-Mawrid fī ʿAmal al-Mawlid",
+   "ku": "al-Mawrid fī ʿAmal al-Mawlid",
+   "ckb": "al-Mawrid fī ʿAmal al-Mawlid",
+   "bs": "al-Mawrid fī ʿAmal al-Mawlid",
+   "fr": "al-Mawrid fī ʿAmal al-Mawlid",
+   "es": "al-Mawrid fī ʿAmal al-Mawlid"
+  },
+  "PDF/Scan-Nachweise aus den Büchern": {
+   "ar": "شواهد PDF/المسح من الكتب",
+   "en": "PDF/scan evidence from the books",
+   "tr": "Kitaplardan PDF/tarama şahitleri",
+   "ku": "Şahidên PDF/skenê ji pirtûkan",
+   "ckb": "بەڵگەکانی PDF/سکان لە کتێبەکانەوە",
+   "bs": "PDF/sken dokazi iz knjiga",
+   "fr": "Preuves PDF/scan tirées des livres",
+   "es": "Pruebas PDF/escaneo de los libros"
+  },
+  "Die folgenden PDF-Buttons sind mit": {
+   "ar": "أزرار PDF التالية مضبوطة بـ",
+   "en": "The following PDF buttons are set with",
+   "tr": "Aşağıdaki PDF düğmeleri şununla ayarlıdır:",
+   "ku": "Bişkokên PDF yên jêr bi",
+   "ckb": "دوگمەکانی PDF ی خوارەوە دانراون بە",
+   "bs": "Sljedeća PDF dugmad postavljena su s",
+   "fr": "Les boutons PDF suivants sont réglés avec",
+   "es": "Los siguientes botones PDF están fijados con"
+  },
+  "gesetzt. Dadurch wird nicht nur das Buch geöffnet, sondern direkt die Belegseite angefordert.": {
+   "ar": "مضبوطة. وبذلك لا يُفتَح الكتاب فحسب، بل تُطلب مباشرة صفحة الشاهد.",
+   "en": "set. Thus not only is the book opened, but the evidence page is requested directly.",
+   "tr": "ayarlanmıştır. Böylece yalnızca kitap açılmaz, doğrudan şahit sayfası istenir.",
+   "ku": "hatine danîn. Bi vê yekê ne tenê pirtûk tê vekirin, belê rasterast rûpela şahidê tê xwestin.",
+   "ckb": "دانراون. بەمە تەنها کتێبەکە ناکرێتەوە، بەڵکو ڕاستەوخۆ لاپەڕەی بەڵگە داوا دەکرێت.",
+   "bs": "postavljena. Time se ne otvara samo knjiga, nego se izravno traži stranica dokaza.",
+   "fr": "réglés. Ainsi, non seulement le livre s’ouvre, mais la page de la preuve est demandée directement.",
+   "es": "fijados. Así no solo se abre el libro, sino que se solicita directamente la página de la prueba."
+  },
+  "direkt bei S. 295 der PDF-/Einband-Ausgabe, wo die Mawlid-Aussage steht.": {
+   "ar": "مباشرة عند ص 295 من طبعة PDF/الغلاف، حيث تقع عبارة المولد.",
+   "en": "directly at p. 295 of the PDF/bound edition, where the Mawlid statement stands.",
+   "tr": "PDF/ciltli baskının s. 295’inde doğrudan, Mawlid sözünün durduğu yerde.",
+   "ku": "rasterast li r. 295 a çapa PDF/bergê, li cihê ku gotina Mawlid lê ye.",
+   "ckb": "ڕاستەوخۆ لە لاپەڕە 295 ی چاپی PDF/بەرگ، لەو شوێنەی قسەی مەولید لێیە.",
+   "bs": "izravno na str. 295 PDF/uvezenog izdanja, gdje stoji izjava o Mawlidu.",
+   "fr": "directement à la p. 295 de l’édition PDF/reliée, où se trouve le propos sur le Mawlid.",
+   "es": "directamente en la p. 295 de la edición PDF/encuadernada, donde está el dicho del Mawlid."
+  },
+  "direkt bei der kurzen PDF-Ausgabe, auf der die Aussage „keine Grundlage“ und „Bidʿah“ steht; Druckangabe S. 8–10.": {
+   "ar": "مباشرة عند الطبعة القصيرة من PDF، التي عليها القول «لا أصل» و«بدعة»؛ وبيان الطبع ص 8–10.",
+   "en": "directly at the short PDF edition, on which the statement “no basis” and “Bidʿah” stands; print reference pp. 8–10.",
+   "tr": "kısa PDF baskısında doğrudan, üzerinde “aslı yok” ve “Bidʿah” sözünün durduğu yerde; baskı bilgisi s. 8–10.",
+   "ku": "rasterast li çapa PDF ya kurt, ya ku gotina “bingeh tune” û “Bidʿah” lê ye; agahiya çapê r. 8–10.",
+   "ckb": "ڕاستەوخۆ لە چاپی کورتە PDF، کە قسەی «بنەما نییە» و «بیدعە» لەسەرەتی؛ زانیاریی چاپ لاپەڕە 8–10.",
+   "bs": "izravno kod kratkog PDF izdanja, na kojem stoji izjava „nema osnove“ i „Bidʿah“; podaci štampe str. 8–10.",
+   "fr": "directement à la courte édition PDF, sur laquelle se trouve le propos « aucun fondement » et « Bidʿah » ; indication d’impression p. 8–10.",
+   "es": "directamente en la edición PDF breve, en la que está el dicho «sin fundamento» y «Bidʿah»; indicación de impresión pp. 8–10."
+  },
+  "Shamela · markiert: Dies haben die Salaf nicht getan": {
+   "ar": "Shamela · مميَّز: هذا لم يفعله السلف",
+   "en": "Shamela · highlighted: the Salaf did not do this",
+   "tr": "Shamela · işaretli: Bunu Salaf yapmamıştır",
+   "ku": "Shamela · nîşankirî: Salaf vê nekirine",
+   "ckb": "Shamela · نیشانکراو: سەلەف ئەمەیان نەکردووە",
+   "bs": "Shamela · označeno: ovo Salaf nisu činili",
+   "fr": "Shamela · marqué : les Salaf ne l’ont pas fait",
+   "es": "Shamela · marcado: esto no lo hicieron los Salaf"
+  },
+  "Ibn Taymiyyah – Begründung": {
+   "ar": "Ibn Taymiyyah – التعليل",
+   "en": "Ibn Taymiyyah – reasoning",
+   "tr": "Ibn Taymiyyah – gerekçe",
+   "ku": "Ibn Taymiyyah – sedem",
+   "ckb": "Ibn Taymiyyah – هۆکار",
+   "bs": "Ibn Taymiyyah – obrazloženje",
+   "fr": "Ibn Taymiyyah – argumentation",
+   "es": "Ibn Taymiyyah – fundamentación"
+  },
+  "Shamela · markiert: wäre es reines Gutes gewesen": {
+   "ar": "Shamela · مميَّز: لو كان خيرًا محضًا",
+   "en": "Shamela · highlighted: had it been a pure good",
+   "tr": "Shamela · işaretli: saf bir hayır olsaydı",
+   "ku": "Shamela · nîşankirî: heke qenciyeke paqij bûya",
+   "ckb": "Shamela · نیشانکراو: ئەگەر چاکەیەکی پاک بووایە",
+   "bs": "Shamela · označeno: da je bilo čisto dobro",
+   "fr": "Shamela · marqué : si cela avait été un bien pur",
+   "es": "Shamela · marcado: si hubiera sido un bien puro"
+  },
+  "Shamela · markiert: keine Grundlage": {
+   "ar": "Shamela · مميَّز: لا أصل",
+   "en": "Shamela · highlighted: no basis",
+   "tr": "Shamela · işaretli: aslı yok",
+   "ku": "Shamela · nîşankirî: bingeh tune",
+   "ckb": "Shamela · نیشانکراو: بنەما نییە",
+   "bs": "Shamela · označeno: nema osnove",
+   "fr": "Shamela · marqué : aucun fondement",
+   "es": "Shamela · marcado: sin fundamento"
+  },
+  "al-Fākihānī – Bidʿah-Aussage": {
+   "ar": "al-Fākihānī – قول البدعة",
+   "en": "al-Fākihānī – Bidʿah statement",
+   "tr": "al-Fākihānī – Bidʿah sözü",
+   "ku": "al-Fākihānī – gotina Bidʿah",
+   "ckb": "al-Fākihānī – قسەی بیدعە",
+   "bs": "al-Fākihānī – izjava o Bidʿi",
+   "fr": "al-Fākihānī – propos sur la Bidʿah",
+   "es": "al-Fākihānī – dicho sobre la Bidʿah"
+  },
+  "Shamela · markiert: vielmehr ist er Bidʿah": {
+   "ar": "Shamela · مميَّز: بل هو بدعة",
+   "en": "Shamela · highlighted: rather, it is Bidʿah",
+   "tr": "Shamela · işaretli: bilakis o Bidʿah’tır",
+   "ku": "Shamela · nîşankirî: belê ew Bidʿah e",
+   "ckb": "Shamela · نیشانکراو: بەڵکو ئەو بیدعەیە",
+   "bs": "Shamela · označeno: štaviše, to je Bidʿah",
+   "fr": "Shamela · marqué : c’est plutôt une Bidʿah",
+   "es": "Shamela · marcado: antes bien, es Bidʿah"
+  },
+  "Iqtiḍāʾ aṣ-Ṣirāṭ direkt zur Mawlid-Stelle": {
+   "ar": "Iqtiḍāʾ aṣ-Ṣirāṭ مباشرة إلى موضع المولد",
+   "en": "Iqtiḍāʾ aṣ-Ṣirāṭ directly to the Mawlid passage",
+   "tr": "Iqtiḍāʾ aṣ-Ṣirāṭ doğrudan Mawlid yerine",
+   "ku": "Iqtiḍāʾ aṣ-Ṣirāṭ rasterast bo cihê Mawlid",
+   "ckb": "Iqtiḍāʾ aṣ-Ṣirāṭ ڕاستەوخۆ بۆ شوێنی مەولید",
+   "bs": "Iqtiḍāʾ aṣ-Ṣirāṭ izravno na mjesto o Mawlidu",
+   "fr": "Iqtiḍāʾ aṣ-Ṣirāṭ directement au passage du Mawlid",
+   "es": "Iqtiḍāʾ aṣ-Ṣirāṭ directamente al pasaje del Mawlid"
+  },
+  "Shamela PDF · direkte Öffnung mit #page=295": {
+   "ar": "Shamela PDF · فتح مباشر مع #page=295",
+   "en": "Shamela PDF · direct opening with #page=295",
+   "tr": "Shamela PDF · #page=295 ile doğrudan açılış",
+   "ku": "Shamela PDF · vekirina rasterast bi #page=295",
+   "ckb": "Shamela PDF · کردنەوەی ڕاستەوخۆ بە #page=295",
+   "bs": "Shamela PDF · izravno otvaranje s #page=295",
+   "fr": "Shamela PDF · ouverture directe avec #page=295",
+   "es": "Shamela PDF · apertura directa con #page=295"
+  },
+  "Alter Scan-Druck direkt öffnen": {
+   "ar": "افتح مباشرة الطبعة الممسوحة القديمة",
+   "en": "Open the old scan print directly",
+   "tr": "Eski tarama baskısını doğrudan aç",
+   "ku": "Çapa skena kevn rasterast veke",
+   "ckb": "چاپی سکانی کۆن ڕاستەوخۆ بکەرەوە",
+   "bs": "Izravno otvori stari sken-tisak",
+   "fr": "Ouvrir directement l’ancien imprimé scanné",
+   "es": "Abrir directamente la impresión escaneada antigua"
+  },
+  "Wikimedia PDF · direkte Öffnung mit #page=13": {
+   "ar": "Wikimedia PDF · فتح مباشر مع #page=13",
+   "en": "Wikimedia PDF · direct opening with #page=13",
+   "tr": "Wikimedia PDF · #page=13 ile doğrudan açılış",
+   "ku": "Wikimedia PDF · vekirina rasterast bi #page=13",
+   "ckb": "Wikimedia PDF · کردنەوەی ڕاستەوخۆ بە #page=13",
+   "bs": "Wikimedia PDF · izravno otvaranje s #page=13",
+   "fr": "Wikimedia PDF · ouverture directe avec #page=13",
+   "es": "Wikimedia PDF · apertura directa con #page=13"
+  },
+  "al-Mawrid direkt zur Aussage öffnen": {
+   "ar": "افتح al-Mawrid مباشرة إلى القول",
+   "en": "Open al-Mawrid directly to the statement",
+   "tr": "al-Mawrid’i doğrudan söze aç",
+   "ku": "al-Mawrid rasterast bo gotinê veke",
+   "ckb": "al-Mawrid ڕاستەوخۆ بۆ قسەکە بکەرەوە",
+   "bs": "Otvori al-Mawrid izravno na izjavu",
+   "fr": "Ouvrir al-Mawrid directement au propos",
+   "es": "Abrir al-Mawrid directamente al dicho"
+  },
+  "Shamela PDF · direkte Öffnung mit #page=2 · Druckangabe S. 8–10": {
+   "ar": "Shamela PDF · فتح مباشر مع #page=2 · بيان الطبع ص 8–10",
+   "en": "Shamela PDF · direct opening with #page=2 · print reference pp. 8–10",
+   "tr": "Shamela PDF · #page=2 ile doğrudan açılış · baskı bilgisi s. 8–10",
+   "ku": "Shamela PDF · vekirina rasterast bi #page=2 · agahiya çapê r. 8–10",
+   "ckb": "Shamela PDF · کردنەوەی ڕاستەوخۆ بە #page=2 · زانیاریی چاپ لاپەڕە 8–10",
+   "bs": "Shamela PDF · izravno otvaranje s #page=2 · podaci štampe str. 8–10",
+   "fr": "Shamela PDF · ouverture directe avec #page=2 · indication d’impression p. 8–10",
+   "es": "Shamela PDF · apertura directa con #page=2 · indicación de impresión pp. 8–10"
+  }
+ }
+}

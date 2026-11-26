@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "tafsir-de-v2",
+  "source": "Deutsche Übertragung nach dem abgerufenen arabischen Tafsīr Ibn Kathīr (quran.com resource 14) und Tafsīr as-Saʿdī (resource 91). Verswortlaut: Frank Bubenheim und Nadeem (resource 27). Kein Ibn-ʿAbbās-Eintrag.",
+  "updated": "2026-11-26",
+  "fetchedAt": "2026-11-26",
+  "works": [
+    {
+      "id": "ibn-kathir",
+      "work": "Tafsīr Ibn Kathīr",
+      "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+      "deathYear": 774,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+      "edition": "quran.com, arabische Fassung, resource 14",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/114"
+    },
+    {
+      "id": "sadi",
+      "work": "Tafsīr as-Saʿdī",
+      "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+      "deathYear": 1376,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+      "edition": "quran.com, arabische Fassung, resource 91",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/114"
+    }
+  ],
+  "blocked": [
+    "Ibn ʿAbbās: resource 15 ohne erlaubte Isnād-Wertung. Die Erklärung über Saʿīd ibn Ǧubayr bleibt im Abschnitt Ibn Kathīrs."
+  ],
+  "verses": [
+    {
+      "id": 1,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Sag: Ich nehme Zuflucht beim Herrn der Menschen,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=114&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Das sind drei Eigenschaften des Herrn: die Herrenheit, das Königtum und die Göttlichkeit. Er ist der Herr aller Dinge, ihr König und ihr Gott. Alle Dinge sind sein Geschöpf, sein Besitz und Ihm dienende Knechte. Er befiehlt dem, der Zuflucht nimmt, bei dem Zuflucht zu nehmen, der mit diesen Eigenschaften beschrieben ist, vor dem Übel des Einflüsterers, der sich zurückzieht. Das ist der Satan, der mit dem Menschen beauftragt ist. Es gibt niemanden von den Kindern Ādams, der nicht einen Gefährten hätte, der ihm ausschmückt. Der Auszug bricht ab. Derselbe Abschnitt steht im Abruf auch bei 114:2 und 114:3.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/114",
+          "verseKey": "114:1"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Diese Sūra umfasst die Zuflucht beim Herrn der Menschen, ihrem König und ihrem Gott, vor dem Satan, der der Ursprung allen Übels und sein Stoff ist. Zu seiner Versuchung und seinem Übel gehört, dass er in die Brüste der Menschen einflüstert, ihnen das Böse schönmacht, es ihnen in schöner Gestalt zeigt und ihren Willen antreibt, es zu tun, und dass er ihnen das Gute hässlich macht, sie davon abhält und es ihnen in einer anderen Gestalt zeigt. Er bleibt in diesem Zustand: er flüstert ein und zieht sich zurück, das heißt, er weicht zurück, wenn der Diener seines Herrn gedenkt und gegen ihn Hilfe sucht. Deshalb soll der Mensch sich an der Herrenheit Allahs über alle Menschen festhalten und bei ihr Zuflucht nehmen. Die ganze Schöpfung steht unter der Herrenheit und dem Königtum; Er hat jedes Lebewesen an der Stirnlocke. Und an seiner Göttlichkeit, für die Er sie erschaffen hat: sie wird für sie nur vollständig, wenn das Übel ihres Feindes abgewehrt wird, der sie davon abschneiden und sich zwischen sie und sie stellen will und sie zu seiner Partei machen will, damit sie zu den Leuten des Feuerbrandes gehören. Das Einflüstern kommt von den Ǧinn und von den Menschen. Deshalb sagt Er: von den Ǧinn und den Menschen.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/114",
+          "verseKey": "114:1"
+        }
+      ],
+      "sabab": "Ibn Kathīr behandelt diese Sūra zusammen mit Sūra 113 und bezeichnet die beiden Schutzsuren als medinensisch.",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 2,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): dem König der Menschen,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=114&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der abgerufene Text ist derselbe Abschnitt wie zu 114:1. Er nennt die drei Eigenschaften zusammen: Herrenheit, Königtum und Göttlichkeit.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/114",
+          "verseKey": "114:2"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der abgerufene Text ist dieselbe zusammenhängende Erklärung der Sūra wie zu 114:1. Darin nennt er die Zuflucht zum Herrn, zum König und zum Gott der Menschen.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/114",
+          "verseKey": "114:2"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 3,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): dem Gott der Menschen,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=114&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der abgerufene Text ist derselbe Abschnitt wie zu 114:1 und nennt die Göttlichkeit zusammen mit der Herrenheit und dem Königtum.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/114",
+          "verseKey": "114:3"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der abgerufene Text ist dieselbe zusammenhängende Erklärung der Sūra wie zu 114:1.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/114",
+          "verseKey": "114:3"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 4,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): vor dem Übel des Einflüsterers, des Davonschleichers,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=114&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Saʿīd ibn Ǧubayr von Ibn ʿAbbās: der Einflüsterer, der sich zurückzieht, ist der Satan, der auf dem Herzen des Menschenkindes hockt. Wenn es unachtsam ist, flüstert er ein. Wenn es Allahs gedenkt, zieht er sich zurück. So Muğāhid und Qatāda. Al-Muʿtamir ibn Sulaymān von seinem Vater: mir wurde erwähnt, dass der Satan oder der Einflüsterer bei Trauer und bei Freude in das Herz des Menschenkindes bläst; wenn es Allahs gedenkt. Der Auszug bricht ab. Die Zuschreibung an Ibn ʿAbbās steht im Wortlaut Ibn Kathīrs ohne eigene Isnād-Wertung und bleibt in diesem Abschnitt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/114",
+          "verseKey": "114:4"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der abgerufene Text ist dieselbe Erklärung wie zu 114:1. Darin heißt es: er flüstert ein und zieht sich zurück, das heißt, er weicht zurück, wenn der Diener seines Herrn gedenkt und gegen ihn Hilfe sucht.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/114",
+          "verseKey": "114:4"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 5,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): der in die Brüste der Menschen einflüstert,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=114&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Beschränkt sich das, wie es das Naheliegende ist, auf die Kinder Ādams, oder umfasst es die Kinder Ādams und die Ǧinn? Darüber gibt es zwei Aussagen. Sie wären dann über das Überwiegen in das Wort „Menschen“ eingeschlossen. Ibn Ǧarīr sagte: unter ihnen wird „Männer von den Ǧinn“ gebraucht, deshalb ist es nicht fern, „Menschen“ auf sie anzuwenden.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/114",
+          "verseKey": "114:5"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der abgerufene Text ist dieselbe Erklärung wie zu 114:1. Darin heißt es: das Einflüstern kommt von den Ǧinn und von den Menschen. Deshalb sagt Er: von den Ǧinn und den Menschen.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/114",
+          "verseKey": "114:5"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 6,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): von den Ginn und den Menschen.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=114&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Dann erklärt Er sie: von den Ǧinn und den Menschen. Das stützt die zweite Aussage. Es wird auch gesagt: „von den Ǧinn und den Menschen“ erklärt, wer in die Brüste der Menschen einflüstert, von den Satans der Menschen und der Ǧinn. Ibn Kathīr verweist auf 6:112 und beginnt danach einen Bericht Aḥmads von Abū Ḏarr: der Gesandte Allahs sagte, er solle bei Allah Zuflucht suchen vor dem Übel der Satans der Menschen und der Ǧinn. Abū Ḏarr fragte: Gesandter Allahs, gibt es auch unter den Menschen Satane? Er sagte: ja. Der Auszug bricht bei der nächsten Frage ab.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/114",
+          "verseKey": "114:6"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Diese Sūra umfasst die Zuflucht beim Herrn der Menschen, ihrem König und ihrem Gott, vor dem Satan, der der Ursprung allen Übels und sein Stoff ist. Zu seiner Versuchung und seinem Übel gehört, dass er in die Brüste der Menschen einflüstert, ihnen das Böse schönmacht, es ihnen in schöner Gestalt zeigt und ihren Willen antreibt, es zu tun, und dass er ihnen das Gute hässlich macht, sie davon abhält und es ihnen in einer anderen Gestalt zeigt. Er bleibt in diesem Zustand: er flüstert ein und zieht sich zurück, das heißt, er weicht zurück, wenn der Diener seines Herrn gedenkt und gegen ihn Hilfe sucht. Deshalb soll der Mensch sich an der Herrenheit Allahs über alle Menschen festhalten und bei ihr Zuflucht nehmen. Die ganze Schöpfung steht unter der Herrenheit und dem Königtum; Er hat jedes Lebewesen an der Stirnlocke. Und an seiner Göttlichkeit, für die Er sie erschaffen hat: sie wird für sie nur vollständig, wenn das Übel ihres Feindes abgewehrt wird, der sie davon abschneiden und sich zwischen sie und sie stellen will und sie zu seiner Partei machen will, damit sie zu den Leuten des Feuerbrandes gehören. Das Einflüstern kommt von den Ǧinn und von den Menschen. Deshalb sagt Er: von den Ǧinn und den Menschen. Der abgerufene Schluss nennt die Fertigstellung durch ʿAbd ar-Raḥmān ibn Nāṣir ibn ʿAbdillāh, bekannt als Ibn Saʿdī, am 1. Rabīʿ I 1344. Die daran anschließende persönliche Bittbitte des Verfassers ist kein Verskommentar und wird nicht wiedergegeben.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/114",
+          "verseKey": "114:6"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    }
+  ]
+}

@@ -82,6 +82,20 @@ struct WebAppView: UIViewRepresentable {
         let escapedDevice = deviceId
             .replacingOccurrences(of: "\\", with: "\\\\")
             .replacingOccurrences(of: "\"", with: "\\\"")
+        let iosWebFirstBootFlag = """
+        (function(){
+          try{
+            window.DAR_IOS_WEB_FIRST_BOOT_V1=true;
+          }catch(e){}
+        })();
+        """
+        userContentController.addUserScript(
+            WKUserScript(
+                source: iosWebFirstBootFlag,
+                injectionTime: .atDocumentStart,
+                forMainFrameOnly: true
+            )
+        )
         let iosNativePushBridge = """
         (function(){
           try{
@@ -293,7 +307,6 @@ struct WebAppView: UIViewRepresentable {
             if(!root)return;
             root.classList.add("dar-ios-native-app");
             root.classList.remove("dar-ios-native-tabs");
-            root.classList.remove("dar-soft-booting");
           }catch(e){}
           function brand(){
             try{
@@ -334,13 +347,10 @@ struct WebAppView: UIViewRepresentable {
               "html.dar-ios-native-app{",
               "  --dar-ios-theme-bg:var(--theme-page-bg,var(--theme-feed-bg,var(--quran-page-bg,var(--outer-bg-flat,var(--bg,#050504)))));",
               "}",
-              "html.dar-ios-native-app #dar-soft-boot{display:none!important;visibility:hidden!important;}",
               "html.dar-ios-native-app #footerAppSave,html.dar-ios-native-app .footer-app-save,html.dar-ios-native-app .footer-action-save{display:none!important;visibility:hidden!important;width:0!important;height:0!important;overflow:hidden!important;}",
               "html.dar-ios-native-app .footer-actions,html.dar-ios-native-app .footer .footer-actions,html.dar-ios-native-app body.is-home-route .footer .footer-actions{display:flex!important;flex-wrap:nowrap!important;justify-content:center!important;align-items:stretch!important;grid-template-columns:none!important;gap:8px!important;width:min(430px,calc(100% - 16px))!important;max-width:430px!important;margin:12px auto 0!important;}",
               "html.dar-ios-native-app .footer-actions .footer-action-btn,html.dar-ios-native-app .footer-actions .footer-social-link{flex:1 1 0!important;max-width:140px!important;margin:0!important;}",
               "html.dar-ios-native-app button,html.dar-ios-native-app a,html.dar-ios-native-app [role=button],html.dar-ios-native-app [data-nav],html.dar-ios-native-app .prayer-action-btn,html.dar-ios-native-app input,html.dar-ios-native-app label{touch-action:manipulation!important;cursor:pointer!important;-webkit-tap-highlight-color:rgba(212,175,55,0.18)!important;}",
-              "html.dar-ios-native-app.dar-soft-booting,",
-              "html.dar-ios-native-app.dar-soft-booting body{overflow:visible!important;}",
               "html.dar-ios-native-app body.is-home-route,",
               "html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen),",
               "html.dar-ios-native-app body.is-more-route,",
@@ -378,7 +388,6 @@ struct WebAppView: UIViewRepresentable {
             style.textContent=cssText();
             if(root){
               root.classList.add("dar-ios-native-app");
-              root.classList.remove("dar-soft-booting");
               if(root.getAttribute("data-layout")==="medium"||root.getAttribute("data-layout")==="expanded"){
                 root.setAttribute("data-layout","compact");
               }
@@ -387,11 +396,6 @@ struct WebAppView: UIViewRepresentable {
             if(document.head)document.head.appendChild(style);
             var feedForce=document.getElementById("dar-ios-parity-edge-force-v665")||document.getElementById("dar-ios-parity-edge-force-v659")||document.getElementById("dar-ios-parity-edge-force-v658")||document.getElementById("dar-ios-parity-edge-force-v657")||document.getElementById("dar-ios-parity-edge-force-v656")||document.getElementById("dar-ios-parity-edge-force-v655")||document.getElementById("dar-ios-parity-edge-force-v654")||document.getElementById("dar-ios-parity-edge-force-v653")||document.getElementById("dar-ios-parity-edge-force-v652")||document.getElementById("dar-ios-parity-edge-force-v651")||document.getElementById("dar-ios-parity-edge-force-v650")||document.getElementById("dar-ios-parity-edge-force-v649")||document.getElementById("dar-ios-parity-edge-force-v648")||document.getElementById("full-edge-feed-force-v645")||document.getElementById("full-edge-feed-force-v644");
             if(feedForce&&document.head)document.head.appendChild(feedForce);
-            try{
-              var sb=document.getElementById("dar-soft-boot");
-              if(sb&&sb.parentNode)sb.parentNode.removeChild(sb);
-              if(typeof window.__darSoftBootFinish==="function")window.__darSoftBootFinish();
-            }catch(e){}
           }
           function pinFeedNodes(){
             if(!document.body||!document.body.classList.contains("is-feed-fullscreen"))return;
@@ -880,7 +884,7 @@ struct WebAppView: UIViewRepresentable {
             DarNativePermissions.shared.attach(webView: webView)
             installLoadingOverlay(on: containerView)
             applySurfaceColor(pageSurfaceColor)
-            showLoadingOverlay(subtitle: "App wird geladen")
+            // Web-first boot: the live site shows #dar-soft-boot. Do not cover it.
             updateViewportInsets()
             DispatchQueue.main.async { [weak self] in
                 self?.updateViewportInsets()
@@ -1258,6 +1262,10 @@ struct WebAppView: UIViewRepresentable {
             }
             if message.name == "darPushSettings" {
                 if let body = message.body as? [String: Any] {
+                    if body["localeOnly"] as? Bool == true, let locale = body["dar_app_locale"] as? String {
+                        DarPushNotifications.applyAppLocale(locale)
+                        return
+                    }
                     DarPushNotifications.applyWebPrayerSettings(body)
                 }
                 return
@@ -1385,7 +1393,6 @@ struct WebAppView: UIViewRepresentable {
         }
 
         func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-            showLoadingOverlay(subtitle: "App wird geladen")
             scheduleLoadTimeout(for: webView)
         }
 
@@ -2103,7 +2110,6 @@ struct WebAppView: UIViewRepresentable {
                 completionHandler: nil
             )
             if didShowErrorState {
-                showLoadingOverlay(subtitle: "Erneut laden")
                 webView.load(URLRequest(url: WebAppView.launchURL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60))
             }
         }

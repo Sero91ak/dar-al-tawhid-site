@@ -467,7 +467,11 @@ struct WebAppView: UIViewRepresentable {
             case "darLiveActivitySettings":
                 DarPrayerLiveActivityController.handle(body, webView: webView)
             case "darPushSettings":
-                DarPushNotifications.applyWebPrayerSettings(body)
+                if body["localeOnly"] as? Bool == true, let locale = body["dar_app_locale"] as? String {
+                    DarPushNotifications.applyAppLocale(locale)
+                } else {
+                    DarPushNotifications.applyWebPrayerSettings(body)
+                }
             case "darPushTest":
                 DarPushNotifications.showTest(
                     title: String(describing: body["title"] ?? "[Test] DĀR AL TAWḤĪD"),

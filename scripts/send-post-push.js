@@ -243,7 +243,7 @@ function buildMessage(files) {
     const filename = path.basename(files[0]);
     const cacheVersion = Date.now();
     return {
-      title: "Neuer Beitrag online",
+      title: "Neuer Beitrag",
       message: postTitle,
       postId,
       filename,
@@ -349,8 +349,24 @@ async function sendCopyPayload(copy) {
   const payload = withNotificationIcons({
     app_id: APP_ID,
     target_channel: "push",
-    headings: { en: copy.title, de: copy.title },
-    contents: { en: copy.message, de: copy.message },
+    headings: {
+      de: copy.title,
+      en: "New post",
+      ar: "منشور جديد",
+      tr: "Yeni yazı",
+      bs: "Nova objava",
+      fr: "Nouvelle publication",
+      es: "Nueva publicación"
+    },
+    contents: {
+      de: copy.message,
+      en: copy.message,
+      ar: copy.message,
+      tr: copy.message,
+      bs: copy.message,
+      fr: copy.message,
+      es: copy.message
+    },
     url: copy.url,
     data: pushData,
     name: copy.postId ? `github-posts-auto-${copy.postId}` : `github-posts-auto-${RUN_ID}`,
@@ -407,7 +423,7 @@ async function repairStuckPosts() {
     }
 
     const copy = {
-      title: "Neuer Beitrag online",
+      title: "Neuer Beitrag",
       message: postTitle,
       postId,
       filename,

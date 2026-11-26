@@ -1,0 +1,974 @@
+{
+  "version": 1,
+  "generatedAt": "2026-11-26",
+  "rule": "Nur geprüfte Umschläge gedruckter Ausgaben, lokal als WebP. Kein Hotlink. Kein erfundener Umschlag. Titelblätter und Fotos mit Personen bleiben unbenutzt. Fehlende Umschläge bleiben im Regal ein gestalteter Ledereinband, kein Foto.",
+  "checkedOn": "2026-11-26",
+  "counts": {
+    "works": 113,
+    "found": 30,
+    "notFound": 83,
+    "files": 27
+  },
+  "files": [
+    "sahih-muslim.webp",
+    "sahih-al-buhari.webp",
+    "sharh-usul-itiqad.webp",
+    "musannaf-ibn-abi-saybah.webp",
+    "sunan-ad-darimi.webp",
+    "jami-bayan-al-ilm.webp",
+    "sunan-abi-dawud.webp",
+    "hilyat-al-awliya.webp",
+    "al-muwatta.webp",
+    "ash-shariah.webp",
+    "sharh-as-sunnah.webp",
+    "ahmad-az-zuhd.webp",
+    "al-mustadrak.webp",
+    "manaqib-ahmad.webp",
+    "musnad-ahmad.webp",
+    "sunan-ibn-magah.webp",
+    "shuab-al-iman.webp",
+    "ilam-al-muwaqqiin.webp",
+    "sunan-ad-daraqutni.webp",
+    "siyar-alam-an-nubala.webp",
+    "ibn-sad-tabaqat.webp",
+    "sunan-an-nasai.webp",
+    "asma-wa-sifat.webp",
+    "sunan-al-kubra.webp",
+    "ar-risalah-shafii.webp",
+    "tarikh-tabari.webp",
+    "musannaf-abd-al-razzaq.webp"
+  ],
+  "rejected": [
+    {
+      "title": "Ǧāmiʿ at-Tirmiḏī",
+      "reason": "Nur ein Titelblatt der Ausgabe Muṣṭafā al-Bābī al-Ḥalabī, kein Umschlag.",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D8%B3%D9%86%D9%86_%D8%A7%D9%84%D8%AA%D8%B1%D9%85%D8%B0%D9%8A.jpg"
+    },
+    {
+      "title": "ʿAbd ar-Razzāq, al-Muṣannaf",
+      "reason": "Gefundenes Umschlagfoto zeigt eine abgebildete Person. Nicht verwendet.",
+      "sourceUrl": "https://archive.org/details/MusannafAbdulRazzaqByAllamaMuhammadAbdulHakeemSharafQadri_201509"
+    },
+    {
+      "title": "Ḥilyat al-Awliyāʾ",
+      "reason": "Nur das Titelblatt der Ḫānǧī-Ausgabe, kein Umschlag.",
+      "sourceUrl": "https://archive.org/details/hleawl"
+    },
+    {
+      "title": "Ǧāmiʿ at-Tirmiḏī",
+      "reason": "Dār at-Taʾṣīl liegt nur als Titelblatt vor, nicht als Umschlag.",
+      "sourceUrl": "https://archive.org/details/hadith-tirmidhi-pdf"
+    },
+    {
+      "title": "Ǧāmiʿ at-Tirmiḏī",
+      "reason": "Dār ar-Risālah al-ʿĀlamiyyah liegt nur als Titelblatt vor, Dār al-Gharb ohne Umschlagfund.",
+      "sourceUrl": "https://archive.org/details/jt06_20230903"
+    },
+    {
+      "title": "aš-Šāṭibī, al-Iʿtiṣām",
+      "reason": "Dār Ibn ʿAffān nur als Titelblatt, kein Umschlag.",
+      "sourceUrl": "https://archive.org/details/0571Pdf_20180403"
+    },
+    {
+      "title": "al-Ibānah al-Kubrā",
+      "reason": "Gefundene Scans sind Titelblätter, kein Umschlag.",
+      "sourceUrl": "https://archive.org/details/20240818_20240818_0222"
+    },
+    {
+      "title": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān",
+      "reason": "Gefundene Ausgabe nur als Titelblatt.",
+      "sourceUrl": "https://archive.org/details/talib-al-ilm-66a038ea-6f6f-4c80-8b4b-1a0f6d7aa5ae"
+    },
+    {
+      "title": "Ibn Hišām, as-Sīrah",
+      "reason": "Nur ein illustrierter moderner Einband mit Herzmotiv, keine klassische Ausgabe.",
+      "sourceUrl": "https://archive.org/details/sirns1"
+    }
+  ],
+  "works": [
+    {
+      "title": "Ṣaḥīḥ Muslim",
+      "slug": "sahih-muslim",
+      "entries": 1437,
+      "status": "found",
+      "file": "assets/hadith-covers/sahih-muslim.webp",
+      "sha256": "2957351bcbe0bfe119ac9311473127524c9c9bd4bd7f7fc0d520ce442c876bef",
+      "edition": "Ṣaḥīḥ Muslim, Dār at-Taʾṣīl, arabische Ausgabe, Umschlag",
+      "sourceUrl": "https://archive.org/details/hadith-muslim-pdf"
+    },
+    {
+      "title": "Ṣaḥīḥ al-Buḫārī",
+      "slug": "sahih-al-buhari",
+      "entries": 1018,
+      "status": "found",
+      "file": "assets/hadith-covers/sahih-al-buhari.webp",
+      "sha256": "7bfeba27ad9d9bbb1df9d0b2fa94231c375e2fddaf3a817a67a579a8faf6eb59",
+      "edition": "Ṣaḥīḥ al-Buḫārī, Dār at-Taʾṣīl, Band 1, Umschlag der gescannten Ausgabe",
+      "sourceUrl": "https://archive.org/details/1_20191217_20191217_1502"
+    },
+    {
+      "title": "Šarḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
+      "slug": "sarh-usul-i-tiqad-ahl-as-sunnah",
+      "entries": 126,
+      "status": "found",
+      "file": "assets/hadith-covers/sharh-usul-itiqad.webp",
+      "sha256": "664662d01695378bd102659523a4635bc7c351edba349c62a3c15f31d6769a55",
+      "edition": "Šarḥ Uṣūl Iʿtiqād Ahl as-Sunnah, al-Lālakāʾī, Dār al-Baṣīrah / Dār Ṭaybah",
+      "sourceUrl": "https://archive.org/details/dar_709"
+    },
+    {
+      "title": "Muṣannaf Ibn Abī Šaybah",
+      "slug": "musannaf-ibn-abi-saybah",
+      "entries": 123,
+      "status": "found",
+      "file": "assets/hadith-covers/musannaf-ibn-abi-saybah.webp",
+      "sha256": "260789e9167d7dd3b7306c25a3491527ae8f80022e88557358654b3abe02ab55",
+      "edition": "al-Muṣannaf von Ibn Abī Šaybah, Foto der gedruckten Ausgabe",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Al-Musannaf-Ibn-Abi-Shaybah.jpg"
+    },
+    {
+      "title": "Ǧāmiʿ at-Tirmiḏī",
+      "slug": "gami-at-tirmidi",
+      "entries": 96,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Sunan ad-Dārimī",
+      "slug": "sunan-ad-darimi",
+      "entries": 79,
+      "status": "found",
+      "file": "assets/hadith-covers/sunan-ad-darimi.webp",
+      "sha256": "4ee0e10e1f0b0a7f094faf3302d41990ad61c97d8946a0a193e5d5d6ea97cead",
+      "edition": "Sunan ad-Dārimī, in dieser Ausgabe als al-Musnad betitelt, Dār at-Taʾṣīl, Umschlag",
+      "sourceUrl": "https://archive.org/details/hadith-darimi-pdf"
+    },
+    {
+      "title": "Ǧāmiʿ Bayān al-ʿIlm",
+      "slug": "gami-bayan-al-ilm",
+      "entries": 77,
+      "status": "found",
+      "file": "assets/hadith-covers/jami-bayan-al-ilm.webp",
+      "sha256": "4703bca7498808f7a4100afcfc1b600de35b4d61720832ef7048e80775e9f09b",
+      "edition": "Ǧāmiʿ Bayān al-ʿIlm wa-Faḍlih von Ibn ʿAbd al-Barr, Umschlag",
+      "sourceUrl": "https://archive.org/details/a1715n"
+    },
+    {
+      "title": "Sunan Abī Dāwūd",
+      "slug": "sunan-abi-dawud",
+      "entries": 59,
+      "status": "found",
+      "file": "assets/hadith-covers/sunan-abi-dawud.webp",
+      "sha256": "cef0f14809733925be3c609ef5145078389dbdd2eee4f251d8a5be40905ba5fe",
+      "edition": "Sunan Abī Dāwūd, Dār at-Taʾṣīl, Umschlag",
+      "sourceUrl": "https://archive.org/details/hadith-abu-dawud-pdf"
+    },
+    {
+      "title": "Ḥilyat al-Awliyāʾ",
+      "slug": "hilyat-al-awliya",
+      "entries": 50,
+      "status": "found",
+      "file": "assets/hadith-covers/hilyat-al-awliya.webp",
+      "sha256": "e812056eea9b86773075fad0fd00d7102c268cf76b177eafba2edf4064023c96",
+      "edition": "Ḥilyat al-Awliyāʾ von Abū Nuʿaym, Umschlag der gedruckten Ausgabe",
+      "sourceUrl": "https://archive.org/details/1_20250806_20250806_1444"
+    },
+    {
+      "title": "al-Muwaṭṭaʾ",
+      "slug": "al-muwatta",
+      "entries": 22,
+      "status": "found",
+      "file": "assets/hadith-covers/al-muwatta.webp",
+      "sha256": "41873d0f4560862e21e8f07d3cd9f264ae56e3899590b4f36841f764d2a17f70",
+      "edition": "al-Muwaṭṭaʾ von Imām Mālik, Maktabat Dār al-Furqān",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Muwatta_El_Imam_Malik.jpg"
+    },
+    {
+      "title": "al-Ibānah al-Kubrā",
+      "slug": "al-ibanah-al-kubra",
+      "entries": 21,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī ad-Dunyā, Muḥāsabat an-Nafs",
+      "slug": "ibn-abi-ad-dunya-muhasabat-an-nafs",
+      "entries": 17,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "aš-Šarīʿah",
+      "slug": "as-sari-ah",
+      "entries": 16,
+      "status": "found",
+      "file": "assets/hadith-covers/ash-shariah.webp",
+      "sha256": "f0759fe65f4a98aef72284e4f7efb51787962aaf88f722502343710ccb527537",
+      "edition": "aš-Šarīʿah von al-Āǧurrī, Umschlag",
+      "sourceUrl": "https://archive.org/details/sharyaa3"
+    },
+    {
+      "title": "Šarḥ as-Sunnah",
+      "slug": "sarh-as-sunnah",
+      "entries": 15,
+      "status": "found",
+      "file": "assets/hadith-covers/sharh-as-sunnah.webp",
+      "sha256": "7229d9d31e0bb1628b06d3b1324faf6fdc931a8621bf3b18c57338ff762389a5",
+      "edition": "Šarḥ as-Sunnah von al-Barbahārī, Umschlag",
+      "sourceUrl": "https://archive.org/details/a1491n"
+    },
+    {
+      "title": "Uṣūl as-Sunnah",
+      "slug": "usul-as-sunnah",
+      "entries": 15,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Aḥmad, az-Zuhd",
+      "slug": "ahmad-az-zuhd",
+      "entries": 14,
+      "status": "found",
+      "file": "assets/hadith-covers/ahmad-az-zuhd.webp",
+      "sha256": "e89d7b5a739dc3496db563017f92e6e36a4efd8ec994508f4e314796b107c21c",
+      "edition": "az-Zuhd von Aḥmad ibn Ḥanbal, Dār Ibn al-Qayyim, Umschlag ohne Person",
+      "sourceUrl": "https://archive.org/details/20200131_20200131_0742"
+    },
+    {
+      "title": "al-Ḫaṭīb al-Baġdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal",
+      "slug": "al-hatib-al-bagdadi-iqtida-al-ilm-al-amal",
+      "entries": 13,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Mustadrak",
+      "slug": "al-mustadrak",
+      "entries": 11,
+      "status": "found",
+      "file": "assets/hadith-covers/al-mustadrak.webp",
+      "sha256": "ae9aaa3179dcf129beef67c629ed80a2d0a1517311be1054ca064b6442fc1d5e",
+      "edition": "al-Mustadrak ʿalā aṣ-Ṣaḥīḥayn, Dār ar-Risālah al-ʿĀlamiyyah, Umschlag",
+      "sourceUrl": "https://archive.org/details/almostadrak-alresala"
+    },
+    {
+      "title": "Ibn al-Ǧawzī, Manāqib al-Imām Aḥmad",
+      "slug": "ibn-al-gawzi-manaqib-al-imam-ahmad",
+      "entries": 11,
+      "status": "found",
+      "file": "assets/hadith-covers/manaqib-ahmad.webp",
+      "sha256": "7f11df9c45f1a2cd42fb31249c1d3a15a2846874e1a0c9d454d7ad179f91de54",
+      "edition": "Manāqib al-Imām Aḥmad von Ibn al-Ǧawzī, Umschlag der gescannten Ausgabe",
+      "sourceUrl": "https://archive.org/details/Managhib_Emame_Ahmed"
+    },
+    {
+      "title": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān",
+      "slug": "at-tabari-gami-al-bayan",
+      "entries": 10,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Ḫaṭīb al-Baġdādī, al-Ǧāmiʿ li-Aḫlāq ar-Rāwī",
+      "slug": "al-hatib-al-bagdadi-al-gami-li-ahlaq-ar-rawi",
+      "entries": 9,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn al-Mubārak, az-Zuhd",
+      "slug": "ibn-al-mubarak-az-zuhd",
+      "entries": 9,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Bayhaqī, Manāqib aš-Šāfiʿī",
+      "slug": "al-bayhaqi-manaqib-as-safi-i",
+      "entries": 8,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Ḫaṭīb al-Baġdādī, Šaraf Aṣḥāb al-Ḥadīṯ",
+      "slug": "al-hatib-al-bagdadi-saraf-ashab-al-hadit",
+      "entries": 8,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Qāḍī ʿIyāḍ, Tartīb al-Madārik",
+      "slug": "al-qadi-iyad-tartib-al-madarik",
+      "entries": 8,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Musnad Aḥmad",
+      "slug": "musnad-ahmad",
+      "entries": 8,
+      "status": "found",
+      "file": "assets/hadith-covers/musnad-ahmad.webp",
+      "sha256": "248040dd3a8a6dfdd616fea5f8a2a2d933c62b42e3ec08d2ca46ca4efea3172c",
+      "edition": "Musnad al-Imām Aḥmad, Muʾassasat ar-Risālah, Umschlag",
+      "sourceUrl": "https://archive.org/details/0_20230928"
+    },
+    {
+      "title": "Sunan Ibn Māǧah",
+      "slug": "sunan-ibn-magah",
+      "entries": 8,
+      "status": "found",
+      "file": "assets/hadith-covers/sunan-ibn-magah.webp",
+      "sha256": "f7678200b46fc1fbae908a81e835602b1d19d9cf935317494e9ae51d97529ae4",
+      "edition": "Sunan Ibn Māǧah, Dār at-Taʾṣīl, Umschlag",
+      "sourceUrl": "https://archive.org/details/hadith-ibn-majah-pdf"
+    },
+    {
+      "title": "al-Ḫaṭīb al-Baġdādī, al-Faqīh wa-l-Mutafaqqih",
+      "slug": "al-hatib-al-bagdadi-al-faqih-wa-l-mutafaqqih",
+      "entries": 7,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Kifāyah",
+      "slug": "al-kifayah",
+      "entries": 7,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Šuʿab al-Īmān",
+      "slug": "su-ab-al-iman",
+      "entries": 7,
+      "status": "found",
+      "file": "assets/hadith-covers/shuab-al-iman.webp",
+      "sha256": "5b4f317369495bb3d9925d172d2b7efab9f2dc095c63b73400a73af4ad0605c9",
+      "edition": "Šuʿab al-Īmān von al-Bayhaqī, Dār al-Kutub al-ʿIlmiyyah, Umschlag",
+      "sourceUrl": "https://archive.org/details/Shiab_Al_Iman"
+    },
+    {
+      "title": "al-Ḫaṭīb al-Baġdādī, Tārīḫ Baġdād",
+      "slug": "al-hatib-al-bagdadi-tarih-bagdad",
+      "entries": 6,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī ad-Dunyā, al-Iḫlāṣ wa-n-Niyyah",
+      "slug": "ibn-abi-ad-dunya-al-ihlas-wa-n-niyyah",
+      "entries": 6,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Abū Dāwūd, az-Zuhd",
+      "slug": "abu-dawud-az-zuhd",
+      "entries": 5,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Madḫal",
+      "slug": "al-madhal",
+      "entries": 5,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī Ḥātim, Ādāb aš-Šāfiʿī",
+      "slug": "ibn-abi-hatim-adab-as-safi-i",
+      "entries": 5,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Hišām, as-Sīrah",
+      "slug": "ibn-hisam-as-sirah",
+      "entries": 5,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "aš-Šāṭibī, al-Iʿtiṣām",
+      "slug": "as-satibi-al-i-tisam",
+      "entries": 4,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī ad-Dunyā, Iṣlāḥ al-Qulūb",
+      "slug": "ibn-abi-ad-dunya-islah-al-qulub",
+      "entries": 4,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn al-Qayyim, Iʿlām al-Muwaqqiʿīn",
+      "slug": "ibn-al-qayyim-i-lam-al-muwaqqi-in",
+      "entries": 4,
+      "status": "found",
+      "file": "assets/hadith-covers/ilam-al-muwaqqiin.webp",
+      "sha256": "f754b161ab943f69389708b5c8b931ca2f09dbb54fb376ce72e6e0d7197c181f",
+      "edition": "Iʿlām al-Muwaqqiʿīn von Ibn al-Qayyim, Dār Ibn al-Ǧawzī, Umschlag der Ausgabe",
+      "sourceUrl": "https://archive.org/details/ILMULMUWEQQINanRabbiLlemn06IbnQajjimElDewzijje"
+    },
+    {
+      "title": "Ibn ʿAbd al-Barr, Bahǧat al-Maǧālis",
+      "slug": "ibn-abd-al-barr-bahgat-al-magalis",
+      "entries": 4,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Sunan ad-Dāraquṭnī",
+      "slug": "sunan-ad-daraqutni",
+      "entries": 4,
+      "status": "found",
+      "file": "assets/hadith-covers/sunan-ad-daraqutni.webp",
+      "sha256": "602619d1d4e9b9808fb277b3509d35b065458f06fe0821eee3ba078c561730c2",
+      "edition": "Sunan ad-Dāraquṭnī, grüner Schmuckumschlag, Bandangabe 1",
+      "sourceUrl": "https://archive.org/details/sunan-al-daraqutni-vol-3"
+    },
+    {
+      "title": "aḏ-Ḏahabī, Siyar Aʿlām an-Nubalāʾ",
+      "slug": "ad-dahabi-siyar-a-lam-an-nubala",
+      "entries": 3,
+      "status": "found",
+      "file": "assets/hadith-covers/siyar-alam-an-nubala.webp",
+      "sha256": "54044f7e2ee56efdb88bbd39639ed2b9d267e189ff08731ded2dcf74506ad0a1",
+      "edition": "Siyar Aʿlām an-Nubalāʾ, Muʾassasat ar-Risālah, weinroter Umschlag",
+      "sourceUrl": "https://archive.org/details/Siyar_Alam_Nubala_Thahabi"
+    },
+    {
+      "title": "al-Āǧurrī, Aḫlāq Ḥamalat al-Qurʾān",
+      "slug": "al-agurri-ahlaq-hamalat-al-qur-an",
+      "entries": 3,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Bayhaqī, az-Zuhd al-Kabīr",
+      "slug": "al-bayhaqi-az-zuhd-al-kabir",
+      "entries": 3,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Ḫaṭīb, Iqtiḍāʾ al-ʿIlm al-ʿAmal",
+      "slug": "al-hatib-iqtida-al-ilm-al-amal",
+      "entries": 3,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī ad-Dunyā, aṣ-Ṣamt",
+      "slug": "ibn-abi-ad-dunya-as-samt",
+      "entries": 3,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Abū Ḫayṯamah",
+      "slug": "abu-haytamah",
+      "entries": 2,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Harawī, Ḏamm al-Kalām",
+      "slug": "al-harawi-damm-al-kalam",
+      "entries": 2,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Ḫaṭīb al-Baġdādī, al-Ǧāmiʿ",
+      "slug": "al-hatib-al-bagdadi-al-gami",
+      "entries": 2,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Ḫaṭīb al-Baġdādī, Taqyīd al-ʿIlm",
+      "slug": "al-hatib-al-bagdadi-taqyid-al-ilm",
+      "entries": 2,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Hannād, az-Zuhd",
+      "slug": "hannad-az-zuhd",
+      "entries": 2,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī ad-Dunyā, al-Ḫawf",
+      "slug": "ibn-abi-ad-dunya-al-hawf",
+      "entries": 2,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī ad-Dunyā, at-Tawbah",
+      "slug": "ibn-abi-ad-dunya-at-tawbah",
+      "entries": 2,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī Šaybah, al-Īmān",
+      "slug": "ibn-abi-saybah-al-iman",
+      "entries": 2,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn al-Qayyim, al-Ǧawāb al-Kāfī, überliefert von Ibn ʿAbbās",
+      "slug": "ibn-al-qayyim-al-gawab-al-kafi-uberliefert-von-ibn-abbas",
+      "entries": 2,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Saʿd, aṭ-Ṭabaqāt",
+      "slug": "ibn-sa-d-at-tabaqat",
+      "entries": 2,
+      "status": "found",
+      "file": "assets/hadith-covers/ibn-sad-tabaqat.webp",
+      "sha256": "aa386c3e0c0384e8099231081a29d41f8df0ba5654cdd9d6d69ce2600cd9af9e",
+      "edition": "aṭ-Ṭabaqāt al-Kubrā von Ibn Saʿd, Maktabat al-Ḫānǧī, Umschlag",
+      "sourceUrl": "https://archive.org/details/A66aba9at_"
+    },
+    {
+      "title": "Sunan an-Nasāʾī",
+      "slug": "sunan-an-nasa-i",
+      "entries": 2,
+      "status": "found",
+      "file": "assets/hadith-covers/sunan-an-nasai.webp",
+      "sha256": "8bcf0c4f76018dbf36e51083c21cb59b00a565e9123857db04e5b3d978804e10",
+      "edition": "Sunan an-Nasāʾī mit Šarḥ von as-Suyūṭī und as-Sindī, Umschlag",
+      "sourceUrl": "https://archive.org/details/SunanNissa3SiyutiSindi"
+    },
+    {
+      "title": "Abū ʿUbayd",
+      "slug": "abu-ubayd",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "aḏ-Ḏahabī, Siyar Aʿlām an-Nubalāʾ, Biografie Imām aš-Šāfiʿī, Bd. 10, digitale S. 34–35",
+      "slug": "ad-dahabi-siyar-a-lam-an-nubala-biografie-imam-as-safi-i-bd-10-digitale-s-34-35",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "aḏ-Ḏahabī, Siyar Aʿlām an-Nubalāʾ, Biografie Wakīʿ ibn al-Ǧarrāḥ, Bd. 9, digitale S. 144",
+      "slug": "ad-dahabi-siyar-a-lam-an-nubala-biografie-waki-ibn-al-garrah-bd-9-digitale-s-144",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Aḥmad, Faḍāʾil aṣ-Ṣaḥābah",
+      "slug": "ahmad-fada-il-as-sahabah",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Āǧurrī, Aḫlāq al-ʿUlamāʾ",
+      "slug": "al-agurri-ahlaq-al-ulama",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Āǧurrī, Aḫlāq al-ʿUlamāʾ, S. 58",
+      "slug": "al-agurri-ahlaq-al-ulama-s-58",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Āǧurrī, al-Ġurabāʾ",
+      "slug": "al-agurri-al-guraba",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Baġawī, Maʿālim at-Tanzīl, Tafsīr Sūrat al-Mulk 67:2, Bd. 8, digitale S. 176",
+      "slug": "al-bagawi-ma-alim-at-tanzil-tafsir-surat-al-mulk-67-2-bd-8-digitale-s-176",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Bayhaqī, al-Asmāʾ wa-ṣ-Ṣifāt",
+      "slug": "al-bayhaqi-al-asma-wa-s-sifat",
+      "entries": 1,
+      "status": "found",
+      "file": "assets/hadith-covers/asma-wa-sifat.webp",
+      "sha256": "de09025e7a889a002acb0594f61f697114eb3f4292f8074ca99c7ae4d6f1d826",
+      "edition": "al-Asmāʾ wa-ṣ-Ṣifāt von al-Bayhaqī, Dār al-Kutub al-ʿIlmiyyah, Umschlag",
+      "sourceUrl": "https://archive.org/details/20250806_20250806_1751"
+    },
+    {
+      "title": "al-Bayhaqī, as-Sunan al-Kubrā",
+      "slug": "al-bayhaqi-as-sunan-al-kubra",
+      "entries": 1,
+      "status": "found",
+      "file": "assets/hadith-covers/sunan-al-kubra.webp",
+      "sha256": "63f22b38603add14ea8141e3f65af4993f62238cfcaa7de2e0bac0195a88afd0",
+      "edition": "as-Sunan al-Kubrā von al-Bayhaqī, Dār al-Kutub al-ʿIlmiyyah, Umschlag",
+      "sourceUrl": "https://archive.org/details/skb07_202511"
+    },
+    {
+      "title": "al-Ǧāmiʿ fī as-Sunan wa-l-Ādāb",
+      "slug": "al-gami-fi-as-sunan-wa-l-adab",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Ḥākim, Maʿrifat ʿUlūm al-Ḥadīṯ, Bericht über Ayyūb as-Saḫtiyānī (arabischer Direkttext)",
+      "slug": "al-hakim-ma-rifat-ulum-al-hadit-bericht-uber-ayyub-as-sahtiyani-arabischer-direk",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Harawī, Ḏamm al-Kalām wa-Ahlihi",
+      "slug": "al-harawi-damm-al-kalam-wa-ahlihi",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Ḫaṭīb al-Baġdādī, al-Ǧāmiʿ li-Aḫlāq ar-Rāwī wa-Ādāb as-Sāmiʿ, Muqaddimah, Bericht Nr. 8, Bd. 1, digitale S. 79",
+      "slug": "al-hatib-al-bagdadi-al-gami-li-ahlaq-ar-rawi-wa-adab-as-sami-muqaddimah-bericht-",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Ḫaṭīb al-Baġdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, Bericht mit neun aufeinanderfolgenden Vätern",
+      "slug": "al-hatib-al-bagdadi-iqtida-al-ilm-al-amal-bericht-mit-neun-aufeinanderfolgenden-",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Ḫaṭīb al-Baġdādī, Šaraf Aṣḥāb al-Ḥadīṯ, Kapitel über den Schutz der Sunnah durch die Ḥadīṯ-Gelehrten, Bericht Nr. 79 (digitale Zählung)",
+      "slug": "al-hatib-al-bagdadi-saraf-ashab-al-hadit-kapitel-uber-den-schutz-der-sunnah-durc",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Khallāl, as-Sunnah",
+      "slug": "al-khallal-as-sunnah",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Qāḍī ʿIyāḍ, aš-Šifāʾ bi-Taʿrīf Ḥuqūq al-Muṣṭafā, Bd. 2, digitale S. 444, Abschnitt über den Besuch des Propheten-Grabes",
+      "slug": "al-qadi-iyad-as-sifa-bi-ta-rif-huquq-al-mustafa-bd-2-digitale-s-444-abschnitt-ub",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "al-Qāḍī ʿIyāḍ, aš-Šifāʾ, Bd. 2, in der Frage des wiederholten Gebets",
+      "slug": "al-qadi-iyad-as-sifa-bd-2-in-der-frage-des-wiederholten-gebets",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "aš-Šāfiʿī, ar-Risālah",
+      "slug": "as-safi-i-ar-risalah",
+      "entries": 1,
+      "status": "found",
+      "file": "assets/hadith-covers/ar-risalah-shafii.webp",
+      "sha256": "ddd01ea7ac42a697940fcf22c0566959858c0d8ff7bd40b64e2704212b6e10f0",
+      "edition": "ar-Risālah von aš-Šāfiʿī, Ausgabe Aḥmad Šākir, Umschlag mit Rücken",
+      "sourceUrl": "https://archive.org/details/risalashafii"
+    },
+    {
+      "title": "aš-Šāṭibī, al-Iʿtiṣām, Bd. 1, digitale S. 112",
+      "slug": "as-satibi-al-i-tisam-bd-1-digitale-s-112",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "aš-Šāṭibī, al-Iʿtiṣām, Bd. 1, S. 49, Überlieferung von Imām Mālik",
+      "slug": "as-satibi-al-i-tisam-bd-1-s-49-uberlieferung-von-imam-malik",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "aš-Šāṭibī, al-Iʿtiṣām, Bd. 1, S. 65 (digitale Ausgabe), mit Bericht Ibn al-Māǧišūns 'samiʿtu Mālikan yaqūlu'",
+      "slug": "as-satibi-al-i-tisam-bd-1-s-65-digitale-ausgabe-mit-bericht-ibn-al-magisuns-sami",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "aš-Šāṭibī, al-Iʿtiṣām, Bd. 2, Abschnitt al-ʿibādāt (Hintergrundzitat von Ḥuḏayfah)",
+      "slug": "as-satibi-al-i-tisam-bd-2-abschnitt-al-ibadat-hintergrundzitat-von-hudayfah",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "as-Sunan al-Kubrā",
+      "slug": "as-sunan-al-kubra",
+      "entries": 1,
+      "status": "found",
+      "file": "assets/hadith-covers/sunan-al-kubra.webp",
+      "sha256": "63f22b38603add14ea8141e3f65af4993f62238cfcaa7de2e0bac0195a88afd0",
+      "edition": "Dieselbe Bayhaqī-Ausgabe; die Regalzeile ohne Namensvorsatz ist dieselbe as-Sunan al-Kubrā",
+      "sourceUrl": "https://archive.org/details/skb07_202511",
+      "sameWorkAs": "al-Bayhaqī, as-Sunan al-Kubrā"
+    },
+    {
+      "title": "aṭ-Ṭabarānī, al-Muʿǧam al-Kabīr, Nr. 10488",
+      "slug": "at-tabarani-al-mu-gam-al-kabir-nr-10488",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "aṭ-Ṭabarī, at-Tabṣīr fī Maʿālim ad-Dīn",
+      "slug": "at-tabari-at-tabsir-fi-ma-alim-ad-din",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "aṭ-Ṭabarī, Tārīḫ ar-Rusul wa-l-Mulūk",
+      "slug": "at-tabari-tarih-ar-rusul-wa-l-muluk",
+      "entries": 1,
+      "status": "found",
+      "file": "assets/hadith-covers/tarikh-tabari.webp",
+      "sha256": "c4cee3a05fa059cfa56ae07acf2744f872099f8212899c38dfc9bf6b1f5f3264",
+      "edition": "Tārīḫ aṭ-Ṭabarī, geprägter Ledereinband der Alexandrina, Band 1",
+      "sourceUrl": "https://archive.org/details/AAlexandrina-147042"
+    },
+    {
+      "title": "Ibn Abī ad-Dunyā, al-Ǧūʿ",
+      "slug": "ibn-abi-ad-dunya-al-gu",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī ad-Dunyā, al-Qubūr",
+      "slug": "ibn-abi-ad-dunya-al-qubur",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī ad-Dunyā, aš-Šukr",
+      "slug": "ibn-abi-ad-dunya-as-sukr",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī ad-Dunyā, az-Zuhd",
+      "slug": "ibn-abi-ad-dunya-az-zuhd",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī ad-Dunyā, Dhamm al-Hawā",
+      "slug": "ibn-abi-ad-dunya-dhamm-al-hawa",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī ad-Dunyā, Ḥusn aẓ-Ẓann billāh",
+      "slug": "ibn-abi-ad-dunya-husn-az-zann-billah",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī ad-Dunyā, Iṣlāḥ al-Māl",
+      "slug": "ibn-abi-ad-dunya-islah-al-mal",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī ad-Dunyā, Qaṣr al-Amal",
+      "slug": "ibn-abi-ad-dunya-qasr-al-amal",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Abī al-ʿIzz, Šarḥ al-ʿAqīdah aṭ-Ṭaḥāwiyyah, Bd. 2, S. 362 (digitale Ausgabe), zitiert al-Ḥasan al-Baṣrī",
+      "slug": "ibn-abi-al-izz-sarh-al-aqidah-at-tahawiyyah-bd-2-s-362-digitale-ausgabe-zitiert-",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn al-Ǧawzī, Ṣifat aṣ-Ṣafwah",
+      "slug": "ibn-al-gawzi-sifat-as-safwah",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn al-Qayyim, al-Wābil aṣ-Ṣayyib, überliefert von Ibn ʿAbbās",
+      "slug": "ibn-al-qayyim-al-wabil-as-sayyib-uberliefert-von-ibn-abbas",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn aṣ-Ṣalāḥ, Maʿrifat Anwāʿ ʿUlūm al-Ḥadīṯ, Typ 61 (Maʿrifat aṯ-ṯiqāt wa-ḍ-ḍuʿafāʾ), digitale S. 389",
+      "slug": "ibn-as-salah-ma-rifat-anwa-ulum-al-hadit-typ-61-ma-rifat-at-tiqat-wa-d-du-afa-di",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Ḥibbān, Rawḍat al-ʿUqalāʾ",
+      "slug": "ibn-hibban-rawdat-al-uqala",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Kaṯīr, al-Bidāyah wa-n-Nihāyah",
+      "slug": "ibn-katir-al-bidayah-wa-n-nihayah",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Māǧah",
+      "slug": "ibn-magah",
+      "entries": 1,
+      "status": "found",
+      "file": "assets/hadith-covers/sunan-ibn-magah.webp",
+      "sha256": "f7678200b46fc1fbae908a81e835602b1d19d9cf935317494e9ae51d97529ae4",
+      "edition": "Dieselbe Ausgabe wie Sunan Ibn Māǧah; die Einzelstelle im Regal gehört zu diesem Werk",
+      "sourceUrl": "https://archive.org/details/hadith-ibn-majah-pdf",
+      "sameWorkAs": "Sunan Ibn Māǧah"
+    },
+    {
+      "title": "Ibn Raǧab, Ǧāmiʿ al-ʿUlūm wa-l-Ḥikam, Bd. 2, S. 132 (Kommentar",
+      "slug": "ibn-ragab-gami-al-ulum-wa-l-hikam-bd-2-s-132-kommentar",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Saʿd, aṭ-Ṭabaqāt al-Kubrā",
+      "slug": "ibn-sa-d-at-tabaqat-al-kubra",
+      "entries": 1,
+      "status": "found",
+      "file": "assets/hadith-covers/ibn-sad-tabaqat.webp",
+      "sha256": "aa386c3e0c0384e8099231081a29d41f8df0ba5654cdd9d6d69ce2600cd9af9e",
+      "edition": "Dieselbe Ḫānǧī-Ausgabe wie Ibn Saʿd, aṭ-Ṭabaqāt",
+      "sourceUrl": "https://archive.org/details/A66aba9at_",
+      "sameWorkAs": "Ibn Saʿd, aṭ-Ṭabaqāt"
+    },
+    {
+      "title": "Ibn Taymiyyah zitiert in Muqaddimah fī Uṣūl at-Tafsīr",
+      "slug": "ibn-taymiyyah-zitiert-in-muqaddimah-fi-usul-at-tafsir",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Waḍḍāḥ, al-Bidaʿ wa-n-Nahy ʿanhā",
+      "slug": "ibn-waddah-al-bida-wa-n-nahy-anha",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn Waḍḍāḥ, al-Bidaʿ, Nr. 76",
+      "slug": "ibn-waddah-al-bida-nr-76",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ibn ʿAbd al-Barr, al-Intiqāʾ",
+      "slug": "ibn-abd-al-barr-al-intiqa",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Maʿānī al-Qurʾān wa-Iʿrābuhu",
+      "slug": "ma-ani-al-qur-an-wa-i-rabuhu",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Mundartlich verbreitete Ibn-ʿAbbās-Zuschreibung",
+      "slug": "mundartlich-verbreitete-ibn-abbas-zuschreibung",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Qawām as-Sunnah al-Aṣbahānī, al-Ḥuǧǧah fī Bayān al-Maḥaǧǧah, Bd. 2, S. 494, Nr. 519 (Ayyūb)",
+      "slug": "qawam-as-sunnah-al-asbahani-al-huggah-fi-bayan-al-mahaggah-bd-2-s-494-nr-519-ayy",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Ṭabaqāt al-Ḥanābilah",
+      "slug": "tabaqat-al-hanabilah",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Tahḏīb al-Kamāl fī Asmāʾ ar-Riǧāl",
+      "slug": "tahdib-al-kamal-fi-asma-ar-rigal",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "Wakīʿ ibn al-Ǧarrāḥ, az-Zuhd, Nr. 220",
+      "slug": "waki-ibn-al-garrah-az-zuhd-nr-220",
+      "entries": 1,
+      "status": "not-found",
+      "shelf": "placeholder"
+    },
+    {
+      "title": "ʿAbd ar-Razzāq, al-Muṣannaf",
+      "slug": "abd-ar-razzaq-al-musannaf",
+      "entries": 1,
+      "status": "found",
+      "file": "assets/hadith-covers/musannaf-abd-al-razzaq.webp",
+      "sha256": "7d28515edb95da47ef393f2f81e38be13bc19f1e6768b527b58d561aad94e852",
+      "edition": "al-Muṣannaf von ʿAbd ar-Razzāq, Umschlag ohne Personenabbildung",
+      "sourceUrl": "https://archive.org/details/jild3_202002"
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import {
 } from "./prayer-push-scheduler.js";
 import { readPrayerStatusFromStore } from "./prayer-status-store.js";
 import { pickPrayerEntryVariant, buildAdvancePushBody, PRAYER_TITLE_EMOJI, sanitizePrayerPushText } from "./prayer-push-copy.js";
+import { prayerLocaleCopy, prayerIndividualCopy } from "./push-locale-from-draft.js";
 import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
 
@@ -19,6 +20,25 @@ const PRAYER_NAMES = {
   isha: "ʿIshāʾ",
   tahajjud: "Taḥajjud"
 };
+
+export function prayerTestLocaleCopy(prayerKey, mode, advanceMinutes = 15, locale = "") {
+  const minutes = [5, 10, 15].includes(Number(advanceMinutes)) ? Number(advanceMinutes) : 15;
+  try {
+    const one = locale === "ku" || locale === "ckb"
+      ? prayerIndividualCopy(locale, prayerKey, mode, minutes, "21:46")
+      : null;
+    const map = one || prayerLocaleCopy(prayerKey, mode, minutes, "21:46");
+    if (map?.headings?.de && map?.headings?.en && map?.contents?.de && map?.contents?.en) return map;
+  } catch (_) {}
+  const german = buildPrayerTestCopy(prayerKey, mode, minutes);
+  const headings = {};
+  const contents = {};
+  for (const code of ["de", "en", "tr", "ar", "bs", "fr", "es"]) {
+    headings[code] = german.title;
+    contents[code] = german.body;
+  }
+  return { headings, contents };
+}
 
 export function buildPrayerTestCopy(prayerKey, mode, advanceMinutes = 15) {
   const key = String(prayerKey || "maghrib").toLowerCase();
@@ -110,7 +130,8 @@ export async function sendPrayerTestPush(env, input = {}) {
   const prayerKey = String(input.prayer || input.prayerKey || "maghrib").toLowerCase();
   const mode = String(input.mode || "entry").toLowerCase() === "advance" ? "advance" : "entry";
   const advanceMinutes = Number(input.advanceMinutes || 15);
-  const copy = buildPrayerTestCopy(prayerKey, mode, advanceMinutes);
+  const locale = String(input.locale || input.dar_app_locale || "").toLowerCase();
+  const copy = prayerTestLocaleCopy(prayerKey, mode, advanceMinutes, locale);
   const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "");
   const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
   const icon = `${site}/notification-icon-192.png?v=3`;
@@ -120,8 +141,8 @@ export async function sendPrayerTestPush(env, input = {}) {
     app_id: appId,
     target_channel: "push",
     include_subscription_ids: [subscriptionId],
-    headings: { de: copy.title, en: copy.title },
-    contents: { de: copy.body, en: copy.body },
+    headings: copy.headings,
+    contents: copy.contents,
     ios_sound: "default",
     ttl: 3600,
     url: `${site}/#prayer`,
@@ -141,8 +162,8 @@ export async function sendPrayerTestPush(env, input = {}) {
       delivered: delivery.delivered,
       prayer: prayerKey,
       mode,
-      title: copy.title,
-      body: copy.body,
+      title: copy.headings.de,
+      body: copy.contents.de,
       subscriptionId,
       notificationId: delivery.notificationId || null,
       reason: delivery.reason || null,

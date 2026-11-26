@@ -3,6 +3,7 @@
 const fs = require("node:fs");
 const crypto = require("node:crypto");
 const { separatePushLaunchUrls } = require("./lib/onesignal-push");
+const { localizedNotification, dailyHeadings } = require("./push-locale-chrome.cjs");
 
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const API_KEY = String(
@@ -110,8 +111,7 @@ function payload(kind, item, subscriptionId) {
     app_id: APP_ID,
     target_channel: "push",
     include_subscription_ids: [subscriptionId],
-    headings: { de: title, en: title },
-    contents: { de: body, en: body },
+    ...localizedNotification(title, body, (map => map.de === title ? map : null)(dailyHeadings(isDua ? "dua" : "recommendation")), null),
     url,
     idempotency_key: idempotencyKey,
     name: `daily-emergency-${kind}-${dateKey}-${TOKEN}`.slice(0, 128),

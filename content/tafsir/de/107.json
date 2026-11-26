@@ -1,0 +1,297 @@
+{
+  "schemaVersion": "tafsir-de-v2",
+  "source": "Deutsche Übertragung nach dem abgerufenen arabischen Tafsīr Ibn Kathīr (quran.com resource 14) und Tafsīr as-Saʿdī (resource 91). Verswortlaut: Frank Bubenheim und Nadeem (resource 27). Kein Ibn-ʿAbbās-Eintrag.",
+  "updated": "2026-11-26",
+  "fetchedAt": "2026-11-26",
+  "works": [
+    {
+      "id": "ibn-kathir",
+      "work": "Tafsīr Ibn Kathīr",
+      "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+      "deathYear": 774,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+      "edition": "quran.com, arabische Fassung, resource 14",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/107"
+    },
+    {
+      "id": "sadi",
+      "work": "Tafsīr as-Saʿdī",
+      "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+      "deathYear": 1376,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+      "edition": "quran.com, arabische Fassung, resource 91",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/107"
+    }
+  ],
+  "blocked": [
+    "Ibn ʿAbbās: resource 15 ohne erlaubte Isnād-Wertung."
+  ],
+  "verses": [
+    {
+      "id": 1,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Siehst du (nicht) denjenigen, der das Gericht für Lüge erklärt?",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=107&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Die Sūra ist mekkanisch. Allah sagt: Siehst du, Muḥammad, den, der das dīn für Lüge erklärt? Das ist die Wiederkehr und die Vergeltung.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/107",
+          "verseKey": "107:1"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Allah tadelt den, der seine Rechte und die Rechte seiner Diener lässt: den, der die Vergeltung für Lüge erklärt. Das ist die Auferstehung und die Abrechnung. Er glaubt nicht an das, womit die Gesandten kamen.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/107",
+          "verseKey": "107:1"
+        }
+      ],
+      "sabab": "Ibn Kathīr bezeichnet diese Sūra in der abgerufenen Fassung als mekkanisch. Ein einzelner Offenbarungsanlass ist in diesem Auszug nicht festgelegt.",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 2,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Das ist derjenige, der die Waise zurückstößt",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=107&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Das ist der, der die Waise überwältigt, sie um ihr Recht bringt, sie nicht speist und ihr nicht guttut.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/107",
+          "verseKey": "107:2"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Das ist der, der die Waise heftig und hart wegstoßt und sie nicht bemitleidet, weil sein Herz hart ist und weil er keine Belohnung erhofft und keine Strafe fürchtet.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/107",
+          "verseKey": "107:2"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 3,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): und nicht zur Speisung des Armen anhält.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=107&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Gemeint ist der Arme, der nichts hat, was seinen Bedarf und sein Auskommen deckt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/107",
+          "verseKey": "107:3"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Er spornt andere nicht zur Speisung des Armen an. Erst recht speist er den Armen nicht selbst.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/107",
+          "verseKey": "107:3"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 4,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Wehe nun den Betenden,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=107&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Dann sagt Er: Wehe den Betenden, die ihr Gebet versäumen. Ibn ʿAbbās und andere: die Heuchler, die öffentlich beten und im Verborgenen nicht. Deshalb sagt Er „den Betenden“: die zum Gebet gehören und es auf sich genommen haben, es dann aber versäumen, entweder ganz, wie Ibn ʿAbbās sagte, oder in seiner Verrichtung. Der Auszug bricht ab. Die Zuschreibung steht ohne Isnād-Wertung und wird nicht als eigener Ibn-ʿAbbās-Beleg geführt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/107",
+          "verseKey": "107:4"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Wehe den Betenden, das heißt denen, die sich zur Verrichtung des Gebets verpflichtet haben, die ihr Gebet aber versäumen.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/107",
+          "verseKey": "107:4"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 5,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): denjenigen, die auf ihre Gebete nicht achten,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=107&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. ʿAṭāʾ ibn Dīnār: Lob sei Allah, der sagte „über ihrem Gebet unachtsam“ und nicht „in ihrem Gebet unachtsam“. Oder sie versäumen seine erste Zeit und schieben es meist oder immer bis an ihr Ende. Oder sie versäumen seine Pfeiler und Bedingungen so, wie es befohlen ist. Oder sie versäumen die Demut darin und das Nachdenken über seine Bedeutungen. Der Wortlaut umfasst das alles und jeden, den etwas davon trifft.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/107",
+          "verseKey": "107:5"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Das heißt, sie lassen es verderben, lassen seine Zeit und versäumen seine Pfeiler. Das kommt daher, dass ihnen die Sache Allahs nicht wichtig ist, denn sie haben das Gebet verdorben, das der wichtigste Gehorsam und die beste Annäherung ist. Die Unachtsamkeit über das Gebet ist es, deren Urheber Tadel verdient. Die Unachtsamkeit im Gebet trifft jeden, auch den Propheten.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/107",
+          "verseKey": "107:5"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 6,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): denjenigen, die dabei (nur) gesehen werden wollen;",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=107&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Hier sagt Er: die gesehen werden wollen. Danach beginnt ein Isnād bei aṭ-Ṭabarānī, der im Auszug abbricht. Der Bericht wird nicht vervollständigt und nicht bewertet.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/107",
+          "verseKey": "107:6"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Deshalb beschreibt Allah sie mit Augendienerei, Härte und fehlender Barmherzigkeit: die gesehen werden wollen, das heißt, sie tun die Werke, damit die Menschen sie sehen.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/107",
+          "verseKey": "107:6"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 7,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): und die Hilfeleistung verweigern!",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=107&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Sie verweigern al-māʿūn: sie haben weder die Anbetung ihres Herrn noch den Umgang mit seiner Schöpfung gut gemacht, nicht einmal durch das Verleihen dessen, womit man Nutzen zieht, während die Sache selbst bleibt und zu ihnen zurückkehrt. Solche Leute verweigern erst recht die Zakāh und die Arten der Annäherung. Ibn Abī Naǧīḥ von Muğāhid: ʿAlī sagte, al-māʿūn ist die Zakāh. So überliefert es as-Suddī von Abū Ṣāliḥ. Der Auszug bricht ab.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/107",
+          "verseKey": "107:7"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Sie verweigern al-māʿūn, das heißt die Gabe einer Sache, deren Geben als Leihe oder Schenkung nicht schadet, wie das Gefäß, der Eimer und die Axt und Ähnliches, das man gewöhnlich hergibt. Diese verweigern aus heftigem Geiz al-māʿūn; wie erst das, was mehr ist als es. In dieser Sūra liegt das Antreiben, die Waise und die Armen zu ehren, das Gebet zu beachten und zu bewahren, die Aufrichtigkeit in allen Werken, und das Antreiben, leichte Güter herzugeben, wie die Leihe von Gefäß, Eimer und Buch, weil Allah den tadelt, der das nicht tut.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/107",
+          "verseKey": "107:7"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    }
+  ]
+}

@@ -220,6 +220,17 @@ enum DarPushNotifications {
         return "dar-" + trimmed
     }
 
+    static func applyAppLocale(_ raw: String) {
+        let code = raw.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let known = ["de", "en", "tr", "ar", "bs", "fr", "es", "ku", "ckb"]
+        guard known.contains(code) else { return }
+        let provider = ["ku", "ckb"].contains(code) ? "de" : code
+        #if !targetEnvironment(macCatalyst)
+        OneSignal.User.setLanguage(provider)
+        OneSignal.User.addTags(["dar_app_locale": code])
+        #endif
+    }
+
     static func applyWebPrayerSettings(_ raw: [String: Any]) {
         let clean = plistDictionary(raw)
         if PropertyListSerialization.propertyList(clean, isValidFor: .binary) {

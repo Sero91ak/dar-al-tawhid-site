@@ -285,8 +285,40 @@
     });
     syncDetail();scheduleContext();
   }
+  function isStartHome(){
+    var hash=String((win.location&&win.location.hash)||"");
+    var route=hash.replace(/^#\/?/,"").split(/[/?&#]/)[0].toLowerCase();
+    // Empty hash and #home are the start page. A later class is only a backup.
+    if(!route||route==="home")return true;
+    var body=doc.body;
+    try{
+      if(body&&body.classList&&typeof body.classList.contains==="function")
+        return body.classList.contains("is-home-route");
+    }catch(e){}
+    return false;
+  }
+  function isLandscapeViewport(){
+    var m=viewport();
+    return m.width>m.height;
+  }
+  function releaseHomeSplit(){
+    if(!active)return;
+    if(pane){savedReaderTop=pane.scrollTop;savedReaderHash=win.location.hash||"#home";}
+    restoreContent();
+    active=false;
+    root.classList.remove("dar-fold-v2-active");
+    if(nav)nav.hidden=true;
+    if(pane)pane.hidden=true;
+  }
   function apply() {
     if(!doc.body||!doc.getElementById("appView"))return false;
+    // The start page already has one home (the parity view). The landscape
+    // split parked that home at left:-250vw and forced the legacy #appView
+    // back on screen, so iPad and Fold showed two start pages.
+    if(isStartHome()&&isLandscapeViewport()){
+      releaseHomeSplit();
+      return false;
+    }
     var m=viewport(),c=capacity(m.width,m.height);
     if(!c.dual){
       if(active){
@@ -335,7 +367,7 @@
     win.addEventListener("resize",schedule,{passive:true});
     win.addEventListener("orientationchange",schedule,{passive:true});
     win.addEventListener("pageshow",schedule,{passive:true});
-    win.addEventListener("hashchange",onRoute);
+    win.addEventListener("hashchange",function(){schedule();onRoute();});
     if(typeof ResizeObserver==="function"){
       resizeObserver=new ResizeObserver(schedule);
       resizeObserver.observe(doc.documentElement);

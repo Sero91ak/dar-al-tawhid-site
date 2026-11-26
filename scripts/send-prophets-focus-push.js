@@ -8,6 +8,7 @@ const {
   postOneSignalNotification,
   siteOriginFromEnv
 } = require("./lib/onesignal-push");
+const { localizedNotification, chromePack } = require("./push-locale-chrome.cjs");
 
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const API_KEY = process.env.ONESIGNAL_API_KEY_NEW || process.env.ONESIGNAL_API_KEY || process.env.ONESIGNAL_APP_API_KEY;
@@ -44,8 +45,12 @@ function newsPushBody(text) {
     {
       app_id: APP_ID,
       target_channel: "push",
-      headings: { en: title, de: title },
-      contents: { en: text, de: text },
+      ...localizedNotification(
+        title,
+        text,
+        title === chromePack("prophets").title.de ? chromePack("prophets").title : null,
+        text === chromePack("prophets").body.de ? chromePack("prophets").body : null
+      ),
       url,
       data: {
         type: "news",
