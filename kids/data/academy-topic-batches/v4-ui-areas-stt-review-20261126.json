@@ -1,0 +1,16 @@
+{
+  "createdAt": "2026-11-26T23:13:09.179146+00:00",
+  "checked": 32,
+  "passed": 31,
+  "failedFlagged": 1,
+  "regenerated": 0,
+  "decision": "do-not-regenerate",
+  "nuhStyleFalsePositive": [
+    {
+      "ident": "c25fd92dba74d6c839e4a5cb",
+      "text": "Welche Antwort passt zu „Ādam عليه السلام kennenlernen“ im Alltag?",
+      "transcript": "Welche Antwort passt zu Adam Alaihi Salam? Kennenlernen im Alltag",
+      "reason": "Scribe (deu) romanized عليه السلام as “Alaihi Salam”; phonetically correct, not a regen case. German overlap 1.0."
+    }
+  ]
+}
