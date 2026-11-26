@@ -361,7 +361,7 @@ html body #darAdultBrandHeaderV2{
 }
 html body #darAdultBrandHeaderV2 .dtbh-row{
  display:grid!important;
- grid-template-columns:clamp(35px,10vw,45px) minmax(0,1fr) clamp(34px,9.2vw,42px) clamp(34px,9.2vw,42px)!important;
+ grid-template-columns:clamp(35px,10vw,45px) minmax(0,1fr) clamp(34px,9.2vw,42px) clamp(34px,9.2vw,42px) clamp(34px,9.2vw,42px)!important;
  grid-template-rows:minmax(43px,auto)!important;
  gap:clamp(4px,1.4vw,10px)!important;
  align-items:center!important;
@@ -389,14 +389,17 @@ html body #darAdultBrandHeaderV2 .dtbh-name{
  letter-spacing:-.04em!important;
  white-space:nowrap!important;text-overflow:clip!important;overflow:visible!important;
 }
-html body #darAdultBrandHeaderV2 .dvp-trigger{
+html body #darAdultBrandHeaderV2 .dtbh-row > #darVisitorLanguageButtonV1{
  grid-column:3!important;grid-row:1!important;
+}
+html body #darAdultBrandHeaderV2 .dvp-trigger{
+ grid-column:4!important;grid-row:1!important;
  width:clamp(34px,9.2vw,42px)!important;height:clamp(36px,9.2vw,42px)!important;
  max-width:100%!important;margin:0!important;justify-self:center!important;
  align-self:center!important;
 }
 html body #darAdultBrandHeaderV2 .dtbh-toggle{
- grid-column:4!important;grid-row:1!important;
+ grid-column:5!important;grid-row:1!important;
  width:clamp(34px,9.2vw,42px)!important;height:clamp(36px,9.2vw,42px)!important;
  flex:0 0 auto!important;margin:0!important;justify-self:center!important;
  align-self:center!important;
@@ -404,21 +407,22 @@ html body #darAdultBrandHeaderV2 .dtbh-toggle{
 @media (min-width:720px){
  html body #darAdultBrandHeaderV2{padding-inline:clamp(16px,3vw,45px)!important;padding-block-end:5px!important}
  html body #darAdultBrandHeaderV2 .dtbh-row{
-   grid-template-columns:54px minmax(0,1fr) 48px 48px!important;
+   grid-template-columns:54px minmax(0,1fr) 48px 48px 48px!important;
    grid-template-rows:54px!important;min-height:54px!important;
    gap:15px!important;
  }
  html body #darAdultBrandHeaderV2 .dtbh-logo{width:54px!important;height:54px!important}
  html body #darAdultBrandHeaderV2 .dtbh-name{font-size:clamp(24px,2.4vw,29px)!important;letter-spacing:-.025em!important}
+ html body #darAdultBrandHeaderV2 .dtbh-row > #darVisitorLanguageButtonV1,
  html body #darAdultBrandHeaderV2 .dvp-trigger,
  html body #darAdultBrandHeaderV2 .dtbh-toggle{width:48px!important;height:48px!important}
 }
 @media(max-width:355px){
  html body #darAdultBrandHeaderV2{padding-inline:9px!important}
- html body #darAdultBrandHeaderV2 .dtbh-row{grid-template-columns:34px minmax(0,1fr) 34px 34px!important;gap:4px!important}
+ html body #darAdultBrandHeaderV2 .dtbh-row{grid-template-columns:34px minmax(0,1fr) 34px 34px 34px!important;gap:4px!important}
  html body #darAdultBrandHeaderV2 .dtbh-logo{width:34px!important;height:34px!important}
  html body #darAdultBrandHeaderV2 .dtbh-name{font-size:clamp(14px,4.6vw,17px)!important}
- html body #darAdultBrandHeaderV2 .dvp-trigger,html body #darAdultBrandHeaderV2 .dtbh-toggle{width:34px!important;height:36px!important}
+ html body #darAdultBrandHeaderV2 .dtbh-row > #darVisitorLanguageButtonV1,html body #darAdultBrandHeaderV2 .dvp-trigger,html body #darAdultBrandHeaderV2 .dtbh-toggle{width:34px!important;height:40px!important}
 }
 @media (orientation:landscape) and (max-height:560px){
  html body #darAdultBrandHeaderV2{padding-block-start:env(safe-area-inset-top,0px)!important}
@@ -473,7 +477,7 @@ html.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-row{
   padding-block-end:3px!important;
  }
  html.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-row{
-  grid-template-columns:46px minmax(0,1fr) 44px 44px!important;
+  grid-template-columns:46px minmax(0,1fr) 44px 44px 44px!important;
   grid-template-rows:46px!important;
   min-height:46px!important;
   column-gap:clamp(7px,1.2vw,15px)!important;
@@ -485,7 +489,7 @@ html.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-row{
   font-size:clamp(18px,2.1vw,24px)!important;
   overflow:hidden!important;text-overflow:clip!important;
  }
- html.dar-adult-global-brand-ready #darAdultBrandHeaderV2 :is(#darVisitorProfileButtonV1,.dtbh-toggle){
+ html.dar-adult-global-brand-ready #darAdultBrandHeaderV2 :is(#darVisitorLanguageButtonV1,#darVisitorProfileButtonV1,.dtbh-toggle){
   width:44px!important;height:44px!important;
   min-width:44px!important;min-height:44px!important;
   max-width:44px!important;max-height:44px!important;
@@ -494,14 +498,14 @@ html.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-row{
 }
 @media (min-width:600px) and (max-width:900px) and (orientation:portrait){
  html.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-row{
-  grid-template-columns:46px minmax(0,1fr) 44px 44px!important;
+  grid-template-columns:46px minmax(0,1fr) 44px 44px 44px!important;
   grid-template-rows:46px!important;min-height:46px!important;
   column-gap:clamp(6px,1.3vw,11px)!important;
  }
  html.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-logo{
   width:46px!important;height:46px!important;
  }
- html.dar-adult-global-brand-ready #darAdultBrandHeaderV2 :is(#darVisitorProfileButtonV1,.dtbh-toggle){
+ html.dar-adult-global-brand-ready #darAdultBrandHeaderV2 :is(#darVisitorLanguageButtonV1,#darVisitorProfileButtonV1,.dtbh-toggle){
   width:44px!important;height:44px!important;max-width:44px!important;
   min-width:44px!important;min-height:44px!important;
  }
