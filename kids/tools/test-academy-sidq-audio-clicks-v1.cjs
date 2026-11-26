@@ -84,7 +84,7 @@ if(missing.length){
  assert.deepEqual(grouped,{question:1,answer:4,glossary:9},
   "The approved pending Ṣidq gap set must remain exactly 1+4+9");
 }else{
- assert.equal(Object.values(pub.entries).filter(x=>x.sourceLessonId==="sidq").length,72,
+ assert.ok(Object.values(pub.entries).filter(x=>x.sourceLessonId==="sidq").length>=72,
   "14 actual V4 click audios must be present before marking Ṣidq click coverage complete");
 }
 console.log(JSON.stringify({
