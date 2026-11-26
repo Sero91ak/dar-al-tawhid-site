@@ -1,13 +1,13 @@
 {
   "version": 1,
   "generatedAt": "2026-11-26",
-  "rule": "Nur geprüfte Umschläge gedruckter Ausgaben, lokal als WebP. Kein Hotlink. Kein erfundener Einband. Titelblätter und Grafiken mit Personen wurden nicht verwendet.",
+  "rule": "Nur geprüfte Umschläge gedruckter Ausgaben, lokal als WebP. Kein Hotlink. Kein erfundener Umschlag. Titelblätter und Fotos mit Personen bleiben unbenutzt. Fehlende Umschläge bleiben im Regal ein gestalteter Ledereinband, kein Foto.",
   "checkedOn": "2026-11-26",
   "counts": {
     "works": 113,
-    "found": 21,
-    "notFound": 92,
-    "files": 18
+    "found": 24,
+    "notFound": 89,
+    "files": 21
   },
   "files": {
     "al-mustadrak.webp": "ae9aaa3179dcf129beef67c629ed80a2d0a1517311be1054ca064b6442fc1d5e",
@@ -21,13 +21,16 @@
     "musannaf-ibn-abi-saybah.webp": "260789e9167d7dd3b7306c25a3491527ae8f80022e88557358654b3abe02ab55",
     "musnad-ahmad.webp": "248040dd3a8a6dfdd616fea5f8a2a2d933c62b42e3ec08d2ca46ca4efea3172c",
     "sahih-al-buhari.webp": "7bfeba27ad9d9bbb1df9d0b2fa94231c375e2fddaf3a817a67a579a8faf6eb59",
-    "sahih-muslim.webp": "f200966a35bd4905ea5e323d8a2e0c4af100e1b6978c385de5ec725193f5a920",
+    "sahih-muslim.webp": "2957351bcbe0bfe119ac9311473127524c9c9bd4bd7f7fc0d520ce442c876bef",
     "sharh-as-sunnah.webp": "7229d9d31e0bb1628b06d3b1324faf6fdc931a8621bf3b18c57338ff762389a5",
     "sunan-abi-dawud.webp": "cef0f14809733925be3c609ef5145078389dbdd2eee4f251d8a5be40905ba5fe",
     "sunan-ad-darimi.webp": "4ee0e10e1f0b0a7f094faf3302d41990ad61c97d8946a0a193e5d5d6ea97cead",
     "sunan-al-kubra.webp": "63f22b38603add14ea8141e3f65af4993f62238cfcaa7de2e0bac0195a88afd0",
     "sunan-an-nasai.webp": "8bcf0c4f76018dbf36e51083c21cb59b00a565e9123857db04e5b3d978804e10",
-    "sunan-ibn-magah.webp": "f7678200b46fc1fbae908a81e835602b1d19d9cf935317494e9ae51d97529ae4"
+    "sunan-ibn-magah.webp": "f7678200b46fc1fbae908a81e835602b1d19d9cf935317494e9ae51d97529ae4",
+    "hilyat-al-awliya.webp": "e812056eea9b86773075fad0fd00d7102c268cf76b177eafba2edf4064023c96",
+    "shuab-al-iman.webp": "5b4f317369495bb3d9925d172d2b7efab9f2dc095c63b73400a73af4ad0605c9",
+    "musannaf-abd-al-razzaq.webp": "7d28515edb95da47ef393f2f81e38be13bc19f1e6768b527b58d561aad94e852"
   },
   "rejected": [
     {
@@ -44,6 +47,11 @@
       "title": "Ḥilyat al-Awliyāʾ",
       "reason": "Nur das Titelblatt der Ḫānǧī-Ausgabe, kein Umschlag.",
       "sourceUrl": "https://archive.org/details/hleawl"
+    },
+    {
+      "title": "Ǧāmiʿ at-Tirmiḏī",
+      "reason": "Dār at-Taʾṣīl liegt nur als Titelblatt vor, nicht als Umschlag.",
+      "sourceUrl": "https://archive.org/details/hadith-tirmidhi-pdf"
     }
   ],
   "works": [
@@ -53,9 +61,9 @@
       "entries": 1437,
       "status": "found",
       "file": "test/assets/hadith-covers/sahih-muslim.webp",
-      "sha256": "f200966a35bd4905ea5e323d8a2e0c4af100e1b6978c385de5ec725193f5a920",
-      "edition": "Ṣaḥīḥ Muslim, Umschlag der gescannten Ausgabe (Urdu-Einband)",
-      "sourceUrl": "https://archive.org/details/sohih_muslim-1"
+      "sha256": "2957351bcbe0bfe119ac9311473127524c9c9bd4bd7f7fc0d520ce442c876bef",
+      "edition": "Ṣaḥīḥ Muslim, Dār at-Taʾṣīl, arabische Ausgabe, Umschlag",
+      "sourceUrl": "https://archive.org/details/hadith-muslim-pdf"
     },
     {
       "title": "Ṣaḥīḥ al-Buḫārī",
@@ -125,8 +133,11 @@
       "title": "Ḥilyat al-Awliyāʾ",
       "slug": "hilyat-al-awliya",
       "entries": 50,
-      "status": "not-found",
-      "shelf": "placeholder"
+      "status": "found",
+      "file": "test/assets/hadith-covers/hilyat-al-awliya.webp",
+      "sha256": "e812056eea9b86773075fad0fd00d7102c268cf76b177eafba2edf4064023c96",
+      "edition": "Ḥilyat al-Awliyāʾ von Abū Nuʿaym, Umschlag der gedruckten Ausgabe",
+      "sourceUrl": "https://archive.org/details/1_20250806_20250806_1444"
     },
     {
       "title": "al-Muwaṭṭaʾ",
@@ -293,8 +304,11 @@
       "title": "Šuʿab al-Īmān",
       "slug": "su-ab-al-iman",
       "entries": 7,
-      "status": "not-found",
-      "shelf": "placeholder"
+      "status": "found",
+      "file": "test/assets/hadith-covers/shuab-al-iman.webp",
+      "sha256": "5b4f317369495bb3d9925d172d2b7efab9f2dc095c63b73400a73af4ad0605c9",
+      "edition": "Šuʿab al-Īmān von al-Bayhaqī, Dār al-Kutub al-ʿIlmiyyah, Umschlag",
+      "sourceUrl": "https://archive.org/details/Shiab_Al_Iman"
     },
     {
       "title": "al-Ḫaṭīb al-Baġdādī, Tārīḫ Baġdād",
@@ -901,8 +915,11 @@
       "title": "ʿAbd ar-Razzāq, al-Muṣannaf",
       "slug": "abd-ar-razzaq-al-musannaf",
       "entries": 1,
-      "status": "not-found",
-      "shelf": "placeholder"
+      "status": "found",
+      "file": "test/assets/hadith-covers/musannaf-abd-al-razzaq.webp",
+      "sha256": "7d28515edb95da47ef393f2f81e38be13bc19f1e6768b527b58d561aad94e852",
+      "edition": "al-Muṣannaf von ʿAbd ar-Razzāq, Umschlag ohne Personenabbildung",
+      "sourceUrl": "https://archive.org/details/jild3_202002"
     }
   ]
 }
