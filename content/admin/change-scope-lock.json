@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "q70-posts-index-parity-retry-20261126",
+      "at": "2026-11-26T22:08:00.000Z",
+      "approvedBy": "owner-serhat-explicit-finish-q70-live-20261126",
+      "reason": "The Q70 visitor publish uploaded and then rolled back because the posts index was still the previous edge copy. This unlock allows one retry loop in the existing posts-index parity check so a good publish is not rolled back. No push, prayer, Kids or Qibla change.",
+      "paths": [
+        "scripts/app-live-parity-check.js"
+      ],
+      "expiresAt": "2026-12-03T23:59:59.000Z"
+    },
+    {
       "id": "q70-shafii-ahwa-owner-20261126",
       "at": "2026-11-26T21:50:00.000Z",
       "approvedBy": "owner-serhat-explicit-quellenlink-and-push-live-20261126",
