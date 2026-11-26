@@ -1,0 +1,373 @@
+{
+  "schemaVersion": "tafsir-de-v2",
+  "source": "Deutsche Übertragung nach dem abgerufenen arabischen Tafsīr Ibn Kathīr (quran.com resource 14) und Tafsīr as-Saʿdī (resource 91). Verswortlaut: Frank Bubenheim und Nadeem (resource 27). Kein Ibn-ʿAbbās-Eintrag.",
+  "updated": "2026-11-26",
+  "fetchedAt": "2026-11-26",
+  "works": [
+    {
+      "id": "ibn-kathir",
+      "work": "Tafsīr Ibn Kathīr",
+      "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+      "deathYear": 774,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+      "edition": "quran.com, arabische Fassung, resource 14",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/104"
+    },
+    {
+      "id": "sadi",
+      "work": "Tafsīr as-Saʿdī",
+      "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+      "deathYear": 1376,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+      "edition": "quran.com, arabische Fassung, resource 91",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/104"
+    }
+  ],
+  "blocked": [
+    "Ibn ʿAbbās: resource 15 ohne إسناده صحيح oder إسناده حسن. Die im Ibn-Kathīr-Auszug genannten Zuschreibungen bleiben ohne eigene Wertung."
+  ],
+  "verses": [
+    {
+      "id": 1,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Wehe jedem Stichler und Nörgler,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=104&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Die Sūra ist mekkanisch. Im abgerufenen Auszug ist der Hammāz der, der mit der Rede tadelt, und der Lammāz der, der mit der Tat tadelt: er verachtet die Menschen und setzt sie herab. Ibn Kathīr verweist auf 68:11. Er führt an, Ibn ʿAbbās habe „humazatin lumazah“ als jemanden erklärt, der stichelt und Fehler sucht, und ar-Rabīʿ ibn Anas: der Hammāz stichelt ihm ins Gesicht, der Lammāz hinter seinem Rücken. Der Auszug bricht hier ab. Diese Zuschreibungen stehen ohne Isnād-Wertung und werden nicht als eigener Ibn-ʿAbbās-Beleg geführt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/104",
+          "verseKey": "104:1"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. „Wayl“ ist Drohung, Unheil und heftige Strafe für jeden, der die Menschen mit seiner Tat anstichelt und sie mit seinem Wort herabsetzt. Der Hammāz tadelt die Menschen und greift sie mit Zeichen und Tat an. Der Lammāz tadelt sie mit seinem Wort.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/104",
+          "verseKey": "104:1"
+        }
+      ],
+      "sabab": "Ibn Kathīr bezeichnet diese Sūra in der abgerufenen Fassung als mekkanisch. Ein einzelner Offenbarungsanlass ist in diesem Auszug nicht festgelegt.",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 2,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): der Besitz zusammenträgt und ihn zählt und immer wieder zählt,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=104&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der Besitz sammelte und ihn zählte: er häufte ihn aufeinander und zählte seine Zahl, wie in dem Wort „und sammelte und verwahrte“ (70:18). So as-Suddī und Ibn Ǧarīr. Muḥammad ibn Kaʿb: sein Besitz beschäftigte ihn am Tag, Stück um Stück; kam die Nacht, schlief er wie ein Aas.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/104",
+          "verseKey": "104:2"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Zu den Eigenschaften dieses Stichlers gehört, dass er kein Anliegen hat außer dem Sammeln, Zählen und der Selbstzufriedenheit mit dem Besitz. Er hat kein Verlangen, ihn auf den Wegen des Guten und für die Verwandtschaftsbande auszugeben.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/104",
+          "verseKey": "104:2"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 3,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): wobei er meint, daß sein Besitz ihn ewig leben ließe!",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=104&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Er meint, das Sammeln des Besitzes lasse ihn in dieser Wohnstätte ewig bleiben. „Kallā“: die Sache ist nicht so, wie er behauptet und wie er meint.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/104",
+          "verseKey": "104:3"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Er meint in seiner Unwissenheit, sein Besitz lasse ihn im Diesseits ewig bleiben. Deshalb geht all seine Mühe auf die Vermehrung seines Besitzes, von dem er glaubt, er verlängere sein Leben. Er weiß nicht, dass Geiz die Lebenszeiten abbricht und die Wohnstätten zerstört und dass Rechtschaffenheit das Leben mehrt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/104",
+          "verseKey": "104:3"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 4,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Keineswegs! Er wird ganz gewiß in al-Hutama geworfen werden.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=104&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Dieser, der Besitz sammelte und zählte, wird gewiss in al-Ḥuṭama geworfen. Das ist der Name einer Schicht des Feuers, weil sie den zermalmt, der in ihr ist.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/104",
+          "verseKey": "104:4"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Keineswegs, er wird gewiss in al-Ḥuṭama geworfen, das heißt hingeworfen.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/104",
+          "verseKey": "104:4"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 5,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Was läßt dich wissen, was al-Hutama ist?",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=104&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Ibn Kathīr führt „wa-mā adrāka mā l-ḥuṭama“ bis „taṭṭaliʿu ʿalā l-afʾida“ an. Thābit al-Bunānī: sie verbrennt sie bis zu den Herzen, während sie lebendig sind; dann sagt er, die Strafe habe sie erreicht, und weint. Muḥammad ibn Kaʿb: sie frisst alles von seinem Körper, bis sie sein Herz auf der Höhe der Kehle erreicht, dann kehrt sie zu seinem Körper zurück.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/104",
+          "verseKey": "104:5"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. „Was lässt dich wissen, was al-Ḥuṭama ist?“ Das vergrößert sie und schüchtert vor ihrer Sache ein.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/104",
+          "verseKey": "104:5"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 6,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): (Sie ist) Allahs entfachtes Feuer,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=104&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der abgerufene Text zu diesem Vers lautet: sie frisst alles von seinem Körper, bis sie sein Herz auf der Höhe der Kehle erreicht, dann kehrt sie zu seinem Körper zurück. Im Auszug zu 104:5 wird derselbe Satz Muḥammad ibn Kaʿb zugeschrieben.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/104",
+          "verseKey": "104:6"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Das Feuer Allahs, das entfacht ist, dessen Brennstoff die Menschen und die Steine sind.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/104",
+          "verseKey": "104:6"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 7,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): das Einblick in die Herzen gewinnt.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=104&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der abgerufene Text wiederholt die Erklärung von „was lässt dich wissen, was al-Ḥuṭama ist“ bis „die bis zu den Herzen vordringt“, mit dem Wort Thābit al-Bunānīs und dem Wort Muḥammad ibn Kaʿbs, das schon zu 104:5 steht.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/104",
+          "verseKey": "104:7"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Die vor ihrer Heftigkeit bis zu den Herzen vordringt, das heißt, sie durchdringt die Körper bis zu den Herzen.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/104",
+          "verseKey": "104:7"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 8,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Gewiß, es wird sie einschließen",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=104&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Sie ist über ihnen verschlossen, das heißt zugemacht, wie er es zuvor in Sūrat al-Balad erklärt hat. Danach beginnt ein Isnād über Ibn Mardawayh, der im Auszug abbricht. Der Bericht wird nicht vervollständigt und nicht bewertet.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/104",
+          "verseKey": "104:8"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Bei dieser heftigen Hitze sind sie darin festgehalten und haben die Hoffnung aufgegeben, daraus herauszukommen. Deshalb sagt Er: sie ist über ihnen verschlossen, das heißt geschlossen.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/104",
+          "verseKey": "104:8"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 9,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): in langgestreckten Säulen.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=104&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. In ausgestreckten Säulen. ʿAṭiyya al-ʿAwfī: Säulen aus Eisen. As-Suddī: aus Feuer. Šabīb ibn Bišr von ʿIkrima von Ibn ʿAbbās: die ausgestreckten sind die Türen. Qatāda zu einer Lesart ʿAbdallāh ibn Masʿūds: sie ist über ihnen verschlossen mit ausgestreckten Säulen. Al-ʿAwfī von Ibn ʿAbbās: Er ließ sie in Säulen eintreten und streckte sie über ihnen aus. Der Auszug bricht ab. Die Zuschreibungen an Ibn ʿAbbās stehen ohne Isnād-Wertung und werden nicht als eigener Beleg geführt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/104",
+          "verseKey": "104:9"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. In Säulen hinter den Türen, ausgestreckt, damit sie nicht daraus herauskommen. As-Saʿdī fügt das Wort an: sooft sie daraus herauswollen, werden sie darein zurückgebracht.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/104",
+          "verseKey": "104:9"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    }
+  ]
+}

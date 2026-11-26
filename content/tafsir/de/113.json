@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "tafsir-de-v2",
+  "source": "Deutsche Übertragung nach dem abgerufenen arabischen Tafsīr Ibn Kathīr (quran.com resource 14) und Tafsīr as-Saʿdī (resource 91). Verswortlaut: Frank Bubenheim und Nadeem (resource 27). Kein Ibn-ʿAbbās-Eintrag.",
+  "updated": "2026-11-26",
+  "fetchedAt": "2026-11-26",
+  "works": [
+    {
+      "id": "ibn-kathir",
+      "work": "Tafsīr Ibn Kathīr",
+      "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+      "deathYear": 774,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+      "edition": "quran.com, arabische Fassung, resource 14",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/113"
+    },
+    {
+      "id": "sadi",
+      "work": "Tafsīr as-Saʿdī",
+      "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+      "deathYear": 1376,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+      "edition": "quran.com, arabische Fassung, resource 91",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/113"
+    }
+  ],
+  "blocked": [
+    "Ibn ʿAbbās: resource 15 ohne erlaubte Isnād-Wertung.",
+    "113:5: resource 14 wiederholt den Abschnitt zu 113:4 und eröffnet nicht den Vers über den Neider. Deshalb kein Ibn-Kathīr-Text."
+  ],
+  "verses": [
+    {
+      "id": 1,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Sag: Ich nehme Zuflucht beim Herrn des Tagesanbruchs",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=113&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Die beiden Schutzsuren sind medinensisch. Ibn Kathīr führt einen Bericht Aḥmads an: ʿAffān, Ḥammād ibn Salama, ʿĀṣim ibn Bahdala, von Zirr ibn Ḥubayš: ich sagte zu Ubayy ibn Kaʿb, Ibn Masʿūd habe die beiden Schutzsuren nicht in seine Muṣḥaf-Abschrift geschrieben. Ubayy sagte: ich bezeuge, dass der Gesandte Allahs mir berichtete, dass Ǧibrīl sagte. Der Auszug bricht ab. Er wird nicht vervollständigt und nicht bewertet.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/113",
+          "verseKey": "113:1"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Sprich, Zuflucht suchend: ich nehme Zuflucht, das heißt, ich flüchte, suche Schutz und halte mich fest am Herrn des falaq. Das ist der, der das Korn und den Kern spaltet und den Morgen hervorbrechen lässt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/113",
+          "verseKey": "113:1"
+        }
+      ],
+      "sabab": "Ibn Kathīr bezeichnet die beiden Schutzsuren in der abgerufenen Fassung als medinensisch.",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 2,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): vor dem Übel dessen, was Er erschaffen hat,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=113&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Vor dem Übel dessen, was Er erschaffen hat: vor dem Übel aller Geschöpfe. Thābit al-Bunānī und al-Ḥasan al-Baṣrī: die Hölle, Iblīs und seine Nachkommenschaft, von dem, was Er erschaffen hat.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/113",
+          "verseKey": "113:2"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Vor dem Übel dessen, was Er erschaffen hat. Das umfasst alles, was Allah erschaffen hat: Menschen, Ǧinn und Tiere. Man nimmt bei ihrem Erschaffer Zuflucht vor dem Übel, das in ihnen ist.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/113",
+          "verseKey": "113:2"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 3,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): und vor dem Übel der Dunkelheit, wenn sie zunimmt,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=113&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Vor dem Übel eines ġāsiq, wenn er hereinbricht. Muğāhid: die Nacht, wenn sie hereinbricht, das ist der Untergang der Sonne. Al-Buḫārī führt das von ihm an, und so Ibn Abī Naǧīḥ von ihm. Ebenso Ibn ʿAbbās, Muḥammad ibn Kaʿb al-Quraẓī, aḍ-Ḍaḥḥāk, Ḫuṣayf, al-Ḥasan und Qatāda: die Nacht, wenn sie mit ihrer Dunkelheit kommt. Az-Zuhrī: die Sonne, wenn sie untergeht. Der Auszug bricht ab. Die Zuschreibung an Ibn ʿAbbās steht ohne Isnād-Wertung.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/113",
+          "verseKey": "113:3"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Dann nennt Er nach dem Allgemeinen das Besondere: vor dem Übel eines ġāsiq, wenn er hereinbricht, das heißt vor dem Übel dessen, was in der Nacht geschieht, wenn sie die Menschen bedeckt und viele böse Geister und schädliche Tiere sich darin ausbreiten.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/113",
+          "verseKey": "113:3"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 4,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): und vor dem Übel der Knotenanbläserinnen",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=113&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Vor dem Übel derer, die auf die Knoten blasen. Muğāhid, ʿIkrima, al-Ḥasan, Qatāda und aḍ-Ḍaḥḥāk: die Zauberinnen. Muğāhid: wenn sie Besprechungen sprechen und auf die Knoten blasen. Ibn Kathīr führt einen Isnād Ibn Ǧarīrs an, Ibn ʿAbd al-Aʿlā, Ibn Thawr, von Maʿmar, von Ibn Ṭāwūs, von seinem Vater: nichts ist der Beigesellung näher als die Besprechung der Schlange und der Besessenen. In einem weiteren Bericht kam Ǧibrīl zum Gesandten Allahs und sagte: bist du erkrankt, Muḥammad? Er sagte: ja. Er sagte: im Namen Allahs bespreche ich dich, vor jeder Krankheit, die dir schadet, und vor dem Übel jedes Neiders und jedes bösen Blicks; Allah heilt dich. Ibn Kathīr sagt, vielleicht gehörte das zu seiner Erkrankung, als er verzaubert wurde; dann heilte Allah ihn und warf die List der zaubernden, neidischen Juden auf sie selbst zurück. Der Auszug bricht ab. Der Bericht wird nicht über den sichtbaren Wortlaut hinaus ergänzt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/113",
+          "verseKey": "113:4"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Vor dem Übel derer, die auf die Knoten blasen: vor dem Übel der Zauberinnen, die sich bei ihrem Zauber des Blasens auf die Knoten bedienen, die sie über den Zauber knüpfen.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/113",
+          "verseKey": "113:4"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 5,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): und vor dem Übel eines (jeden) Neidenden, wenn er neidet.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=113&per_page=50",
+      "tafsir": [
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Vor dem Übel eines Neiders, wenn er neidet. Der Neider ist der, der das Schwinden der Gunst am Beneideten liebt und nach Kräften auf ihr Schwinden hinarbeitet. Deshalb braucht man die Zuflucht bei Allah vor seinem Übel und die Vereitelung seiner List. Zum Neider gehört der, der mit dem bösen Blick trifft, denn der böse Blick geht nur von einem Neider mit böser Art und übler Seele aus. Diese Sūra umfasst die Zuflucht vor allen Arten des Übels, allgemein und im Einzelnen. Sie zeigt, dass der Zauber eine Wirklichkeit hat, deren Schaden man fürchtet und vor der man bei Allah Zuflucht nimmt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/113",
+          "verseKey": "113:5"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    }
+  ]
+}

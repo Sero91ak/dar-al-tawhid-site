@@ -1,0 +1,221 @@
+{
+  "schemaVersion": "tafsir-de-v2",
+  "source": "Deutsche Übertragung nach dem abgerufenen arabischen Tafsīr Ibn Kathīr (quran.com resource 14) und Tafsīr as-Saʿdī (resource 91). Verswortlaut: Frank Bubenheim und Nadeem (resource 27). Kein Ibn-ʿAbbās-Eintrag.",
+  "updated": "2026-11-26",
+  "fetchedAt": "2026-11-26",
+  "works": [
+    {
+      "id": "ibn-kathir",
+      "work": "Tafsīr Ibn Kathīr",
+      "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+      "deathYear": 774,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+      "edition": "quran.com, arabische Fassung, resource 14",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/111"
+    },
+    {
+      "id": "sadi",
+      "work": "Tafsīr as-Saʿdī",
+      "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+      "deathYear": 1376,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+      "edition": "quran.com, arabische Fassung, resource 91",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/111"
+    }
+  ],
+  "blocked": [
+    "Ibn ʿAbbās: resource 15 ohne erlaubte Isnād-Wertung. Der Buḫārī-Auszug zu 111:1 bricht vor dem vollständigen Wortlaut ab."
+  ],
+  "verses": [
+    {
+      "id": 1,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Zugrunde gehen sollen die Hände Abu Lahabs, und zugrunde gehen soll er (selbst)!",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=111&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Die Sūra ist mekkanisch. Ibn Kathīr führt al-Buḫārī an: Muḥammad ibn Sallām berichtete uns, Abū Muʿāwiya, al-Aʿmaš, von ʿAmr ibn Murra, von Saʿīd ibn Ǧubayr, von Ibn ʿAbbās: der Prophet ging zum Baṭḥāʾ hinaus, stieg auf den Berg und rief „Yā ṣabāḥāh“. Die Qurayš versammelten sich bei ihm, und er sagte: „Was meint ihr, wenn ich euch berichtete, dass der Feind.“ Der Auszug bricht ab. Die Fortsetzung und eine Nummer werden nicht ergänzt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/111",
+          "verseKey": "111:1"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Abū Lahab ist der Onkel des Propheten und war heftig feindlich gegen ihn. Er hatte keine Religion und keinen Schutz der Verwandtschaft. Allah tadelte ihn mit diesem großen Tadel, der bis zum Tag der Auferstehung eine Schande über ihm ist: zugrunde gehen sollen die Hände Abū Lahabs, das heißt seine Hände verlieren, und er ist unglücklich; und zugrunde gehen soll er, und er gewinnt nicht.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/111",
+          "verseKey": "111:1"
+        }
+      ],
+      "sabab": "Ibn Kathīr bezeichnet diese Sūra in der abgerufenen Fassung als mekkanisch.",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 2,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Was nützt ihm sein Besitz und das, was er erworben hat?",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=111&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Was nützt ihm sein Besitz und das, was er erworben hat. Ibn ʿAbbās und andere: „was er erworben hat“ meint sein Kind. So wird es auch von ʿĀʾiša, Muğāhid, ʿAṭāʾ, al-Ḥasan und Ibn Sīrīn angeführt. Es wird von Ibn Masʿūd erwähnt, dass Abū Lahab, als der Gesandte Allahs seine Leute zum Glauben rief, sagte: wenn das wahr ist, was der Sohn meines Bruders sagt, kaufe ich mich los. Der Auszug bricht ab. Die Zuschreibung an Ibn ʿAbbās steht ohne Isnād-Wertung.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/111",
+          "verseKey": "111:2"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Sein Besitz, den er hatte und der ihn übermütig machte, nützte ihm nichts, und auch nicht, was er erwarb. Es wehrte nichts von der Strafe Allahs ab, als sie ihn traf.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/111",
+          "verseKey": "111:2"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 3,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Er wird einem Feuer voller Flammen ausgesetzt sein",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=111&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Einem Feuer mit Funken, Flamme und heftigem Brennen.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/111",
+          "verseKey": "111:3"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Er wird einem Feuer voller Flammen ausgesetzt sein: das Feuer wird ihn von jeder Seite umgeben.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/111",
+          "verseKey": "111:3"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 4,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): und (auch) seine Frau, die Brennholzträgerin.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=111&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Und seine Frau, die Brennholzträgerin. Seine Frau gehörte zu den vornehmen Frauen der Qurayš: Umm Ǧamīl, ihr Name ist Arwā bint Ḥarb ibn Umayya, die Schwester Abū Sufyāns. Sie half ihrem Mann in seinem Unglauben, seiner Leugnung und seiner Feindschaft. Deshalb wird sie am Tag der Auferstehung eine Hilfe gegen ihn in seiner Strafe im Höllenfeuer sein. Deshalb sagt Er: die Brennholzträgerin.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/111",
+          "verseKey": "111:4"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Er und seine Frau, die Brennholzträgerin. Auch sie fügte dem Gesandten Allahs heftiges Leid zu. Sie und ihr Mann halfen einander bei Sünde und Feindschaft, warfen das Übel hin und bemühten sich nach Kräften, dem Gesandten Leid zuzufügen.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/111",
+          "verseKey": "111:4"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 5,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Um ihrem Hals ist ein Strick aus Palmfasern.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=111&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Um ihren Hals ein Strick aus Palmfasern: sie trägt das Brennholz und wirft es auf ihren Mann, damit das, worin er ist, noch zunehme, und sie ist dazu bereit. Muğāhid und ʿUrwa: aus dem Feuer. Von Muğāhid, ʿIkrima, al-Ḥasan, Qatāda, ath-Thawrī und as-Suddī: die Brennholzträgerin ging mit Verleumdung um. Ibn Kathīr sagt, Ibn Ǧarīr habe das gewählt. Der Auszug bricht ab.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/111",
+          "verseKey": "111:5"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Sie sammelt auf ihrem Rücken an Lasten wie jemand, der Brennholz sammelt. Für ihren Hals ist ein Strick aus masad bereitet, das ist Palmfaser. Oder sie trägt im Feuer das Brennholz auf ihren Mann, während an ihrem Hals ein Strick aus Palmfaser hängt. So oder so ist in dieser Sūra ein deutliches Zeichen: Allah sandte sie herab, als Abū Lahab und seine Frau noch nicht zugrunde gegangen waren, und berichtete, dass sie im Feuer bestraft werden. Dazu gehört, dass sie nicht Muslime werden. Es traf ein, wie der Kundige des Verborgenen und des Sichtbaren berichtet hatte.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/111",
+          "verseKey": "111:5"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    }
+  ]
+}

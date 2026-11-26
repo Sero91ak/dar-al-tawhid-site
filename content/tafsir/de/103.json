@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "tafsir-de-v2",
+  "source": "Deutsche Übertragung nach dem abgerufenen arabischen Tafsīr Ibn Kathīr (quran.com resource 14) und Tafsīr as-Saʿdī (resource 91). Verswortlaut: Frank Bubenheim und Nadeem (resource 27). Kein Ibn-ʿAbbās-Eintrag.",
+  "updated": "2026-11-26",
+  "fetchedAt": "2026-11-26",
+  "works": [
+    {
+      "id": "ibn-kathir",
+      "work": "Tafsīr Ibn Kathīr",
+      "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+      "deathYear": 774,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+      "edition": "quran.com, arabische Fassung, resource 14",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/103"
+    },
+    {
+      "id": "sadi",
+      "work": "Tafsīr as-Saʿdī",
+      "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+      "deathYear": 1376,
+      "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+      "edition": "quran.com, arabische Fassung, resource 91",
+      "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/103"
+    }
+  ],
+  "blocked": [
+    "Ibn ʿAbbās: Tafsīr aṭ-Ṭabarī, quran.com resource 15, enthält für 103:1–3 keine Formulierung إسناده صحيح oder إسناده حسن. Tanwīr al-Miqbās wird nicht verwendet."
+  ],
+  "verses": [
+    {
+      "id": 1,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Beim Zeitalter!",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=103&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Ibn Kathīr leitet die Sūra als mekkanisch ein. Er führt an, ʿAmr ibn al-ʿĀṣ sei, noch bevor er Muslim wurde, zu Musaylima gekommen. Auf die Frage, was in dieser Zeit auf ihren Gefährten herabgesandt wurde, sagte ʿAmr, es sei eine kurze, beredte Sūra herabgesandt worden, und er begann mit „wal-ʿaṣr, inna l-insān…“. Der abgerufene Auszug bricht hier ab.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/103",
+          "verseKey": "103:1"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Allah schwört beim ʿaṣr, das ist die Nacht und der Tag, der Ort der Handlungen und Werke der Diener.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/103",
+          "verseKey": "103:1"
+        }
+      ],
+      "sabab": "Ibn Kathīr bezeichnet diese Sūra in der abgerufenen Fassung als mekkanisch. Ein einzelner Offenbarungsanlass ist in diesem Auszug nicht festgelegt.",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 2,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): Der Mensch befindet sich wahrlich in Verlust,",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=103&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Er schwört darauf, dass der Mensch sich in Verlust und Verderben befindet.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/103",
+          "verseKey": "103:2"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Dass jeder Mensch ein Verlierer ist. Der Verlierer ist das Gegenteil des Gewinnenden. Der Verlust hat mehrere, ungleiche Stufen. Er kann vollständig sein, wie bei dem, der Diesseits und Jenseits verliert, dem die Wonne entgeht und der das Höllenfeuer verdient.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/103",
+          "verseKey": "103:2"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    },
+    {
+      "id": 3,
+      "meaning": "Übersetzung (Frank Bubenheim und Nadeem): außer denjenigen, die glauben und rechtschaffene Werke tun und einander die Wahrheit eindringlich empfehlen und einander die Standhaftigkeit eindringlich empfehlen.",
+      "meaningSource": "https://api.quran.com/api/v4/quran/translations/27?chapter_number=103&per_page=50",
+      "tafsir": [
+        {
+          "source": "Ibn Kathīr",
+          "author": "Ismāʿīl ibn ʿUmar ibn Kathīr",
+          "deathYear": 774,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs.",
+          "work": "Tafsīr Ibn Kathīr",
+          "edition": "quran.com, arabische Fassung, resource 14",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Er nimmt von der Gattung Mensch diejenigen vom Verlust aus, die mit ihren Herzen glauben, mit ihren Gliedern rechtschaffene Werke tun und einander die Wahrheit eindringlich empfehlen. Das ist das Verrichten des Gehorsams und das Unterlassen des Verbotenen.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/14/by_chapter/103",
+          "verseKey": "103:3"
+        },
+        {
+          "source": "as-Saʿdī",
+          "author": "ʿAbd ar-Raḥmān ibn Nāṣir as-Saʿdī",
+          "deathYear": 1376,
+          "deathYearBasis": "Biographische Standardangabe, nicht Teil des abgerufenen Auszugs. Der abgerufene Schluss von Sūra 114 nennt die Fertigstellung am 1. Rabīʿ I 1344, nicht das Todesjahr.",
+          "work": "Tafsīr as-Saʿdī",
+          "edition": "quran.com, arabische Fassung, resource 91",
+          "translation": true,
+          "excerpt": true,
+          "text": "Deutsche Übertragung des abgerufenen arabischen Auszugs. Der Verlust kann auch nur in mancher Hinsicht bestehen und in anderer nicht. Deshalb hat Allah den Verlust für jeden Menschen allgemein gesetzt, außer für den, der vier Eigenschaften hat: den Glauben an das, woran zu glauben Allah befohlen hat, und der Glaube besteht nicht ohne Wissen; das rechtschaffene Werk, und das umfasst alle guten Taten, die äußeren und die inneren, die das Recht Allahs und das Recht seiner Diener betreffen, die Pflicht und das Empfohlene; das gegenseitige Einschärfen der Wahrheit, das ist der Glaube und das rechtschaffene Werk; und das gegenseitige Einschärfen der Geduld im Gehorsam gegenüber Allah, beim Unterlassen des Ungehorsams und bei den schmerzhaften Bestimmungen Allahs. Mit den ersten beiden vervollkommnet der Mensch sich selbst, mit den letzten beiden andere. Wer die vier Dinge vervollständigt, ist vor dem Verlust bewahrt und gewinnt.",
+          "sourceUrl": "https://api.quran.com/api/v4/tafsirs/91/by_chapter/103",
+          "verseKey": "103:3"
+        }
+      ],
+      "sabab": "",
+      "hadiths": [],
+      "place": "",
+      "period": "",
+      "year": ""
+    }
+  ]
+}

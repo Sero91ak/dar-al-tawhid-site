@@ -9978,6 +9978,16 @@
         "content/admin/canonical-content-continuation-policy.json"
       ],
       "expiresAt": "2026-12-31T23:59:00+01:00"
+    },
+    {
+      "id": "tafsir-phase2-short-surahs-20261126",
+      "at": "2026-11-26T15:10:00+01:00",
+      "approvedBy": "owner-explicit-20261126-phase2-tafsir-areas",
+      "reason": "Owner Phase 2: fill content/tafsir/de for the missing and empty short surahs from fetched tafsir only. globalLock stays on. No prayer, Qibla, location, push, Kids or native project changes.",
+      "paths": [
+        "content/tafsir/de/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00+01:00"
     }
   ],
   "enabled": true
