@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "revert-hadith-library-shelves-visitor-20261126",
+      "at": "2026-11-26T10:12:00+01:00",
+      "approvedBy": "owner-serhat-20261126-t29u-restore-app-clicks",
+      "reason": "Owner Serhat t29u: the live adult app stopped opening every area except the Hadith library after PR 1903. Approved immediate revert of that visitor shelves release so Qur'an, Dua, More and posts are clickable again. Removes the shelves script, stylesheet and its build check only.",
+      "paths": [
+        "assets/hadith-library-shelves-v1.js",
+        "assets/hadith-library-shelves-v1.css",
+        "scripts/check-hadith-library-shelves-v1.cjs",
+        "scripts/cf-pages-build.js"
+      ],
+      "expiresAt": "2026-11-28T23:59:00+01:00"
+    },
+    {
       "id": "core-lock-push-language-t28u-20261126",
       "at": "2026-11-26T10:20:00+01:00",
       "approvedBy": "owner-serhat-20261126-t28u-core-lock-language-only",
@@ -164,19 +177,6 @@
         ".github/CORE_SECURITY_LOCK.md"
       ],
       "expiresAt": "2026-11-27T23:59:59Z"
-    },
-    {
-      "id": "hadith-library-shelves-visitor-20261126",
-      "at": "2026-11-26T09:20:00+01:00",
-      "approvedBy": "owner-serhat-20261126-hadith-library-redesign-global-live-t21u",
-      "reason": "Owner Serhat approved the Ḥadīṯ library redesign before the reading view and global live for the adult surfaces that show it. Shelves, fihris and the architecture header only. No Kids, OneSignal, prayer, Qibla, push or Zentrale.",
-      "paths": [
-        "assets/hadith-library-shelves-v1.js",
-        "assets/hadith-library-shelves-v1.css",
-        "scripts/check-hadith-library-shelves-v1.cjs",
-        "scripts/cf-pages-build.js"
-      ],
-      "expiresAt": "2026-11-28T23:59:00+01:00"
     },
     {
       "id": "push-locale-delivery-20261126",

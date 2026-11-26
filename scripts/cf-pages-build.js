@@ -68,10 +68,6 @@ execFileSync(process.execPath, [path.join(__dirname, 'assert-hadith-public-prese
   cwd: root,
   stdio: 'inherit'
 });
-execFileSync(process.execPath, [path.join(__dirname, 'check-hadith-library-shelves-v1.cjs')], {
-  cwd: root,
-  stdio: 'inherit'
-});
 
 const quranSearchBuilder = path.join(__dirname, 'build-quran-search-index.js');
 execFileSync(process.execPath, [quranSearchBuilder], {
