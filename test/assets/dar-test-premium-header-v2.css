@@ -410,16 +410,23 @@ html.dar-ios-native-app.dar-test-premium-header-v2 body.dar-ios-native-app.has-b
 
 /* V1415: Frauen sticky top comes from the measured global brand via one CSS variable. */
 /* CALM_HERO_V1417: shorter dock, keep heads in the women's photographs. */
+html[data-theme] body.is-frauen-route .frauen-library-hero,
 html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 > .frauen-library-hero{
-  height:clamp(108px,16svh,156px)!important;
-  background-position:center 62%!important;
+  min-height:0!important;
+  height:clamp(132px,20svh,176px)!important;
+  background-position:74% 46%!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero h2{
+  font-size:clamp(22px,5.6vw,32px)!important;
+  line-height:1.12!important;
 }
 html[data-theme] body.is-frauen-route #appView :is(.frauen-library-card.has-visual,.frauen-library-area-card.has-visual){
   min-height:clamp(128px,22svh,168px)!important;
   background-position:78% 42%!important;
 }
 @media (max-width:390px),(max-height:700px){
+  html[data-theme] body.is-frauen-route .frauen-library-hero,
   html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 > .frauen-library-hero{
-    height:clamp(96px,14svh,128px)!important;
+    height:clamp(120px,18svh,148px)!important;
   }
 }

@@ -325,12 +325,16 @@
     if (typeof w.navigate === "function") w.navigate("hadith", value || "");
     else if (w.location) w.location.hash = "#/hadith" + (value ? "/" + value : "");
   }
-  function crumbs(book, chapter, section, loc) {
+  function crumbs(book, chapter, section, loc, title) {
     var rows = [{ label: t("crumbHome", loc), value: "" }];
     if (book) rows.push({ label: book.title || t("works", loc), value: String(book.id) });
     if (book && chapter) rows.push({ label: cleanKitab(chapter.title || t("kitab", loc)), value: book.id + "/" + chapter.id });
     if (book && chapter && section) rows.push({ label: cleanBab(section.title || t("bab", loc)), value: book.id + "/" + chapter.id + "/" + section.id });
-    if (rows.length > 1) rows.pop();
+    if (title) {
+      var shown = norm(title);
+      rows = rows.filter(function (row) { return norm(publicText(row.label)) !== shown; });
+    }
+    if (!rows.length) rows = [{ label: t("crumbHome", loc), value: "" }];
     return '<nav class="hls-crumbs" aria-label="' + esc(t("library", loc)) + '">' + rows.map(function (row, i) {
       var sep = i ? '<span class="hls-crumb-sep" aria-hidden="true"> › </span>' : "";
       return sep + '<button type="button" class="hls-crumb" data-nav="hadith" data-value="' + esc(row.value) + '">' + esc(publicText(row.label)) + "</button>";
@@ -584,7 +588,7 @@
   }
   function workFrame(book, loc) {
     var arabic = arabicOf(book.title);
-    return crumbs(book, null, null, loc) +
+    return crumbs(book, null, null, loc, book.title || "") +
       '<figure class="hls-work">' + faceHtml(book) +
       (arabic ? '<figcaption class="hls-work-ar" lang="ar" dir="rtl">' + esc(arabic) + "</figcaption>" : "") +
       "</figure>";
@@ -612,8 +616,15 @@
       var blob = (chapter.title || "") + " " + shown.name + " " + shown.arabic + " " + babs.map(function (bab) { return bab.title; }).join(" ");
       if (!matchesQuery(blob, q) && String(openId) !== String(chapter.id)) return "";
       var name = shown.name;
-      if (!name || countish(name)) name = babs.length ? cleanBab(babs[0].title || "") : "";
-      if (!name || norm(name) === "bab" || norm(name) === "kitab" || countish(name)) name = t("kitab", loc) + " " + (index + 1);
+      if (!name || norm(name) === "bab" || norm(name) === "kitab" || countish(name)) {
+        name = "";
+        babs.some(function (bab) {
+          var babName = cleanBab(bab.title || "");
+          if (babName && norm(babName) !== "bab" && norm(babName) !== "kitab" && !countish(babName)) { name = babName; return true; }
+          return false;
+        });
+        if (!name) name = t("kitab", loc);
+      }
       if (babs.length <= 1) return navRow(book.id + "/" + chapter.id, name, shown.arabic, countLabel(count, loc));
       var open = String(openId) === String(chapter.id);
       var inner = open ? '<ul class="hls-group hls-group--inner">' + babs.map(function (bab, babIndex) {
@@ -660,7 +671,7 @@
     }).join("");
     var group = '<ul class="hls-group">' + (list || '<li class="hls-empty">' + esc(t("noHits", loc)) + "</li>") + "</ul>";
     if (bare) return page(book.title || "", workSub(book, countLabel(rows.length, loc)), tools(q, loc), workFrame(book, loc) + group, loc, true);
-    return page(title, [book.title, countLabel(rows.length, loc)].filter(Boolean).join(" · "), tools(q, loc), crumbs(book, chapter, section, loc) + group, loc, true);
+    return page(title, [book.title, countLabel(rows.length, loc)].filter(Boolean).join(" · "), tools(q, loc), crumbs(book, chapter, section, loc, title) + group, loc, true);
   }
   function onHadith() {
     try { return !!(w.readRoute && w.readRoute().view === "hadith"); } catch (e) { return false; }
@@ -701,9 +712,12 @@
   function hadithReading(book, h, loc) {
     var chapter = h.chapterId ? { id: h.chapterId, title: h.chapterTitle || "" } : null;
     var section = (h.babId || h.babTitle) ? { id: h.babId || (chapter && chapter.id) || "", title: h.babTitle || "" } : null;
-    var who = publicText(h.narrator || h.narratorLine || "");
+    var rawWho = publicText(h.narrator || h.narratorLine || "").replace(/\s*ist überliefert:?\s*/gi, " ").replace(/\s+/g, " ").trim();
+    var honorMatch = rawWho.match(/[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF][\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF\s]*/);
+    var honor = honorMatch ? honorMatch[0].trim() : "";
+    var latinWho = honor ? rawWho.replace(honorMatch[0], " ").replace(/\s+/g, " ").trim() : rawWho;
     var say = publicText(h.speakerLabel || "");
-    if (/^(er|sie)\s+sagte:?$/i.test(say)) say = "";
+    if (/^(er|sie)\s+sagte:?$/i.test(say) || /überliefert/i.test(say)) say = "";
     var german = publicText(h.german || "");
     var source = publicText(h.source || "");
     var grade = publicText(h.grade || "");
@@ -712,14 +726,14 @@
     var title = cleanBab(h.babTitle || "") || cleanKitab(h.chapterTitle || "");
     if (!title || norm(title) === "bab" || norm(title) === "kitab" || countish(title)) title = (book && book.title) || t("library", loc);
     var body = '<article class="hls-reading">' +
-      (who ? '<p class="hls-reading-who" dir="ltr">' + bidi(who) + "</p>" : "") +
+      ((latinWho || honor) ? '<p class="hls-reading-who" dir="ltr">' + (latinWho ? '<span class="hls-reading-name">' + esc(latinWho) + "</span>" : "") + (honor ? '<bdi class="hls-reading-honor" dir="rtl" lang="ar">' + esc(honor) + "</bdi>" : "") + "</p>" : "") +
       (say && say !== who ? '<p class="hls-reading-say" dir="ltr">' + bidi(say) + "</p>" : "") +
       (h.arabic ? '<p class="hls-reading-ar" lang="ar" dir="rtl">' + esc(String(h.arabic)) + "</p>" : "") +
       (german ? '<p class="hls-reading-matn" dir="ltr">' + bidi(german) + "</p>" : "") +
       (grade ? '<p class="hls-reading-grade">' + esc(grade) + "</p>" : "") +
       (source ? '<p class="hls-reading-source">' + esc(source) + "</p>" : "") +
       "</article>";
-    return page(title, [book && book.title, num].filter(Boolean).join(" · "), tools(searchQuery(), loc), crumbs(book, chapter, section, loc) + body, loc, true);
+    return page(title, [book && book.title, num].filter(Boolean).join(" · "), tools(searchQuery(), loc), crumbs(book, chapter, section, loc, title) + body, loc, true);
   }
   function renderShelves() {
     w.__SHELF_RENDER = (w.__SHELF_RENDER || 0) + 1;

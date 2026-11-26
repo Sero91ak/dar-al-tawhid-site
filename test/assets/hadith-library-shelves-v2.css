@@ -61,7 +61,10 @@ html[data-theme] body.is-hadith-route #darHadithHeroDockV1416 > .frauen-library-
 }
 html[data-theme] body.is-hadith-route #darHadithHeroDockV1416 > .frauen-library-hero h2{
   font-size:clamp(18px,4.4vw,28px)!important;
-  line-height:1.03!important;
+  line-height:1.12!important;
+  color:#f8f1e2!important;
+  -webkit-text-fill-color:#f8f1e2!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.55);
 }
 html[data-theme] body.is-hadith-route #darHadithHeroDockV1416 .frauen-library-hero__subtitle{
   font-size:clamp(13px,1.7cqw,16px)!important;
@@ -95,8 +98,8 @@ html[data-theme] body.is-hadith-route #appView .dar-frauen-dock-spacer{
   display:block!important;
   position:relative!important;
   width:100%!important;
-  height:var(--frauen-dock-reserved,0px)!important;
-  min-height:0!important;
+  height:max(var(--frauen-dock-reserved,0px), calc(clamp(96px,16svh,156px) + 78px))!important;
+  min-height:calc(clamp(96px,16svh,156px) + 78px)!important;
   padding:0!important;
   margin:0!important;
   border:0!important;
@@ -503,7 +506,8 @@ html[data-theme] body.is-hadith-route #appView .hls-thumb--mark span{
 html[data-theme] body.is-hadith-route #appView .hls-reading{max-width:42rem;padding:2px 0 28px;}
 html[data-theme] body.is-hadith-route #appView .hls-reading p{margin:0 0 12px;text-align:start;unicode-bidi:isolate;}
 html[data-theme] body.is-hadith-route #appView .hls-reading-who,
-html[data-theme] body.is-hadith-route #appView .hls-reading-say{color:var(--hls-gold);font-size:.95rem;line-height:1.45;}
+html[data-theme] body.is-hadith-route #appView .hls-reading-say{color:var(--hls-gold);font-size:.95rem;line-height:1.45;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;justify-content:flex-start;}
+html[data-theme] body.is-hadith-route #appView .hls-reading-honor{unicode-bidi:isolate;font-family:"Noto Naskh Arabic","Amiri",serif;}
 html[data-theme] body.is-hadith-route #appView .hls-reading-matn{font-size:1.05rem;line-height:1.6;color:var(--hls-ink);}
 html[data-theme] body.is-hadith-route #appView .hls-reading-ar{font-family:"Noto Naskh Arabic","Amiri",serif;font-size:1.28rem;line-height:1.8;color:var(--hls-ink);}
 html[data-theme] body.is-hadith-route #appView .hls-reading-source,
