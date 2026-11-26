@@ -407,7 +407,7 @@
       var book = null;
       books.some(function (item) { if (isSix(item.title, key)) { book = item; return true; } return false; });
       if (!book) return "";
-      return '<button type="button" class="hls-chip" data-nav="hadith" data-value="' + esc(book.id) + '">' + esc(labels[i] || book.title) + "</button>";
+      return '<button type="button" class="hls-quick" data-nav="hadith" data-value="' + esc(book.id) + '">' + esc(labels[i] || book.title) + "</button>";
     }).join("");
     if (!chips) return "";
     return '<div class="hls-six"><p class="hls-six-label">' + esc(t("sixBooks", loc)) + '</p><div class="hls-six-row">' + chips + "</div></div>";
@@ -744,7 +744,7 @@
         try { var pos = search.value.length; search.setSelectionRange(pos, pos); } catch (e3) {}
       }
     }
-    w.document.querySelectorAll(".hls-book, .hls-compact, .hls-chip").forEach(function (btn) {
+    w.document.querySelectorAll(".hls-book, .hls-compact, .hls-quick").forEach(function (btn) {
       btn.addEventListener("click", function () { writeSearch(""); });
     });
     w.document.querySelectorAll("[data-hls-section]").forEach(function (btn) {
