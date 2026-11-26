@@ -28,7 +28,7 @@ html[data-theme] body.is-frauen-route #appView
   background-color:var(--card,var(--bg))!important;
   background-image:var(--frauen-card-img)!important;
   background-size:cover!important;
-  background-position:right center!important;
+  background-position:78% 42%!important;
   background-repeat:no-repeat!important;
   box-shadow:0 10px 26px rgba(4,16,15,.07)!important;
   transform:none!important;
@@ -231,8 +231,8 @@ html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 > .frauen-library-
   width:100%!important;
   min-width:0!important;
   max-width:none!important;
-  height:clamp(240px,53vw,360px)!important;
-  height:clamp(240px,53cqw,360px)!important;
+  height:clamp(132px,20svh,176px)!important;
+  background-position:74% 46%!important;
   min-height:0!important;
   max-height:none!important;
   box-sizing:border-box!important;
