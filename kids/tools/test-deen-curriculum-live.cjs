@@ -22,12 +22,24 @@ assert.equal(lessons.filter(x=>x.status==="existing").length,6,"Six original les
 assert.equal(lessons.filter(x=>x.status==="planned").length,0,"No Dīn lesson may remain planned or locked after publication");
 assert.equal(lessons.filter(x=>x.status==="published").length,24,"24 additional fully written master lessons must be publicly readable");
 assert.equal(lessons.filter(x=>x.status==="review").length,0,"Research drafts cannot be released publicly");
+function assertApprovedMasterAudio(l){
+  const a=l.audio||{};
+  assert.ok(a&&typeof a==="object"&&a.url,"Missing master audio: "+l.id);
+  assert.equal(a.approvedForPlayback,true,"Unapproved Dīn audio: "+l.id);
+  assert.equal(a.releaseEnabled,true,"Dīn audio not release-enabled: "+l.id);
+  assert.equal(typeof a.liveConfirmed,"boolean","liveConfirmed must be an explicit boolean: "+l.id);
+  assert.ok(typeof a.sha256==="string"&&/^[0-9a-f]{64}$/.test(a.sha256),"Missing audio hash: "+l.id);
+  const loc=path.join(root,String(a.url).replace(/^\/+/, ""));
+  assert.ok(fs.existsSync(loc),"Missing Dīn audio file: "+a.url);
+  const digest=require("node:crypto").createHash("sha256").update(fs.readFileSync(loc)).digest("hex");
+  assert.equal(digest,a.sha256,"Dīn audio hash mismatch: "+l.id);
+}
 assert.ok(lessons.filter(x=>x.status==="published").every(x=>
  typeof x.masterStoryText==="string"&&x.masterStoryText.length>1600&&
  Array.isArray(x.sourceRefs)&&x.sourceRefs.length>=3&&
- Array.isArray(x.sourceLinks)&&x.sourceLinks.length===x.sourceRefs.length&&
- !Object.values(x.audio||{}).some(Boolean)
-),"Every published reading requires an independent master script, at least three sources, and no unverified audio");
+ Array.isArray(x.sourceLinks)&&x.sourceLinks.length===x.sourceRefs.length
+),"Every published reading requires an independent master script and at least three sources");
+for(const l of lessons) assertApprovedMasterAudio(l);
 let totalSources=0;
 for(const l of lessons.filter(x=>x.status==="published")){
  assert.ok(l.masterStoryText.startsWith("As-Salāmu")&&l.masterStoryText.endsWith("Barakātuh."),"Master narrative incomplete: "+l.id);
@@ -57,7 +69,7 @@ assert.ok(!code.includes("installSwipeBack("),"Swipe navigation forbidden");
 new vm.Script(code,{filename:"kids/deen-lessons.js"});
 const shells=["kids/index.html","kids/start.html","kids/shell.html"].map(read);
 assert.ok(shells.every(x=>x===shells[0]),"The 3 KIDS HTML shells must remain identical");
-assert.ok(shells[0].includes("/kids/deen-lessons.js?v=13"),"KIDS Dīn runtime version missing");
+assert.ok(shells[0].includes("/kids/deen-lessons.js?v=14"),"KIDS Dīn runtime version missing");
 assert.ok(shells[0].includes("/kids/item-offline-v1.js?v=6"),"Offline KIDS runtime version missing");
-assert.ok(offline.includes("/kids/data/deen-curriculum-v1.json?v=3")&&offline.includes("/kids/deen-lessons.js?v=13"),"Lesson download must cache exact public data");
+assert.ok(offline.includes("/kids/data/deen-curriculum-v1.json?v=20261126-v4-fill")&&offline.includes("/kids/deen-lessons.js?v=14"),"Lesson download must cache exact public data");
 console.log("PASS: public Dīn 6×5, original six + 24 new readable masters, primary reference checks, no fabricated audio, image files, boy/girl layouts, offline and shells");

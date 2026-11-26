@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-v18-audio-queue-test-live-release-20261126",
+      "at": "2026-11-26T16:56:00+01:00",
+      "approvedBy": "owner-serhat-20261126-t3u-live-release",
+      "reason": "Owner t3u: Alle Lernakademie- und Den-Dīn-V4-Clips direkt live in die App. Gibt ausschließlich den angepassten CI-Queue-Test frei, an dem der Produktions-Deploy 0146db73 in der Änderungssperre gescheitert ist. Keine weiteren Bereiche.",
+      "paths": [
+        "scripts/test-kids-academy-audio-queue-v18.js"
+      ],
+      "expiresAt": "2026-12-03T23:59:59+01:00"
+    },
+    {
       "id": "push-locale-ku-ckb-t32u-20261126",
       "at": "2026-11-26T11:00:00+01:00",
       "approvedBy": "owner-serhat-20261126-t32u-push-language",
