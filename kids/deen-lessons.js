@@ -1,7 +1,7 @@
 (() => {
 "use strict";
 const DATA_URL="/kids/data/deen-lessons.json?v=3";
-const CURRICULUM_URL="/kids/data/deen-curriculum-v1.json?v=3";
+const CURRICULUM_URL="/kids/data/deen-curriculum-v1.json?v=20261126-v4-fill";
 const MODE_KEY="kids.contentMode.v19";
 const DONE_PREFIX="kids.deenLesson.done.";
 const $=(s,r=document)=>r.querySelector(s);
@@ -15,7 +15,12 @@ let items=[],groups=[],allLessons=[],selectedCategory=null,active=null,activeTex
 function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
 function audioMeta(item){
   const a=item&&item.audio&&typeof item.audio==="object"?item.audio:{};
-  return a[ageKey()]||a["4-10"]||a.master||null;
+  const nested=a[ageKey()]||a["4-10"]||a.master;
+  if(nested&&nested.url)return nested;
+  // Single master V4 track stored flat on the lesson (url at audio.url).
+  if(a.url)return a;
+  if(item&&item.masterAudio&&item.masterAudio.url)return item.masterAudio;
+  return null;
 }
 function textFor(item){
   const policy=window.DARKidsStoryPolicy;
