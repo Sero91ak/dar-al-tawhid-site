@@ -115,3 +115,4 @@ Neue nummerierte Quellenlinks gehören immer in `q/<nummer>/`.
 | `q/67` | Die Hand ohne Verähnlichung | Abū Ḥanīfah (zugeschriebener Text) | al-Fiqh al-Absaṭ S. 56; Parallelstellen, direkter Šarḥ von al-Bayāḍī und Šarḥ al-Akbar von al-Qārī; vier Fragen in neun Sprachen; Zuschreibung nicht gesichert. |
 
 | `q/69` | Zuhd, Dunyā und Āḫirah | `ʿAbdullāh ibn Masʿūd` | Āṯar mawqūf: mehr Gebet und Fasten, und doch waren die Gefährten besser, weil sie enthaltsamer in der Dunyā und sehnsüchtiger nach der Āḫirah waren. al-Mustadrak 4/350 Nr. 7880; Wortlautvarianten getrennt. |
+| `q/70` | ʿAqīdah · Gefahr der Ahwāʾ | `Muḥammad ibn Idrīs aš-Šāfiʿī` | Ausspruch, gestorben 204 n. H.: jede Sünde außer dem Schirk ist leichter als die Begegnung mit den Ahwāʾ. al-Bayhaqī, Manāqib 1/452, und al-Baġawī, Šarḥ as-Sunnah 1/217, bleiben getrennte Wortlaute. Keine erfundene ṣaḥīḥ- oder ḥasan-Wertung. |
