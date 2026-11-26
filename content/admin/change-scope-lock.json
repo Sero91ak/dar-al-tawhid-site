@@ -9956,6 +9956,19 @@
       "expiresAt": "2026-11-29T23:59:00+01:00"
     },
     {
+      "id": "hadith-library-atelier-visitor-20261126",
+      "at": "2026-11-26T13:40:00+01:00",
+      "approvedBy": "owner-explicit-t30u-t47u-hadith-library-atelier",
+      "reason": "Owner t47u: visitor lane receives the ordered library atelier already live-verified on the test app. Exact shelf script, stylesheet, provenance JSON and assets/hadith-covers/ only. No prayer, Qibla, location, push, Kids or native Swift changes. globalLock stays on.",
+      "paths": [
+        "assets/hadith-library-shelves-v2.css",
+        "assets/hadith-library-shelves-v2.js",
+        "assets/hadith-cover-sources-v1.json",
+        "assets/hadith-covers/"
+      ],
+      "expiresAt": "2026-11-30T23:59:00+01:00"
+    },
+    {
       "id": "quran-tadabbur-gapfill-06-271-20261126",
       "at": "2026-11-26T14:00:00+01:00",
       "approvedBy": "owner-sero91ak-explicit-complete-open-tadabbur",
