@@ -9929,6 +9929,18 @@
         "content/admin/chat-publish-requests/umar-liebe-hass-gerechtigkeit-20261124-q65.json"
       ],
       "expiresAt": "2026-11-26T23:59:00+01:00"
+    },
+    {
+      "id": "hadith-library-shelves-v2-visitor-20261126",
+      "at": "2026-11-26T11:55:00+01:00",
+      "approvedBy": "owner-explicit-t30u-hadith-shelves-rebuild",
+      "reason": "Owner t30u: rebuild the Hadith library shelves on the visitor lane after the test lane was live-verified. Exact new shelf stylesheet, script and precomputed badge map only. No prayer, Qibla, location, push, Kids or native Swift changes. globalLock stays on.",
+      "paths": [
+        "assets/hadith-library-shelves-v2.css",
+        "assets/hadith-library-shelves-v2.js",
+        "assets/hadith-shelf-badges-v1.json"
+      ],
+      "expiresAt": "2026-11-28T23:59:00+01:00"
     }
   ],
   "enabled": true
