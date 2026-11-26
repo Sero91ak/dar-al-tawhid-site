@@ -749,15 +749,52 @@
       else w.localStorage.removeItem("darHadithSearchQueryV1");
     } catch (e) {}
   }
-  function syncHeroHeight() {
+  function brandBottom() {
+    var nodes = w.document.querySelectorAll("header");
+    var i, cs, rect;
+    for (i = 0; i < nodes.length; i++) {
+      cs = w.getComputedStyle(nodes[i]);
+      if (cs.position !== "fixed" && cs.position !== "sticky") continue;
+      rect = nodes[i].getBoundingClientRect();
+      if (rect.height > 20 && rect.top < 40) return Math.round(rect.bottom);
+    }
+    return 0;
+  }
+  function pinHero() {
+    if (!w.document || !onHadith()) return;
+    var app = w.document.getElementById("appView");
     var head = w.document.querySelector("#appView .hadith-hub > .view-head");
-    if (!head) return;
+    if (!app || !head) return;
+    var box = app.getBoundingClientRect();
+    var top = brandBottom();
+    head.style.position = "fixed";
+    head.style.top = top + "px";
+    head.style.left = Math.round(box.left) + "px";
+    head.style.width = Math.round(box.width) + "px";
+    head.style.maxWidth = "none";
+    head.style.margin = "0";
+    head.style.right = "auto";
+    head.style.zIndex = "64";
+    head.style.borderRadius = "0";
     var h = Math.round(head.getBoundingClientRect().height);
-    if (h > 40) w.document.documentElement.style.setProperty("--dar-immersive-hero-height", h + "px");
+    var hub = head.parentElement;
+    if (h > 40 && hub) {
+      var pad = Math.max(0, Math.round(top + h - hub.getBoundingClientRect().top));
+      hub.style.paddingTop = pad + "px";
+      w.document.documentElement.style.setProperty("--dar-immersive-hero-height", (top + h) + "px");
+    }
   }
   function bindShelves() {
     if (!w.document || !onHadith()) return;
-    syncHeroHeight();
+    pinHero();
+    if (!w.__hlsHeroPin) {
+      w.__hlsHeroPin = true;
+      if (typeof w.ResizeObserver === "function") {
+        var app = w.document.getElementById("appView");
+        if (app) new w.ResizeObserver(function () { pinHero(); }).observe(app);
+      }
+      w.addEventListener("resize", pinHero, { passive: true });
+    }
     var search = w.document.getElementById("hadithSearchInput");
     if (search) {
       search.oninput = function () {
