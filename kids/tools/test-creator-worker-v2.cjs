@@ -47,5 +47,16 @@ const get=(path,method="GET")=>handler.fetch(new Request("https://kids-preview.e
   const head=await get("/kids/start.html","HEAD");
   assert.equal(head.status,200);
   assert.equal(await head.text(),"");
-  console.log("KIDS CREATOR WORKER V2 PASS: KIDS-only routes, independent domain, no adult/admin/paid APIs, correct cache and HEAD semantics.");
+  assert.equal(home.headers.get("x-frame-options"),"DENY","The Kids shell must stay unframed");
+  const academy=await get("/kids/akademie/index.html");
+  assert.equal(academy.status,200);
+  assert.equal(academy.headers.get("x-frame-options"),"SAMEORIGIN",
+    "Lernen embeds the academy in a same-origin iframe; DENY leaves the tab blank");
+  const academyDir=await get("/kids/akademie");
+  assert.equal(academyDir.status,302);
+  assert.match(academyDir.headers.get("location"),/\/kids\/akademie\/index\.html$/);
+  const academySlash=await get("/kids/akademie/");
+  assert.equal(academySlash.status,302);
+  assert.match(academySlash.headers.get("location"),/\/kids\/akademie\/index\.html$/);
+  console.log("KIDS CREATOR WORKER V2 PASS: KIDS-only routes, independent domain, no adult/admin/paid APIs, correct cache and HEAD semantics, academy iframe allowed.");
 })().catch(e=>{console.error(e);process.exitCode=1});
