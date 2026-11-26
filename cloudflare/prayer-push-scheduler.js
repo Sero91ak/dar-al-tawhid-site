@@ -35,6 +35,7 @@ const REFERENCE = { lat: 50.6256, lon: 6.9491, city: "Rheinbach", timeZone: "Eur
 
 let lastStatusReport = null;
 let alreadyTargetedSet = new Set();
+let appLocaleSets = null;
 
 function oneSignalApiKey(env) {
   return String(env.ONESIGNAL_API_KEY_NEW || env.ONESIGNAL_API_KEY || "")
@@ -612,7 +613,7 @@ async function cancelDuplicateQueuedPushes(env, queued, stats) {
   }
 }
 
-async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun, appLocaleSets = null) {
+async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
   const deliveryName = prayerDeliveryName(prayer, sendAfter, mode, group.timeZone, group.advanceMinutes);
   const claimNames = [deliveryName, deliveryName + "-ku", deliveryName + "-ckb"];
   const ids = uniqueSubscriptionIds(group).filter((id) => {
@@ -839,7 +840,7 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
   };
   const sentInRun = new Set();
   alreadyTargetedSet = new Set();
-  let appLocaleSets = null;
+  appLocaleSets = null;
 
   await cancelQueuedBadAdvancePushes(env, stats);
   try {
@@ -948,7 +949,7 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
           if (lateEntry) stats.entryCatchups = (stats.entryCatchups || 0) + 1;
           group.lateEntry = lateEntry;
           try {
-            await sendPush(env, group, prayer, slot.sendAfter, slot.mode, stats, sentInRun, appLocaleSets);
+            await sendPush(env, group, prayer, slot.sendAfter, slot.mode, stats, sentInRun);
           } catch (err) {
             stats.errors += 1;
             stats.errorDetails.push(`${slot.mode} ${prayer.name}: ${err.message || err}`);
