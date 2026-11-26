@@ -28,6 +28,13 @@ export default {
       const out = new URL("/kids/start.html", url);
       return Response.redirect(out.toString(), 302);
     }
+    // html_handling=none does not add index.html. Keep the academy iframe
+    // and typed /kids/akademie URLs on the real document.
+    if (url.pathname === "/kids/akademie" || url.pathname === "/kids/akademie/") {
+      const out = new URL("/kids/akademie/index.html", url);
+      out.search = url.search;
+      return Response.redirect(out.toString(), 302);
+    }
     if (!url.pathname.startsWith("/kids/")) {
       return textResponse("This private-purpose preview Worker serves KIDS only", 404);
     }
@@ -43,9 +50,13 @@ export default {
     const headers = new Headers(asset.headers);
     headers.set("X-Robots-Tag", ROBOT);
     headers.set("X-Content-Type-Options", "nosniff");
-    headers.set("X-Frame-Options", "DENY");
     headers.set("Referrer-Policy", "same-origin");
     const path = url.pathname.toLowerCase();
+    // Lernen opens the academy in a same-origin iframe. DENY leaves that tab blank
+    // (live does not send X-Frame-Options). Keep DENY on the shell and other assets.
+    const allowSameOriginFrame = path === "/kids/akademie/index.html"
+      || path.startsWith("/kids/akademie/");
+    headers.set("X-Frame-Options", allowSameOriginFrame ? "SAMEORIGIN" : "DENY");
     if (/\.(?:html?|js|css|json|webmanifest)$/.test(path)
         || asset.status !== 200) {
       headers.set("Cache-Control", "private, no-store, max-age=0");
