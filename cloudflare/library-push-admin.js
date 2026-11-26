@@ -3,6 +3,7 @@
  */
 
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
+import { localizedNotification, chromePack } from "./push-locale-chrome.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
@@ -330,8 +331,7 @@ export async function sendLibraryPublicationPush(env, record) {
   const basePayload = {
     app_id: appId,
     target_channel: "push",
-    headings: { en: title, de: title },
-    contents: { en: message, de: message },
+    ...localizedNotification(title, message, chromePack("libraryPdf").title, null),
     url,
     data: pushData,
     chrome_web_icon: icon,

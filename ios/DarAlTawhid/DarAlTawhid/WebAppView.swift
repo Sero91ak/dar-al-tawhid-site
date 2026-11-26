@@ -1258,6 +1258,10 @@ struct WebAppView: UIViewRepresentable {
             }
             if message.name == "darPushSettings" {
                 if let body = message.body as? [String: Any] {
+                    if body["localeOnly"] as? Bool == true, let locale = body["dar_app_locale"] as? String {
+                        DarPushNotifications.applyAppLocale(locale)
+                        return
+                    }
                     DarPushNotifications.applyWebPrayerSettings(body)
                 }
                 return

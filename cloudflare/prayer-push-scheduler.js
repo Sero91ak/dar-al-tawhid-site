@@ -5,6 +5,7 @@
  */
 
 import { pickPrayerEntryVariant, buildAdvancePushBody, PRAYER_TITLE_EMOJI, sanitizePrayerPushText, hasBlockedPrayerPhrase } from "./prayer-push-copy.js";
+import { prayerLocaleCopy } from "./push-locale-from-draft.js";
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
 import { writePrayerStatusToStore } from "./prayer-status-store.js";
 
@@ -345,7 +346,7 @@ function notifyTitle(prayer, mode, group) {
   return emoji ? `${emoji} ${baseTitle}` : baseTitle;
 }
 
-function notifyCopy(prayer, mode, group) {
+function germanPrayerCopy(prayer, mode, group) {
   const timeLabel = prayer.time == null ? "" : formatHour(prayer.time);
   const m = normAdvance(group.advanceMinutes);
   if (mode === "advance") {
@@ -369,21 +370,34 @@ function notifyCopy(prayer, mode, group) {
   };
 }
 
+function notifyCopy(prayer, mode, group) {
+  const timeLabel = prayer.time == null ? "" : formatHour(prayer.time);
+  const minutes = normAdvance(group.advanceMinutes);
+  if (prayer.key !== "tahajjud" && (mode === "advance" || mode === "entry")) {
+    try {
+      return prayerLocaleCopy(prayer.key, mode, minutes, timeLabel);
+    } catch (_) {}
+  }
+  return germanPrayerCopy(prayer, mode, group);
+}
+
 function enforcePrayerCopyGuard(copy) {
-  const title = sanitizePrayerPushText(copy?.headings?.de || "");
-  const body = sanitizePrayerPushText(copy?.contents?.de || "");
-  const blocked = hasBlockedPrayerPhrase(title) || hasBlockedPrayerPhrase(body);
-  return {
-    headings: {
-      de: title,
-      en: sanitizePrayerPushText(copy?.headings?.en || title)
-    },
-    contents: {
-      de: body,
-      en: sanitizePrayerPushText(copy?.contents?.en || body)
-    },
-    blocked
-  };
+  const deTitle = sanitizePrayerPushText(copy?.headings?.de || copy?.headings?.en || "");
+  const deBody = sanitizePrayerPushText(copy?.contents?.de || copy?.contents?.en || "");
+  const codes = new Set(["de", "en", ...Object.keys(copy?.headings || {}), ...Object.keys(copy?.contents || {})]);
+  const headings = {};
+  const contents = {};
+  let blocked = hasBlockedPrayerPhrase(deTitle) || hasBlockedPrayerPhrase(deBody);
+  for (const code of codes) {
+    const title = sanitizePrayerPushText(copy?.headings?.[code] || deTitle);
+    const body = sanitizePrayerPushText(copy?.contents?.[code] || deBody);
+    if (hasBlockedPrayerPhrase(title) || hasBlockedPrayerPhrase(body)) blocked = true;
+    headings[code] = title;
+    contents[code] = body;
+  }
+  if (!headings.en) headings.en = deTitle;
+  if (!contents.en) contents.en = deBody;
+  return { headings, contents, blocked };
 }
 
 async function uuidFrom(seed) {

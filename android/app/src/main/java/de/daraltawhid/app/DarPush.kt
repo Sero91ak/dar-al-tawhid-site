@@ -44,6 +44,15 @@ object DarPush {
         OneSignal.User.pushSubscription.optIn()
     }
 
+    fun setAppLocale(code: String) {
+        val known = setOf("de", "en", "tr", "ar", "bs", "fr", "es", "ku", "ckb")
+        val normalized = code.trim().lowercase()
+        if (!known.contains(normalized)) return
+        val provider = if (normalized == "ku" || normalized == "ckb") "de" else normalized
+        OneSignal.User.setLanguage(provider)
+        OneSignal.User.addTags(mapOf("dar_app_locale" to normalized))
+    }
+
     fun subscriptionId(): String = OneSignal.User.pushSubscription.id.orEmpty()
 
     fun pushToken(): String = OneSignal.User.pushSubscription.token.orEmpty()
