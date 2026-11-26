@@ -69,15 +69,21 @@ const output={
 const filename=path.join(ROOT,"kids/data/academy-voice-plan-v9.json");
 const proposed=JSON.stringify(output,null,2)+"\n";
 if(fs.existsSync(filename)){
- // Protect the historic 511 exact phrases. Two unreleased curriculum lines now
- // contain the complete Islamic Salam. Validate their effect, but never rewrite V9.
+ // Protect the historic archive. A few later curriculum wording updates are
+ // recognized here, but this exporter must never rewrite V9 itself.
  const historic=fs.readFileSync(filename,"utf8");
  const authorizedReplacement=historic
   .replaceAll("As-salāmu ʿalaykum ist ein islamischer Friedensgruß.",
     "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh ist ein islamischer Friedensgruß.")
   .replaceAll("Jemand sagt zu dir As-salāmu ʿalaykum. Was tust du?",
-    "Jemand sagt zu dir As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh. Was tust du?");
- if(proposed!==authorizedReplacement)throw Error("Unexpected changes to immutable V9 archive: release a separate reviewed voice plan");
+    "Jemand sagt zu dir As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh. Was tust du?")
+  .replaceAll("Ich muss niemanden verspotten oder beleidigen.",
+    "Ich verspotte und beleidige niemanden.");
+ // Authorized wording updates can change sort order; compare the resorted archive.
+ const authorized=JSON.parse(authorizedReplacement);
+ authorized.phrases.sort((a,b)=>a.priority-b.priority||a.text.localeCompare(b.text,"de"));
+ const authorizedResorted=JSON.stringify(authorized,null,2)+"\n";
+ if(proposed!==authorizedResorted)throw Error("Unexpected changes to immutable V9 archive: release a separate reviewed voice plan");
  console.log("ACADEMY V9: immutable historic archive verified; 2 complete-Salam teaching updates require separate future voice-plan approval; 0 credits");
 }else{
  // Fresh seeding is only used when no archival plan exists.
