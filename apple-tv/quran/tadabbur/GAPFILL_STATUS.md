@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-275` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-276` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4831
-totalVerifiedEntries: 4831
-loadedEntries: 4831
-uniqueVerifiedReferences: 4831
-missingCount: 1405
+entriesCount: 4838
+totalVerifiedEntries: 4838
+loadedEntries: 4838
+uniqueVerifiedReferences: 4838
+missingCount: 1398
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-275.json
-nächster Gap-Fill-Batch: entries-gap-06-276.json
+letzter Gap-Fill-Batch: entries-gap-06-276.json
+nächster Gap-Fill-Batch: entries-gap-06-277.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `641` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `648` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -727,3 +727,7 @@ Zehn Verse mit abgerufenem Wortlaut und zugelassener Stufe: 4:34, 5:116, 6:79, 1
 ## Batch 06-275 — 26.11.2026
 
 Dreizehn Verse aus Ṣaḥīḥ Muslim, Sunan Abī Dāwūd und Sunan an-Nasāʾī: 4:77, 5:41, 5:47, 6:163, 7:43, 9:19, 9:39, 9:92, 9:120, 10:58, 10:62, 14:36, 19:72. Acht Ṭabarī-Stellen ab 3:9 ohne Stufe stehen in blocked-inspected.json. Katalog 4831/6236, Lücken 1405. Details in SOURCE_REVIEW_06-275.md.
+
+## Batch 06-276 — 26.11.2026
+
+Sieben Verse: 5:48, 5:88, 10:94, 11:80, 13:39, 16:101, 18:109. Einundzwanzig geprüfte Stellen ohne zugelassene Stufe stehen in blocked-inspected.json, darunter at-Tirmiḏī 3036. Katalog 4838/6236, Lücken 1398. Details in SOURCE_REVIEW_06-276.md.
