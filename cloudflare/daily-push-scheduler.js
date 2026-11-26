@@ -6,7 +6,8 @@
 
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
 import { writeNamedStatusToStore } from "./prayer-status-store.js";
-import { dailyLocaleCopy } from "./push-locale-from-draft.js";
+import { dailyLocaleCopy, dailyIndividualTitle } from "./push-locale-from-draft.js";
+import { loadAppLocaleSets, localeForSubscription } from "./push-app-locale-delivery.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const DEFAULT_SITE_URL = "https://dar-al-tawhid.de";
@@ -532,6 +533,17 @@ export async function sendDailyPushBatch(env, rows, kind, item, config, dateKey,
     ].join("|"));
     const payload = buildDailyPushPayload(env, kind, item, config, localDateKey, subscriptionId, options.forceToken || "");
     payload.idempotency_key = idempotencyKey;
+    const appLocale = localeForSubscription(subscriptionId, options.appLocaleSets);
+    if (appLocale) {
+      try {
+        const title = dailyIndividualTitle(appLocale, isDua ? "daily_dua" : "daily_recommendation");
+        const source = payload.contents?.de || payload.contents?.en || "";
+        if (title && source) {
+          payload.headings = { de: title, en: title };
+          payload.contents = { de: source, en: source };
+        }
+      } catch (_) {}
+    }
     payload.name = `daily-${isDua ? "dua" : "recommendation"}-${localDateKey}-v1`.slice(0, 128);
 
     try {
@@ -680,8 +692,10 @@ export async function runDailyPushScheduler(env, options = {}, deps = {}) {
     }
   }
 
-  await sendDailyPushBatch(env, duaQueue, "dua", duaItem, config, canonicalDateKey, stats, { forceToken: force.kinds.has("dua") ? force.token : "" });
-  await sendDailyPushBatch(env, recommendationQueue, "recommendation", recommendationItem, config, canonicalDateKey, stats, { forceToken: force.kinds.has("recommendation") ? force.token : "" });
+  let appLocaleSets = null;
+  try { appLocaleSets = await loadAppLocaleSets(env); } catch (_) { appLocaleSets = null; }
+  await sendDailyPushBatch(env, duaQueue, "dua", duaItem, config, canonicalDateKey, stats, { forceToken: force.kinds.has("dua") ? force.token : "", appLocaleSets });
+  await sendDailyPushBatch(env, recommendationQueue, "recommendation", recommendationItem, config, canonicalDateKey, stats, { forceToken: force.kinds.has("recommendation") ? force.token : "", appLocaleSets });
 
   let forceClear = null;
   if (force.active && stats.errors === 0) {

@@ -4,7 +4,7 @@ import {
 } from "./jummah-push-scheduler.js";
 import { readNamedStatusFromStore } from "./prayer-status-store.js";
 import { jummahCopyForMode } from "./jummah-push-copy.js";
-import { jummahLocale } from "./push-locale-chrome.js";
+import { jummahLocale, jummahIndividual } from "./push-locale-chrome.js";
 import { evaluateOneSignalDelivery } from "./onesignal-delivery.js";
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
 
@@ -89,7 +89,8 @@ export async function sendJummahTestPush(env, input = {}) {
 
   const modeKey = ["morning", "advance", "entry"].includes(mode) ? mode : "entry";
   const copy = jummahCopyForMode(modeKey);
-  const text = jummahLocale(modeKey, copy);
+  const locale = String(input.locale || input.dar_app_locale || "").toLowerCase();
+  const text = jummahIndividual(locale, modeKey) || jummahLocale(modeKey, copy);
   const body = withIcons({
     app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
     target_channel: "push",

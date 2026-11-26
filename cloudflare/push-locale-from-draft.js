@@ -27,6 +27,21 @@ export function dailyLocaleCopy(kind) {
   return withEnglishFallback(dailyMessage(draft, kind));
 }
 
+export function prayerIndividualCopy(locale, prayerKey, mode, advanceMinutes, time) {
+  if (locale !== "ku" && locale !== "ckb") return null;
+  const map = prayerMessage(draft, prayerKey, mode, advanceMinutes, time, locale);
+  const title = map.headings?.en || "";
+  const body = map.contents?.en || "";
+  if (!title || !body) return null;
+  return { headings: { de: title, en: title }, contents: { de: body, en: body } };
+}
+
+export function dailyIndividualTitle(locale, kind) {
+  if (locale !== "ku" && locale !== "ckb") return "";
+  const map = dailyMessage(draft, kind, locale);
+  return map.headings?.en || "";
+}
+
 export function assertSingleTestSubscription(ids) {
   const list = [...new Set((Array.isArray(ids) ? ids : []).map((id) => String(id || "").trim()).filter(Boolean))];
   if (list.length !== 1) {

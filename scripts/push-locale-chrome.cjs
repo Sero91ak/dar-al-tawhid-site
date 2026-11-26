@@ -22,6 +22,11 @@ function chromePack(name) {
   return data[name] || null;
 }
 
+function individualChrome(name, locale) {
+  if (locale !== "ku" && locale !== "ckb") return null;
+  return (data.individual && data.individual[locale] && data.individual[locale][name]) || null;
+}
+
 function dailyHeadings(kind) {
   const draft = require("../desktop-preview/i18n-core-v1/push-copy-nine-languages-draft.json");
   const key = kind === "dua" ? "daily_dua" : "daily_recommendation";
@@ -33,4 +38,4 @@ function dailyHeadings(kind) {
   return map;
 }
 
-module.exports = { localizedNotification, chromePack, dailyHeadings };
+module.exports = { localizedNotification, chromePack, dailyHeadings, individualChrome };

@@ -29,3 +29,17 @@ export function jummahLocale(mode, german) {
 export function chromePack(name) {
   return data[name] || null;
 }
+
+export function individualChrome(name, locale) {
+  if (locale !== "ku" && locale !== "ckb") return null;
+  return data.individual?.[locale]?.[name] || null;
+}
+
+export function jummahIndividual(locale, mode) {
+  const pack = individualChrome("jummah", locale)?.[mode];
+  if (!pack?.title || !pack?.body) return null;
+  return {
+    headings: { de: pack.title, en: pack.title },
+    contents: { de: pack.body, en: pack.body }
+  };
+}
