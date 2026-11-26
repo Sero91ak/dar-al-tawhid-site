@@ -2,6 +2,14 @@
   "project": "DĀR AL TAWḤĪD – Apple TV Content",
   "schemaVersion": "1.9",
   "language": "de",
+  "i18n": {
+    "catalogPath": "i18n/catalog.json",
+    "uiPath": "i18n/ui.json",
+    "preferenceKey": "darAdultPreferredLocaleV1",
+    "defaultLocale": "de",
+    "followsSystemLanguage": false,
+    "note": "Dieselbe Neun-Sprachen-Liste wie die Erwachsenen-App. Religiöse Texte nur aus vorhandenen Paketen; fehlt eine Fassung, bleibt Deutsch. Unbekannte Felder dürfen ältere tvOS-Decoder ignorieren."
+  },
   "defaultModule": "hadith",
   "defaultModuleScope": "library-tab-only",
   "defaultModuleDoesNotControlScreensaver": true,

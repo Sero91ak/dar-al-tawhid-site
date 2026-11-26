@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "project": "DĀR AL TAWḤĪD Apple TV languages",
+  "preferenceKey": "darAdultPreferredLocaleV1",
+  "defaultLocale": "de",
+  "followsSystemLanguage": false,
+  "systemLanguageNote": "Wie der Sprachwähler der Erwachsenen-App: ohne gespeicherte Wahl bleibt Deutsch. Eine spätere Wahl liegt unter demselben Schlüssel.",
+  "pickerOrder": ["de", "tr", "en", "ar", "ku", "ckb", "bs", "fr", "es"],
+  "rtl": ["ar", "ckb"],
+  "ui": "/apple-tv/i18n/ui.json",
+  "review": "machine-translation-owner-approved",
+  "humanReligiousReview": false,
+  "doNotInventReligiousText": true,
+  "hideInternalIds": true,
+  "locales": [
+    {"code": "de", "name": "Deutsch", "dir": "ltr"},
+    {"code": "tr", "name": "Türkçe", "dir": "ltr"},
+    {"code": "en", "name": "English", "dir": "ltr"},
+    {"code": "ar", "name": "العربية", "dir": "rtl"},
+    {"code": "ku", "name": "Kurmancî", "dir": "ltr"},
+    {"code": "ckb", "name": "سۆرانی", "dir": "rtl"},
+    {"code": "bs", "name": "Bosanski", "dir": "ltr"},
+    {"code": "fr", "name": "Français", "dir": "ltr"},
+    {"code": "es", "name": "Español", "dir": "ltr"}
+  ],
+  "sections": {
+    "posts": {
+      "german": "/content/posts/",
+      "translation": "/assets/i18n/content/{locale}.json",
+      "field": "posts",
+      "id": "frontmatter id, identisch mit dem Schlüssel im Sprachpaket"
+    },
+    "quran": {
+      "reader": "/content/quran/{surah}.json",
+      "arabicField": "verses.ar",
+      "meaningField": "verses.de",
+      "meaningEdition": "de.bubenheim",
+      "transliterationField": "verses.tr",
+      "transliterationIsNotATranslation": true,
+      "localesWithProjectMeaning": ["de"],
+      "fallbackLocale": "de"
+    },
+    "tadabbur": {
+      "source": "/apple-tv/quran/tadabbur/",
+      "localesWithProjectText": ["de"],
+      "fallbackLocale": "de",
+      "doNotMachineTranslate": true
+    },
+    "hadith": {
+      "german": "/apple-tv/hadith/library-shell.json",
+      "recordType": "hadith",
+      "translation": "/assets/i18n/content/hadith-{locale}.json",
+      "field": "items"
+    },
+    "athar": {
+      "german": "/apple-tv/hadith/library-shell.json",
+      "recordType": "athar",
+      "translation": "/assets/i18n/content/hadith-{locale}.json",
+      "field": "items"
+    },
+    "duas": {
+      "canonical": "/content/duas/duas.json",
+      "preserve": ["ar", "src"],
+      "transliterationField": "tr",
+      "transliterationIsNotTurkish": true,
+      "translation": "/assets/i18n/content/{locale}.json",
+      "fields": ["title", "occasion", "meaning"]
+    }
+  }
+}
