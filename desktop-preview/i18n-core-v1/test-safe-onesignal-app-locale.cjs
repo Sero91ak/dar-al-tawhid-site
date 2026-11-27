@@ -28,10 +28,14 @@ assert.doesNotMatch(script,/\.optIn\s*\(|requestPermission\s*\(/);
  assert.equal(sent[sent.length-1],"fr");
  locale="ckb";
  const fallback=await global.DARPushLocaleSync.pushLocale();
- assert.equal(fallback.reason,"individual_delivery_required");
+ assert.equal(fallback.reason,"fallback_de");
  assert.equal(fallback.fallbackLocale,"de");
- assert.equal(sent[sent.length-1],"de","Unsupported locale must clear stale Turkish provider language");
+ assert.equal(sent[sent.length-1],"de","Unsupported locale must clear the previous provider language");
  assert.ok(sent.every(code=>code!=="ckb"));
+ const repeat=await global.DARPushLocaleSync.pushLocale();
+ assert.equal(repeat.reason,"individual_delivery_required");
+ assert.equal(repeat.fallbackLocale,"de");
+ assert.equal(sent[sent.length-1],"de");
  const native={
   OneSignal:{User:{async setLanguage(code){sent.push("NATIVE_WRONG_"+code)}}},
   DAR_IOS_ONESIGNAL_ID:"native-test-sub",
@@ -41,7 +45,8 @@ assert.doesNotMatch(script,/\.optIn\s*\(|requestPermission\s*\(/);
  };
  vm.runInNewContext(script,{window:native});
  const nativeAttempt=await native.DARPushLocaleSync.pushLocale();
- assert.equal(nativeAttempt.reason,"native_sdk_locale_bridge_required");
+ assert.equal(nativeAttempt.reason,"native_set_language");
+ assert.equal(nativeAttempt.providerLocale,"tr");
  assert.ok(!sent.some(x=>x.startsWith("NATIVE_WRONG")));
 
  console.log(JSON.stringify({passed:true,turkish:true,french:true,kurdishFailsClosed:true,subscriptionsChanged:false,notificationsSent:0}));

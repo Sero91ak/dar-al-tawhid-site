@@ -171,6 +171,26 @@
       "expiresAt": "2026-12-03T23:59:59+01:00"
     },
     {
+      "id": "q70-posts-index-parity-retry-20261126",
+      "at": "2026-11-26T22:08:00.000Z",
+      "approvedBy": "owner-serhat-explicit-finish-q70-live-20261126",
+      "reason": "The Q70 visitor publish uploaded and then rolled back because the posts index was still the previous edge copy. This unlock allows one retry loop in the existing posts-index parity check so a good publish is not rolled back. No push, prayer, Kids or Qibla change.",
+      "paths": [
+        "scripts/app-live-parity-check.js"
+      ],
+      "expiresAt": "2026-12-03T23:59:59.000Z"
+    },
+    {
+      "id": "q70-shafii-ahwa-owner-20261126",
+      "at": "2026-11-26T21:50:00.000Z",
+      "approvedBy": "owner-serhat-explicit-quellenlink-and-push-live-20261126",
+      "reason": "Serhat ordered the next free source card for ash-Shafii on ahwāʾ, nine languages, the Aqidah section, the learning page, publication and one notification after the page is live. This unlock covers only the new locale manifest. globalLock stays on. No push-system code, Kids, prayer or Qibla change.",
+      "paths": [
+        "assets/q70-locales.json"
+      ],
+      "expiresAt": "2026-12-03T23:59:59.000Z"
+    },
+    {
       "id": "kids-v18-audio-queue-test-live-release-20261126",
       "at": "2026-11-26T16:56:00+01:00",
       "approvedBy": "owner-serhat-20261126-t3u-live-release",
