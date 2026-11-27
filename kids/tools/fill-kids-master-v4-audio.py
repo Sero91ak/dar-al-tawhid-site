@@ -212,7 +212,7 @@ def lift_arabic_terms_for_tts(text: str) -> str:
                     return "الصِّدْق"
                 if raw.lower().startswith("a") and len(raw) > 2 and raw[1] in "-‐‑":
                     return "الصِّدْق"
-                return "صِدْق"
+                return "الصِّدْق"
             out = rx.sub(sidq_repl, out)
         else:
             out = rx.sub(repl, out)

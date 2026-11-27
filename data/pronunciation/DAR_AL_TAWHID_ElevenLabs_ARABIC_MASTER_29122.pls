@@ -12861,19 +12861,19 @@
   </lexeme>
 <lexeme>
     <grapheme>Ṣidq</grapheme>
-    <alias>صِدْق</alias>
+    <alias>الصِّدْق</alias>
   </lexeme>
 <lexeme>
     <grapheme>Sidq</grapheme>
-    <alias>صِدْق</alias>
+    <alias>الصِّدْق</alias>
   </lexeme>
 <lexeme>
     <grapheme>ṣidq</grapheme>
-    <alias>صِدْق</alias>
+    <alias>الصِّدْق</alias>
   </lexeme>
 <lexeme>
     <grapheme>sidq</grapheme>
-    <alias>صِدْق</alias>
+    <alias>الصِّدْق</alias>
   </lexeme>
 <lexeme>
     <grapheme>Amānah</grapheme>
