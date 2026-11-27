@@ -37,43 +37,43 @@
   </lexeme>
 <lexeme>
     <grapheme>Tawḥīd</grapheme>
-    <alias>Tauhiid</alias>
+    <alias>تَوْحِيد</alias>
   </lexeme>
 <lexeme>
     <grapheme>Tawhid</grapheme>
-    <alias>Tauhiid</alias>
+    <alias>تَوْحِيد</alias>
   </lexeme>
 <lexeme>
     <grapheme>tawḥīd</grapheme>
-    <alias>Tauhiid</alias>
+    <alias>تَوْحِيد</alias>
   </lexeme>
 <lexeme>
     <grapheme>tawhid</grapheme>
-    <alias>Tauhiid</alias>
+    <alias>تَوْحِيد</alias>
   </lexeme>
 <lexeme>
     <grapheme>ʿAqīdah</grapheme>
-    <alias>A-qiidah</alias>
+    <alias>عَقِيدَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>'Aqidah</grapheme>
-    <alias>A-qiidah</alias>
+    <alias>عَقِيدَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Aqidah</grapheme>
-    <alias>A-qiidah</alias>
+    <alias>عَقِيدَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>ʿaqīdah</grapheme>
-    <alias>A-qiidah</alias>
+    <alias>عَقِيدَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>'aqidah</grapheme>
-    <alias>A-qiidah</alias>
+    <alias>عَقِيدَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>aqidah</grapheme>
-    <alias>A-qiidah</alias>
+    <alias>عَقِيدَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Islām</grapheme>
@@ -197,15 +197,15 @@
   </lexeme>
 <lexeme>
     <grapheme>Īmān</grapheme>
-    <alias>Iimaan</alias>
+    <alias>إِيمَان</alias>
   </lexeme>
 <lexeme>
     <grapheme>Iman</grapheme>
-    <alias>Iimaan</alias>
+    <alias>إِيمَان</alias>
   </lexeme>
 <lexeme>
     <grapheme>īmān</grapheme>
-    <alias>Iimaan</alias>
+    <alias>إِيمَان</alias>
   </lexeme>
 <lexeme>
     <grapheme>iman</grapheme>
@@ -293,11 +293,11 @@
   </lexeme>
 <lexeme>
     <grapheme>Sunnah</grapheme>
-    <alias>Sunnah</alias>
+    <alias>سُنَّة</alias>
   </lexeme>
 <lexeme>
     <grapheme>sunnah</grapheme>
-    <alias>Sunnah</alias>
+    <alias>سُنَّة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Bidʿah</grapheme>
@@ -1805,19 +1805,19 @@
   </lexeme>
 <lexeme>
     <grapheme>al-Fātiḥah</grapheme>
-    <alias>al-Faatihah</alias>
+    <alias>الْفَاتِحَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-Fatihah</grapheme>
-    <alias>al-Faatihah</alias>
+    <alias>الْفَاتِحَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-fātiḥah</grapheme>
-    <alias>al-Faatihah</alias>
+    <alias>الْفَاتِحَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-fatihah</grapheme>
-    <alias>al-Faatihah</alias>
+    <alias>الْفَاتِحَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Āyat al-Kursī</grapheme>
@@ -3653,19 +3653,19 @@
   </lexeme>
 <lexeme>
     <grapheme>al-Iḫlāṣ</grapheme>
-    <alias>al-Ichlaas</alias>
+    <alias>الْإِخْلَاص</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-Ikhlas</grapheme>
-    <alias>al-Ichlaas</alias>
+    <alias>الْإِخْلَاص</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-iḫlāṣ</grapheme>
-    <alias>al-Ichlaas</alias>
+    <alias>الْإِخْلَاص</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-ikhlas</grapheme>
-    <alias>al-Ichlaas</alias>
+    <alias>الْإِخْلَاص</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-Falaq</grapheme>
@@ -3857,7 +3857,7 @@
   </lexeme>
 <lexeme>
     <grapheme>Sahih</grapheme>
-    <alias>Sahiih</alias>
+    <alias>صَحِيح</alias>
   </lexeme>
 <lexeme>
     <grapheme>sahīh</grapheme>
@@ -3865,15 +3865,15 @@
   </lexeme>
 <lexeme>
     <grapheme>sahih</grapheme>
-    <alias>Sahiih</alias>
+    <alias>صَحِيح</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ṣaḥīḥ</grapheme>
-    <alias>Sahiih</alias>
+    <alias>صَحِيح</alias>
   </lexeme>
 <lexeme>
     <grapheme>ṣaḥīḥ</grapheme>
-    <alias>Sahiih</alias>
+    <alias>صَحِيح</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ḥasan</grapheme>
@@ -8925,11 +8925,11 @@
   </lexeme>
 <lexeme>
     <grapheme>Fiqh</grapheme>
-    <alias>Fikh</alias>
+    <alias>فِقْه</alias>
   </lexeme>
 <lexeme>
     <grapheme>fiqh</grapheme>
-    <alias>Fikh</alias>
+    <alias>فِقْه</alias>
   </lexeme>
 <lexeme>
     <grapheme>Uṣūl al-Fiqh</grapheme>
@@ -8949,27 +8949,27 @@
   </lexeme>
 <lexeme>
     <grapheme>ʿIbādah</grapheme>
-    <alias>Ibaadah</alias>
+    <alias>عِبَادَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>'Ibadah</grapheme>
-    <alias>Ibaadah</alias>
+    <alias>عِبَادَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ibadah</grapheme>
-    <alias>Ibaadah</alias>
+    <alias>عِبَادَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>ʿibādah</grapheme>
-    <alias>Ibaadah</alias>
+    <alias>عِبَادَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>'ibadah</grapheme>
-    <alias>Ibaadah</alias>
+    <alias>عِبَادَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>ibadah</grapheme>
-    <alias>Ibaadah</alias>
+    <alias>عِبَادَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>ʿIbādāt</grapheme>
@@ -8997,31 +8997,31 @@
   </lexeme>
 <lexeme>
     <grapheme>Ṭahārah</grapheme>
-    <alias>Tahaarah</alias>
+    <alias>طَهَارَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Taharah</grapheme>
-    <alias>Tahaarah</alias>
+    <alias>طَهَارَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>ṭahārah</grapheme>
-    <alias>Tahaarah</alias>
+    <alias>طَهَارَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>taharah</grapheme>
-    <alias>Tahaarah</alias>
+    <alias>طَهَارَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Wuḍūʾ</grapheme>
-    <alias>Wuduu</alias>
+    <alias>وُضُوء</alias>
   </lexeme>
 <lexeme>
     <grapheme>Wudu'</grapheme>
-    <alias>Wuduu</alias>
+    <alias>وُضُوء</alias>
   </lexeme>
 <lexeme>
     <grapheme>Wudu</grapheme>
-    <alias>Wuduu</alias>
+    <alias>وُضُوء</alias>
   </lexeme>
 <lexeme>
     <grapheme>wuḍūʾ</grapheme>
@@ -9029,11 +9029,11 @@
   </lexeme>
 <lexeme>
     <grapheme>wudu'</grapheme>
-    <alias>Wuduu</alias>
+    <alias>وُضُوء</alias>
   </lexeme>
 <lexeme>
     <grapheme>wudu</grapheme>
-    <alias>Wuduu</alias>
+    <alias>وُضُوء</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ġusl</grapheme>
@@ -9181,19 +9181,19 @@
   </lexeme>
 <lexeme>
     <grapheme>Ṣalāh</grapheme>
-    <alias>Salaah</alias>
+    <alias>صَلَاة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Salah</grapheme>
-    <alias>Salaah</alias>
+    <alias>صَلَاة</alias>
   </lexeme>
 <lexeme>
     <grapheme>ṣalāh</grapheme>
-    <alias>Salaah</alias>
+    <alias>صَلَاة</alias>
   </lexeme>
 <lexeme>
     <grapheme>salah</grapheme>
-    <alias>Salaah</alias>
+    <alias>صَلَاة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ṣalāt</grapheme>
@@ -9925,19 +9925,19 @@
   </lexeme>
 <lexeme>
     <grapheme>Ramaḍān</grapheme>
-    <alias>Ramadaan</alias>
+    <alias>رَمَضَان</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ramadan</grapheme>
-    <alias>Ramadaan</alias>
+    <alias>رَمَضَان</alias>
   </lexeme>
 <lexeme>
     <grapheme>ramaḍān</grapheme>
-    <alias>Ramadaan</alias>
+    <alias>رَمَضَان</alias>
   </lexeme>
 <lexeme>
     <grapheme>ramadan</grapheme>
-    <alias>Ramadaan</alias>
+    <alias>رَمَضَان</alias>
   </lexeme>
 <lexeme>
     <grapheme>Suḥūr</grapheme>
@@ -12397,23 +12397,23 @@
   </lexeme>
 <lexeme>
     <grapheme>Akhlāq</grapheme>
-    <alias>Akhlaaq</alias>
+    <alias>أَخْلَاق</alias>
   </lexeme>
 <lexeme>
     <grapheme>Akhlaq</grapheme>
-    <alias>Akhlaaq</alias>
+    <alias>أَخْلَاق</alias>
   </lexeme>
 <lexeme>
     <grapheme>akhlāq</grapheme>
-    <alias>Akhlaaq</alias>
+    <alias>أَخْلَاق</alias>
   </lexeme>
 <lexeme>
     <grapheme>akhlaq</grapheme>
-    <alias>Akhlaaq</alias>
+    <alias>أَخْلَاق</alias>
   </lexeme>
 <lexeme>
     <grapheme>Duʿāʾ</grapheme>
-    <alias>Du-aa</alias>
+    <alias>دُعَاء</alias>
   </lexeme>
 <lexeme>
     <grapheme>Du'a'</grapheme>
@@ -12501,19 +12501,19 @@
   </lexeme>
 <lexeme>
     <grapheme>Ṣabr</grapheme>
-    <alias>Sabr</alias>
+    <alias>صَبْر</alias>
   </lexeme>
 <lexeme>
     <grapheme>Sabr</grapheme>
-    <alias>Sabr</alias>
+    <alias>صَبْر</alias>
   </lexeme>
 <lexeme>
     <grapheme>ṣabr</grapheme>
-    <alias>Sabr</alias>
+    <alias>صَبْر</alias>
   </lexeme>
 <lexeme>
     <grapheme>sabr</grapheme>
-    <alias>Sabr</alias>
+    <alias>صَبْر</alias>
   </lexeme>
 <lexeme>
     <grapheme>Šukr</grapheme>
@@ -12533,27 +12533,27 @@
   </lexeme>
 <lexeme>
     <grapheme>Ikhlāṣ</grapheme>
-    <alias>Ikhlaas</alias>
+    <alias>إِخْلَاص</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ikhlas</grapheme>
-    <alias>Ikhlaas</alias>
+    <alias>إِخْلَاص</alias>
   </lexeme>
 <lexeme>
     <grapheme>ikhlāṣ</grapheme>
-    <alias>Ikhlaas</alias>
+    <alias>إِخْلَاص</alias>
   </lexeme>
 <lexeme>
     <grapheme>ikhlas</grapheme>
-    <alias>Ikhlaas</alias>
+    <alias>إِخْلَاص</alias>
   </lexeme>
 <lexeme>
     <grapheme>Niyyah</grapheme>
-    <alias>Niyyah</alias>
+    <alias>نِيَّة</alias>
   </lexeme>
 <lexeme>
     <grapheme>niyyah</grapheme>
-    <alias>Niyyah</alias>
+    <alias>نِيَّة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Khawf</grapheme>
@@ -12877,19 +12877,19 @@
   </lexeme>
 <lexeme>
     <grapheme>Amānah</grapheme>
-    <alias>Amaanah</alias>
+    <alias>أَمَانَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Amanah</grapheme>
-    <alias>Amaanah</alias>
+    <alias>أَمَانَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>amānah</grapheme>
-    <alias>Amaanah</alias>
+    <alias>أَمَانَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>amanah</grapheme>
-    <alias>Amaanah</alias>
+    <alias>أَمَانَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ḥilm</grapheme>
@@ -12909,19 +12909,19 @@
   </lexeme>
 <lexeme>
     <grapheme>Raḥmah</grapheme>
-    <alias>Rahmah</alias>
+    <alias>رَحْمَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Rahmah</grapheme>
-    <alias>Rahmah</alias>
+    <alias>رَحْمَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>raḥmah</grapheme>
-    <alias>Rahmah</alias>
+    <alias>رَحْمَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>rahmah</grapheme>
-    <alias>Rahmah</alias>
+    <alias>رَحْمَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ghaḍab</grapheme>
@@ -13021,19 +13021,19 @@
   </lexeme>
 <lexeme>
     <grapheme>Ghibah</grapheme>
-    <alias>Ghiibah</alias>
+    <alias>غِيبَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>ghibah</grapheme>
-    <alias>Ghiibah</alias>
+    <alias>غِيبَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ġībah</grapheme>
-    <alias>Ghiibah</alias>
+    <alias>غِيبَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>ġībah</grapheme>
-    <alias>Ghiibah</alias>
+    <alias>غِيبَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ghībah</grapheme>
@@ -13053,7 +13053,7 @@
   </lexeme>
 <lexeme>
     <grapheme>غِيبَة</grapheme>
-    <alias>Ghiibah</alias>
+    <alias>غِيبَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Namīmah</grapheme>
@@ -24845,7 +24845,7 @@
   </lexeme>
 <lexeme>
     <grapheme>Al-Fātiḥah</grapheme>
-    <alias>al-Faatihah</alias>
+    <alias>الْفَاتِحَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-Ghaniyy</grapheme>
@@ -25985,7 +25985,7 @@
   </lexeme>
 <lexeme>
     <grapheme>al-Ikhlāṣ</grapheme>
-    <alias>al-Ichlaas</alias>
+    <alias>الْإِخْلَاص</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-ikhlāṣ</grapheme>
@@ -25993,7 +25993,7 @@
   </lexeme>
 <lexeme>
     <grapheme>Al-Ikhlāṣ</grapheme>
-    <alias>al-Ichlaas</alias>
+    <alias>الْإِخْلَاص</alias>
   </lexeme>
 <lexeme>
     <grapheme>al-Ittiba</grapheme>
@@ -30581,11 +30581,11 @@
   </lexeme>
 <lexeme>
     <grapheme>Sahabah</grapheme>
-    <alias>Sahaabah</alias>
+    <alias>صَحَابَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>sahabah</grapheme>
-    <alias>Sahaabah</alias>
+    <alias>صَحَابَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Schafii</grapheme>
@@ -30941,7 +30941,7 @@
   </lexeme>
 <lexeme>
     <grapheme>الفاتحة</grapheme>
-    <alias>al-Faatihah</alias>
+    <alias>الْفَاتِحَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>الفرائض</grapheme>
@@ -31045,11 +31045,11 @@
   </lexeme>
 <lexeme>
     <grapheme>Ṣaḥābah</grapheme>
-    <alias>Sahaabah</alias>
+    <alias>صَحَابَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>ṣaḥābah</grapheme>
-    <alias>Sahaabah</alias>
+    <alias>صَحَابَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>'Awrah</grapheme>
@@ -31753,11 +31753,11 @@
   </lexeme>
 <lexeme>
     <grapheme>Sahabi</grapheme>
-    <alias>Sahaabii</alias>
+    <alias>صَحَابِيّ</alias>
   </lexeme>
 <lexeme>
     <grapheme>sahabi</grapheme>
-    <alias>Sahaabii</alias>
+    <alias>صَحَابِيّ</alias>
   </lexeme>
 <lexeme>
     <grapheme>Sharia</grapheme>
@@ -32141,7 +32141,7 @@
   </lexeme>
 <lexeme>
     <grapheme>الصلاة</grapheme>
-    <alias>Salaah</alias>
+    <alias>صَلَاة</alias>
   </lexeme>
 <lexeme>
     <grapheme>الطائف</grapheme>
@@ -32333,7 +32333,7 @@
   </lexeme>
 <lexeme>
     <grapheme>الوضوء</grapheme>
-    <alias>Wuduu</alias>
+    <alias>وُضُوء</alias>
   </lexeme>
 <lexeme>
     <grapheme>سليمان</grapheme>
@@ -32369,11 +32369,11 @@
   </lexeme>
 <lexeme>
     <grapheme>Ṣaḥābī</grapheme>
-    <alias>Sahaabii</alias>
+    <alias>صَحَابِيّ</alias>
   </lexeme>
 <lexeme>
     <grapheme>ṣaḥābī</grapheme>
-    <alias>Sahaabii</alias>
+    <alias>صَحَابِيّ</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ṭāghūt</grapheme>
@@ -32877,15 +32877,15 @@
   </lexeme>
 <lexeme>
     <grapheme>Wudhu</grapheme>
-    <alias>Wuduu</alias>
+    <alias>وُضُوء</alias>
   </lexeme>
 <lexeme>
     <grapheme>wudhu</grapheme>
-    <alias>Wuduu</alias>
+    <alias>وُضُوء</alias>
   </lexeme>
 <lexeme>
     <grapheme>Wudūʾ</grapheme>
-    <alias>Wuduu</alias>
+    <alias>وُضُوء</alias>
   </lexeme>
 <lexeme>
     <grapheme>wudūʾ</grapheme>
@@ -32905,7 +32905,7 @@
   </lexeme>
 <lexeme>
     <grapheme>إخلاص</grapheme>
-    <alias>Ichlaas</alias>
+    <alias>إِخْلَاص</alias>
   </lexeme>
 <lexeme>
     <grapheme>إدريس</grapheme>
@@ -33221,7 +33221,7 @@
   </lexeme>
 <lexeme>
     <grapheme>رمضان</grapheme>
-    <alias>Ramadaan</alias>
+    <alias>رَمَضَان</alias>
   </lexeme>
 <lexeme>
     <grapheme>زكريا</grapheme>
@@ -33233,7 +33233,7 @@
   </lexeme>
 <lexeme>
     <grapheme>صحابي</grapheme>
-    <alias>Sahaabii</alias>
+    <alias>صَحَابِيّ</alias>
   </lexeme>
 <lexeme>
     <grapheme>ضرورة</grapheme>
@@ -33245,7 +33245,7 @@
   </lexeme>
 <lexeme>
     <grapheme>عبادة</grapheme>
-    <alias>Ibaadah</alias>
+    <alias>عِبَادَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>عرفات</grapheme>
@@ -33645,7 +33645,7 @@
   </lexeme>
 <lexeme>
     <grapheme>دعاء</grapheme>
-    <alias>Duaa</alias>
+    <alias>دُعَاء</alias>
   </lexeme>
 <lexeme>
     <grapheme>راوي</grapheme>
@@ -33685,7 +33685,7 @@
   </lexeme>
 <lexeme>
     <grapheme>صحيح</grapheme>
-    <alias>Sahiih</alias>
+    <alias>صَحِيح</alias>
   </lexeme>
 <lexeme>
     <grapheme>صفات</grapheme>
@@ -33973,7 +33973,7 @@
   </lexeme>
 <lexeme>
     <grapheme>سنة</grapheme>
-    <alias>Sunnah</alias>
+    <alias>سُنَّة</alias>
   </lexeme>
 <lexeme>
     <grapheme>شرط</grapheme>
@@ -33985,7 +33985,7 @@
   </lexeme>
 <lexeme>
     <grapheme>صبر</grapheme>
-    <alias>Sabr</alias>
+    <alias>صَبْر</alias>
   </lexeme>
 <lexeme>
     <grapheme>صحف</grapheme>
@@ -34017,7 +34017,7 @@
   </lexeme>
 <lexeme>
     <grapheme>فقه</grapheme>
-    <alias>Fikh</alias>
+    <alias>فِقْه</alias>
   </lexeme>
 <lexeme>
     <grapheme>قبر</grapheme>
@@ -34124,7 +34124,8 @@
 <lexeme><grapheme>Moslem</grapheme><alias>مسلم</alias></lexeme>
 <lexeme><grapheme>Muslima</grapheme><alias>مسلمة</alias></lexeme>
 <lexeme><grapheme>Deen</grapheme><alias>الدين</alias></lexeme>
-<lexeme><grapheme>Niyya</grapheme><alias>النية</alias></lexeme>
+<lexeme><grapheme>Niyya</grapheme>
+    <alias>نِيَّة</alias></lexeme>
 <lexeme><grapheme>Niyah</grapheme><alias>النية</alias></lexeme>
 <lexeme><grapheme>Tawba</grapheme><alias>التوبة</alias></lexeme>
 <lexeme><grapheme>Tauba</grapheme><alias>التوبة</alias></lexeme>
@@ -34917,11 +34918,11 @@
   </lexeme>
 <lexeme>
     <grapheme>تَوْحِيد</grapheme>
-    <alias>Tauhiid</alias>
+    <alias>تَوْحِيد</alias>
   </lexeme>
 <lexeme>
     <grapheme>توحيد</grapheme>
-    <alias>Tauhiid</alias>
+    <alias>تَوْحِيد</alias>
   </lexeme>
 <lexeme>
     <grapheme>تَوْحِيدُ الرُّبُوبِيَّةِ</grapheme>
@@ -34949,19 +34950,19 @@
   </lexeme>
 <lexeme>
     <grapheme>عَقِيدَة</grapheme>
-    <alias>Aqiidah</alias>
+    <alias>عَقِيدَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>عقيدة</grapheme>
-    <alias>Aqiidah</alias>
+    <alias>عَقِيدَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>إِيمَان</grapheme>
-    <alias>Iimaan</alias>
+    <alias>إِيمَان</alias>
   </lexeme>
 <lexeme>
     <grapheme>إيمان</grapheme>
-    <alias>Iimaan</alias>
+    <alias>إِيمَان</alias>
   </lexeme>
 <lexeme>
     <grapheme>إِحْسَان</grapheme>
@@ -34973,7 +34974,7 @@
   </lexeme>
 <lexeme>
     <grapheme>إِخْلَاص</grapheme>
-    <alias>Ikhlaas</alias>
+    <alias>إِخْلَاص</alias>
   </lexeme>
 <lexeme>
     <grapheme>إِسْلَام</grapheme>
@@ -35017,7 +35018,7 @@
   </lexeme>
 <lexeme>
     <grapheme>سُنَّة</grapheme>
-    <alias>Sunnah</alias>
+    <alias>سُنَّة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Tāghūt</grapheme>
@@ -35033,11 +35034,11 @@
   </lexeme>
 <lexeme>
     <grapheme>عِبَادَة</grapheme>
-    <alias>Ibaadah</alias>
+    <alias>عِبَادَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>دُعَاء</grapheme>
-    <alias>Du-aa</alias>
+    <alias>دُعَاء</alias>
   </lexeme>
 <lexeme>
     <grapheme>تَوَكُّل</grapheme>
@@ -35089,7 +35090,7 @@
   </lexeme>
 <lexeme>
     <grapheme>صَبْر</grapheme>
-    <alias>Sabr</alias>
+    <alias>صَبْر</alias>
   </lexeme>
 <lexeme>
     <grapheme>شُكْر</grapheme>
@@ -35365,7 +35366,7 @@
   </lexeme>
 <lexeme>
     <grapheme>فِقْه</grapheme>
-    <alias>Fiqh</alias>
+    <alias>فِقْه</alias>
   </lexeme>
 <lexeme>
     <grapheme>أُصُولُ الْفِقْه</grapheme>
@@ -35373,19 +35374,19 @@
   </lexeme>
 <lexeme>
     <grapheme>طَهَارَة</grapheme>
-    <alias>Tahaara</alias>
+    <alias>طَهَارَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>طهارة</grapheme>
-    <alias>Tahaara</alias>
+    <alias>طَهَارَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>وُضُوء</grapheme>
-    <alias>Wuduu</alias>
+    <alias>وُضُوء</alias>
   </lexeme>
 <lexeme>
     <grapheme>وضوء</grapheme>
-    <alias>Wuduu</alias>
+    <alias>وُضُوء</alias>
   </lexeme>
 <lexeme>
     <grapheme>Ghusul</grapheme>
@@ -35417,11 +35418,11 @@
   </lexeme>
 <lexeme>
     <grapheme>صَلَاة</grapheme>
-    <alias>Salaah</alias>
+    <alias>صَلَاة</alias>
   </lexeme>
 <lexeme>
     <grapheme>صلاة</grapheme>
-    <alias>Salaah</alias>
+    <alias>صَلَاة</alias>
   </lexeme>
 <lexeme>
     <grapheme>زَكَاة</grapheme>
@@ -35445,7 +35446,7 @@
   </lexeme>
 <lexeme>
     <grapheme>رَمَضَان</grapheme>
-    <alias>Ramadaan</alias>
+    <alias>رَمَضَان</alias>
   </lexeme>
 <lexeme>
     <grapheme>حَجّ</grapheme>
@@ -36029,11 +36030,11 @@
   </lexeme>
 <lexeme>
     <grapheme>أَمَانَة</grapheme>
-    <alias>Amaanah</alias>
+    <alias>أَمَانَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>أمانة</grapheme>
-    <alias>Amaanah</alias>
+    <alias>أَمَانَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>Wasiyah</grapheme>
@@ -36233,7 +36234,7 @@
   </lexeme>
 <lexeme>
     <grapheme>صَحِيح</grapheme>
-    <alias>Sahiih</alias>
+    <alias>صَحِيح</alias>
   </lexeme>
 <lexeme>
     <grapheme>حَسَن</grapheme>
@@ -36357,11 +36358,11 @@
   </lexeme>
 <lexeme>
     <grapheme>صَحَابَة</grapheme>
-    <alias>Sahaabah</alias>
+    <alias>صَحَابَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>صحابة</grapheme>
-    <alias>Sahaabah</alias>
+    <alias>صَحَابَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>صَحَابِي</grapheme>
@@ -36609,11 +36610,11 @@
   </lexeme>
 <lexeme>
     <grapheme>أَخْلَاق</grapheme>
-    <alias>Akhlaaq</alias>
+    <alias>أَخْلَاق</alias>
   </lexeme>
 <lexeme>
     <grapheme>أخلاق</grapheme>
-    <alias>Akhlaaq</alias>
+    <alias>أَخْلَاق</alias>
   </lexeme>
 <lexeme>
     <grapheme>ḥikmah</grapheme>
@@ -39033,7 +39034,7 @@
   </lexeme>
 <lexeme>
     <grapheme>رحمة</grapheme>
-    <alias>rahmatan</alias>
+    <alias>رَحْمَة</alias>
   </lexeme>
 <lexeme>
     <grapheme>l-wahhāb</grapheme>
@@ -39822,5 +39823,45 @@
 <lexeme>
     <grapheme>maymunah</grapheme>
     <alias>Maymuunah</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>Masḥ</grapheme>
+    <alias>مَسْح</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>masḥ</grapheme>
+    <alias>مَسْح</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>مَسْح</grapheme>
+    <alias>مَسْح</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>مسح</grapheme>
+    <alias>مَسْح</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>نِيَّة</grapheme>
+    <alias>نِيَّة</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>نية</grapheme>
+    <alias>نِيَّة</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>رَحْمَة</grapheme>
+    <alias>رَحْمَة</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>الْفَاتِحَة</grapheme>
+    <alias>الْفَاتِحَة</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>غيبة</grapheme>
+    <alias>غِيبَة</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>Duʿā</grapheme>
+    <alias>دُعَاء</alias>
   </lexeme>
 </lexicon>
