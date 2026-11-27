@@ -519,3 +519,5 @@ html[data-theme] body.is-hadith-route #appView button.hls-leaf .hls-row-count{al
 @media (min-width:1100px){
   .hls{padding-inline:8px;}
 }
+html[data-theme] body.is-hadith-route #appView .hadith-ki-mark{margin:.35rem 0 .8rem;color:var(--hls-muted);font-size:.82rem;line-height:1.45;}
+html[data-theme] body.is-hadith-route #appView .hadith-sharh--ki{margin-top:.6rem;}
