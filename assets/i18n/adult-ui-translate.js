@@ -94,7 +94,7 @@ var QREF={
 };
 var catalog=new Map();
 var phraseKeys=[];
-var GERMAN_STOP=/(^|[^\p{L}\p{N}])(und|oder|nicht|keine|keiner|eine|einer|einem|eines|ist|sind|wird|werden|mit|für|auf|von|der|die|das|den|dem|des|ein|im|zum|zur|vom|beim|auch|nach|bei|aus|wenn|aber|noch|nur|sich|sowie|diese|dieser|dieses|dein|deine|deinen)(?=$|[^\p{L}\p{N}])/giu;
+var GERMAN_STOP=/(^|[^\p{L}\p{N}'’ʼ])(und|oder|nicht|keine|keiner|eine|einer|einem|eines|ist|sind|wird|werden|mit|für|auf|von|der|die|das|den|dem|des|ein|im|zum|zur|vom|beim|auch|nach|bei|aus|wenn|aber|noch|nur|sich|sowie|diese|dieser|dieses|dein|deine|deinen)(?=$|[^\p{L}\p{N}])/giu;
 function stopHits(s){GERMAN_STOP.lastIndex=0;return s.match(GERMAN_STOP)}
 var content=null;
 var hadithPack=null;
@@ -162,7 +162,7 @@ function looksGerman(value){
  return false;
 }
 function residualGerman(value){
- return /(^|[^\p{L}\p{N}])(und|oder|mit|für|von|der|die|das|bei|aus|auf|nach|zum|zur|ist|sind|eine|nicht|keine|ihre|dem|den|ein|im|auch|noch|nur|diese|wird|werden|sowie|beim|vom|freie|Auswahl|Anbetung|Beigesellung|Wissenszentrum|Veröffentlichung|Direktnachweise|Überlieferungsmassstab|Maßstab)(?=$|[^\p{L}\p{N}])/iu.test(String(value||""));
+ return /(^|[^\p{L}\p{N}'’ʼ])(und|oder|mit|für|von|der|die|das|bei|aus|auf|nach|zum|zur|ist|sind|eine|nicht|keine|ihre|dem|den|ein|im|auch|noch|nur|diese|wird|werden|sowie|beim|vom|freie|Auswahl|Anbetung|Beigesellung|Wissenszentrum|Veröffentlichung|Direktnachweise|Überlieferungsmassstab|Maßstab)(?=$|[^\p{L}\p{N}])/iu.test(String(value||""));
 }
 function rememberBlocked(source){
  var s=norm(source);
@@ -389,14 +389,18 @@ function setRoot(){
  if(!doc)return;
  doc.lang=code;
  doc.dir=RTL[code]?"rtl":"ltr";
+ // Nine-language Q cards localize their own document title; leave it alone there.
+ var ownsLocales=!!(global.document.querySelector&&global.document.querySelector("[data-dar-no-translate='qsource-nine-locales']"));
  var currentTitle=String(global.document.title||"");
- if(!titleSource)titleSource=currentTitle;
- else if(currentTitle&&currentTitle!==titleSource){
-  var rendered=code==="de"?titleSource:renderSource(titleSource);
-  if(currentTitle!==rendered&&(looksGerman(currentTitle)||catalog.get(currentTitle)))titleSource=currentTitle;
+ if(!ownsLocales){
+  if(!titleSource)titleSource=currentTitle;
+  else if(currentTitle&&currentTitle!==titleSource){
+   var rendered=code==="de"?titleSource:renderSource(titleSource);
+   if(currentTitle!==rendered&&(looksGerman(currentTitle)||catalog.get(currentTitle)))titleSource=currentTitle;
+  }
+  var nextTitle=code==="de"?titleSource:renderSource(titleSource);
+  if(nextTitle&&nextTitle!==currentTitle)global.document.title=nextTitle;
  }
- var nextTitle=code==="de"?titleSource:renderSource(titleSource);
- if(nextTitle&&nextTitle!==currentTitle)global.document.title=nextTitle;
  if(code==="ku"&&global.document.querySelectorAll){
   var blocks=global.document.querySelectorAll("p,li,h1,h2,h3,blockquote,figcaption");
   for(var bi=0;bi<blocks.length&&bi<400;bi++){
@@ -537,7 +541,9 @@ function applyContent(rerender){
   setRoot();
   note();
   if(rerender&&typeof global.render==="function"){
-   try{global.render()}catch(_){}
+   // Page-level render(lang) functions (nine-language Q cards and their learning pages) treat a
+   // missing argument as German. Hand them the active locale so a re-render never resets the page.
+   try{if(global.render.length>0)global.render(locale());else global.render()}catch(_){}
   }
  }finally{busy=false}
 }
