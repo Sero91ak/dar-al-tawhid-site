@@ -600,7 +600,7 @@
   function navRow(value, name, arabic, meta) {
     return '<li class="hls-group-item"><button type="button" class="hls-row" data-nav="hadith" data-value="' + esc(value) + '"><span class="hls-row-main">' +
       (arabic ? '<span class="hls-row-ar" lang="ar" dir="rtl">' + esc(arabic) + "</span>" : "") +
-      "<strong>" + esc(name) + '</strong></span><span class="hls-row-count">' + esc(meta) + "</span>" + chevron() + "</button></li>";
+      "<strong dir=\"auto\">" + esc(name) + '</strong></span><span class="hls-row-count">' + esc(meta) + "</span>" + chevron() + "</button></li>";
   }
   function matchesQuery(blob, q) {
     var nq = norm(q);
@@ -655,24 +655,29 @@
       var id = String(chapter.id) + "/" + String((bab && bab.id) || chapter.id);
       if (group.seen[id]) return;
       group.seen[id] = true;
-      var ord = minOrdinal(hadiths);
-      if (ord && (!group.order || ord < group.order)) group.order = ord;
-      group.count += hadiths.length;
-      group.babs.push({ id: (bab && bab.id) || chapter.id, chapterId: chapter.id, title: (bab && bab.title) || "", hadiths: hadiths, order: ord || 1000000000 });
+      if (chapter.corpusOrder) {
+        if (!group.order || chapter.corpusOrder < group.order) group.order = chapter.corpusOrder;
+      } else {
+        var ord = minOrdinal(hadiths);
+        if (ord && (!group.order || ord < group.order)) group.order = ord;
+      }
+      group.count += hadiths.length || Number(chapter.corpusCount || 0);
+      group.babs.push({ id: (bab && bab.id) || chapter.id, chapterId: chapter.id, title: (bab && bab.title) || "", arabic: (bab && bab.faceArabic) || "", hadiths: hadiths, order: ord || 1000000000 });
     }
     (chapters || []).forEach(function (chapter) {
       var split = kitabBabSplit(chapter.title || "");
       var babs = babsOf(chapter);
-      if (looseShelfTitle(split.kitab)) {
+      var corpusKitab = chapter.corpusNo != null && !chapter.corpusLoose;
+      if (chapter.corpusLoose || (!corpusKitab && looseShelfTitle(split.kitab))) {
         if (babs.length) babs.forEach(function (bab) { pushBab(loose, chapter, bab); });
         else pushBab(loose, chapter, { id: chapter.id, title: chapter.title, hadiths: chapter.hadiths || [] });
         return;
       }
-      var key = norm(cleanKitab(split.kitab));
+      var key = corpusKitab ? "corpus:" + String(chapter.id) : norm(cleanKitab(split.kitab));
       var group = byKey[key];
       if (!group) {
         var face = kitabFace(split.kitab, "de");
-        group = { id: chapter.id, key: key, loose: false, title: split.kitab, name: cleanKitab(split.kitab), arabic: face.arabic || "", order: 0, count: 0, babs: [], seen: {} };
+        group = { id: chapter.id, key: key, loose: false, title: split.kitab, name: cleanKitab(split.kitab), arabic: chapter.faceArabic || face.arabic || "", order: chapter.corpusOrder || 0, count: 0, babs: [], seen: {} };
         byKey[key] = group;
         groups.push(group);
       }
@@ -695,14 +700,17 @@
     var items = groups.map(function (group) {
       var distinct = group.babs.filter(function (bab) {
         var babName = cleanBab(bab.title || "");
-        return babName && norm(babName) !== "bab" && norm(babName) !== "kitab" && norm(babName) !== norm(group.name) && !countish(babName);
+        var nb = norm(babName), ng = norm(group.name);
+        var sameAsKitab = (nb || ng) ? nb === ng : String(babName).trim() === String(group.name || "").trim();
+        return babName && nb !== "bab" && nb !== "kitab" && !/^باب\s*:?$/.test(String(babName).trim()) && !sameAsKitab && !countish(babName);
       });
       var blob = (group.title || "") + " " + (group.name || "") + " " + (group.arabic || "") + " " + distinct.map(function (bab) { return bab.title; }).join(" ");
       var holdsOpen = String(openId) === String(group.id) || group.babs.some(function (bab) { return String(bab.chapterId) === String(openId); });
       if (!matchesQuery(blob, q) && !holdsOpen) return "";
       var arabic = (loc === "ar" || loc === "ckb") ? "" : (group.arabic || "");
       var name = group.loose ? t("moreHadith", loc) : ((loc === "ar" || loc === "ckb") && group.arabic ? group.arabic : (group.name || t("kitab", loc)));
-      var number = group.loose ? "" : '<span class="hls-row-no">' + esc(ornament(++shelfNo, loc)) + "</span>";
+      var shownNo = (!group.loose && group.order && group.order < 100000) ? group.order : ++shelfNo;
+      var number = group.loose ? "" : '<span class="hls-row-no">' + esc(ornament(shownNo, loc)) + "</span>";
       if (!distinct.length) {
         var target = group.babs[0];
         var value = target ? (book.id + "/" + target.chapterId + (target.id && String(target.id) !== String(target.chapterId) ? "/" + target.id : "")) : book.id;
@@ -713,7 +721,8 @@
       var open = holdsOpen || !!q;
       var inner = open ? '<ul class="hls-group hls-group--inner">' + distinct.map(function (bab) {
         var babName = cleanBab(bab.title || "");
-        return navRow(book.id + "/" + bab.chapterId + "/" + bab.id, babName, "", countLabel((bab.hadiths || []).length, loc));
+        var babAr = (loc !== "ar" && loc !== "ckb" && bab.arabic && bab.arabic !== babName && bab.arabic !== bab.title) ? bab.arabic : "";
+        return navRow(book.id + "/" + bab.chapterId + "/" + bab.id, babName, babAr, countLabel((bab.hadiths || []).length, loc));
       }).join("") + "</ul>" : "";
       return '<li class="hls-group-item' + (open ? " is-open" : "") + '"><button type="button" class="hls-row" data-hls-kitab="' + esc(group.id) + '" aria-expanded="' + (open ? "true" : "false") + '">' + number + '<span class="hls-row-main">' +
         (arabic ? '<span class="hls-row-ar" lang="ar" dir="rtl">' + esc(arabic) + "</span>" : "") +
@@ -745,7 +754,7 @@
     if (!title || norm(title) === "kitab" || norm(title) === "bab" || countish(title)) title = book.title || "";
     var list = rows.map(function (h, i) {
       var num = publicNum(h.hadithNumber);
-      var preview = publicText(h.german || h.babTitle || "").replace(/\s+/g, " ").slice(0, 180);
+      var preview = publicText((h.kiPending || (h.corpus && !h.german)) ? (h.arabic || h.german || "") : (h.german || h.babTitle || "")).replace(/\s+/g, " ").slice(0, 180);
       var who = publicText(h.narrator || h.narratorLine || "");
       var grade = publicText(h.grade || "");
       if (grade.length > 32) grade = "";
@@ -851,16 +860,55 @@
         refreshOnce();
       }, function () { delete COLS_WAIT[book.id]; });
     }
+    if (book && collection && w.DARHadithOpenCorpus && String(book.id) === w.DARHadithOpenCorpus.workId) {
+      w.DARHadithOpenCorpus.apply(book, collection, loc);
+    }
     if (route.hadithId) {
       remember(route);
-      var found = typeof w.findHadithById === "function" ? w.findHadithById(route.hadithId) : null;
+      var found = (w.DARHadithOpenCorpus && typeof w.DARHadithOpenCorpus.recordById === "function") ? w.DARHadithOpenCorpus.recordById(route.hadithId, loc) : null;
+      if (found && w.DARHadithOpenCorpus.shellForNumber) {
+        var shellHit = w.DARHadithOpenCorpus.shellForNumber(found.hadithNumber);
+        if (shellHit && shellHit.sharhStatus === "verified" && shellHit.sharhText && shellHit.sharhScholar && shellHit.sharhBook && shellHit.sharhReference) {
+          found = Object.assign({}, found, {
+            id: shellHit.id || found.id,
+            sharhText: shellHit.sharhText,
+            sharhScholar: shellHit.sharhScholar,
+            sharhBook: shellHit.sharhBook,
+            sharhReference: shellHit.sharhReference,
+            sharhStatus: "verified",
+            kiSharh: ""
+          });
+        }
+      }
+      if (!found && w.DARHadithOpenCorpus && typeof w.DARHadithOpenCorpus.shellRecord === "function") found = w.DARHadithOpenCorpus.shellRecord(route.hadithId);
+      if (!found && typeof w.findHadithById === "function") found = w.findHadithById(route.hadithId);
+      if (!found && w.DARHadithOpenCorpus && route.chapterId && collection) {
+        var waitChapter = (collection.chapters || []).filter(function (item) { return String(item.id) === String(route.chapterId); })[0];
+        if (waitChapter && waitChapter.corpusNo != null && !(waitChapter.hadiths || []).length) {
+          w.DARHadithOpenCorpus.ensure(waitChapter.corpusNo).then(function () { refreshOnce(); }, function () { refreshOnce(); });
+          return page((book && book.title) || t("library", loc), "", "", '<p class="hls-empty">' + esc(t("opening", loc)) + "</p>", loc, true);
+        }
+      }
       if (found && typeof w.renderHadithDetail === "function") {
         var readChapter = found.chapterId ? { id: found.chapterId, title: found.chapterTitle || "" } : null;
         var readSection = (found.babId || found.babTitle) ? { id: found.babId || "", title: found.babTitle || "" } : null;
         var readTitle = cleanBab(found.babTitle || "") || cleanKitab(found.chapterTitle || "");
         if (!readTitle || norm(readTitle) === "bab" || norm(readTitle) === "kitab" || countish(readTitle)) readTitle = (book && book.title) || t("library", loc);
         var readSub = [book && book.title, publicNum(found.hadithNumber)].filter(Boolean).join(" · ");
-        return page(readTitle, readSub, tools(searchQuery(), loc), crumbs(book, readChapter, readSection, loc, readTitle) + w.renderHadithDetail(found), loc, true);
+        var ki = "";
+        if (found.kiMark || found.kiSharh || found.textNote) {
+          ki = (found.kiMark ? '<p class="hadith-ki-mark">' + esc(found.kiMark) + "</p>" : "") +
+            (found.textNote ? '<p class="hadith-ki-mark">' + esc(found.textNote) + "</p>" : "") +
+            (found.kiSharh ? '<section class="hadith-sharh hadith-sharh--ki" aria-label="KI-Zusammenfassung"><header class="hadith-sharh-head"><p class="hadith-sharh-eyebrow">KI-Zusammenfassung</p><h3 class="hadith-sharh-heading">Šarḥ <span>– kurz</span></h3></header><div class="hadith-sharh-text">' + esc(found.kiSharh) + "</div></section>" : "");
+        }
+        var detailHtml = w.renderHadithDetail(found);
+        if (found.corpus && found.arabic && (detailHtml.indexOf("hadith-arabic") < 0 || detailHtml.indexOf(esc(String(found.arabic).slice(0, 40))) < 0)) {
+          var arBlock = '<div class="hadith-arabic" dir="rtl" lang="ar">' + esc(found.arabic) + "</div>";
+          var arAt = -1;
+          ['<p class="hadith-source-line"', '<section class="hadith-sharh"', '<section class="share'].some(function (mark) { arAt = detailHtml.indexOf(mark); return arAt >= 0; });
+          detailHtml = arAt >= 0 ? detailHtml.slice(0, arAt) + arBlock + detailHtml.slice(arAt) : detailHtml + arBlock;
+        }
+        return page(readTitle, readSub, tools(searchQuery(), loc), crumbs(book, readChapter, readSection, loc, readTitle) + detailHtml + ki, loc, true);
       }
       if (typeof w.renderHadithBookPanel === "function") return w.renderHadithBookPanel(book, route);
     }
@@ -878,6 +926,10 @@
       var onlyBabs = babsOf(only);
       if (only && onlyBabs.length > 1) return babBoard(book, only, onlyBabs, q, loc);
       return leaf(book, only, (onlyBabs[0] || null), q, loc, true);
+    }
+    if (chapter && chapter.corpusNo != null && !(chapter.hadiths || []).length && w.DARHadithOpenCorpus) {
+      w.DARHadithOpenCorpus.ensure(chapter.corpusNo).then(function () { refreshOnce(); }, function () { refreshOnce(); });
+      return page(chapter.title || book.title || t("library", loc), "", tools(q, loc), '<p class="hls-empty">' + esc(t("opening", loc)) + "</p>", loc, true);
     }
     if (route.babId && chapter) return leaf(book, chapter, section || babs[0] || null, q, loc);
     if (chapter && babs.length <= 1) return leaf(book, chapter, babs[0] || null, q, loc);
