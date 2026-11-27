@@ -219,7 +219,7 @@
   // allgemeiner Pack < Quiz < Duʿāʾ. So überschreibt nie wieder ein alter
   // generischer Clip einen frisch gerenderten Bereichs-Clip.
   // Akademie-Minipack wird vor den großen Archiven unabhängig freigegeben.
-  var academyPublic=loadManifest("/kids/data/academy-audio.json?v=20261126-ui-areas",5,function(data){
+  var academyPublic=loadManifest("/kids/data/academy-audio.json?v=20261127-sidq-pronunciation",5,function(data){
     return !!(data&&data.id==="KIDS_ACADEMY_SERHAT_MASTER_V1"&&
       data.voiceProfileId==="serhat-owner-voice-2026"&&
       data.speaker==="Serhat Abu Malik"&&

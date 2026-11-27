@@ -12861,19 +12861,19 @@
   </lexeme>
 <lexeme>
     <grapheme>Ṣidq</grapheme>
-    <alias>Sidq</alias>
+    <alias>صِدْق</alias>
   </lexeme>
 <lexeme>
     <grapheme>Sidq</grapheme>
-    <alias>Sidq</alias>
+    <alias>صِدْق</alias>
   </lexeme>
 <lexeme>
     <grapheme>ṣidq</grapheme>
-    <alias>Sidq</alias>
+    <alias>صِدْق</alias>
   </lexeme>
 <lexeme>
     <grapheme>sidq</grapheme>
-    <alias>Sidq</alias>
+    <alias>صِدْق</alias>
   </lexeme>
 <lexeme>
     <grapheme>Amānah</grapheme>
@@ -36661,11 +36661,11 @@
   </lexeme>
 <lexeme>
     <grapheme>صِدْق</grapheme>
-    <alias>Sidq</alias>
+    <alias>صِدْق</alias>
   </lexeme>
 <lexeme>
     <grapheme>صدق</grapheme>
-    <alias>Sidq</alias>
+    <alias>صِدْق</alias>
   </lexeme>
 <lexeme>
     <grapheme>Amr bi-l-Maʿrūf</grapheme>

@@ -165,6 +165,24 @@ def concat_mp3(parts: list[Path], dest: Path) -> None:
     )
 
 
+# Latin Ṣidq/Sidq in German text is read as "Sidak"/"Ziq". Lift to vowelized
+# Arabic so it becomes its own Fuṣḥā segment. Display/spokenText stays unchanged.
+# Do not lift Ṣadaqah, Ṣiddīq, or other ص-roots.
+SIDQ_LIFT_RE = re.compile(
+    r"(?<![A-Za-zṢṣ])((?:a[sṣSṢ]-)?(?:Ṣidq|Sidq|ṣidq|sidq))(?![A-Za-zāīūḍḥṣṭẓʾʿ])"
+)
+
+def lift_sidq_for_tts(text: str) -> str:
+    def repl(m: re.Match) -> str:
+        raw = m.group(1)
+        if raw.lower().startswith("a") and len(raw) > 2 and raw[1] in "-‐‑":
+            return "الصِّدْق"
+        if raw[:2].lower() in {"as", "aṣ"} and len(raw) > 2 and raw[2] == "-":
+            return "الصِّدْق"
+        return "صِدْق"
+    return SIDQ_LIFT_RE.sub(repl, text)
+
+
 def split_segments(text: str) -> list[tuple[str, str]]:
     """Return ordered (lang, text) segments. Arabic script / ﷺ are ar."""
     out = []
@@ -513,7 +531,7 @@ def update_deen_audio(lesson_id: str, source: str, url: str, digest: str, durati
 
 def synthesize_text(text: str, ident: str) -> tuple[Path, list[str], int, str, bool]:
     """Return (mp3_path, request_ids, chars_spent, language_label, used_dict)."""
-    segs = split_segments(text)
+    segs = split_segments(lift_sidq_for_tts(text))
     ORIGINALS.mkdir(parents=True, exist_ok=True)
     parts = []
     request_ids = []
