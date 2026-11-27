@@ -228,6 +228,7 @@
   function ensurePack(no, code) {
     var key = String(Number(no)) + ":" + code;
     if (packs[key]) return Promise.resolve(packs[key]);
+    if (code === "ar") { packs[key] = {}; return Promise.resolve(packs[key]); }
     if (packWait[key]) return packWait[key];
     packWait[key] = loadJson(BASE + "/i18n/" + kid(no) + "/" + code + ".json").then(function (data) {
       packs[key] = data || {};

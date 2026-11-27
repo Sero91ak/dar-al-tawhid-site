@@ -700,7 +700,9 @@
     var items = groups.map(function (group) {
       var distinct = group.babs.filter(function (bab) {
         var babName = cleanBab(bab.title || "");
-        return babName && norm(babName) !== "bab" && norm(babName) !== "kitab" && norm(babName) !== norm(group.name) && !countish(babName);
+        var nb = norm(babName), ng = norm(group.name);
+        var sameAsKitab = (nb || ng) ? nb === ng : String(babName).trim() === String(group.name || "").trim();
+        return babName && nb !== "bab" && nb !== "kitab" && !/^باب\s*:?$/.test(String(babName).trim()) && !sameAsKitab && !countish(babName);
       });
       var blob = (group.title || "") + " " + (group.name || "") + " " + (group.arabic || "") + " " + distinct.map(function (bab) { return bab.title; }).join(" ");
       var holdsOpen = String(openId) === String(group.id) || group.babs.some(function (bab) { return String(bab.chapterId) === String(openId); });
