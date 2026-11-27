@@ -426,6 +426,22 @@ body.qsource-body::after{
   --social-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.1a15.7 15.7 0 0 0-1.08-5.02A8.02 8.02 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.46 3.03 1.67 4.96h-3.34C10.54 7.07 11.17 5.24 12 4.04ZM4.26 13h3.9c.1 1.72.47 3.34 1.08 4.74A8.03 8.03 0 0 1 4.26 13Zm3.9-2h-3.9a8.03 8.03 0 0 1 4.98-4.74A15.8 15.8 0 0 0 8.16 11ZM12 19.96c-.83-1.2-1.46-3.03-1.67-4.96h3.34c-.21 1.93-.84 3.76-1.67 4.96ZM13.9 13h-3.8a14.6 14.6 0 0 1 0-2h3.8a14.6 14.6 0 0 1 0 2Zm.86 4.74c.61-1.4.98-3.02 1.08-4.74h3.9a8.03 8.03 0 0 1-4.98 4.74Z'/%3E%3C/svg%3E");
 }
 
+/* Q_SOURCE_APPSTORE_BUTTON_V1 (27.11.2026): App-Store-Button mit dem offiziellen
+   App-Icon (identisch mit der Live-Store-Grafik), rechts neben dem Website-Button. */
+.qsource-social .appstore::before{
+  display:none!important;
+  content:none!important;
+}
+.qsource-social .appstore img{
+  display:block;
+  width:28px;
+  height:28px;
+  border-radius:7px;
+  object-fit:cover;
+  box-shadow:0 0 0 1px rgba(0,0,0,.08);
+  pointer-events:none;
+}
+
 /* Kompatibilitätsfix: ältere qsource-footer-Blöcke werden als Icon-Leiste dargestellt. */
 .qsource-footer{
   display:flex;
