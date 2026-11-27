@@ -155,6 +155,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "bukhari-open-corpus-test-20261126",
+      "at": "2026-11-26T22:40:00+01:00",
+      "approvedBy": "owner-serhat-20261126-bukhari-corpus",
+      "reason": "Owner Serhat: Sahih al-Bukhari from an open Arabic dataset, lazy per kitab, on the Dar Test lane first. No prayer, Qibla, location, Kids or push.",
+      "paths": [
+        "data/hadith/open/",
+        "scripts/build-bukhari-open-corpus.py",
+        "test/assets/hadith-open-corpus-v1.js",
+        "test/assets/hadith-open-corpus-source.md",
+        "test/assets/hadith-library-shelves-v2.js",
+        "test/assets/hadith-library-shelves-v2.css",
+        "test/index.html"
+      ],
+      "expiresAt": "2026-12-03T23:59:59+01:00"
+    },
+    {
       "id": "q70-posts-index-parity-retry-20261126",
       "at": "2026-11-26T22:08:00.000Z",
       "approvedBy": "owner-serhat-explicit-finish-q70-live-20261126",
@@ -10039,6 +10055,23 @@
         "scripts/test-kids-academy-v9.js"
       ],
       "expiresAt": "2026-12-31T23:59:00+01:00"
+    },
+    {
+      "id": "bukhari-open-corpus-expanded-test-20261127",
+      "at": "2026-11-27T08:00:00+01:00",
+      "approvedBy": "owner-serhat-20261127-explicit-bukhari-phase-a",
+      "reason": "Owner Serhat Abu Malik explicitly authorized expansion of PR #1964 for Sahih al-Bukhari. Test lane only, beginning with Phase A. Permit the complete Arabic text and Kitab/Bab structure plus directly related hadith-library files. No merge to visitor lane without separate 'Push live'. Kids, prayer-time push, automations and core-security lock remain untouched.",
+      "paths": [
+        "data/hadith/open/sahih-al-bukhari/",
+        "scripts/build-bukhari-open-corpus.py",
+        "test/assets/hadith-open-corpus-v1.js",
+        "test/assets/hadith-open-corpus-source.md",
+        "test/assets/hadith-library-shelves-v2.js",
+        "test/assets/hadith-library-shelves-v2.css",
+        "test/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-04T23:59:59+01:00"
     }
   ],
   "enabled": true
