@@ -36,7 +36,7 @@ Jede nummerierte Quellenseite muss diesen Aufbau verwenden:
 9. Keine alten Listen wie `<ul class="qsource-link-list">` für Quellenlinks verwenden.
 10. Keine Text-Footer wie `Telegram Instagram WhatsApp Website` verwenden.
 11. Nach den Originalnachweisen muss **immer** der thematisch passende interne Lernbereich verlinkt sein: `<a class="qsource-learning" href="/lernen/<passender-slug>/" ...>`. Die Lernseite muss existieren, das Wissen der jeweiligen Quelle behandeln und zu derselben Q-Nummer zurückverlinken. Wenn keine passende Lernseite existiert, **vor Veröffentlichung eine eigene passende Lernseite anlegen**. Der Lernbereich ist keine weitere Überlieferungsquelle.
-12. Ganz am Schluss folgt **immer die vollständige Icon-Leiste** `<nav class="qsource-social">` mit vier **funktionierenden Links**: Telegram `https://t.me/dar_al_tauhid`, Instagram `https://www.instagram.com/dar_at_tawhid/`, WhatsApp-Kanal `https://whatsapp.com/channel/0029VbBK0YaDp2Q8A0kW1F3g` und Website `/`. Eine einzelne Homepage-Schaltfläche reicht nicht aus. Die Icons werden über die zentrale CSS gerendert; zugängliche Beschriftung ist Pflicht.
+12. Ganz am Schluss folgt **immer die vollständige Icon-Leiste** `<nav class="qsource-social">` mit fünf **funktionierenden Links**: Telegram `https://t.me/dar_al_tauhid`, Instagram `https://www.instagram.com/dar_at_tawhid/`, WhatsApp-Kanal `https://whatsapp.com/channel/0029VbBK0YaDp2Q8A0kW1F3g`, Website `/desktop-preview/` (öffentliche Desktop-Webseite; `/` öffnet in der iOS-App die App selbst) und ganz rechts App Store `https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753` mit dem offiziellen App-Icon `/assets/app-icons/type-creme-ar/icon-180.png`. Eine einzelne Homepage-Schaltfläche reicht nicht aus. Die Icons werden über die zentrale CSS gerendert; zugängliche Beschriftung ist Pflicht.
 13. Die sichtbare geteilte Quellenadresse lautet ohne Protokoll `dar-al-tawhid.de/q/<nummer>/` (mit Schluss-Slash); die technischen URLs verwenden HTTPS. Keine reinen beschrifteten Markdown-Links zum Weiterkopieren.
 14. Originalnachweise müssen verifiziert, markiert und in den vorgesehenen Linkkarten erfasst sein; die Lernseite ersetzt niemals Quellen-/Isnād-Belege.
 15. Quellenlinks werden nicht automatisch in Beiträgen veröffentlicht, sondern erst nach Freigabe des Nutzers; eine Q-Seite oder Lernseite löst **keine OneSignal-Nachricht** aus.
@@ -59,7 +59,8 @@ Das Beispiel ist an **Q46 (Ibn Sīrīn)** gebunden; es darf bei anderen Aussagen
   <a class="telegram" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener noreferrer" aria-label="Telegram"></a>
   <a class="instagram" href="https://www.instagram.com/dar_at_tawhid/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"></a>
   <a class="whatsapp" href="https://whatsapp.com/channel/0029VbBK0YaDp2Q8A0kW1F3g" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"></a>
-  <a class="web" href="/" aria-label="Website"></a>
+  <a class="web" href="/desktop-preview/" aria-label="Website"></a>
+  <a class="appstore" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im App Store"><img src="/assets/app-icons/type-creme-ar/icon-180.png" alt="" width="30" height="30" loading="lazy" decoding="async"></a>
 </nav>
 ```
 

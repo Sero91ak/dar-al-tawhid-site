@@ -142,7 +142,8 @@ for (const n of files) {
       telegram: 'https://t.me/dar_al_tauhid',
       instagram: 'https://www.instagram.com/dar_at_tawhid/',
       whatsapp: 'https://whatsapp.com/channel/0029VbBK0YaDp2Q8A0kW1F3g',
-      web: '/'
+      web: '/desktop-preview/',
+      appstore: 'https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753'
     };
     for (const [cls, expected] of Object.entries(requiredSocial)) {
       const found = social.find(tag => attr(tag, 'class').split(/\s+/).includes(cls));
