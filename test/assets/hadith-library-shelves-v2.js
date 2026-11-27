@@ -901,7 +901,10 @@
         }
         var detailHtml = w.renderHadithDetail(found);
         if (found.corpus && found.arabic && (detailHtml.indexOf("hadith-arabic") < 0 || detailHtml.indexOf(esc(String(found.arabic).slice(0, 40))) < 0)) {
-          detailHtml += '<div class="hadith-arabic" dir="rtl" lang="ar">' + esc(found.arabic) + "</div>";
+          var arBlock = '<div class="hadith-arabic" dir="rtl" lang="ar">' + esc(found.arabic) + "</div>";
+          var arAt = -1;
+          ['<p class="hadith-source-line"', '<section class="hadith-sharh"', '<section class="share'].some(function (mark) { arAt = detailHtml.indexOf(mark); return arAt >= 0; });
+          detailHtml = arAt >= 0 ? detailHtml.slice(0, arAt) + arBlock + detailHtml.slice(arAt) : detailHtml + arBlock;
         }
         return page(readTitle, readSub, tools(searchQuery(), loc), crumbs(book, readChapter, readSection, loc, readTitle) + detailHtml + ki, loc, true);
       }
