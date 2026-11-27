@@ -334,17 +334,56 @@ html body .kids-academy-portal iframe{max-width:100%;min-width:0}
   }
 }
 
-/* iPad Pro landscape: leave a strip so "Meine Lernakademie" clears the dock. */
+/* iPad Pro / Air landscape: cap the hero AND scale the wordmark so the
+   academy card title clears the dock without overlapping the salām. */
 @media (orientation:landscape) and (min-height:801px) and (max-height:1100px){
   html body .app #view-today.view .kids-salah-home-world > .hero,
   html.kids-ios-app body .app #view-today.view .kids-salah-home-world > .hero,
   html.dar-ios-native-app body .app #view-today.view .kids-salah-home-world > .hero,
   html:not(.kids-ios-app):not(.dar-ios-native-app) body .app #view-today.view .kids-salah-home-world > .hero{
-    --kids-home-visible-hero:min(42dvh,calc(100dvh - var(--kids-dock-clearance) - 460px),480px);
+    --kids-home-visible-hero:min(29dvh,calc(100dvh - var(--kids-dock-clearance) - 600px),360px);
     box-sizing:border-box!important;
     min-height:var(--kids-home-visible-hero)!important;
     height:var(--kids-home-visible-hero)!important;
     max-height:var(--kids-home-visible-hero)!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world .kids-wordmark,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .kids-wordmark,
+  html.dar-ios-native-app body .app #view-today.view .kids-salah-home-world .kids-wordmark{
+    top:clamp(8px,1.6dvh,18px)!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world .kids-wordmark > img.wm-dar-reference-v1222,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .kids-wordmark > img.wm-dar-reference-v1222{
+    width:min(36dvh,420px)!important;
+    max-width:calc(100% - 40px)!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world .wm-kids,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .wm-kids{
+    font-size:clamp(42px,7.2dvh,72px)!important;
+    margin-top:-2px!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world .wm-dar-arc-text,
+  html body .app #view-today.view .kids-salah-home-world .wm-dar-arc-masktext,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .wm-dar-arc-text{
+    font-size:clamp(28px,4.8dvh,48px)!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world .hero-copy,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .hero-copy{
+    bottom:4px!important;padding:2px 10px!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world .hero-salam,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .hero-salam{
+    font-size:clamp(12px,2dvh,16px)!important;line-height:1.2!important;margin-bottom:2px!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world .hero h1,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .hero h1{
+    font-size:clamp(18px,3.2dvh,28px)!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world > .kids-salah-stage,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world > .kids-salah-stage{
+    padding-top:clamp(8px,1.6dvh,16px)!important;
+    padding-bottom:clamp(6px,1.2dvh,12px)!important;
+    margin-top:clamp(4px,1dvh,10px)!important;
   }
 }
 
@@ -374,5 +413,171 @@ html body .kids-academy-portal iframe{max-width:100%;min-width:0}
   body .stage-surface{
     padding-bottom:calc(var(--kids-academy-dock-clearance,128px) + 16px)!important;
     scroll-padding-bottom:calc(var(--kids-academy-dock-clearance,128px) + 16px)!important;
+  }
+}
+
+
+/* Apple HIG 44×44 — selectors must beat prayer-stage / compact-timer / dock
+   !important floors (37px Ort wählen, 36px day-back, 43px Eltern manage). */
+html body .app #view-today .kids-salah-home-world .kids-salah-location,
+html body .app #view-today .kids-salah-home-world #kidsSalahLocation,
+html body .app #kidsSalahLocation{
+  min-height:44px !important;
+  min-width:44px !important;
+  box-sizing:border-box;
+  padding-top:8px !important;
+  padding-bottom:8px !important;
+}
+html body #kidsSalahDailyPage .kids-salah-day-header .kids-detail-dock-back,
+html body #kidsSalahDailyPage #kidsSalahDayBack,
+html body .kids-salah-day .kids-salah-day-back,
+html body #kidsSalahDayBack{
+  width:44px !important;
+  min-width:44px !important;
+  max-width:44px !important;
+  height:44px !important;
+  min-height:44px !important;
+  max-height:44px !important;
+  flex:0 0 44px !important;
+}
+html body .app #view-parents button.kids-parent-manage,
+html body .app #view-parents .kids-parent-manage{
+  min-height:44px !important;
+}
+html body .academy-header .academy-nav-back,
+html body[data-kids-portal="true"] .academy-header #academyNavBack,
+html body .academy-header #academyNavBack{
+  min-width:44px !important;
+  min-height:44px !important;
+}
+html body .focus-page-navigation button,
+html body[data-academy-view="lesson"] #lessonMain .focus-page-navigation button{
+  min-height:44px !important;
+  min-width:44px !important;
+}
+
+/* Duʿāʾ search field fills its 58px wrapper; chips stay a horizontal rail
+   (kids-touch-rail gives .kids-tap-card width:100%, which stacked them). */
+html body .app .duahub-search input,
+html body .app #duaHubSearch{
+  min-height:44px !important;
+  height:100% !important;
+  align-self:stretch;
+}
+html body .app :is(.duahub-chips,#duaHubChips){
+  display:flex !important;
+  flex-direction:row !important;
+  flex-wrap:nowrap !important;
+  align-items:center;
+  overflow-x:auto !important;
+  max-width:100%;
+}
+html body .app :is(.duahub-chips,#duaHubChips) button,
+html body .app :is(.duahub-chips,#duaHubChips) .kids-tap-card{
+  width:auto !important;
+  max-width:none !important;
+  flex:0 0 auto !important;
+  min-width:44px !important;
+  min-height:44px !important;
+}
+
+/* Welcome CTA: in-flow flex footer, not position:absolute over the
+   „Begrüßung anhören“ control. Keep enough padding so the listen
+   button cannot paint into the footer (lesson-stage overflow:visible). */
+html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain #lessonNavigation:not([hidden]),
+html body[data-academy-view="lesson"] #lessonMain #lessonNavigation:not([hidden]){
+  position:static !important;
+  top:auto !important;
+  left:auto !important;
+  right:auto !important;
+  bottom:auto !important;
+  inset:auto !important;
+  width:auto !important;
+  z-index:2 !important;
+  flex:0 0 auto !important;
+  margin:12px 0 0 !important;
+}
+html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain #stageSurface{
+  flex:1 1 0 !important;
+  min-height:0 !important;
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+}
+html body[data-kids-portal="true"][data-academy-view="lesson"][data-academy-step="0"] #lessonMain #stageSurface{
+  padding-bottom:8px !important;
+  scroll-padding-block-end:8px !important;
+}
+html body[data-kids-portal="true"][data-academy-view="lesson"][data-academy-step="0"] #lessonMain .lesson-stage .stage-audio{
+  position:sticky !important;
+  bottom:0 !important;
+  z-index:6 !important;
+  margin:0 0 0 !important;
+  padding:10px 0 8px !important;
+  background:linear-gradient(150deg,#fff5e3,#fffdf8 62%) !important;
+  border-radius:0 0 20px 20px;
+  box-shadow:0 -10px 12px 4px #fff8ec;
+}
+html body[data-kids-portal="true"][data-academy-view="lesson"][data-academy-step="0"] #lessonMain .lesson-stage .stage-audio .voice-note{
+  display:none !important;
+}
+
+/* Term chips and the quiz „Frage anhören“ control. */
+html body .academy-term-button,
+html body[data-kids-portal="true"] .academy-term-button{
+  min-height:44px !important;
+  min-width:44px !important;
+  box-sizing:border-box !important;
+}
+html body #repeat.pill,
+html body[data-kids-portal="true"] #repeat,
+html body .lesson-main #repeat.pill,
+html body[data-kids-portal="true"] #lessonMain #repeat{
+  min-height:44px !important;
+}
+
+html body #hint.pill,
+html body[data-kids-portal="true"] #hint,
+html body .lesson-main #hint.pill,
+html body[data-kids-portal="true"] #lessonMain #hint,
+html body .question-panel .pill{
+  min-height:44px !important;
+}
+html body .app #view-today.view .kids-salah-home-world .kids-salah-open-day,
+html body .app #view-today.view .kids-salah-home-world #kidsSalahOpenDay,
+html body .app #view-today.view .kids-salah-home-world #kidsQiblaQuick,
+html body .app #view-today.view .kids-salah-home-world .kids-salah-shortcuts > .kids-salah-open-day{
+  min-height:44px !important;
+  height:auto !important;
+  box-sizing:border-box !important;
+}
+html body .app #minuteSlider,
+html body .app #view-parents input[type="range"],
+html body .app input[type="range"]{
+  min-height:44px !important;
+  height:44px !important;
+}
+
+/* Short-landscape Eltern: compact-timer floors the hero at 380px on a
+   344px Fold-closed canvas, so the page title sits under the dock. */
+@media (orientation:landscape) and (max-height:500px){
+  html body .app #view-parents.view > .page-head.page-head{
+    height:min(200px,calc(100dvh - var(--kids-dock-clearance) - 12px)) !important;
+    min-height:0 !important;
+    max-height:calc(100dvh - var(--kids-dock-clearance) - 12px) !important;
+    padding-top:clamp(8px,3dvh,18px) !important;
+    padding-bottom:8px !important;
+    box-sizing:border-box !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:flex-end !important;
+  }
+  html body .app #view-parents.view > .page-head.page-head h2{
+    font-size:clamp(28px,11dvh,44px) !important;
+    margin:0 0 4px !important;
+  }
+  html body .app #view-parents.view > .page-head.page-head p{
+    font-size:clamp(11px,3.4dvh,14px) !important;
+    line-height:1.25 !important;
+    margin:0 !important;
   }
 }
