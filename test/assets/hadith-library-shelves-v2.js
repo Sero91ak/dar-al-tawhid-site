@@ -667,12 +667,13 @@
     (chapters || []).forEach(function (chapter) {
       var split = kitabBabSplit(chapter.title || "");
       var babs = babsOf(chapter);
-      if (chapter.corpusLoose || looseShelfTitle(split.kitab)) {
+      var corpusKitab = chapter.corpusNo != null && !chapter.corpusLoose;
+      if (chapter.corpusLoose || (!corpusKitab && looseShelfTitle(split.kitab))) {
         if (babs.length) babs.forEach(function (bab) { pushBab(loose, chapter, bab); });
         else pushBab(loose, chapter, { id: chapter.id, title: chapter.title, hadiths: chapter.hadiths || [] });
         return;
       }
-      var key = norm(cleanKitab(split.kitab));
+      var key = corpusKitab ? "corpus:" + String(chapter.id) : norm(cleanKitab(split.kitab));
       var group = byKey[key];
       if (!group) {
         var face = kitabFace(split.kitab, "de");
@@ -751,7 +752,7 @@
     if (!title || norm(title) === "kitab" || norm(title) === "bab" || countish(title)) title = book.title || "";
     var list = rows.map(function (h, i) {
       var num = publicNum(h.hadithNumber);
-      var preview = publicText(h.kiPending ? (h.arabic || h.german || "") : (h.german || h.babTitle || "")).replace(/\s+/g, " ").slice(0, 180);
+      var preview = publicText((h.kiPending || (h.corpus && !h.german)) ? (h.arabic || h.german || "") : (h.german || h.babTitle || "")).replace(/\s+/g, " ").slice(0, 180);
       var who = publicText(h.narrator || h.narratorLine || "");
       var grade = publicText(h.grade || "");
       if (grade.length > 32) grade = "";
@@ -899,7 +900,7 @@
             (found.kiSharh ? '<section class="hadith-sharh hadith-sharh--ki" aria-label="KI-Zusammenfassung"><header class="hadith-sharh-head"><p class="hadith-sharh-eyebrow">KI-Zusammenfassung</p><h3 class="hadith-sharh-heading">Šarḥ <span>– kurz</span></h3></header><div class="hadith-sharh-text">' + esc(found.kiSharh) + "</div></section>" : "");
         }
         var detailHtml = w.renderHadithDetail(found);
-        if (found.corpus && found.arabic && detailHtml.indexOf("hadith-arabic") < 0) {
+        if (found.corpus && found.arabic && (detailHtml.indexOf("hadith-arabic") < 0 || detailHtml.indexOf(esc(String(found.arabic).slice(0, 40))) < 0)) {
           detailHtml += '<div class="hadith-arabic" dir="rtl" lang="ar">' + esc(found.arabic) + "</div>";
         }
         return page(readTitle, readSub, tools(searchQuery(), loc), crumbs(book, readChapter, readSection, loc, readTitle) + detailHtml + ki, loc, true);
