@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-11-26T22:10:00.000Z",
+  "generated": "2026-11-27T11:37:12.000Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -2087,6 +2087,50 @@
           "chrome_web_push": 5
         },
         "idempotencyKey": "68edc165-e896-4741-8907-8ea48874421a"
+      }
+    },
+    "maymun-rechenschaft-taqwa-20261127-q71-500": {
+      "postId": "maymun-rechenschaft-taqwa-20261127-q71-500",
+      "filename": "maymun-rechenschaft-taqwa-20261127-q71.md",
+      "postTitle": "Rechenschaft beginnt bei dir",
+      "postPath": "content/posts/maymun-rechenschaft-taqwa-20261127-q71.md",
+      "publishedAt": "2026-11-27T11:30:00.000Z",
+      "status": "sent",
+      "pushApproved": true,
+      "pushApprovedAt": "2026-11-27T11:37:12.000Z",
+      "sentAt": "2026-11-27T11:37:12.000Z",
+      "updatedAt": "2026-11-27T11:37:12.000Z",
+      "lastError": "",
+      "mustNotResend": true,
+      "liveCheck": {
+        "ok": true,
+        "deploymentRun": 45991363606,
+        "sourceLive": true,
+        "postsIndexParity": true,
+        "qUrl": "https://dar-al-tawhid.de/q/71/",
+        "learnUrl": "https://dar-al-tawhid.de/lernen/maymun-rechenschaft-taqwa/"
+      },
+      "pushResult": {
+        "target": "DAR_PUSH",
+        "notificationId": "3045631a-2f3d-4258-9df7-d78b02d6557c",
+        "successful": 121,
+        "failed": 0,
+        "remaining": 0,
+        "targetUrl": "https://dar-al-tawhid.de/?post=maymun-rechenschaft-taqwa-20261127-q71-500#post/maymun-rechenschaft-taqwa-20261127-q71-500",
+        "headings": {
+          "de": "Neuer Beitrag",
+          "en": "New post"
+        },
+        "contents": {
+          "de": "Rechenschaft beginnt bei dir",
+          "en": "Accountability begins with you"
+        },
+        "platforms": {
+          "ios": 107,
+          "safari_web_push": 9,
+          "chrome_web_push": 5
+        },
+        "idempotencyKey": "526809d2-f8b0-4344-aeaf-4b44bdcb5e86"
       }
     }
   }
