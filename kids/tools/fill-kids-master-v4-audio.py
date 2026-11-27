@@ -165,22 +165,62 @@ def concat_mp3(parts: list[Path], dest: Path) -> None:
     )
 
 
-# Latin Ṣidq/Sidq in German text is read as "Sidak"/"Ziq". Lift to vowelized
-# Arabic so it becomes its own Fuṣḥā segment. Display/spokenText stays unchanged.
-# Do not lift Ṣadaqah, Ṣiddīq, or other ص-roots.
-SIDQ_LIFT_RE = re.compile(
-    r"(?<![A-Za-zṢṣ])((?:a[sṣSṢ]-)?(?:Ṣidq|Sidq|ṣidq|sidq))(?![A-Za-zāīūḍḥṣṭẓʾʿ])"
-)
+# Lift scholarly Latin Arabic terms to vowelized Fuṣḥā so they become their
+# own Arabic TTS segments. Display/spokenText stays unchanged. Longer / more
+# specific forms first. Do not lift Ṣadaqah as Ṣidq, or Ṣiddīq as Ṣidq.
+_WB = r"(?<![A-Za-zṢṣḤḥḌḍṬṭẒẓĠġĀāĪīŪūʾʿ])"
+_WA = r"(?![A-Za-zāīūḍḥṣṭẓʾʿĀĪŪṢṣḤḥ])"
+_TERM_LIFTS: list[tuple[re.Pattern, str]] = [
+    (re.compile(_WB + r"(?:Al-Fātiḥah|al-Fātiḥah|Al-Fatihah|al-Fatihah|al-fātiḥah|al-fatihah)" + _WA), "الْفَاتِحَة"),
+    (re.compile(_WB + r"(?:Al-Ikhlāṣ|al-Ikhlāṣ|Al-Iḫlāṣ|al-Iḫlāṣ|Al-Ikhlas|al-Ikhlas|al-iḫlāṣ|al-ikhlas)" + _WA), "الْإِخْلَاص"),
+    (re.compile(_WB + r"(?:a[sṣSṢ]-)?(?:Ṣidq|Sidq|ṣidq|sidq)" + _WA), "SIDQ_SPECIAL"),
+    (re.compile(_WB + r"(?:Wuḍūʾ|Wudūʾ|Wuḍū'|Wudu'|Wudhu|Wuḍuʾ)" + _WA), "وُضُوء"),
+    (re.compile(_WB + r"(?:Ṣaḥābah|Sahabah|ṣaḥābah)" + _WA), "صَحَابَة"),
+    (re.compile(_WB + r"(?:Ṣaḥābī|Sahabi|ṣaḥābī)" + _WA), "صَحَابِيّ"),
+    (re.compile(_WB + r"(?:Ṣaḥīḥ|Sahih|ṣaḥīḥ)" + _WA), "صَحِيح"),
+    (re.compile(_WB + r"(?:Ṣalāh|Salah|ṣalāh)" + _WA), "صَلَاة"),
+    (re.compile(_WB + r"(?:Akhlāq|Akhlaq|akhlāq)" + _WA), "أَخْلَاق"),
+    (re.compile(_WB + r"(?:Ikhlāṣ|Ikhlas|Iḫlāṣ|ikhlāṣ|iḫlāṣ)" + _WA), "إِخْلَاص"),
+    (re.compile(_WB + r"(?:Tawḥīd|Tawhid|tawḥīd)" + _WA), "تَوْحِيد"),
+    (re.compile(_WB + r"(?:Ṣabr|ṣabr)(?![a-zāīū])" ), "صَبْر"),
+    (re.compile(_WB + r"(?:ʿIbādah|Ibādah|ʿibādah)" + _WA), "عِبَادَة"),
+    (re.compile(_WB + r"(?:ʿAqīdah|Aqīdah|ʿaqīdah)" + _WA), "عَقِيدَة"),
+    (re.compile(_WB + r"(?:Amānah|amānah)" + _WA), "أَمَانَة"),
+    (re.compile(_WB + r"(?:Duʿāʾ|Duʿā)(?![a-zāīūʾ])"), "دُعَاء"),
+    (re.compile(_WB + r"(?:Ṭahārah|ṭahārah|Taharah)" + _WA), "طَهَارَة"),
+    (re.compile(_WB + r"(?:Ramaḍān|ramaḍān)" + _WA), "رَمَضَان"),
+    (re.compile(_WB + r"(?:Raḥmah|raḥmah)" + _WA), "رَحْمَة"),
+    (re.compile(_WB + r"(?:Ġībah|Ghibah|ġībah|ghibah)" + _WA), "غِيبَة"),
+    (re.compile(_WB + r"(?:Niyyah|Niyya|niyyah)" + _WA), "نِيَّة"),
+    (re.compile(_WB + r"(?:Masḥ|masḥ)" + _WA), "مَسْح"),
+    (re.compile(_WB + r"(?:Fiqh|fiqh)" + _WA), "فِقْه"),
+    (re.compile(_WB + r"(?:Īmān|īmān)" + _WA), "إِيمَان"),
+    (re.compile(_WB + r"(?:Qurʾān)" + _WA), "الْقُرْآن"),
+    (re.compile(_WB + r"(?:Sunnah)" + _WA), "سُنَّة"),
+    (re.compile(_WB + r"(?:Ṣadaqah|ṣadaqah)" + _WA), "صَدَقَة"),
+]
+
+
+def lift_arabic_terms_for_tts(text: str) -> str:
+    """TTS-only rewrite. Do not use the result as a manifest key."""
+    out = text
+    for rx, repl in _TERM_LIFTS:
+        if repl == "SIDQ_SPECIAL":
+            def sidq_repl(m: re.Match, _rx=rx) -> str:
+                raw = m.group(0)
+                if raw[:2].lower() in {"as", "aṣ"} and len(raw) > 2 and raw[2] == "-":
+                    return "الصِّدْق"
+                if raw.lower().startswith("a") and len(raw) > 2 and raw[1] in "-‐‑":
+                    return "الصِّدْق"
+                return "صِدْق"
+            out = rx.sub(sidq_repl, out)
+        else:
+            out = rx.sub(repl, out)
+    return out
+
 
 def lift_sidq_for_tts(text: str) -> str:
-    def repl(m: re.Match) -> str:
-        raw = m.group(1)
-        if raw.lower().startswith("a") and len(raw) > 2 and raw[1] in "-‐‑":
-            return "الصِّدْق"
-        if raw[:2].lower() in {"as", "aṣ"} and len(raw) > 2 and raw[2] == "-":
-            return "الصِّدْق"
-        return "صِدْق"
-    return SIDQ_LIFT_RE.sub(repl, text)
+    return lift_arabic_terms_for_tts(text)
 
 
 def split_segments(text: str) -> list[tuple[str, str]]:
@@ -531,7 +571,7 @@ def update_deen_audio(lesson_id: str, source: str, url: str, digest: str, durati
 
 def synthesize_text(text: str, ident: str) -> tuple[Path, list[str], int, str, bool]:
     """Return (mp3_path, request_ids, chars_spent, language_label, used_dict)."""
-    segs = split_segments(lift_sidq_for_tts(text))
+    segs = split_segments(lift_arabic_terms_for_tts(text))
     ORIGINALS.mkdir(parents=True, exist_ok=True)
     parts = []
     request_ids = []
