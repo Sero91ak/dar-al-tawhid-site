@@ -1,0 +1,215 @@
+/* TAWḤĪD KIDS · shared layout architecture v1478
+   Central tokens and guards so every page fits every aspect ratio.
+   Does not change palette, illustration, typography face, or the five-tab dock look. */
+:root{
+  --kids-page-gutter:clamp(12px,3.2vw,28px);
+  --kids-content-max:52rem;
+  --kids-measure:40rem;
+  --kids-dock-clearance:var(--kids-academy-dock-clearance,128px);
+  --kids-safe-top:env(safe-area-inset-top,0px);
+  --kids-safe-right:env(safe-area-inset-right,0px);
+  --kids-safe-bottom:env(safe-area-inset-bottom,0px);
+  --kids-safe-left:env(safe-area-inset-left,0px);
+}
+
+html,body{max-width:100%;overflow-x:clip}
+html{height:100%}
+body{min-height:100%;min-height:100dvh}
+
+html body .app,
+html body .shell,
+html body .view,
+html body .modal,
+html body .modal-shell,
+html body .kids-follow-reader,
+html body .kfr-sheet{
+  min-width:0;
+  max-width:100%;
+  box-sizing:border-box;
+}
+
+html body .app,
+html body .app .shell{
+  padding-left:max(16px,var(--kids-safe-left));
+  padding-right:max(16px,var(--kids-safe-right));
+}
+
+html body .app .shell{
+  width:min(100%,780px);
+  padding-bottom:calc(var(--kids-dock-clearance) + 8px);
+  scroll-padding-bottom:calc(var(--kids-dock-clearance) + 8px);
+}
+
+/* Every main view and open-world pane must clear the floating dock. */
+html body .app :is(#view-today,#view-stories,#view-salaf,#view-parents,#view-dua,.salaf-wrap,.salaf-pane,.ps-world-scroll,.gh-world-scroll,.duahub-view){
+  padding-bottom:calc(var(--kids-dock-clearance) + 16px)!important;
+  scroll-padding-bottom:calc(var(--kids-dock-clearance) + 16px)!important;
+  box-sizing:border-box!important;
+}
+
+html body .app :is(.shell,.view,.hero,.modal-shell,.kfr-head,.kfr-controls,.kids-listening-shortcuts-grid,.surah-grid,.story-grid,.salaf-wrap) > *{
+  min-width:0;
+}
+
+html body .app img,
+html body .modal img,
+html body .kids-follow-reader img,
+.page-shell img{max-width:100%}
+
+html body .app :is(p,h1,h2,h3,h4,li,blockquote,label,small,span,strong,button,a),
+html body .kids-follow-reader :is(p,h1,h2,h3,li,span,strong,button),
+.page-shell :is(p,h1,h2,h3,li){
+  overflow-wrap:break-word;
+  word-wrap:break-word;
+}
+
+html body .app :is(.story-copy,.knowledge-child,.knowledge-exact,.ayah-de,.ayah-tr,.lesson-stage p,.stage-surface p,.kfr-read,.kfr-read p,.parent-card p,.parent-note,.gentle-note),
+html body .kids-follow-reader .kfr-read,
+html body .kids-follow-reader .kfr-read p{
+  max-width:min(100%,var(--kids-measure));
+}
+
+/* Lesebereich */
+html.kids-follow-reader-open,
+html.kids-follow-reader-open body{overflow:hidden!important}
+html body .kids-follow-reader.open,
+html body .kids-follow-reader[aria-hidden="false"]{
+  position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;
+  padding:var(--kids-safe-top) var(--kids-safe-right) var(--kids-safe-bottom) var(--kids-safe-left);
+  box-sizing:border-box;
+}
+html body .kfr-sheet{
+  width:min(820px,100%)!important;
+  max-height:min(92dvh,calc(100dvh - var(--kids-safe-top) - var(--kids-safe-bottom)))!important;
+  margin-inline:auto;display:flex!important;flex-direction:column!important;
+  min-height:0!important;overflow:hidden;
+}
+html body .kfr-head{flex:0 0 auto;min-width:0;gap:clamp(8px,2vw,14px)}
+html body .kfr-head .kfr-title{
+  white-space:normal!important;overflow:visible!important;text-overflow:unset!important;
+  overflow-wrap:anywhere;font-size:clamp(18px,4.4vw,30px)!important;
+}
+html body .kfr-controls{
+  display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,7.5rem),1fr));
+  gap:clamp(6px,1.5vw,12px);align-items:center;min-width:0;flex:0 0 auto;
+}
+html body .kfr-controls .kfr-progress{grid-column:1/-1}
+html body .kfr-read{
+  flex:1 1 auto!important;min-height:0!important;overflow:auto!important;
+  -webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+  padding-bottom:calc(24px + var(--kids-safe-bottom))!important;max-width:100%!important;
+}
+html body .kfr-read p{
+  font-size:clamp(18px,2.7vw + .6rem,24px)!important;line-height:1.68!important;
+  max-width:min(100%,var(--kids-measure));
+}
+
+html body .bottom-nav{
+  max-width:calc(100% - (var(--kids-safe-left) + var(--kids-safe-right)))!important;
+  box-sizing:border-box;
+}
+html body .bottom-nav .nav-btn .lab{
+  max-width:100%;overflow-wrap:anywhere;white-space:normal;line-height:1.15;hyphens:auto;
+}
+
+/* Root cause: several heroes use min-height: Nvw, which on landscape uses the
+   LONG side and grows taller than the viewport, so the dock covers the title. */
+@media (orientation:landscape) and (max-height:700px){
+  html body .app #view-today .hero,
+  html body .app #view-salaf > .salaf-hero,
+  html body .app #view-stories .hero,
+  html body .app .kids-listening-hero,
+  html body .app .kids-salaf-listening-hero,
+  html body .app :is(.duahub-hero,.dua-hero,[class*="listening-hero"]){
+    min-height:0!important;
+    max-height:calc(100dvh - var(--kids-dock-clearance) - 12px)!important;
+    height:auto!important;
+    padding-top:clamp(28px,8dvh,72px)!important;
+    padding-bottom:clamp(12px,3dvh,24px)!important;
+  }
+  html body .app #view-today .hero{
+    min-height:min(200px,calc(100dvh - var(--kids-dock-clearance) - 12px))!important;
+  }
+  html body .app #view-salaf .salaf-hero h2{
+    font-size:clamp(22px,6dvh,40px)!important;
+    margin:6px 0 8px!important;
+  }
+  html body .app .academy-home-hero,
+  html body #academyHome,
+  html body .academy-hero,
+  html body [class*="academy"] .hero{
+    min-height:0!important;
+  }
+}
+
+@media (orientation:landscape) and (max-height:500px){
+  html body .app #view-today .hero,
+  html body .app #view-salaf > .salaf-hero{
+    max-height:calc(100dvh - var(--kids-dock-clearance) - 8px)!important;
+  }
+  html body .app .shell{padding-bottom:calc(var(--kids-dock-clearance) + 4px)}
+}
+
+@media (max-width:400px){
+  html body .app :is(h1,h2,.hero h1,.section-title,.knowledge-title,.modal-title strong,.salaf-hero h2){
+    overflow-wrap:anywhere;hyphens:auto;
+  }
+  html body .kfr-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media (min-width:960px){
+  html body .app #view-today .daily-journey,
+  html body .app #view-today .knowledge-card,
+  html body .app #view-parents.view > :not(.page-head):not(.bottom-nav){
+    max-width:min(100%,var(--kids-content-max,52rem));
+    margin-left:auto;margin-right:auto;
+  }
+}
+
+html body .app :is(.dua-stage,.dua-body,.dua-hub,#duaStage,#duaBody){min-width:0;max-width:100%}
+html body .app :is(.dua-stage,.dua-body,#duaBody) :is(p,li,blockquote,h1,h2,h3){
+  max-width:min(100%,var(--kids-measure));overflow-wrap:break-word;
+}
+/* Category chips may scroll sideways; they must not widen the page. */
+html body .app :is(.duahub-chips,.dua-chips,.kids-touch-rail){
+  max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;
+}
+
+html body .kids-academy-portal,
+html body .kids-academy-portal iframe{max-width:100%;min-width:0}
+
+/* Academy (same file, loaded inside the iframe): compact on short landscape. */
+@media (orientation:landscape) and (max-height:700px){
+  body #academyHome .academy-hero,
+  body .academy-home-banner,
+  body [class*="wissen"],
+  body .portal-hero{
+    min-height:0!important;
+    padding-top:clamp(8px,3dvh,24px)!important;
+  }
+  body .wrap,
+  body #academyHome,
+  body #lessonMain,
+  body .lesson-main,
+  body .stage-surface{
+    padding-bottom:calc(var(--kids-academy-dock-clearance,128px) + 16px)!important;
+    scroll-padding-bottom:calc(var(--kids-academy-dock-clearance,128px) + 16px)!important;
+  }
+}
+
+/* Privacy / legal pages */
+.page-shell{
+  width:min(calc(100% - 2 * var(--kids-page-gutter,14px)),var(--max,980px));
+  padding-bottom:max(44px,calc(24px + var(--kids-safe-bottom)));
+  overflow-wrap:break-word;
+}
+.page-shell :is(p,li,h1,h2,h3){max-width:min(100%,var(--kids-measure,46rem))}
+.page-shell .logo-wrap{overflow:hidden;flex:0 0 auto}
+.page-shell .logo-wrap img{max-width:100%;max-height:100%;object-fit:contain}
+@media (max-width:400px){
+  .page-shell{width:min(calc(100% - 16px),var(--max,980px))}
+  .page-shell .logo-wrap{width:72px;height:72px;flex-basis:72px}
+}
+@media (orientation:landscape) and (max-height:500px){
+  .page-shell{padding-top:12px;padding-bottom:24px}
+}
