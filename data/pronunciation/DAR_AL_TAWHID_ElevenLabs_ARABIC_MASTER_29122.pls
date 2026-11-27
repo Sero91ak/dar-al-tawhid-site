@@ -31940,10 +31940,6 @@
     <alias>al-Aakhirah</alias>
   </lexeme>
 <lexeme>
-    <grapheme>Ākhirah</grapheme>
-    <alias>Aakhirah</alias>
-  </lexeme>
-<lexeme>
     <grapheme>al-Ākhirah</grapheme>
     <alias>al-Aakhirah</alias>
   </lexeme>

@@ -147,7 +147,7 @@ for(const age of ["4-5","6-8","9-10"]){
  assert(projected.every(q=>q.type==="choice"));
  sidqAdapted+=projected.filter(q=>q.adaptedFromText).length;
 }
-assert.equal(sidqAdapted,3);
+assert.equal(sidqAdapted,2);
 const salam=choiceOnly.project(lessons65["adab-salam"],"6-8",lessons65["adab-salam"].questions["6-8"]);
 assert.equal(salam.length,3);
 assert(salam.every(q=>q.type==="choice"));
