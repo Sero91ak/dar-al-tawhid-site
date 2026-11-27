@@ -1,22 +1,33 @@
 #!/usr/bin/env python3
-"""Split the open Arabic Bukhari edition into one JSON file per kitāb.
+"""Build the Dar Test Bukhari corpus: Kitab -> Bab -> Hadith, one Arabic file per kitab.
 
-Source file: /tmp/ara-bukhari.min.json
-(download: https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari.min.json)
+Primary source (CC BY 4.0 dataset, public-domain matn and isnad):
+  open-hadith-data by samt-qa - https://github.com/samt-qa/open-hadith-data - CC BY 4.0
+  Release v0.1.0, open-hadith-data-0.1.0.zip -> jsonl/bukhari.jsonl.gz
+  Sultaniyya edition (Bulaq 1311 H., Shamela 1681), Fuad numbering as reference.
+Cross-check only, for numbers the primary source does not carry:
+  fawazahmed0/hadith-api edition ara-bukhari (Unlicense).
 
-The English edition of that dataset is not copied. It is a copyrighted translation.
+Usage:
+  python3 scripts/build-bukhari-open-corpus.py /path/bukhari.jsonl.gz /path/ara-bukhari.min.json
+
+Translations are not built here. They live in i18n/k-NN/<lang>.json and are loaded lazily.
 """
 from __future__ import annotations
 
+import gzip
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SRC = Path("/tmp/ara-bukhari.min.json")
 OUT = ROOT / "data/hadith/open/sahih-al-bukhari"
-I18N = OUT / "i18n-kitab-01.json"
+LANGS = ["ar", "de", "en", "tr", "fr", "es", "bs", "ku", "ckb"]
 
-# no, ar, de, en, tr, fr, es, bs, ku, ckb
+# Kitab 1 has no bab heading in the dataset (parser gap). The Sultaniyya edition opens with this tarjama,
+# followed by an-Nisa 4:163. Documented in SOURCE.md.
+KITAB1_BAB = "كيف كان بدء الوحي إلى رسول الله صلى الله عليه وسلم"
+
 TITLES = [
 (1,"بدء الوحي","Badʾ al-Waḥy","The beginning of revelation","Vahyin başlangıcı","Le début de la révélation","El inicio de la revelación","Početak objave","Destpêka wehyê","دەستپێکی وەحی"),
 (2,"الإيمان","al-Īmān","Faith","İman","La foi","La fe","Iman","Îman","ئیمان"),
@@ -118,83 +129,103 @@ TITLES = [
 ]
 
 
+
 def titles_for(row):
-    keys = ["ar", "de", "en", "tr", "fr", "es", "bs", "ku", "ckb"]
-    return dict(zip(keys, row[1:]))
+    return dict(zip(["ar", "de", "en", "tr", "fr", "es", "bs", "ku", "ckb"], row[1:]))
+
+
+def num_id(row):
+    return row["id"].split(":", 1)[1]
 
 
 def main():
-    data = json.loads(SRC.read_text(encoding="utf-8"))
-    sections = data["metadata"]["sections"]
-    extra = {}
-    if I18N.exists():
-        extra = json.loads(I18N.read_text(encoding="utf-8")).get("hadiths", {})
-    groups = {i: [] for i in range(0, 98)}
-    for hadith in data["hadiths"]:
-        book = int(hadith["reference"]["book"])
-        number = hadith["hadithnumber"]
-        number_s = str(int(number)) if isinstance(number, float) and number.is_integer() else str(number)
-        if isinstance(number, float) and not number.is_integer():
-            number_s = ("%s" % number).rstrip("0").rstrip(".") if False else str(number)
-        item = {"n": number_s, "ar": hadith["text"]}
-        add = extra.get(number_s)
-        if add:
-            item.update(add)
-        groups.setdefault(book, []).append(item)
-    OUT.joinpath("kitab").mkdir(parents=True, exist_ok=True)
+    src = Path(sys.argv[1] if len(sys.argv) > 1 else "/tmp/bukhari.jsonl.gz")
+    fz_src = Path(sys.argv[2] if len(sys.argv) > 2 else "/tmp/ara-bukhari.min.json")
+    rows = [json.loads(line) for line in gzip.open(src, "rt", encoding="utf-8")]
     title_by_no = {row[0]: row for row in TITLES}
+    kitabs = {}
+    order = []
+    for row in rows:
+        k = row["kitab"]["n"]
+        if k not in kitabs:
+            kitabs[k] = {"source": row["kitab"]["title"], "babs": {}, "border": []}
+            order.append(k)
+        kb = kitabs[k]
+        b = row["bab"]["n"]
+        if b not in kb["babs"]:
+            title = row["bab"]["title"]
+            opening = False
+            if k == 1 and b == 0 and not title:
+                title = KITAB1_BAB
+            elif b == 0 and not title:
+                opening = True
+            kb["babs"][b] = {"n": b, "id": "k-%02d-b-%03d" % (k, b), "ar": title or "", "opening": opening, "hadiths": []}
+            kb["border"].append(b)
+        text = row["text"]
+        matn = row.get("matn") or ""
+        item = {"n": num_id(row), "p": row["numbers"]["printed"], "ar": text}
+        if row["numbers"].get("sub"):
+            item["sub"] = row["numbers"]["sub"]
+        at = text.find(matn) if matn else -1
+        if at > 0:
+            item["mi"] = at
+        kb["babs"][b]["hadiths"].append(item)
+    printed = set(p for row in rows for p in row["numbers"]["printed"])
+    # Fuad numbers absent from the primary source: keep the cross-check wording, clearly flagged.
+    fz = json.loads(fz_src.read_text(encoding="utf-8"))
+    loose = []
+    for h in fz["hadiths"]:
+        n = h["hadithnumber"]
+        if isinstance(n, float):
+            continue
+        if n not in printed and h.get("text"):
+            loose.append({"n": str(n), "p": [n], "ar": h["text"], "crossCheck": True})
+    (OUT / "kitab").mkdir(parents=True, exist_ok=True)
+    for old in (OUT / "kitab").glob("k-*.json"):
+        old.unlink()
     toc = []
     numbers = {}
-    for book in range(0, 98):
-        rows = groups.get(book) or []
-        kid = "k-%02d" % book
-        loose = book == 0
-        if loose:
-            names = {
-                "ar": "أحاديث بلا كتاب في هذه النشرة",
-                "de": "Weitere Ḥadīṯe",
-                "en": "Further ḥadīths",
-                "tr": "Diğer hadisler",
-                "fr": "Autres ḥadīths",
-                "es": "Otros ḥadīṯes",
-                "bs": "Ostali hadisi",
-                "ku": "Hedîsên din",
-                "ckb": "حەدیسی تر",
-            }
-        else:
-            names = titles_for(title_by_no[book])
-        payload = {
-            "workId": "sahih-al-buhari",
-            "kitabNo": book,
-            "id": kid,
-            "loose": loose,
-            "sourceTitle": sections.get(str(book), ""),
-            "titles": names,
-            "hadiths": rows,
-        }
-        (OUT / "kitab" / ("%s.json" % kid)).write_text(
-            json.dumps(payload, ensure_ascii=False, separators=(",", ":")),
-            encoding="utf-8",
-        )
-        toc.append({
-            "no": book,
-            "id": kid,
-            "loose": loose,
-            "count": len(rows),
-            "sourceTitle": sections.get(str(book), ""),
-            "titles": names,
-        })
-        for row in rows:
-            numbers[row["n"]] = book
+    total = 0
+    bab_total = 0
+    for k in order:
+        kb = kitabs[k]
+        babs = [kb["babs"][b] for b in kb["border"]]
+        count = sum(len(b["hadiths"]) for b in babs)
+        kid = "k-%02d" % k
+        names = titles_for(title_by_no[k])
+        payload = {"workId": "sahih-al-buhari", "kitabNo": k, "id": kid, "loose": False,
+                   "sourceTitle": kb["source"], "titles": names, "babs": babs}
+        (OUT / "kitab" / (kid + ".json")).write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+        toc.append({"no": k, "id": kid, "loose": False, "count": count, "babCount": len(babs),
+                    "sourceTitle": kb["source"], "titles": names})
+        for b in babs:
+            for h in b["hadiths"]:
+                numbers[h["n"]] = k
+                for p in h["p"]:
+                    numbers.setdefault(str(p), k)
+        total += count
+        bab_total += len(babs)
+    if loose:
+        names = {"ar": "أحاديث من نشرة المقابلة", "de": "Weitere Ḥadīṯe", "en": "Further ḥadīths",
+                 "tr": "Diğer hadisler", "fr": "Autres ḥadīths", "es": "Otros ḥadīṯes", "bs": "Ostali hadisi",
+                 "ku": "Hedîsên din", "ckb": "حەدیسی تر"}
+        payload = {"workId": "sahih-al-buhari", "kitabNo": 0, "id": "k-00", "loose": True, "sourceTitle": "",
+                   "titles": names, "babs": [{"n": 0, "id": "k-00-b-000", "ar": "", "opening": False, "hadiths": loose}]}
+        (OUT / "kitab" / "k-00.json").write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+        toc.append({"no": 0, "id": "k-00", "loose": True, "count": len(loose), "babCount": 1, "sourceTitle": "", "titles": names})
+        for h in loose:
+            numbers[h["n"]] = 0
     (OUT / "toc.json").write_text(json.dumps({
         "workId": "sahih-al-buhari",
-        "edition": "ara-bukhari",
-        "hadithCount": sum(item["count"] for item in toc),
-        "kitabCount": 97,
+        "edition": "open-hadith-data v0.1.0 (Sultaniyya, Shamela 1681)",
+        "attribution": "open-hadith-data by samt-qa - https://github.com/samt-qa/open-hadith-data - CC BY 4.0",
+        "hadithCount": total + len(loose),
+        "kitabCount": len(order),
+        "babCount": bab_total,
         "kitab": toc,
     }, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     (OUT / "numbers.json").write_text(json.dumps(numbers, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print("kitab", len(toc), "hadith", sum(item["count"] for item in toc), "numbers", len(numbers))
+    print("kitab", len(order), "bab", bab_total, "hadith", total, "crossCheck", len(loose), "numbers", len(numbers))
 
 
 if __name__ == "__main__":

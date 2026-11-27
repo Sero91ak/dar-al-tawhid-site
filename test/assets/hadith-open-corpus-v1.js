@@ -1,6 +1,7 @@
 /* DAR_HADITH_OPEN_CORPUS_V1
  * Arabic: data/hadith/open/sahih-al-bukhari/ (see SOURCE.md and hadith-open-corpus-source.md).
- * One kitāb file is fetched when that kitāb is opened. The 8 MB edition is not one bundle.
+ * Kitāb → Bāb → Ḥadīṯ. One kitāb file is fetched when that kitāb is opened, and only the
+ * translation package of the current language (i18n/k-NN/<lang>.json, plus German as fallback).
  */
 (function (w) {
   "use strict";
@@ -12,6 +13,17 @@
   var tocWait = null;
   var kits = {};
   var kitWait = {};
+  var packs = {};
+  var packWait = {};
+  var lastLoc = "de";
+  var OPENING = {
+    de: "Zu Beginn des Kitāb", ar: "", en: "Opening of the kitāb", tr: "Kitabın başı",
+    ku: "Destpêka kitêbê", ckb: "سەرەتای کتێب", bs: "Početak kitaba", fr: "Ouverture du kitāb", es: "Apertura del kitāb"
+  };
+  var UNTITLED = {
+    de: "Ohne Überschrift", ar: "باب", en: "Untitled", tr: "Başlıksız",
+    ku: "Bê sernav", ckb: "بێ ناونیشان", bs: "Bez naslova", fr: "Sans titre", es: "Sin título"
+  };
   var shellById = {};
   var shellByNumber = {};
   var PENDING = {
@@ -89,15 +101,32 @@
     });
     collection.__openRemembered = true;
   }
-  function rowRecord(kitab, row, loc) {
+  function packOf(kitab, code) {
+    var p = packs[String(kitab.kitabNo) + ":" + code];
+    return p || null;
+  }
+  function rowBag(kitab, row, code) {
+    var p = packOf(kitab, code);
+    return (p && p.hadiths && p.hadiths[String(row.n)]) || null;
+  }
+  function babTitle(kitab, bab, code) {
+    var p = packOf(kitab, code);
+    var own = p && p.babs && p.babs[String(bab.n)];
+    if (own) return own;
+    if (bab.opening) return code === "ar" ? (kitab.sourceTitle || "") : (OPENING[code] || OPENING.de);
+    var ar = String(bab.ar || "").trim();
+    if (!ar || /^باب\s*:?$/.test(ar)) return UNTITLED[code] || UNTITLED.de;
+    return ar;
+  }
+  function rowRecord(kitab, row, loc, bab) {
     var code = lang(loc);
-    var bag = (row.i18n && (row.i18n[code] || null)) || null;
+    var bag = rowBag(kitab, row, code);
     var german = bag && bag.matn ? bag.matn : "";
     var sharh = bag && bag.sharh ? bag.sharh : "";
     var mark = "";
     var pending = false;
     if (!german && code !== "ar") {
-      var deBag = row.i18n && row.i18n.de;
+      var deBag = rowBag(kitab, row, "de");
       if (deBag && deBag.matn) {
         german = deBag.matn;
         sharh = sharh || deBag.sharh || "";
@@ -119,15 +148,16 @@
       bookTitle: "Ṣaḥīḥ al-Buḫārī",
       chapterId: kitab.id,
       chapterTitle: chapterTitle,
-      babId: "",
-      babTitle: "",
+      babId: bab ? bab.id : "",
+      babTitle: bab ? babTitle(kitab, bab, code) : "",
+      babArabic: bab && !bab.opening ? String(bab.ar || "") : "",
       hadithNumber: String(row.n),
       arabic: row.ar || "",
       german: german,
       germanHtml: "",
       narrator: "",
       speakerLabel: "",
-      source: "Ṣaḥīḥ al-Buḫārī, Nr. " + row.n + ". Arabisch: ara-bukhari, fawazahmed0/hadith-api.",
+      source: "Ṣaḥīḥ al-Buḫārī, Nr. " + row.n + (row.crossCheck ? ". Arabisch: ara-bukhari, fawazahmed0/hadith-api (Gegenquelle)." : ". Arabisch: open-hadith-data (samt-qa), CC BY 4.0, Sulṭāniyya-Ausgabe."),
       grade: "",
       sharhStatus: "",
       sharhText: "",
@@ -141,8 +171,21 @@
     };
   }
   function materialize(kitab, loc) {
-    return (kitab.hadiths || []).map(function (row) {
-      return rowRecord(kitab, row, loc);
+    var out = [];
+    (kitab.babs || []).forEach(function (bab) {
+      (bab.hadiths || []).forEach(function (row) { out.push(rowRecord(kitab, row, loc, bab)); });
+    });
+    return out;
+  }
+  function materializeBabs(kitab, loc) {
+    var code = lang(loc);
+    return (kitab.babs || []).map(function (bab) {
+      return {
+        id: bab.id,
+        title: babTitle(kitab, bab, code),
+        faceArabic: bab.opening ? "" : String(bab.ar || ""),
+        hadiths: (bab.hadiths || []).map(function (row) { return rowRecord(kitab, row, code, bab); })
+      };
     });
   }
   function apply(book, collection, loc) {
@@ -155,10 +198,15 @@
     }
     rememberShell(collection);
     var code = lang(loc);
+    lastLoc = code;
     book.hadithCount = toc.hadithCount || book.hadithCount;
     collection.chapters = (toc.kitab || []).map(function (k) {
       var cached = kits[k.no];
       var titles = k.titles || {};
+      var babs = cached ? materializeBabs(cached, code) : [];
+      if (cached && !packs[String(k.no) + ":" + code] && !packWait[String(k.no) + ":" + code]) {
+        ensurePack(k.no, code).then(function () { if (typeof w.render === "function") w.render(); }, function () {});
+      }
       return {
         id: k.id,
         title: titles[code] || titles.de || k.sourceTitle || "",
@@ -167,20 +215,41 @@
         corpusCount: k.count,
         corpusOrder: k.loose ? 100000 : k.no,
         corpusLoose: !!k.loose,
-        hadiths: cached ? materialize(cached, code) : []
+        corpusBabCount: k.babCount || 0,
+        babs: babs,
+        hadiths: babs.reduce(function (all, bab) { return all.concat(bab.hadiths); }, [])
       };
     });
     collection.__corpusLoc = code;
   }
+  function kid(no) {
+    return "k-" + (Number(no) < 10 ? "0" + Number(no) : String(Number(no)));
+  }
+  function ensurePack(no, code) {
+    var key = String(Number(no)) + ":" + code;
+    if (packs[key]) return Promise.resolve(packs[key]);
+    if (packWait[key]) return packWait[key];
+    packWait[key] = loadJson(BASE + "/i18n/" + kid(no) + "/" + code + ".json").then(function (data) {
+      packs[key] = data || {};
+      delete packWait[key];
+      return packs[key];
+    }, function () {
+      packs[key] = {};
+      delete packWait[key];
+      return packs[key];
+    });
+    return packWait[key];
+  }
   function ensure(no) {
-    var key = String(no);
-    if (kits[key] || kits[Number(key)]) return Promise.resolve(kits[key] || kits[Number(key)]);
+    var key = String(Number(no));
+    var code = lang(lastLoc);
+    var langs = code === "de" ? ["de"] : [code, "de"];
+    if (kits[key] && langs.every(function (c) { return packs[key + ":" + c]; })) return Promise.resolve(kits[key]);
     if (kitWait[key]) return kitWait[key];
-    var id = "k-" + (Number(key) < 10 ? "0" + Number(key) : String(Number(key)));
-    kitWait[key] = loadJson(BASE + "/kitab/" + id + ".json").then(function (data) {
-      kits[Number(key)] = data;
+    kitWait[key] = Promise.all([loadJson(BASE + "/kitab/" + kid(key) + ".json")].concat(langs.map(function (c) { return ensurePack(key, c); }))).then(function (all) {
+      kits[key] = all[0];
       delete kitWait[key];
-      return data;
+      return all[0];
     }, function (err) {
       delete kitWait[key];
       throw err;

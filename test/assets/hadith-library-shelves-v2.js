@@ -600,7 +600,7 @@
   function navRow(value, name, arabic, meta) {
     return '<li class="hls-group-item"><button type="button" class="hls-row" data-nav="hadith" data-value="' + esc(value) + '"><span class="hls-row-main">' +
       (arabic ? '<span class="hls-row-ar" lang="ar" dir="rtl">' + esc(arabic) + "</span>" : "") +
-      "<strong>" + esc(name) + '</strong></span><span class="hls-row-count">' + esc(meta) + "</span>" + chevron() + "</button></li>";
+      "<strong dir=\"auto\">" + esc(name) + '</strong></span><span class="hls-row-count">' + esc(meta) + "</span>" + chevron() + "</button></li>";
   }
   function matchesQuery(blob, q) {
     var nq = norm(q);
@@ -662,7 +662,7 @@
         if (ord && (!group.order || ord < group.order)) group.order = ord;
       }
       group.count += hadiths.length || Number(chapter.corpusCount || 0);
-      group.babs.push({ id: (bab && bab.id) || chapter.id, chapterId: chapter.id, title: (bab && bab.title) || "", hadiths: hadiths, order: ord || 1000000000 });
+      group.babs.push({ id: (bab && bab.id) || chapter.id, chapterId: chapter.id, title: (bab && bab.title) || "", arabic: (bab && bab.faceArabic) || "", hadiths: hadiths, order: ord || 1000000000 });
     }
     (chapters || []).forEach(function (chapter) {
       var split = kitabBabSplit(chapter.title || "");
@@ -718,7 +718,8 @@
       var open = holdsOpen || !!q;
       var inner = open ? '<ul class="hls-group hls-group--inner">' + distinct.map(function (bab) {
         var babName = cleanBab(bab.title || "");
-        return navRow(book.id + "/" + bab.chapterId + "/" + bab.id, babName, "", countLabel((bab.hadiths || []).length, loc));
+        var babAr = (loc !== "ar" && loc !== "ckb" && bab.arabic && bab.arabic !== babName && bab.arabic !== bab.title) ? bab.arabic : "";
+        return navRow(book.id + "/" + bab.chapterId + "/" + bab.id, babName, babAr, countLabel((bab.hadiths || []).length, loc));
       }).join("") + "</ul>" : "";
       return '<li class="hls-group-item' + (open ? " is-open" : "") + '"><button type="button" class="hls-row" data-hls-kitab="' + esc(group.id) + '" aria-expanded="' + (open ? "true" : "false") + '">' + number + '<span class="hls-row-main">' +
         (arabic ? '<span class="hls-row-ar" lang="ar" dir="rtl">' + esc(arabic) + "</span>" : "") +
