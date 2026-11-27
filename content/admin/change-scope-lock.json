@@ -171,6 +171,26 @@
       "expiresAt": "2026-12-03T23:59:59+01:00"
     },
     {
+      "id": "q-cards-locale-render-fix-owner-20261127",
+      "at": "2026-11-27T11:45:00.000Z",
+      "approvedBy": "owner-serhat-explicit-repair-older-q-cards-20261127",
+      "reason": "Serhat approved repairing the older nine-language Q cards (Q64-Q70 and their learning pages) that show 'This section is not available in the selected language' because the visitor locale runtime re-rendered them without a language. This unlock covers only the locale runtime. globalLock stays on. No post, no push, no push-system code, Kids, prayer, location or Qibla change.",
+      "paths": [
+        "assets/i18n/adult-ui-translate.js"
+      ],
+      "expiresAt": "2026-12-04T23:59:59.000Z"
+    },
+    {
+      "id": "q71-maymun-rechenschaft-owner-20261127",
+      "at": "2026-11-27T10:30:00.000Z",
+      "approvedBy": "owner-serhat-explicit-quellenlink-and-push-live-20261127",
+      "reason": "Serhat ordered the next free source card for Maymun ibn Mihran on self-accountability and taqwa, nine languages, the Tazkiyah section, the learning page, and (after 'ja schalte live und push live') publication and one notification after the page is live. This unlock covers only the new locale manifest. globalLock stays on. No push-system code, Kids, prayer or Qibla change.",
+      "paths": [
+        "assets/q71-locales.json"
+      ],
+      "expiresAt": "2026-12-04T23:59:59.000Z"
+    },
+    {
       "id": "q70-posts-index-parity-retry-20261126",
       "at": "2026-11-26T22:08:00.000Z",
       "approvedBy": "owner-serhat-explicit-finish-q70-live-20261126",

@@ -25,7 +25,7 @@ assertHas(html,/localStorage\.getItem\("dar-quellen-royal-theme"\)/,"same appear
 assertHas(css,/QSOURCE_LEARNING_CONTRAST_V2/,"Q source learning link contrast fix missing");
 assertHas(css,/:root\[data-q-theme="dark"\] \.qsource-learning strong/,"dark learning link contrast missing");
 assertHas(css,/:root\[data-q-theme="light"\] \.qsource-learning span/,"light learning link contrast missing");
-assertHas(q,/q-source-dar-al-layl\.css\?v=20261019contrast2/,"Q46 must invalidate stale cached CSS");
+assertHas(q,/q-source-dar-al-layl\.css\?v=20261127-appstore1/,"Q46 must invalidate stale cached CSS");
 assertHas(html,/id="question"/,"question region absent");
 assertHas(html,/id="choices"/,"answer region absent");
 assertHas(html,/id="nextButton" disabled/,"next must be disabled until answer");
