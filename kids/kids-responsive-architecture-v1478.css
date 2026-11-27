@@ -213,3 +213,166 @@ html body .kids-academy-portal iframe{max-width:100%;min-width:0}
 @media (orientation:landscape) and (max-height:500px){
   .page-shell{padding-top:12px;padding-bottom:24px}
 }
+
+/* ── v1478.2 viewport heroes ─────────────────────────────────────────────
+   Root cause follow-up: prayer-stage V1290/V1296 sizes #view-today .hero
+   with --kids-home-visible-hero and a 350px floor under
+   `html body #view-today.view .kids-salah-home-world > .hero` (and the
+   even more specific html.kids-ios-app variant). The first architecture
+   pass targeted `#view-today .hero` and lost that specificity war, so
+   Fold-landscape Heute stayed 350px+ on a 344px-tall canvas.
+   Academy home uses `.overview-hero` (min-height 34vw/68vw), not
+   `.academy-hero`. Short portrait Salaf heroes stay 305px+, so the first
+   topic titles sit under the dock even though #view-salaf already has
+   140px padding (scroll can reach them; first paint cannot). */
+
+/* Fold-closed landscape and similarly short wide canvases. */
+@media (orientation:landscape) and (max-height:500px){
+  html body .app #view-today.view .kids-salah-home-world > .hero,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world > .hero,
+  html.dar-ios-native-app body .app #view-today.view .kids-salah-home-world > .hero,
+  html:not(.kids-ios-app):not(.dar-ios-native-app) body .app #view-today.view .kids-salah-home-world > .hero{
+    --kids-home-visible-hero:min(208px,calc(100dvh - var(--kids-dock-clearance) - 8px));
+    box-sizing:border-box!important;
+    min-height:var(--kids-home-visible-hero)!important;
+    height:var(--kids-home-visible-hero)!important;
+    max-height:var(--kids-home-visible-hero)!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world .kids-wordmark,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .kids-wordmark,
+  html.dar-ios-native-app body .app #view-today.view .kids-salah-home-world .kids-wordmark{
+    top:clamp(6px,2dvh,12px)!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world .kids-wordmark > img.wm-dar-reference-v1222,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .kids-wordmark > img.wm-dar-reference-v1222{
+    width:min(46dvh,280px)!important;
+    max-width:calc(100% - 24px)!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world .wm-kids,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .wm-kids,
+  html.dar-ios-native-app body .app #view-today.view .kids-salah-home-world .wm-kids{
+    font-size:clamp(28px,12dvh,46px)!important;
+    margin-top:-2px!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world .wm-dar-arc-text,
+  html body .app #view-today.view .kids-salah-home-world .wm-dar-arc-masktext,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .wm-dar-arc-text,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .wm-dar-arc-masktext{
+    font-size:clamp(18px,7.2dvh,32px)!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world .hero-copy,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .hero-copy{
+    bottom:4px!important;padding:2px 8px!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world .hero-salam,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .hero-salam{
+    font-size:clamp(10px,3.6dvh,14px)!important;line-height:1.2!important;margin-bottom:2px!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world .hero h1,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .hero h1{
+    font-size:clamp(16px,6dvh,24px)!important;
+  }
+  html body .app #view-today.view .kids-salah-home-world .hero-kicker,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world .hero-kicker{
+    font-size:clamp(8px,2.8dvh,11px)!important;margin-bottom:2px!important;
+  }
+
+  /* Academy portal (loaded in the Lernen iframe).
+     Must beat `body .academy-home > .overview-hero` and height:clamp(...,72vw,...).
+     Reserve the parent dock plus the academy profile header. */
+  html body:not([data-embedded="true"]) #academyHome .overview-hero,
+  html body:not([data-embedded="true"]) .academy-home > .overview-hero,
+  html body[data-kids-portal="true"] #academyHome .overview-hero,
+  html body[data-kids-portal="true"] .academy-home > .overview-hero,
+  html body .academy-home > .overview-hero,
+  html body #academyHome .overview-hero,
+  html body .overview-hero,
+  html body .lesson-heading{
+    min-height:0!important;
+    height:auto!important;
+    max-height:calc(100dvh - var(--kids-academy-dock-clearance,128px) - 64px)!important;
+    padding:clamp(8px,3dvh,18px)!important;
+  }
+  html body .academy-home > .overview-hero .overview-copy h1,
+  html body #academyHome .overview-copy h1,
+  html body .overview-hero h1,
+  html body .overview-copy h1,
+  html body .lesson-heading h1{
+    font-size:clamp(22px,7dvh,36px)!important;
+    line-height:1.12!important;
+  }
+}
+
+/* Fold-open landscape, iPad mini landscape, and other mid-short wide canvases. */
+@media (orientation:landscape) and (min-height:501px) and (max-height:800px){
+  html body .app #view-today.view .kids-salah-home-world > .hero,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world > .hero,
+  html.dar-ios-native-app body .app #view-today.view .kids-salah-home-world > .hero,
+  html:not(.kids-ios-app):not(.dar-ios-native-app) body .app #view-today.view .kids-salah-home-world > .hero{
+    --kids-home-visible-hero:min(clamp(240px,40dvh,400px),calc(100dvh - var(--kids-dock-clearance) - 240px));
+    box-sizing:border-box!important;
+    min-height:var(--kids-home-visible-hero)!important;
+    height:var(--kids-home-visible-hero)!important;
+    max-height:var(--kids-home-visible-hero)!important;
+  }
+  html body:not([data-embedded="true"]) #academyHome .overview-hero,
+  html body:not([data-embedded="true"]) .academy-home > .overview-hero,
+  html body[data-kids-portal="true"] #academyHome .overview-hero,
+  html body[data-kids-portal="true"] .academy-home > .overview-hero,
+  html body .academy-home > .overview-hero,
+  html body #academyHome .overview-hero,
+  html body .overview-hero{
+    min-height:0!important;
+    max-height:min(280px,calc(100dvh - var(--kids-academy-dock-clearance,128px) - 64px))!important;
+    height:auto!important;
+  }
+  html body .academy-home > .overview-hero .overview-copy h1,
+  html body #academyHome .overview-copy h1,
+  html body .overview-hero h1,
+  html body .overview-copy h1{
+    font-size:clamp(26px,6dvh,40px)!important;
+  }
+}
+
+/* iPad Pro landscape: leave a strip so "Meine Lernakademie" clears the dock. */
+@media (orientation:landscape) and (min-height:801px) and (max-height:1100px){
+  html body .app #view-today.view .kids-salah-home-world > .hero,
+  html.kids-ios-app body .app #view-today.view .kids-salah-home-world > .hero,
+  html.dar-ios-native-app body .app #view-today.view .kids-salah-home-world > .hero,
+  html:not(.kids-ios-app):not(.dar-ios-native-app) body .app #view-today.view .kids-salah-home-world > .hero{
+    --kids-home-visible-hero:min(42dvh,calc(100dvh - var(--kids-dock-clearance) - 460px),480px);
+    box-sizing:border-box!important;
+    min-height:var(--kids-home-visible-hero)!important;
+    height:var(--kids-home-visible-hero)!important;
+    max-height:var(--kids-home-visible-hero)!important;
+  }
+}
+
+/* Short portrait phones: shrink the Salaf hero so the first topic titles
+   (Barmherzigkeit, Ehrlichkeit) sit above the dock on first paint. */
+@media (orientation:portrait) and (max-height:740px){
+  html body .app #view-salaf > .salaf-hero,
+  html body .app #view-salaf .salaf-hero{
+    min-height:0!important;
+    max-height:min(248px,calc(100dvh - var(--kids-dock-clearance) - 300px))!important;
+    padding-top:clamp(28px,6dvh,48px)!important;
+    padding-bottom:clamp(16px,3dvh,28px)!important;
+  }
+  html body .app #view-salaf .salaf-hero h2{
+    font-size:clamp(22px,6.2vw,34px)!important;
+    margin:6px 0 8px!important;
+  }
+}
+
+/* Academy lesson surface: keep the iframe content above the parent dock
+   on any short canvas, not only landscape. */
+@media (max-height:700px){
+  body .wrap,
+  body #academyHome,
+  body #lessonMain,
+  body .lesson-main,
+  body .stage-surface{
+    padding-bottom:calc(var(--kids-academy-dock-clearance,128px) + 16px)!important;
+    scroll-padding-bottom:calc(var(--kids-academy-dock-clearance,128px) + 16px)!important;
+  }
+}
