@@ -22,7 +22,7 @@ assert(html.includes('navigator.serviceWorker.register("/kids/sw.js?v='+releaseC
 assert(sw.includes("dar-al-tawhid-kids-v"+releaseCache),"SW cache version");
 assert(html.lastIndexOf("parents-dashboard-v1432.css")>html.lastIndexOf("kids-girl-palette-authority-v1427.css"),"dashboard style must be last");
 for(const id of ["parentBirthSave","parentBirthPanel","minuteSlider","parentStoriesDone",
- "parentDuasDone","parentQuizCorrect","parentTodayDone","profileList","profileAdd","profileBring","profileAsk"]){
+ "parentDuasDone","parentQuizCorrect","parentTodayDone","profileList","profileAdd","profileAsk"]){
  assert(html.includes('id="'+id+'"'),"existing parent element removed: "+id);
 }
 for(const marker of ["kids-parent-overview","kidsParentName","kidsParentManage","kidsParentAccounts",

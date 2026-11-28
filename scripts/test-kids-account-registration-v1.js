@@ -1,124 +1,50 @@
 #!/usr/bin/env node
 "use strict";
+/* KIDS_STORE_V1 contract: no cloud accounts, no third-party requests, parental gate present. */
 const assert=require("node:assert/strict");
 const fs=require("node:fs");
 const vm=require("node:vm");
-for(const file of ["kids/start.html","kids/index.html","kids/shell.html"]){
+const shells=["kids/start.html","kids/index.html","kids/shell.html"];
+const first=fs.readFileSync(shells[0],"utf8");
+for(const file of shells){
   const html=fs.readFileSync(file,"utf8");
-  for(const id of ["joinName","joinPass","joinSave","joinStatus","joinLoginExisting","deviceLoginName","deviceLoginPass","deviceLoginSubmit","deviceLoginStatus","deviceLoginCancel","profileBring"]){
-    assert.equal(html.split('id="'+id+'"').length-1,1,file+" duplicate or missing "+id);
+  assert.equal(html,first,file+" must stay byte-identical to start.html");
+  // Child accounts are disabled: no passwords, no sign-in, no server calls.
+  for(const id of ["joinPass","joinLoginExisting","deviceLoginName","deviceLoginPass","deviceLoginSubmit","profileBring","profileAskFull"]){
+    assert.ok(!html.includes('id="'+id+'"'),file+" must not contain the removed account element "+id);
   }
-  assert.match(html,/id="joinStatus"[^>]*aria-live="polite"/);
-  assert.match(html,/\.kids-join \.join-feedback\[hidden\]/);
-  assert.match(html,/function joinExistingHint\(msg\)/);
-  assert.match(html,/function submitJoin\(mode\)/);
-  assert.match(html,/joinPending\(true\)/);
-  assert.match(html,/joinPending\(false\)/);
-  assert.match(html,/if\(existing&&existing\.ok===true\)\{acceptExistingAccount/);
-  assert.match(html,/rpc\("kids_login",\{p_name:name,p_hash:h\}\)/);
-  assert.match(html,/rpc\("kids_register",\{p_name:name,p_hash:h/);
-  assert.match(html,/joinExistingHint\(\)/);
-  assert.match(html,/document\.getElementById\("joinLoginExisting"\)\.addEventListener/);
-  assert.ok(!html.includes('if(p.name&&p.pass)rpc("kids_register"'),
-    file+" may overwrite existing cloud progress when reopened");
-  // Kids support address must be available to parents in login and account settings.
-  assert.equal((html.match(/mailto:dar\.al\.tauhid91@gmail\.com\?/g)||[]).length,2,file+" needs both support links");
-  assert.match(html,/Passwort vergessen\? Support kontaktieren/);
-  assert.match(html,/Hilfe mit einem Kinderkonto\? Support kontaktieren/);
-  assert.match(html,/Bitte keine Passwörter oder sensiblen Kinderdaten per E-Mail senden/);
-  assert.match(html,/KIDS ACCOUNT SUPPORT V1/);
-  assert.match(html,/#view-parents \.kids-support-link/);
-  assert.match(html,/\.app\[data-gender="girl"\] #view-parents \.kids-support-link/);
-  assert.ok(!html.includes('mailto:dar.al.tauhid91@gmail.com?subject=Passwort%3A'),"Never embed a password in email");
-  // Login must never depend on blocking browser-native prompts in iOS WKWebView.
-  assert.match(html,/data-step="login" role="group"/);
-  assert.match(html,/id="deviceLoginStatus"[^>]*aria-live="polite"/);
-  assert.match(html,/id="deviceLoginName"[^>]*autocomplete="username"/);
-  assert.match(html,/id="deviceLoginPass"[^>]*autocomplete="current-password"/);
-  assert.match(html,/if\(bring\)bring\.addEventListener\("click",function\(\)\{/);
-  assert.match(html,/openJoin\("login"\)/);
-  assert.match(html,/deviceLoginSubmit\.addEventListener\("click",function\(\)\{submitJoin\("restore"\)\}/);
-  assert.ok(!html.includes('window.prompt("Anmeldename")'),file+" still uses native account login prompt");
-  assert.ok(!html.includes('var pw=window.prompt("Passwort für "+p.name)'),file+" still uses native profile login prompt");
-  assert.match(html,/#view-parents #profileBring\{/);
-  assert.match(html,/-webkit-text-fill-color:#fff9eb!important/);
-  assert.match(html,/\.app\[data-gender="girl"\] #view-parents #profileBring\{/);
-  assert.match(html,/document\.addEventListener\("visibilitychange"/);
-  // Save while app is open, retry interrupted network requests, avoid stale uploads.
-  assert.match(html,/KIDS ACCOUNT SYNC V3/);
-  assert.match(html,/function flushProfileSync\(id\)/);
-  assert.match(html,/function profileSnapshot\(p\)/);
-  assert.match(html,/setInterval\(function\(\)/);
-  assert.match(html,/window\.addEventListener\("online"/);
-  assert.match(html,/syncPending\[p\.id\]=true/);
-  assert.match(html,/syncConfirmed\[known\.id\]=profileSnapshot\(known\)/);
-  assert.match(html,/syncConfirmed\[p\.id\]=profileSnapshot\(p\)/);
-  assert.match(html,/delete syncPending\[p\.id\];writeSyncPending\(\)/);
-  assert.match(html,/if\(previous&&\(previous\.name\|\|""\)\.toLowerCase\(\)!==name\.toLowerCase\(\)\)rememberCurrent\(\)/);
+  for(const needle of ["supabase","sb_publishable_","kids_login","kids_register","kids_save","kids_delete_full","rpc(","syncPending","flushProfileSync","crypto.subtle"]){
+    assert.ok(!html.includes(needle),file+" must not contain "+needle);
+  }
+  assert.equal(html.split('id="joinName"').length-1,1);
+  assert.equal(html.split('id="joinSave"').length-1,1);
+  assert.match(html,/function submitJoin\(\)\{/);
+  assert.match(html,/Es gibt keine Anmeldung und kein Konto/);
+  // Parents area: one support link behind the gate, privacy link, no account wording.
+  assert.equal((html.match(/mailto:dar\.al\.tauhid91@gmail\.com\?/g)||[]).length,1,file+" needs exactly the support link");
+  assert.match(html,/data-parent-gate="support"/);
+  assert.match(html,/href="\/kids\/datenschutz\.html"/);
+  assert.ok(!/Konto komplett löschen|Vorhandenes Kind anmelden|Konto anlegen/.test(html),file+" still offers an account");
+  // No third-party requests from the Kids shell.
+  for(const host of ["use.typekit.net","fonts.googleapis.com","fonts.gstatic.com","static.cloudflareinsights.com","everyayah.com","dnznrvs05pmza.cloudfront.net","at.adobe.com","geocoding-api.open-meteo.com"]){
+    assert.ok(!html.includes(host),file+" still references "+host);
+  }
+  assert.match(html,/\/kids\/kids-fonts-v1\.css/);
+  assert.match(html,/\/kids\/kids-parent-gate-v1\.js/);
+  assert.match(html,/\/kids\/kids-local-geocode-v1\.js/);
   const blocks=[...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
   for(const b of blocks){
     if(/\bsrc=/.test(b[1])||/\btype=["']module["']/.test(b[1]))continue;
     new vm.Script(b[2],{filename:file});
   }
 }
-console.log("KIDS account UI: all three visitor entry shells, registration feedback, sign-in and JS syntax OK");
-
-
-/* Exercise the actual production sync implementation with mocked browser state.
-   No real accounts, passwords or network endpoints are used in this test. */
-async function exerciseAccountSync(){
-  const html=fs.readFileSync("kids/index.html","utf8");
-  const start=html.indexOf("  /* KIDS ACCOUNT SYNC V3");
-  const end=html.indexOf("  function renderList(){",start);
-  assert.ok(start>0&&end>start,"sync implementation must be extractable");
-  const store=new Map(), calls=[];
-  let profile={id:"test-child",name:"Testkind",pass:"mock-hash",
-    gender:"boy",age:"6–8",data:{"kids.quran.resume":"1"}};
-  let progress="1", failNext=false;
-  const ctx={
-    localStorage:{
-      getItem:key=>store.has(key)?store.get(key):null,
-      setItem:(key,value)=>store.set(key,String(value))
-    },
-    document:{querySelector:()=>({getAttribute:()=> "boy"})},
-    load:()=>[profile],
-    save:rows=>{profile=rows[0]},
-    currentProfile:()=>profile,
-    bag:()=>({"kids.quran.resume":progress}),
-    rpc:(name,params)=>{
-      assert.equal(name,"kids_save");
-      calls.push(params);
-      return Promise.resolve(failNext?{ok:false,error:"offline"}:{ok:true});
-    },
-    setTimeout:(fn)=>setImmediate(fn)
-  };
-  vm.createContext(ctx);
-  vm.runInContext(html.slice(start,end)+
-    "\nthis.syncTest={rememberCurrent,profileSnapshot,flushProfileSync,syncConfirmed,syncPending};",ctx);
-  const sync=ctx.syncTest;
-  sync.syncConfirmed[profile.id]=sync.profileSnapshot(profile);
-  sync.rememberCurrent();
-  assert.equal(calls.length,0,"unchanged profile must not write to Supabase");
-  progress="2";
-  sync.rememberCurrent();
-  assert.equal(calls.length,1,"changed learning progress must upload");
-  assert.equal(JSON.parse(store.get("dar.kids.account.pendingSync.v1"))[profile.id],true,
-    "pending upload must survive app termination");
-  await new Promise(resolve=>setImmediate(resolve));
-  assert.equal(Boolean(sync.syncPending[profile.id]),false,"successful upload must clear pending state");
-  failNext=true;
-  progress="3";
-  sync.rememberCurrent();
-  await new Promise(resolve=>setImmediate(resolve));
-  assert.equal(Boolean(sync.syncPending[profile.id]),true,"offline failure must remain queued");
-  failNext=false;
-  sync.flushProfileSync(profile.id);
-  await new Promise(resolve=>setImmediate(resolve));
-  assert.equal(Boolean(sync.syncPending[profile.id]),false,"reconnect must replay pending update");
-  assert.equal(calls[calls.length-1].p_data["kids.quran.resume"],"3");
-  console.log("KIDS cloud sync: change-only saves, durable pending, offline retry OK");
-}
-exerciseAccountSync().catch(e=>{console.error(e);process.exitCode=1});
+for(const f of ["kids/kids-parent-gate-v1.js","kids/kids-local-geocode-v1.js","kids/kids-fonts-v1.css","kids/datenschutz.html"])assert.ok(fs.existsSync(f),f+" missing");
+const css=fs.readFileSync("kids/section-heroes-v1095.css","utf8");
+assert.ok(!css.includes("cloudfront.net"),"expired third-party art must stay removed");
+const privacy=fs.readFileSync("kids/datenschutz.html","utf8");
+for(const phrase of ["Kein Konto","Keine Werbung","Kein Tracking","Gebetszeiten","Von diesem Gerät löschen","dar.al.tauhid91@gmail.com"])assert.ok(privacy.includes(phrase),"privacy page lacks: "+phrase);
+assert.ok(!/serhat/i.test(privacy),"privacy page must not contain the owner's name");
+console.log("KIDS store contract: no accounts, no third-party requests, parental gate and privacy page OK");
 
 // Service-only recovery foundation and simulated Gmail intake regression.
 require("../kids/recovery/tests/foundation.test.cjs");

@@ -92,7 +92,7 @@ function runKidsDesignGuard() {
   const homeHeroNeedles = [
     "kids-home-reference-exact-v1199",
     "/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1199",
-    "https://use.typekit.net/jka5jda.css",
+    "/kids/kids-fonts-v1.css?v=1480",
     "class=\"wm-dar-safe\"",
     "margin:calc(-1 * var(--safe-top)) calc(50% - 50vw) 0!important",
     "kids-home-reference-polish-v1204",
