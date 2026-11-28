@@ -25,6 +25,7 @@ html.kids-visitor-booting #kids-visitor-boot::before{content:"";position:absolut
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0c2636">
 <script src="/kids/kids-birth-month-v1431.js?v=1431"></script>
+<script src="/kids/kids-local-geocode-v1.js?v=1480"></script>
 <link rel="stylesheet" href="/kids/kids-birth-month-v1431.css?v=1431">
 <script id="kids-profile-first-paint-v1348">
 (function(){
@@ -90,7 +91,7 @@ html body .app #view-today > .hero :is(.cloud,.shooting-star,.city,.arch,.dune,.
 </style>
 <!-- KIDS_FIRST_PAINT_HERO_V1313: same exact URL as final homepage CSS, requested before styles/scripts -->
 <link rel="preload" as="image" href="/kids/assets/kids-salah-v1272/hero-home.png?v=1274" fetchpriority="high">
-<link rel="stylesheet" href="https://use.typekit.net/jka5jda.css">
+<link rel="stylesheet" href="/kids/kids-fonts-v1.css?v=1480">
 <link rel="manifest" href="/kids/manifest.webmanifest">
 <link rel="preload" as="style" href="/kids/kids-nav-v1421.css?v=1422">
 <link rel="preload" as="style" href="/kids/kids-motion-v1422.css?v=1422">
@@ -2856,12 +2857,11 @@ html:not([data-view="today"]) .view.active{
 
 /* KIDS_DUA_QUIZ_INLINE_ART_V1124 */
 #duaModal .dua-scene,#duaModal .dua-scene.morning,#duaModal .dua-scene.learn,#duaModal .dua-scene.sleep,#duaModal .dua-scene.night,#duaModal .dua-scene.food,#duaModal .dua-scene.family{
- --dua-art:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/c469c30f-7dda-48c5-a72f-7bb40a043993/Single_standalone_cinematic_16_9_hero_illustration_for_a_premium_Islamic_children_s_app_Du_a_section_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiN2FiNTAyMmYyM2ZjYjc0OSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTM2MTMyN30.KiYu2lPZdL0AbD8W0UyithIa1nWu57iaVAgb-SwDtA4")!important;
  background:#173848!important;
 }
 #duaModal .dua-scene::before{background-image:var(--dua-art)!important;background-size:cover!important;background-position:center 52%!important;filter:saturate(1.03) brightness(.9)!important}
 #quizModal .quiz-scene{
- --quiz-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/cbe2efa5-f245-41e4-9262-be656af8ffc7/c22155b0-3b92-4227-a372-cfdaf600c518/Single_standalone_cinematic_16_9_hero_illustration_for_a_pre.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDEzNTA0YmI5ZTBiNjNjMyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMzMDM2M30.RWZGx2UrVdXyvfYQRM-noI7t5EVNJPS9cvcn4fawl40")!important;
+ --quiz-art:url("/kids/assets/kids-art/quiz-courtyard-v11.jpg?v=11-creative1")!important;
  background-image:linear-gradient(180deg,rgba(4,17,28,.01),rgba(4,17,28,.08) 45%,rgba(4,17,28,.56) 100%),var(--quiz-art)!important;
  background-size:cover!important;background-position:center 50%!important;background-repeat:no-repeat!important;
 }
@@ -2875,7 +2875,6 @@ html:not([data-view="today"]) .view.active{
 .academy-pilot-text>span{font-size:12px;color:rgba(255,255,255,.78)}
 .academy-pilot-arrow{flex:none;display:grid;place-items:center;border:1px solid rgba(226,189,114,.4);background:rgba(226,189,114,.1);color:#f1d28c;border-radius:50%;height:42px;width:42px;font-size:24px}
 </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
 <!-- Launch v174: native/PWA opens directly on the approved mosque background; no obsolete intro overlay or audio. -->
 
 
@@ -3665,7 +3664,7 @@ var quizQuestionHadError=false;
 function pad3(n){return String(n).padStart(3,"0")}
 function padAyah(n){return String(n).padStart(3,"0")}
 function audioUrl(surah,ayah){
-  return "https://everyayah.com/data/Husary_128kbps/"+pad3(surah)+padAyah(ayah)+".mp3";
+  return "/kids/assets/quran-ayat/"+pad3(surah)+padAyah(ayah)+".mp3?v=1480";
 }
 function todayKey(){
   var d=new Date();
@@ -7171,7 +7170,6 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 })();
 </script>
 
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="/kids/content-studio-feed.js?v=studio8"></script>
 <script src="/kids/owner-voice.js?v=20261127-sidq-asidq"></script>
 <script src="/kids/dua-word-meanings-v1.js?v=2"></script>
@@ -7815,7 +7813,7 @@ html[data-view="stories"] .shell{
   background-image:
     linear-gradient(90deg,rgba(4,22,35,.90) 0%,rgba(4,22,35,.68) 42%,rgba(4,22,35,.25) 72%,rgba(4,22,35,.08) 100%),
     linear-gradient(180deg,rgba(4,20,33,.08) 0%,rgba(4,20,33,.04) 42%,rgba(4,24,38,.36) 76%,#0c2636 100%),
-    url("https://at.adobe.com/jaPS3uCKdEKCahM6")!important;
+    url("/kids/assets/kids-art/section-stories-v1096.jpg?v=1096-real2")!important;
   background-size:cover!important;
   background-position:center 52%!important;
   background-repeat:no-repeat!important;
@@ -8018,7 +8016,7 @@ html[data-view="stories"] .shell{
   background-image:
     linear-gradient(90deg,rgba(4,22,35,.90) 0%,rgba(4,22,35,.68) 42%,rgba(4,22,35,.25) 72%,rgba(4,22,35,.08) 100%),
     linear-gradient(180deg,rgba(4,20,33,.08) 0%,rgba(4,20,33,.04) 42%,rgba(4,24,38,.36) 76%,#0c2636 100%),
-    url("https://at.adobe.com/jaPS3uCKdEKCahM6")!important;
+    url("/kids/assets/kids-art/section-stories-v1096.jpg?v=1096-real2")!important;
 }
 #view-stories > .story-feature,
 #view-stories > .story-more-title,
@@ -8082,7 +8080,7 @@ html[data-view="stories"] .shell{
   background-image:
     linear-gradient(90deg,rgba(3,20,33,.92) 0%,rgba(3,20,33,.70) 43%,rgba(3,20,33,.28) 73%,rgba(3,20,33,.10) 100%),
     linear-gradient(180deg,rgba(4,20,33,.10) 0%,rgba(4,20,33,.02) 46%,rgba(4,24,38,.42) 77%,#0c2636 100%),
-    url("https://at.adobe.com/jaPS3uCKdEKCahM6")!important;
+    url("/kids/assets/kids-art/section-stories-v1096.jpg?v=1096-real2")!important;
   background-size:cover!important;
   background-position:center 50%!important;
   background-repeat:no-repeat!important;
