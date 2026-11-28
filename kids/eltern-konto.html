@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Elternkonto (Test) · DĀR AL TAWḤĪD Kids</title>
+<meta name="theme-color" content="#0c2636">
+<link rel="stylesheet" href="/kids/kids-fonts-v1.css?v=1480">
+<style>
+:root{--bg:#0c2636;--card:#123449;--gold:#e5c47d;--ink:#f7efdc;--mute:#bcd0d8;--bad:#ffb4a8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 clamp(16px,1.1vw + 13px,19px)/1.6 Fredoka,system-ui,-apple-system,"Segoe UI",sans-serif;padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+main{max-width:40rem;margin:0 auto}
+h1{font:600 clamp(22px,3vw + 14px,30px)/1.2 Cinzel,Georgia,serif;color:var(--gold);margin:6px 0 14px}
+h2{font:600 1.15em/1.3 Fredoka,system-ui,sans-serif;color:var(--gold);margin:0 0 8px}
+section{background:var(--card);border:1px solid rgba(229,196,125,.28);border-radius:20px;padding:clamp(14px,3vw,24px);margin:0 0 14px}
+p{margin:0 0 10px}a{color:var(--gold)}
+label{display:block;margin:10px 0 4px;font-weight:600}
+input,select{width:100%;min-height:48px;border-radius:14px;border:1px solid rgba(229,196,125,.5);background:#0c2636;color:var(--ink);padding:0 14px;font:inherit}
+button{min-height:48px;padding:0 20px;border-radius:99px;border:1px solid var(--gold);background:var(--gold);color:#0c2636;font:inherit;font-weight:600;cursor:pointer;margin:12px 8px 0 0}
+button.ghost{background:transparent;color:var(--ink);border-color:rgba(229,196,125,.6)}
+button.danger{background:transparent;color:var(--bad);border-color:var(--bad)}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.msg{min-height:1.6em;color:var(--mute)}.msg.err{color:var(--bad)}
+ul.kids{list-style:none;padding:0;margin:0}
+ul.kids li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid rgba(229,196,125,.18)}
+ul.kids button{margin:0;min-height:44px}
+small{color:var(--mute)}
+.badge{display:inline-block;padding:4px 12px;border-radius:99px;background:rgba(229,196,125,.16);border:1px solid rgba(229,196,125,.5);font-size:.82em}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+<h1>Elternkonto <span class="badge">TEST</span></h1>
+
+<section id="blocked" hidden>
+  <p>Das Elternkonto ist in dieser Version noch nicht verfügbar.</p>
+  <p><a href="/kids/start.html">Zurück zur Kids-App</a></p>
+</section>
+
+<section id="login" hidden>
+  <h2>Anmelden mit E-Mail-Code</h2>
+  <p>Kein Passwort nötig: Wir senden dir einen Einmalcode an deine E-Mail-Adresse. Das Konto gehört den Eltern; Kinder bekommen darunter nur Profile.</p>
+  <form id="loginForm" novalidate>
+    <label for="email">E-Mail-Adresse der Eltern</label>
+    <input id="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required>
+    <button type="submit" id="sendCode">Code senden</button>
+  </form>
+  <form id="codeForm" novalidate hidden>
+    <label for="code">Code aus der E-Mail</label>
+    <input id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="10" required>
+    <button type="submit" id="verify">Bestätigen</button>
+    <button type="button" class="ghost" id="back">Andere Adresse</button>
+  </form>
+  <p id="loginMsg" class="msg" role="status" aria-live="polite"></p>
+  <small>Mit der Anmeldung stimmst du der <a href="/kids/datenschutz.html">Datenschutzerklärung</a> zu. Die Adresse wird nur für die Anmeldung genutzt.</small>
+</section>
+
+<section id="home" hidden>
+  <h2>Kinderprofile</h2>
+  <p><small>Angemeldet als <span id="who"></span></small></p>
+  <ul class="kids" id="kidList"></ul>
+  <p id="emptyMsg" class="msg">Noch kein Kinderprofil angelegt.</p>
+  <form id="childForm" novalidate>
+    <label for="childName">Spitzname des Kindes</label>
+    <input id="childName" maxlength="24" autocomplete="off" required>
+    <small>Bitte keinen vollständigen Namen eingeben.</small>
+    <label for="childAge">Altersgruppe</label>
+    <select id="childAge"><option>4-6</option><option selected>7-9</option><option>10-12</option><option>13+</option></select>
+    <label for="childAvatar">Symbol</label>
+    <select id="childAvatar"><option value="star">Stern</option><option value="moon">Mond</option><option value="book">Buch</option><option value="palm">Palme</option><option value="lantern">Laterne</option><option value="heart">Herz</option><option value="leaf">Blatt</option><option value="sun">Sonne</option></select>
+    <button type="submit">Kind hinzufügen</button>
+  </form>
+  <p id="homeMsg" class="msg" role="status" aria-live="polite"></p>
+</section>
+
+<section id="account" hidden>
+  <h2>Konto</h2>
+  <button type="button" class="ghost" id="signOut">Abmelden</button>
+  <h2 style="margin-top:18px">Konto löschen</h2>
+  <p>Löscht das Elternkonto, die E-Mail-Zuordnung und alle Kinderprofile unwiderruflich auf dem Server.</p>
+  <label for="confirmDelete">Zur Bestätigung <b>LÖSCHEN</b> eingeben</label>
+  <input id="confirmDelete" autocomplete="off">
+  <button type="button" class="danger" id="deleteAccount" disabled>Konto endgültig löschen</button>
+  <p id="accountMsg" class="msg" role="status" aria-live="polite"></p>
+</section>
+<p><a href="/kids/start.html">Zurück zur Kids-App</a></p>
+</main>
+<script src="/kids/kids-parent-account-v1.js?v=1"></script>
+<script>
+(function(){
+  "use strict";
+  var P=window.DarKidsParent, $=function(id){return document.getElementById(id)};
+  var api=P.create({storage:window.localStorage});
+  var pendingEmail="";
+  var AV={star:"★",moon:"☾",book:"📖",palm:"🌴",lantern:"🏮",heart:"♥",leaf:"🍃",sun:"☀"};
+  var TXT={
+    invalid_email:"Bitte eine gültige E-Mail-Adresse eingeben.",
+    wait:"Bitte kurz warten, bevor du einen neuen Code anforderst.",
+    rate_limited:"Zu viele Versuche. Bitte in einigen Minuten erneut versuchen.",
+    network:"Keine Verbindung. Bitte später erneut versuchen.",
+    server:"Das hat gerade nicht geklappt. Bitte später erneut versuchen.",
+    invalid_code:"Der Code ist ungültig oder abgelaufen.",
+    invalid_name:"Bitte einen Spitznamen mit 1 bis 24 Zeichen eingeben.",
+    limit:"Es sind höchstens 8 Kinderprofile möglich.",
+    duplicate:"Dieser Spitzname ist schon vergeben.",
+    session:"Bitte erneut anmelden."
+  };
+  function say(id,text,err){var el=$(id);el.textContent=text||"";el.className="msg"+(err?" err":"")}
+  function show(which){["blocked","login","home","account"].forEach(function(k){$(k).hidden=true});which.forEach(function(k){$(k).hidden=false})}
+  async function refreshHome(){
+    $("who").textContent=api.email();
+    var r=await api.listChildren();
+    if(!r.ok){if(r.error==="session"){show(["login"]);say("loginMsg",TXT.session,true)}else say("homeMsg",TXT.server,true);return}
+    var ul=$("kidList");ul.textContent="";
+    r.children.forEach(function(c){
+      var li=document.createElement("li");
+      var span=document.createElement("span");span.textContent=(AV[c.avatar]||"★")+" "+c.display_name+" · "+c.age_band;
+      var b=document.createElement("button");b.type="button";b.className="ghost";b.textContent="Entfernen";
+      b.setAttribute("aria-label",c.display_name+" entfernen");
+      b.addEventListener("click",async function(){
+        if(!window.confirm("Kinderprofil wirklich entfernen?"))return;
+        var d=await api.deleteChild(c.id);
+        if(!d.ok)say("homeMsg",TXT[d.error]||TXT.server,true);else refreshHome();
+      });
+      li.appendChild(span);li.appendChild(b);ul.appendChild(li);
+    });
+    $("emptyMsg").hidden=r.children.length>0;
+  }
+  function start(){
+    if(!P.isEnabledHost(location.hostname)){show(["blocked"]);return}
+    if(api.isLoggedIn()){show(["home","account"]);refreshHome()}else show(["login"]);
+  }
+  $("loginForm").addEventListener("submit",async function(e){
+    e.preventDefault();
+    var email=$("email").value;
+    $("sendCode").disabled=true;
+    var r=await api.requestCode(email);
+    $("sendCode").disabled=false;
+    if(!r.ok){say("loginMsg",TXT[r.error]||TXT.server,true);return}
+    pendingEmail=email;
+    $("loginForm").hidden=true;$("codeForm").hidden=false;$("code").focus();
+    say("loginMsg","Falls die Adresse stimmt, ist ein Code unterwegs. Bitte auch den Spam-Ordner prüfen.");
+  });
+  $("codeForm").addEventListener("submit",async function(e){
+    e.preventDefault();
+    $("verify").disabled=true;
+    var r=await api.verifyCode(pendingEmail,$("code").value);
+    $("verify").disabled=false;
+    if(!r.ok){say("loginMsg",TXT[r.error]||TXT.invalid_code,true);return}
+    $("code").value="";say("loginMsg","");
+    show(["home","account"]);refreshHome();
+  });
+  $("back").addEventListener("click",function(){$("codeForm").hidden=true;$("loginForm").hidden=false;say("loginMsg","")});
+  $("childForm").addEventListener("submit",async function(e){
+    e.preventDefault();
+    var r=await api.addChild({display_name:$("childName").value,age_band:$("childAge").value,avatar:$("childAvatar").value});
+    if(!r.ok){if(r.error==="session"){show(["login"]);say("loginMsg",TXT.session,true)}else say("homeMsg",TXT[r.error]||TXT.server,true);return}
+    $("childName").value="";say("homeMsg","Kinderprofil gespeichert.");refreshHome();
+  });
+  $("signOut").addEventListener("click",async function(){await api.signOut();show(["login"]);$("codeForm").hidden=true;$("loginForm").hidden=false});
+  $("confirmDelete").addEventListener("input",function(){$("deleteAccount").disabled=$("confirmDelete").value.trim()!=="LÖSCHEN"});
+  $("deleteAccount").addEventListener("click",async function(){
+    var r=await api.deleteAccount();
+    if(!r.ok){say("accountMsg",TXT[r.error]||TXT.server,true);return}
+    $("confirmDelete").value="";$("deleteAccount").disabled=true;
+    show(["login"]);$("codeForm").hidden=true;$("loginForm").hidden=false;
+    say("loginMsg","Dein Konto und alle Kinderprofile wurden gelöscht.");
+  });
+  start();
+})();
+</script>
+</body>
+</html>
