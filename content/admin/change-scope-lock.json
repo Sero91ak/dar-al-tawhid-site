@@ -10059,6 +10059,18 @@
         "scripts/test-kids-academy-v9.js"
       ],
       "expiresAt": "2026-12-31T23:59:00+01:00"
+    },
+    {
+      "id": "account-rpc-hardening-20261128",
+      "at": "2026-11-28T11:45:00+01:00",
+      "approvedBy": "owner-explicit-t27s2-account-hotfix-sofort",
+      "reason": "Owner (t27s2): sofort die offenen Konto-Tabellen schließen. Anmeldung, Favoriten, Qurʾān-Lesestand und Zakāt laufen über Ratenbegrenzte SECURITY-DEFINER-RPCs mit Sitzungs-Token. Nur Konto-Client und SQL-Migrationsdateien; globalLock bleibt an. Keine Gebets-, Push-, Kids- oder native Änderungen.",
+      "paths": [
+        "content/admin/account-rpc-hardening-20261128-part1.sql",
+        "content/admin/account-rpc-hardening-20261128-part2.sql",
+        "scripts/test-visitor-profile-lock-shortcuts-v1.cjs"
+      ],
+      "expiresAt": "2026-12-31T23:59:00+01:00"
     }
   ],
   "enabled": true

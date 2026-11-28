@@ -666,13 +666,25 @@
     });
   }
 
+  async function zakatRpc(name, args) {
+    const session = global.accountSession?.();
+    if (!session?.token || !global.supabaseRpc) throw new Error("Bitte zuerst anmelden.");
+    const r = await global.supabaseRpc(name, { p_token: session.token, ...(args || {}) });
+    if (r && r.ok === false) {
+      if (r.error === "session") {
+        global.setAccountSession?.(null);
+        throw new Error("Sitzung abgelaufen. Bitte neu anmelden.");
+      }
+      throw new Error("Aktion nicht möglich (" + String(r.error || "Fehler") + ").");
+    }
+    return r;
+  }
+
   async function fetchZakatHistory(userId) {
-    if (!global.supabaseRest || !userId) return [];
+    if (!userId) return [];
     try {
-      const rows = await global.supabaseRest(
-        `user_zakat_calculations?user_id=eq.${encodeURIComponent(userId)}&select=id,zakat_year,calculated_at,zakat_due,payment_status&order=calculated_at.desc&limit=20`
-      );
-      return Array.isArray(rows) ? rows : [];
+      const r = await zakatRpc("acct_zakat_list");
+      return Array.isArray(r?.rows) ? r.rows : [];
     } catch (e) {
       return [];
     }
@@ -689,19 +701,15 @@
     if (!result) return;
     const year = String(new Date().getFullYear());
     try {
-      await global.supabaseRest("user_zakat_calculations", {
-        method: "POST",
-        prefer: "return=representation",
-        body: {
-          user_id: session.id,
+      await zakatRpc("acct_zakat_save", {
+        p_record: {
           zakat_year: year,
           payload: { input: zakatInput, result, configVersion: zakatConfig?.version },
           total_wealth: result.totalWealth,
           debts_due: result.debtsDue,
           zakatable_wealth: result.zakatableWealth,
           zakat_due: result.zakatDue,
-          hawl_next_date: result.hawl?.nextDueDate || null,
-          payment_status: "open"
+          hawl_next_date: result.hawl?.nextDueDate || null
         }
       });
       zakatHistory = await fetchZakatHistory(session.id);
@@ -717,10 +725,7 @@
     if (!session?.id || !id) return;
     if (!confirm("Diese Berechnung löschen?")) return;
     try {
-      await global.supabaseRest(`user_zakat_calculations?id=eq.${encodeURIComponent(id)}&user_id=eq.${encodeURIComponent(session.id)}`, {
-        method: "DELETE",
-        prefer: "return=minimal"
-      });
+      await zakatRpc("acct_zakat_delete", { p_id: id });
       zakatHistory = await fetchZakatHistory(session.id);
       zakatRenderPreserve();
     } catch (e) {

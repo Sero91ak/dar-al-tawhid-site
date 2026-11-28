@@ -348,8 +348,12 @@
 
   async function applyAccountAuthSuccess(profile, mode) {
     if (mode === "login" && hasRealAccountSystem() && hasLocalAccountData()) {
+      setAccountSession(profile);
       const choice = await chooseMergeStrategy(profile.id);
       if (choice === "cancel") {
+        try {
+          await supabaseRpc("acct_logout", { p_token: profile.token });
+        } catch (e) {}
         setAccountSession(null);
         throw new Error("Anmeldung abgebrochen.");
       }
@@ -534,11 +538,9 @@
           setAccountStatus("Anmeldung wird geprüft …", "warn");
           const username = validateUsername($("accountUsername")?.value);
           const pin = validatePin($("accountPin")?.value);
-          const profile = await accountFindProfile(username);
-          if (!profile) throw new Error("Anmeldename nicht gefunden.");
-          const hash = await accountPinHash(username, pin, profile.pin_salt);
-          if (hash !== profile.pin_hash) throw new Error("PIN stimmt nicht.");
-          await applyAccountAuthSuccess(profile, "login");
+          const result = await accountLoginRpc(username, pin);
+          if (!result || !result.ok) throw new Error(accountAuthErrorText(result));
+          await applyAccountAuthSuccess({ id: result.id, username: result.username, token: result.token }, "login");
           render();
         } catch (e) {
           setAccountStatus(e.message || String(e), "warn");
@@ -552,18 +554,9 @@
           setAccountStatus("Konto wird angelegt …", "warn");
           const username = validateUsername($("accountUsername")?.value);
           const pin = validatePin($("accountPin")?.value);
-          const existing = await accountFindProfile(username);
-          if (existing) throw new Error("Dieser Anmeldename ist bereits vergeben.");
-          const salt = randomHex(16);
-          const pin_hash = await accountPinHash(username, pin, salt);
-          const rows = await supabaseRest("user_profiles", {
-            method: "POST",
-            prefer: "return=representation",
-            body: { username, pin_hash, pin_salt: salt },
-          });
-          const profile = Array.isArray(rows) ? rows[0] : rows;
-          if (!profile || !profile.id) throw new Error("Konto konnte nicht gespeichert werden.");
-          await applyAccountAuthSuccess(profile, "register");
+          const result = await accountRegisterRpc(username, pin);
+          if (!result || !result.ok) throw new Error(accountAuthErrorText(result));
+          await applyAccountAuthSuccess({ id: result.id, username: result.username, token: result.token }, "register");
           render();
         } catch (e) {
           setAccountStatus(e.message || String(e), "warn");
@@ -580,6 +573,10 @@
         const removeLocal = confirm(
           "Lokale Kontodaten von diesem Gerät entfernen?\n\nOK = Lokale Favoriten und Lesestand auf diesem Gerät löschen\nAbbrechen = Lokale Daten behalten"
         );
+        try {
+          const sess = accountSession();
+          if (sess) supabaseRpc("acct_logout", { p_token: sess.token }).catch(() => {});
+        } catch (e) {}
         setAccountSession(null);
         setAccountSyncState("");
         if (removeLocal) {

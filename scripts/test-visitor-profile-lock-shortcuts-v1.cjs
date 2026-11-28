@@ -23,8 +23,8 @@ assert.match(picker,/pending=g;previewGender=g;panel.innerHTML=markup\(\)/,"Left
 assert.match(picker,/\(type==="hub"\|\|type==="account"\)&&pending&&locked\(\)/,"Only the right-hand Mein DĀR entry can trigger profile PIN confirmation");
 assert.match(picker,/function selectedGender\(\)\{return previewGender\|\|gender\(\)\}/,"Selected profile must be reflected in both columns");
 assert.match(js,/isProfileLocked\(\)&&permit!==PROFILE_REAUTH_TOKEN/,"No silent changes to selected signed-in profiles");
-assert.match(js,/await accountFindProfile\(username\)/,"Reuse existing account's live login lookup");
-assert.match(js,/await accountPinHash\(username,String\(pin\),live\.pin_salt\)/,"Reuse existing account PIN verifier");
+assert.match(js,/await accountLoginRpc\(username,String\(pin\)\)/,"Reuse existing account's rate-limited login RPC");
+assert.match(js,/live\.ok!==true/,"Reject failed login RPC result");
 assert.match(js,/String\(account\(\)\.id\)!==String\(session\.id\)/,"Reject session switch while verifying PIN");
 assert.match(js,/openNotes:openNotes,openSaved:openSaved/,"Notes and Saved must remain directly accessible");
 assert.match(js,/dspSavedOverlay/,"Saved sheet must remain available without navigating out of the screen");
@@ -62,8 +62,8 @@ const ctx=vm.createContext({
  location:{pathname:"/",hash:""},window:win,document,
  localStorage:{getItem:key=>local.get(key)||null,setItem:(key,val)=>local.set(key,val)},
  accountSession:()=>user,
- accountFindProfile:async name=>name==="testaccount"?{id:"acct-22",username:"testaccount",pin_salt:"salt",pin_hash:"hash-2468"}:null,
- accountPinHash:async(_name,pin,_salt)=>"hash-"+pin,
+ accountLoginRpc:async(name,pin)=>name==="testaccount"&&pin==="2468"?{ok:true,id:"acct-22",username:name,token:"t"}:{ok:false,error:"invalid"},
+ accountAuthErrorText:()=>"Anmeldename oder PIN stimmt nicht.",
  requestAnimationFrame:()=>{},setTimeout:()=>{},console,MutationObserver:function(){this.observe=()=>{}},
  CustomEvent:function(type,info){this.type=type;this.detail=info.detail},
  Date,Math,Number,Array,Object,JSON,String

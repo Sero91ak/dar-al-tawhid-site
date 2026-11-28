@@ -35,16 +35,16 @@ async function changeGenderWithLogin(gender,pin){
  var now=Date.now();
  if(blockedProfilePinUntil>now)throw new Error("Zu viele Versuche. Bitte später erneut anmelden.");
  if(!/^\d{4,8}$/.test(String(pin||"")))throw new Error("Bitte die Konto-PIN (4–8 Ziffern) eingeben.");
- if(typeof accountFindProfile!=="function"||typeof accountPinHash!=="function")throw new Error("Kontoanmeldung nicht verfügbar. Bitte den Kontobereich öffnen.");
- // Use the existing account's same live login verifier; this does NOT create
- // a parallel account system or pretend to make client-side PINs server auth.
+ if(typeof accountLoginRpc!=="function"||typeof accountAuthErrorText!=="function")throw new Error("Kontoanmeldung nicht verfügbar. Bitte den Kontobereich öffnen.");
+ // Use the existing account's server-side rate-limited login RPC; the extra
+ // session it issues is revoked right away, no parallel account system.
  var username=String(session.username||"");
  if(!username)throw new Error("Kontoanmeldung konnte nicht bestätigt werden.");
  try{
-  var live=await accountFindProfile(username);
-  if(!live||String(live.id)!==String(session.id))throw new Error("Anmeldung nicht bestätigt.");
-  var hash=await accountPinHash(username,String(pin),live.pin_salt);
-  if(hash!==live.pin_hash)throw new Error("PIN stimmt nicht.");
+  var live=await accountLoginRpc(username,String(pin));
+  if(!live||live.ok!==true)throw new Error(accountAuthErrorText(live));
+  try{if(typeof supabaseRpc==="function"&&live.token)supabaseRpc("acct_logout",{p_token:live.token}).catch(function(){})}catch(e0){}
+  if(String(live.id)!==String(session.id))throw new Error("Anmeldung nicht bestätigt.");
  }catch(err){
   failedProfilePin++;if(failedProfilePin>=3){blockedProfilePinUntil=Date.now()+60000;failedProfilePin=0}
   throw err
