@@ -5,7 +5,7 @@ import { join } from 'node:path';
 const { chromium } = pkg;
 const BASE = process.env.KIDS_BASE || 'http://127.0.0.1:38287';
 const START = BASE.replace(/\/$/, '') + '/kids/start.html';
-const PRIVACY = BASE.replace(/\/$/, '') + '/privacy/index.html';
+const PRIVACY = BASE.replace(/\/$/, '') + '/kids/datenschutz.html';
 const ROOT = process.env.KIDS_QA_OUT || '/workspace/kids-qa-suite-20261127';
 mkdirSync(ROOT, { recursive: true });
 
@@ -41,6 +41,7 @@ function seedProfile() {
   ]));
   localStorage.setItem('kids.activeProfile', 'qa-boy-68');
   localStorage.setItem('kids.age', '6–8');
+  try { sessionStorage.setItem('kids.parentGate.until.v1', String(Date.now() + 3600000)); } catch (e) {}
 }
 
 const AUDIT_FN = () => {
@@ -345,6 +346,45 @@ for (const vp of VIEWPORTS_RUN) {
       rec.pages.dua = { error: String(e).slice(0, 200) };
     }
 
+    // Parental gate: blocked first, then solved with the real keypad.
+    try {
+      await page.evaluate(() => { sessionStorage.removeItem('kids.parentGate.until.v1'); });
+      await page.evaluate(() => document.querySelector('.bottom-nav .nav-btn[data-target="parents"]').click());
+      await page.waitForSelector('#kidsParentGate.open', { timeout: 4000 });
+      {
+        const gpath = join(dir, 'gate.png');
+        await page.screenshot({ path: gpath, fullPage: false, animations: 'disabled' });
+        const issues = await page.evaluate(() => {
+          const out = [], vw = window.innerWidth, vh = window.innerHeight;
+          const card = document.querySelector('#kidsParentGate .kpg-card');
+          const cr = card.getBoundingClientRect();
+          if (cr.left < -1 || cr.right > vw + 1) out.push({ type: 'gate-card-outside-x' });
+          if (cr.top < -1 || cr.bottom > vh + 1) {
+            const sc = card.scrollHeight > card.clientHeight + 2;
+            if (!sc) out.push({ type: 'gate-card-outside-y' });
+          }
+          for (const b of document.querySelectorAll('#kidsParentGate button')) {
+            const r = b.getBoundingClientRect();
+            if (r.width < 43.5 || r.height < 43.5) out.push({ type: 'gate-tap-small', text: b.textContent, w: Math.round(r.width), h: Math.round(r.height) });
+          }
+          return out;
+        });
+        rec.pages.gate = { path: gpath, audit: { issues }, fail: issues.length > 0 };
+      }
+      const parentsOpen = await page.evaluate(() => !!document.querySelector('#view-parents.active'));
+      if (parentsOpen) rec.pages.gate.audit.issues.push({ type: 'gate-bypassed' });
+      const task = await page.evaluate(() => document.querySelector('#kpgTask').textContent);
+      const m = task.match(/(\d+) × (\d+) \+ (\d+)/);
+      const answer = String(Number(m[1]) * Number(m[2]) + Number(m[3]));
+      for (const ch of answer) await page.click(`#kidsParentGate button[data-k="${ch}"]`);
+      await page.click('#kidsParentGate button[data-k="OK"]');
+      await page.waitForTimeout(500);
+      const ok = await page.evaluate(() => !!document.querySelector('#view-parents.active') && !document.querySelector('#kidsParentGate.open'));
+      if (!ok) rec.pages.gate.audit.issues.push({ type: 'gate-solve-failed' });
+      rec.pages.gate.fail = rec.pages.gate.audit.issues.length > 0;
+    } catch (e) {
+      rec.pages.gate = { error: String(e).slice(0, 200), fail: true };
+    }
     await showTab(page, 'parents');
     rec.pages.eltern = await shot(page, dir, 'eltern');
 

@@ -12,16 +12,18 @@
           <view key="view" contentMode="scaleToFill" clipsSubviews="YES" id="kids-visitor-launch-view">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <subviews>
-              <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KidsVisitorLaunchPoster" translatesAutoresizingMaskIntoConstraints="NO" id="kids-visitor-launch-art">
+              <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" image="KidsVisitorLaunchPoster" translatesAutoresizingMaskIntoConstraints="NO" id="kids-visitor-launch-art">
                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
               </imageView>
             </subviews>
             <color key="backgroundColor" name="LaunchBackground"/>
             <constraints>
-              <constraint firstItem="kids-visitor-launch-art" firstAttribute="top" secondItem="kids-visitor-launch-view" secondAttribute="top" id="l-top"/>
-              <constraint firstItem="kids-visitor-launch-art" firstAttribute="leading" secondItem="kids-visitor-launch-view" secondAttribute="leading" id="l-leading"/>
-              <constraint firstAttribute="trailing" secondItem="kids-visitor-launch-art" secondAttribute="trailing" id="l-trailing"/>
-              <constraint firstAttribute="bottom" secondItem="kids-visitor-launch-art" secondAttribute="bottom" id="l-bottom"/>
+              <constraint firstItem="kids-visitor-launch-art" firstAttribute="centerX" secondItem="kids-visitor-launch-view" secondAttribute="centerX" id="l-centerX"/>
+              <constraint firstItem="kids-visitor-launch-art" firstAttribute="centerY" secondItem="kids-visitor-launch-view" secondAttribute="centerY" id="l-centerY"/>
+              <constraint firstItem="kids-visitor-launch-art" firstAttribute="width" secondItem="kids-visitor-launch-art" secondAttribute="height" multiplier="0.561" id="l-aspect"/>
+              <constraint firstItem="kids-visitor-launch-art" firstAttribute="width" relation="lessThanOrEqual" secondItem="kids-visitor-launch-view" secondAttribute="width" id="l-max-width"/>
+              <constraint firstItem="kids-visitor-launch-art" firstAttribute="height" relation="lessThanOrEqual" secondItem="kids-visitor-launch-view" secondAttribute="height" id="l-max-height"/>
+              <constraint firstItem="kids-visitor-launch-art" firstAttribute="height" secondItem="kids-visitor-launch-view" secondAttribute="height" priority="750" id="l-fill-height"/>
             </constraints>
           </view>
         </viewController>
@@ -31,7 +33,7 @@
     </scene>
   </scenes>
   <resources>
-    <image name="KidsVisitorLaunchPoster" width="1080" height="1920"/>
+    <image name="KidsVisitorLaunchPoster" width="1122" height="2000"/>
     <namedColor name="LaunchBackground"><color red="0.047" green="0.149" blue="0.212" alpha="1" colorSpace="custom" customColorSpace="sRGB"/></namedColor>
   </resources>
 </document>
