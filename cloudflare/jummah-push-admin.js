@@ -90,13 +90,13 @@ export async function sendJummahTestPush(env, input = {}) {
   const modeKey = ["morning", "advance", "entry"].includes(mode) ? mode : "entry";
   const copy = jummahCopyForMode(modeKey);
   const locale = String(input.locale || input.dar_app_locale || "").toLowerCase();
-  const text = jummahIndividual(locale, modeKey) || jummahLocale(modeKey, copy);
+  const localized = jummahIndividual(locale, modeKey) || jummahLocale(modeKey, copy);
   const body = withIcons({
     app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
     target_channel: "push",
     include_subscription_ids: [subscriptionId],
-    headings: text.headings,
-    contents: text.contents,
+    headings: localized.headings,
+    contents: localized.contents,
     url: String(env.SITE_URL || DEFAULT_SITE_URL),
     data: { type: "jummah-test", mode, test: true }
   }, env);

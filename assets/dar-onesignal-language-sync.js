@@ -12,6 +12,8 @@ const KEY="darAdultPreferredLocaleV1";
 const SUPPORTED=new Set(["de","en","tr","ar","bs","fr","es"]);
 const ALL=new Set(["de","ar","en","tr","ku","ckb","bs","fr","es"]);
 let generation=0,lastApplied="",pendingLocale="",pendingPromise=null;
+// lastApplied/pendingLocale hold the APP locale (incl. ku/ckb), not the provider
+// language: de, ku and ckb all map to provider "de" but need different tags.
 function read(){
  let value="";
  try{value=String(global.localStorage?.getItem(KEY)||"").toLowerCase()}catch(_){}
@@ -43,19 +45,19 @@ async function pushLocale(){
  if(!os?.User || typeof os.User.setLanguage!=="function")
    return {synced:false,reason:"sdk_unavailable",locale};
  const fallback=providerLocale!==locale;
- if(providerLocale===lastApplied)return fallback
+ if(locale===lastApplied)return fallback
    ? {synced:true,locale,reason:"individual_delivery_required",fallbackLocale:"de",unchanged:true,tag:"dar_app_locale"}
    : {synced:true,locale,unchanged:true,tag:"dar_app_locale"};
- if(providerLocale===pendingLocale && pendingPromise)return pendingPromise;
+ if(locale===pendingLocale && pendingPromise)return pendingPromise;
  const rev=++generation;
- pendingLocale=providerLocale;
+ pendingLocale=locale;
  const task=(async()=>{
    try{
      await os.User.setLanguage(providerLocale);
      if(typeof os.User.addTag==="function")await os.User.addTag("dar_app_locale",locale);
      else if(typeof os.User.addTags==="function")await os.User.addTags({dar_app_locale:locale});
      if(rev!==generation)return {synced:false,locale,reason:"language_changed_during_sync"};
-     lastApplied=providerLocale;
+     lastApplied=locale;
      return fallback
        ? {synced:true,locale,reason:"fallback_de",fallbackLocale:"de",tag:"dar_app_locale"}
        : {synced:true,locale,tag:"dar_app_locale"};

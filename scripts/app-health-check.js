@@ -289,6 +289,37 @@ try {
   fail("Visitor locale leftover crawl");
 }
 
+// Admin publisher worker (all push senders) must parse, otherwise its deploy
+// fails and push language fixes never reach users (26.11.2026: duplicate
+// `const text` in jummah-push-admin.js blocked every deploy). Read-only.
+(function checkPushWorkerModules() {
+  const cp = require("child_process");
+  const CF = path.join(ROOT, "cloudflare");
+  const seen = new Set();
+  const queue = ["worker.js"];
+  let bad = 0;
+  while (queue.length) {
+    const rel = queue.shift();
+    if (seen.has(rel)) continue;
+    seen.add(rel);
+    const file = path.join(CF, rel);
+    if (!fs.existsSync(file)) { fail(`Admin-Worker-Modul fehlt: cloudflare/${rel}`); bad += 1; continue; }
+    const src = fs.readFileSync(file, "utf8");
+    const res = cp.spawnSync(process.execPath, ["--input-type=module", "--check"], { input: src, encoding: "utf8" });
+    if (res.status !== 0) {
+      fail(`Admin-Worker-Modul cloudflare/${rel} hat einen Syntaxfehler:\n${String(res.stderr || "").split("\n").slice(0, 5).join("\n")}`);
+      bad += 1;
+    }
+    const re = /(?:^|\n)\s*(?:import|export)\s[^;]*?from\s*["'](\.\/[^"']+\.js)["']/g;
+    let m;
+    while ((m = re.exec(src))) {
+      const next = path.normalize(path.join(path.dirname(rel), m[1])).replace(/\\/g, "/");
+      if (!next.startsWith("..")) queue.push(next);
+    }
+  }
+  if (!bad) ok(`Admin-Worker: ${seen.size} Module ab cloudflare/worker.js syntaktisch gültig`);
+})();
+
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);
