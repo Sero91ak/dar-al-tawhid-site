@@ -26,8 +26,8 @@ feed:
   shareEnabled: true
 ---
 
-🖋️ **Ḥassān ibn Abī Sinān** (raḥimahullāh), berichtet von Zuhayr ibn Nuʿaym al-Bābī:
+🖋️ **Ḥassān ibn Abī Sinān** (raḥimahullāh) sagte:
 
 „Yūnus ibn ʿUbayd und Ḥassān ibn Abī Sinān trafen sich. Yūnus sagte: Mit nichts habe ich mich schwerer getan als mit dem Waraʿ (der Gewissenhaftigkeit, Zweifelhaftes zu meiden). Ḥassān sagte: Mir ist aber nichts leichter gefallen. Yūnus fragte: Wie das? Er antwortete: Ich habe das, was mich beunruhigt, verlassen für das, was mich nicht beunruhigt, und so fand ich Ruhe.“
 
-🌙 **Fazit:** Waraʿ ist nur schwer, solange man mit dem Zweifel verhandelt. Wer ihn sofort loslässt, findet Frieden im Herzen, also **lass das Zweifelhafte und wähle das Klare**.
+🌙 **Fazit:** Waraʿ ist nur schwer, solange man mit dem Zweifel verhandelt. Wer ihn sofort loslässt, findet Frieden im Herzen, also lass das Zweifelhafte und halte dich an das Klare.
