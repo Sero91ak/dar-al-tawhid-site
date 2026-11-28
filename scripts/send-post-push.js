@@ -9,6 +9,7 @@ const {
   postOneSignalNotification,
   siteOriginFromEnv
 } = require("./lib/onesignal-push");
+const { NEW_POST_HEADINGS, postTitlesByLocale } = require("./lib/post-push-locale-titles.cjs");
 
 const APP_ID = process.env.ONESIGNAL_APP_ID || "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
 const API_KEY = process.env.ONESIGNAL_API_KEY_NEW || process.env.ONESIGNAL_API_KEY || process.env.ONESIGNAL_APP_API_KEY;
@@ -334,6 +335,20 @@ function writeGithubOutput(values) {
   fs.appendFileSync(outPath, `${body}\n`);
 }
 
+/* Each OneSignal language gets the post title in that language when a
+ * published translation exists; otherwise the German title as before. */
+function postPushLanguageMap(copy) {
+  const headings = { ...NEW_POST_HEADINGS, de: copy.title };
+  if (!copy.postId) {
+    const contents = {};
+    for (const code of Object.keys(headings)) contents[code] = copy.message;
+    return { headings, contents };
+  }
+  const { titles, localized } = postTitlesByLocale(copy.message, { postId: copy.postId, filename: copy.filename });
+  console.log(`Post-Push Sprachen: ${localized.length ? localized.join(",") : "nur de"} (${copy.postId})`);
+  return { headings, contents: titles };
+}
+
 async function sendCopyPayload(copy) {
   const pushData = copy.postId ? {
     type: "post",
@@ -349,24 +364,7 @@ async function sendCopyPayload(copy) {
   const payload = withNotificationIcons({
     app_id: APP_ID,
     target_channel: "push",
-    headings: {
-      de: copy.title,
-      en: "New post",
-      ar: "منشور جديد",
-      tr: "Yeni yazı",
-      bs: "Nova objava",
-      fr: "Nouvelle publication",
-      es: "Nueva publicación"
-    },
-    contents: {
-      de: copy.message,
-      en: copy.message,
-      ar: copy.message,
-      tr: copy.message,
-      bs: copy.message,
-      fr: copy.message,
-      es: copy.message
-    },
+    ...postPushLanguageMap(copy),
     url: copy.url,
     data: pushData,
     name: copy.postId ? `github-posts-auto-${copy.postId}` : `github-posts-auto-${RUN_ID}`,

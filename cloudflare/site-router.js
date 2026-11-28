@@ -1719,7 +1719,7 @@ export default {
       if (assetResponse.ok) html = injectFrauenCompactEditorialV1417(html);
       if (assetResponse.ok) html = injectAdultKeyboardNavAssetVersionV1(html);
       if (assetResponse.ok && !html.includes("dar-onesignal-language-sync.js")) {
-        const localeTag = '<script defer id="darAdultOneSignalLocaleV1" src="/assets/dar-onesignal-language-sync.js?v=1"></script>';
+        const localeTag = '<script defer id="darAdultOneSignalLocaleV1" src="/assets/dar-onesignal-language-sync.js?v=2"></script>';
         html = html.includes("</body>") ? html.replace("</body>", localeTag + "</body>") : html + localeTag;
       }
       return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
@@ -1974,7 +1974,7 @@ export default {
         const scriptTag = '<script defer src="/desktop-preview/desktop-overhaul.js?v=183"><\/script>';
         if (!html.includes("desktop-overhaul.css")) html = html.replace("</head>", styleTag + "</head>");
         if (!html.includes("desktop-overhaul.js")) html = html.replace("</body>", scriptTag + "</body>");
-        if (!html.includes("dar-onesignal-language-sync.js")) html = html.replace("</body>", '<script defer src="/assets/dar-onesignal-language-sync.js?v=1"></script></body>');
+        if (!html.includes("dar-onesignal-language-sync.js")) html = html.replace("</body>", '<script defer src="/assets/dar-onesignal-language-sync.js?v=2"></script></body>');
         if (!html.includes("darPublicWebsiteGuardV1")) html = html.replace("</body>", publicWebsiteAddon() + "</body>");
         html = activateAdultCompactHero(html);
         html = injectAdultReaderRuntimeV5(html);
@@ -2019,7 +2019,7 @@ export default {
         html = html.replace(/(\/test\/assets\/dar-smart-profile-v1\.js\?v=)[^"'\s<>]+/g,
           "$1" + "20261031-neutral-hooded-test-v14");
         if (!html.includes("dar-onesignal-language-sync.js")) {
-          const tag = '<script defer id="darTestOneSignalLocaleV1" src="/assets/dar-onesignal-language-sync.js?v=1"></script>';
+          const tag = '<script defer id="darTestOneSignalLocaleV1" src="/assets/dar-onesignal-language-sync.js?v=2"></script>';
           html = html.includes("</body>") ? html.replace("</body>", tag + "</body>") : html + tag;
         }
         // SMART_TEST_HOME_V3: actual public /test/ router, cache-busted test-only Home JS.

@@ -289,6 +289,15 @@ try {
   fail("Visitor locale leftover crawl");
 }
 
+// Admin publisher worker (all push senders) must parse, otherwise its deploy
+// fails and push language fixes never reach users.
+try {
+  require("child_process").execFileSync(process.execPath,
+    [path.join(__dirname, "check-push-worker-modules.cjs")], { stdio: "inherit" });
+} catch (error) {
+  fail("Admin publisher worker module syntax (push senders)");
+}
+
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);
