@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "apple-tv/i18n/check-tv-locales.mjs",
+  "defaultLocale": "de",
+  "followsSystemLanguage": false,
+  "preferenceKey": "darAdultPreferredLocaleV1",
+  "rtl": [
+    "ar",
+    "ckb"
+  ],
+  "humanReligiousReview": false,
+  "quranSample": {
+    "reference": "1:1",
+    "hasArabic": true,
+    "hasGermanMeaning": true,
+    "transliterationField": "tr",
+    "transliterationIsNotTurkish": true
+  },
+  "gaps": {
+    "quranMeanings": "Nur Deutsch (Bubenheim & Elyas) liegt im Projekt. Keine erfundene Bedeutung für ar, en, tr, ku, ckb, bs, fr, es. Das Feld tr in content/quran ist Lautschrift.",
+    "tadabbur": "Die Tadabbur-Einträge sind ausschließlich Deutsch. Andere Sprachen zeigen den deutschen Text mit Hinweis.",
+    "hadithWithoutPack": 44,
+    "atharWithoutPack": 21,
+    "postsWithoutPack": [
+      "imam-shafii-wahrheit-vor-meinung",
+      "bishr-al-hafi-wissen-handeln-923",
+      "mutarrif-ujub-nach-ibadah-824",
+      "prophet-hochmut-wahrheit-ablehnen-451",
+      "ibn-masud-zuhd-dunya-20261125-q69-498"
+    ],
+    "blockedList": "content/i18n/adult-nine-locale-gaps-20261125.json"
+  },
+  "locales": {
+    "de": {
+      "ui": "complete",
+      "posts": {
+        "mode": "canonical-markdown",
+        "files": 500
+      },
+      "quranMeaning": "de.bubenheim in content/quran",
+      "tadabbur": 4852,
+      "hadith": 2408,
+      "hadithTotal": 2408,
+      "athar": 1046,
+      "atharTotal": 1046,
+      "duas": 97,
+      "duasTotal": 97
+    },
+    "tr": {
+      "ui": "complete",
+      "posts": {
+        "translated": 495,
+        "germanFiles": 500
+      },
+      "quranMeaning": "no in-repo verse meaning; German remains; field tr is transliteration only",
+      "tadabbur": "German only",
+      "hadith": 2364,
+      "hadithTotal": 2408,
+      "athar": 1025,
+      "atharTotal": 1046,
+      "duas": 97,
+      "duasTotal": 97
+    },
+    "en": {
+      "ui": "complete",
+      "posts": {
+        "translated": 495,
+        "germanFiles": 500
+      },
+      "quranMeaning": "no in-repo verse meaning; German remains; field tr is transliteration only",
+      "tadabbur": "German only",
+      "hadith": 2364,
+      "hadithTotal": 2408,
+      "athar": 1025,
+      "atharTotal": 1046,
+      "duas": 97,
+      "duasTotal": 97
+    },
+    "ar": {
+      "ui": "complete",
+      "posts": {
+        "translated": 495,
+        "germanFiles": 500
+      },
+      "quranMeaning": "no in-repo verse meaning; German remains; field tr is transliteration only",
+      "tadabbur": "German only",
+      "hadith": 2364,
+      "hadithTotal": 2408,
+      "athar": 1025,
+      "atharTotal": 1046,
+      "duas": 97,
+      "duasTotal": 97
+    },
+    "ku": {
+      "ui": "complete",
+      "posts": {
+        "translated": 495,
+        "germanFiles": 500
+      },
+      "quranMeaning": "no in-repo verse meaning; German remains; field tr is transliteration only",
+      "tadabbur": "German only",
+      "hadith": 2364,
+      "hadithTotal": 2408,
+      "athar": 1025,
+      "atharTotal": 1046,
+      "duas": 97,
+      "duasTotal": 97
+    },
+    "ckb": {
+      "ui": "complete",
+      "posts": {
+        "translated": 495,
+        "germanFiles": 500
+      },
+      "quranMeaning": "no in-repo verse meaning; German remains; field tr is transliteration only",
+      "tadabbur": "German only",
+      "hadith": 2364,
+      "hadithTotal": 2408,
+      "athar": 1025,
+      "atharTotal": 1046,
+      "duas": 97,
+      "duasTotal": 97
+    },
+    "bs": {
+      "ui": "complete",
+      "posts": {
+        "translated": 495,
+        "germanFiles": 500
+      },
+      "quranMeaning": "no in-repo verse meaning; German remains; field tr is transliteration only",
+      "tadabbur": "German only",
+      "hadith": 2364,
+      "hadithTotal": 2408,
+      "athar": 1025,
+      "atharTotal": 1046,
+      "duas": 97,
+      "duasTotal": 97
+    },
+    "fr": {
+      "ui": "complete",
+      "posts": {
+        "translated": 495,
+        "germanFiles": 500
+      },
+      "quranMeaning": "no in-repo verse meaning; German remains; field tr is transliteration only",
+      "tadabbur": "German only",
+      "hadith": 2364,
+      "hadithTotal": 2408,
+      "athar": 1025,
+      "atharTotal": 1046,
+      "duas": 97,
+      "duasTotal": 97
+    },
+    "es": {
+      "ui": "complete",
+      "posts": {
+        "translated": 495,
+        "germanFiles": 500
+      },
+      "quranMeaning": "no in-repo verse meaning; German remains; field tr is transliteration only",
+      "tadabbur": "German only",
+      "hadith": 2364,
+      "hadithTotal": 2408,
+      "athar": 1025,
+      "atharTotal": 1046,
+      "duas": 97,
+      "duasTotal": 97
+    }
+  }
+}
