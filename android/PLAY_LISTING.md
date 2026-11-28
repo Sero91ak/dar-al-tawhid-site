@@ -28,7 +28,7 @@ Application type: App
 Category: Education (or Books & Reference)
 Tags: Islam, Quran, Sunnah, Gebetszeiten, Bildung
 
-Contact email: dal.al.tauhid91@gmail.com
+Contact email: dar.al.tauhid91@gmail.com
 Website: https://dar-al-tawhid.de/
 Privacy policy: https://dar-al-tawhid.de/privacy
 

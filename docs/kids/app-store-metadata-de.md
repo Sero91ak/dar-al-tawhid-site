@@ -15,7 +15,7 @@ Alle Texte enthalten **keinen Personennamen**. Der von Apple angezeigte Verkäuf
 | Copyright | `© 2026 DAR AL TAWḤĪD` (ohne Personennamen) |
 | Datenschutz-URL | `https://dar-al-tawhid.de/kids/datenschutz.html` (erst nach Merge nach main live) |
 | Support-URL | `https://dar-al-tawhid.de/kids/datenschutz.html` oder eigene Support-Seite (offen) |
-| Support-E-Mail | `dar.al.tauhid91@gmail.com` – **vorläufig**, Entscheidung offen |
+| Support-E-Mail | `dar.al.tauhid91@gmail.com` (entschieden 28.11.2026, überall einheitlich) |
 | Preis | kostenlos, keine In-App-Käufe, keine Werbung |
 | Exportrecht (Verschlüsselung) | nur Standard-HTTPS → „Ausgenommen“ |
 
@@ -69,7 +69,7 @@ Vielen Dank!
 Siehe `/workspace/kids-appstore-screenshots/` (iPhone 6.9″ 1320×2868, iPad 13″ 2064×2752). Zeigen Heute, Hören, Lernakademie, Duʿāʾ, Eltern-Gate; kein Personenname.
 
 ## Offene Entscheidungen für Serhat
-1. Support-Adresse final festlegen (aktuell überall vorläufig `dar.al.tauhid91@gmail.com`; auf anderen Seiten steht teils `dal.al.tauhid91`).
+1. Support-Adresse ist entschieden: `dar.al.tauhid91@gmail.com`, überall einheitlich (Kids-App, Datenschutzseiten, Impressum, Store-Dokumente).
 2. Name `TAWḤĪD KIDS` in App Store Connect verfügbar? Sonst Alternative.
 3. Support-URL (eigene Seite oder Datenschutzseite).
-4. Lizenz-Check für gehostete Rezitationsdateien (Husary, everyayah-Quelle).
+4. Rezitation: kommt über den gemeinsamen Endpunkt `/quran-audio/ar.alafasy/{Ayah}.mp3` wie in den anderen DAR-Apps (Standard-Edition Mišārī al-ʿAfāsī); keine eigenen Kopien im Kids-Ordner.

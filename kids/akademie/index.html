@@ -4090,7 +4090,7 @@ const AGE_UI=Object.freeze({
  }
 });
 const humanAge=x=>String(x||"").replace(/-/g,"–");
-const TRACKS={"quran:9:119":{src:"/quran-audio/ar.alafasy/1354.mp3",fallback:"https://everyayah.com/data/Alafasy_128kbps/009119.mp3"}};
+const TRACKS={"quran:9:119":{src:"/quran-audio/ar.alafasy/1354.mp3"}};
 const stages=all('.lesson-stage[data-lesson-step]');
 const questions=()=>window.DARKidsAcademyChoiceOnlyV1.project(activeLesson(),age,activeLesson()?.questions?.[age]||exercises[age]||[]);
 const ACADEMY_FULL_SALAM="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.";
@@ -4517,7 +4517,7 @@ function applySelectedLesson(){
   return;
  }
  const q=lesson.quran,k="quran:"+q.surah+":"+q.ayah;
- TRACKS[k]={src:"/quran-audio/ar.alafasy/"+(QURAN_COUNTS.slice(0,q.surah-1).reduce((a,b)=>a+b,0)+q.ayah)+".mp3",fallback:"https://everyayah.com/data/Alafasy_128kbps/"+String(q.surah).padStart(3,"0")+String(q.ayah).padStart(3,"0")+".mp3"};
+ TRACKS[k]={src:"/quran-audio/ar.alafasy/"+(QURAN_COUNTS.slice(0,q.surah-1).reduce((a,b)=>a+b,0)+q.ayah)+".mp3"};
  $("#lessonIntroduction").textContent=lesson.goal;$("#welcomeTitle").textContent="Heute lernen wir: "+lesson.topic;
  const ageTeaching=lesson.ageText?.[age];
  $("#lessonWelcomeBody").textContent=ageTeaching?.intro||lesson.lead+" "+lesson.goal;
@@ -5274,5 +5274,5 @@ html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain .stag
 }
 </style>
 
-<link rel="stylesheet" href="/kids/kids-responsive-architecture-v1478.css?v=1480" data-kids-responsive-architecture="1480">
+<link rel="stylesheet" href="/kids/kids-responsive-architecture-v1478.css?v=1481" data-kids-responsive-architecture="1481">
 </body></html>
