@@ -25,6 +25,9 @@ html.kids-visitor-booting #kids-visitor-boot::before{content:"";position:absolut
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0c2636">
 <script src="/kids/kids-birth-month-v1431.js?v=1431"></script>
+<script src="/kids/kids-local-geocode-v1.js?v=1482"></script>
+<script src="/kids/kids-quran-audio-v1.js?v=1482"></script>
+<script src="/kids/kids-parent-gate-v1.js?v=1482"></script>
 <link rel="stylesheet" href="/kids/kids-birth-month-v1431.css?v=1431">
 <script id="kids-profile-first-paint-v1348">
 (function(){
@@ -90,7 +93,7 @@ html body .app #view-today > .hero :is(.cloud,.shooting-star,.city,.arch,.dune,.
 </style>
 <!-- KIDS_FIRST_PAINT_HERO_V1313: same exact URL as final homepage CSS, requested before styles/scripts -->
 <link rel="preload" as="image" href="/kids/assets/kids-salah-v1272/hero-home.png?v=1274" fetchpriority="high">
-<link rel="stylesheet" href="https://use.typekit.net/jka5jda.css">
+<link rel="stylesheet" href="/kids/kids-fonts-v1.css?v=1482">
 <link rel="manifest" href="/kids/manifest.webmanifest">
 <link rel="preload" as="style" href="/kids/kids-nav-v1421.css?v=1422">
 <link rel="preload" as="style" href="/kids/kids-motion-v1422.css?v=1422">
@@ -2856,12 +2859,11 @@ html:not([data-view="today"]) .view.active{
 
 /* KIDS_DUA_QUIZ_INLINE_ART_V1124 */
 #duaModal .dua-scene,#duaModal .dua-scene.morning,#duaModal .dua-scene.learn,#duaModal .dua-scene.sleep,#duaModal .dua-scene.night,#duaModal .dua-scene.food,#duaModal .dua-scene.family{
- --dua-art:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/c469c30f-7dda-48c5-a72f-7bb40a043993/Single_standalone_cinematic_16_9_hero_illustration_for_a_premium_Islamic_children_s_app_Du_a_section_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiN2FiNTAyMmYyM2ZjYjc0OSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTM2MTMyN30.KiYu2lPZdL0AbD8W0UyithIa1nWu57iaVAgb-SwDtA4")!important;
  background:#173848!important;
 }
 #duaModal .dua-scene::before{background-image:var(--dua-art)!important;background-size:cover!important;background-position:center 52%!important;filter:saturate(1.03) brightness(.9)!important}
 #quizModal .quiz-scene{
- --quiz-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/cbe2efa5-f245-41e4-9262-be656af8ffc7/c22155b0-3b92-4227-a372-cfdaf600c518/Single_standalone_cinematic_16_9_hero_illustration_for_a_pre.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDEzNTA0YmI5ZTBiNjNjMyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMzMDM2M30.RWZGx2UrVdXyvfYQRM-noI7t5EVNJPS9cvcn4fawl40")!important;
+ --quiz-art:url("/kids/assets/kids-art/quiz-courtyard-v11.jpg?v=11-creative1")!important;
  background-image:linear-gradient(180deg,rgba(4,17,28,.01),rgba(4,17,28,.08) 45%,rgba(4,17,28,.56) 100%),var(--quiz-art)!important;
  background-size:cover!important;background-position:center 50%!important;background-repeat:no-repeat!important;
 }
@@ -2875,7 +2877,6 @@ html:not([data-view="today"]) .view.active{
 .academy-pilot-text>span{font-size:12px;color:rgba(255,255,255,.78)}
 .academy-pilot-arrow{flex:none;display:grid;place-items:center;border:1px solid rgba(226,189,114,.4);background:rgba(226,189,114,.1);color:#f1d28c;border-radius:50%;height:42px;width:42px;font-size:24px}
 </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
 <!-- Launch v174: native/PWA opens directly on the approved mosque background; no obsolete intro overlay or audio. -->
 
 
@@ -3113,8 +3114,9 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
   <div class="kids-join-card">
     <div class="step on" data-step="hello">
       <h2>Willkommen</h2>
-      <p>Ein Konto ist freiwillig. Du kannst einfach spielen. Später kannst du unter Eltern ein Konto anlegen, wenn du den Fortschritt merken willst. Ohne E-Mail.</p>
+      <p>Du kannst einfach spielen. Alles bleibt nur auf diesem Gerät. Es gibt keine Anmeldung und kein Konto.</p>
       <button type="button" id="joinNextHello">Weiter</button>
+      <a class="ghost kids-join-privacy" href="/kids/datenschutz.html" data-parent-gate="privacy" style="display:block;margin-top:10px;text-align:center;font-size:14px;color:inherit;opacity:.85;padding:12px 0;min-height:44px;box-sizing:border-box">Für Eltern: Datenschutz</a>
       <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Überspringen</button>
     </div>
     <div class="step" data-step="who">
@@ -3129,13 +3131,13 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
     </div>
     <div class="step" data-step="age">
       <h2>Geburtsmonat und Geburtsjahr</h2>
-      <p>Für das Kinderkonto bitte nur Monat und Jahr wählen. Die Lernstufe ändert sich ab dem 1. des Geburtsmonats automatisch.</p>
+      <p>Bitte nur Monat und Jahr wählen. Die Lernstufe ändert sich ab dem 1. des Geburtsmonats automatisch.</p>
       <div class="kids-birth-fields"><label>Geburtsmonat<select id="joinBirthMonth"><option value="">Monat wählen</option></select></label>
       <label>Geburtsjahr<select id="joinBirthYear"><option value="">Jahr wählen</option></select></label></div>
       <p class="kids-birth-notice" id="joinBirthNotice" role="status"></p>
       <button type="button" id="joinBirthContinue">Mit automatischer Lernstufe weiter</button>
       <p class="kids-birth-note">Kein Geburtstagstag. Nur auf diesem Gerät gespeichert.</p>
-      <div class="kids-birth-guest"><strong>Ohne Konto? Lernstufe selbst wählen:</strong>
+      <div class="kids-birth-guest"><strong>Oder Lernstufe selbst wählen:</strong>
       <div class="kids-join-row">
         <button type="button" data-join-age="4–5">4–5</button>
         <button type="button" data-join-age="6–8">6–8</button>
@@ -3145,28 +3147,13 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
       <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Überspringen</button>
     </div>
     <div class="step" data-step="name">
-      <h2>Name merken</h2>
-      <p>Nur wenn du ein Konto willst. Sonst einfach überspringen – du kommst direkt in die Kinderwelt.</p>
-      <input id="joinName" maxlength="24" placeholder="Name des Kindes" autocomplete="off">
-      <input id="joinPass" type="password" maxlength="40" placeholder="Passwort" autocomplete="new-password">
-      <button type="button" id="joinSave">Konto anlegen</button>
+      <h2>Wie heißt das Kind?</h2>
+      <p>Ein Vorname ist freiwillig und bleibt nur auf diesem Gerät. Ohne Namen einfach weitermachen.</p>
+      <input id="joinName" maxlength="24" placeholder="Vorname (freiwillig)" autocomplete="off">
+      <button type="button" id="joinSave">Auf diesem Gerät speichern</button>
       <p id="joinStatus" class="join-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></p>
-      <button type="button" id="joinLoginExisting" class="ghost" style="margin-top:8px;width:100%" hidden>Vorhandenes Konto anmelden</button>
-      <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Ohne Konto weitermachen</button>
+      <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Ohne Namen weitermachen</button>
       <button type="button" class="ghost" data-back="age" style="margin-top:8px;width:100%">Zurück</button>
-    </div>
-    <div class="step" data-step="login" role="group" aria-labelledby="kidsExistingLoginTitle">
-      <h2 id="kidsExistingLoginTitle">Vorhandenes Kind anmelden</h2>
-      <p>Mit dem bisherigen Anmeldenamen und Passwort den gespeicherten Lernstand von deinem anderen Gerät laden.</p>
-      <label for="deviceLoginName">Anmeldename des Kindes</label>
-      <input type="text" id="deviceLoginName" maxlength="24" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Name des Kindes">
-      <label for="deviceLoginPass">Passwort</label>
-      <input type="password" id="deviceLoginPass" maxlength="40" autocomplete="current-password" placeholder="Passwort">
-      <button type="button" id="deviceLoginSubmit">Anmelden und Lernstand laden</button>
-      <p id="deviceLoginStatus" class="join-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></p>
-      <a class="kids-support-link" href="mailto:dar.al.tauhid91@gmail.com?subject=DAR%20AL%20TAWHID%20KIDS%20-%20Kontohilfe&amp;body=As-salamu%20alaykum%2C%0Aich%20ben%C3%B6tige%20Hilfe%20beim%20Zugang%20zu%20einem%20Kinderkonto.%0A%0AIch%20werde%20keine%20Passw%C3%B6rter%20oder%20sensiblen%20Kinderdaten%20per%20E-Mail%20senden." aria-label="DĀR AL TAWḤĪD KIDS Support wegen eines Kinderkontos per E-Mail kontaktieren">Passwort vergessen? Support kontaktieren</a>
-      <p class="kids-support-privacy">Bitte keine Passwörter oder sensiblen Kinderdaten per E-Mail senden.</p>
-      <button type="button" id="deviceLoginCancel" class="ghost" style="margin-top:9px;width:100%">Abbrechen</button>
     </div>
       <button type="button" id="joinCancel" class="ghost" style="display:none;margin-top:10px;width:100%">Abbrechen</button>
   </div>
@@ -3370,24 +3357,23 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
           <div class="parent-progress-stat"><strong id="parentQuizCorrect">0</strong><span>Quizfragen richtig</span></div>
           <div class="parent-progress-stat"><strong id="parentTodayDone">0/3</strong><span>Heute geschafft</span></div>
         </div>
-        <p class="parent-note">Mit Kinderkonto kann der gespeicherte Lernstand nach Anmeldung auch auf anderen Geräten geladen werden. Ohne Konto bleibt er lokal.</p>
+        <p class="parent-note">Der Lernstand bleibt auf diesem Gerät. Es gibt keine Konten und keine Übertragung.</p>
       </div>
 
 
       <div class="parent-card" id="profileCard">
-        <div class="label-row"><strong>Kinder auf diesem Gerät</strong><span style="color:var(--gold);font-size:12px">OHNE E-MAIL</span></div>
-        <p class="parent-note">Kinderkonto wechseln, hinzufügen oder auf einem anderen Gerät anmelden. Ein Konto ist freiwillig.</p>
+        <div class="label-row"><strong>Kinder auf diesem Gerät</strong><span style="color:var(--gold);font-size:12px">NUR AUF DIESEM GERÄT</span></div>
+        <p class="parent-note">Kinder auf diesem Gerät wechseln oder hinzufügen. Alles bleibt nur auf diesem Gerät.</p>
         <div id="profileList" class="profile-list"></div>
         <div id="profileAsk" class="profile-ask" hidden>
           <p id="profileAskText" class="parent-note"></p>
-          <button type="button" id="profileAskDevice">Nur auf diesem Gerät</button>
-          <button type="button" id="profileAskFull" class="ghost">Konto komplett löschen</button>
+          <button type="button" id="profileAskDevice">Von diesem Gerät löschen</button>
           <button type="button" id="profileAskCancel" class="ghost">Abbrechen</button>
         </div>
-        <button type="button" id="profileAdd" class="daily-start" style="margin-top:10px">Konto anlegen</button>
-        <button type="button" id="profileBring" aria-label="Vorhandenes Kinderkonto anmelden und Lernstand laden" class="ghost" style="margin-top:8px;width:100%">Vorhandenes Kind anmelden</button>
-        <a class="kids-support-link kids-support-link-parent" href="mailto:dar.al.tauhid91@gmail.com?subject=DAR%20AL%20TAWHID%20KIDS%20-%20Kontohilfe&amp;body=As-salamu%20alaykum%2C%0Aich%20ben%C3%B6tige%20Hilfe%20beim%20Zugang%20zu%20einem%20Kinderkonto.%0A%0AIch%20werde%20keine%20Passw%C3%B6rter%20oder%20sensiblen%20Kinderdaten%20per%20E-Mail%20senden." aria-label="DĀR AL TAWḤĪD KIDS Support für Kinderkonten per E-Mail kontaktieren">Hilfe mit einem Kinderkonto? Support kontaktieren</a>
-        <p class="kids-support-privacy">Support: dar.al.tauhid91@gmail.com · Bitte keine Passwörter verschicken.</p>
+        <button type="button" id="profileAdd" class="daily-start" style="margin-top:10px">Kind hinzufügen</button>
+        <a class="kids-support-link kids-support-link-parent" href="mailto:dar.al.tauhid91@gmail.com?subject=DAR%20AL%20TAWHID%20KIDS%20-%20Support&amp;body=As-salamu%20alaykum%2C%0Ameine%20Frage%20zur%20App%3A%0A%0ABitte%20keine%20pers%C3%B6nlichen%20Daten%20von%20Kindern%20senden." aria-label="DĀR AL TAWḤĪD KIDS Support per E-Mail kontaktieren" data-parent-gate="support">Fragen oder Hilfe? Support kontaktieren</a>
+        <a class="kids-support-link kids-support-link-parent" href="/kids/datenschutz.html" id="kidsPrivacyLink" aria-label="Datenschutzerklärung für Eltern öffnen">Datenschutzerklärung für Eltern</a>
+        <p class="kids-support-privacy">Support: dar.al.tauhid91@gmail.com · Bitte keine sensiblen Daten von Kindern per E-Mail senden.</p>
       </div>
 
     </section>
@@ -3665,7 +3651,7 @@ var quizQuestionHadError=false;
 function pad3(n){return String(n).padStart(3,"0")}
 function padAyah(n){return String(n).padStart(3,"0")}
 function audioUrl(surah,ayah){
-  return "https://everyayah.com/data/Husary_128kbps/"+pad3(surah)+padAyah(ayah)+".mp3";
+  return window.DARKidsQuranAudio.url(Number(surah),Number(ayah));
 }
 function todayKey(){
   var d=new Date();
@@ -3899,6 +3885,7 @@ function kidsFinishMainTabSwitch(){
 }
 window.DARKidsResetMainScroll=kidsFinishMainTabSwitch;
 function showTab(name){
+  if(name==="parents"&&window.DARKidsParentGate&&!window.DARKidsParentGate.allowed("parents")){window.DARKidsParentGate.require("parents",function(){showTab("parents")});return}
   if(name==="quran"||name==="alphabet")name="today";
   if(name==="dua"&&window.DARKidsDuaHub&&typeof window.DARKidsDuaHub.open==="function"){
     window.DARKidsDuaHub.open();
@@ -6758,8 +6745,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 (function(){
   var KEY="kids.profiles.v1";
   var ACTIVE="kids.activeProfile";
-  var API="https://djyfkttjbdraynuxrzno.supabase.co/rest/v1/rpc/";
-  var APIKEY="sb_publishable_kR6b1SlL3uoVq4gbTFWKkQ_a2Rcfg2i";
+  /* KIDS_STORE_V1: no cloud accounts. Profiles and progress stay on this device only; no network request is made here. */
   var join=document.getElementById("kidsJoin");
   var draft={gender:"boy",age:"6–8",birthMonth:""};
   var askId="";
@@ -6768,14 +6754,6 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   try{if("scrollRestoration" in history)history.scrollRestoration="manual"}catch(e){}
   function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return []}}
   function save(list){localStorage.setItem(KEY,JSON.stringify(list))}
-  function hash(pw){
-    return crypto.subtle.digest("SHA-256",new TextEncoder().encode("dar-kids:"+pw)).then(function(buf){
-      return Array.from(new Uint8Array(buf)).map(function(b){return ("0"+b.toString(16)).slice(-2)}).join("");
-    });
-  }
-  function rpc(name,body){
-    return fetch(API+name,{method:"POST",headers:{"Content-Type":"application/json","apikey":APIKEY,"Authorization":"Bearer "+APIKEY},body:JSON.stringify(body)}).then(function(r){return r.json()}).catch(function(){return {ok:false,error:"Keine Verbindung. Bitte später noch einmal."}});
-  }
   function bag(){
     var o={},i,k;
     for(i=0;i<localStorage.length;i++){
@@ -6812,76 +6790,32 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   }
   function joinPending(v){
     joinBusy=!!v;
-    var save=document.getElementById("joinSave"),login=document.getElementById("joinLoginExisting");
-    save.disabled=joinBusy;save.textContent=joinBusy?"Bitte warten …":"Konto anlegen";
-    if(login)login.disabled=joinBusy;
-    var deviceLogin=document.getElementById("deviceLoginSubmit");
-    if(deviceLogin){deviceLogin.disabled=joinBusy;deviceLogin.textContent=joinBusy?"Anmeldung läuft …":"Anmelden und Lernstand laden"}
+    var save=document.getElementById("joinSave");
+    if(save){save.disabled=joinBusy}
   }
-  function joinExistingHint(msg){
-    joinFeedback(msg||"Dieser Name ist bereits vergeben. Bitte mit dem vorhandenen Passwort anmelden oder einen anderen Namen wählen.","error");
-    document.getElementById("joinLoginExisting").hidden=false;
-  }
-  function acceptExistingAccount(name,h,res){
-    if(!res||res.ok!==true){joinExistingHint("Anmeldung fehlgeschlagen. Prüfe Name und Passwort oder wähle einen anderen Namen.");return}
-    var previous=currentProfile();
-    if(previous&&(previous.name||"").toLowerCase()!==name.toLowerCase())rememberCurrent();
-    var old=load(), known=old.find(function(p){return (p.name||"").toLowerCase()===name.toLowerCase()});
-    var p={id:known?known.id:String(Date.now()),name:res.name||name,pass:h,
-      gender:res.gender||"boy",age:res.age||"6–8",data:res.data||{}};
-    save(old.filter(function(x){return x.id!==p.id&&(x.name||"").toLowerCase()!==name.toLowerCase()}).concat([p]));
-    applyBag(p.data);localStorage.setItem(ACTIVE,p.id);applyProfile(p);
-    /* Remote login explicitly wins over any stale pending local write. */
-    delete syncPending[p.id];writeSyncPending();
-    syncConfirmed[p.id]=profileSnapshot(p);
-    joinFeedback("Anmeldung erfolgreich.","success");closeJoin();renderList();
-    try{sessionStorage.setItem("kids.profile.restoreTab","view-parents")}catch(e){}
-    location.reload();
-  }
-  function submitJoin(mode){
+  function submitJoin(){
     if(joinBusy)return;
-    var isRestore=mode==="restore";
-    var name=(document.getElementById(isRestore?"deviceLoginName":"joinName").value||"").trim();
-    var pw=document.getElementById(isRestore?"deviceLoginPass":"joinPass").value||"";
-    if(name.length<2){joinFeedback("Bitte einen Namen mit mindestens zwei Zeichen eingeben.","error");return}
-    if(pw.length<4){joinFeedback("Bitte ein Passwort mit mindestens vier Zeichen eingeben.","error");return}
-    if(mode==="register"&&!draft.birthMonth){step("age");document.getElementById("joinBirthNotice").textContent="Für das Konto bitte Monat und Jahr auswählen.";return}
-    if(mode!=="login"&&!isRestore)document.getElementById("joinLoginExisting").hidden=true;
+    var raw=(document.getElementById("joinName").value||"").replace(/[<>&"']/g,"").trim().slice(0,24);
+    var name=raw||"Mein Kind";
     joinPending(true);
-    joinFeedback(mode==="login"||isRestore?"Anmeldung wird geprüft …":"Konto wird geprüft …","info");
-    hash(pw).then(function(h){
-      return rpc("kids_login",{p_name:name,p_hash:h}).then(function(existing){
-        if(existing&&existing.ok===true){acceptExistingAccount(name,h,existing);return}
-        if(isRestore){joinFeedback((existing&&existing.error)||"Name oder Passwort passt nicht. Bitte erneut versuchen.","error");return}
-        if(mode==="login"){joinExistingHint("Name oder Passwort passt nicht. Bitte erneut versuchen.");return}
-        if(existing&&/Keine Verbindung/i.test(existing.error||"")){joinFeedback(existing.error,"error");return}
-        return rpc("kids_register",{p_name:name,p_hash:h,p_gender:draft.gender,p_age:draft.age,p_data:bag()}).then(function(res){
-          if(!res||res.ok!==true){
-            if(/vergeben/i.test(res&&res.error||""))joinExistingHint();
-            else joinFeedback(res&&res.error||"Konto konnte nicht angelegt werden. Bitte erneut versuchen.","error");
-            return;
-          }
-          if(res.linked){return rpc("kids_login",{p_name:name,p_hash:h}).then(function(r){acceptExistingAccount(name,h,r)})}
-          rememberCurrent();
-          var app=document.querySelector(".app");
-          if(app)app.setAttribute("data-gender",draft.gender);
-          var ageBtn=document.querySelector('.age-tabs [data-age="'+draft.age+'"]');
-          if(ageBtn)ageBtn.click();
-          var p={id:String(Date.now()),name:name,pass:h,gender:draft.gender,age:draft.age,data:bag()};
-          if(draft.birthMonth)window.DARKidsBirthMonth?.set(p.id,draft.birthMonth);
-          var list=load();list.push(p);save(list);localStorage.setItem(ACTIVE,p.id);
-          /* The old account's auto-age cannot override the new child's age. */
-          if(window.DARKidsApplyAgeGroup)window.DARKidsApplyAgeGroup(draft.age);
-          syncConfirmed[p.id]=profileSnapshot(p);
-          joinFeedback("Konto erfolgreich angelegt.","success");closeJoin();renderList();
-        });
-      });
-    }).catch(function(){joinFeedback("Verbindung oder Passwortverarbeitung fehlgeschlagen. Bitte erneut versuchen.","error")})
-      .finally(function(){joinPending(false)});
+    try{
+      rememberCurrent();
+      var app=document.querySelector(".app");
+      if(app)app.setAttribute("data-gender",draft.gender);
+      var ageBtn=document.querySelector('.age-tabs [data-age="'+draft.age+'"]');
+      if(ageBtn)ageBtn.click();
+      var p={id:String(Date.now()),name:name,pass:"",gender:draft.gender,age:draft.age,data:bag()};
+      if(draft.birthMonth)window.DARKidsBirthMonth?.set(p.id,draft.birthMonth);
+      var list=load();list.push(p);save(list);localStorage.setItem(ACTIVE,p.id);
+      /* The previous child's auto-age cannot override the new child's age. */
+      if(window.DARKidsApplyAgeGroup)window.DARKidsApplyAgeGroup(draft.age);
+      closeJoin();renderList();
+    }catch(e){joinFeedback("Speichern auf diesem Gerät ist nicht möglich.","error")}
+    finally{joinPending(false)}
   }
   function step(name){
     if(name==="place")name="name";
-    joinFeedback("","info");document.getElementById("joinLoginExisting").hidden=true;
+    joinFeedback("","info");
     join.querySelectorAll(".step").forEach(function(s){s.classList.toggle("on",s.getAttribute("data-step")===name)});
     var globalCancel=document.getElementById("joinCancel");
     if(globalCancel)globalCancel.style.display=name==="login"?"none":localStorage.getItem(ACTIVE)?"block":"none";
@@ -6915,7 +6849,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var has=!!localStorage.getItem(ACTIVE);
     join.querySelectorAll(".join-skip").forEach(function(b){b.style.display=has?"none":"block"});
     if(cancel)cancel.style.display=has?"block":"none";
-    joinFeedback("","info");document.getElementById("joinLoginExisting").hidden=true;
+    joinFeedback("","info");
     step(from||"hello");
   }
   function closeJoin(){
@@ -6937,48 +6871,6 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var id=localStorage.getItem(ACTIVE);
     return load().find(function(x){return x.id===id})||null;
   }
-  /* KIDS ACCOUNT SYNC V3: only upload changed progress. A durable, non-
-     content pending marker survives interrupted iOS background requests. */
-  var SYNC_PENDING_KEY="dar.kids.account.pendingSync.v1";
-  var syncConfirmed={},syncBusy={};
-  function readSyncPending(){
-    try{
-      var data=JSON.parse(localStorage.getItem(SYNC_PENDING_KEY)||"{}");
-      return data&&typeof data==="object"&&!Array.isArray(data)?data:{};
-    }catch(e){return {}}
-  }
-  var syncPending=readSyncPending();
-  function writeSyncPending(){
-    try{localStorage.setItem(SYNC_PENDING_KEY,JSON.stringify(syncPending))}catch(e){}
-  }
-  function profileSnapshot(p){
-    var data=p&&p.data||{},ordered={};
-    Object.keys(data).sort().forEach(function(k){ordered[k]=data[k]});
-    return JSON.stringify([p&&p.gender||"boy",p&&p.age||"6–8",ordered]);
-  }
-  function flushProfileSync(id){
-    if(syncBusy[id]||!syncPending[id])return;
-    var p=load().find(function(x){return x.id===id});
-    if(!p||!p.pass)return;
-    var stamp=profileSnapshot(p);
-    syncBusy[id]=true;
-    rpc("kids_save",{p_name:p.name,p_hash:p.pass,p_data:p.data||{},p_gender:p.gender,p_age:p.age})
-      .then(function(res){
-        if(!res||res.ok!==true)return;
-        syncConfirmed[id]=stamp;
-        var current=load().find(function(x){return x.id===id});
-        if(current&&profileSnapshot(current)===stamp){
-          delete syncPending[id];
-          writeSyncPending();
-        }
-      }).catch(function(){}).finally(function(){
-        syncBusy[id]=false;
-        var newest=load().find(function(x){return x.id===id});
-        if(syncPending[id]&&newest&&profileSnapshot(newest)!==stamp&&syncConfirmed[id]===stamp){
-          setTimeout(function(){flushProfileSync(id)},300);
-        }
-      });
-  }
   function rememberCurrent(){
     var p=currentProfile();
     if(!p)return;
@@ -6987,13 +6879,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var newGender=app&&app.getAttribute("data-gender")||p.gender;
     var newAge=localStorage.getItem("kids.age")||p.age;
     p.data=newData;p.gender=newGender;p.age=newAge;
-    var stamp=profileSnapshot(p);
-    if(syncConfirmed[p.id]===stamp&&!syncPending[p.id])return;
     save(load().map(function(x){return x.id===p.id?p:x}));
-    if(!p.pass)return;
-    syncPending[p.id]=true;
-    writeSyncPending();
-    flushProfileSync(p.id);
   }
   function renderList(){
     refreshBirthPanel();
@@ -7011,7 +6897,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
       b.addEventListener("click",function(){openAsk(b.getAttribute("data-del"))});
     });
     var addBtn=document.getElementById("profileAdd");
-    if(addBtn)addBtn.textContent=rows.length?"Weiteres Kind":"Konto anlegen";
+    if(addBtn)addBtn.textContent="Kind hinzufügen";
   }
   function openAsk(id){
     askId=id;
@@ -7019,7 +6905,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var box=document.getElementById("profileAsk");
     var text=document.getElementById("profileAskText");
     if(!box||!p)return;
-    if(text)text.textContent=p.name+": Nur auf diesem Gerät entfernen, oder das Konto komplett löschen? Komplett bleibt der Name gesperrt und ist danach nicht mehr frei.";
+    if(text)text.textContent=p.name+": Von diesem Gerät entfernen? Dabei werden Name, Altersangabe und Lernstand dieses Kindes auf dem Gerät gelöscht.";
     box.hidden=false;
   }
   function removeLocal(id){
@@ -7034,11 +6920,11 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   }
   function switchTo(id){
     var p=load().find(function(x){return x.id===id});
-    if(!p)return;
-    openJoin("login");
-    join.dataset.gender=p.gender==="girl"?"girl":"boy";
-    document.getElementById("deviceLoginName").value=p.name||"";
-    document.getElementById("deviceLoginPass").value="";
+    if(!p||id===localStorage.getItem(ACTIVE))return;
+    rememberCurrent();
+    applyBag(p.data);localStorage.setItem(ACTIVE,p.id);applyProfile(p);
+    try{sessionStorage.setItem("kids.profile.restoreTab","view-parents")}catch(e){}
+    location.reload();
   }
   document.getElementById("joinNextHello").addEventListener("click",function(){step("who")});
   join.querySelectorAll("[data-back]").forEach(function(b){b.addEventListener("click",function(){step(b.getAttribute("data-back"))})});
@@ -7089,26 +6975,11 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   });
   var cancel=document.getElementById("joinCancel");
   if(cancel)cancel.addEventListener("click",function(){if(localStorage.getItem(ACTIVE))closeJoin()});
-  document.getElementById("joinSave").addEventListener("click",function(){submitJoin("register")});
-  document.getElementById("joinLoginExisting").addEventListener("click",function(){submitJoin("login")});
+  document.getElementById("joinSave").addEventListener("click",submitJoin);
   var add=document.getElementById("profileAdd");
-  if(add)add.addEventListener("click",function(){draft={gender:"boy",age:"6–8",birthMonth:""};document.getElementById("joinBirthMonth").value="";document.getElementById("joinBirthYear").value="";openJoin(load().length?"who":"hello")});
+  if(add)add.addEventListener("click",function(){draft={gender:"boy",age:"6–8",birthMonth:""};document.getElementById("joinBirthMonth").value="";document.getElementById("joinBirthYear").value="";openJoin("who")});
   join.querySelectorAll(".join-skip").forEach(function(b){b.addEventListener("click",skipJoin)});
-  var bring=document.getElementById("profileBring");
-  if(bring)bring.addEventListener("click",function(){
-    document.getElementById("deviceLoginName").value="";
-    document.getElementById("deviceLoginPass").value="";
-    openJoin("login");
-  });
-  var deviceLoginSubmit=document.getElementById("deviceLoginSubmit");
-  if(deviceLoginSubmit)deviceLoginSubmit.addEventListener("click",function(){submitJoin("restore")});
-  var deviceLoginCancel=document.getElementById("deviceLoginCancel");
-  if(deviceLoginCancel)deviceLoginCancel.addEventListener("click",closeJoin);
-  document.getElementById("deviceLoginPass").addEventListener("keydown",function(ev){
-    if(ev.key==="Enter"){ev.preventDefault();submitJoin("restore")}
-  });
   var askDevice=document.getElementById("profileAskDevice");
-  var askFull=document.getElementById("profileAskFull");
   var askCancel=document.getElementById("profileAskCancel");
   if(askCancel)askCancel.addEventListener("click",function(){document.getElementById("profileAsk").hidden=true});
   if(askDevice)askDevice.addEventListener("click",function(){
@@ -7117,28 +6988,10 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     renderList();
     if(!localStorage.getItem(ACTIVE))location.reload();
   });
-  if(askFull)askFull.addEventListener("click",function(){
-    var p=load().find(function(x){return x.id===askId});
-    if(!p)return;
-    var pw=window.prompt("Passwort zur Bestätigung für "+p.name);
-    if(!pw)return;
-    hash(pw).then(function(h){
-      if(p.pass&&h!==p.pass){window.alert("Das Passwort passt nicht.");return}
-      rpc("kids_delete_full",{p_name:p.name,p_hash:h}).then(function(res){
-        if(!res||res.ok!==true){window.alert((res&&res.error)||"Löschen nicht möglich.");return}
-        removeLocal(p.id);
-        document.getElementById("profileAsk").hidden=true;
-        renderList();
-        if(!localStorage.getItem(ACTIVE))location.reload();
-      });
-    });
-  });
   var active=localStorage.getItem(ACTIVE);
   var known=load().find(function(p){return p.id===active});
   if(known){
     applyProfile(known);
-    syncConfirmed[known.id]=profileSnapshot(known);
-    if(syncPending[known.id])setTimeout(function(){flushProfileSync(known.id)},1200);
     try{
       var resumeProfileTab=sessionStorage.getItem("kids.profile.restoreTab")||"";
       sessionStorage.removeItem("kids.profile.restoreTab");
@@ -7153,7 +7006,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     closeJoin();
   }else openJoin("hello");
   renderList();
-  if(add)add.textContent=load().length?"Weiteres Kind":"Konto anlegen";
+  if(add)add.textContent="Kind hinzufügen";
   /* Never re-register local profiles at startup: this can overwrite cloud progress. */
   window.addEventListener("pagehide",rememberCurrent);
   window.addEventListener("pageshow",function(){refreshBirthday();refreshBirthPanel()});
@@ -7161,17 +7014,10 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   /* Progress can change in any Kids learning module without a page change. */
   setInterval(function(){
     if(document.visibilityState!=="hidden"){refreshBirthday();rememberCurrent()}
-    var p=currentProfile();
-    if(p&&syncPending[p.id]&&!syncBusy[p.id])flushProfileSync(p.id);
   },20000);
-  window.addEventListener("online",function(){
-    rememberCurrent();
-    var p=currentProfile();if(p)flushProfileSync(p.id);
-  });
 })();
 </script>
 
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="/kids/content-studio-feed.js?v=studio8"></script>
 <script src="/kids/owner-voice.js?v=20261127-sidq-asidq"></script>
 <script src="/kids/dua-word-meanings-v1.js?v=2"></script>
@@ -7184,7 +7030,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1479",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1482",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -7815,7 +7661,7 @@ html[data-view="stories"] .shell{
   background-image:
     linear-gradient(90deg,rgba(4,22,35,.90) 0%,rgba(4,22,35,.68) 42%,rgba(4,22,35,.25) 72%,rgba(4,22,35,.08) 100%),
     linear-gradient(180deg,rgba(4,20,33,.08) 0%,rgba(4,20,33,.04) 42%,rgba(4,24,38,.36) 76%,#0c2636 100%),
-    url("https://at.adobe.com/jaPS3uCKdEKCahM6")!important;
+    url("/kids/assets/kids-art/section-stories-v1096.jpg?v=1096-real2")!important;
   background-size:cover!important;
   background-position:center 52%!important;
   background-repeat:no-repeat!important;
@@ -8018,7 +7864,7 @@ html[data-view="stories"] .shell{
   background-image:
     linear-gradient(90deg,rgba(4,22,35,.90) 0%,rgba(4,22,35,.68) 42%,rgba(4,22,35,.25) 72%,rgba(4,22,35,.08) 100%),
     linear-gradient(180deg,rgba(4,20,33,.08) 0%,rgba(4,20,33,.04) 42%,rgba(4,24,38,.36) 76%,#0c2636 100%),
-    url("https://at.adobe.com/jaPS3uCKdEKCahM6")!important;
+    url("/kids/assets/kids-art/section-stories-v1096.jpg?v=1096-real2")!important;
 }
 #view-stories > .story-feature,
 #view-stories > .story-more-title,
@@ -8082,7 +7928,7 @@ html[data-view="stories"] .shell{
   background-image:
     linear-gradient(90deg,rgba(3,20,33,.92) 0%,rgba(3,20,33,.70) 43%,rgba(3,20,33,.28) 73%,rgba(3,20,33,.10) 100%),
     linear-gradient(180deg,rgba(4,20,33,.10) 0%,rgba(4,20,33,.02) 46%,rgba(4,24,38,.42) 77%,#0c2636 100%),
-    url("https://at.adobe.com/jaPS3uCKdEKCahM6")!important;
+    url("/kids/assets/kids-art/section-stories-v1096.jpg?v=1096-real2")!important;
   background-size:cover!important;
   background-position:center 50%!important;
   background-repeat:no-repeat!important;
@@ -12110,5 +11956,5 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority .kids-acad
 <script src="/kids/kids-qibla-focus-v1442.js?v=1448" defer></script>
 <!-- KIDS_PROFILE_LAYOUT_CONTRACT_V1447: automatic parent card width and boy/girl colour inheritance -->
 <link rel="stylesheet" href="/kids/kids-profile-layout-contract-v1447.css?v=1447">
-<link rel="stylesheet" href="/kids/kids-responsive-architecture-v1478.css?v=1479">
+<link rel="stylesheet" href="/kids/kids-responsive-architecture-v1478.css?v=1482">
 </html>

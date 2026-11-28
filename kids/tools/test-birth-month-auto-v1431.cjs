@@ -15,7 +15,7 @@ assert(app.includes("/kids/kids-birth-month-v1431.js?v=1431"),"Main app age modu
 assert(app.includes('id="joinBirthMonth"')&&app.includes('id="joinBirthYear"'),"Registration must ask for month and year");
 assert(app.includes('id="parentBirthMonth"')&&app.includes('id="parentBirthYear"'),"Parents must be able to set existing child's birth month");
 assert(!app.includes('id="joinBirthDay"')&&!app.includes('id="parentBirthDay"'),"Never demand a child's day of birth");
-assert(app.includes('mode==="register"&&!draft.birthMonth'),"Registered account must require month/year");
+assert(app.includes('function submitJoin(){')&&app.includes('if(draft.birthMonth)window.DARKidsBirthMonth?.set(p.id,draft.birthMonth)'),"Local child profile must keep the chosen month/year");
 assert(app.includes('window.DARKidsBirthMonth?.set(p.id,draft.birthMonth)'),"Newly registered child must retain per-profile age metadata");
 assert(app.includes('refreshBirthday();rememberCurrent()'),"Long-running main app must refresh at birthday month");
 assert(academy.includes('/kids/kids-birth-month-v1431.js?v=1431')&&

@@ -4,6 +4,8 @@
 const VISITOR_HOSTS=new Set(["dar-al-tawhid.de","www.dar-al-tawhid.de"]);
 if(!VISITOR_HOSTS.has(location.hostname)||!location.pathname.startsWith("/kids/")||window.DAR_KIDS_TEST_CONTAINER===true)return;
 if(window.DARKidsVisitorNotificationSettings)return;
+/* KIDS_STORE_V1: the notification settings stay hidden until the signed native build can schedule real iOS reminders. */
+if(window.DAR_KIDS_NOTIFICATIONS_NATIVE_READY!==true)return;
 const PREF="kids.visitor.notify.preferences.v1",SEEN="kids.visitor.notify.welcome.v1",QIBLA="kids.visitor.qibla.place.v1";
 const PRAYER_PLACE="darkids_kids_prayer_place_v1",PRAYER_CACHE="darkids_kids_prayer_days_v1";
 const CHANNELS=[["prayer","Fünf Gebete","Gebetszeiten individuell auswählen"],["learning","Lernen fortsetzen","An begonnene Lerneinheiten erinnern"],["quiz","Quiz fortsetzen","Unterbrochene Quizrunden"],["content","Neue Inhalte","Geschichten und Lernangebote"]];

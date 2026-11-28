@@ -6,7 +6,7 @@ App: native WebView of https://dar-al-tawhid.de (same approach as iOS)
 
 Privacy: https://dar-al-tawhid.de/privacy
 Support: https://dar-al-tawhid.de/
-Email: dal.al.tauhid91@gmail.com
+Email: dar.al.tauhid91@gmail.com
 
 ## What you still do in the browser (Google)
 

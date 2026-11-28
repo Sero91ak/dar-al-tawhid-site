@@ -690,10 +690,9 @@
     qa(".duahub-listen.is-playing").forEach(el => el.classList.remove("is-playing"));
   }
 
-  function everyAyahUrl(ref) {
-    const surah = String(Number(ref.surah) || 1).padStart(3, "0");
-    const ayah = String(Number(ref.ayah) || 1).padStart(3, "0");
-    return "https://everyayah.com/data/Husary_128kbps/" + surah + ayah + ".mp3";
+  function quranAudioUrl(ref) {
+    const A = window.DARKidsQuranAudio;
+    return A ? A.url(Number(ref.surah) || 1, Number(ref.ayah) || 1) : "";
   }
 
   function playQuranRefs(refs, index = 0) {
@@ -701,7 +700,7 @@
       q("#duaHubListen")?.classList.remove("is-playing");
       return;
     }
-    fallbackAudio = new Audio(everyAyahUrl(refs[index]));
+    fallbackAudio = new Audio(quranAudioUrl(refs[index]));
     fallbackAudio.playsInline = true;
     fallbackAudio.onended = () => playQuranRefs(refs, index + 1);
     fallbackAudio.onerror = () => q("#duaHubListen")?.classList.remove("is-playing");

@@ -26,4 +26,4 @@ Yes (HTTPS).
 
 ## Users can request deletion
 
-Yes, via dal.al.tauhid91@gmail.com as stated on https://dar-al-tawhid.de/privacy
+Yes, via dar.al.tauhid91@gmail.com as stated on https://dar-al-tawhid.de/privacy
