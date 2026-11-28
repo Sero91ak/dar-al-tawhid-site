@@ -1,0 +1,794 @@
+{
+ "workId": "sahih-al-buhari",
+ "kitabNo": 8,
+ "lang": "tr",
+ "method": "ai",
+ "babs": {
+  "1": "Namazda elbise giymenin farziyeti",
+  "2": "Namazda izarı ense üzerinde bağlamak",
+  "3": "Bürünerek tek elbiseyle namaz kılmak",
+  "4": "Tek elbiseyle namaz kılan onu omuzlarına atsın",
+  "5": "Elbise dar olursa",
+  "6": "Şam cübbesiyle namaz kılmak",
+  "7": "Namazda ve başka hâllerde çıplaklığın mekruhluğu",
+  "8": "Gömlek, şalvar, don ve kaftanla namaz kılmak",
+  "9": "Avretten örtülmesi gereken",
+  "10": "Ridâsız namaz kılmak",
+  "11": "Uyluk hakkında zikredilenler",
+  "12": "Kadın kaç parça elbiseyle namaz kılar",
+  "13": "Desenli bir elbiseyle namaz kılıp desenine bakarsa",
+  "14": "Haç veya resimli elbiseyle namaz kılarsa namazı bozulur mu, bundan neler yasaklanır",
+  "15": "Arkası yırtmaçlı ipek kaftanla namaz kılıp sonra onu çıkaran kimse",
+  "16": "Kırmızı elbiseyle namaz kılmak",
+  "17": "Damlarda, minberde ve tahta üzerinde namaz kılmak",
+  "18": "Secde ederken namaz kılanın elbisesi hanımına değerse",
+  "19": "Hasır üzerinde namaz kılmak",
+  "20": "Humra (küçük seccade) üzerinde namaz kılmak",
+  "21": "Yatak üzerinde namaz kılmak",
+  "22": "Şiddetli sıcakta elbise üzerine secde etmek",
+  "23": "Na'linlerle namaz kılmak",
+  "24": "Mestlerle namaz kılmak",
+  "25": "Secdeyi tam yapmazsa",
+  "26": "Secdede kollarını açıp bedeninden uzak tutmak",
+  "27": "Kıbleye yönelmenin fazileti",
+  "28": "Medine ve Şam ehlinin kıblesi",
+  "29": "Allah Teâlâ'nın \"İbrahim'in makamından bir namazgâh edinin\" sözü",
+  "30": "Nerede olursa olsun kıbleye yönelmek",
+  "31": "Kıble hakkında gelenler",
+  "32": "Mescitteki tükürüğü elle kazımak",
+  "33": "Mescitteki sümüğü çakıl taşıyla gidermek",
+  "34": "Namazda sağına tükürmez",
+  "35": "Soluna veya sol ayağının altına tükürsün",
+  "36": "Mescitte tükürmenin kefareti",
+  "37": "Mescitte balgamı gömmek",
+  "38": "Tükürük gelirse elbisesinin ucuyla alsın",
+  "39": "İmamın insanlara namazı tam kılmaları için öğüt vermesi ve kıbleyi zikretmesi",
+  "40": "\"Falan oğullarının mescidi\" denilir mi?",
+  "41": "Mescitte taksimat yapmak ve hurma salkımı asmak",
+  "42": "Mescitte yemeğe davet eden ve orada davete icabet eden",
+  "43": "Mescitte erkekler ve kadınlar arasında hüküm ve lian",
+  "44": "Bir eve giren dilediği yerde ya da emredildiği yerde namaz kılar, tecessüs etmez",
+  "45": "Evlerdeki mescitler",
+  "46": "Mescide girerken ve başka işlerde sağdan başlamak",
+  "47": "Cahiliye müşriklerinin kabirleri açılıp yerlerine mescit yapılabilir mi?",
+  "48": "Koyun ağıllarında namaz kılmak",
+  "49": "Develerin bulunduğu yerlerde namaz kılmak",
+  "50": "Önünde tandır, ateş veya tapınılan bir şey varken namaz kılan",
+  "51": "Kabristanlarda namaz kılmanın mekruhluğu",
+  "52": "Yere batırılma ve azap yerlerinde namaz kılmak",
+  "53": "Kilisede namaz kılmak",
+  "55": "Peygamber'in ﷺ \"Yeryüzü bana mescit ve temizleyici kılındı\" sözü",
+  "56": "Kadının mescitte uyuması",
+  "57": "Erkeklerin mescitte uyuması",
+  "58": "Yolculuktan dönünce namaz kılmak",
+  "59": "Mescitte abdestin bozulması",
+  "60": "Mescidin inşası",
+  "61": "Mescit inşasında yardımlaşmak",
+  "62": "Minber tahtaları ve mescit için marangoz ve ustalardan yardım istemek",
+  "63": "Mescit yapan kimse",
+  "64": "Mescitten geçerken okların demirlerinden tutmak",
+  "65": "Mescitten geçmek",
+  "66": "Mescitte şiir",
+  "67": "Mescitteki mızrak oyuncuları",
+  "68": "Mescitte minber üzerinde alım satımı zikretmek",
+  "69": "Mescitte borç istemek ve borçlunun peşini bırakmamak",
+  "70": "Mescidi süpürmek ve bez parçaları, çerçöp ve çöpleri toplamak",
+  "71": "Şarap ticaretinin haramlığının mescitte ilanı",
+  "72": "Mescide hizmetçi",
+  "73": "Esir veya borçlunun mescitte bağlanması",
+  "74": "Müslüman olunca gusletmek ve esirin mescitte bağlanması",
+  "75": "Hastalar ve diğerleri için mescitte çadır",
+  "76": "Bir sebepten dolayı deveyi mescide sokmak",
+  "77": "Mescitteki küçük kapı ve geçit",
+  "78": "Kâbe ve mescitler için kapılar ve kilit",
+  "79": "Müşrikin mescide girmesi",
+  "80": "Mescitlerde sesi yükseltmek",
+  "81": "Mescitte halkalar ve oturmak",
+  "82": "Mescitte sırtüstü uzanmak ve ayağını uzatmak",
+  "83": "İnsanlara zarar vermeden yol üzerinde bulunan mescit",
+  "84": "Çarşı mescidinde namaz kılmak",
+  "85": "Mescitte ve başka yerde parmakları birbirine geçirmek",
+  "86": "Medine yolları üzerindeki mescitler ve Peygamber'in ﷺ namaz kıldığı yerler",
+  "88": "İmamın sütresi arkasındakilerin de sütresidir",
+  "89": "Namaz kılanla sütre arasında ne kadar mesafe olmalı",
+  "90": "Mızrağa doğru namaz kılmak",
+  "91": "Aneze'ye doğru namaz kılmak",
+  "92": "Mekke'de ve başka yerlerde sütre",
+  "93": "Direğe doğru namaz kılmak",
+  "94": "Cemaat dışında direkler arasında namaz kılmak",
+  "95": "Binek, deve, ağaç ve semere doğru namaz kılmak",
+  "96": "Sedire doğru namaz kılmak",
+  "97": "Namaz kılan, önünden geçeni engeller",
+  "98": "Namaz kılanın önünden geçenin günahı",
+  "99": "Kişinin namaz kılarken arkadaşına veya başkasına yönelmesi",
+  "100": "Uyuyan birinin arkasında namaz kılmak",
+  "101": "Kadının arkasında nafile namaz kılmak",
+  "102": "Namazı hiçbir şeyin bozmadığını söyleyen",
+  "103": "Namazda küçük bir kız çocuğunu boynunda taşırsa",
+  "104": "Üzerinde hayızlı bir kadın bulunan yatağa doğru namaz kılarsa",
+  "105": "Kişi secde edebilmek için secde esnasında hanımını dürtebilir mi?",
+  "106": "Kadının namaz kılandan eziyet veren bir şeyi atması"
+ },
+ "hadiths": {
+  "349": {
+   "matn": "Yahyâ ibn Bükeyr bize bildirdi, dedi: Leys bize Yûnus’tan, o İbn Şihâb’dan, o Enes ibn Mâlik’ten bildirdi, dedi: Ebû Zer şöyle anlatırdı: Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, dedi ki: “Ben Mekke’deyken evimin tavanı açıldı. Cibrîl indi, göğsümü açtı, sonra onu Zemzem suyuyla yıkadı, sonra hikmet ve imanla dolu altın bir leğen getirdi, onu göğsüme boşalttı, sonra kapattı. Sonra elimden tutup beni dünya semâsına yükseltti. Dünya semâsına geldiğimde Cibrîl, semânın bekçisine: Aç! dedi. O: Kim bu? dedi. Cibrîl: Bu Cibrîl, dedi. O: Yanında biri var mı? dedi. Cibrîl: Evet, yanımda Muhammed, Allah’ın salât ve selâmı onun üzerine olsun, var, dedi. O: Çağrıldı mı? dedi. Cibrîl: Evet, dedi. Açınca dünya semâsının üstüne yükseldik. Bir de ne göreyim, oturan bir adam; sağında kara görüntüler, solunda da kara görüntüler vardı. Sağına baktığında gülüyor, soluna baktığında ağlıyordu. Dedi ki: Hoş geldin, sâlih peygamber ve sâlih oğul! Cibrîl’e: Bu kim? dedim. Dedi ki: Bu Âdem; sağındaki ve solundaki bu görüntüler de oğullarının ruhlarıdır. Onlardan sağdakiler cennet ehlidir, solundaki görüntüler ise ateş ehlidir. Sağına baktığında güler, soluna baktığında ağlar. – Sonra benimle ikinci semâya yükseldi ve onun bekçisine: Aç! dedi. Bekçisi ona birincinin dediği gibi dedi ve açtı. Enes dedi ki: Peygamber, semâlarda Âdem’i, İdrîs’i, Mûsâ’yı, Îsâ’yı ve İbrâhîm’i bulduğunu anlattı; Allah’ın salâtı onların üzerine olsun. Makamlarının nasıl olduğu sabit olmamıştır; yalnız Âdem’i dünya semâsında, İbrâhîm’i altıncı semâda bulduğunu anlattı. Enes dedi ki: Cibrîl, Peygamber’le, Allah’ın salât ve selâmı onun üzerine olsun, İdrîs’in yanından geçince İdrîs: Hoş geldin, sâlih peygamber ve sâlih kardeş! dedi. Ben: Bu kim? dedim. Cibrîl: Bu İdrîs, dedi. Sonra Mûsâ’nın yanından geçtim; o: Hoş geldin, sâlih peygamber ve sâlih kardeş! dedi. Ben: Bu kim? dedim. Cibrîl: Bu Mûsâ, dedi. Sonra Îsâ’nın yanından geçtim; o: Hoş geldin, sâlih kardeş ve sâlih peygamber! dedi. Ben: Bu kim? dedim. Cibrîl: Bu Îsâ, dedi. Sonra İbrâhîm’in yanından geçtim; o: Hoş geldin, sâlih peygamber ve sâlih oğul! dedi. Ben: Bu kim? dedim. Cibrîl: Bu İbrâhîm, Allah’ın salât ve selâmı onun üzerine olsun, dedi.” İbn Şihâb dedi ki: İbn Hazm bana bildirdi: İbn Abbâs ile Ebû Habbe el-Ensârî şöyle derlerdi: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, dedi ki: “Sonra yükseltildim; öyle bir düzlüğe çıktım ki orada kalemlerin gıcırtısını işittim.” İbn Hazm ile Enes ibn Mâlik dedi ki: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, dedi ki: “Allah ümmetime elli vakit namazı farz kıldı. Bununla döndüm, Mûsâ’nın yanından geçtim. O: Allah ümmetine neyi farz kıldı? dedi. Ben: Elli vakit namazı farz kıldı, dedim. O: Rabbine dön, çünkü ümmetin buna güç yetiremez, dedi. Bunun üzerine Allah benimle tekrar görüştü ve yarısını kaldırdı. Mûsâ’ya döndüm ve: Yarısını kaldırdı, dedim. O: Rabbine dön, çünkü ümmetin buna güç yetiremez, dedi. Döndüm, yarısını kaldırdı. Ona döndüm, o: Rabbine dön, çünkü ümmetin buna güç yetiremez, dedi. Döndüm; Allah: Bunlar beştir ve elli vakittir; söz Benim katımda değiştirilmez, dedi. Mûsâ’ya döndüm; o: Rabbine dön, dedi. Ben: Rabbimden utandım, dedim. Sonra beni götürdü ve Sidretü’l-Müntehâ’ya kadar getirdi; onu ne olduğunu bilmediğim renkler kaplamıştı. Sonra cennete sokuldum; orada inci habâyil’leri vardı ve toprağı misk idi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Hadis, Namaz Kitabı’nın başında, ilk bâbdan önce yer alır. Ebû Zer, Peygamber’in semâlar yolculuğu hakkında anlattıklarını nakleder: göğsünün açılıp yıkanması, Cibrîl’le semâlarda yükselmesi ve Âdem, İdrîs, Mûsâ, Îsâ ve İbrâhîm’le karşılaşmaları. İbn Şihâb, İbn Hazm yoluyla İbn Abbâs ile Ebû Habbe’den gelen sözleri ve Enes’le birlikte, beşe indirilen elli vakit namazın farz kılınmasını ekler. Habâyil sözü burada çevrilmeden bırakılmıştır."
+  },
+  "350": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Sâlih ibn Keysân’dan, o Urve ibn ez-Zübeyr’den, o müminlerin annesi Âişe’den, dedi ki: “Allah namazı farz kıldığı vakit, ikişer rekât olarak farz kıldı; hem ikamette hem yolculukta. Yolculuk namazı olduğu gibi bırakıldı, ikamet namazına ise ekleme yapıldı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Bu hadis de Namaz Kitabı’nda, ilk bâbdan önce yer alır. Âişe, namazın önce ikamette ve yolculukta ikişer rekât olarak farz kılındığını, yolculuk namazının olduğu gibi kaldığını, ikamet namazına ise ekleme yapıldığını bildirir."
+  },
+  "351": {
+   "matn": "Mûsâ ibn İsmâil bize bildirdi, dedi: Yezîd ibn İbrâhîm bize bildirdi, Muhammed’den, o Ümmü Atıyye’den, dedi ki: “Bize, iki bayram gününde hayızlı kadınları ve odalarındaki kadınları çıkarmamız emredildi; Müslümanların topluluğunda ve duâlarında bulunsunlar, hayızlılar ise namaz yerlerinden uzak dursunlar. Bir kadın: Ey Allah’ın Elçisi, birimizin dış örtüsü yok? dedi. O: Arkadaşı kendi dış örtüsünden ona giydirsin, buyurdu.” Abdullah ibn Recâ da şöyle dedi: İmrân bize bildirdi: Muhammed ibn Sîrîn bize bildirdi: Ümmü Atıyye bize bildirdi: Peygamber’i, Allah’ın salât ve selâmı onun üzerine olsun, bunu söylerken işittim.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Namazda elbise giymenin farziyeti” bâbının altına koyar. Ümmü Atıyye, iki bayram gününde hayızlı kadınların ve odalarındaki kadınların Müslümanların topluluğuna çıkarılmasının emredildiğini, hayızlıların ise namaz yerinden uzak durmasının istendiğini bildirir. Dış örtüsü olmayana arkadaşı kendi örtüsünden giydirecektir. Ardından Abdullah ibn Recâ yoluyla, “dedi” diye başlayan bir başka rivâyet yolu gelir."
+  },
+  "352": {
+   "matn": "Ahmed ibn Yûnus bize bildirdi, dedi: Âsım ibn Muhammed bize bildirdi, dedi: Vâkıd ibn Muhammed bana bildirdi, Muhammed ibn el-Münkedir’den, dedi ki: Câbir, ensesinden düğümlediği bir izârla namaz kıldı; elbiseleri ise askılığın üzerinde duruyordu. Birisi ona: Tek bir izârla mı namaz kılıyorsun? dedi. O: Bunu ancak senin gibi bir ahmak beni görsün diye yaptım. Peygamber’in, Allah’ın salât ve selâmı onun üzerine olsun, zamanında hangimizin iki elbisesi vardı? dedi.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Namazda izarı ense üzerinde bağlamak” bâbının altına koyar. Câbir, elbiseleri askılıkta dururken ensesinden düğümlediği bir izârla namaz kılar. İtiraza, bunu senin gibi bir ahmak görsün diye yaptığını söyleyerek karşılık verir ve Peygamber zamanında herkesin iki elbisesi olmadığına dikkat çeker."
+  },
+  "353": {
+   "matn": "Mutarrif Ebû Mus‘ab bize bildirdi, dedi: Abdurrahmân ibn Ebi’l-Mevâlî bize bildirdi, Muhammed ibn el-Münkedir’den, dedi ki: “Câbir ibn Abdullah’ı tek bir elbiseyle namaz kılarken gördüm; dedi ki: Peygamber’i, Allah’ın salât ve selâmı onun üzerine olsun, bir elbiseyle namaz kılarken gördüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı “Namazda izarı ense üzerinde bağlamak” bâbının altına koyar. İbn el-Münkedir, Câbir’i tek bir elbiseyle namaz kılarken gördü; Câbir de Peygamber’i aynı şekilde namaz kılarken gördüğünü söyledi."
+  },
+  "354": {
+   "matn": "Ubeydullah ibn Mûsâ bize bildirdi, dedi: Hişâm ibn Urve bize bildirdi, babasından, o Ömer ibn Ebî Seleme’den: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, iki ucunu çaprazladığı tek bir elbiseyle namaz kıldı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Bürünerek tek elbiseyle namaz kılmak” bâbının altına koyar. Ömer ibn Ebî Seleme, Peygamber’in iki ucunu çaprazladığı tek bir elbiseyle namaz kıldığını bildirir."
+  },
+  "355": {
+   "matn": "Muhammed ibn el-Müsennâ bize bildirdi, dedi: Yahyâ bize bildirdi, dedi: Hişâm bize bildirdi, dedi: Babam bana bildirdi, Ömer ibn Ebî Seleme’den: “O, Peygamber’i, Allah’ın salât ve selâmı onun üzerine olsun, Ümmü Seleme’nin evinde, iki ucunu omuzlarına attığı tek bir elbiseyle namaz kılarken gördü.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı “Bürünerek tek elbiseyle namaz kılmak” bâbının altına koyar. Ömer ibn Ebî Seleme, Peygamber’i Ümmü Seleme’nin evinde, uçları omuzlarına atılmış tek bir elbiseyle namaz kılarken gördüğünü bildirir."
+  },
+  "356": {
+   "matn": "Ubeyd ibn İsmâil bize bildirdi, dedi: Ebû Usâme bize bildirdi, Hişâm’dan, o babasından: Ömer ibn Ebî Seleme ona haber verdi, dedi ki: “Allah’ın Elçisini, Allah’ın salât ve selâmı onun üzerine olsun, Ümmü Seleme’nin evinde, iki ucunu omuzlarına koyarak büründüğü tek bir elbiseyle namaz kılarken gördüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı “Bürünerek tek elbiseyle namaz kılmak” bâbının altına koyar. Ömer ibn Ebî Seleme, Peygamber’i Ümmü Seleme’nin evinde, bürünmüş olarak tek bir elbiseyle, uçları omuzlarında namaz kılarken gördüğünü bildirir."
+  },
+  "357": {
+   "matn": "İsmâil ibn Ebî Üveys bize bildirdi, dedi: Mâlik ibn Enes bana bildirdi, Ömer ibn Ubeydullah’ın azatlısı Ebû’n-Nadr’dan: Ebû Tâlib’in kızı Ümmü Hânî’nin azatlısı Ebû Murre ona haber verdi; Ebû Tâlib’in kızı Ümmü Hânî’yi şöyle derken işitmiş: “Fetih yılında Allah’ın Elçisinin, Allah’ın salât ve selâmı onun üzerine olsun, yanına gittim; onu gusül yaparken buldum, kızı Fâtıma da onu örtüyordu. Dedi ki: Ona selâm verdim; o: Kim bu? dedi. Ben: Ben Ebû Tâlib’in kızı Ümmü Hânî’yim, dedim. O: Hoş geldin, Ümmü Hânî! dedi. Yıkanmayı bitirince kalktı ve tek bir elbiseye bürünmüş olarak sekiz rekât namaz kıldı. Namazdan dönünce: Ey Allah’ın Elçisi, annemin oğlu, ben aman verdiğim bir adamı, Hübeyre oğlu falancayı, öldüreceğini iddia ediyor, dedim. Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu ki: Ey Ümmü Hânî, senin aman verdiğine biz de aman verdik. Ümmü Hânî dedi ki: Bu kuşluk vaktiydi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı “Bürünerek tek elbiseyle namaz kılmak” bâbının altına koyar. Ümmü Hânî, fetih yılında Peygamber’in yanına, o yıkanırken geldiğini; ardından onun tek bir elbiseye bürünmüş olarak sekiz rekât namaz kıldığını bildirir. Aman verdiği adamı ona söyler, o da bu amanı onaylar. Bunun kuşluk vaktinde olduğunu ekler."
+  },
+  "358": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, İbn Şihâb’dan, o Saîd ibn el-Müseyyeb’den, o Ebû Hureyre’den: “Bir soru soran, Allah’ın Elçisine, Allah’ın salât ve selâmı onun üzerine olsun, tek elbiseyle namaz kılmayı sordu. Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, dedi ki: Hepinizin iki elbisesi mi var?”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı “Bürünerek tek elbiseyle namaz kılmak” bâbının altına koyar. Ebû Hureyre, bir kişinin Peygamber’e tek elbiseyle namaz kılmayı sorduğunu, Peygamber’in de hepinizin iki elbisesi mi var diye karşı soruyla cevap verdiğini bildirir."
+  },
+  "359": {
+   "matn": "Ebû Âsım bize bildirdi, Mâlik’ten, o Ebû’z-Zinâd’dan, o Abdurrahmân el-A‘rec’den, o Ebû Hureyre’den, dedi ki: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, dedi ki: “Hiçbiriniz, omuzlarında bir şey yokken tek elbiseyle namaz kılmasın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Tek elbiseyle namaz kılan onu omuzlarına atsın” bâbının altına koyar. Ebû Hureyre, Peygamber’den, omuzlarında bir şey yokken tek elbiseyle namaz kılınmaması gerektiği sözünü nakleder."
+  },
+  "360": {
+   "matn": "Ebû Nuaym bize bildirdi, dedi: Şeybân bize bildirdi, Yahyâ ibn Ebî Kesîr’den, o İkrime’den, dedi ki: Onu işittim, ya da ona sormuştum; dedi ki: Ebû Hureyre’yi şöyle derken işittim: Şahitlik ederim ki Allah’ın Elçisini, Allah’ın salât ve selâmı onun üzerine olsun, şöyle derken işittim: “Kim tek elbiseyle namaz kılarsa iki ucunu çaprazlasın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı “Tek elbiseyle namaz kılan onu omuzlarına atsın” bâbının altına koyar. Ebû Hureyre, Peygamber’in, tek elbiseyle namaz kılanın iki ucunu çaprazlaması gerektiğini söylediğini işittiğine şahitlik eder. İsnâdda râvî, İkrime’den bizzat mi işittiğinden yoksa ona mı sorduğundan emin değildir."
+  },
+  "361": {
+   "matn": "Yahyâ ibn Sâlih bize bildirdi, dedi: Füleyh ibn Süleymân bize bildirdi, Saîd ibn el-Hâris’ten, dedi ki: “Câbir ibn Abdullah’a tek elbiseyle namaz kılmayı sorduk. Dedi ki: Peygamber’le, Allah’ın salât ve selâmı onun üzerine olsun, bazı seferlerinde çıktım; bir gece bir işim için geldim, onu namaz kılarken buldum, üzerimde ise tek bir elbise vardı. Ona büründüm ve yanında namaz kıldım. Dönünce: Bu gece yolculuğu nedir, Câbir? dedi. Ona ihtiyacımı haber verdim. Bitirince: Gördüğüm şu bürünme nedir? dedi. Ben: Bir elbiseydi – yani dardı, dedim. O: Geniş ise ona bürün, dar ise onu izâr olarak bağla, dedi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Elbise dar olursa” bâbının altına koyar. Câbir, bir yolculukta geceleyin tek elbisesiyle namaz kılan Peygamber’in yanında namaz kıldığını anlatır. Bürünmeyi sorulunca elbisenin dar olduğunu söyler; Peygamber de bürünülen geniş elbiseyle izâr olarak bağlanan dar elbise arasında ayrım yapar."
+  },
+  "362": {
+   "matn": "Müsedded bize bildirdi, dedi: Yahyâ bize bildirdi, Süfyân’dan, dedi: Ebû Hâzim bana bildirdi, Sehl’den, dedi ki: “Erkekler Peygamber’le, Allah’ın salât ve selâmı onun üzerine olsun, namaz kılardı; izârlarını çocuklar gibi boyunlarına düğümlerlerdi. Kadınlara da: Erkekler dik oturuncaya kadar başlarınızı kaldırmayın, denirdi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı “Elbise dar olursa” bâbının altına koyar. Sehl, erkeklerin Peygamber’le çocuklar gibi izârlarını boyunlarına düğümleyerek namaz kıldığını, kadınlara da erkekler dik oturuncaya kadar başlarını kaldırmamaları söylendiğini bildirir."
+  },
+  "363": {
+   "matn": "Yahyâ bize bildirdi, dedi: Ebû Muâviye bize bildirdi, el-A‘meş’ten, o Müslim’den, o Mesrûk’tan, o Mugîre ibn Şu‘be’den, dedi ki: “Bir seferde Peygamber’le, Allah’ın salât ve selâmı onun üzerine olsun, birlikteydim. Dedi ki: Mugîre, su kabını al! Aldım. Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, benden gizleninceye kadar yürüdü ve ihtiyacını giderdi. Üzerinde Şam işi bir cübbe vardı. Elini kolundan çıkarmak istedi, kol dar geldi; elini alttan çıkardı. Ben su döktüm; o da namaz için aldığı gibi abdest aldı, mestlerinin üzerine mesh etti, sonra namaz kıldı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Şam cübbesiyle namaz kılmak” bâbının altına koyar. Mugîre, bir seferde Peygamber’in su kabını taşıdığını anlatır. Peygamber dar kollu bir Şam cübbesi giyiyordu; elini alttan çıkardı, abdest aldı, mestlerin üzerine mesh etti ve namaz kıldı."
+  },
+  "364": {
+   "matn": "Matar ibn el-Fadl bize bildirdi, dedi: Ravh bize bildirdi, dedi: Zekeriyyâ ibn İshâk bize bildirdi: Amr ibn Dînâr bize bildirdi, dedi ki: Câbir ibn Abdullah’ı şöyle anlatırken işittim: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, onlarla birlikte Kâbe için taş taşıyordu; üzerinde izârı vardı. Amcası Abbâs ona: Kardeşimin oğlu, izârını çözüp taşların altına koymasan da omuzlarına koysan, dedi. Dedi ki: O da onu çözüp omuzlarına koydu; bayılarak yere düştü. Ondan sonra bir daha çıplak görülmedi, Allah’ın salât ve selâmı onun üzerine olsun.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Namazda ve başka hâllerde çıplaklığın mekruhluğu” bâbının altına koyar. Câbir, Peygamber’in diğerleriyle birlikte Kâbe için taş taşıdığını, amcası Abbâs’ın izârını omuzlarına koymasını önerdiğini, onun da ardından bayılıp düştüğünü ve bundan sonra hiç çıplak görülmediğini bildirir."
+  },
+  "365": {
+   "matn": "Süleymân ibn Harb bize bildirdi, dedi: Hammâd ibn Zeyd bize bildirdi, Eyyûb’dan, o Muhammed’den, o Ebû Hureyre’den, dedi ki: “Bir adam Peygamber’in, Allah’ın salât ve selâmı onun üzerine olsun, huzuruna kalkıp ona tek elbiseyle namaz kılmayı sordu. O: Hepiniz iki elbise bulabiliyor mu? dedi. Sonra bir adam Ömer’e sordu; o: Allah genişlik verdiğinde siz de genişlik gösterin. Kişi elbiselerini üzerinde toplasın: Bir adam izâr ve ridâ (üst örtü) ile, izâr ve gömlekle, izâr ve kaftanla, şalvar ve ridâ ile, şalvar ve gömlekle, şalvar ve kaftanla, don ve kaftanla, don ve gömlekle namaz kıldı.” Dedi ki: Zannederim şunu da dedi: don ve ridâ ile.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Gömlek, şalvar, don ve kaftanla namaz kılmak” bâbının altına koyar. Ebû Hureyre, Peygamber’in tek elbiseyle namaz kılmayı soran kişiye karşı soruyla cevap verdiğini bildirir. Ardından Ömer’in benzer bir soruya cevabı anılır; burada çeşitli elbise kombinasyonları sayılır. Son kombinasyonu râvî yalnızca “zannederim” diyerek aktarır."
+  },
+  "366": {
+   "matn": "Âsım ibn Alî bize bildirdi, dedi: İbn Ebî Zi’b bize bildirdi, Zührî’den, o Sâlim’den, o İbn Ömer’den, dedi ki: “Bir adam Allah’ın Elçisine, Allah’ın salât ve selâmı onun üzerine olsun, sordu: İhramlı ne giyer? Buyurdu: Gömlek giymez, şalvar giymez, bürnüs giymez, zaferanın değdiği bir elbise giymez, vers de giymez. Sandal bulamazsa mestleri giysin ve ayak bileklerinin altına inecek şekilde kessin.” Ve Nâfi’den, o İbn Ömer’den, o Peygamber’den, Allah’ın salât ve selâmı onun üzerine olsun: aynısı.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Gömlek, şalvar, don ve kaftanla namaz kılmak” bâbının altına koyar. İbn Ömer, Peygamber’in ihramlı ne giyer sorusuna gömlek, şalvar, bürnüs ile zaferan veya versin değdiği elbiseleri hariç tuttuğunu, sandal bulamayan için bileklerin altından kesilmiş mestlere izin verdiğini bildirir. Nâfi’ yoluyla ikinci bir rivâyet “aynısı” diye eklenir. Vers, sarı bir boyadır."
+  },
+  "367": {
+   "matn": "Kuteybe ibn Saîd bize bildirdi, dedi: Leys bize bildirdi, İbn Şihâb’dan, o Ubeydullah ibn Abdullah ibn Utbe’den, o Ebû Saîd el-Hudrî’den, şöyle dedi: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, sammâ bürünmesini (iştimâlüs-sammâ) ve bir adamın tek elbiseyle, avret yerinin üzerinde ondan bir şey olmadan, dizlerini kucaklayıp oturmasını (ihtibâ) yasakladı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Avretten örtülmesi gereken” bâbının altına koyar. Ebû Saîd, Peygamber’in sammâ bürünmesini ve avret yerinin üzerinde elbiseden bir şey olmadan tek elbiseyle dizleri kucaklayarak oturmayı yasakladığını bildirir. İki terim burada çevrilmeden, okunuşuyla verilmiştir."
+  },
+  "368": {
+   "matn": "Kabîsa ibn Ukbe bize bildirdi, dedi: Süfyân bize bildirdi, Ebû’z-Zinâd’dan, o A‘rec’den, o Ebû Hureyre’den, dedi ki: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, iki alışverişi yasakladı: dokunma (limâs) ve atma (nibâz); ayrıca sammâ biçiminde bürünmeyi ve bir adamın tek elbiseyle dizlerini kucaklayıp oturmasını.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı “Avretten örtülmesi gereken” bâbının altına koyar. Ebû Hureyre, Peygamber’in iki alışverişi, yani dokunmayı (limâs) ve atmayı (nibâz), ayrıca sammâ biçiminde bürünmeyi ve tek elbiseyle dizleri kucaklayıp oturmayı yasakladığını bildirir."
+  },
+  "369": {
+   "matn": "İshâk bize bildirdi, dedi: Yakûb ibn İbrâhîm bize bildirdi, dedi: İbn Şihâb’ın kardeşinin oğlu bize bildirdi, amcasından, dedi ki: Humeyd ibn Abdurrahmân ibn Avf bana haber verdi: Ebû Hureyre dedi ki: “Ebû Bekir, o hacda beni kurban günü Mina’da ilan etmek üzere ilancılarla birlikte gönderdi: Dikkat edin, bu yıldan sonra hiçbir müşrik hac yapamaz ve kimse Beyt’i çıplak tavaf edemez. Humeyd ibn Abdurrahmân dedi: Sonra Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, Alî’yi arkasına bindirdi ve ona Berâe’yi ilan etmesini emretti. Ebû Hureyre dedi: Alî de kurban günü Mina halkına bizimle birlikte ilan etti: Bu yıldan sonra hiçbir müşrik hac yapamaz ve kimse Beyt’i çıplak tavaf edemez.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı “Avretten örtülmesi gereken” bâbının altına koyar. Ebû Hureyre, Ebû Bekir’in onu o hacda ilan edenlerle Mina’ya gönderdiğini, bu yıldan sonra hiçbir müşrikin hac yapamayacağını ve kimsenin Beyt’i çıplak tavaf edemeyeceğini ilan etmelerini istediğini bildirir. Ardından Peygamber Alî’yi Berâe’yi ilan etmesi için gönderir ve Alî aynı şeyi Mina halkına duyurur."
+  },
+  "370": {
+   "matn": "Abdülazîz ibn Abdullah bize bildirdi, dedi: İbn Ebi’l-Mevâlî bana bildirdi, Muhammed ibn el-Münkedir’den, dedi ki: “Câbir ibn Abdullah’ın yanına girdim; o, ridâsı bir yana bırakılmış hâlde, bir elbiseye bürünmüş namaz kılıyordu. Dönünce: Ey Ebû Abdullah, ridân bir yanda dururken namaz mı kılıyorsun? dedik. Dedi ki: Evet, sizin gibi câhillerin beni görmesini istedim. Peygamber’i, Allah’ın salât ve selâmı onun üzerine olsun, böyle namaz kılarken gördüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Ridâsız namaz kılmak” bâbının altına koyar. İbn el-Münkedir, Câbir’i ridâsı bir yanda dururken bir elbiseye bürünmüş namaz kılarken gördüğünü bildirir. Sorulunca Câbir, câhillerin onu böyle görmesini istediğini ve Peygamber’i de aynı şekilde namaz kılarken gördüğünü söyler."
+  },
+  "371": {
+   "matn": "Yakûb ibn İbrâhîm bize bildirdi, dedi: İsmâil ibn Uleyye bize bildirdi, dedi: Abdülazîz ibn Suheyb bize bildirdi, Enes’ten: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, Hayber’e sefere çıktı. Oraya yakın bir yerde sabah namazını karanlıkta kıldık. Sonra Allah’ın Peygamberi, Allah’ın salât ve selâmı onun üzerine olsun, bindi, Ebû Talha da bindi; ben de Ebû Talha’nın terkisindeydim. Allah’ın Peygamberi, Allah’ın salât ve selâmı onun üzerine olsun, bineğini Hayber sokağında koşturdu; dizim Allah’ın Peygamberinin uyluğuna değiyordu. Sonra izârı uylundan çekti; öyle ki Allah’ın Peygamberinin uyluğunun beyazlığına bakıyordum. Köye girince: Allahu ekber, Hayber harap oldu! Biz bir kavmin meydanına indiğimizde uyarılanların sabahı ne kötüdür! dedi. Bunu üç kez söyledi. Dedi ki: Halk işlerine çıktı ve: Muhammed! dediler. Abdülazîz dedi ki: Bazı arkadaşlarımız da: Ve ordu – yani ordu, dedi. Dedi ki: Orayı zorla aldık, esirler toplandı. Dihye gelip: Ey Allah’ın Peygamberi, bana esirlerden bir câriye ver, dedi. O: Git, bir câriye al, dedi. Dihye, Huyey’in kızı Safiyye’yi aldı. Bir adam Peygamber’e, Allah’ın salât ve selâmı onun üzerine olsun, gelip: Ey Allah’ın Peygamberi, Kurayza ve Nadîr’in hanımefendisi Huyey’in kızı Safiyye’yi Dihye’ye verdin; o ancak sana yaraşır, dedi. O: Onu onunla birlikte çağırın, dedi. Dihye onu getirdi; Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, ona bakınca: Esirlerden ondan başka bir câriye al, dedi. Dedi ki: Peygamber onu azat etti ve onunla evlendi. Sâbit ona: Ey Ebû Hamza, ona mehir olarak ne verdi? dedi. O: Kendisini; onu azat etti ve onunla evlendi, dedi. Yolda iken Ümmü Süleym onu onun için hazırladı ve geceleyin ona gönderdi; Peygamber sabaha damat olarak çıktı. Dedi ki: Yanında bir şey olan getirsin. Bir deri sofra serdi; kimi hurma getiriyor, kimi tereyağı getiriyordu. Dedi ki: Zannederim kavut da andı. Dedi ki: Bunlardan hays yaptılar; işte bu, Allah’ın Elçisinin, Allah’ın salât ve selâmı onun üzerine olsun, düğün yemeği oldu.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Uyluk hakkında zikredilenler” bâbının altına koyar. Enes, Hayber seferini anlatır: Sokakta ilerlerken Peygamber izârı uylundan çekti ve Enes onun beyazlığını gördü. Ardından Hayber’in alınışı, Huyey’in kızı Safiyye’nin payına düşüp azat edilmesi, Peygamber’le evlenmesi ve hurma, tereyağı ve kavuttan düğün yemeği anlatılır. “Ordu” ile ilgili ek, râvînin bazı arkadaşlarının sözü olarak belirtilir."
+  },
+  "372": {
+   "matn": "Ebü’l-Yemân bize bildirdi, dedi: Şuayb bize haber verdi, Zührî’den, dedi ki: Urve bana haber verdi: Âişe dedi ki: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, sabah namazını kılardı; onunla birlikte mümin kadınlardan bir kısmı da, örtülerine (murût) bürünmüş olarak hazır bulunurdu; sonra evlerine dönerlerdi, kimse onları tanımazdı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kadın kaç parça elbiseyle namaz kılar” bâbının altına koyar. Âişe, mümin kadınların örtülerine bürünmüş olarak Peygamber’le sabah namazını kıldığını ve sonra kimse tanımadan evlerine döndüğünü bildirir."
+  },
+  "373": {
+   "matn": "Ahmed ibn Yûnus bize bildirdi, dedi: İbrâhîm ibn Sa‘d bize bildirdi, dedi: İbn Şihâb bize bildirdi, Urve’den, o Âişe’den: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, nakışlı bir hamîsa içinde namaz kıldı; nakışlarına bir kez baktı. Dönünce: Şu hamîsamı Ebû Cehm’e götürün, bana Ebû Cehm’in enbicânîsini getirin; çünkü o az önce beni namazımdan alıkoydu, dedi.” Hişâm ibn Urve de babasından, o Âişe’den şöyle dedi: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, dedi ki: Namazdayken nakşına bakıyordum; beni fitneye düşürmesinden korktum.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Desenli bir elbiseyle namaz kılıp desenine bakarsa” bâbının altına koyar. Âişe, Peygamber’in nakışlı bir elbiseyle namaz kılıp nakışlarına baktığını; ardından onu Ebû Cehm’e gönderip Ebû Cehm’in enbicânîsini getirttiğini bildirir, çünkü o elbise namazdan alıkoymuştu. Hişâm ibn Urve yoluyla ikinci bir rivâyet “dedi” diye eklenir."
+  },
+  "374": {
+   "matn": "Ebû Ma‘mer Abdullah ibn Amr bize bildirdi, dedi: Abdülvâris bize bildirdi, dedi: Abdülazîz ibn Suheyb bize bildirdi, Enes’ten: “Âişe’nin bir perdesi (kırâm) vardı; evinin bir yanını onunla örtmüştü. Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, dedi ki: Şu perdeni bizden uzaklaştır; çünkü onun resimleri namazımda sürekli gözümün önüne geliyor.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Haç veya resimli elbiseyle namaz kılarsa namazı bozulur mu, bundan neler yasaklanır” bâbının altına koyar. Enes, Âişe’nin evinin bir yanını perdeyle örttüğünü, Peygamber’in de resimleri namazında gözünün önüne geldiği için onu kaldırmasını istediğini bildirir."
+  },
+  "375": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Leys bize bildirdi, Yezîd’den, o Ebü’l-Hayr’dan, o Ukbe ibn Âmir’den, dedi ki: “Peygamber’e, Allah’ın salât ve selâmı onun üzerine olsun, ipekten bir ferrûc hediye edildi; onu giydi ve içinde namaz kıldı, sonra döndü ve ondan hoşlanmayan biri gibi şiddetle çıkardı ve: Bu, müttakilere yakışmaz, dedi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Arkası yırtmaçlı ipek kaftanla namaz kılıp sonra onu çıkaran kimse” bâbının altına koyar. Ukbe, Peygamber’e arkası yırtmaçlı ipekten bir kaftan (ferrûc) hediye edildiğini; onunla namaz kılıp sonra ondan hoşlanmayan biri gibi şiddetle çıkardığını ve bunun müttakilere yakışmadığını söylediğini bildirir."
+  },
+  "376": {
+   "matn": "Muhammed ibn Ar‘ara bize bildirdi, dedi: Ömer ibn Ebî Zâide bana bildirdi, Avn ibn Ebî Cuhayfe’den, o babasından, dedi ki: “Allah’ın Elçisini, Allah’ın salât ve selâmı onun üzerine olsun, deriden kırmızı bir çadırda gördüm; Bilâl’i Allah’ın Elçisinin abdest suyunu alırken gördüm; insanların o suya koştuklarını gördüm; kim ondan bir şey bulursa onunla ovunuyor, kim bulamazsa arkadaşının elindeki ıslaklıktan alıyordu. Sonra Bilâl’i bir kısa mızrak alıp yere diktiğini gördüm; Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, eteklerini toplamış hâlde kırmızı bir hulle içinde çıktı ve insanlarla mızrağa doğru iki rekât namaz kıldı; insanların ve hayvanların mızrağın önünden geçtiğini gördüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kırmızı elbiseyle namaz kılmak” bâbının altına koyar. Ebû Cuhayfe, Peygamber’i deriden kırmızı bir çadırda, Bilâl’i onun abdest suyunu alırken ve insanların ona koştuklarını gördüğünü bildirir. Ardından Peygamber kırmızı bir hulle içinde insanlarla yere dikilmiş bir mızrağa doğru iki rekât namaz kılar; insanlar ve hayvanlar mızrağın önünden geçer."
+  },
+  "377": {
+   "matn": "Ali ibn Abdullah bize bildirdi, dedi: Süfyân bize bildirdi, dedi: Ebû Hâzim bize bildirdi, dedi ki: “Sehl ibn Sa‘d’a: Minber neyden yapılmıştır? diye sordular. Dedi ki: İnsanlar arasında benden daha çok bilen kalmadı: Gâbe’nin ılgınındandır; falan kadının azatlısı falan, Allah’ın Elçisi için, Allah’ın salât ve selâmı onun üzerine olsun, yaptı. Allah’ın Elçisi, yapılıp yerleştirildiğinde üzerine çıktı, kıbleye yöneldi, tekbir getirdi, insanlar da arkasında durdu; okudu ve rükû etti, insanlar da arkasında rükû etti; sonra başını kaldırdı, sonra geri geri indi ve yere secde etti; sonra minbere döndü, rükû etti, başını kaldırdı, sonra yere secde edinceye kadar geri geri indi. Onun uygulaması buydu.” Ebû Abdullah dedi: Ali ibn Abdullah dedi: Ahmed ibn Hanbel, Allah ona rahmet etsin, bana bu hadisi sordu ve dedi ki: Ben ancak Peygamber’in insanlardan daha yüksekte olduğunu kastettim; bu hadise göre imamın insanlardan yüksekte olmasında sakınca yoktur. Dedi ki: Ben de: Süfyân ibn Uyeyne buna dair çok sorulurdu, ondan işitmedin mi? dedim. O: Hayır, dedi.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Damlarda, minberde ve tahta üzerinde namaz kılmak” bâbının altına koyar. Ebû Hâzim, Sehl ibn Sa‘d’ın minberin neyden yapıldığı sorusuna Gâbe’nin ılgınından olduğunu söylediğini ve Peygamber’in minberde nasıl namaz kıldığını, rükû ettiğini, geri geri inip yere secde ettiğini anlattığını bildirir. Ardından Ali ibn Abdullah’ın Ahmed ibn Hanbel’le konuşmasına dair bir haber gelir; bu, Peygamber sözü olarak değil, âlim sözü olarak belirtilmiştir."
+  },
+  "378": {
+   "matn": "Muhammed ibn Abdurrahîm bize bildirdi, dedi: Yezîd ibn Hârûn bize bildirdi, dedi: Humeyd et-Tavîl bize haber verdi, Enes ibn Mâlik’ten: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, atından düştü; baldırı ya da omzu sıyrıldı; hanımlarından bir ay uzak durmaya yemin etti. Hurma kütüklerinden merdivenli bir bâlâhâneye oturdu. Arkadaşları onu ziyarete geldi; o onlarla oturarak namaz kıldı, onlar ise ayaktaydı. Selâm verince dedi ki: İmam ancak kendisine uyulsun diye konmuştur: Tekbir getirdiğinde tekbir getirin, rükû ettiğinde rükû edin, secde ettiğinde secde edin; ayakta namaz kılarsa ayakta kılın. Yirmi dokuzunda indi; onlar: Ey Allah’ın Elçisi, bir ay yemin etmiştin? dediler. O: Ay yirmi dokuzdur, dedi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı “Damlarda, minberde ve tahta üzerinde namaz kılmak” bâbının altına koyar. Enes, Peygamber’in attan düşüp baldırını ya da omzunu sıyırdığını; ayakta duran arkadaşlarına oturarak namaz kıldırdığını ve imamın kendisine uyulsun diye konduğunu söylediğini bildirir. Yirmi dokuzuncu gün bâlâhâneden inip ayın yirmi dokuz olduğunu söyler. Baldır mı omuz mu olduğu rivâyette açık bırakılmıştır."
+  },
+  "379": {
+   "matn": "Müsedded bize bildirdi, Hâlid’den, dedi: Süleymân eş-Şeybânî bize bildirdi, Abdullah ibn Şeddâd’dan, o Meymûne’den, dedi ki: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, ben hayızlıyken tam karşısında dururken namaz kılardı; secde ettiğinde bazen elbisesi bana değerdi. Dedi ki: Humra üzerinde namaz kılardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Secde ederken namaz kılanın elbisesi hanımına değerse” bâbının altına koyar. Meymûne, Peygamber’in kendisi hayızlı ve karşısındayken namaz kıldığını, secde ederken elbisesinin bazen kendisine değdiğini ve küçük bir namaz hasırı olan humra üzerinde namaz kıldığını bildirir."
+  },
+  "380": {
+   "matn": "Abdullah bize bildirdi, dedi: Mâlik bize haber verdi, İshâk ibn Abdullah ibn Ebî Talha’dan, o Enes ibn Mâlik’ten: “Onun ninesi Muleyke, Allah’ın Elçisini, Allah’ın salât ve selâmı onun üzerine olsun, kendisi için hazırladığı bir yemeğe davet etti; ondan yedi, sonra dedi ki: Kalkın, sizin için namaz kılayım. Enes dedi ki: Uzun süre kullanılmaktan kararmış bir hasırımıza kalktım ve üzerine su serptim. Allah’ın Elçisi ayağa kalktı; ben ve yetim onun arkasında, yaşlı kadın da arkamızda saf tuttuk; Allah’ın Elçisi bize iki rekât namaz kıldı, sonra döndü.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Hasır üzerinde namaz kılmak” bâbının altına koyar. Enes, ninesi Muleyke’nin Peygamber’i bir yemeğe davet ettiğini bildirir. Yemekten sonra Peygamber namaza kalkmalarını söyledi; Enes kararmış bir hasıra su serpti, Peygamber onun üzerinde durdu, Enes ile yetim onun arkasında, yaşlı kadın da onların arkasında saf tuttu ve Peygamber iki rekât namaz kıldı."
+  },
+  "381": {
+   "matn": "Ebû’l-Velîd bize bildirdi, dedi: Şu‘be bize bildirdi, dedi: Süleyman eş-Şeybânî bize bildirdi, Abdullah ibn Şeddâd’dan, o Meymûne’den, dedi ki: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, humra üzerinde namaz kılardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Humra (küçük seccade) üzerinde namaz kılmak” bâbının altına koyar. Meymûne kısa bir ifadeyle Peygamber’in humra üzerinde namaz kıldığını bildirir."
+  },
+  "382": {
+   "matn": "İsmâil bize bildirdi, dedi: Mâlik bana bildirdi, Ömer ibn Ubeydullah’ın azatlısı Ebû’n-Nadr’dan, o Ebû Seleme ibn Abdurrahmân’dan, o Peygamber’in eşi Âişe’den, şöyle dedi: “Allah’ın Elçisinin, Allah’ın salât ve selâmı onun üzerine olsun, önünde uyurdum, ayaklarım onun kıblesindeydi; secde ettiğinde bana dokunurdu, ben de ayaklarımı toplardım; kalkınca onları uzatırdım. Dedi ki: O gün evlerde kandiller yoktu.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Yatak üzerinde namaz kılmak” bâbının altına koyar. Âişe, Peygamber’in önünde uyuduğunu, ayaklarının onun kıblesinde olduğunu bildirir; secdeye vardığında ona dokunur, o da ayaklarını toplar, kalkınca tekrar uzatırdı. Ayrıca o gün evlerde kandil bulunmadığını ekler."
+  },
+  "383": {
+   "matn": "Yahyâ ibn Bukeyr bize bildirdi, dedi: Leys bize bildirdi, Ukayl’den, o İbn Şihâb’dan, dedi ki: Urve bana bildirdi: Âişe ona bildirdi ki Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, “o kendisiyle kıble arasında bulunduğu hâlde, ailesinin yatağı üzerinde, cenaze gibi enine uzanmışken namaz kılardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Yatak üzerinde namaz kılmak” bâbının altına koyar. Âişe, Peygamber’in ailesinin yatağı üzerinde, kendisi onunla kıble arasında cenaze gibi enine uzanmışken namaz kıldığını bildirir."
+  },
+  "384": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Leys bize bildirdi, Yezîd’den, o Irâk’tan, o Urve’den: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, “Âişe onunla kıble arasında enine uzanmışken, ikisinin üzerinde uyuduğu yatak üzerinde namaz kılardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Yatak üzerinde namaz kılmak” bâbının altına koyar. Urve, Peygamber’in Âişe onunla kıble arasında, ikisinin uyuduğu yatakta enine uzanmışken namaz kıldığını bildirir. Senedde Urve’den hemen sonra Peygamber gelir; araya giren bir râvî anılmaz."
+  },
+  "385": {
+   "matn": "Ebû’l-Velîd Hişâm ibn Abdülmelik bize bildirdi, dedi: Bişr ibn el-Mufaddal bize bildirdi, dedi: Gâlib el-Kattân bana bildirdi, Bekr ibn Abdullah’tan, o Enes ibn Mâlik’ten, dedi ki: “Peygamber’le, Allah’ın salât ve selâmı onun üzerine olsun, namaz kılardık; sıcağın şiddetinden birimiz elbisesinin ucunu secde yerine koyardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Şiddetli sıcakta elbise üzerine secde etmek” bâbının altına koyar. Enes, Peygamber’le namaz kıldıklarını ve sıcağın şiddetinden birinin elbisesinin ucunu secde yerine koyduğunu bildirir."
+  },
+  "386": {
+   "matn": "Âdem ibn Ebî İyâs bize bildirdi, dedi: Şu‘be bize bildirdi, dedi: Ebû Mesleme Saîd ibn Yezîd el-Ezdî bize haber verdi, dedi ki: “Enes ibn Mâlik’e sordum: Peygamber nalinleriyle namaz kılar mıydı? Dedi ki: Evet.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Na‘linlerle namaz kılmak” bâbının altına koyar. Saîd ibn Yezîd, Enes’e Peygamber’in na‘linleriyle namaz kılıp kılmadığını sorar; Enes “evet” diye cevap verir."
+  },
+  "387": {
+   "matn": "Âdem bize bildirdi, dedi: Şu‘be bize bildirdi, A‘meş’ten, dedi ki: İbrâhim’in Hemmâm ibn el-Hâris’ten naklettiğini işittim, dedi ki: “Cerîr ibn Abdullah’ı küçük aptes bozarken gördüm; sonra abdest aldı, mestlerinin üzerine mesh etti, sonra kalkıp namaz kıldı. Kendisine sorulunca dedi ki: Peygamber’i, Allah’ın salât ve selâmı onun üzerine olsun, bunun gibi yaparken gördüm.” İbrâhim dedi ki: Bu onların hoşuna giderdi; çünkü Cerîr, Müslüman olanların en sonlarındandı.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mestlerle namaz kılmak” bâbının altına koyar. Hemmâm, Cerîr’in küçük aptesten sonra abdest aldığını, mestlerinin üzerine mesh edip namaz kıldığını bildirir; sorulduğunda Peygamber’i aynısını yaparken gördüğünü söylemiştir. Cerîr’in geç Müslüman olmasına işaret eden son cümle senetteki bir râvî olan İbrâhim’e aittir; Peygamber’in sözü değildir."
+  },
+  "388": {
+   "matn": "İshâk ibn Nasr bize bildirdi, dedi: Ebû Usâme bize bildirdi, A‘meş’ten, o Müslim’den, o Mesrûk’tan, o Muğîre ibn Şu‘be’den, dedi ki: “Peygamber’e, Allah’ın salât ve selâmı onun üzerine olsun, abdestinde yardım ettim; mestlerinin üzerine mesh etti ve namaz kıldı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mestlerle namaz kılmak” bâbının altına koyar. Muğîre, Peygamber’in abdestinde ona yardım ettiğini; Peygamber’in mestlerinin üzerine mesh edip namaz kıldığını bildirir."
+  },
+  "389": {
+   "matn": "Salt ibn Muhammed bize haber verdi: Mehdî bize haber verdi, Vâsıl’dan, o Ebû Vâil’den, o Huzeyfe’den: “Rükûunu ve secdesini tam yapmayan bir adam gördü. Namazını bitirince Huzeyfe ona dedi ki: Namaz kılmadın. Dedi ki — ve sanırım şöyle dedi: — Ölürsen Muhammed’in, Allah’ın salât ve selâmı onun üzerine olsun, sünneti üzere ölmezsin.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Secdeyi tam yapmazsa” bâbının altına koyar. Huzeyfe, rükû ve secdesini tam yapmayan bir adam görür ve namazdan sonra ona namaz kılmadığını söyler. “Sanırım şöyle dedi” ifadesi, râvînin sonraki cümlenin lafzı konusundaki tereddüdünü gösterir."
+  },
+  "390": {
+   "matn": "Yahyâ ibn Bukeyr bize haber verdi: Bekr ibn Mudar bize bildirdi, Cafer’den, o İbn Hürmüz’den, o Abdullah ibn Mâlik ibn Buhayne’den: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, “namaz kıldığında kollarını açardı, koltuk altlarının beyazlığı görününceye kadar.” Leys de dedi ki: Cafer ibn Rebîa bana bunun benzerini bildirdi.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Secdede kollarını açıp bedeninden uzak tutmak” bâbının altına koyar. İbn Buhayne, Peygamber’in namazda kollarını koltuk altlarının beyazlığı görününceye kadar açtığını bildirir. “Leys de dedi ki …” ilavesi muallaktır, yani tam bir senet olmadan zikredilmiştir."
+  },
+  "391": {
+   "matn": "Amr ibn Abbâs bize bildirdi, dedi: İbnü’l-Mehdî bize bildirdi, dedi: Mansûr ibn Sa‘d bize bildirdi, Meymûn ibn Siyâh’tan, o Enes ibn Mâlik’ten, dedi ki: Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu ki: “Kim bizim namazımız gibi namaz kılar, kıblemize yönelir ve kestiğimizi yerse, işte o, Allah’ın ve Resûlünün himayesinde olan Müslümandır; öyleyse Allah’ın himayesini bozmayın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kıbleye yönelmenin fazileti” bâbının altına koyar. Enes, Peygamber’in şu sözünü nakleder: Müslümanların namazını kılan, kıblelerine yönelen ve kestiklerini yiyen kimse Allah’ın ve Resûlünün himayesindedir; bu himaye çiğnenmemelidir."
+  },
+  "392": {
+   "matn": "Nuaym bize bildirdi, dedi: İbnü’l-Mübârek bize bildirdi, Humeyd et-Tavîl’den, o Enes ibn Mâlik’ten, dedi ki: Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu ki: “İnsanlarla, ‘Allah’tan başka ilâh yoktur’ deyinceye kadar savaşmakla emrolundum. Bunu söyler, bizim namazımızı kılar, kıblemize yönelir ve bizim kestiğimiz gibi keserlerse, hakkı olması dışında kanları ve malları bize haram olmuştur; hesapları Allah’a aittir.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kıbleye yönelmenin fazileti” bâbının altına koyar. Enes, Peygamber’in şu sözünü nakleder: İnsanlarla kelime-i şehâdeti söyleyinceye kadar savaşmakla emrolunmuştur; bunu söyleyen, Müslümanların namazını kılan, kıblelerine yönelen ve onlar gibi kesen kimsenin kanı ve malı haklı bir sebep olmadıkça dokunulmazdır ve hesabı Allah’a aittir."
+  },
+  "393": {
+   "matn": "İbn Ebî Meryem dedi ki: Yahyâ bize haber verdi: Humeyd bize bildirdi: Enes bize bildirdi, Peygamber’den, Allah’ın salât ve selâmı onun üzerine olsun.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî bu senedi “Kıbleye yönelmenin fazileti” bâbının altına koyar. “İbn Ebî Meryem dedi ki” kalıbıyla zikredilir ve yalnızca Peygamber’e uzanan senedi içerir; kendi lafzı yoktur."
+  },
+  "393.2": {
+   "matn": "Ali ibn Abdullah da dedi ki: Hâlid ibn el-Hâris bize bildirdi, dedi: Humeyd bize bildirdi, dedi ki: “Meymûn ibn Siyâh, Enes ibn Mâlik’e sordu ve dedi ki: Ey Ebû Hamza, kulun kanını ve malını haram kılan nedir? Dedi ki: Kim Allah’tan başka ilâh olmadığına şahitlik eder, kıblemize yönelir, namazımızı kılar ve kestiğimizi yerse, işte o Müslümandır; Müslümanın hakkı onun da hakkıdır, Müslümanın yükümlülüğü ona da aittir.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî bu rivayeti “Kıbleye yönelmenin fazileti” bâbının altında “Ali ibn Abdullah da dedi ki” kalıbıyla zikreder. Meymûn, Enes’e neyin kan ve malı dokunulmaz kıldığını sorar; Enes, kelime-i şehâdeti söyleyen, kıbleye yönelen, namaz kılan ve kesilmiş hayvandan yiyen kimsenin aynı hak ve yükümlülüklere sahip bir Müslüman olduğunu söyler."
+  },
+  "394": {
+   "matn": "Ali ibn Abdullah bize bildirdi, dedi: Süfyân bize bildirdi, dedi: ez-Zührî bize bildirdi, Atâ ibn Yezîd’den, o Ebû Eyyûb el-Ensârî’den: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu ki: “Hâcet yerine gittiğinizde kıbleye dönmeyin ve ona arkanızı çevirmeyin; doğuya veya batıya yönelin. Ebû Eyyûb dedi ki: Şam’a geldik; kıbleye doğru yapılmış tuvaletler bulduk; kenara dönerdik ve Yüce Allah’tan bağışlanma dilerdik.” Ve ez-Zührî’den, o Atâ’dan, dedi ki: Ebû Eyyûb’u Peygamber’den, Allah’ın salât ve selâmı onun üzerine olsun, benzerini söylerken işittim.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Medine ve Şam ehlinin kıblesi” bâbının altına koyar. Ebû Eyyûb, Peygamber’in, hâcet giderirken kıbleye ne yönelmeyi ne de arkayı dönmeyi, doğuya veya batıya yönelmeyi emreden sözünü nakleder. Şam’daki tuvaletlere dair devam eden haber, sahâbî Ebû Eyyûb’un kendi tutumuna ilişkin açıklamasıdır. Sonda, ez-Zührî’den Atâ yoluyla benzer lafızlı ikinci bir senet gelir."
+  },
+  "395": {
+   "matn": "el-Humeydî bize bildirdi, dedi: Süfyân bize bildirdi, dedi: Amr ibn Dînâr bize bildirdi, dedi ki: “İbn Ömer’e, umre için Kâbe’yi tavaf eden ama Safâ ile Merve arasında sa‘y etmeyen bir adamı sorduk: Hanımına yaklaşabilir mi? Dedi ki: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, geldi, Kâbe’yi yedi kez tavaf etti, makamın arkasında iki rekât namaz kıldı ve Safâ ile Merve arasında sa‘y etti; ‘Sizin için Allah’ın Elçisinde güzel bir örnek vardır.’”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Allah Teâlâ’nın ‘İbrahim’in makamından bir namazgâh edinin’ sözü” bâbının altına koyar. İbn Ömer, umreyle ilgili bir soruya, Peygamber’in Kâbe’yi yedi kez tavaf ettiğini, İbrâhim’in makamının arkasında iki rekât kıldığını ve Safâ ile Merve arasında sa‘y ettiğini belirterek cevap verir; sonunda Allah’ın Elçisinin örnekliğine işaret eder."
+  },
+  "396": {
+   "matn": "Câbir ibn Abdullah’a da sorduk, dedi ki: “Safâ ile Merve arasında sa‘y edinceye kadar ona yaklaşmasın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî bu sözü aynı bâbın altına koyar. Önceki habere devam olarak kendi senedi olmadan gelir: Aynı soruya Câbir ibn Abdullah, Safâ ile Merve arasında sa‘y edilinceye kadar hanıma yaklaşılmaması gerektiği cevabını verir."
+  },
+  "397": {
+   "matn": "Müsedded bize bildirdi, dedi: Yahyâ bize bildirdi, Seyf’ten, dedi ki: Mücâhid’in şöyle dediğini işittim: “İbn Ömer’e gelindi ve ona: İşte Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, Kâbe’ye girdi, denildi.” İbn Ömer dedi ki: Ben de gittim; Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, çoktan çıkmıştı ve Bilâl’i iki kapı arasında dikilirken buldum. Bilâl’e sordum ve dedim ki: Peygamber Kâbe’de namaz kıldı mı? Dedi ki: Evet, girdiğinde solunda kalan iki direk arasında iki rekât; sonra çıktı ve Kâbe’nin önünde iki rekât namaz kıldı.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Allah Teâlâ’nın ‘İbrahim’in makamından bir namazgâh edinin’ sözü” bâbının altına koyar. Mücâhid, İbn Ömer’e Peygamber’in Kâbe’ye girdiğinin söylendiğini bildirir. İbn Ömer Bilâl’e sorar; Bilâl, Peygamber’in girenin solunda kalan iki direk arasında iki rekât, ardından Kâbe’nin önünde iki rekât daha kıldığını doğrular."
+  },
+  "398": {
+   "matn": "İshâk ibn Nasr bize bildirdi, dedi: Abdürrezzâk bize bildirdi: İbn Cüreyc bize haber verdi, Atâ’dan, dedi ki: İbn Abbâs’ı şöyle derken işittim: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, Beyt’e girince onun bütün köşelerinde dua etti; ondan çıkıncaya kadar namaz kılmadı. Çıkınca Kâbe’nin karşısında iki rekât namaz kıldı ve: İşte kıble budur, dedi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbın altına koyar. İbn Abbâs, Peygamber’in Beyt’e girince bütün köşelerinde dua ettiğini, ancak çıktıktan sonra Kâbe’nin önünde iki rekât namaz kıldığını ve “kıble budur” dediğini bildirir."
+  },
+  "399": {
+   "matn": "Abdullah ibn Recâ bize bildirdi, dedi: İsrâil bize bildirdi, Ebû İshâk’tan, o Berâ ibn Âzib’den, Allah ikisinden de razı olsun, dedi ki: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, on altı veya on yedi ay Beytülmakdis’e doğru namaz kıldı; Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, Kâbe’ye yöneltilmeyi arzu ediyordu. Bunun üzerine Allah şunu indirdi: ‘Yüzünün gökte dönüp durduğunu görüyoruz.’ Ve Kâbe’ye yöneldi. İnsanlardan akılsızlar, yani Yahudiler, dediler ki: ‘Onları üzerinde bulundukları kıbleden çeviren nedir?’ De ki: ‘Doğu da batı da Allah’ındır; O, dilediğini doğru yola iletir.’ Bir adam Peygamber’le, Allah’ın salât ve selâmı onun üzerine olsun, namaz kıldı; namazı kıldıktan sonra çıktı ve ikindi namazında Beytülmakdis’e doğru namaz kılan Ensâr’dan bir topluluğun yanından geçti. Şahitlik ederek dedi ki: Allah’ın Elçisiyle, Allah’ın salât ve selâmı onun üzerine olsun, namaz kıldım ve o Kâbe’ye yöneldi. Bunun üzerine topluluk, Kâbe’ye yönelinceye kadar döndü.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Nerede olursa olsun kıbleye yönelmek” bâbının altına koyar. Berâ, Peygamber’in on altı veya on yedi ay Beytülmakdis’e doğru namaz kıldığını, ardından yüzünün gökte dönüp durmasına dair âyetin indiğini ve Kâbe’ye yöneldiğini bildirir. Peygamber’le namaz kılmış bir adam bunu ikindi namazında Ensâr’dan bir topluluğa haber verdi ve onlar Kâbe’ye döndüler. “On altı veya on yedi” belirsizliği rivayetten gelir."
+  },
+  "400": {
+   "matn": "Müslim bize bildirdi, dedi: Hişâm bize bildirdi, dedi: Yahyâ ibn Ebî Kesîr bize bildirdi, Muhammed ibn Abdurrahmân’dan, o Câbir’den, dedi ki: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, bineği hangi yöne dönerse dönsün üzerinde namaz kılardı; farz namazı kılmak istediğinde ise iner ve kıbleye yönelirdi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Nerede olursa olsun kıbleye yönelmek” bâbının altına koyar. Câbir, Peygamber’in bineği hangi yöne dönükse o yönde namaz kıldığını; farz namaz için inip kıbleye yöneldiğini bildirir."
+  },
+  "401": {
+   "matn": "Osman bize bildirdi, dedi: Cerîr bize bildirdi, Mansûr’dan, o İbrâhim’den, o Alkame’den, dedi ki: Abdullah dedi ki: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, namaz kıldı – İbrâhim dedi ki: Fazla mı kıldı eksik mi, bilmiyorum –; selâm verince kendisine: Ey Allah’ın Elçisi, namazda yeni bir şey mi oldu? denildi. Dedi ki: O nedir? Dediler ki: Şöyle şöyle kıldın. Bunun üzerine ayaklarını büktü, kıbleye yöneldi, iki secde yaptı, sonra selâm verdi. Yüzüyle bize döndüğünde dedi ki: Namazda yeni bir şey olsaydı size haber verirdim; ancak ben sizin gibi bir beşerim, sizin unuttuğunuz gibi ben de unuturum. Unuttuğumda bana hatırlatın; sizden biri namazında şüpheye düşerse doğruyu araştırsın, onun üzerine tamamlasın, sonra selâm versin, sonra iki secde yapsın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Nerede olursa olsun kıbleye yönelmek” bâbının altına koyar. Abdullah, Peygamber’in namaz kıldığını; namazda yeni bir şey olup olmadığı sorulduğunda ve şöyle şöyle kıldığı söylendiğinde kıbleye yönelip iki secde yaptığını ve selâm verdiğini bildirir. Ardından kendisinin onlar gibi bir beşer olduğunu ve unuttuğunu, kendisine hatırlatmalarını, namazında şüphe eden kimsenin doğruyu araştırmasını söyledi. Râvî İbrâhim’in, Peygamber’in fazla mı eksik mi kıldığı konusundaki tereddüdü lafızda korunmuştur."
+  },
+  "402": {
+   "matn": "Amr ibn Avn bize bildirdi, dedi: Huşeym bize bildirdi, Humeyd’den, o Enes’ten, dedi ki: Ömer dedi ki: “Rabbimle üç hususta uyuştum: Dedim ki: Ey Allah’ın Elçisi, keşke İbrâhim’in makamını namazgâh edinsek! Bunun üzerine ‘İbrahim’in makamından bir namazgâh edinin’ âyeti indi. Bir de hicâb âyeti: Dedim ki: Ey Allah’ın Elçisi, keşke hanımlarına örtünmelerini emretsen; çünkü onlarla iyi de konuşuyor, kötü de! Bunun üzerine hicâb âyeti indi. Peygamber’in, Allah’ın salât ve selâmı onun üzerine olsun, hanımları ona karşı kıskançlıkta bir araya geldiler; ben de onlara dedim ki: ‘Belki Rabbi, sizi boşarsa, ona sizden daha hayırlı eşler verir.’ Bunun üzerine bu âyet indi.” İbn Ebî Meryem bize bildirdi, dedi: Yahyâ ibn Eyyûb bize haber verdi, dedi: Humeyd bana bildirdi, dedi: Enes’i bunu söylerken işittim.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kıble hakkında gelenler” bâbının altına koyar. Enes, Ömer’in Rabbiyle üç hususta uyuştuğunu nakleder: İbrâhim’in makamının namazgâh edinilmesi, hicâb âyeti ve onun sözlerinin ardından inen, Peygamber’in hanımlarına dair âyet. Ardından İbn Ebî Meryem yoluyla ikinci bir senet gelir; burada Humeyd, bunu Enes’ten işittiğini söyler."
+  },
+  "403": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik ibn Enes bize haber verdi, Abdullah ibn Dînâr’dan, o Abdullah ibn Ömer’den, dedi ki: “İnsanlar Kubâ’da sabah namazındayken yanlarına bir gelen geldi ve dedi ki: Allah’ın Elçisine, Allah’ın salât ve selâmı onun üzerine olsun, bu gece Kur’ân indirildi ve Kâbe’ye yönelmesi emredildi; siz de ona yönelin. Yüzleri Şam’a doğruydu; Kâbe’ye döndüler.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kıble hakkında gelenler” bâbının altına koyar. İbn Ömer, Kubâ ahalisinin sabah namazında Peygamber’e Kâbe’ye yönelmesinin emredildiğini öğrendiğini; o ana kadar Şam’a yönelmiş olan insanların Kâbe’ye döndüğünü bildirir."
+  },
+  "404": {
+   "matn": "Müsedded bize bildirdi, dedi: Yahyâ bize bildirdi, Şu‘be’den, o Hakem’den, o İbrâhim’den, o Alkame’den, o Abdullah’tan, dedi ki: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, öğle namazını beş rekât kıldı. Dediler ki: Namaza ilâve mi edildi? Dedi ki: O nedir? Dediler ki: Beş kıldın. Bunun üzerine ayaklarını büktü ve iki secde yaptı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kıble hakkında gelenler” bâbının altına koyar. Abdullah, Peygamber’in öğle namazını beş rekât kıldığını; namaza ilâve edilip edilmediği sorulduğunda ve beş kıldığı söylendiğinde ayaklarını bükerek iki secde yaptığını bildirir."
+  },
+  "405": {
+   "matn": "Kuteybe bize bildirdi, dedi: İsmâil ibn Cafer bize bildirdi, Humeyd’den, o Enes’ten: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, “kıblede bir balgam gördü; bu ona ağır geldi, öyle ki yüzünde belli oldu. Kalkıp onu eliyle kazıdı. Sonra dedi ki: Sizden biri namazda durduğunda Rabbiyle gizlice konuşur – ya da: Rabbi onunla kıble arasındadır –; bu yüzden hiçbiriniz kıblesi yönüne tükürmesin; soluna veya ayaklarının altına tükürsün. Sonra ridâsının ucunu aldı, içine tükürdü, bir kısmını diğerinin üzerine katladı ve dedi ki: Ya da böyle yapsın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitteki tükürüğü elle kazımak” bâbının altına koyar. Enes, Peygamber’in kıblede bir balgam gördüğünü, buna belirgin biçimde üzüldüğünü ve onu eliyle kazıdığını bildirir. Ardından namazda duran kimsenin Rabbiyle gizlice konuştuğunu, bu yüzden kıble yönüne değil soluna veya ayaklarının altına tükürmesi gerektiğini söyledi; kendisi ridâsının ucuna tükürdü. “Ya da: Rabbi onunla kıble arasındadır” seçeneği, râvînin lafızdaki tereddüdünü yansıtır."
+  },
+  "406": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Nâfi‘den, o Abdullah ibn Ömer’den: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, kıble duvarında tükürük gördü ve onu kazıdı. Sonra insanlara döndü ve dedi ki: Sizden biri namaz kılarken yüzünün önüne tükürmesin; çünkü namaz kıldığında Allah yüzünün önündedir.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbın altına koyar. İbn Ömer, Peygamber’in kıble duvarında tükürük görüp onu kazıdığını; sonra insanlara, namaz kılanın yüzünün önüne tükürmemesi gerektiğini, çünkü namaz kılarken Allah’ın yüzünün önünde olduğunu söylediğini bildirir."
+  },
+  "407": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Hişâm ibn Urve’den, o babasından, o müminlerin annesi Âişe’den: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, kıble duvarında sümük, ya da tükürük, ya da balgam gördü ve onu kazıdı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbın altına koyar. Âişe, Peygamber’in kıble duvarında sümük, tükürük veya balgam gördüğünü ve kazıdığını bildirir; rivayet üç ihtimali yan yana zikreder, birini belirlemez."
+  },
+  "408": {
+   "matn": "Mûsâ ibn İsmâil bize bildirdi, dedi: İbrâhim ibn Sa‘d bize haber verdi: İbn Şihâb bize haber verdi, Humeyd ibn Abdurrahmân’dan, Ebû Hüreyre ile Ebû Saîd ona şunu anlattı: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, mescidin duvarında bir balgam gördü, bir çakıl taşı alıp onu kazıdı. Sonra dedi ki: Sizden biri balgam çıkardığında yüzünün önüne ve sağına çıkarmasın; soluna veya sol ayağının altına tükürsün.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitteki sümüğü çakıl taşıyla gidermek” bâbının altına koyar. Ebû Hüreyre ile Ebû Saîd, Peygamber’in mescit duvarında bir balgam görüp onu çakıl taşıyla kazıdığını bildirir. Yüzünün önüne ve sağına değil, soluna veya sol ayağının altına tükürülmesi gerektiğini söyledi."
+  },
+  "410": {
+   "matn": "Yahyâ ibn Bukeyr bize bildirdi, dedi: Leys bize bildirdi, Ukayl’den, o İbn Şihâb’dan, o Humeyd ibn Abdurrahmân’dan, Ebû Hüreyre ile Ebû Saîd ona şunu bildirdi: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, mescidin duvarında bir balgam gördü; Allah’ın Elçisi bir çakıl taşı alıp onu sıyırdı. Sonra dedi ki: Sizden biri balgam çıkardığında yüzünün önüne ve sağına çıkarmasın; soluna veya sol ayağının altına tükürsün.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Namazda sağına tükürmez” bâbının altına koyar. Ebû Hüreyre ile Ebû Saîd, Peygamber’in mescit duvarında bir balgam görüp onu çakıl taşıyla sıyırdığını bildirir; yüzünün önüne ve sağına değil, soluna veya sol ayağının altına tükürülmesi gerektiğini söyledi."
+  },
+  "412": {
+   "matn": "Hafs ibn Ömer bize bildirdi, dedi: Şu’be bize bildirdi, dedi: Katâde bana haber verdi, dedi: Enes’i şöyle derken işittim: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: “Hiçbiriniz önüne ve sağına tükürmesin; soluna veya ayağının altına tükürsün.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbın altına koyar. Enes, Peygamber’den anlatı çerçevesi olmayan kısa bir söz nakleder: İnsan ne önüne ne de sağına tükürmeli; soluna veya ayağının altına tükürmelidir."
+  },
+  "413": {
+   "matn": "Âdem bize bildirdi, dedi: Şu’be bize bildirdi, dedi: Katâde bize bildirdi, dedi: Enes ibn Mâlik’i şöyle derken işittim: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: “Mümin namazdayken Rabbiyle gizlice konuşur; bu yüzden önüne ve sağına tükürmesin; soluna veya ayağının altına tükürsün.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Soluna veya sol ayağının altına tükürsün” bâbının altına koyar. Enes, Peygamber’den şunu nakleder: Mümin namazdayken Rabbiyle gizlice konuşur; bu yüzden ne önüne ne de sağına tükürmeli, soluna veya ayağının altına tükürmelidir."
+  },
+  "414": {
+   "matn": "Ali bize bildirdi, dedi: Süfyân bize bildirdi: Zührî bize bildirdi, Humeyd ibn Abdurrahmân’dan, o Ebû Saîd’den: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, mescidin kıblesinde bir balgam gördü ve onu bir çakıl taşıyla kazıdı. Sonra bir adamın önüne veya sağına tükürmesini yasakladı; soluna veya sol ayağının altına tükürülmesini söyledi.” Zührî’den de: Humeyd’i işitti, o Ebû Saîd’den: benzerini.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbın altına koyar. Ebû Saîd, Peygamber’in mescidin kıblesinde bir balgam görüp onu çakıl taşıyla kazıdığını, sonra önüne veya sağına tükürmeyi yasaklayıp bunun yerine soluna veya sol ayağının altına işaret ettiğini bildirir. Sonda Zührî’den Humeyd ve Ebû Saîd yoluyla “benzeri” lafzıyla ikinci bir senet yer alır."
+  },
+  "415": {
+   "matn": "Âdem bize bildirdi, dedi: Şu’be bize bildirdi, dedi: Katâde bize bildirdi, dedi: Enes ibn Mâlik’i şöyle derken işittim: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: “Mescitte tükürmek bir günahtır, kefareti de onu gömmektir.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitte tükürmenin kefareti” bâbının altına koyar. Enes, Peygamber’den şunu nakleder: Mescitte tükürmek bir günahtır, kefareti de onu gömmektir."
+  },
+  "416": {
+   "matn": "İshâk ibn Nasr bize bildirdi, dedi: Abdürrezzâk bize bildirdi, Ma’mer’den, o Hemmâm’dan, o Ebû Hüreyre’yi işitti, o Peygamber’den, Allah’ın salât ve selâmı onun üzerine olsun, dedi ki: “Sizden biri namaza kalktığında önüne tükürmesin; çünkü namaz kıldığı yerde bulunduğu sürece Allah’la gizlice konuşur. Sağına da tükürmesin; çünkü sağında bir melek vardır. Soluna veya ayağının altına tükürsün ve onu gömsün.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitte balgamı gömmek” bâbının altına koyar. Ebû Hüreyre, Peygamber’den şunu nakleder: Namaza kalkan kişi önüne tükürmesin; çünkü Allah’la gizlice konuşur. Sağına da tükürmesin; çünkü orada bir melek vardır. Soluna veya ayağının altına tükürsün ve sonra onu gömsün."
+  },
+  "417": {
+   "matn": "Mâlik ibn İsmâîl bize bildirdi, dedi: Züheyr bize bildirdi, dedi: Humeyd bize bildirdi, Enes’ten: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, “kıblede bir balgam gördü ve onu eliyle kazıdı; üzerinde hoşnutsuzluk görüldü – ya da: bundan hoşnutsuzluğu ve ona karşı sertliği görüldü. Dedi ki: Sizden biri namazında durduğunda Rabbiyle gizlice konuşur – ya da: Rabbi onunla kıblesi arasındadır –; bu yüzden kıblesine tükürmesin; soluna veya ayağının altına tükürsün. Sonra ridâsının ucunu aldı, içine tükürdü ve bir kısmını diğerinin üzerine kıvırdı. Dedi ki: Ya da böyle yapsın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Tükürük gelirse elbisesinin ucuyla alsın” bâbının altına koyar. Enes, Peygamber’in kıblede bir balgam görüp onu eliyle kazıdığını bildirir; ardından kıbleye değil soluna veya ayağının altına tükürülmesi gerektiğini söyledi ve kendisi ridâsının ucuna tükürdü. Rivayet hoşnutsuzluk için iki, gizli konuşma için iki ifade verir (“ya da: Rabbi onunla kıblesi arasındadır”); bu, râvînin lafızdaki tereddüdünü gösterir."
+  },
+  "418": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Ebû’z-Zinâd’dan, o A‘rec’den, o Ebû Hüreyre’den: Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: “Kıblemi şurada mı görüyorsunuz? Allah’a yemin olsun, ne huşûunuz ne de rükûunuz benden gizli kalır; ben sizi arkamdan da görürüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “İmamın insanlara namazı tam kılmaları için öğüt vermesi ve kıbleyi zikretmesi” bâbının altına koyar. Ebû Hüreyre, Peygamber’in cemaate kıblesini burada görüp görmediklerini sorduğunu, ardından ne huşûlarının ne de rükûlarının kendisinden gizli kalmadığını, çünkü onları arkasından gördüğünü vurguladığını nakleder."
+  },
+  "419": {
+   "matn": "Yahyâ ibn Sâlih bize bildirdi, dedi: Füleyh ibn Süleymân bize bildirdi, Hilâl ibn Ali’den, o Enes ibn Mâlik’ten, dedi ki: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, bize bir namaz kıldırdı, sonra minbere çıktı ve namaz ile rükû hakkında konuştu: Ben sizi arkamdan da, sizi gördüğüm gibi görürüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbın altına koyar. Enes, Peygamber’in namazdan sonra minberde namaz ve rükû hakkında konuştuğunu ve kendisini şu an gördüğü gibi arkasından da gördüğünü söylediğini bildirir."
+  },
+  "420": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize bildirdi, Nâfi‘den, o Abdullah ibn Ömer’den: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, idmanlı atlar arasında el-Hafyâ’dan yarış yaptırdı; bunların varış yeri Seniyyetü’l-Vedâ idi. İdmansız atlar arasında ise Seniyye’den Züreyk oğulları mescidine kadar yarış yaptırdı. Abdullah ibn Ömer de bu atlarla yarışanlar arasındaydı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “‘Falan oğullarının mescidi’ denilir mi?” bâbının altına koyar. İbn Ömer, Peygamber’in idmanlı ve idmansız atlar arasında her biri için ayrı bir parkurla yarış yaptırdığını bildirir; idmansız atların parkuru Züreyk oğulları mescidinde bitiyordu. Kendisi de bu yarışa katılmıştır."
+  },
+  "421": {
+   "matn": "İbrâhim dedi, Abdülazîz ibn Suhayb’den, o Enes’ten, Allah ondan razı olsun, dedi ki: Peygamber’e, Allah’ın salât ve selâmı onun üzerine olsun, Bahreyn’den mal getirildi ve buyurdu: “Onu mescitte serin.” Bu, Allah’ın Elçisi’ne getirilen en çok maldı. Allah’ın Elçisi namaza çıktı ve ona dönüp bakmadı. Namazı bitirince gelip malın yanına oturdu; kime baksa ona verdi. Derken Abbâs geldi ve dedi ki: “Ey Allah’ın Elçisi, bana ver; çünkü ben hem kendimi hem Akîl’i fidyeyle kurtardım.” Allah’ın Elçisi ona: “Al” buyurdu. O da elbisesine avuç avuç doldurdu, sonra kaldırmak istedi ama kaldıramadı. Dedi ki: “Ey Allah’ın Elçisi, onlardan birine emret de onu bana kaldırsın.” Buyurdu ki: “Hayır.” Dedi ki: “O hâlde sen kaldır.” Buyurdu ki: “Hayır.” Bunun üzerine bir kısmını döktü, sonra yine kaldırmak istedi ve dedi ki: “Ey Allah’ın Elçisi, onlardan birine emret de onu bana kaldırsın.” Buyurdu ki: “Hayır.” Dedi ki: “O hâlde sen kaldır.” Buyurdu ki: “Hayır.” Bunun üzerine yine bir kısmını döktü, sonra onu yüklenip omzuna attı ve gitti. Allah’ın Elçisi, gözden kayboluncaya kadar ardından bakmaya devam etti; onun hırsına hayret ediyordu. Allah’ın Elçisi, ondan tek bir dirhem bile kalmadıkça yerinden kalkmadı.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî bu metni “İbrâhim dedi” diyerek kendi tam isnadı olmaksızın (muallak) “Mescitte taksimat yapmak ve hurma salkımı asmak” bâbında zikreder. Enes, Bahreyn’den gelen malın mescitte serildiğini ve Peygamber’in namazdan sonra gördüğü herkese verdiğini bildirir. Abbâs kendisi ve Akîl için pay istedi, taşıyabileceğinden fazlasını aldı ve Peygamber kimsenin ona yardım etmesine izin vermediği için iki kez bir kısmını dökmek zorunda kaldı. Peygamber, tek bir dirhem kalmayıncaya kadar kalkmadı."
+  },
+  "422": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi: Mâlik bize bildirdi, İshâk ibn Abdullah’tan, o Enes’i işitti, dedi ki: “Peygamber’i, Allah’ın salât ve selâmı onun üzerine olsun, mescitte buldum; yanında insanlar vardı. Ben ayağa kalktım; bana: Seni Ebû Talha mı gönderdi? dedi. Dedim ki: Evet. Dedi ki: Yemek için mi? Dedim ki: Evet. Bunun üzerine yanındakilere: Kalkın, dedi. Yola koyuldu, ben de onların önünde yürüdüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitte yemeğe davet eden ve orada davete icabet eden” bâbının altına koyar. Enes, Peygamber’i mescitte insanlarla birlikte bulur ve sorularına karşılık Ebû Talha’nın kendisini bir yemek için gönderdiğini doğrular. Peygamber arkadaşlarına kalkmalarını söyler ve yola çıkarlar; Enes önlerinden gider."
+  },
+  "423": {
+   "matn": "Yahyâ bize bildirdi, dedi: Abdürrezzâk bize bildirdi, dedi: İbn Cüreyc bize bildirdi, dedi: İbn Şihâb bana haber verdi, Sehl ibn Sa‘d’den: “Bir adam dedi ki: Ey Allah’ın Elçisi, karısının yanında başka bir erkek bulan adam hakkında ne dersin, onu öldürebilir mi? Bunun üzerine ikisi mescitte lian yaptılar; ben de tanıktım.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitte erkekler ve kadınlar arasında hüküm ve lian” bâbının altına koyar. Sehl ibn Sa‘d, bir adamın karısının yanında başka bir erkek bulan kimse hakkındaki sorusunu ve ardından ikisinin mescitte lian yaptığını, kendisinin de orada bulunduğunu bildirir. Lafız kısadır ve başka ayrıntı vermez."
+  },
+  "424": {
+   "matn": "Abdullah ibn Mesleme bize bildirdi, dedi: İbrâhim ibn Sa‘d bize bildirdi, İbn Şihâb’dan, o Mahmûd ibn er-Rebî‘den, o İtbân ibn Mâlik’ten: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, evine geldi ve dedi ki: Evinde senin için nerede namaz kılmamı istersin? Dedi ki: Ona bir yeri işaret ettim. Peygamber tekbir aldı, biz de arkasında saf tuttuk ve iki rekât kıldı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Bir eve giren dilediği yerde ya da emredildiği yerde namaz kılar, tecessüs etmez” bâbının altına koyar. İtbân, Peygamber’in evine gelip nerede namaz kılacağını sorduğunu bildirir; İtbân bir yer gösterir, Peygamber orada iki rekât kılar ve onlar arkasında saf tutar."
+  },
+  "425": {
+   "matn": "Saîd ibn Ufeyr bize bildirdi, dedi: Leys bana bildirdi, dedi: Ukayl bana bildirdi, İbn Şihâb’dan, dedi ki: Mahmûd ibn er-Rebî‘ el-Ensârî bana haber verdi: “İtbân ibn Mâlik – o, Allah’ın Elçisi’nin, Allah’ın salât ve selâmı onun üzerine olsun, ashâbından ve Bedir’de bulunan Ensâr’dandı – Allah’ın Elçisi’ne gelip dedi ki: Ey Allah’ın Elçisi, gözüm zayıfladı ve ben kavmime imamlık yapıyorum. Yağmur yağınca benimle onlar arasındaki vadi akıyor, onların mescidine gidip onlara namaz kıldıramıyorum. Ey Allah’ın Elçisi, keşke bana gelip evimde namaz kılsan da orayı namazgâh edinsem. Dedi ki: Allah’ın Elçisi ona: İnşallah yaparım, dedi. İtbân dedi ki: Allah’ın Elçisi ile Ebû Bekir, gün yükseldiğinde erkenden geldiler. Allah’ın Elçisi izin istedi, ben de izin verdim. Eve girinceye kadar oturmadı, sonra dedi ki: Evinde nerede namaz kılmamı istersin? Ona evin bir köşesini işaret ettim. Allah’ın Elçisi kalktı, tekbir aldı; biz de kalkıp saf tuttuk. İki rekât kıldı, sonra selam verdi. Dedi ki: Onu, onun için hazırladığımız bir hazîre yemeği için alıkoyduk. Mahalle halkından bir grup adam evde toplandı, sayıları azımsanmayacak kadardı. İçlerinden biri dedi ki: Mâlik ibn ed-Duhaysin – ya da ibn ed-Duhşun – nerede? Bazıları dedi ki: O, Allah’ı ve Elçisi’ni sevmeyen bir münafıktır. Allah’ın Elçisi dedi ki: Böyle deme. Onun “Allah’tan başka ilâh yoktur” dediğini, bununla Allah’ın rızasını (yüzünü) dilediğini görmüyor musun? Dedi ki: Allah ve Elçisi daha iyi bilir. Dedi ki: Biz onun yüzünü ve öğüdünü münafıklara dönük görüyoruz. Allah’ın Elçisi dedi ki: Allah, Allah’ın rızasını (yüzünü) dileyerek ‘Allah’tan başka ilâh yoktur’ diyeni ateşe haram kılmıştır.” İbn Şihâb dedi ki: Sonra Husayn ibn Muhammed el-Ensârî’ye – o Sâlim oğullarındandır ve onların ileri gelenlerindendir – Mahmûd ibn er-Rebî‘in hadisini sordum, o da bunu doğruladı.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Evlerdeki mescitler” bâbının altına koyar. Bedir’de bulunan İtbân, gözü zayıfladığı ve yağmurda vadi mescide giden yolu kestiği için Peygamber’den evine gelip orada namaz kılmasını ister; böylece o yeri namazgâh edinecektir. Peygamber Ebû Bekir ile gelir, gösterilen yerde iki rekât kılar ve bir yemek için kalır. Biri Mâlik ibn ed-Duhşun’u sorup başkaları ona münafık deyince Peygamber, Allah’ın rızasını dileyerek “Allah’tan başka ilâh yoktur” diyene Allah’ın ateşi haram kıldığını söyler. Adamın adı tereddütle nakledilmiştir (ed-Duhaysin ya da ed-Duhşun). Sonda Husayn ibn Muhammed, Mahmûd ibn er-Rebî‘in rivayetini doğrular."
+  },
+  "426": {
+   "matn": "Süleymân ibn Harb bize bildirdi, dedi: Şu‘be bize bildirdi, Eş‘as ibn Süleym’den, o babasından, o Mesrûk’tan, o Âişe’den, dedi ki: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, gücü yettiği sürece bütün işlerinde sağdan başlamayı severdi: temizlenmesinde, saçını taramasında ve nalın giymesinde.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescide girerken ve başka işlerde sağdan başlamak” bâbının altına koyar. Âişe, Peygamber’in gücü yettiği sürece bütün işlerinde sağdan başlamayı sevdiğini bildirir ve temizlenmeyi, saç taramayı ve nalın giymeyi sayar."
+  },
+  "427": {
+   "matn": "Muhammed ibn el-Müsennâ bize bildirdi, dedi: Yahyâ bize bildirdi, Hişâm’dan, dedi: Babam bana bildirdi, Âişe’den: “Ümmü Habîbe ile Ümmü Seleme, Habeşistan’da gördükleri, içinde resimler bulunan bir kiliseyi andılar. Bunu Peygamber’e, Allah’ın salât ve selâmı onun üzerine olsun, anlattılar; o da dedi ki: Onların arasında salih bir adam bulunur da ölürse, kabrinin üzerine bir mescit yapar ve içine o resimleri çizerlerdi. İşte onlar, kıyamet günü Allah katında yaratılmışların en kötüleridir.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Cahiliye müşriklerinin kabirleri açılıp yerlerine mescit yapılabilir mi?” bâbının altına koyar. Âişe, Ümmü Habîbe ile Ümmü Seleme’nin Peygamber’e Habeşistan’daki resimli bir kiliseyi anlattığını bildirir; Peygamber, o kimselerin salih bir adamın kabri üzerine mescit yapıp içine resimler koyduklarını söyler ve onları kıyamet günü Allah katında yaratılmışların en kötüleri olarak niteler."
+  },
+  "428": {
+   "matn": "Müsedded bize bildirdi, dedi: Abdülvâris bize bildirdi, Ebü’t-Teyyâh’tan, o Enes’ten, dedi ki: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, Medine’ye geldi ve Medine’nin yukarı kısmında, Amr ibn Avf oğulları denilen bir mahallede konakladı. Peygamber onların arasında on dört gece kaldı; sonra Neccâr oğullarına haber gönderdi, onlar kılıçlarını kuşanmış olarak geldiler. Sanki Peygamber’i bineğinin üstünde görüyorum; Ebû Bekir arkasında, Neccâr oğulları da çevresindeydi; sonunda Ebû Eyyûb’un avlusunda konakladı. Namaz vakti nerede yetişirse orada namaz kılmayı severdi, koyun ağıllarında da namaz kılardı. Sonra mescidin yapılmasını emretti ve Neccâr oğullarından bir topluluğa haber gönderip dedi ki: Ey Neccâr oğulları, şu bahçenizin bedelini bana söyleyin. Dediler ki: Hayır, vallahi, biz onun bedelini ancak Allah’tan isteriz. Enes dedi ki: Orada size söyleyeceğim şeyler vardı: Müşriklerin kabirleri, harabeler ve hurma ağaçları. Peygamber müşriklerin kabirlerinin açılmasını, harabelerin düzeltilmesini ve hurma ağaçlarının kesilmesini emretti. Hurma kütüklerini mescidin kıblesine doğru sıraladılar ve iki yan kapı direğini taştan yaptılar. Recez söyleyerek kaya taşıyorlardı; Peygamber de onlarla birlikteydi ve şöyle diyordu: Allahım, âhiret hayrından başka hayır yoktur – öyleyse Ensâr’ı ve Muhâcirleri bağışla.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbın altına koyar. Enes, Peygamber’in Medine’ye gelişini, Amr ibn Avf oğulları yanındaki konaklamasını ve Neccâr oğullarının mescit için arsayı, bedelini yalnızca Allah’tan isteyerek vermesini anlatır. Arsada müşriklerin kabirleri, harabeler ve hurma ağaçları vardı; Peygamber kabirlerin açılmasını, harabelerin düzeltilmesini ve hurmaların kesilmesini emretti, hurma kütükleri kıble olarak dizildi. Taşlar taşınırken dizeler söylendi ve Peygamber de katıldı: “Allahım, âhiret hayrından başka hayır yoktur.”"
+  },
+  "429": {
+   "matn": "Süleymân ibn Harb bize bildirdi, dedi: Şu‘be bize bildirdi, Ebü’t-Teyyâh’tan, o Enes’ten, dedi ki: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, koyun ağıllarında namaz kılardı.” Sonra onu daha sonra şöyle derken işittim: Mescit yapılmadan önce koyun ağıllarında namaz kılardı.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Koyun ağıllarında namaz kılmak” bâbının altına koyar. Enes, Peygamber’in koyun ağıllarında namaz kıldığını bildirir; sonraki bir sözünde bunun mescit yapılmadan önce olduğunu belirtir."
+  },
+  "430": {
+   "matn": "Sadaka ibn el-Fadl bize bildirdi, dedi: Süleymân ibn Hayyân bize bildirdi, dedi: Ubeydullah bize bildirdi, Nâfi‘den, dedi ki: “İbn Ömer’i devesine doğru namaz kılarken gördüm ve dedi ki: Peygamber’i, Allah’ın salât ve selâmı onun üzerine olsun, bunu yaparken gördüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Develerin bulunduğu yerlerde namaz kılmak” bâbının altına koyar. Nâfi‘, İbn Ömer’i devesine doğru namaz kılarken gördüğünü bildirir; İbn Ömer, Peygamber’i de aynısını yaparken gördüğünü söylemiştir."
+  },
+  "431": {
+   "matn": "Abdullah ibn Mesleme bize bildirdi, Mâlik’ten, o Zeyd ibn Eslem’den, o Atâ ibn Yesâr’dan, o Abdullah ibn Abbâs’tan, dedi ki: “Güneş tutuldu; Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, namaz kıldı. Sonra dedi ki: Bana ateş gösterildi; bugünkü gibi daha korkunç bir manzara hiç görmedim.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Önünde tandır, ateş veya tapınılan bir şey varken namaz kılan” bâbının altına koyar. İbn Abbâs, güneşin tutulduğunu ve Peygamber’in namaz kıldığını bildirir; ardından Peygamber’e ateşin gösterildiğini ve hiç bu kadar korkunç bir manzara görmediğini söylediğini aktarır."
+  },
+  "432": {
+   "matn": "Müsedded bize bildirdi, dedi: Yahyâ bize bildirdi, Ubeydullah’tan, dedi ki: Nâfi‘ bana haber verdi, İbn Ömer’den, o Peygamber’den, Allah’ın salât ve selâmı onun üzerine olsun, dedi ki: “Namazınızdan bir kısmını evlerinizde kılın ve onları kabirlere çevirmeyin.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kabristanlarda namaz kılmanın mekruhluğu” bâbının altına koyar. İbn Ömer, Peygamber’den namazın bir kısmının evlerde kılınması ve evlerin kabirlere çevrilmemesi talimatını nakleder."
+  },
+  "433": {
+   "matn": "İsmâîl ibn Abdullah bize bildirdi, dedi: Mâlik bana bildirdi, Abdullah ibn Dînâr’dan, o Abdullah ibn Ömer’den, Allah ikisinden de razı olsun: Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu ki: “Azaba uğratılmış bu kimselerin yerlerine ağlayarak olmadıkça girmeyin. Ağlamıyorsanız onlara girmeyin; onlara isabet eden size de isabet etmesin.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Yere batırılma ve azap yerlerinde namaz kılmak” bâbının altına koyar. İbn Ömer, Peygamber’in azaba uğratılanların yerlerine ağlayarak olmadıkça girilmemesi konusunda uyardığını bildirir; amaç, onlara isabet edenin kişiye de isabet etmemesidir."
+  },
+  "434": {
+   "matn": "Muhammed bize bildirdi, dedi: Abde bize haber verdi, Hişâm ibn Urve’den, o babasından, o Âişe’den: “Ümmü Seleme, Allah’ın Elçisi’ne, Allah’ın salât ve selâmı onun üzerine olsun, Habeş diyarında gördüğü ve Mâriye denilen bir kiliseyi anlattı. İçinde gördüğü resimleri ona anlattı. Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, dedi ki: Onlar öyle bir topluluktur ki, aralarında salih kul – ya da salih adam – ölünce kabrinin üzerine bir mescit yapar ve içine o resimleri çizerlerdi. İşte onlar Allah katında yaratılmışların en kötüleridir.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kilisede namaz kılmak” bâbının altına koyar. Âişe, Ümmü Seleme’nin Peygamber’e Habeşistan’daki Mâriye adlı kiliseyi ve resimlerini anlattığını bildirir; Peygamber, o kimselerin salih kullarının kabri üzerine mescit yapıp içine resimler koyduklarını söyler ve onları Allah katında yaratılmışların en kötüleri olarak niteler. “Kul” ya da “adam” ifadesi râvînin lafızdaki tereddüdüdür."
+  },
+  "435": {
+   "matn": "Ebü’l-Yemân bize bildirdi, dedi: Şuayb bize haber verdi, Zührî’den: Ubeydullah ibn Abdullah ibn Utbe bana haber verdi: Âişe ile Abdullah ibn Abbâs şöyle dedi: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, can çekişirken yüzüne bir örtü atmaya başladı; onun altında bunaldığında yüzünden açıyordu. Bu hâldeyken şöyle dedi: Allah’ın laneti Yahudilerin ve Hıristiyanların üzerine olsun; peygamberlerinin kabirlerini mescit edindiler.” Onların yaptıklarından sakındırıyordu.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi kaynakta yalnızca “bâb” diye geçen, başlıksız bir bâbın altına koyar. Âişe ile İbn Abbâs, Peygamber’in son hastalığında yüzüne bir örtü örtüp tekrar açtığını ve peygamberlerinin kabirlerini mescit edinen Yahudilere ve Hıristiyanlara Allah’ın lanetinin olduğunu söylediğini bildirir; metin, onların yaptıklarından sakındırdığını ekler."
+  },
+  "437": {
+   "matn": "Abdullah ibn Mesleme bize bildirdi, Mâlik’ten, o İbn Şihâb’dan, o Saîd ibn el-Müseyyeb’den, o Ebû Hüreyre’den: Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu ki: “Allah Yahudilerle savaşsın: peygamberlerinin kabirlerini mescit edindiler.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı başlıksız bâbın altına koyar. Ebû Hüreyre, Peygamber’den Yahudilerin peygamberlerinin kabirlerini mescit edindikleri için Allah’ın onlarla savaşsın dediğini nakleder."
+  },
+  "438": {
+   "matn": "Muhammed ibn Sinân bize bildirdi, dedi: Hüşeym bize bildirdi, dedi: Seyyâr – o, Ebü’l-Hakem’dir – bize bildirdi, dedi: Yezîd el-Fakîr bize bildirdi, dedi: Câbir ibn Abdullah bize bildirdi, dedi: Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu ki: “Bana benden önceki peygamberlerden hiçbirine verilmeyen beş şey verildi: Bir aylık yol mesafesinden korkuyla yardım gördüm; yeryüzü bana mescit ve temizleyici kılındı; ümmetimden kime namaz vakti yetişirse namaz kılsın; ganimetler bana helâl kılındı; her peygamber yalnızca kendi kavmine gönderilirdi, ben ise bütün insanlara gönderildim; bana şefaat verildi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi Peygamber’in “Yeryüzü bana mescit ve temizleyici kılındı” sözü bâbının altına koyar. Câbir, Peygamber’e ve ondan önceki hiçbir peygambere verilmeyen beş şeyi nakleder: bir aylık mesafeden korkuyla yardım, mescit ve temizleyici olarak yeryüzü, helâl kılınan ganimet, yalnızca kendi kavmine değil bütün insanlara gönderilmek ve şefaat. Ayrıca ümmetinden herkesin namaz vakti nerede yetişirse orada namaz kılması gerektiği belirtilir."
+  },
+  "439": {
+   "matn": "Ubeyd ibn İsmâil bize bildirdi, dedi: Ebû Usâme bize bildirdi, Hişâm’dan, o babasından, o Âişe’den: “Siyahî bir cariye Arapların bir kabilesine aitti; onu azat ettiler ve onların yanında kaldı. Dedi ki: Onlardan bir kız çocuğu çıktı, üzerinde deri şeritlerden kırmızı bir kuşak vardı. Dedi ki: Onu bıraktı – ya da üzerinden düştü –; o yerde dururken bir çaylak geçti, onu et sandı ve kaptı. Dedi ki: Onu aradılar ama bulamadılar. Dedi ki: Bunun üzerine beni itham ettiler. Dedi ki: Beni aramaya başladılar, hatta mahrem yerini bile aradılar. Dedi ki: Vallahi ben onlarla birlikte duruyordum ki çaylak geçti ve onu bıraktı; aralarına düştü. Dedi ki: Dedim ki: İşte beni itham ettiğiniz şey bu – siz iddia ettiniz, ben ondan beriydim –, işte o! Dedi ki: Sonra Allah’ın Elçisi’ne, Allah’ın salât ve selâmı onun üzerine olsun, geldi ve Müslüman oldu. Âişe dedi ki: Mescitte onun bir çadırı ya da küçük bir odası vardı. Dedi ki: Bana gelir, yanımda konuşurdu. Dedi ki: Yanımda hiç oturmaz ki şunu söylemesin: Kuşak günü Rabbimizin harikalarındandır – ama muhakkak ki beni küfür diyarından kurtardı. Âişe dedi ki: Ona dedim ki: Sana ne oluyor, yanımda hiç oturmuyorsun ki bunu söylemiyorsun? Dedi ki: Bunun üzerine bana bu hadiseyi anlattı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kadının mescitte uyuması” bâbının altına koyar. Âişe, kırmızı deri kuşağı almakla itham edilen ve bir çaylak kuşağı düşürene kadar aranan azatlı siyahî bir cariyeyi anlatır. Kadın Peygamber’e gelip Müslüman oldu ve sonra mescitte bir çadırı ya da küçük bir odası oldu; Âişe’nin yanında her seferinde kuşak günü hakkında bir beyit okur ve sonunda olayı anlatırdı."
+  },
+  "440": {
+   "matn": "Müsedded bize bildirdi, dedi: Yahyâ bize bildirdi, Ubeydullah’tan, dedi ki: Nâfi‘ bana bildirdi, dedi ki: Abdullah bana haber verdi: “Genç, bekâr ve ailesiz bir erkek olarak Peygamber’in, Allah’ın salât ve selâmı onun üzerine olsun, mescidinde uyurdu.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Erkeklerin mescitte uyuması” bâbının altına koyar. İbn Ömer, genç, bekâr ve ailesiz bir erkek olarak Peygamber’in mescidinde uyuduğunu bildirir."
+  },
+  "441": {
+   "matn": "Kuteybe ibn Saîd bize bildirdi, dedi: Abdülazîz ibn Ebî Hâzim bize bildirdi, Ebû Hâzim’den, o Sehl ibn Sa‘d’den, dedi ki: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, Fâtıma’nın evine geldi ve Ali’yi evde bulamadı. Dedi ki: Amcaoğlun nerede? Dedi ki: Benimle onun arasında bir şey oldu, bana kızdı, çıktı ve yanımda öğle uykusuna yatmadı. Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, bir kişiye: Bak bakalım nerede, dedi. O geldi ve dedi ki: Ey Allah’ın Elçisi, mescitte uyuyor. Allah’ın Elçisi geldi; Ali yan yatıyordu, ridâsı yanından düşmüş ve üstüne toprak bulaşmıştı. Allah’ın Elçisi onu üzerinden silmeye başladı ve şöyle diyordu: Kalk Ebû Türâb, kalk Ebû Türâb.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbın altına koyar. Sehl, Peygamber’in Ali’yi, bir tartışmadan sonra çıkıp gittiği için Fâtıma’nın evinde bulamadığını ve onu mescitte uyurken, ridâsı kaymış ve toprağa bulanmış hâlde bulduğunu bildirir; Peygamber toprağı sildi ve ona “Ebû Türâb” diye seslendi."
+  },
+  "442": {
+   "matn": "Yûsuf ibn Îsâ bize bildirdi, dedi: İbn Fudayl bize bildirdi, babasından, o Ebû Hâzim’den, o Ebû Hüreyre’den, dedi ki: “Suffe ehlinden yetmiş kişi gördüm; hiçbirinin üzerinde ridâ yoktu, yalnızca bir izâr ya da bir örtü vardı ve bunları boyunlarına bağlamışlardı. Kimininki baldırın yarısına, kimininki topuklara ulaşırdı; kişi onu eliyle toplar, avret yerinin görünmesinden hoşlanmazdı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbın altına koyar. Ebû Hüreyre, Suffe ehlinden yetmiş kişi gördüğünü, bunların ridâsının olmadığını, yalnızca bir izâr ya da boyna bağlanmış bir örtüleri bulunduğunu ve bunların farklı uzunluklara ulaştığını bildirir; giyen kişi avret yeri görünmesin diye onu eliyle toplardı."
+  },
+  "443": {
+   "matn": "Hallâd ibn Yahyâ bize bildirdi, dedi: Mis‘ar bize bildirdi, dedi: Muhârib ibn Dişâr bize bildirdi, Câbir ibn Abdullah’tan, dedi ki: “Peygamber’in, Allah’ın salât ve selâmı onun üzerine olsun, yanına mescitteyken geldim – Mis‘ar dedi ki: Zannederim kuşluk vaktinde dedi. O da: İki rekât namaz kıl, buyurdu. Benim ondan bir alacağım vardı; bana borcunu ödedi ve üstüne ekledi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Yolculuktan dönünce namaz kılmak” bâbının altına koyar. Câbir, mescitte Peygamber’in yanına geldiğini bildirir; râvî Mis‘ar bunun kuşluk vaktinde olup olmadığında tereddüt eder. Peygamber ona iki rekât namaz kılmasını söyledi ve ona olan borcu fazlasıyla ödedi."
+  },
+  "444": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Âmir ibn Abdullah ibn ez-Zübeyr’den, o Amr ibn Süleym ez-Zürakî’den, o Ebû Katâde es-Sülemî’den: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, şöyle buyurdu: Biriniz mescide girdiğinde oturmadan önce iki rekât namaz kılsın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Yolculuktan dönünce namaz kılmak” bâbının altına koyar. Ebû Katâde, Peygamber’den, mescide giren kimsenin oturmadan önce iki rekât namaz kılması gerektiğini nakleder."
+  },
+  "445": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Ebü’z-Zinâd’dan, o el-A‘rec’den, o Ebû Hureyre’den: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, şöyle buyurdu: Melekler, sizden biriniz namaz kıldığı namaz yerinde kaldığı ve abdestini bozmadığı sürece ona dua eder. Şöyle derler: Allah’ım, onu bağışla! Allah’ım, ona merhamet et!”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitte abdestin bozulması” bâbının altına koyar. Ebû Hureyre, Peygamber’den, namaz kılan kişi namaz yerinde kaldığı ve abdestini bozmadığı sürece meleklerin ona dua ettiğini nakleder; şöyle derler: “Allah’ım, onu bağışla, Allah’ım, ona merhamet et.”"
+  },
+  "446": {
+   "matn": "Ali ibn Abdullah bize bildirdi, dedi: Yakub ibn İbrâhim ibn Sa‘d bize bildirdi, dedi: Babam bana bildirdi, Sâlih ibn Keysân’dan, dedi ki: Nâfi‘ bize bildirdi: Abdullah ona haber verdi ki: “Allah’ın Elçisi’nin, Allah’ın salât ve selâmı onun üzerine olsun, zamanında mescit kerpiçle yapılmıştı, çatısı hurma dalı, direkleri hurma kütüğüydü. Ebû Bekir ona bir şey eklemedi, Ömer ise ona ekleme yaptı: Onu Allah’ın Elçisi’nin, Allah’ın salât ve selâmı onun üzerine olsun, zamanındaki yapısı üzerine kerpiç ve hurma dalıyla yaptı ve direklerini yeniden ağaçtan yaptı. Sonra Osman onu değiştirdi ve ona çok ekleme yaptı: Duvarını oyma taşlarla ve kireç harcıyla (el-kassa) yaptı, direklerini oyma taştan, çatısını da tik ağacından yaptı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescidin inşası” bâbının altına koyar. İbn Ömer, Peygamber’in mescidini kerpiçten, çatısı hurma dallı ve direkleri hurma kütüklü olarak tarif eder. Ebû Bekir bir şey eklemedi; Ömer onu aynı biçimde yeniden yaptı ve direkleri ağaçla değiştirdi; Osman onu çok genişletti ve oyma taş, kireç harcı ve tik ağacı kullandı."
+  },
+  "447": {
+   "matn": "Müsedded bize bildirdi, dedi: Abdülazîz ibn Muhtâr bize bildirdi, dedi: Hâlid el-Hazzâ bize bildirdi, İkrime’den: İbn Abbas bana ve oğlu Ali’ye dedi ki: “Ebû Said’in yanına gidin ve onun hadisini dinleyin. Gittik; o bir bahçede onu onarıyordu. Abasını aldı, dizlerini sararak oturdu, sonra bize anlatmaya başladı; mescidin inşasının anılmasına geldi. Dedi ki: Biz birer kerpiç taşıyorduk, Ammâr ise ikişer kerpiç. Peygamber onu gördü, üzerindeki tozu silkeledi ve şöyle dedi: Vah Ammâr’a! [Onu azgın topluluk öldürecek.] O onları cennete çağırıyor, onlar ise onu ateşe çağırıyor.” Dedi ki: Ammâr: Fitnelerden Allah’a sığınırım, diyor.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescit inşasında yardımlaşmak” bâbının altına koyar. Ebû Said el-Hudrî, mescidin inşasında herkesin birer kerpiç taşıdığını, Ammâr’ın ise ikişer taşıdığını ve Peygamber’in üzerindeki tozu silkelediğini anlatır. Köşeli parantez içindeki cümle Arapça metinde böyle işaretlenmiştir; Ammâr fitnelerden Allah’a sığındı."
+  },
+  "448": {
+   "matn": "Kuteybe bize bildirdi, dedi: Abdülazîz bize bildirdi, Ebû Hâzim’den, o Sehl’den, dedi ki: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, bir kadına haber gönderdi: Marangoz kölene söyle, bana üzerine oturacağım tahta basamaklar yapsın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Minber tahtaları ve mescit için marangoz ve ustalardan yardım istemek” bâbının altına koyar. Sehl, Peygamber’in bir kadına haber gönderip marangoz kölesine kendisine üzerine oturacağı tahta basamaklar yaptırmasını söylediğini bildirir."
+  },
+  "449": {
+   "matn": "Hallâd bize bildirdi, dedi: Abdülvâhid ibn Eymen bize bildirdi, babasından, o Câbir’den: “Bir kadın dedi ki: Ey Allah’ın Elçisi, sana üzerine oturacağın bir şey yaptırmayayım mı? Benim marangoz bir kölem var. Buyurdu: Dilersen. O da minberi yaptırdı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Minber tahtaları ve mescit için marangoz ve ustalardan yardım istemek” bâbının altına koyar. Câbir, bir kadının marangoz kölesine Peygamber için üzerine oturacağı bir şey yaptırmayı teklif ettiğini bildirir; Peygamber kabul etti ve böylece minber yapıldı."
+  },
+  "450": {
+   "matn": "Yahyâ ibn Süleymân bize bildirdi: İbn Vehb bana bildirdi, dedi ki: Amr bana haber verdi, ona Bükeyr bildirdi, ona Âsım ibn Ömer ibn Katâde bildirdi, o Ubeydullah el-Havlânî’yi işitti: “Osman ibn Affân’ın, Allah’ın Elçisi’nin, Allah’ın salât ve selâmı onun üzerine olsun, mescidini yaptırdığı için insanlar onun hakkında konuşurken şunu söylediğini işitti: Çok konuştunuz; ben Peygamber’in, Allah’ın salât ve selâmı onun üzerine olsun, şöyle buyurduğunu işittim: Kim bir mescit yaparsa – Bükeyr dedi ki: Zannederim şöyle dedi: Allah’ın rızasını gözeterek –, Allah ona cennette onun bir benzerini yapar.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescit yapan kimse” bâbının altına koyar. Osman, Peygamber’in mescidini yaptırması hakkında konuşan insanlara, mescit yapana Allah’ın cennette bir benzerini yapacağı hadisiyle cevap verir. Râvî Bükeyr, “Allah’ın rızasını gözeterek” ziyadesinin söylenip söylenmediğinde tereddüt eder."
+  },
+  "451": {
+   "matn": "Kuteybe ibn Saîd bize bildirdi, dedi: Süfyân bize bildirdi, dedi: Amr’a dedim ki: Câbir ibn Abdullah’ı şöyle derken işittin mi: “Bir adam yanında oklarla mescitten geçti; Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, ona: Onları demirlerinden tut, dedi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitten geçerken okların demirlerinden tutmak” bâbının altına koyar. Râvî Amr’a, Câbir’den şunu işitip işitmediğini sorar: Bir adam oklarla mescitten geçti ve Peygamber ona onları demirlerinden tutmasını söyledi."
+  },
+  "452": {
+   "matn": "Mûsâ ibn İsmâil bize bildirdi, dedi: Abdülvâhid bize bildirdi, dedi: Ebû Bürde ibn Abdullah bize bildirdi, dedi: Ebû Bürde’yi babasından, o Peygamber’den, Allah’ın salât ve selâmı onun üzerine olsun, işittim, buyurdu ki: “Kim mescitlerimizden ya da çarşılarımızdan birinden oklarla geçerse, avucuyla bir Müslümanı yaralamasın diye onları demirlerinden tutsun.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitten geçmek” bâbının altına koyar. Peygamber, mescitlerden ya da çarşılardan oklarla geçenin, eliyle bir Müslümanı incitmemesi için okları demirlerinden tutmasını emreder."
+  },
+  "453": {
+   "matn": "Ebü’l-Yemân el-Hakem ibn Nâfi bize bildirdi, dedi: Şuayb bize haber verdi, ez-Zührî’den, dedi ki: Ebû Seleme ibn Abdurrahmân ibn Avf bana haber verdi: “Hassân ibn Sâbit el-Ensârî’yi Ebû Hureyre’yi şahit tutarken işitti: Allah aşkına sana soruyorum, Peygamber’i, Allah’ın salât ve selâmı onun üzerine olsun, şöyle derken işittin mi: Ey Hassân, Allah’ın Elçisi adına cevap ver. Allah’ım, onu Rûhülkudüs ile destekle! Ebû Hureyre dedi ki: Evet.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitte şiir” bâbının altına koyar. Hassân ibn Sâbit, Ebû Hureyre’yi Allah adına şahit tutarak, Peygamber’i şöyle derken işitip işitmediğini sorar: “Ey Hassân, Allah’ın Elçisi adına cevap ver; Allah’ım, onu Rûhülkudüs ile destekle.” Ebû Hureyre bunu “Evet” diye doğrular."
+  },
+  "454": {
+   "matn": "Abdülazîz ibn Abdullah bize bildirdi, dedi: İbrâhim ibn Sa‘d bize bildirdi, Sâlih’ten, o İbn Şihâb’dan, dedi ki: Urve ibn ez-Zübeyr bana bildirdi ki Âişe şöyle dedi: “Allah’ın Elçisi’ni, Allah’ın salât ve selâmı onun üzerine olsun, bir gün odamın kapısında gördüm; Habeşliler mescitte oynuyorlardı, Allah’ın Elçisi de, Allah’ın salât ve selâmı onun üzerine olsun, beni cübbesiyle örtüyordu; ben onların oyununa bakıyordum.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitteki mızrak oyuncuları” bâbının altına koyar. Âişe, Habeşliler mescitte oynarken Peygamber’i odasının kapısında gördüğünü bildirir; Peygamber onu cübbesiyle örttü ve o onların oyununa baktı."
+  },
+  "455": {
+   "matn": "İbrâhim ibn el-Münzir şunu ekledi: İbn Vehb bize bildirdi: Yûnus bana haber verdi, İbn Şihâb’dan, o Urve’den, o Âişe’den, dedi ki: “Habeşliler mızraklarıyla oynarken Peygamber’i, Allah’ın salât ve selâmı onun üzerine olsun, gördüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî rivayeti “Mescitteki mızrak oyuncuları” bâbının altına koyar. Bu, İbrâhim ibn el-Münzir’in Âişe’ye kadar kendi isnadıyla eklediği bir rivayettir ve daha kısa biçimde, Habeşliler mızraklarıyla oynarken Peygamber’i gördüğünü bildirir."
+  },
+  "456": {
+   "matn": "Ali ibn Abdullah bize bildirdi, dedi: Süfyân bize bildirdi, Yahyâ’dan, o Amre’den, o Âişe’den, dedi ki: “Berîre ona geldi, kitâbeti konusunda ondan yardım istedi. Âişe: İstersen ailene (bedelini) vereyim, velâ (azat edenin hakkı) bana ait olsun, dedi. Ailesi ise: İstersen kalanı ona ver, dediler – Süfyân bir keresinde: İstersen onu azat et, velâ bizim olsun, dedi. Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, gelince bunu ona anlattım. Buyurdu ki: Onu satın al ve azat et; çünkü velâ azat edene aittir. Sonra Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, minberde ayağa kalktı – Süfyân bir keresinde: Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, minbere çıktı, dedi – ve buyurdu ki: Allah’ın Kitabı’nda olmayan şartlar koşan topluluklara ne oluyor? Kim Allah’ın Kitabı’nda olmayan bir şart koşarsa, yüz kez koşsa da o şart onun değildir.” Ali dedi ki: Yahyâ ve Abdülvehhâb, Yahyâ’dan, o Amre’den dediler; Ca‘fer ibn Avn ise Yahyâ’dan şöyle dedi: Amre’yi işittim, dedi ki: Âişe’yi işittim. Mâlik bunu Yahyâ’dan, o Amre’den rivayet etti: Berîre – ve “Minbere çıktı” sözünü anmadı.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitte minber üzerinde alım satımı zikretmek” bâbının altına koyar. Âişe, Berîre’nin kitâbeti hakkında anlatır: Peygamber velânın azat edene ait olduğunu söyler, sonra minberden Allah’ın Kitabı’nda olmayan şartlara karşı konuşur. Metin, Süfyân’ın lafzındaki farklılıkları ve farklı isnadları belirtir; Mâlik olayı minber anılmadan rivayet eder."
+  },
+  "457": {
+   "matn": "Abdullah ibn Muhammed bize bildirdi, dedi: Osman ibn Ömer bize bildirdi, dedi: Yûnus bize haber verdi, ez-Zührî’den, o Abdullah ibn Ka‘b ibn Mâlik’ten, o Ka‘b’dan: “Mescitte İbn Ebî Hadred’den, ondaki bir alacağını istedi; sesleri yükseldi, öyle ki Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, evindeyken onları işitti. Onlara doğru çıktı, odasının perdesini kaldırdı ve: Ey Ka‘b! diye seslendi. Dedi ki: Buyur, ey Allah’ın Elçisi! Buyurdu ki: Şu alacağından bir kısmını bırak. Ve ona işaret etti: yani yarısını. Dedi ki: Yaptım, ey Allah’ın Elçisi. Buyurdu ki: Kalk ve ödeyiver.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitte borç istemek ve borçlunun peşini bırakmamak” bâbının altına koyar. Ka‘b, mescitte İbn Ebî Hadred’den alacağını istediğini bildirir; sesleri yükselince Peygamber çıkıp Ka‘b’dan yarısını bırakmasını istedi, o da bıraktı. Sonra Peygamber borçluya kalanı ödemesini söyledi."
+  },
+  "458": {
+   "matn": "Süleymân ibn Harb bize bildirdi, dedi: Hammâd ibn Zeyd bize bildirdi, Sâbit’ten, o Ebû Râfi‘den, o Ebû Hureyre’den: “Siyahî bir adam ya da siyahî bir kadın mescidi süpürürdü ve öldü. Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, onu sordu; Öldü, dediler. Buyurdu ki: Bana haber vermeniz gerekmez miydi? Bana kabrini gösterin – ya da: kabrini dedi. Kabrine geldi ve onun için namaz kıldı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescidi süpürmek ve bez parçaları, çerçöp ve çöpleri toplamak” bâbının altına koyar. Ebû Hureyre, mescidi süpüren ve ölen siyahî bir adam ya da kadını nakleder. Peygamber o kişiyi sordu, kabrinin gösterilmesini istedi ve orada onun için namaz kıldı. Metinde bunun erkek mi kadın mı olduğu belli değildir."
+  },
+  "459": {
+   "matn": "Abdân bize bildirdi, Ebû Hamza’dan, o A‘meş’ten, o Müslim’den, o Mesrûk’tan, o Âişe’den, dedi ki: “Bakara sûresinden faiz ile ilgili âyetler indirilince Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, mescide çıktı ve onları insanlara okudu; sonra şarap ticaretini haram kıldı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Şarap ticaretinin haramlığının mescitte ilanı” bâbının altına koyar. Âişe, Bakara sûresinin faizle ilgili âyetleri indikten sonra Peygamber’in mescide çıkıp onları insanlara okuduğunu, sonra şarap ticaretini haram kıldığını bildirir."
+  },
+  "460": {
+   "matn": "Ahmed ibn Vâkıd bize bildirdi, dedi: Hammâd bize bildirdi, Sâbit’ten, o Ebû Râfi‘den, o Ebû Hureyre’den: “Bir kadın ya da bir erkek mescidi süpürürdü – ben ancak kadın olduğunu zannediyorum –; bunun üzerine Peygamber’in onun kabri başında namaz kıldığı hadisini zikretti.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescide hizmetçi” bâbının altına koyar. Ebû Hureyre, mescidi süpüren bir kadın ya da erkeği nakleder; râvî “kadın” olduğuna meyleder. Peygamber’in bu kişinin kabri başında namaz kıldığı rivayetine işaret eder."
+  },
+  "461": {
+   "matn": "İshâk ibn İbrâhim bize bildirdi, dedi: Rûh ve Muhammed ibn Ca‘fer bize haber verdi, Şu‘be’den, o Muhammed ibn Ziyâd’dan, o Ebû Hureyre’den, o Peygamber’den, Allah’ın salât ve selâmı onun üzerine olsun, dedi ki: “Cinlerden bir ifrit dün gece – ya da buna benzer bir söz söyledi – namazımı kesmek için üzerime atıldı. Allah beni ona karşı muktedir kıldı; onu mescidin direklerinden birine bağlamak istedim ki sabah olunca hepiniz ona bakasınız. Sonra kardeşim Süleyman’ın şu sözünü hatırladım: ‘Rabbim, bana, benden sonra hiç kimseye layık olmayacak bir mülk bağışla.’” Rûh dedi ki: “Böylece onu horlanmış olarak geri çevirdi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Esir veya borçlunun mescitte bağlanması” bâbının altına koyar. Ebû Hureyre, Peygamber’den, cinlerden bir ifritin gece namazını kesmek için üzerine atıldığını ve Allah’ın onu ona karşı muktedir kıldığını nakleder. Onu bir direğe bağlamak istedi, fakat Süleyman’ın duasını hatırladı ve Rûh’un eklediği üzere onu horlanmış olarak geri çevirdi."
+  },
+  "462": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: el-Leys bize bildirdi, dedi: Saîd ibn Ebî Saîd bize bildirdi, Ebû Hureyre’yi şöyle derken işittiğini: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, Necid tarafına süvariler gönderdi; Benî Hanîfe’den Sümâme ibn Usâl denilen bir adamı getirdiler ve mescidin direklerinden birine bağladılar. Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, ona çıktı ve: Sümâme’yi çözün, dedi. O da mescide yakın bir hurmalığa gitti, yıkandı, sonra mescide girdi ve: Allah’tan başka ilâh olmadığına ve Muhammed’in Allah’ın Elçisi olduğuna şahitlik ederim, dedi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Müslüman olunca gusletmek ve esirin mescitte bağlanması” bâbının altına koyar. Ebû Hureyre, Peygamber’in süvarilerinin Benî Hanîfe’den Sümâme ibn Usâl’ı getirip mescidin bir direğine bağladığını bildirir. Peygamber’in emriyle çözüldü, mescide yakın hurmalıkta yıkandı ve mescitte şehâdet getirdi."
+  },
+  "463": {
+   "matn": "Zekeriyyâ ibn Yahyâ bize bildirdi, dedi: Abdullah ibn Numeyr bize bildirdi, dedi: Hişâm bize bildirdi, babasından, o Âişe’den, dedi ki: “Sa‘d, Hendek günü ekhal damarından vuruldu. Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, onu yakından ziyaret edebilmek için mescitte bir çadır kurdu. Onları – mescitte Benî Gıfâr’a ait bir çadır vardı – ürküten, yalnızca kanın kendilerine doğru akmasıydı. Dediler ki: Ey çadır ahalisi, sizin taraftan bize gelen bu nedir? Meğer Sa‘d’ın yarası kan fışkırtıyormuş; o orada öldü.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Hastalar ve diğerleri için mescitte çadır” bâbının altına koyar. Âişe, Sa‘d’ın Hendek günü ekhal damarından vurulduğunu ve Peygamber’in onu yakından ziyaret etmek için mescitte bir çadır kurduğunu bildirir. Kan Benî Gıfâr’ın çadırına doğru akınca bunun Sa‘d’ın yarasından geldiği anlaşıldı; o çadırda öldü. Metin yalnızca “Sa‘d” adını anar."
+  },
+  "464": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Muhammed ibn Abdurrahmân ibn Nevfel’den, o Urve’den, o Ebû Seleme’nin kızı Zeynep’ten, o Ümmü Seleme’den, dedi ki: “Allah’ın Elçisi’ne, Allah’ın salât ve selâmı onun üzerine olsun, hasta olduğumu şikâyet ettim. Buyurdu ki: Binekteyken insanların arkasından tavaf et. Ben tavaf ettim; Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, Beyt’in yanında namaz kılıyor ve Tûr sûresini okuyordu: ‘Yazılı bir kitaba andolsun.’”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Bir sebepten dolayı deveyi mescide sokmak” bâbının altına koyar. Ümmü Seleme, hastalığını Peygamber’e şikâyet ettiğini bildirir; Peygamber ona binekteyken insanların arkasından tavaf etmesini söyledi, kendisi ise Beyt’in yanında namaz kılıp Tûr sûresini okuyordu."
+  },
+  "465": {
+   "matn": "Muhammed ibn el-Müsennâ bize bildirdi, dedi: Muâz ibn Hişâm bize bildirdi, dedi: Babam bana bildirdi, Katâde’den, dedi ki: Enes bize bildirdi: “Peygamber’in, Allah’ın salât ve selâmı onun üzerine olsun, ashâbından iki adam, karanlık bir gecede Peygamber’in yanından çıktılar; yanlarında önlerini aydınlatan iki kandil gibi bir şey vardı. Birbirlerinden ayrıldıklarında her birinin yanında bir tane kaldı, ta ki ailesine varıncaya kadar.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Bir sebepten dolayı deveyi mescide sokmak” bâbının altına koyar. Enes, iki sahâbînin karanlık bir gecede Peygamber’in yanından ayrıldığını ve önlerinde kandil gibi iki ışığın parladığını; ayrıldıklarında her birinin yanında birinin kalıp ailesine varıncaya dek onunla birlikte olduğunu bildirir."
+  },
+  "466": {
+   "matn": "Muhammed ibn Sinân bize bildirdi, dedi: Fuleyh bize bildirdi, dedi: Ebü’n-Nadr bize bildirdi, Ubeyd ibn Huneyn’den, o Büsr ibn Saîd’den, o Ebû Saîd el-Hudrî’den, dedi ki: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, hutbe verdi ve şöyle buyurdu: Allah bir kulu dünya ile kendi katındaki şey arasında muhayyer bıraktı; o da Allah katındakini seçti. Bunun üzerine Ebû Bekir ağladı, Allah ondan razı olsun. İçimden: Bu ihtiyar niçin ağlıyor? dedim. Allah bir kulu dünya ile kendi katındaki şey arasında muhayyer bıraktıysa ve o Allah katındakini seçtiyse – o kul Allah’ın Elçisi’ydi ve Ebû Bekir bizim en bilgilimizdi. Buyurdu ki: Ey Ebû Bekir, ağlama! İnsanların arkadaşlığında ve malında bana en cömert davranan Ebû Bekir’dir. Ümmetimden bir halîl edinecek olsaydım, Ebû Bekir’i edinirdim; ancak İslâm kardeşliği ve sevgisi vardır. Mescitte Ebû Bekir’in kapısı dışında kapatılmadık hiçbir kapı kalmasın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitteki küçük kapı ve geçit” bâbının altına koyar. Ebû Saîd, Peygamber’in dünya ile Allah katındaki şey arasında muhayyer bırakılan bir kulu anlatan hutbesini bildirir; Ebû Bekir ağladı ve Ebû Saîd bu kulun Peygamber’in kendisi olduğunu anladı. Peygamber, Ebû Bekir’in arkadaşlığını ve malını övdü ve Ebû Bekir’inkinin dışında mescide açılan bütün kapıların kapatılmasını emretti."
+  },
+  "467": {
+   "matn": "Abdullah ibn Muhammed el-Cu‘fî bize bildirdi, dedi: Vehb ibn Cerîr bize bildirdi, dedi: Babam bize bildirdi, dedi: Ya‘lâ ibn Hakîm’i işittim, İkrime’den, o İbn Abbas’tan, dedi ki: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, öldüğü hastalığında başına bir bez bağlamış olarak çıktı, minbere oturdu, Allah’a hamd ve senâ etti, sonra şöyle buyurdu: İnsanlar arasında nefsiyle ve malıyla bana Ebû Bekir ibn Ebî Kuhâfe’den daha cömert davranan kimse yoktur. İnsanlardan bir halîl edinecek olsaydım, Ebû Bekir’i halîl edinirdim; ancak İslâm dostluğu daha faziletlidir. Bu mescitte Ebû Bekir’in küçük kapısı (havha) dışındaki her küçük kapıyı benim için kapatın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitteki küçük kapı ve geçit” bâbının altına koyar. İbn Abbas, Peygamber’in son hastalığında başı bağlı olarak minbere çıktığını, Allah’a hamd ettiğini ve Ebû Bekir’in nefsiyle ve malıyla cömertliğini vurguladığını bildirir. Ebû Bekir’inkinin dışında mescide açılan bütün küçük kapıların kapatılmasını emretti."
+  },
+  "468": {
+   "matn": "Ebü’n-Nu‘mân ve Kuteybe bize bildirdi, dediler ki: Hammâd bize bildirdi, Eyyûb’dan, o Nâfi‘den, o İbn Ömer’den: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, Mekke’ye geldi ve Osman ibn Talha’yı çağırdı; o kapıyı açtı. Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, Bilâl, Üsâme ibn Zeyd ve Osman ibn Talha içeri girdiler, sonra kapı kapatıldı. İçeride bir süre kaldı, sonra çıktılar. İbn Ömer dedi ki: Acele ettim ve Bilâl’e sordum. Dedi ki: İçinde namaz kıldı. Dedim ki: Neresinde? Dedi ki: İki direğin arasında. İbn Ömer dedi ki: Ona kaç rekât kıldığını sormak aklımdan çıktı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kâbe ve mescitler için kapılar ve kilit” bâbının altına koyar. İbn Ömer, Peygamber’in Mekke’de Bilâl, Üsâme ibn Zeyd ve Osman ibn Talha ile Kâbe’ye girdiğini ve kapının kapatıldığını bildirir. Bilâl’e göre Peygamber içeride iki direğin arasında namaz kıldı; İbn Ömer kaç rekât kıldığını sormayı unuttu."
+  },
+  "469": {
+   "matn": "Kuteybe bize bildirdi, dedi: el-Leys bize bildirdi, Saîd ibn Ebî Saîd’den, Ebû Hureyre’yi şöyle derken işittiğini: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, Necid tarafına süvariler gönderdi; Benî Hanîfe’den Sümâme ibn Usâl denilen bir adamı getirdiler ve onu mescidin direklerinden birine bağladılar.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Müşrikin mescide girmesi” bâbının altına koyar. Ebû Hureyre kısa rivayette, Peygamber’in gönderdiği süvarilerin Benî Hanîfe’den Sümâme ibn Usâl’ı getirip mescidin bir direğine bağladığını bildirir."
+  },
+  "470": {
+   "matn": "Ali ibn Abdullah bize bildirdi, dedi: Yahyâ ibn Saîd bize bildirdi, dedi: el-Cu‘ayd ibn Abdurrahmân bize bildirdi, dedi: Yezîd ibn Husayfa bana bildirdi, es-Sâib ibn Yezîd’den, dedi ki: “Mescitte ayakta duruyordum; bir adam bana küçük bir taş attı. Baktım, Ömer ibn el-Hattâb’dı. Dedi ki: Git, şu ikisini bana getir. Onları ona getirdim. Dedi ki: Siz kimsiniz, ya da nerelisiniz? Taif ahalisindeniz, dediler. Dedi ki: Bu şehir halkından olsaydınız size acı bir ceza verirdim; Allah’ın Elçisi’nin, Allah’ın salât ve selâmı onun üzerine olsun, mescidinde seslerinizi yükseltiyorsunuz.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitlerde sesi yükseltmek” bâbının altına koyar. Es-Sâib ibn Yezîd, Ömer’in kendisine küçük bir taş atarak dikkatini çektiğini ve mescitte seslerini yükselten Taifli iki adamı getirttiğini bildirir. Ömer, şehir halkından olsalardı onlara acı bir ceza vereceğini söyledi."
+  },
+  "471": {
+   "matn": "Ahmed bize bildirdi, dedi: İbn Vehb bize bildirdi, dedi: Yûnus ibn Yezîd bana haber verdi, İbn Şihâb’dan: Abdullah ibn Ka‘b ibn Mâlik bana bildirdi ki Ka‘b ibn Mâlik ona haber verdi: “Allah’ın Elçisi’nin, Allah’ın salât ve selâmı onun üzerine olsun, zamanında mescitte İbn Ebî Hadred’den ondaki bir alacağını istedi; sesleri yükseldi, öyle ki Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, evindeyken onları işitti. Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, onlara doğru çıktı, odasının perdesini kaldırdı ve: Ey Ka‘b ibn Mâlik! Ey Ka‘b! diye seslendi. Dedi ki: Buyur, ey Allah’ın Elçisi! Eliyle borcunun yarısını bırakması için işaret etti. Ka‘b dedi ki: Yaptım, ey Allah’ın Elçisi. Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu ki: Kalk ve öde.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitlerde sesi yükseltmek” bâbının altına koyar. Ka‘b ibn Mâlik, mescitte İbn Ebî Hadred’den alacağını isterken seslerinin yükseldiğini; Peygamber’in çıkıp borcun yarısının bırakılması için işaret ettiğini ve sonra borçluya kalanı ödemesini söylediğini bildirir."
+  },
+  "472": {
+   "matn": "Müsedded bize bildirdi, dedi: Bişr ibn el-Mufaddal bize bildirdi, Ubeydullah’tan, o Nâfi‘den, o İbn Ömer’den, dedi ki: “Bir adam, Peygamber minberdeyken ona, Allah’ın salât ve selâmı onun üzerine olsun, sordu: Gece namazı hakkında ne dersin? Buyurdu ki: İkişer ikişer; sabahı kaçırmaktan korkan kişi bir rekât kılar, o da kıldığını tek yapar.” Ve şöyle derdi: “Namazınızın sonunu vitir yapın; çünkü Peygamber bunu emretti.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitte halkalar ve oturmak” bâbının altına koyar. İbn Ömer, Peygamber’e gece namazı sorulduğunda minberden şöyle cevap verdiğini bildirir: İkişer ikişer, sabahtan korkulursa vitir olarak bir rekât. İbn Ömer, namazın sonunu vitir yapmak gerektiğini ekler."
+  },
+  "473": {
+   "matn": "Ebü’n-Nu‘mân bize bildirdi, dedi: Hammâd bize bildirdi, Eyyûb’dan, o Nâfi‘den, o İbn Ömer’den: “Bir adam, Peygamber hutbe verirken ona, Allah’ın salât ve selâmı onun üzerine olsun, geldi ve: Gece namazı nasıl kılınır? dedi. Buyurdu ki: İkişer ikişer; sabahı kaçırmaktan korkarsan bir rekâtla vitir kıl; o, kıldığını tek yapar.” Velîd ibn Kesîr dedi ki: Ubeydullah ibn Abdullah bana bildirdi: İbn Ömer onlara bildirdi: Bir adam, Peygamber mescitteyken ona, Allah’ın salât ve selâmı onun üzerine olsun, seslendi.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitte halkalar ve oturmak” bâbının altına koyar. İbn Ömer, Peygamber’in gece namazı sorusuna cevabını nakleder: İkişer ikişer, sabahtan korkulursa vitir olarak bir rekât. Velîd ibn Kesîr’in kendi isnadıyla yaptığı ek, adamın Peygamber’e mescitte seslendiğini belirtir."
+  },
+  "474": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, İshâk ibn Abdullah ibn Ebî Talha’dan: Akîl ibn Ebî Tâlib’in azatlısı Ebû Murre ona haber verdi, Ebû Vâkıd el-Leysî’den, dedi ki: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, mescitteyken üç kişi geldi; ikisi Allah’ın Elçisi’ne yöneldi, biri gitti. İkisinden biri bir boşluk gördü ve oturdu, diğeri onların arkasına oturdu. Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, bitirince buyurdu ki: Size bu üç kişiyi haber vereyim mi? Biri Allah’a sığındı, Allah da ona sığınak verdi; diğeri utandı, Allah da ondan utandı; öbürü yüz çevirdi, Allah da ondan yüz çevirdi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitte halkalar ve oturmak” bâbının altına koyar. Ebû Vâkıd, Peygamber’in mescitteki meclisine gelen üç kişiyi anlatır: biri bir boşluğa oturdu, biri diğerlerinin arkasına oturdu, biri gitti. Peygamber, Allah’ın birincisine sığınak verdiğini, ikincisinden utandığını, üçüncüsünden yüz çevirdiğini açıkladı."
+  },
+  "475": {
+   "matn": "Abdullah ibn Mesleme bize bildirdi, Mâlik’ten, o İbn Şihâb’dan, o Abbâd ibn Temîm’den, o amcasından ki: “Allah’ın Elçisi’ni, Allah’ın salât ve selâmı onun üzerine olsun, mescitte sırtüstü yatmış, bir ayağını diğerinin üzerine koymuş gördü.” Ve İbn Şihâb’dan, o Saîd ibn el-Müseyyeb’den, dedi ki: Ömer ve Osman bunu yaparlardı.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitte sırtüstü uzanmak ve ayağını uzatmak” bâbının altına koyar. Abbâd ibn Temîm, amcasından Peygamber’i mescitte sırtüstü, bir ayağı diğerinin üzerinde yatarken gördüğünü nakleder. Saîd ibn el-Müseyyeb yoluyla gelen ikinci kısım, Ömer ve Osman’ın uygulamasına dair bir sözdür; Peygamber’in sözü değildir."
+  },
+  "476": {
+   "matn": "Yahyâ ibn Bükeyr bize bildirdi, dedi: el-Leys bize bildirdi, Ukayl’den, o İbn Şihâb’dan, dedi ki: Urve ibn ez-Zübeyr bana bildirdi ki Peygamber’in, Allah’ın salât ve selâmı onun üzerine olsun, hanımı Âişe şöyle dedi: “Ebeveynimi bildim bileli onlar dine (dîn) uyuyorlardı; üzerimizden Allah’ın Elçisi’nin, Allah’ın salât ve selâmı onun üzerine olsun, günün iki ucunda, sabah ve akşam bize uğramadığı bir gün geçmedi. Sonra Ebû Bekir’in aklına bir şey geldi ve evinin avlusunda bir mescit yaptı; orada namaz kılar ve Kur’ân okurdu. Müşriklerin kadınları ve çocukları başında durur, ona hayret eder ve ona bakarlardı. Ebû Bekir çok ağlayan bir adamdı; Kur’ân okuduğunda gözlerine hâkim olamazdı. Bu, müşrik Kureyş eşrâfını telaşlandırdı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “İnsanlara zarar vermeden yol üzerinde bulunan mescit” bâbının altına koyar. Âişe, Ebû Bekir’in evinin avlusunda bir mescit yaptığını, orada namaz kılıp Kur’ân okuduğunu bildirir; müşriklerin kadınları ve çocukları ona bakardı, o okurken çok ağlardı ve bu Kureyş eşrâfını telaşlandırdı."
+  },
+  "477": {
+   "matn": "Müsedded bize bildirdi, dedi: Ebû Muâviye bize bildirdi, el-A‘meş’ten, o Ebû Sâlih’ten, o Ebû Hureyre’den, o Peygamber’den, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu ki: “Cemaatle kılınan namaz, kişinin evinde ve çarşısında kıldığı namazdan yirmi beş derece fazladır. Çünkü biriniz güzelce abdest alır, sonra yalnızca namaz kılmak isteyerek mescide gelirse, attığı her adımla Allah onu bir derece yükseltir ve bir günahını siler; mescide girinceye kadar. Mescide girince, namaz onu alıkoyduğu sürece namazdadır; melekler de – yani onun için – namaz kıldığı oturma yerinde bulunduğu sürece dua eder: Allah’ım, onu bağışla, Allah’ım, ona merhamet et; orada abdestini bozmadığı sürece.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Çarşı mescidinde namaz kılmak” bâbının altına koyar. Ebû Hureyre, Peygamber’den, cemaatle kılınan namazın evde ve çarşıda kılınan namazdan yirmi beş derece fazla olduğunu, mescide atılan her adımın bir derece yükselttiğini ve bir günahı sildiğini, abdestini bozmadığı sürece oturan kişi için meleklerin dua ettiğini nakleder."
+  },
+  "478": {
+   "matn": "Hâmid ibn Ömer bize bildirdi, Bişr’den, dedi ki: Âsım bize bildirdi, dedi: Vâkıd bize bildirdi, babasından, o İbn Ömer’den ya da İbn Amr’dan: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, parmaklarını birbirine geçirdi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitte ve başka yerde parmakları birbirine geçirmek” bâbının altına koyar. Metin, Peygamber’in parmaklarını birbirine geçirdiğini kısaca bildirir. Râvî, sahâbînin İbn Ömer mi İbn Amr mı olduğunda tereddüt eder."
+  },
+  "480": {
+   "matn": "Âsım ibn Alî dedi ki: Âsım ibn Muhammed bize bildirdi: Bu hadisi babamdan işittim ama ezberleyemedim; Vâkıd onu bana babasından düzeltti, dedi ki: Babamı şöyle derken işittim: Abdullah dedi ki: Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu ki: “Ey Abdullah ibn Amr, insanların döküntüsü arasında kalırsan halin nice olur?” – bu lafızla.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî rivayeti “Mescitte ve başka yerde parmakları birbirine geçirmek” bâbının altına koyar. “Âsım ibn Alî dedi ki” sözüyle başlar ve yalnızca bir parça olarak nakledilir: Peygamber, Abdullah ibn Amr’a insanların döküntüsü arasında kalırsa halinin nice olacağını sorar. Lafzın geri kalanı metinde verilmez."
+  },
+  "481": {
+   "matn": "Hallâd ibn Yahyâ bize bildirdi, dedi: Süfyân bize bildirdi, Ebû Bürde ibn Abdullah ibn Ebî Bürde’den, o dedesinden, o Ebû Mûsâ’dan, o Peygamber’den, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu ki: “Mümin mümine, birbirini destekleyen parçalardan oluşan bir bina gibidir.” Ve parmaklarını birbirine geçirdi.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitte ve başka yerde parmakları birbirine geçirmek” bâbının altına koyar. Ebû Mûsâ, Peygamber’in müminin mümine, parçaları birbirini destekleyen bir bina gibi olduğu örneğini nakleder; Peygamber bunu söylerken parmaklarını birbirine geçirdi."
+  },
+  "482": {
+   "matn": "İshâk bize bildirdi, dedi: İbn Şumeyl bize bildirdi: İbn Avn bize haber verdi, İbn Sîrîn’den, o Ebû Hureyre’den, dedi ki: “Allah’ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, bize ikindi vaktindeki iki namazdan birini kıldırdı – İbn Sîrîn dedi ki: Ebû Hureyre onun adını söyledi, ben ise unuttum –, dedi ki: Bize iki rekât kıldırdı, sonra selâm verdi; mescitte enine konmuş bir kütüğe gitti, öfkeli gibi ona dayandı, sağ elini sol elinin üzerine koydu, parmaklarını birbirine geçirdi ve sağ yanağını sol elinin tersine koydu. Acele edenler mescidin kapılarından çıktılar ve: Namaz kısaltıldı mı? dediler. Cemaat arasında Ebû Bekir ve Ömer vardı, ama ona konuşmaktan çekindiler. Cemaat arasında elleri uzun, Zü’l-Yedeyn denilen bir adam vardı. Dedi ki: Ey Allah’ın Elçisi, unuttun mu, yoksa namaz mı kısaltıldı? Buyurdu ki: Ne unuttum, ne de kısaltıldı. Sonra: Zü’l-Yedeyn’in dediği gibi mi? dedi. Evet, dediler. Bunun üzerine ilerledi, bıraktığını kıldı, sonra selâm verdi, sonra tekbir getirdi ve secdesi gibi ya da daha uzun secde etti, sonra başını kaldırıp tekbir getirdi, sonra tekbir getirdi ve secdesi gibi ya da daha uzun secde etti, sonra başını kaldırıp tekbir getirdi.” Bazen ona: Sonra selâm verdi mi? diye sorarlardı; o da: Bana, İmrân ibn Husayn’ın: Sonra selâm verdi, dediği bildirildi, derdi.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mescitte ve başka yerde parmakları birbirine geçirmek” bâbının altına koyar. Ebû Hureyre, Peygamber’in iki rekâttan sonra selâm verdiğini, bir kütüğe dayanıp parmaklarını birbirine geçirdiğini bildirir; Zü’l-Yedeyn unutup unutmadığını ya da namazın kısaltılıp kısaltılmadığını sordu. Hazır bulunanlar doğruladıktan sonra Peygamber eksik bıraktığını kıldı ve iki secde yaptı. Selâma dair son söz, İbn Sîrîn’in bunun kendisine İmrân ibn Husayn’dan bildirildiği şeklindeki ifadesidir."
+  },
+  "483": {
+   "matn": "Muhammed ibn Ebî Bekr el-Mukaddemî bize bildirdi, dedi: Fudayl ibn Süleymân bize bildirdi, dedi: Mûsâ ibn Ukbe bize bildirdi, dedi: “Sâlim ibn Abdullah’ı yol üzerinde bazı yerleri özellikle arayıp orada namaz kılarken gördüm; babasının orada namaz kıldığını ve onun Peygamber’i ﷺ o yerlerde namaz kılarken gördüğünü anlatıyordu. Nâfi de bana İbn Ömer’den onun o yerlerde namaz kıldığını bildirdi. Sâlim’e sordum; onun bütün yerlerde Nâfi’ye uyduğunu biliyorum, yalnız ikisi Şeref er-Ravhâ’daki bir mescit konusunda ayrıldılar.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Medine yolları üzerindeki mescitler ve Peygamber'in ﷺ namaz kıldığı yerler” bâbının altına koyar. Mûsâ ibn Ukbe, Sâlim ibn Abdullah’ın yol üzerinde bazı yerleri arayıp orada namaz kıldığını bildirir; çünkü babası orada namaz kılmış ve Peygamber’i orada namaz kılarken görmüştür. Nâfi de aynısını İbn Ömer’den nakleder. Mûsâ’ya göre ikisi, Şeref er-Ravhâ’daki bir mescit dışında aynı görüştedir."
+  },
+  "484": {
+   "matn": "İbrâhîm ibn el-Münzir bize bildirdi, dedi: Enes ibn İyâd bize bildirdi, dedi: Mûsâ ibn Ukbe bize bildirdi, Nâfi’den: Abdullah ona haber verdi ki Allah’ın Elçisi ﷺ “umre yaptığında Zü’l-Huleyfe’de, haccında da hac yaptığı zaman Zü’l-Huleyfe’deki mescidin bulunduğu yerde bir semure ağacının altında konaklardı. Bir gazveden –bu yoldan– ya da hacdan veya umreden dönerken bir vadinin içinden inerdi; vadinin içinden çıkınca vadinin doğu kenarındaki Batha’da devesini çöktürür ve sabaha kadar orada geceyi geçirirdi – taştan yapılı mescidin yanında ve üzerinde mescit bulunan tepecikte değil. Orada bir su kanalı vardı, Abdullah onun yanında namaz kılardı; içinde kum yığınları vardı ve Allah’ın Elçisi ﷺ orada namaz kılardı. Sonra sel orada Batha’yı yaydı, Abdullah’ın namaz kıldığı o yer gömülene kadar.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Medine yolları üzerindeki mescitler ve Peygamber'in ﷺ namaz kıldığı yerler” bâbının altına koyar. İbn Ömer, Peygamber’in Zü’l-Huleyfe’de bir semure ağacının altında nerede konakladığını ve dönüşte Batha’da geceyi nerede geçirdiğini anlatır. Metin ayrıca selin, Abdullah’ın namaz kıldığı bir yeri gömdüğünü de belirtir."
+  },
+  "485": {
+   "matn": "Ve Abdullah ibn Ömer ona şunu bildirdi: “Peygamber ﷺ, Şeref er-Ravhâ’daki mescidin öncesinde bulunan küçük mescidin olduğu yerde namaz kıldı.” Abdullah, Peygamber’in ﷺ namaz kıldığı yeri bilirdi ve şöyle derdi: “Sonra mescitte namaza durduğunda sağında. O mescit, Mekke’ye giderken yolun sağ kenarındadır; onunla büyük mescit arasında bir taş atımı kadar ya da ona yakın bir mesafe vardır.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî rivayeti “Medine yolları üzerindeki mescitler ve Peygamber'in ﷺ namaz kıldığı yerler” bâbının altına koyar. “Ve” diye başlar; böylece önceki rivayetin devamı niteliğindedir. İbn Ömer, Şeref er-Ravhâ’daki mescidin öncesindeki küçük mescidi Peygamber’in namaz kıldığı yer olarak belirtir ve Mekke yönünde yolun sağ kenarındaki konumunu tarif eder."
+  },
+  "486": {
+   "matn": "“Ve İbn Ömer, Ravhâ’nın Munsaraf’ında bulunan Irk’a doğru namaz kılardı. O Irk’ın kenarının ucu, Mekke’ye giderken onunla Munsaraf arasındaki mescidin öncesinde yolun kenarına ulaşır. Orada bir mescit yapılmıştı, ama Abdullah o mescitte namaz kılmazdı; onu solunda ve arkasında bırakır, önünde Irk’ın kendisine doğru namaz kılardı. Abdullah Ravhâ’dan yola çıkar ve o yere varana kadar öğle namazını kılmaz, orada öğle namazını kılardı. Mekke’den gelirken oraya sabahtan bir saat önce ya da gecenin sonunda uğrarsa, orada sabah namazını kılana kadar konaklardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî rivayeti “Medine yolları üzerindeki mescitler ve Peygamber'in ﷺ namaz kıldığı yerler” bâbının altına koyar. İsnad girişi olmadan “ve” diye başlar; böylece önceki rivayetlerin devamı niteliğindedir. İbn Ömer’in Ravhâ yakınındaki Irk’ta nerede namaz kıldığını ve orada yapılan mescitten kaçındığını anlatır."
+  },
+  "487": {
+   "matn": "Ve Abdullah ona şunu bildirdi: “Peygamber ﷺ, Ruveyse’nin öncesinde, yolun sağında ve yola karşı, düz ve yumuşak bir yerde, büyük bir ağacın altında konaklardı; ta ki Ruveyse’nin Berîd’inden iki mil önce bulunan bir tepecikten gelene kadar. Ağacın tepesi kırılmış ve ortasından bükülmüştü, ama bir gövde üzerinde duruyor; gövdesinde çok sayıda kum yığını var.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî rivayeti “Medine yolları üzerindeki mescitler ve Peygamber'in ﷺ namaz kıldığı yerler” bâbının altına koyar. İbn Ömer, Peygamber’in Ruveyse’nin öncesinde büyük bir ağacın altındaki konaklama yerini anlatır. Metinde yalnızca yer bildirimleri ve ağacın tarifi vardır."
+  },
+  "488": {
+   "matn": "Ve Abdullah ibn Ömer ona şunu bildirdi: “Peygamber ﷺ, Arc’ın ardında, bir yüksekliğe giderken, bir Tal‘a’nın kenarında namaz kıldı. O mescidin yanında iki ya da üç kabir vardır; kabirlerin üzerinde yolun sağında, yolun selem ağaçlarının yanında, o selem ağaçlarının arasında bir taş yığını vardır. Abdullah, öğle sıcağında güneş kaydıktan sonra Arc’tan yola çıkar ve o mescitte öğle namazını kılardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî rivayeti “Medine yolları üzerindeki mescitler ve Peygamber'in ﷺ namaz kıldığı yerler” bâbının altına koyar. “Ve” diye başlar; böylece önceki rivayetlerin devamı niteliğindedir. İbn Ömer, Peygamber’in Arc’ın ardında namaz kıldığı bir yeri belirtir ve konumunu tarif eder; metinde yalnızca yer bildirimleri vardır."
+  },
+  "489": {
+   "matn": "Ve Abdullah ibn Ömer ona şunu bildirdi: “Allah’ın Elçisi ﷺ, yolun solunda, Herşâ’nın öncesinde bir su yatağında birkaç büyük ağacın yanında konakladı. O su yatağı Kürâ‘ Herşâ’ya bitişiktir; onunla yol arasında yaklaşık bir ok atımı vardır. Abdullah, bu ağaçların yola en yakın ve en uzun olanı olan bir ağaca doğru namaz kılardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî rivayeti “Medine yolları üzerindeki mescitler ve Peygamber'in ﷺ namaz kıldığı yerler” bâbının altına koyar. İbn Ömer, Peygamber’in Herşâ’nın öncesinde büyük ağaçların yanındaki konaklama yerini ve Abdullah’ın namaz kılarken yöneldiği ağacı anlatır. Metinde yalnızca yer bildirimleri vardır."
+  },
+  "490": {
+   "matn": "Ve Abdullah ibn Ömer ona şunu bildirdi: “Peygamber ﷺ, Medine’nin öncesinde, Merr ez-Zahrân’ın yakın kısmındaki su yatağında, es-Safravât’tan inerken konaklardı. Mekke’ye giderken yolun solundaki o su yatağının içinde konaklardı; Allah’ın Elçisi’nin ﷺ konak yeriyle yol arasında bir taş atımından başka mesafe yoktur.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî rivayeti “Medine yolları üzerindeki mescitler ve Peygamber'in ﷺ namaz kıldığı yerler” bâbının altına koyar. İbn Ömer, Peygamber’in Merr ez-Zahrân’daki bir su yatağında konakladığı yeri anlatır. Metinde yalnızca yer bildirimleri vardır."
+  },
+  "491": {
+   "matn": "Ve Abdullah ibn Ömer ona şunu bildirdi: “Peygamber ﷺ Zü Tuvâ’da konaklar ve sabaha kadar orada geceyi geçirirdi; Mekke’ye geldiğinde sabah namazını kılardı. Allah’ın Elçisi’nin ﷺ o namaz yeri sert bir tepecik üzerindedir; orada yapılan mescitte değil, ondan aşağıda, sert bir tepecik üzerindedir.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî rivayeti “Medine yolları üzerindeki mescitler ve Peygamber'in ﷺ namaz kıldığı yerler” bâbının altına koyar. İbn Ömer, Peygamber’in Zü Tuvâ’da konakladığını, geceyi orada geçirdiğini ve Mekke’ye varınca sabah namazını kıldığını bildirir; namaz yerinin orada yapılan mescide göre konumunu belirtir."
+  },
+  "492": {
+   "matn": "Ve Abdullah ona şunu bildirdi: “Peygamber ﷺ, kendisiyle uzun dağ arasında Kâbe yönünde bulunan dağın iki yarığına yöneldi; orada yapılan mescidi, tepeciğin kenarındaki mescidin soluna aldı. Peygamber’in ﷺ namaz yeri ondan aşağıda, kara tepecik üzerindedir; tepecikten on zirâ ya da bu kadar bırakırsın, sonra seninle Kâbe arasındaki dağın iki yarığına yönelerek namaz kılarsın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî rivayeti “Medine yolları üzerindeki mescitler ve Peygamber'in ﷺ namaz kıldığı yerler” bâbının altına koyar. İbn Ömer, Peygamber’in namaz yerini yer bildirimleriyle verir: Kâbe yönünde bir dağın iki yarığına karşı, kara tepecik üzerinde. Metinde yalnızca yer bildirimleri vardır."
+  },
+  "493": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, İbn Şihâb’dan, o Ubeydullah ibn Abdullah ibn Utbe’den, o Abdullah ibn Abbâs’tan, dedi ki: “Bir dişi eşeğe binmiş olarak geldim; o gün ergenliğe yaklaşmıştım. Allah’ın Elçisi ﷺ Mina’da insanlara bir duvara karşı olmaksızın namaz kıldırıyordu. Safın bir kısmının önünden geçtim, indim, dişi eşeği otlamaya saldım ve safa girdim; bunu bana kimse kınamadı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “İmamın sütresi arkasındakilerin de sütresidir” bâbının altına koyar. İbn Abbâs, Peygamber Mina’da namaz kıldırırken ergenlik çağında bir dişi eşekle safın bir kısmının önünden geçtiğini ve bunu kimsenin kınamadığını bildirir."
+  },
+  "494": {
+   "matn": "İshâk bize bildirdi, dedi: Abdullah ibn Numeyr bize bildirdi, dedi: Ubeydullah bize bildirdi, Nâfi’den, o İbn Ömer’den: Allah’ın Elçisi ﷺ “bayram günü çıktığında mızrağın getirilmesini emrederdi; mızrak önüne dikilirdi, o da ona doğru namaz kılardı, insanlar arkasında dururdu. Bunu yolculukta da yapardı; emirler onu işte oradan edindiler.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “İmamın sütresi arkasındakilerin de sütresidir” bâbının altına koyar. İbn Ömer, Peygamber’in bayram günü önüne bir mızrak diktirip ona doğru namaz kıldığını, insanların arkasında durduğunu ve bunu yolculukta da yaptığını bildirir. Emirlerin onu oradan edindikleri sözü metinde yer alır."
+  },
+  "495": {
+   "matn": "Ebu’l-Velîd bize bildirdi, dedi: Şu‘be bize bildirdi, Avn ibn Ebî Cuhayfe’den, dedi ki: Babamdan işittim: Peygamber ﷺ “Batha’da, önünde bir aneze varken onlara namaz kıldırdı: öğleyi iki rekât, ikindiyi iki rekât; önünden kadın ve eşek geçiyordu.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “İmamın sütresi arkasındakilerin de sütresidir” bâbının altına koyar. Râvî, Peygamber’in Batha’da önünde bir aneze varken öğle ve ikindi namazlarını ikişer rekât kıldırdığını, önünden bir kadın ile bir eşeğin geçtiğini bildirir."
+  },
+  "496": {
+   "matn": "Amr ibn Zürâre bize bildirdi, dedi: Abdülazîz ibn Ebî Hâzim bize haber verdi, babasından, o Sehl’den, dedi ki: “Allah’ın Elçisi’nin ﷺ namaz yeri ile duvar arasında bir koyunun geçeceği kadar bir yer vardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Namaz kılanla sütre arasında ne kadar mesafe olmalı” bâbının altına koyar. Sehl, Peygamber’in namaz yeri ile duvar arasındaki mesafeyi bir koyunun geçişi olarak tarif eder. Metinde kesin bir ölçü yoktur."
+  },
+  "497": {
+   "matn": "Mekkî bize bildirdi, dedi: Yezîd ibn Ebî Ubeyd bize bildirdi, Seleme’den, dedi ki: “Mescidin minber yanındaki duvarı – bir koyun oradan güçlükle geçerdi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Namaz kılanla sütre arasında ne kadar mesafe olmalı” bâbının altına koyar. Seleme, mescidin minber yanındaki duvarında bir koyunun güçlükle geçebileceği dar yeri tarif eder. Metinde kesin bir ölçü yoktur."
+  },
+  "498": {
+   "matn": "Müsedded bize bildirdi, dedi: Yahyâ bize bildirdi, Ubeydullah’tan: Nâfi bana haber verdi, Abdullah’tan: Peygamber ﷺ “kendisi için mızrağı diktirir ve ona doğru namaz kılardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mızrağa doğru namaz kılmak” bâbının altına koyar. İbn Ömer, Peygamber için bir mızrağın yere dikildiğini ve onun buna doğru namaz kıldığını bildirir."
+  },
+  "499": {
+   "matn": "Âdem bize bildirdi, dedi: Şu‘be bize bildirdi, dedi: Avn ibn Ebî Cuhayfe bize bildirdi, dedi: Babamdan işittim, dedi ki: “Allah’ın Elçisi ﷺ öğle sıcağında yanımıza çıktı; abdest suyu getirildi ve abdest aldı. Sonra önünde bir aneze varken bize öğle ve ikindi namazını kıldırdı; kadın ve eşek de onun arkasından geçiyordu.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Aneze'ye doğru namaz kılmak” bâbının altına koyar. Râvî, Peygamber’in abdest aldıktan sonra önünde bir aneze varken öğle ve ikindi namazını kıldırdığını, kadın ile eşeğin anezenin arkasından geçtiğini bildirir."
+  },
+  "500": {
+   "matn": "Muhammed ibn Hâtim ibn Büzey‘ bize bildirdi, dedi: Şâzân bize bildirdi, Şu‘be’den, o Atâ ibn Ebî Meymûne’den, dedi ki: Enes ibn Mâlik’i şöyle derken işittim: “Peygamber ﷺ ihtiyacı için çıktığında ben ve bir oğlan onun peşinden giderdik; yanımızda bir değnek (ukkâze) – ya da bir sopa ya da bir aneze – ve bir su kabı (idâve) bulunurdu; ihtiyacını bitirince su kabını ona uzatırdık.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Aneze'ye doğru namaz kılmak” bâbının altına koyar. Enes, Peygamber ihtiyacı için çıktığında kendisinin ve bir oğlanın, yanlarında bir sopa ya da aneze ve bir su kabıyla onu izlediğini bildirir. Bu metinde namazdan söz edilmez."
+  },
+  "501": {
+   "matn": "Süleyman ibn Harb bize bildirdi, dedi: Şu‘be bize bildirdi, el-Hakem’den, o Ebû Cuhayfe’den, dedi ki: “Allah’ın Elçisi ﷺ öğle sıcağında çıktı ve Batha’da öğle ve ikindi namazını ikişer rekât kıldı; önüne bir aneze dikti ve abdest aldı; insanlar onun abdest suyuyla meshetmeye başladılar.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Mekke'de ve başka yerlerde sütre” bâbının altına koyar. Ebû Cuhayfe, Peygamber’in Batha’da öğle ve ikindi namazlarını ikişer rekât kıldığını, önüne bir aneze diktiğini ve insanların onun abdest suyuyla meshettiğini bildirir."
+  },
+  "502": {
+   "matn": "Mekkî ibn İbrâhîm bize bildirdi, dedi: Yezîd ibn Ebî Ubeyd bize bildirdi, dedi: “Seleme ibn el-Ekva‘ ile birlikte gelirdim; o, mushafın yanındaki direğin yanında namaz kılardı. Dedim ki: Ey Ebû Müslim, namazı bu direğin yanında özellikle aradığını görüyorum? Dedi ki: Ben Peygamber’i ﷺ namazı onun yanında özellikle ararken gördüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Direğe doğru namaz kılmak” bâbının altına koyar. Yezîd, Seleme ibn el-Ekva‘’ın belirli bir direğin yanında namaz kıldığını ve gerekçe olarak Peygamber’i orada özellikle namaz kılarken gördüğünü söylediğini bildirir."
+  },
+  "503": {
+   "matn": "Kabîsa bize bildirdi, dedi: Süfyân bize bildirdi, Amr ibn Âmir’den, o Enes’ten, dedi ki: “Peygamber’in ﷺ büyük ashabını akşam namazında direklere koşarken gördüm.” Şu‘be, Amr’dan, o Enes’ten şunu ekledi: “Peygamber ﷺ çıkana kadar.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Direğe doğru namaz kılmak” bâbının altına koyar. Enes, büyük ashabın akşam namazında direklere koştuğunu bildirir. “Peygamber çıkana kadar” ilavesi Şu‘be yoluyla gelen rivayette zikredilir."
+  },
+  "504": {
+   "matn": "Mûsâ ibn İsmâ‘îl bize bildirdi, dedi: Cüveyriye bize bildirdi, Nâfi’den, o İbn Ömer’den, dedi ki: “Peygamber ﷺ Beyt’e girdi; beraberinde Üsâme ibn Zeyd, Osman ibn Talha ve Bilâl vardı. Orada uzun süre kaldı, sonra çıktı. Onun ardından içeri giren insanların ilki bendim. Bilâl’e sordum: Nerede namaz kıldı? Dedi ki: İki ön direğin arasında.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Cemaat dışında direkler arasında namaz kılmak” bâbının altına koyar. İbn Ömer, Bilâl’e Peygamber’in Beyt’te nerede namaz kıldığını sorduğunu ve Bilâl’in “iki ön direğin arasında” diye cevap verdiğini bildirir."
+  },
+  "505": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Nâfi’den, o Abdullah ibn Ömer’den: “Allah’ın Elçisi ﷺ Kâbe’ye girdi; beraberinde Üsâme ibn Zeyd, Bilâl ve Osman ibn Talha el-Hacebî vardı; kapı arkasından kapatıldı ve içeride kaldı. Bilâl çıktığında ona sordum: Peygamber ﷺ ne yaptı? Dedi ki: Bir direği soluna, bir direği sağına, üç direği arkasına aldı – Beyt o gün altı direk üzerindeydi –, sonra namaz kıldı.” İsmâ‘îl de bize şöyle dedi: Mâlik bana bildirdi ve dedi ki: “sağında iki direk.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Cemaat dışında direkler arasında namaz kılmak” bâbının altına koyar. İbn Ömer, Peygamber’in Kâbe’de namaz kılarken direklere göre nasıl durduğuna dair Bilâl’in anlatımını aktarır. Sonda metin, İsmâ‘îl yoluyla farklı bir ifade zikreder: sağında iki direk."
+  },
+  "506": {
+   "matn": "İbrâhîm ibn el-Münzir bize bildirdi, dedi: Ebû Damre bize bildirdi, dedi: Mûsâ ibn Ukbe bize bildirdi, Nâfi’den: “Abdullah Kâbe’ye girdiğinde, girerken tam karşısına doğru yürürdü” ve kapıyı sırtının arkasında bırakırdı; kendisiyle yüzünün önündeki duvar arasında yaklaşık üç zirâ kalıncaya kadar yürür ve orada namaz kılardı; Bilâl’in, Peygamber’in ﷺ orada namaz kıldığını kendisine bildirdiği yeri gözetirdi. Dedi ki: Hiçbirimize, Beyt’in dilediği yerinde namaz kılmasında bir sakınca yoktur.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Cemaat dışında direkler arasında namaz kılmak” bâbının altına koyar. Nâfi, Abdullah ibn Ömer’in Kâbe’de Bilâl’in Peygamber’in namaz yeri olarak bildirdiği yeri nasıl gözettiğini anlatır. Sonda metin, Beyt’in herhangi bir yerinde namaz kılmanın hiçbirine sakınca olmadığını belirtir."
+  },
+  "507": {
+   "matn": "Muhammed ibn Ebî Bekr el-Mukaddemî bize bildirdi, Mu‘temir bize bildirdi, Ubeydullah’tan, o Nâfi’den, o İbn Ömer’den, o Peygamber’den ﷺ: O “bineğini enine çevirir ve ona doğru namaz kılardı. Dedim ki: Binekler ürkerse ne dersin? Dedi ki: Şu semeri alır, doğrultur ve onun arka kısmına – ya da dedi ki: gerisine – doğru namaz kılardı. İbn Ömer de, Allah ondan razı olsun, bunu yapardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Binek, deve, ağaç ve semere doğru namaz kılmak” bâbının altına koyar. İbn Ömer, Peygamber’in bineğini enine çevirip ona doğru namaz kıldığını bildirir; binekler ürkerse ne olacağı sorulunca doğrultulmuş semeri anar. Metinde İbn Ömer’in de aynısını yaptığı belirtilir."
+  },
+  "508": {
+   "matn": "Osman ibn Ebî Şeybe bize bildirdi, dedi: Cerîr bize bildirdi, Mansûr’dan, o İbrâhîm’den, o el-Esved’den, o Âişe’den, dedi ki: “Bizi köpek ve eşekle bir mi tuttunuz? Kendimi yatakta yatarken gördüm; Peygamber ﷺ gelir, yatağın ortasında durur ve namaz kılardı; önünden geçmeyi hoş görmezdim, bu yüzden yatağın ayak ucundan sıyrılır, battaniyemden kayarak çıkardım.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Sedire doğru namaz kılmak” bâbının altına koyar. Âişe, kadının köpek ve eşekle bir tutulmasını reddeder; yatakta yattığını, Peygamber’in önünde namaz kıldığını ve onun önünden geçmemek için battaniyeden sıyrılıp çıktığını bildirir."
+  },
+  "509": {
+   "matn": "Ebû Ma‘mer bize bildirdi, dedi: Abdülvâris bize bildirdi, dedi: Yûnus bize bildirdi, Humeyd ibn Hilâl’den, o Ebû Sâlih’ten: Ebû Saîd dedi ki: Peygamber ﷺ dedi ki. Âdem ibn Ebî İyâs da bize bildirdi, dedi: Süleyman ibn el-Muğîre bize bildirdi, dedi: Humeyd ibn Hilâl el-Adevî bize bildirdi, dedi: Ebû Sâlih es-Semmân bize bildirdi, dedi ki: “Ebû Saîd el-Hudrî’yi bir cuma günü, kendisini insanlardan örten bir şeye doğru namaz kılarken gördüm. Ebû Muayt oğullarından bir genç onun önünden geçmek istedi; Ebû Saîd onu göğsünden itti. Genç baktı, önünden başka geçecek yer bulamadı; geçmek için geri döndü, Ebû Saîd onu birinciden daha sert itti. Bunun üzerine genç Ebû Saîd’e dil uzattı, sonra Mervân’ın yanına girdi ve Ebû Saîd’den gördüğünü ona şikâyet etti. Ebû Saîd de arkasından Mervân’ın yanına girdi. Mervân dedi ki: Ey Ebû Saîd, kardeşinin oğluyla ne işin var? Dedi ki: Peygamber’i ﷺ şöyle derken işittim: Biriniz kendisini insanlardan örten bir şeye doğru namaz kılarken biri önünden geçmek isterse onu itsin; kabul etmezse onunla savaşsın, çünkü o bir şeytandır.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Namaz kılan, önünden geçeni engeller” bâbının altına koyar. İlk isnad başka bir ifade olmaksızın “Peygamber dedi ki” ile biter; ikinci isnad olayın tamamını içerir. Ebû Sâlih, Ebû Saîd’in önünden geçmek isteyen bir genci ittiğini anlatır ve Mervân’ın yanında Peygamber’in bu konudaki talimatını aktarır."
+  },
+  "510": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Ömer ibn Ubeydullah’ın azatlısı Ebü’n-Nadr’dan, o Büsr ibn Saîd’den: “Zeyd ibn Hâlid onu Ebû Cuheym’e gönderdi ve sordurdu: Namaz kılanın önünden geçen hakkında Allah’ın Elçisi’nden ﷺ ne işittin? Ebû Cuheym dedi ki: Allah’ın Elçisi ﷺ buyurdu ki: Namaz kılanın önünden geçen, üzerine ne olduğunu bilseydi, onun önünden geçmektense kırk beklemesi kendisi için daha hayırlı olurdu.” Ebü’n-Nadr dedi ki: Kırk gün mü, ay mı, yıl mı dedi, bilmiyorum.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Namaz kılanın önünden geçenin günahı” bâbının altına koyar. Metin, “kırk” beklemenin geçmekten daha hayırlı olacağını uyarı olarak belirtir; birim belirsizdir, çünkü Ebü’n-Nadr gün mü, ay mı, yıl mı denildiğini bilmez."
+  },
+  "511": {
+   "matn": "İsmâ‘îl ibn Halîl bize bildirdi, Ali ibn Müshir bize bildirdi, el-A‘meş’ten, o Müslim’den – yani İbn Subeyh’ten –, o Mesrûk’tan, o Âişe’den: “Yanında namazı bozan şeyler anıldı. Dediler ki: Köpek, eşek ve kadın namazı keser. Dedi ki: Bizi köpek yaptınız! Peygamber’i, ona selâm olsun, namaz kılarken gördüm; ben onunla kıble arasında yatakta yatıyordum. İhtiyacım olduğunda ona dönük olmayı hoş görmez, usulca sıyrılırdım.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kişinin namaz kılarken arkadaşına veya başkasına yönelmesi” bâbının altına koyar. Âişe, köpek, eşek ve kadının namazı kestiği sözüne karşı çıkar; namaz kılan Peygamber ile kıble arasında yattığını ve ihtiyacı olduğunda usulca sıyrıldığını bildirir."
+  },
+  "511.2": {
+   "matn": "Ve el-A‘meş’ten, o İbrâhîm’den, o el-Esved’den, o Âişe’den: bunun benzeri.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî bu ek isnadı “Kişinin namaz kılarken arkadaşına veya başkasına yönelmesi” bâbının altına koyar. Kendi lafzını vermez; “bunun benzeri” diyerek Âişe’nin önceki hadisine işaret eder."
+  },
+  "512": {
+   "matn": "Müsedded bize bildirdi, dedi: Yahyâ bize bildirdi, dedi: Hişâm bize bildirdi, dedi: Babam bana bildirdi, Âişe’den, dedi ki: “Peygamber ﷺ namaz kılardı, ben de onun yatağında enine uyurdum; vitir kılmak istediğinde beni uyandırır, ben de vitir kılardım.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Uyuyan birinin arkasında namaz kılmak” bâbının altına koyar. Âişe, Peygamber namaz kılarken onun yatağında enine uyuduğunu ve onun vitir için kendisini uyandırdığını bildirir."
+  },
+  "513": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Ömer ibn Ubeydullah’ın azatlısı Ebü’n-Nadr’dan, o Ebû Seleme ibn Abdurrahmân’dan, o Peygamber’in ﷺ eşi Âişe’den, şöyle dedi: “Allah’ın Elçisi’nin ﷺ önünde uyurdum, ayaklarım onun kıblesinde olurdu. Secde ettiğinde bana dürterdi, ben de ayaklarımı çekerdim; kalkınca onları uzatırdım. Dedi ki: O gün evlerde lamba yoktu.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kadının arkasında nafile namaz kılmak” bâbının altına koyar. Âişe, namaz kılan Peygamber’in önünde uyuduğunu, o secde edip kendisine dürttüğünde ayaklarını çektiğini, kalkınca uzattığını bildirir; ayrıca o zaman evlerde lamba olmadığını ekler."
+  },
+  "514": {
+   "matn": "Ömer ibn Hafs bize bildirdi, dedi: Babam bize bildirdi, dedi: el-A‘meş bize bildirdi, dedi: İbrâhîm bize bildirdi, el-Esved’den, o Âişe’den. el-A‘meş dedi: Müslim de bana bildirdi, Mesrûk’tan, o Âişe’den: “Yanında namazı kesen şeyler anıldı: köpek, eşek ve kadın. Bunun üzerine dedi ki: Bizi eşeklere ve köpeklere benzettiniz! Allah’a yemin olsun, Peygamber’i ﷺ namaz kılarken gördüm; ben yatakta, onunla kıble arasında yatıyordum. Bir ihtiyaç duydum, oturup Peygamber’i ﷺ rahatsız etmeyi hoş görmedim, bu yüzden ayak ucundan sıyrıldım.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Namazı hiçbir şeyin bozmadığını söyleyen” bâbının altına koyar. Âişe, kadınların eşek ve köpeklere benzetilmesini reddeder; namaz kılan Peygamber ile kıble arasında yattığını ve ihtiyacı olduğunda onu rahatsız etmemek için sıyrıldığını bildirir."
+  },
+  "515": {
+   "matn": "İshâk bize bildirdi, dedi: Yakûb ibn İbrâhîm bize haber verdi, dedi: İbn Şihâb’ın kardeşinin oğlu bana bildirdi: Amcasına, namazı bir şeyin kesip kesmediğini sordu. Dedi ki: Hiçbir şey kesmez. Urve ibn ez-Zübeyr bana haber verdi ki Peygamber’in ﷺ eşi Âişe şöyle dedi: “Allah’ın Elçisi ﷺ geceleyin kalkıp namaz kılardı; ben ise onunla kıble arasında, ailesinin yatağında enine yatardım.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Namazı hiçbir şeyin bozmadığını söyleyen” bâbının altına koyar. İbn Şihâb, namazı bir şeyin kesip kesmediği sorusuna “Hiçbir şey kesmez” diye cevap verir ve bunu, Âişe’nin geceleyin namaz kılan Peygamber ile kıble arasında enine yattığı rivayetiyle temellendirir."
+  },
+  "516": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Âmir ibn Abdullah ibn ez-Zübeyr’den, o Amr ibn Süleym ez-Zürakî’den, o Ebû Katâde el-Ensârî’den: Allah’ın Elçisi ﷺ “Zeynep’in kızı Ümâme’yi – Allah’ın Elçisi’nin ﷺ kızının ve Ebü’l-Âs ibn Rebî‘a ibn Abdişems’in kızını – taşıyarak namaz kılardı; secde ettiğinde onu yere bırakır, kalktığında yeniden taşırdı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Namazda küçük bir kız çocuğunu boynunda taşırsa” bâbının altına koyar. Ebû Katâde, Peygamber’in namazda torunu Ümâme’yi taşıdığını, secdede yere bıraktığını, kalkınca yeniden taşıdığını bildirir."
+  },
+  "517": {
+   "matn": "Amr ibn Zürâre bize bildirdi, dedi: Hüşeym bize haber verdi, eş-Şeybânî’den, o Abdullah ibn Şeddâd ibn el-Hâd’dan, dedi ki: Teyzem Meymûne bint el-Hâris bana bildirdi, dedi: “Yatağım Peygamber’in ﷺ namaz yerinin karşısındaydı; bazen ben yatağımdayken elbisesi üzerime düşerdi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Üzerinde hayızlı bir kadın bulunan yatağa doğru namaz kılarsa” bâbının altına koyar. Meymûne, yatağının Peygamber’in namaz yerinin karşısında olduğunu ve elbisesinin bazen üzerine düştüğünü bildirir."
+  },
+  "518": {
+   "matn": "Ebü’n-Nu‘mân bize bildirdi, dedi: Abdülvâhid ibn Ziyâd bize bildirdi, dedi: eş-Şeybânî – Süleyman – bize bildirdi, dedi: Abdullah ibn Şeddâd bize bildirdi, dedi: Meymûne’yi şöyle derken işittim: “Peygamber ﷺ namaz kılardı, ben de yanında uyuyor olurdum; secde ettiğinde, ben âdet hâlindeyken elbisesi bana değerdi.” Müsedded de Hâlid’den şunu ekledi: Süleyman eş-Şeybânî bize bildirdi: “ben âdet hâlindeyken.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Üzerinde hayızlı bir kadın bulunan yatağa doğru namaz kılarsa” bâbının altına koyar. Meymûne, âdet hâlindeyken namaz kılan Peygamber’in yanında uyuduğunu ve secde ettiğinde elbisesinin kendisine değdiğini bildirir. “Ben âdet hâlindeyken” ilavesi Müsedded yoluyla da zikredilir."
+  },
+  "519": {
+   "matn": "Amr ibn Alî bize bildirdi, dedi: Yahyâ bize bildirdi, dedi: Ubeydullah bize bildirdi, dedi: el-Kâsım bize bildirdi, Âişe’den, Allah ondan razı olsun, dedi ki: “Bizi köpek ve eşekle bir tutmanız ne kötü! Allah’ın Elçisi ﷺ namaz kılarken kendimi onunla kıble arasında yatarken gördüm; secde etmek istediğinde ayaklarımı dürterdi, ben de onları çekerdim.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kişi secde edebilmek için secde esnasında hanımını dürtebilir mi?” bâbının altına koyar. Âişe, köpek ve eşekle bir tutulmayı sert biçimde reddeder; Peygamber’in secde etmek istediğinde ayaklarını dürttüğünü ve onları çektiğini bildirir."
+  },
+  "520": {
+   "matn": "Ahmed ibn İshâk es-Sûrmârî bize bildirdi, dedi: Ubeydullah ibn Mûsâ bize bildirdi, dedi: İsrâîl bize bildirdi, Ebû İshâk’tan, o Amr ibn Meymûn’dan, o Abdullah’tan, dedi ki: “Allah’ın Elçisi ﷺ Kâbe’nin yanında ayakta namaz kılarken Kureyş topluluğu meclislerinde bulunuyordu; içlerinden biri dedi ki: Şu, gösteriş yapana bakmıyor musunuz? Hanginiz falanca ailenin boğazlanacak devesine gidip onun işkembe içeriğini, kanını ve son eşini alır, getirir, secdeye varana kadar ona dokunmaz ve sonra bunu iki omzunun arasına koyar? Bunun üzerine içlerinin en bedbahtı harekete geçti. Allah’ın Elçisi ﷺ secde edince onu iki omzunun arasına koydu; Peygamber ﷺ secdede kaldı. Onlar da gülmekten birbirlerinin üzerine yıkılacak kadar güldüler. Sonra biri Fâtıma’ya, ona selâm olsun, koştu – o küçük bir kızdı –; koşarak geldi, Peygamber ﷺ da onu üzerinden atana kadar secdede kaldı; sonra onlara dönüp onlara sövdü. Allah’ın Elçisi ﷺ namazı bitirince dedi ki: Allah’ım, Kureyş’i yakala! Allah’ım, Kureyş’i yakala! Allah’ım, Kureyş’i yakala! Sonra isim isim saydı: Allah’ım, Amr ibn Hişâm’ı, Utbe ibn Rebî‘a’yı, Şeybe ibn Rebî‘a’yı, el-Velîd ibn Utbe’yi, Ümeyye ibn Halef’i, Ukbe ibn Ebî Mu‘ayt’ı ve Umâre ibn el-Velîd’i yakala. Abdullah dedi ki: Allah’a yemin olsun, onları Bedir günü yere serilmiş gördüm; sonra Bedir kuyusuna, o kuyuya sürüklendiler. Sonra Allah’ın Elçisi ﷺ buyurdu ki: Kuyu halkının ardından lânet gönderildi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kadının namaz kılandan eziyet veren bir şeyi atması” bâbının altına koyar. Abdullah, Kureyşli adamların Kâbe’nin yanında namaz kılan Peygamber’in secde ederken iki omzu arasına pislik koyduklarını ve Fâtıma’nın onu kaldırdığını bildirir. Peygamber ardından Allah’a Kureyş aleyhine dua etti ve yedi adamı ismen andı; Abdullah onları Bedir’de yere serilmiş gördüğünü söyler."
+  }
+ }
+}

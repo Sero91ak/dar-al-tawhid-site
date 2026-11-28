@@ -1,0 +1,533 @@
+{
+ "workId": "sahih-al-buhari",
+ "kitabNo": 4,
+ "lang": "tr",
+ "method": "ai",
+ "babs": {
+  "2": "Temizlik olmadan namaz kabul edilmez",
+  "3": "Abdestin fazileti; abdest izlerinden dolayı alınları ve uzuvları parlayanlar",
+  "4": "Kesin bilgi edinmedikçe şüphe sebebiyle abdest alınmaz",
+  "5": "Abdesti eksiksiz almak",
+  "6": "Yüzü bir avuç sudan iki elle yıkamak",
+  "7": "Her durumda ve cinsel ilişki esnasında besmele çekmek",
+  "8": "Helâya girerken ne söylenir",
+  "9": "Helânın yanına su koymak",
+  "10": "Bina, duvar ve benzeri bir şeyin arkası dışında büyük ve küçük abdestte kıbleye dönülmez",
+  "11": "İki kerpiç üzerinde def-i hacet eden kimse",
+  "12": "Kadınların def-i hacet için dışarı çıkması",
+  "13": "Evlerde def-i hacet",
+  "15": "Su ile istincâ",
+  "16": "Temizliği için yanında su taşıyan kimse",
+  "17": "İstincâ için su ile birlikte anez (kısa mızrak) taşımak",
+  "18": "Sağ elle istincânın yasaklanması",
+  "19": "Küçük abdest bozarken tenasül uzvunu sağ eliyle tutmamak",
+  "20": "Taşla istincâ",
+  "21": "Abdest uzuvlarını birer kere yıkamak",
+  "22": "Abdest uzuvlarını ikişer kere yıkamak",
+  "23": "Abdest uzuvlarını üçer kere yıkamak",
+  "24": "Abdestte burna su çekip sümkürmek",
+  "25": "Taşla temizlenmeyi tek sayıda yapmak",
+  "26": "Ayakları yıkamak, ayaklar üzerine mesh edilmez",
+  "27": "Abdestte ağza su vermek",
+  "28": "Topukları yıkamak",
+  "29": "Ayakları na'lin içinde yıkamak, na'linler üzerine mesh edilmez",
+  "30": "Abdestte ve gusülde sağdan başlamak",
+  "31": "Namaz vakti gelince abdest suyu aramak",
+  "32": "İnsan saçının yıkandığı su",
+  "33": "Abdesti yalnızca ön ve arka yollardan çıkan şeylerden dolayı gerekli görenler",
+  "34": "Kişinin arkadaşına abdest aldırması",
+  "35": "Abdest bozulduktan sonra Kur'an okumak ve diğer meseleler",
+  "36": "Ancak ağır baygınlıktan sonra abdest alan kimse",
+  "37": "Başın tamamını mesh etmek",
+  "38": "Ayakları topuklarla birlikte yıkamak",
+  "39": "İnsanların abdest artığı suyunu kullanmak",
+  "40": "Bir avuç suyla ağzına ve burnuna su veren kimse",
+  "41": "Başı bir kere mesh etmek",
+  "42": "Erkeğin hanımıyla birlikte abdest alması ve kadının abdest artığı",
+  "43": "Peygamber'in ﷺ abdest suyunu baygın kişinin üzerine dökmesi",
+  "44": "Leğen, kadeh, ahşap ve taş kaplarda gusül ve abdest",
+  "45": "Tevr (kap) ile abdest almak",
+  "46": "Bir müd su ile abdest almak",
+  "47": "Mestler üzerine mesh",
+  "48": "Ayaklarını temiz iken mestlere sokarsa",
+  "49": "Koyun eti ve sevik yedikten sonra abdest almayan kimse",
+  "50": "Sevik yedikten sonra ağzını çalkalayıp abdest almayan kimse",
+  "51": "Sütten sonra ağız çalkalanır mı?",
+  "52": "Uykudan dolayı abdest",
+  "53": "Abdest bozulmadan abdest almak",
+  "54": "İdrarından sakınmamak büyük günahlardandır",
+  "55": "İdrarı yıkamak hakkında gelenler",
+  "57": "Peygamber'in ﷺ ve insanların, mescitte küçük abdestini bitirinceye kadar bedeviyi bırakması",
+  "58": "Mescitteki idrarın üzerine su dökmek",
+  "60": "Erkek çocukların idrarı",
+  "61": "Ayakta ve oturarak küçük abdest bozmak",
+  "62": "Arkadaşının yanında küçük abdest bozmak ve duvarla örtünmek",
+  "63": "Bir topluluğun çöplüğünde küçük abdest bozmak",
+  "64": "Kanı yıkamak",
+  "65": "Meniyi yıkamak ve ovalamak, kadından bulaşanı yıkamak",
+  "66": "Cünüplük veya başka bir şeyi yıkadığı hâlde izi gitmezse",
+  "67": "Deve, binek ve koyunların idrarı ve ağılları",
+  "68": "Yağa ve suya düşen necasetler",
+  "69": "Namaz kılanın sırtına pislik veya leş atılırsa",
+  "70": "Elbisedeki tükürük, sümük ve benzeri",
+  "71": "Nebîz veya sarhoşluk veren bir şeyle abdest caiz değildir",
+  "72": "Kadının babasının yüzündeki kanı yıkaması",
+  "73": "Misvak",
+  "74": "Misvakı büyüğe vermek",
+  "75": "Abdestli olarak geceleyen kimsenin fazileti"
+ },
+ "hadiths": {
+  "135": {
+   "matn": "İshâk ibn İbrâhîm el-Hanzalî bize bildirdi, dedi: Abdürrazzâk bize haber verdi, dedi: Ma'mer bize haber verdi, Hemmâm ibn Münebbih'ten: Ebû Hüreyre'yi şöyle derken işittiğini: Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: “Abdesti bozulan kimsenin namazı, abdest almadıkça kabul edilmez.” Hadramut'tan bir adam dedi: Hades nedir, ey Ebû Hüreyre? Dedi: Sessiz veya sesli yellenmek.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Temizlik olmadan namaz kabul edilmez” bâbında zikreder. Peygamber ﷺ namazın kabulünü hadesten sonra abdest almaya bağlar. Hadesin ne olduğu, Ebû Hüreyre'nin Hadramutlu sorana cevabıdır, bu kayıtta peygamber sözü değildir."
+  },
+  "136": {
+   "matn": "Yahyâ ibn Bükeyr bize bildirdi, dedi: Leys bize bildirdi, Hâlid'den, o Saîd ibn Ebî Hilâl'den, o Nuaym el-Mücmir'den, dedi: “Ebû Hüreyre ile mescidin damına çıktım, abdest aldı. Sonra dedi: Peygamber'i, Allah’ın salât ve selâmı onun üzerine olsun, şöyle buyururken işittim: Ümmetim kıyamet günü abdest izlerinden dolayı parlak alınlı ve parlak uzuvlu olarak çağrılır. Hanginiz ğurresini uzatabilirse yapsın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi abdestin fazileti ve alınları ile uzuvları parlayanlar bâbında zikreder. Parıltı abdest izlerine bağlanır. Ğurreyi uzatma teşviki bu haberin lafzındadır; bunun ne kadar olacağı burada eklenmez."
+  },
+  "137": {
+   "matn": "Ali bize bildirdi, dedi: Süfyân bize bildirdi, dedi: Zührî bize bildirdi, Saîd ibn el-Müseyyeb'den, o Abbâd ibn Temîm'den, o amcasından: “Allah'ın Elçisi'ne, Allah’ın salât ve selâmı onun üzerine olsun, namazda o şeyi bulduğunu zanneden adamı şikâyet ettiğini. Buyurdu: Bir ses işitmedikçe veya bir koku duymadıkça ayrılmasın – yahut: dönmesin.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi, kesin bilgi edinmedikçe şüphe sebebiyle abdest alınmaz bâbında zikreder. Salt evham namazı bozmaz; kesinlik burada işitmek veya koklamakladır. “Ayrılmasın yahut dönmesin” tereddüdü korunur. Amca, metindeki gibi adsız bırakılır."
+  },
+  "138": {
+   "matn": "Ali ibn Abdullah bize bildirdi, dedi: Süfyân bize bildirdi, Amr'dan, dedi: Küreyp bana haber verdi, İbn Abbas'tan: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, horlayıncaya kadar uyudu, sonra namaz kıldı. Bazen de dedi: Uzanıp horlayıncaya kadar yattı, sonra kalktı namaz kıldı.” Sonra Süfyân onu bize defalarca bildirdi, Amr'dan, o Küreyp'ten, o İbn Abbas'tan, dedi: Teyzem Meymûne'nin yanında geceledim. Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, gece kalktı. Gecenin bir kısmında Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, kalktı, asılı bir kırbadan hafif bir abdest aldı – Amr bunu hafif ve az olarak nitelerdi – ve namaza durdu. Ben de onun abdestine yakın abdest aldım, gelip soluna durdum – Süfyân bazen: şimaline, derdi – beni çevirip sağına aldı. Sonra Allah'ın dilediği kadar namaz kıldı, sonra uzandı, horlayıncaya kadar uyudu. Sonra müezzin gelip ona namazı bildirdi. Onunla namaza kalktı, kıldı ve (yeniden) abdest almadı. Amr'a dedik: İnsanlar diyor ki: Allah'ın Elçisi'nin, Allah’ın salât ve selâmı onun üzerine olsun, gözü uyur, kalbi uyumaz. Amr dedi: Ubeyd ibn Umeyr'i şöyle derken işittim: Peygamberlerin rüyası vahiydir. Sonra okudu: “Ben rüyada seni boğazladığımı görüyorum.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Aynı şüphe ve kesinlik bâbı. Haber, Peygamber'in ﷺ horlayıncaya kadar uyuduğunu ve sonra yenilemeden namaz kıldığını gösterir. “Uyudu yahut uzandı” ve “sol yahut şimal” tereddütleri korunur, Amr'ın hafif abdest nitelenmesi de. Peygamberlerin kalbinin uyumadığı sözü “insanların” sözü olarak durur; Amr bunu, peygamber rüyalarının vahiy olduğuna dair Ubeyd ibn Umeyr'in sözü ve bilinen âyetle destekler. Bu, âlim kaydı olarak belirtilir, bu senedde peygamber sözü değildir."
+  },
+  "139": {
+   "matn": "Abdullah ibn Mesleme bize bildirdi, Mâlik'ten, o Mûsâ ibn Ukbe'den, o İbn Abbas'ın azatlısı Küreyp'ten, o Üsâme ibn Zeyd'den: Onu şöyle derken işittiğini: “Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, Arafat'tan hareket etti, geçitte olunca indi, bevletti, sonra abdest aldı ve abdesti eksiksiz yapmadı. Dedim: Namaz, ey Allah'ın Elçisi. Buyurdu: Namaz önündedir. Binip gitti; Müzdelife'ye gelince indi, abdest aldı ve abdesti eksiksiz yaptı. Sonra namaz kılındı, akşamı kıldı, sonra herkes devesini konakladığı yere çöktürdü, sonra yatsı kılındı, kıldı, ikisinin arasında namaz kılmadı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Abdesti eksiksiz almak” bâbında zikreder. Geçitte eksiksiz olmayan bir abdest alır; namaz “önündedir”, Müzdelife'dedir. Orada abdesti eksiksiz alır ve akşam ile yatsıyı aralarında namaz olmadan birleştirir. İki abdest arasındaki fark metnin kendisindedir."
+  },
+  "140": {
+   "matn": "Muhammed ibn Abdürrahîm bize bildirdi, dedi: Ebû Seleme el-Huzâî Mansûr ibn Seleme bize haber verdi, dedi: İbn Bilâl, yani Süleyman, bize haber verdi, Zeyd ibn Eslem'den, o Atâ ibn Yesâr'dan, o İbn Abbas'tan: “Abdest aldığını ve yüzünü yıkadığını: bir avuç su aldı, onunla mazmaza ve istinşak yaptı, sonra bir avuç su aldı, onunla şöyle yaptı, onu öbür eline kattı, ikisiyle yüzünü yıkadı, sonra bir avuç su aldı, onunla sağ elini yıkadı, sonra bir avuç su aldı, onunla sol elini yıkadı, sonra başına mesh etti, sonra bir avuç su aldı, sağ ayağına döktü, yıkayıncaya kadar, sonra başka bir avuç aldı, onunla ayağını, yani solunu, yıkadı. Sonra dedi: Allah'ın Elçisi'ni, Allah’ın salât ve selâmı onun üzerine olsun, böyle abdest alırken gördüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Yüzü bir avuç sudan iki elle yıkamak” bâbında zikreder. İbn Abbas abdesti gösterir. Mazmaza ve istinşak bir avuçtandır; yüz, öbür ele katılmış bir avuçtan iki elle yıkanır. “Yani solunu” râvinin açıklamasıdır."
+  },
+  "141": {
+   "matn": "Ali ibn Abdullah bize bildirdi, dedi: Cerîr bize bildirdi, Mansûr'dan, o Sâlim ibn Ebî'l-Ca'd'den, o Küreyp'ten, o İbn Abbas'tan, Peygamber'e, Allah’ın salât ve selâmı onun üzerine olsun, ulaştırarak, buyurdu: “Sizden biri eşiyle birleşirken: Allah'ın adıyla, Allah'ım, şeytanı bizden uzak tut, bize rızık olarak verdiklerinden de şeytanı uzak tut, dese, sonra aralarında bir çocuk takdir edilse, şeytan ona zarar vermez.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Her durumda ve cinsel ilişki esnasında besmele çekmek” bâbında zikreder. Dua birleşmenin başındadır; koruma, ihsan edilirse çocuğa aittir. Lafız zararı daha yakından belirtmez, burada da eklenmez."
+  },
+  "142": {
+   "matn": "Âdem bize bildirdi, dedi: Şu'be bize bildirdi, Abdülazîz ibn Suhayb'dan, dedi: Enes'i şöyle derken işittim: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, helâya girince derdi: Allah'ım, habîs ve habisattan (el-hubus ve'l-habâis) Sana sığınırım.” İbn Ar'ara da Şu'be'den (rivayet ederek) ona mutabaat etti. Gunder, Şu'be'den: helâya geldiği zaman, dedi. Mûsâ, Hammâd'dan: girdiği zaman, dedi. Saîd ibn Zeyd dedi: Abdülazîz bize bildirdi: girmek istediği zaman.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Helâya girerken ne söylenir” bâbında zikreder. Sığınma sabittir; “girdi, geldi, girdi, girmek istedi” lafızları râvi farkı olarak korunur. İbn Ar'ara'nın mutabaatı destekleyici yol olarak belirtilir."
+  },
+  "143": {
+   "matn": "Abdullah ibn Muhammed bize bildirdi, dedi: Hâşim ibn el-Kâsım bize bildirdi, dedi: Varka' bize bildirdi, Ubeydullah ibn Ebî Yezîd'den, o İbn Abbas'tan: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, helâya girdi, ben de ona abdest suyu koydum. Dedi: Bunu kim koydu? Haber verildi. Buyurdu: Allah'ım, onu dinde anlayışlı kıl.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Helânın yanına su koymak” bâbında zikreder. İbn Abbas suyu koyar; dinde anlayış duası onadır. Kim haber verdiği, metinde adsız bırakılır."
+  },
+  "144": {
+   "matn": "Âdem bize bildirdi, dedi: İbn Ebî Zi'b bize bildirdi, dedi: Zührî bize bildirdi, Atâ ibn Yezîd el-Leysî'den, o Ebû Eyyûb el-Ensârî'den, dedi: Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: “Sizden biri helâya geldiğinde kıbleye yönelmesin, sırtını da ona dönmesin; doğuya veya batıya dönün.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi, bina dışında büyük ve küçük abdestte kıbleye dönülmez bâbında zikreder. “Doğu veya batı” buyruğu, kıblenin güneyde olduğu Medine durumuna uyar; başka yönlere genelleme burada kesinleştirilmez. Bâbın kendisi duvar arkasındaki istisnayı anar; bu kayıt onu açıkça söylemez."
+  },
+  "145": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Yahyâ ibn Saîd'den, o Muhammed ibn Yahyâ ibn Hıbbân'dan, o amcası Vâsi' ibn Hıbbân'dan, o Abdullah ibn Ömer'den: “Şöyle derdi: İnsanlar diyor: Hacetine oturduğunda kıbleye de Beytülmakdis'e de yönelme. Abdullah ibn Ömer dedi: Bir gün evimizden birinin damına çıktım, Allah'ın Elçisi'ni, Allah’ın salât ve selâmı onun üzerine olsun, iki kerpiç üzerinde, haceti için Beytülmakdis'e yönelmiş gördüm. Ve dedi: Belki sen kalçaları üzerine namaz kılanlardansın? Dedim: Bilmem, vallahi.” Mâlik dedi: Yerden yükselmeden namaz kılanı, yere yapışık halde secde edeni kastediyor.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “İki kerpiç üzerinde def-i hacet eden kimse” bâbında zikreder. İbn Ömer, genel söze kendi gördüğüyle karşı çıkar: Peygamber ﷺ kıbleye sırtı, Beytülmakdis'e yüzü dönük, yapı içinde. “Kalçalar üzerine namaz” sorusu İbn Ömer'in muhatabına sözüdür, peygamber sözü değildir. Mâlik'in bu duruşu açıklaması âlim kaydı olarak belirtilir."
+  },
+  "146": {
+   "matn": "Yahyâ ibn Bükeyr bize bildirdi, dedi: Leys bize bildirdi, dedi: Ukayl bana bildirdi, İbn Şihâb'dan, o Urve'den, o Âişe'den: “Peygamber'in, Allah’ın salât ve selâmı onun üzerine olsun, eşleri geceleyin, def-i hacet ettiklerinde menâsi'e çıkarlardı; burası geniş, açık bir zemindir. Ömer, Peygamber'e, Allah’ın salât ve selâmı onun üzerine olsun, derdi: Kadınlarını ört. Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, bunu yapmazdı. Derken Peygamber'in, Allah’ın salât ve selâmı onun üzerine olsun, eşi Sevde bint Zem'a bir gece akşam vakti dışarı çıktı. Uzun boylu bir kadındı. Ömer ona seslendi: Seni tanıdık, ey Sevde! – hicabın inmesini gayretle isteyerek. Bunun üzerine Allah hicab âyetini indirdi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kadınların def-i hacet için dışarı çıkması” bâbında zikreder. Eşler geceleyin menâsi'e giderlerdi; “geniş, açık bir zemin” ifadesi bu yeri açıklar. Ömer örtünmeyi istedi; Allah'ın Elçisi o sırada bunu yapmadı. Uzun boylu Sevde'ye sesleniş, lafzın kaydettiği üzere, hicabın inmesi arzusundandı; ardından Allah hicab âyetini indirdi. Hangi âyetlerin kastedildiği bu kayıtta belirlenmez."
+  },
+  "147": {
+   "matn": "Zekeriyyâ bize bildirdi, dedi: Ebû Üsâme bize bildirdi, Hişâm ibn Urve'den, o babasından, o Âişe'den, o Peygamber'den, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: “İhtiyacınız için dışarı çıkmanız size izin verildi.” Hişâm dedi: yani def-i hacet (el-berâz).",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı “Kadınların def-i hacet için dışarı çıkması” bâbında zikreder. İzin, “ihtiyacınız için” dışarı çıkmaya dairdir. “Yani def-i hacet” kaydı Hişâm'ın açıklamasıdır ve râvi notu olarak belirtilir."
+  },
+  "148": {
+   "matn": "İbrâhim ibn Münzir bize bildirdi, dedi: Enes ibn İyâd bize bildirdi, Ubeydullah'tan, o Muhammed ibn Yahyâ ibn Hıbbân'dan, o Vâsi' ibn Hıbbân'dan, o Abdullah ibn Ömer'den, dedi: “Bir ihtiyacım için Hafsa'nın evinin damına çıktım, Allah'ın Elçisi'ni, Allah’ın salât ve selâmı onun üzerine olsun, kıbleye sırtı, Şam'a yüzü dönük halde hacetini giderirken gördüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Evlerde def-i hacet” bâbında zikreder. İbn Ömer, Allah'ın Elçisi'ni Hafsa'nın evinin damında görür: kıbleye sırtı, Şam'a yüzü dönük. Bunun yapı içinde olması bâb başlığıyla uyumludur; açık arazi ile yapı konusundaki mezhep ayrılıkları burada karara bağlanmaz."
+  },
+  "149": {
+   "matn": "Ya'kûb ibn İbrâhim bize bildirdi, dedi: Yezîd ibn Hârûn bize bildirdi, dedi: Yahyâ bize haber verdi, Muhammed ibn Yahyâ ibn Hıbbân'dan, amcası Vâsi' ibn Hıbbân'ın kendisine haber verdiğini: Abdullah ibn Ömer'in kendisine haber verdiğini, dedi: “Bir gün evimizin damına çıktım, Allah'ın Elçisi'ni, Allah’ın salât ve selâmı onun üzerine olsun, iki kerpiç üzerinde oturmuş, Beytülmakdis'e yönelmiş gördüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Bu kaydın korpusta bâb başlığı yoktur; burada da eklenmez. Rivayet bir öncekine ve iki kerpiç haberine yakındır: İbn Ömer, Allah'ın Elçisi'ni “evimizin” damında, iki kerpiç üzerinde, Beytülmakdis'e yönelmiş görür."
+  },
+  "150": {
+   "matn": "Ebü'l-Velîd Hişâm ibn Abdülmelik bize bildirdi, dedi: Şu'be bize bildirdi, Ebû Muâz'dan, adı Atâ ibn Ebî Meymûne'dir, dedi: Enes ibn Mâlik'i şöyle derken işittim: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, haceti için çıktığında ben ve bir çocuk gelirdik, yanımızda bir idâve su vardı,” yani onunla istincâ ederdi.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Su ile istincâ” bâbında zikreder. Enes ile bir çocuk bir su kabı getirir. “Yani onunla istincâ ederdi” ifadesi râvi açıklamasıdır. Ebû Muâz'ın adı Atâ ibn Ebî Meymûne olarak verilir. Taşla temizlik gibi diğer yollar bu lafızda ele alınmaz."
+  },
+  "151": {
+   "matn": "Süleyman ibn Harb bize bildirdi, dedi: Şu'be bize bildirdi, Ebû Muâz'dan, o Atâ ibn Ebî Meymûne'dir, dedi: Enes'i şöyle derken işittim: “Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, haceti için çıktığında ben ve bizden bir çocuk onu takip ederdik, yanımızda bir idâve su vardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Temizliği için yanında su taşıyan kimse” bâbında zikreder. Rivayet bir öncekine benzer; burada Enes ile bizden bir çocuğun onu bir su kabıyla takip ettiği belirtilir. Su ile istincâ yorumu bu lafızda yoktur. “O Atâ ibn Ebî Meymûne'dir” kaydı râvi notudur."
+  },
+  "152": {
+   "matn": "Muhammed ibn Beşşâr bize bildirdi, dedi: Muhammed ibn Ca'fer bize bildirdi, dedi: Şu'be bize bildirdi, Atâ ibn Ebî Meymûne'den: Enes ibn Mâlik'i şöyle derken işittiğini: “Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, helâya girerdi, ben ve bir çocuk bir idâve su ile bir anez taşırdık; su ile istincâ ederdi.” Nadr ve Şâzân, Şu'be'den ona (rivayette) tâbi oldular. Anez: ucunda sivri demir (zücc) bulunan bir değnektir.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “İstincâ için su ile birlikte anez (kısa mızrak) taşımak” bâbında zikreder. Enes ile bir çocuk su kabı ve anez taşır; temizlik su iledir. Nadr ve Şâzân'ın tâbi oluşu destekleyici yol olarak belirtilir. Anez'in uçlu değnek olarak açıklanması söz kaydıdır; değneğin amacı bu lafızda belirtilmez."
+  },
+  "153": {
+   "matn": "Muâz ibn Fedâle bize bildirdi, dedi: Hişâm bize bildirdi, o Destuvâî'dir, Yahyâ ibn Ebî Kesîr'den, o Abdullah ibn Ebî Katâde'den, o babasından, dedi: Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: “Biriniz içtiğinde kaba üflemesin; helâya geldiğinde tenasül uzvuna sağ eliyle dokunmasın ve sağ eliyle silinmesin.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Sağ elle istincânın yasaklanması” bâbında zikreder. Lafız üç buyruğu birleştirir: kaba üflemek, uzva sağ elle dokunmak ve sağ elle temizlenmek yasaktır. “O Destuvâî'dir” kaydı râvi notudur. Yasağın kesin haram mı yoksa kerahat mi olduğu bu kayıtta karara bağlanmaz."
+  },
+  "154": {
+   "matn": "Muhammed ibn Yûsuf bize bildirdi, dedi: Evzâî bize bildirdi, Yahyâ ibn Ebî Kesîr'den, o Abdullah ibn Ebî Katâde'den, o babasından, o Peygamber'den, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: “Biriniz bevlettiğinde tenasül uzvunu sağ eliyle almasın, sağ eliyle istincâ etmesin ve kaba üflemesin.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Küçük abdest bozarken tenasül uzvunu sağ eliyle tutmamak” bâbında zikreder. Aynı konu başka sırayla ve “almak” ile “istincâ” fiilleriyle gelir; önceki “dokunmak” ve “silinmek” yerine. Üç buyruk lafızda durur; ifadelerin bir sıralaması burada yazılmaz."
+  },
+  "155": {
+   "matn": "Ahmed ibn Muhammed el-Mekkî bize bildirdi, dedi: Amr ibn Yahyâ ibn Saîd ibn Amr el-Mekkî bize bildirdi, dedesinden, o Ebû Hüreyre'den, dedi: “Peygamber'e, Allah’ın salât ve selâmı onun üzerine olsun, haceti için çıkarken uydum. Dönüp bakmazdı. Ona yaklaştım, dedi: Bana taş bul, onlarla temizleneyim, yahut benzeri bir söz, bana kemik ve tezek getirme. Elbisenin kenarıyla ona taşlar getirdim, yanına koydum ve ondan yüz çevirdim. İşini bitirince onlarla devam etti.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Taşla istincâ” bâbında zikreder. Peygamber ﷺ temizlenmek için taş ister, kemik ve tezeği dışarıda bırakır; gerekçe bu lafızda belirtilmez. “Yahut benzeri bir söz” râvinin tereddüdünü korur. Ebû Hüreyre taşları yanına koyup yüz çevirir; iş bitince kullanılır."
+  },
+  "156": {
+   "matn": "Ebû Nuaym bize bildirdi, dedi: Züheyr bize bildirdi, Ebû İshâk'tan, dedi: Bunu zikreden Ebû Ubeyde değildir, aksine Abdurrahmân ibn Esved'dir, babasından: Abdullah'ı şöyle derken işittiğini: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, hacet yerine geldi, bana üç taş getirmemi emretti. İki taş buldum, üçüncüyü aradım, bulamadım, bir tezek alıp ona götürdüm. İki taşı aldı, tezeği attı ve dedi: Bu rikstir (pislik).”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı “Taşla istincâ” bâbında zikreder. Ebû İshâk isnadı düzeltir: zikreden Ebû Ubeyde değil, Abdurrahmân ibn Esved'dir, babasından; bu bilinen haberde Abdullah, İbn Mes'ûd'dur. Üç taş istenir; ikisi alınır, tezek riks diye atılır. Üç taşın zorunlu olup olmadığı bu kayıtta karara bağlanmaz."
+  },
+  "157": {
+   "matn": "Muhammed ibn Yûsuf bize bildirdi, dedi: Süfyân bize bildirdi, Zeyd ibn Eslem'den, o Atâ ibn Yesâr'dan, o İbn Abbâs'tan, dedi: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, birer kere abdest aldı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Abdest uzuvlarını birer kere yıkamak” bâbında zikreder. İbn Abbâs, uzuvların birer kere yıkanışına şahitlik eder. İki veya üç kere gibi başka sayılar bu lafızda ele alınmaz; sonraki bâblarda geçer."
+  },
+  "158": {
+   "matn": "Hüseyin ibn İsâ bize bildirdi, dedi: Yûnus ibn Muhammed bize bildirdi, dedi: Füleyh ibn Süleyman bize bildirdi, Abdullah ibn Ebî Bekir ibn Amr ibn Hazm'dan, o Abbâd ibn Temîm'den, o Abdullah ibn Zeyd'den: “Peygamber'in, Allah’ın salât ve selâmı onun üzerine olsun, ikişer kere abdest aldığını.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Abdest uzuvlarını ikişer kere yıkamak” bâbında zikreder. Abdullah ibn Zeyd ikişer yıkayışa şahitlik eder. Başka sayılar bu lafızda ele alınmaz; bir kere önceki bâbdadır, üç kere sonrakinde."
+  },
+  "159": {
+   "matn": "Abdülazîz ibn Abdullah el-Uveysî bize bildirdi, dedi: İbrâhim ibn Sa'd bana bildirdi, İbn Şihâb'dan: Atâ ibn Yezîd'in kendisine haber verdiğini: Osman'ın mevlâsı Hümrân'ın kendisine haber verdiğini: “Osman ibn Affân'ı bir kap istediğini, avuçlarına üç kere döküp yıkadığını, sonra sağ elini kaba sokup ağzını çalkaladığını ve burnuna su çektiğini, sonra yüzünü üç kere, kollarını dirseklere kadar üç kere yıkadığını, sonra başına mesh ettiğini, sonra ayaklarını topuklara kadar üç kere yıkadığını gördüğünü, sonra dedi: Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: Kim benim şu abdestim gibi abdest alır, sonra içinde kendisiyle konuşmadan iki rekât namaz kılarsa, günahından önce geçmiş olan bağışlanır.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Abdest uzuvlarını üçer kere yıkamak” bâbında zikreder. Hümrân, Osman'ın abdestini anlatır: avuçlar üç kere, yüz, kollar ve ayaklar üç kere; ağız, burun ve baş meshi sayısızdır. Vaad, “bunun gibi” bir abdest ile kendisiyle konuşulmayan iki rekâta dairdir. Bağışlamanın kapsamı bu lafızda daha yakından belirlenmez."
+  },
+  "160": {
+   "matn": "İbrâhim'den, dedi: Sâlih ibn Keysân dedi: İbn Şihâb dedi: Fakat Urve, Hümrân'dan rivayet eder: “Osman abdest alınca dedi: Size bir hadis söyleyeyim mi? Bir âyet olmasaydı size söylemezdim. Peygamber'i, Allah’ın salât ve selâmı onun üzerine olsun, şöyle derken işittim: Bir adam abdestini güzel alıp namazı kılarsa, namazı kılıncaya kadar kendisi ile namaz arasında olan bağışlanır.” Urve dedi: Âyet: “İndirdiğimiz açık delilleri gizleyenler.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Yol İbrâhim'dendir; İbn Şihâb, Urve'nin Hümrân'dan rivayetini öncekinin karşısına koyar. Osman nakli bir âyete bağlar; Urve'nin âyeti belirlemesi (Bakara 2:159'un başı) âlim kaydı olarak belirtilir. Âyetin lafzı alıntının ötesinde tamamlanmaz."
+  },
+  "161": {
+   "matn": "Abdân bize bildirdi, dedi: Abdullah bize haber verdi, dedi: Yûnus bize haber verdi, Zührî'den, dedi: Ebû İdrîs bana haber verdi ki Ebû Hüreyre'yi, Peygamber'den, Allah’ın salât ve selâmı onun üzerine olsun, şöyle buyururken işitmiş: “Kim abdest alırsa sümkürsün; kim taşla temizlenirse tek sayıda yapsın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Abdestte burna su çekip sümkürmek” bâbında zikreder. İki buyruk yan yanadır: burundan suyu atmak ve taşla temizlikte tek sayı. Daha yakın bir farz hükmü burada yazılmaz."
+  },
+  "162": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Ebû'z-Zinâd'dan, o A'rec'den, o Ebû Hüreyre'den: Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: “Biriniz abdest aldığında (su) burnuna alsın, sonra sümkürsün; kim taşla temizlenirse tek sayıda yapsın; biriniz uykusundan uyanınca elini abdest suyuna sokmadan önce yıkasın, çünkü biriniz elinin geceyi nerede geçirdiğini bilmez.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Taşla temizlenmeyi tek sayıda yapmak” bâbında zikreder. Lafız, buruna su alıp sümkürmeyi, tek sayıyı ve uykudan sonra eli abdest suyuna sokmadan yıkamayı birleştirir. Gerekçe, elin geceyi nerede geçirdiğinin bilinmemesidir; daha ileri yorum ve farz meselesi burada karara bağlanmaz."
+  },
+  "163": {
+   "matn": "Mûsâ bize bildirdi, dedi: Ebû Avâne bize bildirdi, Ebû Bişr'den, o Yûsuf ibn Mâhek'ten, o Abdullah ibn Amr'dan, dedi: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, yaptığımız bir yolculukta gerimizde kaldı, bizi ikindi vakti sıkıştırmışken yetişti. Abdest almaya ve ayaklarımız üzerine mesh etmeye başladık. En yüksek sesiyle seslendi: Topukların ateşten vay hâline. İki veya üç kere.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Ayakları yıkamak, ayaklar üzerine mesh edilmez” bâbında zikreder. Uyarı topuklaradır, onlar ayaklar üzerine mesh ederken. “İki veya üç kere” râvi tereddüdü olarak korunur. Bâb başlığı yıkamaya, salt mesh'e karşı işaret eder; bu konudaki görüş ayrılıkları burada karara bağlanmaz."
+  },
+  "164": {
+   "matn": "Ebü'l-Yemân bize bildirdi, dedi: Şuayb bize haber verdi, Zührî'den, dedi: Atâ ibn Yezîd bana haber verdi, Osman ibn Affân'ın mevlâsı Hümrân'dan: “Osman'ı abdest suyu istediğini, kabından ellerine döküp üç kere yıkadığını, sonra sağ elini abdest suyuna soktuğunu, sonra ağzını çalkaladığını, burnuna su çekip sümkürdüğünü, sonra yüzünü üç kere, kollarını dirseklere kadar üç kere yıkadığını, sonra başına mesh ettiğini, sonra her ayağı üç kere yıkadığını gördüğünü, sonra dedi: Peygamber'i, Allah’ın salât ve selâmı onun üzerine olsun, benim şu abdestim gibi abdest alırken gördüm, ve buyurdu: Kim benim şu abdestim gibi abdest alır, sonra içinde kendisiyle konuşmadan iki rekât namaz kılarsa, Allah günahından önce geçmiş olanı bağışlar.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Abdestte ağza su vermek” bâbında zikreder. Anlatım Osman'ın önceki abdestine yakındır; burada ağza su vermek, buruna çekmek ve sümkürmek açıkça durur, “her ayak” üç kere yıkanır, topuklar anılmaz. Ağız, burun ve baş meshinin sayısı belirtilmez. Vaad, “bunun gibi” bir abdest ile kendisiyle konuşulmayan iki rekâta dairdir."
+  },
+  "165": {
+   "matn": "Âdem ibn Ebî İyâs bize bildirdi, dedi: Şu'be bize bildirdi, dedi: Muhammed ibn Ziyâd bize bildirdi, dedi: “Ebû Hüreyre'yi işittim – yanımızdan geçerken insanlar temizlenme kabından (mathara) abdest alırlardı –, dedi: Abdesti bol tutun, çünkü Ebulkâsım, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: Topukların ateşten vay hâline.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Topukları yıkamak” bâbında zikreder. Ebû Hüreyre abdestin bol tutulmasını ister ve bunu Ebulkâsım'ın ﷺ topuklar hakkındaki sözüne dayandırır. Temizlenme kabındaki sahne, râvi Muhammed ibn Ziyâd'ın tasviridir."
+  },
+  "166": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Saîd el-Makburî'den, o Ubeyd ibn Cüreyç'ten, Abdullah ibn Ömer'e şöyle dediğini: “Ey Ebû Abdurrahmân, seni dört iş yaparken gördüm, arkadaşlarından kimsenin yaptığını görmedim. Dedi: Nedir onlar, ey İbn Cüreyç? Dedi: Rükünlerden yalnız iki Yemen rüknüne dokunduğunu, sibtiyye na'linler giydiğini, sarıya boyandığını, ve Mekke'de iken insanların hilali görünce ihlâl ettiklerini, senin ise terviye gününe kadar ihlâl etmediğini gördüm. Abdullah dedi: Rükünlere gelince: Allah'ın Elçisi'ni, Allah’ın salât ve selâmı onun üzerine olsun, yalnız iki Yemen rüknüne dokunurken gördüm. Sibtiyye na'linlere gelince: Allah'ın Elçisi'ni, Allah’ın salât ve selâmı onun üzerine olsun, içinde kıl olmayan na'lini giyer ve onda abdest alırken gördüm, onun için onları giymeyi severim. Sarıya gelince: Allah'ın Elçisi'ni, Allah’ın salât ve selâmı onun üzerine olsun, onunla boyanırken gördüm, onun için onunla boyanmayı severim. İhlâle gelince: Allah'ın Elçisi'ni, Allah’ın salât ve selâmı onun üzerine olsun, bineği kendisiyle hareket edinceye kadar ihlâl ederken görmedim.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Ayakları na'lin içinde yıkamak, na'linler üzerine mesh edilmez” bâbında zikreder. Dört uygulamadan bâba ait olan, kılsız na'lin içinde abdest almaktır; lafız “onda” der, na'lin üzerine mesh değil. Diğer üç nokta – iki Yemen rüknü, sarıyla boyanma ve ihlâlin ancak bineğin hareketiyle, hilalde değil – haberde durur; bu kayıt hacc ve boyama meselelerini karara bağlamaz."
+  },
+  "167": {
+   "matn": "Müsedded bize bildirdi, dedi: İsmâil bize bildirdi, dedi: Hâlid bize bildirdi, Hafsa bint Sîrîn'den, o Ümmü Atıyye'den, dedi: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, kızı yıkanırken onlara buyurdu: Onun sağ taraflarından ve abdest yerlerinden başlayın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Abdestte ve gusülde sağdan başlamak” bâbında zikreder. Buyruk, kızının gaslinde kadınlaradır: önce sağ taraflar ve abdest yerleri. Kızın adı bu lafızda geçmez ve burada eklenmez."
+  },
+  "168": {
+   "matn": "Hafs ibn Ömer bize bildirdi, dedi: Şu'be bize bildirdi, dedi: Eş'as ibn Süleym bana haber verdi, dedi: Babamı işittim, Mesrûk'tan, o Âişe'den, dedi: “Peygamber'e, Allah’ın salât ve selâmı onun üzerine olsun, na'lin giymesinde, taranmasında ve temizlenmesinde sağdan başlamak hoş gelirdi, bütün işlerinde.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Âişe, na'lin, saç ve temizlikte sağ tarafın tercihini şahitlik eder ve “bütün işlerinde” diye ekler. Bunu babasından işittiğini belirten Eş'as'tır."
+  },
+  "169": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, İshâk ibn Abdullah ibn Ebî Talha'dan, o Enes ibn Mâlik'ten, şöyle dediğini: “Allah'ın Elçisi'ni, Allah’ın salât ve selâmı onun üzerine olsun, ikindi namazının vakti gelmişken gördüm. İnsanlar abdest suyu aradılar, bulamadılar. Allah'ın Elçisi'ne, Allah’ın salât ve selâmı onun üzerine olsun, abdest suyu getirildi. Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, elini o kaba koydu ve insanlara ondan abdest almalarını buyurdu. Dedi: Parmaklarının altından suyun fışkırdığını gördüm, sonunda sonuncularına varıncaya kadar abdest aldılar.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Namaz vakti gelince abdest suyu aramak” bâbında zikreder. İnsanlar abdest suyu arar, bulamazlar; el kaba konunca su parmakların altından fışkırır, sonuncu da abdest alana kadar. Bu lafız hazır olanların sayısını vermez."
+  },
+  "170": {
+   "matn": "Mâlik ibn İsmâîl bize bildirdi, dedi: İsrâil bize bildirdi, Âsım'dan, o İbn Sîrîn'den, dedi: “Ubeyde'ye dedim: Yanımızda Peygamber'in, Allah’ın salât ve selâmı onun üzerine olsun, saçından var; onu Enes tarafından, ya da Enes'in ev halkı tarafından elde ettik. Dedi: Ondan bir kıl bile bende olsa, dünya ve içindekilerden bana daha sevimli gelir.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “İnsan saçının yıkandığı su” bâbında zikreder. İbn Sîrîn, saçın Enes'ten mi yoksa onun ev halkından mı geldiği hususundaki tereddüdü korur. Ubeyde, Peygamber'in tek bir kılını dünya ve içindekilere tercih eder. Bu lafız saç hakkında başka bir sayı veya kaynak belirtmez."
+  },
+  "171": {
+   "matn": "Muhammed ibn Abdürrahîm bize bildirdi, dedi: Saîd ibn Süleyman bize haber verdi, dedi: Abbâd bize bildirdi, İbn Avn'dan, o İbn Sîrîn'den, o Enes'ten: “Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, başını tıraş edince Ebû Talha saçından ilk alan oldu.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Enes, Elçi başını tıraş edince saçından ilk alanın Ebû Talha olduğunu bildirir. Bu lafız yer, vesile ve başka alanları belirtmez."
+  },
+  "172": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, Mâlik'ten, o Ebû'z-Zinâd'dan, o A'rec'ten, o Ebû Hüreyre'den, dedi: Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: “Köpek birinizin kabına içerse, onu yedi kez yıkasın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Lafız, köpeğin içtiği kabın yedi kez yıkanmasını emreder. Bu rivayette toprakla yıkama geçmez. Artık suyun hükmünü metin karara bağlamaz."
+  },
+  "173": {
+   "matn": "İshâk bize bildirdi, dedi: Abdussamed bize haber verdi, dedi: Abdurrahman ibn Abdullah ibn Dînâr bize bildirdi, dedi: Babamı işittim, Ebû Sâlih'ten, o Ebû Hüreyre'den, o Peygamber'den, Allah’ın salât ve selâmı onun üzerine olsun: “Bir adam, susuzluktan nemli toprağı yiyen bir köpek gördü. Adam mestini aldı, onunla ona su kepçelemeye başladı, sonunda onu kandırdı. Allah ona şükretti ve onu cennete soktu.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Kaynak râviyi yalnızca İshâk diye anar, başka künye vermez. Bir adam susuz bir köpeği mestiyile sular; Allah ona şükreder ve onu cennete koyar. Bu lafız kuyu veya yer belirtmez."
+  },
+  "174": {
+   "matn": "Ahmed ibn Şebîb dedi: Babam bize bildirdi, Yûnus'tan, o İbn Şihâb'dan, dedi: Hamza ibn Abdullah bana bildirdi, babasından, dedi: “Allah'ın Elçisi zamanında, Allah’ın salât ve selâmı onun üzerine olsun, köpekler mescidde işer, girer ve çıkardı, ve bundan hiçbir şey serpmezlerdi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî bu hadisi “Ahmed ibn Şebîb dedi” diyerek kendi tam isnadı olmaksızın (muallak) aynı bâbda zikreder. Hamza babasından, köpeklerin mescidde işediğini ve dolaştığını, bundan hiçbir şeyin serpilmediğini nakleder. Lafız bir temizleme işlemi veya fıkhî sonuç belirtmez; ihtilafları karara bağlamaz."
+  },
+  "175": {
+   "matn": "Hafs ibn Ömer bize bildirdi, dedi: Şu'be bize bildirdi, İbn Ebî's-Sefer'den, o Şa'bî'den, o Adî ibn Hâtim'den, dedi: “Peygamber'e, Allah’ın salât ve selâmı onun üzerine olsun, sordum, buyurdu: Eğitilmiş köpeğini salar ve o öldürürse ye; eğer (kendisi) yerse yeme, çünkü onu ancak kendisi için tutmuştur. Dedim: Köpeğimi salar ve yanında başka bir köpek bulursam? Buyurdu: O zaman yeme, çünkü sen ancak kendi köpeğin üzerine isim getirdin, başka bir köpek üzerine isim getirmedin.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Adî, eğitilmiş köpekle avı sorar: öldürür ve kendi yemezse yenir; köpek ondan yerse yenmez. Yanında başka köpek bulunursa yenmez, çünkü isim yalnız kendi köpeği üzerine getirilmiştir. Bu lafız başka av hükümlerini karara bağlamaz."
+  },
+  "176": {
+   "matn": "Âdem ibn Ebî İyâs bize bildirdi, dedi: İbn Ebî Zi'b bize bildirdi, Saîd el-Makburî'den, o Ebû Hüreyre'den, dedi: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: “Kul, mescidde namazı beklediği sürece, hades olmadığı müddetçe namazda olmayı sürdürür.” Acemî bir adam dedi: Hades nedir, ey Ebû Hüreyre? Dedi: Ses; yani yellenmek.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Abdesti yalnızca ön ve arka yollardan çıkan şeylerden dolayı gerekli görenler” bâbında zikreder. Mescidde beklemek, hades olmayınca namaz sayılır. Ebû Hüreyre hadesi burada ses, yani yellenmek olarak açıklar. Bu lafız onu başka hades türlerine yaymaz."
+  },
+  "177": {
+   "matn": "Ebü'l-Velîd bize bildirdi, dedi: İbn Uyeyne bize bildirdi, Zührî'den, o Abbâd ibn Temîm'den, o amcasından, o Peygamber'den, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: “Bir ses işitmedikçe veya bir koku duymadıkça ayrılmasın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Amca bu senedde adıyla anılmaz. Namazdan, bir ses işitilmedikçe veya bir koku duyulmadıkça çıkılmaz. Lafız şüpheyi salt zanla çözmez."
+  },
+  "178": {
+   "matn": "Kuteybe ibn Saîd bize bildirdi, dedi: Cerîr bize bildirdi, A'meş'ten, o Münzir Ebû Ya'lâ es-Sevrî'den, o Muhammed ibn Hanefiyye'den, dedi: Ali dedi: “Ben mezîsi çok gelen bir adamdım, Allah'ın Elçisi'ne, Allah’ın salât ve selâmı onun üzerine olsun, sormaya hayâ ettim. Mikdâd ibn Esved'i görevlendirdim, o sordu. Buyurdu: Onda abdest vardır.” Şu'be de bunu A'meş'ten rivayet etti.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Ali hayâsından Mikdâd'a sordurur; cevap, mezîde abdestin gerektiğidir. Bu lafız guslü anmaz. Son kayıt, Şu'be'nin A'meş'ten başka bir yolunu belirtir."
+  },
+  "179": {
+   "matn": "Sa'd ibn Hafs bize bildirdi, Şeybân bize bildirdi, Yahyâ'dan, o Ebû Seleme'den: Atâ ibn Yesâr'ın ona haber verdiğini: Zeyd ibn Hâlid'in ona haber verdiğini: Osman ibn Affân'a, Allah ondan razı olsun, sorduğunu, dedim: “Cinsel ilişkide bulunur da meni gelmezse ne buyurursun?” Osman dedi: Namaz için abdest aldığı gibi abdest alır ve zekeri yıkar. Osman dedi: Bunu Allah'ın Elçisi'nden, Allah’ın salât ve selâmı onun üzerine olsun, işittim. Sonra bunu Ali'ye, Zübeyr'e, Talha'ya ve Übey ibn Kâ'b'a, Allah onlardan razı olsun, sordum, onlar da onu buna yönelttiler.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Meni gelmediğinde Osman, abdesti ve zekerin yıkanmasını Elçi'den işittiğine bağlar; Ali, Zübeyr, Talha ve Übey ibn Kâ'b aynı şeyi emrettiler. Bu lafız başka rivayetleri ve sonraki değerlendirmeleri karara bağlamaz."
+  },
+  "180": {
+   "matn": "İshâk bize bildirdi, dedi: Nadr bize haber verdi, dedi: Şu'be bize haber verdi, Hakem'den, o Zekvân Ebû Sâlih'ten, o Ebû Saîd el-Hudrî'den: “Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, ensardan bir adama haber gönderdi, o da başı damlar halde geldi. Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: Belki seni acele ettirdik? Dedi: Evet. Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, buyurdu: Acele ettirilirsen veya (meni) kesilirse, üzerine abdest vardır.” Vehb ona bu hususta mutâbaat etti, dedi: Şu'be bize bildirdi. Ebû Abdullah dedi: Günder ve Yahyâ, Şu'be'den “abdest” demediler.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Kaynak râviyi yalnızca İshâk diye anar, başka künye vermez; ensardan adam adsız kalır. Acele veya meninin kesilmesinde abdest anılır. Buhârî (Ebû Abdullah), Günder ve Yahyâ'nın Şu'be'den “abdest” lafzını nakletmediğini kaydeder; Vehb bu lafzı içeren rivayete uyar. Râvilerin ayrılığı olduğu gibi durur."
+  },
+  "181": {
+   "matn": "Muhammed ibn Selâm bana bildirdi, dedi: Yezîd ibn Hârûn bize haber verdi, Yahyâ'dan, o Mûsâ ibn Ukbe'den, o İbn Abbâs'ın mevlâsı Kureyb'den, o Üsâme ibn Zeyd'den: “Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, Arafat'tan hareket edince geçide yöneldi ve ihtiyacını gördü. Üsâme ibn Zeyd dedi: Ben ona dökmeye başladım, o abdest alıyordu, dedim: Ey Allah'ın Elçisi, namaz kılacak mısın? Buyurdu: Namazgâh önündedir.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Kişinin arkadaşına abdest aldırması” bâbında zikreder. Üsâme, Elçi Arafat'tan ayrıldıktan sonra geçitte abdest alırken suyu döker. Namazgâh önlerinde anılır; bu lafız bir yer adı vermez. Yıkama sayısı belirtilmez."
+  },
+  "182": {
+   "matn": "Amr ibn Ali bize bildirdi, dedi: Abdülvehhâb bize bildirdi, dedi: Yahyâ ibn Saîd'i işittim, dedi: Sa'd ibn İbrâhîm bana haber verdi ki Nâfi' ibn Cübeyr ibn Mut'im ona haber vermiş: Urve ibn Muğîre ibn Şu'be'yi, Muğîre ibn Şu'be'den şöyle naklederken işittiğini: “Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, ile bir yolculukta idi, o bir ihtiyacı için gitti, Muğîre de abdest alırken üzerine su dökmeye başladı. Yüzünü ve ellerini yıkadı, başına mesh etti, mestler üzerine mesh etti.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Muğîre suyu döker; yüz, eller, başa mesh ve mestler üzerine mesh anılır. Bu lafız sayı ve yolculuğun başka ayrıntısını vermez."
+  },
+  "183": {
+   "matn": "İsmâil bize bildirdi, dedi: Mâlik bana bildirdi, Mahrame ibn Süleyman'dan, o İbn Abbâs'ın mevlâsı Kureyb'den: Abdullah ibn Abbâs'ın ona haber verdiğini: “Peygamber'in, Allah’ın salât ve selâmı onun üzerine olsun, eşi Meymûne'nin yanında bir gece kaldığını, onun da teyzesi olduğunu. Yastığın enine yattım, Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, ile eşi de boyuna yattılar. Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, gece yarısı oluncaya, yahut biraz öncesine veya biraz sonrasına kadar uyudu. Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, uyandı, oturup eliyle uykuyu yüzünden sildi, sonra Âl-i İmrân suresinin son on âyetini okudu, sonra asılı bir kırbaya yöneldi, ondan abdest aldı ve abdestini güzel aldı, sonra kalkıp namaz kıldı. İbn Abbâs dedi: Kalktım, onun yaptığının benzerini yaptım, sonra gidip yanına durdum. Sağ elini başıma koydu, sağ kulağımı tutup burdu. İki rekât kıldı, sonra iki, sonra iki, sonra iki, sonra iki, sonra iki, sonra vitir kıldı, sonra müezzin yanına gelene kadar yattı. Sonra kalkıp iki hafif rekât kıldı, sonra çıkıp sabah namazını kıldı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Abdest bozulduktan sonra Kur'an okumak ve diğer meseleler” bâbında zikreder. Gece yarısı vurgusu tereddütlü kalır: gece yarısı, biraz önce veya biraz sonra. Âl-i İmrân'ın son on âyetinin okunması, asılı kırbadan anlatılan abdestten öncedir; bu lafız hadesi açıkça anmaz ve hükmü karara bağlamaz. İbn Abbâs onu taklit eder, yanına durur; sağ kulak burulur. Altı kez iki rekât, vitir, müezzinden sonra iki hafif rekât ve sabah namazı gelir."
+  },
+  "184": {
+   "matn": "İsmâil bize bildirdi, dedi: Mâlik bana bildirdi, Hişâm ibn Urve'den, o eşi Fâtıma'dan, o babaannesi Esmâ bint Ebî Bekr'den, şöyle dediğini: “Güneş tutulunca Peygamber'in, Allah’ın salât ve selâmı onun üzerine olsun, eşi Âişe'ye geldim. İnsanlar ayakta namaz kılıyorlardı, o da ayakta namaz kılıyordu. Dedim: İnsanlara ne oldu? Eliyle göğe işaret etti ve Sübhânallah dedi. Dedim: Bir âyet mi? İşaret etti: evet. Ayakta kaldım, baygınlık beni kaplayıncaya kadar, başımın üstüne su dökmeye başladım. Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, ayrılınca Allah'a hamd ve sena etti, sonra buyurdu: Görmediğim hiçbir şey kalmadı ki bu durduğum yerde görmemiş olayım, cennet ve ateşe varıncaya kadar. Bana vahyedildi ki kabirlerde imtihan olunacaksınız, Deccâl'in fitnesi gibi veya ona yakın – Esmâ'nın hangisini söylediğini bilmiyorum –: Birinize gelinir, denir: Bu adam hakkında ne biliyorsun? Mümin, yahut yakîni olan – Esmâ'nın hangisini söylediğini bilmiyorum – der: O, Muhammed'dir, Allah'ın Elçisi; bize apaçık deliller ve hidayetle geldi, biz de icabet ettik, inandık ve uyduk. Denir: İyi olarak uyu, çünkü mümin olduğunu bildik. Münafık veya şüphede olan – Esmâ'nın hangisini söylediğini bilmiyorum – der: Bilmiyorum, insanların bir şey söylediğini işittim, ben de onu söyledim.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Ancak ağır baygınlıktan sonra abdest alan kimse” bâbında zikreder. Esmâ'yı baygınlık kaplar, başına su döker; bu lafız yenilenmiş bir abdest anmaz ve hükmü karara bağlamaz. Râviyenin, Esmâ'nın hangi lafızları kullandığına dair tereddüdü üç kez korunur. Elçi, durduğu yerde cennet ve ateşi gördüğünü ve kabrin imtihanını, Deccâl'inki gibi veya ona yakın, bildirir."
+  },
+  "185": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Amr ibn Yahyâ el-Mâzinî'den, o babasından: “Bir adam, Amr ibn Yahyâ'nın dedesi olan Abdullah ibn Zeyd'e dedi: Allah'ın Elçisi'nin, Allah’ın salât ve selâmı onun üzerine olsun, nasıl abdest aldığını bana gösterebilir misin? Abdullah ibn Zeyd dedi: Evet. Su istedi, ellerine döktü, iki kez yıkadı, sonra üç kez ağzını çalkaladı ve sümkürdü, sonra yüzünü üç kez yıkadı, sonra kollarını dirseklere kadar ikişer kez yıkadı, sonra elleriyle başına mesh etti, onları öne ve arkaya götürdü; başının önünden başladı, enseye kadar götürdü, sonra başladığı yere geri çevirdi, sonra ayaklarını yıkadı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Başın tamamını mesh etmek” bâbında zikreder. Lafız, Abdullah ibn Zeyd'i Amr ibn Yahyâ'nın dedesi olarak anar. Sayılar: eller iki, ağız ve sümkürme üç, yüz üç, kollar dirseklere kadar ikişer; baş meshı önden enseye ve geriye gider. Bu rivayet ayaklar için sayı vermez."
+  },
+  "186": {
+   "matn": "Mûsâ bize bildirdi, dedi: Vüheyb bize bildirdi, Amr'dan, o babasından: “Amr ibn Ebî Hasan'ın Abdullah ibn Zeyd'e Peygamber'in, Allah’ın salât ve selâmı onun üzerine olsun, abdestini sorduğuna şahit oldum. Bir tevr su istedi ve onlara Peygamber'in, Allah’ın salât ve selâmı onun üzerine olsun, abdestini aldı. Tevrden eline boşalttı, ellerini üç kez yıkadı, sonra elini tevre soktu, üç avuçla ağzına su verdi, buruna çekti ve sümkürdü, sonra elini soktu, yüzünü üç kez yıkadı, sonra kollarını dirseklere kadar iki kez yıkadı, sonra elini soktu, başına mesh etti, onları öne ve arkaya götürdü, bir kez, sonra ayaklarını topuklara kadar yıkadı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Ayakları topuklarla birlikte yıkamak” bâbında zikreder. Amr'ın babası, Amr ibn Ebî Hasan'ın sorusuna şahitlik eder. Sayılar: eller üç, ağız, burun ve sümkürme üç avuç, yüz üç, kollar dirseklere kadar iki, baş meshı bir kez öne ve geri. Ayaklar topuklara kadar yıkanır; bu rivayet onlar için sayı vermez."
+  },
+  "187": {
+   "matn": "Âdem bize bildirdi, dedi: Şu'be bize bildirdi, dedi: Hakem bize bildirdi, dedi: Ebû Cuhayfe'yi şöyle derken işittim: “Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, öğle sıcağında yanımıza çıktı. Abdest suyu getirildi, abdest aldı. İnsanlar abdest artığından alıp onunla mesh etmeye başladılar. Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, öğle namazını iki rekât, ikindi namazını iki rekât kıldı, önünde bir anez vardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “İnsanların abdest artığı suyunu kullanmak” bâbında zikreder. İnsanlar artıktan alıp onunla mesh ederler. Öğle ve ikindi ikişer rekât anılır; bu lafız bir yolculuk vesilesi vermez. Önünde bir anez durur."
+  },
+  "188": {
+   "matn": "Ebû Mûsâ dedi: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, içinde su olan bir kadeh istedi, ellerini ve yüzünü onda yıkadı, içine (ağzından bir miktar su) püskürttü, sonra ikisine dedi: Ondan için, yüzlerinize ve göğsünüzün üstüne dökün.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî bu hadisi “Ebû Mûsâ dedi” diyerek kendi tam isnadı olmaksızın (muallak) aynı bâbda zikreder. Peygamber kapta el ve yüzünü yıkar, içine püskürtür ve ikisine ondan içmelerini, yüz ve göğsün üstüne dökmelerini söyler. Hitap edilen iki kişi adsız kalır."
+  },
+  "189": {
+   "matn": "Ali ibn Abdullah bize bildirdi, dedi: Ya'kûb ibn İbrâhîm ibn Sa'd bize bildirdi, dedi: Babam bize bildirdi, Sâlih'ten, o İbn Şihâb'dan, dedi: “Mahmûd ibn Rebî' bana haber verdi, dedi: O, Allah'ın Elçisi'nin, Allah’ın salât ve selâmı onun üzerine olsun, henüz çocukken yüzüne (ağzından su) püskürttüğü kimsedir, onların kuyusundan.” Urve, Mîsver'den ve başkalarından dedi, her biri diğerini doğrulayarak: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, abdest alınca, abdest suyu üzerine neredeyse birbirlerine girerlerdi.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. İlk yol, Mahmûd ibn Rebî'yi, yüzüne onların kuyusundan su püskürtülen çocuk olarak anar. Buhârî, Urve'nin Mîsver ve başkalarından naklini kendi tam isnadı olmaksızın ekler; ikisi birbirini doğrular ki artı su üzerine neredeyse çekişirlerdi."
+  },
+  "190": {
+   "matn": "Abdurrahman ibn Yûnus bize bildirdi, dedi: Hâtim ibn İsmâil bize bildirdi, Ca'd'den, dedi: Sâib ibn Yezîd'i şöyle derken işittim: “Teyzem beni Peygamber'e, Allah’ın salât ve selâmı onun üzerine olsun, götürdü ve dedi: Ey Allah'ın Elçisi, kız kardeşimin oğlu ağrılıyor. Başımı mesh etti, benim için bereketle dua etti, sonra abdest aldı, ben de abdest artığından içtim. Sonra sırtının arkasına durdum, iki küreğinin arasında nübüvvet mührüne baktım, bir hacale düğmesi gibi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Teyze adsız kalır. Sâib, Peygamber başını mesh edip bereketle dua ettikten sonra artıktan içer. Mühür kürek kemikleri arasındadır, “bir hacale düğmesi gibi”; hacale kuş veya gölgelik olarak anlaşılır, bu lafız onu karara bağlamaz."
+  },
+  "191": {
+   "matn": "Müsedded bize bildirdi, dedi: Hâlid ibn Abdullah bize bildirdi, dedi: Amr ibn Yahyâ bize bildirdi, babasından, o Abdullah ibn Zeyd'den: “Kaptan ellerine boşalttığını ve onları yıkadığını, sonra bir tek avuçtan yıkadığını – yahut ağzına su verip buruna çektiğini –, bunu üç kez yaptığını, sonra kollarını dirseklere kadar ikişer kez yıkadığını, başının önünü ve arkasını mesh ettiğini, ayaklarını topuklara kadar yıkadığını, sonra dediğini: Allah'ın Elçisi'nin, Allah’ın salât ve selâmı onun üzerine olsun, abdesti böyleydi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Bir avuç suyla ağzına ve burnuna su veren kimse” bâbında zikreder. “Yıkadı, yahut ağzına su verip buruna çekti” tereddüdü bir avuçtan korunur; bu üç kez yapıldı. Başta eller sayısızdır; kollar dirseklere kadar ikişer; ayaklar topuklara kadar sayısız. Abdullah ibn Zeyd bunu Elçi'nin abdesti olarak sunar."
+  },
+  "192": {
+   "matn": "Süleyman ibn Harb bize bildirdi, dedi: Vüheyb bize bildirdi, dedi: Amr ibn Yahyâ bize bildirdi, babasından, dedi: “Amr ibn Ebî Hasan'ın Abdullah ibn Zeyd'e Peygamber'in, Allah’ın salât ve selâmı onun üzerine olsun, abdestini sorduğuna şahit oldum. Bir tevr su istedi ve onlara abdest aldı. Ellerine boşalttı, onları üç kez yıkadı, sonra elini kaba soktu, üç kez üç avuç suyla ağzına su verdi, buruna çekti ve sümkürdü, sonra elini kaba soktu, yüzünü üç kez yıkadı, sonra elini kaba soktu, kollarını dirseklere kadar ikişer kez yıkadı, sonra elini kaba soktu, başına mesh etti, ellerini öne ve arkaya götürdü, sonra elini kaba soktu, ayaklarını yıkadı.” Musa bize bildirdi, dedi: Vüheyb bize bildirdi, dedi: Başına bir kez mesh etti.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Başı bir kere mesh etmek” bâbında zikreder. İlk yol, ellerin baş üzerinde öne ve arkaya götürülmesini “bir kez” demeden anlatır. Musa'nın Vüheyb'den yolu ekler: Başına bir kez mesh etti. Ayaklar sayı ve topuk anılmadan yıkanır."
+  },
+  "193": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Nâfi'den, o Abdullah ibn Ömer'den, şöyle dediğini: “Allah'ın Elçisi zamanında, Allah’ın salât ve selâmı onun üzerine olsun, erkekler ve kadınlar birlikte abdest alırlardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Erkeğin hanımıyla birlikte abdest alması ve kadının abdest artığı” bâbında zikreder. Lafız yalnızca o zamanda erkekler ve kadınların birlikte abdest aldığını söyler. Aynı kap, artı su veya başka fıkhî meseleleri karara bağlamaz."
+  },
+  "194": {
+   "matn": "Ebü'l-Velîd bize bildirdi, dedi: Şu'be bize bildirdi, Muhammed ibn Münkedir'den, dedi: Câbir'i şöyle derken işittim: “Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, beni ziyarete geldi, ben hastaydım ve aklım yerinde değildi. Abdest aldı ve abdest suyundan üzerime döktü. Aklım yerine geldi, dedim: Ey Allah'ın Elçisi, miras kime ait? Bana ancak kelâle mirasçı olur. Bunun üzerine faraz âyeti indi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Peygamber'in ﷺ abdest suyunu baygın kişinin üzerine dökmesi” bâbında zikreder. Câbir hasta ve bilinçsizdir; artı su üzerine dökülünce ayılır ve kelâle olarak mirası sorar. Lafız âyet numarası vermeden “faraz âyeti”ni anar. Kelâle burada metnin daha yakından tanımlamadığı bir miras terimi olarak kalır."
+  },
+  "195": {
+   "matn": "Abdullah ibn Münîr bize bildirdi, Abdullah ibn Bekr'i işitti, dedi: Humeyd bize bildirdi, Enes'ten, dedi: “Namaz vakti geldi. Evi yakın olanlar ev halkına gitti, bir grup kaldı. Allah'ın Elçisi'ne, Allah’ın salât ve selâmı onun üzerine olsun, içinde su olan taştan bir leğen getirildi. Leğen, avucunu içinde açamayacağı kadar küçüktü, buna rağmen bütün topluluk abdest aldı. Dedik: Kaç kişiydiniz? Dedi: Seksen ve daha fazla.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi “Leğen, kadeh, ahşap ve taş kaplarda gusül ve abdest” bâbında zikreder. Leğen taştandır ve açık avuç için küçüktür; buna rağmen hepsi abdest alır. Sayı “seksen ve daha fazla”dır, daha kesin bir rakam yoktur."
+  },
+  "196": {
+   "matn": "Muhammed ibn Alâ' bize bildirdi, dedi: Ebû Usâme bize bildirdi, Büreyd'den, o Ebû Bürde'den, o Ebû Mûsâ'dan: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, içinde su olan bir kadeh istedi, ellerini ve yüzünü onda yıkadı ve içine (ağzından bir miktar su) püskürttü.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Lafız, kapta el ve yüzün yıkanması ve içine püskürtmekle biter. Bu rivayet hazır bulunanlara başka bir buyruk anmaz."
+  },
+  "197": {
+   "matn": "Ahmed ibn Yûnus bize bildirdi, dedi: Abdülazîz ibn Ebî Seleme bize bildirdi, dedi: Amr ibn Yahyâ bize bildirdi, babasından, o Abdullah ibn Zeyd'den, dedi: “Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, geldi, biz de ona pirinç bir tevrde su çıkardık. Abdest aldı: yüzünü üç kez, kollarını ikişer kez yıkadı, başına mesh etti, onu öne ve arkaya götürdü, ayaklarını yıkadı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Kap pirinçtendir. Sayılar: yüz üç, kollar ikişer, dirsek anılmaz; baş meshı öne ve geri; ayaklar sayısız. Bu rivayet başta ellerin yıkanmasını anmaz."
+  },
+  "198": {
+   "matn": "Ebü'l-Yemân bize bildirdi, dedi: Şuayb bize haber verdi, Zührî'den, dedi: Ubeydullah ibn Abdullah ibn Utbe bana haber verdi: Âişe'nin şöyle dediğini: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, ağırlaşıp ağrısı şiddetlenince, evimde bakılmak için eşlerinden izin istedi, onlar da ona izin verdiler. Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, iki adam arasında dışarı çıktı, ayakları yere sürünerek, Abbâs ile başka bir adamın arasında.” Ubeydullah dedi: Bunu Abdullah ibn Abbâs'a bildirdim, dedi: Diğer adamın kim olduğunu bilir misin? Dedim: Hayır. Dedi: O Ali'dir. Âişe, Allah ondan razı olsun, şöyle anlatırdı: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, evine girdikten ve ağrısı şiddetlendikten sonra dedi: Üzerime, ağızları çözülmemiş yedi kırbadan dökün, belki insanlara bir vasiyette bulunurum. Onu, Peygamber'in, Allah’ın salât ve selâmı onun üzerine olsun, eşi Hafsa'ya ait bir leğene (mıhdab) oturttum. Sonra onları üzerine dökmeye başladık, tâ ki bize işaret etmeye başladı: yaptınız, diye. Sonra insanların yanına çıktı.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Leğen, kadeh, ahşap ve taş kaplarda gusül ve abdest“ bâbında zikreder. Âişe ağır hastalığı ve kendi evinde bakılmayı nakleder; Peygamber, ayakları yerde sürünerek, Abbâs ile başka bir adam arasında çıkar. Diğerinin Ali olduğu, İbn Abbâs'ın Ubeydullah'a söylediği sözdedir, Âişe'nin lafzında değil. Eve girdikten sonra, henüz açılmamış yedi kırbadan üzerine dökülmesini ister ve Hafsa'nın leğenine (mıhdab) oturtulur. Sonra insanların yanına çıkar. Bu rivayet başka durum veya hükümleri anmaz."
+  },
+  "199": {
+   "matn": "Hâlid ibn Mahled bize bildirdi, dedi: Süleymân bize bildirdi, dedi: Amr ibn Yahyâ bana bildirdi, babasından, dedi: “Amcam çok abdest alırdı. Abdullah ibn Zeyd'e dedi: Peygamber'i, Allah’ın salât ve selâmı onun üzerine olsun, nasıl abdest alırken gördüğünü bana anlat. Bir tevr su istedi, ellerinin üzerine boşaltıp onları üç kez yıkadı, sonra elini tevre soktu, tek bir avuçtan üç kez mazmaza yaptı ve burnunu sümkürdü, sonra elini sokup onunla su alarak yüzünü üç kez yıkadı, sonra kollarını dirseklere kadar ikişer kez yıkadı, sonra eliyle su alıp başına mesh etti, onu arkaya ve öne götürdü, sonra ayaklarını yıkadı ve dedi: Peygamber'i, Allah’ın salât ve selâmı onun üzerine olsun, böyle abdest alırken gördüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Tevr (kap) ile abdest almak“ bâbında zikreder. Mazmaza ve istinsâr tek bir avuçtan üç kez yapılır. Kollar dirseklere kadar ikişer kez yıkanır; baş meshı arkaya sonra öne gider; ayaklar sayısızdır. Râvi şöyle bağlar: Peygamber'i böyle abdest alırken gördüm."
+  },
+  "200": {
+   "matn": "Müsedded bize bildirdi, dedi: Hammâd bize bildirdi, Sâbit'ten, o Enes'ten: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, bir kap su istedi. İçinde biraz su bulunan geniş, sığ bir kadeh (kadeh rahrah) getirildi. Parmaklarını içine koydu. Enes dedi: Suyun parmaklarının arasından fışkırdığına bakmaya başladım. Enes dedi: Abdest alanları yetmiş ile seksen arasında tahmin ettim.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Kap, içinde az su bulunan geniş, sığ bir kadehtir; su parmakların arasından fışkırır. Sayı Enes'in tahminidir: yetmiş ile seksen arası."
+  },
+  "201": {
+   "matn": "Ebû Nuaym bize bildirdi, dedi: Mis'ar bize bildirdi, dedi: İbn Cebr bana bildirdi, dedi: Enes'i şöyle derken işittim: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, yıkardı, yahut: bir sâ‘ ile beş müde kadar gusül ederdi ve bir müd ile abdest alırdı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Bir müd su ile abdest almak“ bâbında zikreder. „Yıkardı, yahut: gusül ederdi“ tereddüdü korunur. Miktarlar: gusül için bir sâ‘ ile beş müde kadar, abdest için bir müd. Lafız bunları bugünkü ölçülere çevirmez."
+  },
+  "202": {
+   "matn": "Asbağ ibn el-Ferec el-Mısrî bize bildirdi, İbn Vehb'den, dedi: Amr bana bildirdi: Ebü'n-Nadr bana bildirdi, Ebû Seleme ibn Abdurrahmân'dan, o Abdullah ibn Ömer'den, o Sa'd ibn Ebî Vakkâs'tan, o Peygamber'den, Allah’ın salât ve selâmı onun üzerine olsun: “mestler üzerine mesh ettiğini.” Abdullah ibn Ömer'in bunu Ömer'e sorduğunu, onun da dediğini: Evet, Sa'd sana Peygamber'den, Allah’ın salât ve selâmı onun üzerine olsun, bir şey bildirirse, artık onu başkasına sorma. Mûsâ ibn Ukbe dedi: Ebü'n-Nadr bana haber verdi: Ebû Seleme'nin ona haber verdiğini: Sa'd'ın … ve Ömer'in Abdullah'a: benzerini, dediğini.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Mestler üzerine mesh“ bâbında zikreder. Lafız meshı bildirir, şart veya sayı anmaz. Ömer, Sa'd'ın haberini doğrular ve İbn Ömer'e bunu başkasına sormamasını söyler. Mûsâ ibn Ukbe yolu, sonradan eklenmiş bir âlim kaydı (muallak) olarak belirtilir ve tam yazılmamış lafızla „benzeri“ diye biter."
+  },
+  "203": {
+   "matn": "Amr ibn Hâlid el-Harrânî bize bildirdi, dedi: Leys bize bildirdi, Yahyâ ibn Saîd'den, o Sa'd ibn İbrâhîm'den, o Nâfi' ibn Cübeyr'den, o Urve ibn el-Mugîre'den, o babası el-Mugîre ibn Şu'be'den, o Allah'ın Elçisi'nden, Allah’ın salât ve selâmı onun üzerine olsun: “ihtiyacı için dışarı çıktığını, Mugîre'nin içinde su olan bir idâve ile onu izlediğini, ihtiyacını bitirince üzerine döktüğünü; onun da abdest alıp mestler üzerine mesh ettiğini.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Mugîre bir su kabı ile izler, ihtiyaçtan sonra üzerine döker; Peygamber abdest alır ve mestler üzerine mesh eder. Bu rivayet meshın başka şartlarını anmaz."
+  },
+  "204": {
+   "matn": "Ebû Nuaym bize bildirdi, dedi: Şeybân bize bildirdi, Yahyâ'dan, o Ebû Seleme'den, o Ca'fer ibn Amr ibn Ümeyye ed-Damrî'den: babasının ona haber verdiğini: “Peygamber'i, Allah’ın salât ve selâmı onun üzerine olsun, mestler üzerine mesh ederken gördüğünü.” Harb ibn Şeddâd ve Ebân, Yahyâ'dan ona uydular (rivayette).",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Mestler üzerine mesh“ bâbında zikreder. Ca'fer'in babası, başka şart veya sayı anmadan mestler üzerine meshı görür. Harb ibn Şeddâd ile Ebân'ın Yahyâ'dan mütâbaası, tam yazılmamış lafızla destekleyici yol olarak belirtilir."
+  },
+  "205": {
+   "matn": "Abdân bize bildirdi, dedi: Abdullah bize haber verdi, dedi: Evzâî bize haber verdi, Yahyâ'dan, o Ebû Seleme'den, o Ca'fer ibn Amr'dan, o babasından, dedi: “Peygamber'i, Allah’ın salât ve selâmı onun üzerine olsun, sarığı (imâme) ve mestleri üzerine mesh ederken gördüm.” Ma'mer ona uydu (rivayette), Yahyâ'dan, o Ebû Seleme'den, o Amr'dan, dedi: Peygamber'i, Allah’ın salât ve selâmı onun üzerine olsun, gördüm.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Bu rivayet mestlerin yanında sarık üzerine meshı da anar. Ma'mer'in destekleyici yolu Yahyâ'dan Ebû Seleme üzerinden Amr'a gider, Ca'fer olmadan, ve yazılı lafız şuna inhisar eder: Peygamber'i gördüm. Meshın başka ayrıntıları orada durmaz."
+  },
+  "206": {
+   "matn": "Ebû Nuaym bize bildirdi, dedi: Zekeriyyâ bize bildirdi, Âmir'den, o Urve ibn el-Mugîre'den, o babasından, dedi: “Peygamber ile, Allah’ın salât ve selâmı onun üzerine olsun, bir yolculuktaydım. Mestlerini çıkarmak için eğildim, dedi: Bırak onları, çünkü ayaklarımı temizken soktum. Sonra üzerlerine mesh etti.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Ayaklarını temiz iken mestlere sokarsa“ bâbında zikreder. Peygamber, Mugîre'yi çıkarmaktan alıkoyar ve meshı, ayaklarını temizken sokmuş olmasıyla gerekçelendirir. „Temiz“in ayrıntısı ve başka şartlar bu rivayette karara bağlanmaz."
+  },
+  "207": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Zeyd ibn Eslem'den, o Atâ ibn Yesâr'dan, o Abdullah ibn Abbâs'tan: “Allah'ın Elçisi'nin, Allah’ın salât ve selâmı onun üzerine olsun, bir koyun küreği yediğini, sonra namaz kılıp abdest almadığını.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Koyun eti ve sevik yedikten sonra abdest almayan kimse“ bâbında zikreder. Lafız bir koyun küreğinin yenmesini, ardından abdest yenilenmeden kılınan namazı anar. Bu rivayet başka yiyecek veya mazmazayı anmaz."
+  },
+  "208": {
+   "matn": "Yahyâ ibn Bükeyr bize bildirdi, dedi: Leys bize bildirdi, Ukayl'den, o İbn Şihâb'dan, dedi: Ca'fer ibn Amr ibn Ümeyye bana haber verdi: babasının ona haber verdiğini: “Allah'ın Elçisi'ni, Allah’ın salât ve selâmı onun üzerine olsun, bir koyun küreğinden keserken gördüğünü. Namaza çağrıldı, bıçağı bıraktı, namaz kıldı ve abdest almadı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Allah'ın Elçisi kürekten keser, namaza çağrılır, bıçağı bırakır ve abdest yenilemeden namaz kılar. Bu rivayet mazmazayı anmaz."
+  },
+  "209": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Yahyâ ibn Saîd'den, o Benî Hârise'nin mevlâsı Büşeyr ibn Yesâr'dan: Süveyd ibn en-Nu'mân'ın ona haber verdiğini: “Allah'ın Elçisi ile, Allah’ın salât ve selâmı onun üzerine olsun, Hayber yılında çıktığını, nihayet Sahbâ'da, Hayber'in en yakın yerinde, olduklarını. İkindiyi kıldı, sonra azık istedi, yalnız sevik getirildi. Ona dair emretti, ıslatıldı. Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, yedi, biz de yedik. Sonra akşama kalktı, ağzını çalkaladı, biz de çalkaladık, sonra namaz kıldı ve abdest almadı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Sevik yedikten sonra ağzını çalkalayıp abdest almayan kimse“ bâbında zikreder. Yer ve zaman, Hayber yılındaki Sahbâ, Hayber'in en yakın yeridir. İkindiden sonra yalnız sevik getirilir ve ıslatılır; yemekten sonra, akşamdan önce, abdest yenilenmeden ağız çalkalanır. Lafız sevikin daha yakın bir tarifini vermez."
+  },
+  "210": {
+   "matn": "Ve Asbağ bize bildirdi, dedi: İbn Vehb bize haber verdi, dedi: Amr bana haber verdi, Bukeyr'den, o Kureyb'den, o Meymûne'den: “Peygamber'in, Allah’ın salât ve selâmı onun üzerine olsun, onun yanında bir kürek yediğini, sonra namaz kılıp abdest almadığını.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Sevik yedikten sonra ağzını çalkalayıp abdest almayan kimse“ bâbında zikreder. Lafız, Meymûne'nin yanında bir küreğin yenmesini ve ardından abdest yenilenmeden kılınan namazı anar. Bu rivayet sevik ve mazmazayı anmaz."
+  },
+  "211": {
+   "matn": "Yahyâ ibn Bükeyr ve Kuteybe bize bildirdiler, ikisi de dedi: Leys bize bildirdi, Ukayl'den, o İbn Şihâb'dan, o Ubeydullah ibn Abdullah ibn Utbe'den, o İbn Abbâs'tan: “Allah'ın Elçisi'nin, Allah’ın salât ve selâmı onun üzerine olsun, süt içtiğini, ağzını çalkaladığını ve: Onun yağı (desem) vardır, dediğini.” Yûnus ve Sâlih ibn Keysân, Zührî'den ona uydular (rivayette).",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Sütten sonra ağız çalkalanır mı?“ bâbında zikreder. Allah'ın Elçisi süt içtikten sonra ağzını çalkalar ve bunu yağ ile gerekçelendirir. Bunun farz mı mendup mu olduğunu lafız karara bağlamaz. Yûnus ile Sâlih ibn Keysân'ın Zührî'den mütâbaası, tam yazılmamış lafızla destekleyici yol olarak belirtilir."
+  },
+  "212": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Hişâm'dan, o babasından, o Âişe'den: Allah'ın Elçisi'nin, Allah’ın salât ve selâmı onun üzerine olsun, şöyle dediğini: “Birinize namaz kılarken uyku gelirse, uyku ondan gidene kadar yatsın. Çünkü biriniz uykulu iken namaz kılarsa bilmez: belki bağışlanma diler de bu arada kendine söver.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Uykudan dolayı abdest“ bâbında zikreder. Lafız, namazda uyuklamayı ve uyku gidene kadar yatmayı konu eder, tâ ki kişi bağışlanma dileyip kendine sövmesin. Bu rivayet abdesti ve hafif ile derin uykunun ayrımını anmaz."
+  },
+  "213": {
+   "matn": "Ebû Ma'mer bize bildirdi, dedi: Abdülvâris bize bildirdi: Eyyûb bize bildirdi, Ebû Kılâbe'den, o Enes'ten, o Peygamber'den, Allah’ın salât ve selâmı onun üzerine olsun, dedi: “Birinize namazda uyku gelirse, ne okuduğunu bilene kadar uyusun.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Bu kısa rivayet gerekçeyi, kişinin ne okuduğunu bilmesine indirger. Abdesti anmaz."
+  },
+  "214": {
+   "matn": "Muhammed ibn Yûsuf bize bildirdi, dedi: Süfyân bize bildirdi, Amr ibn Âmir'den, dedi: Enes'i işittim (isnad değişimi). Dedi: Ve Müsedded bize bildirdi, dedi: Yahyâ bize bildirdi, Süfyân'dan, dedi: Amr ibn Âmir bana bildirdi, Enes'ten, dedi: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, her namazda abdest alırdı. Dedim: Siz ne yapardınız? Dedi: Birimize, bozmadığı sürece abdest yeterdi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Abdest bozulmadan abdest almak“ bâbında zikreder. Peygamber her namazda abdest alır; ashap, bozulmadığı sürece bir abdesti yeterli sayar. Peygamber'in bu davranışının farz mı âdet mi olduğu bu rivayette karara bağlanmaz."
+  },
+  "215": {
+   "matn": "Hâlid ibn Mahled bize bildirdi, dedi: Süleymân bize bildirdi, dedi: Yahyâ ibn Saîd bana bildirdi, dedi: Büşeyr ibn Yesâr bana haber verdi, dedi: Süveyd ibn en-Nu'mân bana haber verdi, dedi: “Allah'ın Elçisi ile, Allah’ın salât ve selâmı onun üzerine olsun, Hayber yılında çıktık, nihayet Sahbâ'da iken, Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, bize ikindiyi kıldırdı. Kılınca yemekleri istedi, yalnız sevik getirildi. Yedik ve içtik. Sonra Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, akşama kalktı, ağzını çalkaladı, sonra bize akşamı kıldırdı ve abdest almadı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Yer ve zaman, Hayber yılındaki Sahbâ'dır. İkindiden sonra yalnız sevik getirilir; yerler ve içerler, akşamdan önce o ağzını çalkalar, abdest yenilemeden. Bu rivayet ıslatmayı ve başkalarının onunla birlikte çalkalamasını anmaz."
+  },
+  "216": {
+   "matn": "Osmân bize bildirdi, dedi: Cerîr bize bildirdi, Mansûr'dan, o Mücâhid'den, o İbn Abbâs'tan, dedi: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, Medine'nin, yahut Mekke'nin duvarlarından bir duvarın yanından geçti ve kabirlerinde azap gören iki insanın sesini işitti. Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, dedi: Azap görüyorlar, ve büyük bir şeyden ötürü azap görmüyorlar. Sonra dedi: Bilakis, birisi idrarından sakınmazdı, diğeri de nemîme (koğuculuk) ile dolaşırdı. Sonra bir hurma dalı istedi, onu iki parça etti ve her bir kabrin üzerine bir parça koydu. Ona denildi: Ey Allah'ın Elçisi, bunu neden yaptın? Dedi: Belki kurumadıkları sürece onlardan hafifletilir. Yahut: kuruyuncaya kadar.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „İdrarından sakınmamak büyük günahlardandır“ bâbında zikreder. Yer belirsiz kalır: Medine yahut Mekke. Lafız önce büyük bir şeyden ötürü azap görmediklerini söyler, sonra „Bilakis“ ile pekiştirir ve iki sebebi anar. „Büyük bir şey“in burada neyi kapsadığı metinde belirlenmez. Hurma dalı kırılıp kabirlere konur, „kurumadıkları sürece, yahut: kuruyuncaya kadar“ hafifleme umuduyla; bu tereddüt korunur."
+  },
+  "217": {
+   "matn": "Ya'kûb ibn İbrâhîm bize bildirdi, dedi: İsmâîl ibn İbrâhîm bize bildirdi, dedi: Ravh ibn el-Kâsım bana bildirdi, dedi: Atâ ibn Ebî Meymûne bana bildirdi, Enes ibn Mâlik'ten, dedi: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, ihtiyacı için dışarı çıktığında ona su getirirdim, onunla yıkanırdı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „İdrarı yıkamak hakkında gelenler“ bâbında zikreder. Lafız, Enes'in ihtiyaçtan sonra su getirmesi ve Peygamber'in onunla yıkanmasıyla sınırlıdır. Bu rivayet yıkamanın başka ayrıntılarını anmaz."
+  },
+  "218": {
+   "matn": "Muhammed ibn el-Müsennâ bize bildirdi, dedi: Muhammed ibn Hâzim bize bildirdi, dedi: A'meş bize bildirdi, Mücâhid'den, o Tâvûs'tan, o İbn Abbâs'tan, dedi: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, iki kabrin yanından geçti ve dedi: Onlar gerçekten azap görüyorlar, ve büyük bir şeyden ötürü azap görmüyorlar. Birine gelince, idrardan sakınmazdı; diğerine gelince, nemîme ile dolaşırdı. Sonra yaş bir hurma dalı aldı, onu ikiye böldü ve her kabre birini sapladı. Dediler: Ey Allah'ın Elçisi, bunu neden yaptın? Dedi: Belki kurumadıkları sürece onlardan hafifletilir.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi başlıksız bir bâbda zikreder. Bu rivayet yer anmaz, kabirlere saplanan yaş bir hurma dalından bahseder ve yalnız „kurumadıkları sürece“ ifadesini taşır, „kuruyuncaya kadar“ alternatifini anmaz. „Büyük bir şey“in kapsadığı burada da belirlenmez."
+  },
+  "219": {
+   "matn": "Mûsâ ibn İsmâîl bize bildirdi, dedi: Hemmâm bize bildirdi: İshâk bize haber verdi, Enes ibn Mâlik'ten: “Peygamber'in, Allah’ın salât ve selâmı onun üzerine olsun, mescitte küçük abdest yapan bir bedevî gördüğünü ve: Bırakın onu, dediğini. Bitirince su istedi ve üzerine döktü.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Peygamber'in ﷺ ve insanların, mescitte küçük abdestini bitirinceye kadar bedeviyi bırakması“ bâbında zikreder. Peygamber onu bırakır ve bitince üzerine su döker. Bu rivayet hazır bulunanlara başka buyruk anmaz."
+  },
+  "220": {
+   "matn": "Ebü'l-Yemân bize bildirdi, dedi: Şuayb bize haber verdi, Zührî'den, dedi: Ubeydullah ibn Abdullah ibn Utbe ibn Mes'ûd bana haber verdi: Ebû Hüreyre'nin şöyle dediğini: “Bir bedevî ayağa kalkıp mescitte küçük abdest yaptı. İnsanlar ona yöneldi. Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, onlara dedi: Bırakın onu, ve bevlinin üzerine bir kova (sicil) su dökün, yahut büyük bir kova (zenûb) su. Çünkü siz ancak kolaylaştırıcılar olarak gönderildiniz, zorlaştırıcılar olarak gönderilmediniz.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Mescitteki idrarın üzerine su dökmek“ bâbında zikreder. İnsanlar bedevîye el uzatmak ister; Peygamber onları durdurur ve bir kova su, yahut büyük bir kova, üzerine döktürür. Sicil ile zenûb arasındaki tereddüt kalır. Gerekçe, kolaylaştırıcı olarak gönderilmeleri ve zorlaştırıcı olarak gönderilmemeleridir. İki kabın kesin ölçüsü anılmaz."
+  },
+  "221": {
+   "matn": "Abdân bize bildirdi, dedi: Abdullah bize haber verdi, dedi: Yahyâ ibn Saîd bize haber verdi, dedi: Enes ibn Mâlik'i işittim, Peygamber'den, Allah’ın salât ve selâmı onun üzerine olsun.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Bu rivayet yalnız Enes'e, o da Peygamber'e varan isnadı içerir ve yazılı bir metin taşımaz. Önceki haberlerin içeriği burada tamamlanmaz."
+  },
+  "222": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, Hişâm ibn Urve'den, o babasından, o müminlerin annesi Âişe'den, ki şöyle dedi: “Allah'ın Elçisi'ne, Allah’ın salât ve selâmı onun üzerine olsun, bir erkek çocuk getirildi, elbisesine işedi. O da su istedi ve onu onunla takip etti.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Erkek çocukların idrarı“ bâbında zikreder. Bir erkek çocuk Elçi'ye getirilir, elbiseye işer; o su ister ve idrarı suyla takip eder. Bu rivayet elbiseyi yıkadığını veya yalnızca serptiğini söylemez; suyla takip etmekle sınırlıdır."
+  },
+  "223": {
+   "matn": "Abdullah ibn Yûsuf bize bildirdi, dedi: Mâlik bize haber verdi, İbn Şihâb'dan, o Ubeydullah ibn Abdullah ibn Utbe'den, o Ümmü Kays bint Mihsan'dan, “ki henüz yemek yememiş küçük bir oğlunu Allah'ın Elçisi'ne, Allah’ın salât ve selâmı onun üzerine olsun, getirdi. Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, onu kucağına oturttu, o da elbisesine işedi. Su istedi, onu serpti ve yıkamadı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Bu rivayet henüz yemek yememiş küçük bir oğul, kucağa oturtulması, serpilmesi ve açıkça yıkanmaması geçiyor. Kız çocukları veya artık yemek yiyen çocuklar için bir hüküm lafzında yoktur."
+  },
+  "224": {
+   "matn": "Âdem bize bildirdi, dedi: Şu'be bize bildirdi, A'meş'ten, o Ebû Vâil'den, o Huzeyfe'den, dedi: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, bir topluluğun çöplüğüne geldi ve ayakta küçük abdest bozdu. Sonra su istedi, ben ona su getirdim, o da abdest aldı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Ayakta ve oturarak küçük abdest bozmak“ bâbında zikreder. Lafız yalnızca bir topluluğun çöplüğünde ayakta bozmayı, sonra suyu ve abdesti anar. Oturmak bu rivayette geçmez."
+  },
+  "225": {
+   "matn": "Osmân ibn Ebî Şeybe bize bildirdi, dedi: Cerîr bize bildirdi, Mansûr'dan, o Ebû Vâil'den, o Huzeyfe'den, dedi: “Kendimi Peygamber'le, Allah’ın salât ve selâmı onun üzerine olsun, yürürken gördüm. Bir duvarın arkasında bir topluluğun çöplüğüne geldi, birinizin durduğu gibi durdu ve küçük abdest bozdu. Ben ondan uzaklaştım. Bana işaret etti, yanına geldim ve işi bitene kadar topuğunun yanında durdum.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Arkadaşının yanında küçük abdest bozmak ve duvarla örtünmek“ bâbında zikreder. Çöplük bir duvarın arkasındadır. Huzeyfe önce uzaklaşır, sonra işaretle çağrılır ve Peygamber bitirene kadar topuğunun yanında durur. Bu rivayet sonrasında abdesti anmaz."
+  },
+  "226": {
+   "matn": "Muhammed ibn Ar'ara bize bildirdi, dedi: Şu'be bize bildirdi, Mansûr'dan, o Ebû Vâil'den, dedi: “Ebû Mûsâ el-Eş'arî idrar konusunda sıkı davranır ve derdi: İsrailoğulları'ndan birinin elbisesine isabet ederse onu keserdi. Huzeyfe dedi: Keşke vazgeçseydi. Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, bir topluluğun çöplüğüne geldi ve ayakta küçük abdest bozdu.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Bir topluluğun çöplüğünde küçük abdest bozmak“ bâbında zikreder. Ebû Mûsâ sıkıdır ve İsrailoğulları'nın isabet eden elbiseyi kestiklerini anar. Huzeyfe bunun bırakılmasını diler ve Elçi'nin bir çöplükte ayakta bozduğunu zikreder. Lafız bağlantıyı daha fazla açmaz."
+  },
+  "227": {
+   "matn": "Muhammed ibn el-Müsennâ bize bildirdi, dedi: Yahyâ bize bildirdi, Hişâm'dan, dedi: Fâtıma bana bildirdi, Esmâ'dan, dedi: “Bir kadın Peygamber'e, Allah’ın salât ve selâmı onun üzerine olsun, geldi ve dedi: Ne dersin, birimiz elbisede hayız görürse ne yapsın? Dedi: Onu kaşır, sonra suyla ovar, serper ve onda namaz kılar.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Kanı yıkamak“ bâbında zikreder. Elbisede hayız görülünce ne yapılacağı sorusuna lafız şunları sayar: kaşımak, suyla ovmak, sermek ve onda namaz kılmak. Kadın isimle anılmaz. Bu rivayet başka yıkama adımlarını anmaz."
+  },
+  "228": {
+   "matn": "Muhammed bize bildirdi, dedi: Ebû Muâviye bize bildirdi: Hişâm ibn Urve bize bildirdi, babasından, o Âişe'den, dedi: “Fâtıma bint Ebî Hubeyş Peygamber'e, Allah’ın salât ve selâmı onun üzerine olsun, geldi ve dedi: Ey Allah'ın Elçisi, ben istihâze gören bir kadınım, temizlenmiyorum; namazı bırakayım mı? Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, dedi: Hayır, o ancak bir damardır ve hayız değildir. Hayızın geldiğinde namazı bırak, çekildiğinde de kanı kendinden yıka, sonra namaz kıl. Dedi: Babam da dedi: Sonra her namaz için abdest al, o vakit gelinceye kadar.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı „Kanı yıkamak“ bâbında zikreder. Fâtıma bint Ebî Hubeyş istihâze görmekte ve namazı bırakıp bırakmayacağını sorar. Elçi hayır der: bunun bir damar olup hayız olmadığını; hayız gelince namazı bırakmayı, çekilince kanı yıkayıp namaz kılmayı söyler. „Sonra her namaz için abdest al, o vakit gelinceye kadar“ ifadesi „Babam da dedi“ ile getirilir, bu rivayette Peygamber'in sözü olarak sunulmaz."
+  },
+  "229": {
+   "matn": "Abdân bize bildirdi, dedi: Abdullah bize haber verdi, dedi: Amr ibn Meymûn el-Cezerî bize haber verdi, Süleyman ibn Yesâr'dan, o Âişe'den, dedi: “Peygamber'in, Allah’ın salât ve selâmı onun üzerine olsun, elbisesinden cünüplüğü yıkardım, o da namaza çıkardı, elbisesinde su lekeleri olduğu hâlde.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Meniyi yıkamak ve ovalamak, kadından bulaşanı yıkamak“ bâbında zikreder. Lafız, cünüplüğün elbiseden yıkanması ve namaza su lekeleriyle çıkılmasıdır. Bu rivayet ovalamayı ve meni kelimesini anmaz."
+  },
+  "230": {
+   "matn": "Kuteybe bize bildirdi, dedi: Yezîd bize bildirdi, dedi: Amr bize bildirdi, Süleyman'dan, dedi: Âişe'yi işittim (isnad değişimi). Müsedded de bize bildirdi, dedi: Abdülvâhid bize bildirdi, dedi: Amr ibn Meymûn bize bildirdi, Süleyman ibn Yesâr'dan, dedi: “Âişe'ye elbiseye isabet eden meniyi sordum. Dedi: Allah'ın Elçisi'nin, Allah’ın salât ve selâmı onun üzerine olsun, elbisesinden onu yıkardım, o namaza çıkardı, yıkamanın izi de elbisesindeki su lekeleriydi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. İlk sened „Âişe'yi işittim“ ile biter ve yazılı metin taşımaz; metin ikinci seneddedir. Süleyman Âişe'ye açıkça elbiseye isabet eden meniyi sorar. O onu yıkar; yıkamanın izi su lekeleridir. Bu rivayet de ovalamayı anmaz."
+  },
+  "231": {
+   "matn": "Mûsâ bize bildirdi, dedi: Abdülvâhid bize bildirdi, dedi: Amr ibn Meymûn bize bildirdi, dedi: “Süleyman ibn Yesâr'a cünüplüğün isabet ettiği elbiseyi sordum. Dedi: Âişe dedi: Allah'ın Elçisi'nin, Allah’ın salât ve selâmı onun üzerine olsun, elbisesinden onu yıkardım, sonra namaza çıkardı, yıkamanın izi de ondaki su lekeleriydi.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Cünüplük veya başka bir şeyi yıkadığı hâlde izi gitmezse“ bâbında zikreder. Burada Amr Süleyman'a sorar, o da Âişe'nin sözünü aktarır. Lafız cünüplüğün yıkanması ve yıkama izi olarak su lekelerinden bahseder."
+  },
+  "232": {
+   "matn": "Amr ibn Hâlid bize bildirdi, dedi: Züheyr bize bildirdi, dedi: Amr ibn Meymûn ibn Mihrân bize bildirdi, Süleyman ibn Yesâr'dan, o Âişe'den: “ki Peygamber'in, Allah’ın salât ve selâmı onun üzerine olsun, elbisesinden meniyi yıkardı, sonra ben onda bir leke veya lekeler görürdüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Bu rivayet açıkça meninin yıkanmasını anar. „Bir leke veya lekeler“ tereddüdü korunur. „Görürdüm“ diyenin kim olduğu ve bunların su lekeleri olup olmadığı lafızda belirlenmez."
+  },
+  "233": {
+   "matn": "Süleyman ibn Harb bize bildirdi, dedi: Hammâd ibn Zeyd bize bildirdi, Eyyûb'dan, o Ebû Kılâbe'den, o Enes'ten, dedi: “Ukl'den veya Ureyne'den bazı kimseler geldi, Medine onlara yaramadı. Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, onlara sağmal develeri emretti ve onların idrarından ve sütünden içmelerini söyledi. Gittiler. İyileşince Peygamber'in, Allah’ın salât ve selâmı onun üzerine olsun, çobanını öldürdüler ve hayvanları sürüp götürdüler. Haber günün başında geldi, onların izine adam gönderdi. Gün yükselince getirildiler. Emretti, elleri ve ayakları kesildi, gözleri dağlandı, Harre'ye atıldılar; su isterlerdi, kendilerine su verilmezdi.” Ebû Kılâbe dedi: Bunlar çaldılar ve öldürdüler, imanlarından sonra inkâr ettiler ve Allah'a ve Elçisi'ne savaş açtılar.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Deve, binek ve koyunların idrarı ve ağılları“ bâbında zikreder. Mensup oldukları yer tereddütlüdür: Ukl veya Ureyne. Peygamber onlara sağmal develerin idrarından ve sütünden içmelerini işaret eder. İyileştikten sonra çobanı öldürür, hayvanları götürürler; eller ve ayaklar kesilir, gözler dağlanır, Harre'ye bırakılırlar ve istedikleri su verilmez. Çaldıkları, öldürdükleri, imandan sonra inkâr ettikleri ve Allah ile Elçisi'ne savaş açtıkları yorumu Ebû Kılâbe'nin sözü olarak durur."
+  },
+  "234": {
+   "matn": "Âdem bize bildirdi, dedi: Şu'be bize bildirdi, dedi: Ebü't-Teyyâh Yezîd ibn Humeyd bize haber verdi, Enes'ten, dedi: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, mescit yapılmadan önce koyun ağıllarında namaz kılardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Lafız, Peygamber'in mescit yapılmadan önce koyun ağıllarında namaz kılmasıyla sınırlıdır. Hangi mescidin kastedildiği bu rivayette ayrıca belirlenmez."
+  },
+  "235": {
+   "matn": "İsmâîl bize bildirdi, dedi: Mâlik bana bildirdi, İbn Şihâb'dan, o Ubeydullah ibn Abdullah'tan, o İbn Abbas'tan, o Meymûne'den: “ki Allah'ın Elçisi, Allah’ın salât ve selâmı onun üzerine olsun, yağa düşen bir fare hakkında soruldu ve dedi: Onu ve çevresindekini atın, onu atın ve yağınızı yiyin.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Yağa ve suya düşen necasetler“ bâbında zikreder. Yağa bir fare düşer; Elçi onu ve çevresindekini atmalarını, yağı yemelerini söyler. Katı ve sıvı yağ ayrımı bu rivayette yoktur."
+  },
+  "236": {
+   "matn": "Ali ibn Abdullah bize bildirdi, dedi: Ma'n bize bildirdi, dedi: Mâlik bize bildirdi, İbn Şihâb'dan, o Ubeydullah ibn Abdullah ibn Utbe ibn Mes'ûd'dan, o İbn Abbas'tan, o Meymûne'den: “ki Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, yağa düşen bir fare hakkında soruldu ve dedi: Onu ve çevresindekini alın ve atın.” Ma'n dedi: Mâlik bize, sayamayacağım kadar çok, İbn Abbas'tan, o Meymûne'den, diye bildirdi.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı bâbda zikreder. Bu rivayet „onu ve çevresindekini alın ve atın“ der ve yağın yenmesini açıkça anmaz. Ubeydullah'ın adı burada daha uzundur. Ma'n, Mâlik'in bunu kendisine sayılamayacak kadar çok, İbn Abbas'tan Meymûne yoluyla bildirdiğini belirtir."
+  },
+  "237": {
+   "matn": "Ahmed ibn Muhammed bize bildirdi, dedi: Abdullah bize haber verdi, dedi: Ma'mer bize haber verdi, Hemmâm ibn Münebbih'ten, o Ebû Hüreyre'den, o Peygamber'den, Allah’ın salât ve selâmı onun üzerine olsun, dedi: “Müslümanın Allah yolunda aldığı her yara, kıyamet gününde vurulduğu andaki hali gibi olur, kan fışkırır; rengi kan rengi, kokusu misk kokusudur.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi aynı „Yağa ve suya düşen necasetler“ bâbında zikreder. Lafız, Allah yolunda yaralanan müslümanın yarasının kıyamet günündeki haliyle ilgilidir: vurulduğu andaki biçim, kan rengi, misk kokusu. Bu bâba konulmasının gerekçesi metinde yoktur."
+  },
+  "238": {
+   "matn": "Ebü’l-Yemân bize bildirdi, dedi: Şuayb bize haber verdi, dedi: Ebü’z-Zinâd bize haber verdi, Abdurrahman ibn Hürmüz el-A’rac ona bildirmiş ki, Ebû Hüreyre’den işitmiş, o da Allah Resûlü’nün, Allah’ın salât ve selâmı onun üzerine olsun, şöyle dediğini işitmiş: “Biz sonuncularız, öncelerdeyiz.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Yağa ve suya düşen necasetler“ bâbında zikreder. Lafız kısadır: “Biz sonuncularız, öncelerdeyiz.” Râviler zinciri Ebü’l-Yemân, Şuayb ve Ebü’z-Zinâd üzerinden Ebû Hüreyre’ye ulaşır. Metin bâbın konusuyla bir bağ kurmaz; sonraki hadis aynı senedle gelir."
+  },
+  "239": {
+   "matn": "Ve aynı senedle şöyle dedi: “Hiçbiriniz akmayan durgun suya işemesin; sonra da onda yıkanmasın.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Hadis “aynı senedle” gelir, yani bir önceki hadisin senediyle; akmayan durgun suya işemeyi ve sonra onda yıkanmayı yasaklar. Metin hukuki sonuçlara dair ayrıntı vermez; bu konuda fukahâ arasında farklı görüşler vardır."
+  },
+  "240": {
+   "matn": "Abdân bize bildirdi, dedi: Babam bana haber verdi, Şu’be’den, o Ebû İshâk’tan, o Amr ibn Meymûn’dan, o Abdullah’tan, dedi: “Allah Resûlü, Allah’ın salât ve selâmı onun üzerine olsun, secdedeyken” (başka bir senede geçiş). Dedi: Ahmed ibn Osman bana bildirdi, dedi: Şureyh ibn Mesleme bize bildirdi, dedi: İbrâhim ibn Yûsuf bize bildirdi, babasından, o Ebû İshâk’tan, dedi: Amr ibn Meymûn bana bildirdi ki, Abdullah ibn Mes’ûd ona şöyle anlatmış: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, Beyt’in yanında namaz kılıyordu; Ebû Cehil ve bazı arkadaşları da oturuyordu. Birbirlerine: Hanginiz falan oğullarının kestiği devenin son ağzını (selâ) getirip Muhammed secdeye vardığında sırtına koyacak? dediler. Kavmin en bedbahtı kalktı, onu getirdi, Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, secdeye varıncaya kadar bekledi ve iki omzunun arasına, sırtına koydu. Ben de bakıyordum, hiçbir şeyi değiştiremiyordum; keşke bir korumam olsaydı. Dedi: Gülmeye ve birbirlerine yaslanmaya başladılar; Allah Resûlü, Allah’ın salât ve selâmı onun üzerine olsun, secdede başını kaldırmıyordu. Nihayet Fâtıma geldi ve onu sırtından attı. O zaman başını kaldırdı ve üç kez: Allah’ım, Kureyş sana kalmıştır, dedi. Aleyhlerine dua etmesi onlara ağır geldi. Dedi: Bu şehirde duanın kabul edileceğini düşünürlerdi. Sonra isim saydı: Allah’ım, Ebû Cehil sana kalmıştır; Utbe ibn Rebîa, Şeybe ibn Rebîa, Velîd ibn Utbe, Ümeyye ibn Halef ve Ukbe ibn Ebî Muayt da sana kalmıştır. Yedinciyi de saydı, ama ben onu belleyemedim. Dedi: Nefsim elinde olana yemin olsun ki, Allah Resûlü’nün, Allah’ın salât ve selâmı onun üzerine olsun, saydığı kişileri kuyuda, Bedir kuyusunda öldürülmüş yatarken gördüm.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Namaz kılanın sırtına pislik veya leş atılırsa“ bâbında zikreder. İki senedi vardır, (ḥ) geçişiyle ayrılır; ikincisi Amr ibn Meymûn üzerinden Abdullah ibn Mes’ûd’a ulaşır. Kureyşlilerin namaz kılan Peygamber’in sırtına pislik koyduğu, Fâtıma’nın onu kaldırdığı, Peygamber’in üç kez Kureyş aleyhine dua edip altı isim andığı anlatılır. Râvi yedinci ismi belleyemediğini açıkça söyler. Sonunda Abdullah, anılanları Bedir kuyusunda öldürülmüş olarak gördüğünü bildirir."
+  },
+  "241": {
+   "matn": "Muhammed ibn Yûsuf bize bildirdi, dedi: Süfyân bize bildirdi, Humeyd’den, o Enes’ten, dedi: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, elbisesine tükürdü.” İbn Ebî Meryem onu daha ayrıntılı rivayet etti, dedi: Yahyâ ibn Eyyûb bize haber verdi: Humeyd bana bildirdi, dedi: Enes’i işittim, o Peygamber’den, Allah’ın salât ve selâmı onun üzerine olsun.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Elbisedeki tükürük, sümük ve benzeri“ bâbında zikreder. Lafız kısadır: Peygamber elbisesine tükürdü. Ardından Buhârî, İbn Ebî Meryem’in Yahyâ ibn Eyyûb ve Humeyd yoluyla gelen daha ayrıntılı rivayetini zikreder; orada Humeyd, Enes’i işittiğini açıkça söyler."
+  },
+  "242": {
+   "matn": "Ali ibn Abdullah bize bildirdi, dedi: Süfyân bize bildirdi, dedi: ez-Zührî bize bildirdi, Ebû Seleme’den, o Âişe’den, o Peygamber’den, Allah’ın salât ve selâmı onun üzerine olsun, dedi: “Sarhoş eden her içecek haramdır.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Nebîz veya sarhoşluk veren bir şeyle abdest caiz değildir“ bâbında zikreder. Lafız yalnızca sarhoş eden her içeceğin haram olduğunu söyler; abdestle ilişkisi bâbın başlığından gelir."
+  },
+  "243": {
+   "matn": "Muhammed bize bildirdi, dedi: Süfyân ibn Uyeyne bize bildirdi, Ebû Hâzim’den: O, insanlar kendisine sorarken Sehl ibn Sa’d es-Sâidî’yi işitti, benimle onun arasında kimse yoktu: “Peygamber’in, Allah’ın salât ve selâmı onun üzerine olsun, yarası neyle tedavi edildi? Dedi: Bunu benden iyi bilen kimse kalmadı. Ali kalkanıyla geliyordu, içinde su vardı; Fâtıma da yüzündeki kanı yıkıyordu. Sonra bir hasır alındı, yakıldı ve yarası onunla dolduruldu.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Kadının babasının yüzündeki kanı yıkaması“ bâbında zikreder. Sehl ibn Sa’d, Peygamber’in yarasının neyle tedavi edildiği sorusuna cevap verir: Ali kalkanında su getirdi, Fâtıma yüzdeki kanı yıkadı, yakılmış bir hasır yarayı doldurdu. Ebû Hâzim, kendisiyle Sehl arasında kimsenin bulunmadığını belirtir."
+  },
+  "244": {
+   "matn": "Ebü’n-Nu’mân bize bildirdi, dedi: Hammâd ibn Zeyd bize bildirdi, Gaylân ibn Cerîr’den, o Ebû Bürde’den, o babasından, dedi: “Peygamber’e, Allah’ın salât ve selâmı onun üzerine olsun, geldim; elinde bir misvakla dişlerini temizlerken buldum. ‘A’, a’’ diyordu, misvak ağzındaydı, sanki kusmak istiyordu.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Misvak“ bâbında zikreder. Râvi, Peygamber’i misvak elinde ve ağzında görür; “A’, a’” der, sanki kusacakmış gibi. Ebû Bürde’nin babasının adı senedde belirtilmemiştir."
+  },
+  "245": {
+   "matn": "Osman bize bildirdi, dedi: Cerîr bize bildirdi, Mansûr’dan, o Ebû Vâil’den, o Huzeyfe’den, dedi: “Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, geceleyin kalktığında ağzını misvakla ovardı.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi yine „Misvak“ bâbında zikreder. Lafızda şöyle denir: Peygamber geceleyin kalktığında ağzını misvakla ovardı. Sened Osman, Cerîr, Mansûr ve Ebû Vâil üzerinden Huzeyfe’ye ulaşır."
+  },
+  "246": {
+   "matn": "Ve Affân dedi: Sahr ibn Cüveyriye bize bildirdi, Nâfi’den, o İbn Ömer’den, Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, şöyle dedi: “Kendimi misvakla dişlerimi temizlerken görüyorum; yanıma iki adam geldi, biri diğerinden büyüktü; misvakı ikisinin küçüğüne uzattım. Bana: Büyüğe ver! denildi. Ben de onu ikisinin büyüğüne verdim.” Ebû Abdullah dedi: Nuaym bunu kısaltarak rivayet etti, İbnü’l-Mübârek’ten, o Üsâme’den, o Nâfi’den, o İbn Ömer’den.",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Misvakı büyüğe vermek“ bâbında zikreder. “Ve Affân dedi” diye başlar; yani Buhârî’ye kadar tam bir senedi yoktur (muallak). Lafızda Peygamber’e misvakı büyüğe vermesi söylenir ve o da öyle yapar. Ebû Abdullah (Buhârî), Nuaym’ın hadisi kısaltarak rivayet ettiğini ekler."
+  },
+  "247": {
+   "matn": "Muhammed ibn Mukâtil bize bildirdi, dedi: Abdullah bize haber verdi, dedi: Süfyân bize haber verdi, Mansûr’dan, o Sa’d ibn Ubeyde’den, o Berâ ibn Âzib’den, dedi: Peygamber, Allah’ın salât ve selâmı onun üzerine olsun, dedi ki: “Yatağına gittiğinde namaz abdesti gibi abdest al, sonra sağ yanına yat ve de ki: Allah’ım, yüzümü sana teslim ettim, işimi sana havale ettim, sırtımı sana dayadım; sana rağbet ederek ve senden korkarak. Senden başka sığınak ve kurtuluş yoktur, ancak sanadır. Allah’ım, indirdiğin kitabına ve gönderdiğin peygamberine inandım. O gecende ölürsen fıtrat üzere ölürsün. Bunları söyleyeceğin son söz yap.” Dedi: “Ben de onu Peygamber’e tekrarladım; ‘Allah’ım, indirdiğin kitabına inandım’ yerine geldiğimde: ‘ve elçine’ dedim. Dedi: Hayır, ‘ve gönderdiğin peygamberine’.”",
+   "sharh": "Yapay zekâ özeti, uydurulmuş sayfa numarası yoktur: Buhârî hadisi „Abdestli olarak geceleyen kimsenin fazileti“ bâbında zikreder. Peygamber, uyumadan önce namaz abdesti almayı, sağ yana yatmayı ve anılan duayı okumayı emreder; bu, söylenecek son söz olmalıdır. Berâ onu Peygamber’e tekrarlar ve “peygamberine” yerine önce “elçine” der; Peygamber onu düzeltir. Metin, düzeltmenin gerekçesini belirtmez."
+  }
+ }
+}

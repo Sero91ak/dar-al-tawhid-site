@@ -1,0 +1,794 @@
+{
+ "workId": "sahih-al-buhari",
+ "kitabNo": 8,
+ "lang": "ku",
+ "method": "ai",
+ "babs": {
+  "1": "Ferzbûna lixwekirina cilan di nimêjê de",
+  "2": "Girêdana izarê li ser stûyê di nimêjê de",
+  "3": "Nimêj bi cilekî tenê ku mirov xwe tê de dipêçe",
+  "4": "Kesê ku bi cilekî tenê nimêj dike bila wî bavêje ser milên xwe",
+  "5": "Heke cil teng be",
+  "6": "Nimêj bi cubbeya Şamî",
+  "7": "Nebaşiya tazîbûnê di nimêjê de û li derveyî wê",
+  "8": "Nimêj bi kiras, şalwar, derpê û qebayê",
+  "9": "Tiştê ku ji ewretê divê were girtin",
+  "10": "Nimêj bê ridayê",
+  "11": "Tiştê ku li ser ranê tê gotin",
+  "12": "Jin bi çend cilan nimêj dike",
+  "13": "Heke bi cilekî nexşkirî nimêj bike û li nexşê binêre",
+  "14": "Gelo nimêj bi cilekî bi xaç an wêneyan xera dibe, û çi jê qedexe ye",
+  "15": "Kesê ku bi qebayeke hevrîşmî ya pişt-qelişî nimêj dike paşê wê derdixe",
+  "16": "Nimêj bi cilekî sor",
+  "17": "Nimêj li ser banan, mînberê û daran",
+  "18": "Heke cilê nimêjker di secdeyê de li jina wî bikeve",
+  "19": "Nimêj li ser hesîrê",
+  "20": "Nimêj li ser xumrayê (berbanga biçûk)",
+  "21": "Nimêj li ser nivînan",
+  "22": "Secde li ser cil di germa dijwar de",
+  "23": "Nimêj bi solan",
+  "24": "Nimêj bi mestan",
+  "25": "Heke secdeyê temam neke",
+  "26": "Vekirina milan û dûrxistina wan ji laş di secdeyê de",
+  "27": "Fezîleta rûkirina qibleyê",
+  "28": "Qibleya xelkê Medîneyê û Şamê",
+  "29": "Gotina Xwedê: «Û ji Meqamê Îbrahîm cihê nimêjê bigirin»",
+  "30": "Rûkirina qibleyê li ku derê be",
+  "31": "Tiştê ku li ser qibleyê hatiye",
+  "32": "Xişandina tifê bi destan ji mizgeftê",
+  "33": "Rakirina çilmê bi xîzikan ji mizgeftê",
+  "34": "Di nimêjê de li aliyê rastê nayê tif kirin",
+  "35": "Bila li aliyê çepê an di bin lingê çepê de tif bike",
+  "36": "Kefareta tifkirinê di mizgeftê de",
+  "37": "Veşartina belxemê di mizgeftê de",
+  "38": "Heke tif bi lez bê, bila bi devê cilê xwe bigire",
+  "39": "Îmam mirovan şîret dike ku nimêjê temam bikin û qibleyê bi bîr tîne",
+  "40": "Gelo tê gotin «mizgefta Benû filan»?",
+  "41": "Parvekirin û daleqandina gûşiyên xurmeyan di mizgeftê de",
+  "42": "Kesê ku di mizgeftê de bo xwarinê vexwendinê dike û yê ku li wir bersivê dide",
+  "43": "Dadkirin û lî'an di mizgeftê de di navbera mêr û jinan de",
+  "44": "Kesê ku dikeve malekê li ku bixwaze an li ku jê re bê gotin nimêj dike û sîxuriyê nake",
+  "45": "Mizgeftên di malan de",
+  "46": "Destpêkirina bi aliyê rastê di ketina mizgeftê û tiştên din de",
+  "47": "Gelo gorên muşrikên cahiliyetê tên vekirin û li şûna wan mizgeft tên avakirin?",
+  "48": "Nimêj li axurên pezan",
+  "49": "Nimêj li cihên deveyan",
+  "50": "Kesê ku nimêj dike dema ku li pêşiya wî tenûr, agir an tiştekî tê perestin heye",
+  "51": "Nebaşiya nimêjê li goristanan",
+  "52": "Nimêj li cihên binerdbûn û ezabê",
+  "53": "Nimêj di dêrê de",
+  "55": "Gotina Pêxember ﷺ: «Erd ji min re bû cihê nimêjê û paqijker»",
+  "56": "Razana jinê di mizgeftê de",
+  "57": "Razana mêran di mizgeftê de",
+  "58": "Nimêj dema ji rêwîtiyê vedigere",
+  "59": "Şikandina destnimêjê di mizgeftê de",
+  "60": "Avakirina mizgeftê",
+  "61": "Alîkariya hev di avakirina mizgeftê de",
+  "62": "Alîkarîxwestin ji necar û hostayan ji bo darên mînberê û mizgeftê",
+  "63": "Kesê ku mizgeftekê ava dike",
+  "64": "Girtina serê tîran dema di mizgeftê re derbas dibe",
+  "65": "Derbasbûna di mizgeftê re",
+  "66": "Helbest di mizgeftê de",
+  "67": "Rimbazên di mizgeftê de",
+  "68": "Behskirina kirîn û firotinê li ser mînberê di mizgeftê de",
+  "69": "Daxwazkirina deyn û pêgirtina deyndar di mizgeftê de",
+  "70": "Malîna mizgeftê û berhevkirina perçe, gemar û daran",
+  "71": "Qedexekirina bazirganiya meyê, di mizgeftê de hate ragihandin",
+  "72": "Xizmetkarên mizgeftê",
+  "73": "Dîl an deyndar di mizgeftê de tê girêdan",
+  "74": "Serşuştin dema misilman dibe û girêdana dîl di mizgeftê de",
+  "75": "Kon di mizgeftê de ji bo nexweşan û yên din",
+  "76": "Anîna deveyê nav mizgeftê ji ber sedemekê",
+  "77": "Deriyê biçûk û rêya derbasbûnê di mizgeftê de",
+  "78": "Derî û qufil ji bo Kabeyê û mizgeftan",
+  "79": "Ketina muşrik bo mizgeftê",
+  "80": "Bilindkirina dengê di mizgeftan de",
+  "81": "Xeleqe û rûniştin di mizgeftê de",
+  "82": "Li ser pişta xwe dirêjbûn di mizgeftê de û dirêjkirina lingê",
+  "83": "Mizgefta li ser rê bêyî zirarê bo mirovan",
+  "84": "Nimêj di mizgefta bazarê de",
+  "85": "Tevlihevkirina tiliyan di mizgeftê de û cihên din",
+  "86": "Mizgeftên li ser rêyên Medîneyê û cihên ku Pêxember ﷺ lê nimêj kiriye",
+  "88": "Sutreya îmam sutreya yên li pişt wî ye",
+  "89": "Divê çiqas navber di navbera nimêjker û sutreyê de hebe",
+  "90": "Nimêj ber bi rimekê",
+  "91": "Nimêj ber bi ʿenezeyê",
+  "92": "Sutre li Mekkeyê û cihên din",
+  "93": "Nimêj ber bi stûnekê",
+  "94": "Nimêj di navbera stûnan de li derveyî cemaetê",
+  "95": "Nimêj ber bi siwarî, deve, dar û zînê",
+  "96": "Nimêj ber bi textekî",
+  "97": "Nimêjker kesê ku di ber wî re derbas dibe paş ve dide",
+  "98": "Gunehê kesê ku di ber nimêjker re derbas dibe",
+  "99": "Mêr di nimêja xwe de rûyê xwe dide hevalê xwe an yekî din",
+  "100": "Nimêj li pişt kesekî razayî",
+  "101": "Nimêja sunnet li pişt jinekê",
+  "102": "Kesê ku dibêje tu tişt nimêjê nabire",
+  "103": "Heke di nimêjê de keçeke biçûk li stûyê xwe hilgire",
+  "104": "Heke ber bi nivînekê ku jineke di heyzê de li ser e nimêj bike",
+  "105": "Gelo mêr dikare di secdeyê de jina xwe bitepisîne da ku secde bike?",
+  "106": "Jin tiştekî eziyetdar ji nimêjker dûr dixe"
+ },
+ "hadiths": {
+  "349": {
+   "matn": "Yehyayê kurê Bukeyr ji me re ragihand, got: Leys ji me re ragihand, ji Yûnis, ji Îbn Şîhab, ji Enesê kurê Malik, got: Ebû Zer digot: Resûlê Xwedê, dirûd û silavên Xwedê lê bin, got: „Banê mala min vebû dema ez li Mekkeyê bûm. Cibrîl peya bû, singa min vekir, paşê bi avê Zemzemê şuşt, paşê tasekî zêrîn yê tijî şehrezayî û bawerî anî, ew di singa min de rijand, paşê ew girt. Paşê destê min girt û bi min re hat heta esmanê herî nêzîk. Dema ez gihîştim esmanê herî nêzîk, Cibrîl ji dergevanê esman re got: Veke! Got: Ev kî ye? Got: Ev Cibrîl e. Got: Kesek bi te re heye? Got: Erê, Muhemmed, dirûd û silavên Xwedê lê bin, bi min re ye. Got: Hat gazîkirin? Got: Erê. Dema vekir, em ji esmanê herî nêzîk bilindtir bûn, û va ye zilamek rûniştî bû; li milê wî yê rastê sîberên reş û li milê wî yê çepê sîberên reş hebûn. Dema li rastê dinêrî dikeniya, û dema li çepê dinêrî digiriya. Got: Bi xêr hatî, pêxemberê qenc û kurê qenc! Min ji Cibrîl re got: Ev kî ye? Got: Ev Adem e, û ev sîber li milê wî yê rastê û çepê rûhên zarokên wîne. Ehlê milê rastê ji wan ehlê bihuştê ne, û sîberên li milê çepê ehlê agir in. Dema li rastê dinêre dikene, û dema li çepê dinêre digirî. – Paşê bi min re heta esmanê duyem bilind bû û ji dergevanê wê re got: Veke! Dergevanê wê wek yê yekem jê re got û vekir. Enes got: Wî behs kir ku di esmanan de Adem, Îdrîs, Mûsa, Îsa û Îbrahîm dîtine, dirûdên Xwedê li wan bin; nehatiye diyarkirin ku cihên wan çawa bûn, tenê wî behs kir ku Adem di esmanê herî nêzîk de û Îbrahîm di esmanê şeşem de dîtiye. Enes got: Dema Cibrîl bi Pêxember re, dirûd û silavên Xwedê lê bin, bi ber Îdrîs ve derbas bû, got: Bi xêr hatî, pêxemberê qenc û birayê qenc! Min got: Ev kî ye? Got: Ev Îdrîs e. Paşê ez bi ber Mûsa ve derbas bûm, û got: Bi xêr hatî, pêxemberê qenc û birayê qenc! Min got: Ev kî ye? Got: Ev Mûsa ye. Paşê ez bi ber Îsa ve derbas bûm, û got: Bi xêr hatî, birayê qenc û pêxemberê qenc! Min got: Ev kî ye? Got: Ev Îsa ye. Paşê ez bi ber Îbrahîm ve derbas bûm, û got: Bi xêr hatî, pêxemberê qenc û kurê qenc! Min got: Ev kî ye? Got: Ev Îbrahîm e, dirûd û silavên Xwedê lê bin.“ Îbn Şîhab got: Îbn Hezm ji min re ragihand ku Îbn ʿEbbas û Ebû Heba el-Ensarî digotin: Pêxember, dirûd û silavên Xwedê lê bin, got: „Paşê ez bilind kirim heta ku gihîştim cihekî bilind ku min tê de dengê xişîna qeleman bihîst.“ Îbn Hezm û Enesê kurê Malik gotin: Pêxember, dirûd û silavên Xwedê lê bin, got: „Paşê Xwedê pêncî nimêj li ser ummeta min ferz kir. Ez bi vê yekê vegeriyam heta ku ez ji ber Mûsa re derbas bûm. Got: Xwedê çi li ser ummeta te ferz kir? Min got: Pêncî nimêj ferz kir. Got: Vegere ba Xwedayê xwe, ji ber ku ummeta te vê nikare hilgire. Wî dîsa li min vegerand û nîvê wê kêm kir. Ez vegeriyam ba Mûsa û min got: Nîvê wê kêm kir. Got: Vegere ba Xwedayê xwe, ji ber ku ummeta te vê nikare hilgire. Ez vegeriyam û wî nîvê wê kêm kir. Ez vegeriyam ba wî û got: Vegere ba Xwedayê xwe, ji ber ku ummeta te vê nikare hilgire. Ez vegeriyam ba Wî û got: Ew pênc in û ew pêncî ne; gotin li cem Min nayê guhertin. Ez vegeriyam ba Mûsa û got: Vegere ba Xwedayê xwe. Min got: Ez ji Xwedayê xwe şerm dikim. Paşê ez bi xwe re birim heta ku gihand Sidretul-Muntehayê; reng lê girtibûn ku min nizanibû çi ne. Paşê ez ketim bihuştê û tê de ḥabāyilên ji mirwarî hebûn, û axa wê miskê bû.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Ev hedîs di destpêka Kitêba Nimêjê de ye, berî beşa yekem. Ebû Zer vedibêje ku Pêxember ji rêwîtiya xwe ya di esmanan de çi got: vebûn û şuştina singa wî, hilkişîna di esmanan de bi Cibrîl re û hevdîtinên bi Adem, Îdrîs, Mûsa, Îsa û Îbrahîm re. Îbn Şîhab bi riya Îbn Hezm gotinên Îbn ʿEbbas û Ebû Heba û, bi Enes re, ferzkirina pêncî nimêjan, ku heta pênc hatin kêmkirin, jî lê zêde dike. Peyva ḥabāyil li vir bê wergerandin hatiye hiştin."
+  },
+  "350": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malik ji me re ragihand, ji Salihê kurê Keysan, ji Urweyê kurê Zubeyr, ji Aîşe, diya bawermendan, got: „Xwedê nimêj, dema ferz kir, du du rikat ferz kir, li mal û di rêwîtiyê de. Nimêja rêwîtiyê ma, û nimêja li mal hate zêdekirin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Ev hedîs jî di Kitêba Nimêjê de ye, berî beşa yekem. Aîşe vedibêje ku nimêj pêşî du du rikat ferz bûye, li mal û di rêwîtiyê de; nimêja rêwîtiyê wiha ma, lê nimêja li mal hate zêdekirin."
+  },
+  "351": {
+   "matn": "Mûsayê kurê Îsmaʿîl ji me re ragihand, got: Yezîdê kurê Îbrahîm ji me re ragihand, ji Muhemmed, ji Umm ʿAtiyye, got: „Ji me re hat emirkirin ku di du rojên cejnê de jinên ku xwîna mehane hene û jinên di odeyên xwe yên taybet de derxin, da ku beşdarî civîna misilmanan û duaya wan bibin; yên xwîna mehane wan bila ji cihê nimêjê xwe dûr bimînin. Jinekê got: Ey Resûlê Xwedê, yekî ji me cilê jorîn nîne? Got: Bila hevala wê ji cilê xwe yê jorîn li wê bike.“ Û ʿEbdullahê kurê Reca got: ʿÎmran ji me re ragihand: Muhemmedê kurê Sîrîn ji me re ragihand: Umm ʿAtiyye ji me re ragihand: Min bihîst ku Pêxember, dirûd û silavên Xwedê lê bin, ev got.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Ferzbûna lixwekirina cilan di nimêjê de“ de datîne. Umm ʿAtiyye vedibêje ku hatiye emirkirin ku di du rojên cejnê de jinên xwîna mehane û jinên di odeyên xwe yên taybet de ber bi civîna misilmanan ve werin derxistin; yên xwîna mehane divê ji cihê nimêjê dûr bimînin. Ji bo jina ku cilê wê yê jorîn tune be, hevala wê ji yê xwe li wê dike. Paşê rêyeke din a ragihandinê ya bi „got“ dest pê dike, bi riya ʿEbdullahê kurê Reca, tê."
+  },
+  "352": {
+   "matn": "Ehmedê kurê Yûnis ji me re ragihand, got: ʿÂsimê kurê Muhemmed ji me re ragihand, got: Waqidê kurê Muhemmed ji min re ragihand, ji Muhemmedê kurê Munkedir, got: Cabir bi izarekî ku li pişt stûyê xwe girêdabû nimêj kir, dema cilên wî li ser darekî ku cil lê daleqandî bûn. Kesekî jê re got: Tu bi izarekî tenê nimêj dikî? Got: Min ev tenê ji bo wê kir ku bêaqilekî mîna te min bibîne. Di zemanê Pêxember, dirûd û silavên Xwedê lê bin, de kî ji me du cilên wî hebûn?",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Girêdana izarê li ser stûyê di nimêjê de“ de datîne. Cabir bi izarekî ku li pişt stûyê wî girêdayî ye nimêj dike, tevî ku cilên wî li ser darê ne ku cil lê daleqandî ne. Ji îtirazê re dibêje ku wî ev ji bo wê kiriye ku bêaqilekî mîna pirsiyar wî bibîne, û tîne bîra mirov ku di zemanê Pêxember de ne her kesî du cil hebûn."
+  },
+  "353": {
+   "matn": "Mutarrifê Ebû Musʿeb ji me re ragihand, got: ʿEbdurrehmanê kurê Ebil-Mewalî ji me re ragihand, ji Muhemmedê kurê Munkedir, got: „Min Cabirê kurê ʿEbdullah dît ku bi cilekî tenê nimêj dike, û got: Min Pêxember, dirûd û silavên Xwedê lê bin, dît ku bi cilekî nimêj dike.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di heman beşa „Girêdana izarê li ser stûyê di nimêjê de“ de datîne. Îbn Munkedir Cabir dît ku bi cilekî tenê nimêj dike; Cabir got ku wî Pêxember bi heman awayî nimêj kirî dîtiye."
+  },
+  "354": {
+   "matn": "ʿUbeydullahê kurê Mûsa ji me re ragihand, got: Hîşamê kurê Urwe ji me re ragihand, ji bavê xwe, ji ʿUmerê kurê Ebî Seleme: „Pêxember, dirûd û silavên Xwedê lê bin, bi cilekî tenê ku herdu serên wî li hev xaç kiribûn nimêj kir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj bi cilekî tenê ku mirov xwe tê de dipêçe“ de datîne. ʿUmerê kurê Ebî Seleme vedibêje ku Pêxember bi cilekî tenê ku serên wî li hev xaç kiribûn nimêj kir."
+  },
+  "355": {
+   "matn": "Muhemmedê kurê Musenna ji me re ragihand, got: Yehya ji me re ragihand, got: Hîşam ji me re ragihand, got: Bavê min ji min re ragihand, ji ʿUmerê kurê Ebî Seleme: „Wî Pêxember, dirûd û silavên Xwedê lê bin, dît ku di mala Umm Seleme de bi cilekî tenê nimêj dike, herdu serên wî avêtibûn ser milên xwe.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di heman beşa „Nimêj bi cilekî tenê ku mirov xwe tê de dipêçe“ de datîne. ʿUmerê kurê Ebî Seleme vedibêje ku wî Pêxember di mala Umm Seleme de bi cilekî tenê nimêj dike dîtiye, serên wî avêtibûn ser milên wî."
+  },
+  "356": {
+   "matn": "ʿUbeyd kurê Îsmaʿîl ji me re ragihand, got: Ebû Usame ji me re ragihand, ji Hîşam, ji bavê xwe: ʿUmerê kurê Ebî Seleme jê re ragihand, got: „Min Resûlê Xwedê, dirûd û silavên Xwedê lê bin, dît ku di mala Umm Seleme de bi cilekî tenê ku xwe tê de pêçabû nimêj dike, herdu serên wî danîbûn ser milên xwe.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di heman beşa „Nimêj bi cilekî tenê ku mirov xwe tê de dipêçe“ de datîne. ʿUmerê kurê Ebî Seleme vedibêje ku wî Pêxember di mala Umm Seleme de bi cilekî tenê ku xwe tê de pêçabû nimêj dike dîtiye, serên wî li ser milan."
+  },
+  "357": {
+   "matn": "Îsmaʿîlê kurê Ebî Ûweys ji me re ragihand, got: Malikê kurê Enes ji min re ragihand, ji Ebû en-Nadrê azadkirîyê ʿUmerê kurê ʿUbeydullah: Ebû Murre, azadkirîyê Umm Hanî a keça Ebû Talib, jê re ragihand ku wî bihîstiye Umm Hanî a keça Ebû Talib dibêje: „Ez di sala fethê de çûm cem Resûlê Xwedê, dirûd û silavên Xwedê lê bin, û min ew dît ku xwe dişo, keça wî Fatime ew vedişart. Got: Min silav lê kir, got: Ev kî ye? Min got: Ez Umm Hanî a keça Ebû Talib im. Got: Bi xêr hatî, Umm Hanî! Dema şuştina xwe xelas kir, rabû û heşt rikat nimêj kir, bi cilekî tenê pêçayî. Dema ji nimêjê vegeriya, min got: Ey Resûlê Xwedê, kurê diya min îdia dike ku ew ê zilamekî ku min parastin dayê bikuje, filan kurê Hubeyre. Resûlê Xwedê, dirûd û silavên Xwedê lê bin, got: Em yê ku te parastiye diparêzin, Umm Hanî. Umm Hanî got: Û ev di dema Duhayê de bû.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di heman beşa „Nimêj bi cilekî tenê ku mirov xwe tê de dipêçe“ de datîne. Umm Hanî vedibêje ku di sala fethê de dema Pêxember xwe dişoşt çû cem wî; piştre wî bi cilekî tenê pêçayî heşt rikat nimêj kir. Wê zilamê ku parastibû jê re got, û wî ew parastin pejirand. Ew lê zêde dike ku ev di dema Duhayê de bû."
+  },
+  "358": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malik ji me re ragihand, ji Îbn Şîhab, ji Seʿîdê kurê Musêyyeb, ji Ebû Hureyre: „Pirsyarekî ji Resûlê Xwedê, dirûd û silavên Xwedê lê bin, derbarê nimêjê bi cilekî tenê pirsî. Resûlê Xwedê, dirûd û silavên Xwedê lê bin, got: Gelo ji we her yekî du cil hene?“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di heman beşa „Nimêj bi cilekî tenê ku mirov xwe tê de dipêçe“ de datîne. Ebû Hureyre vedibêje ku pirsyarekî ji Pêxember derbarê nimêjê bi cilekî tenê pirsî, û Pêxember bi vê pirsê bersiv da ku gelo her yekî ji wan du cil hene."
+  },
+  "359": {
+   "matn": "Ebû ʿÂsim ji me re ragihand, ji Malik, ji Ebû ez-Zinad, ji ʿEbdurrehmanê Aʿrec, ji Ebû Hureyre, got: Pêxember, dirûd û silavên Xwedê lê bin, got: „Bila yek ji we bi cilekî tenê nimêj neke dema ku tu tişt li ser milên wî nebe.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Kesê ku bi cilekî tenê nimêj dike bila wî bavêje ser milên xwe“ de datîne. Ebû Hureyre ji Pêxember gotinekê vedibêje ku mirov nabe bi cilekî tenê nimêj bike dema tu tişt li ser milên wî nebe."
+  },
+  "360": {
+   "matn": "Ebû Nuʿeym ji me re ragihand, got: Şeyban ji me re ragihand, ji Yehyayê kurê Ebî Kesîr, ji ʿIkrime, got: Min ew bihîst, an jî min jê pirsîbû, got: Min bihîst ku Ebû Hureyre dibêje: Ez şahidî didim ku min bihîst ku Resûlê Xwedê, dirûd û silavên Xwedê lê bin, got: „Kesê ku bi cilekî tenê nimêj dike bila herdu serên wî li hev xaç bike.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di heman beşa „Kesê ku bi cilekî tenê nimêj dike bila wî bavêje ser milên xwe“ de datîne. Ebû Hureyre şahidî dide ku wî bihîstiye Pêxember got ku kesê bi cilekî tenê nimêj dike divê herdu serên wî li hev xaç bike. Di zincîra ragihandinê de ragihêner ne ewle ye ka wî ʿIkrime bi xwe bihîstiye an jê pirsiye."
+  },
+  "361": {
+   "matn": "Yehyayê kurê Salih ji me re ragihand, got: Feleyhê kurê Silêman ji me re ragihand, ji Seʿîdê kurê Harîs, got: „Me ji Cabirê kurê ʿEbdullah derbarê nimêjê bi cilekî tenê pirsî. Got: Ez bi Pêxember re, dirûd û silavên Xwedê lê bin, di yek ji rêwîtiyên wî de derketim, û şevekê ji bo karekî xwe hatim û min ew dît ku nimêj dike, dema ku cilekî tenê li ber min bû. Min xwe tê de pêça û li kêleka wî nimêj kir. Dema ew vegeriya, got: Ev şevgerdiya çi ye, Cabir? Min pêdiviya xwe jê re got. Dema min xelas kir, got: Ev pêçan çi ye ku min dît? Min got: Cil bû – ango teng bû. Got: Heke fireh be xwe tê de pêçe, û heke teng be wî wek izarê girêde.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Heke cil teng be“ de datîne. Cabir hevdîtineke şevê ya di rêwîtiyê de vedibêje, ku tê de wî bi cilê xwe yê tenê li kêleka Pêxemberê nimêjkar nimêj kir. Dema jê tê pirsîn derbarê pêçanê, rave dike ku cil teng bû, û Pêxember di navbera cilê fireh ku mirov xwe tê de dipêçe û cilê teng ku wek izarê tê girêdan de cuda dike."
+  },
+  "362": {
+   "matn": "Musedded ji me re ragihand, got: Yehya ji me re ragihand, ji Sufyan, got: Ebû Hazim ji min re ragihand, ji Sehl, got: „Mêran bi Pêxember re, dirûd û silavên Xwedê lê bin, nimêj dikirin, izarên xwe li stûyên xwe girêdabûn, wek zarokan, û ji jinan re dihat gotin: Serên xwe bilind nekin heta ku mêr rast rûdinin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di heman beşa „Heke cil teng be“ de datîne. Sehl vedibêje ku mêran bi Pêxember re nimêj dikir, izarên wan wek zarokan li stûyên wan girêdayî bûn, û ji jinan re dihat gotin ku serên xwe bilind nekin heta ku mêr rast rûnin."
+  },
+  "363": {
+   "matn": "Yehya ji me re ragihand, got: Ebû Muʿawîye ji me re ragihand, ji el-Aʿmeş, ji Muslim, ji Mesrûq, ji Mugîreyê kurê Şuʿbe, got: „Ez bi Pêxember re, dirûd û silavên Xwedê lê bin, di rêwîtiyekê de bûm, û got: Mugîre, meska avê bigire! Min girt. Resûlê Xwedê, dirûd û silavên Xwedê lê bin, çû heta ku ji min winda bû û hewcedariya xwe qedand. Cubbeyeke Şamî li ber wî bû. Xwest destê xwe ji kumê wê derxe, lê teng bû, ji ber vê destê xwe ji jêr derxist. Min av lê rijand, û wî wek ji bo nimêjê destnimêj girt, li ser xuffên xwe mesh kir, paşê nimêj kir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj bi cubbeya Şamî“ de datîne. Mugîre rêwîtiyekê vedibêje ku tê de wî meska avê ya Pêxember hilgirt. Pêxember cubbeyeke Şamî ya bi kumên teng li xwe kiribû, destê xwe ji jêr derxist, destnimêj girt, li ser xuffan mesh kir û nimêj kir."
+  },
+  "364": {
+   "matn": "Materê kurê Fedl ji me re ragihand, got: Rewh ji me re ragihand, got: Zekeriyyayê kurê Îshaq ji me re ragihand: ʿEmrê kurê Dînar ji me re ragihand, got: Min bihîst ku Cabirê kurê ʿEbdullah vedibêje: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, bi wan re ji bo Kabeyê kevir hildigirt, û izara wî li xwe bû. Apê wî ʿEbbas jê re got: Kurê birayê min, xwezî te izara xwe veka û bi ser milên xwe de bikira, ji keviran dûr! Got: Wî ew veki û li ser milên xwe kir, û bêhiş ket. Piştî wê careke din tazî nehat dîtin, dirûd û silavên Xwedê lê bin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nebaşiya tazîbûnê di nimêjê de û li derveyî wê“ de datîne. Cabir vedibêje ku Pêxember bi yên din re ji bo Kabeyê kevir hildigirt, ku apê wî ʿEbbas şîret lê kir izara xwe li ser milên xwe bike û ku paşê bêhiş ket; ji wê demê ve careke din tazî nehat dîtin."
+  },
+  "365": {
+   "matn": "Silêmanê kurê Herb ji me re ragihand, got: Hemmadê kurê Zeyd ji me re ragihand, ji Eyyûb, ji Muhemmed, ji Ebû Hureyre, got: „Zilamek li ber Pêxember, dirûd û silavên Xwedê lê bin, rabû û jê derbarê nimêjê bi cilekî tenê pirsî. Got: Gelo her yekî ji we du cilan peyda dike? Paşê zilamekî ji ʿUmer pirsî, û got: Dema Xwedê fireh bike, hûn jî firehî nîşan bidin. Bila zilam cilên xwe li ser xwe berhev bike: Zilamek bi izar û rîdayekê (cilê jorîn) nimêj kir, bi izar û kiras, bi izar û qebayekê, bi şalwar û rîdayekê, bi şalwar û kiras, bi şalwar û qebayekê, bi derpê û qebayekê, bi derpê û kiras.“ Got: Û ez difikirim ku got: bi derpê û rîdayekê.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj bi kiras, şalwar, derpê û qebayê“ de datîne. Ebû Hureyre vedibêje ku Pêxember bersiva pirsiyarê derbarê nimêjê bi cilekî tenê bi pirsekê da. Paşê bersiva ʿUmer a ji pirseke wiha re tê anîn, ku tê de berhevkirinên cuda yên cilan têne hejmartin. Berhevkirina dawî ragihêner tenê bi „ez difikirim“ vedibêje."
+  },
+  "366": {
+   "matn": "ʿÂsimê kurê ʿElî ji me re ragihand, got: Îbn Ebî Zi'b ji me re ragihand, ji Zuhrî, ji Salim, ji Îbn ʿUmer, got: „Zilamekî ji Resûlê Xwedê, dirûd û silavên Xwedê lê bin, pirsî û got: Muhrim çi li xwe dike? Got: Qamîs li xwe nake, ne şalwar (sirwal), ne burnus, ne cilekî ku ze'feran lê ketibe, ne jî wers. Heke solan nebîne, bila xuffan li xwe ke û wan jê bike heta ku di bin qûlikan de bin.“ Û ji Nafiʿ, ji Îbn ʿUmer, ji Pêxember, dirûd û silavên Xwedê lê bin: heman tişt.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj bi kiras, şalwar, derpê û qebayê“ de datîne. Îbn ʿUmer vedibêje ku Pêxember, dema jê hat pirsîn ka muhrim çi li xwe dike, qamîs, şalwar, burnus û cilên ku ze'feran an wers lê ketine derxist, û ji kesê ku solan nabîne re xuffên di bin qûlikan de hatine birrîn destûr da. Rêyeke duyem a bi riya Nafiʿ bi „heman tişt“ tê girêdan. Wers rengekî zer e."
+  },
+  "367": {
+   "matn": "Qutaybeyê kurê Seʿîd ji me re ragihand, got: Leys ji me re ragihand, ji Îbn Şîhab, ji ʿUbeydullahê kurê ʿEbdullahê kurê ʿUtbe, ji Ebû Seʿîdê Xudrî, ku got: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, pêçana bi şêweya sammaʾ (îştîmal es-sammaʾ) û rûniştina zilamekî bi çokên bilindkirî (îhtîba) di cilekî tenê de qedexe kir, dema tiştek ji wî cilî li ser şerma wî nebe.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Tiştê ku ji ewretê divê were girtin“ de datîne. Ebû Seʿîd vedibêje ku Pêxember pêçana bi şêweya sammaʾ û rûniştina bi çokên bilindkirî di cilekî tenê de qedexe kir, dema tiştek ji wî cilî li ser şermê nebe. Her du term li vir bi transkrîpsiyonê, bê wergerandin, hatine dayîn."
+  },
+  "368": {
+   "matn": "Qebîseyê kurê ʿUqbe ji me re ragihand, got: Sufyan ji me re ragihand, ji Ebû ez-Zinad, ji el-Aʿrec, ji Ebû Hureyre, got: „Pêxember, dirûd û silavên Xwedê lê bin, du cureyên kirrûfiroşê qedexe kir: destlêdan (limas) û avêtin (nibaz), û herwiha pêçana bi şêweya sammaʾ û rûniştina zilamekî bi çokên bilindkirî di cilekî tenê de.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di heman beşa „Tiştê ku ji ewretê divê were girtin“ de datîne. Ebû Hureyre vedibêje ku Pêxember du cureyên kirrûfiroşê, destlêdan (limas) û avêtin (nibaz), û her wiha pêçana bi şêweya sammaʾ û rûniştina bi çokên bilindkirî di cilekî tenê de qedexe kir."
+  },
+  "369": {
+   "matn": "Îshaq ji me re ragihand, got: Yaʿqûbê kurê Îbrahîm ji me re ragihand, got: Kurê birayê Îbn Şîhab ji me re ragihand, ji apê xwe, got: Humeydê kurê ʿEbdurrehmanê kurê ʿEwf ji min re ragihand ku Ebû Hureyre got: „Ebû Bekir ez di wê hecê de di nav gazîkeran de rojê qurbanê şandim ku em li Minayê bidin zanîn: Hay ji xwe hebin, piştî vê salê tu muşrik hecê nake, û tu kes bi tazî tewafa Mala Xwedê nake. Humeydê kurê ʿEbdurrehman got: Paşê Resûlê Xwedê, dirûd û silavên Xwedê lê bin, ʿElî li pişt xwe siwar kir û emir lê kir ku Beraetê ragihîne. Ebû Hureyre got: ʿElî jî bi me re di nav xelkê Minayê de rojê qurbanê ragihand: Piştî vê salê tu muşrik hecê nake, û tu kes bi tazî tewafa Mala Xwedê nake.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di heman beşa „Tiştê ku ji ewretê divê were girtin“ de datîne. Ebû Hureyre vedibêje ku Ebû Bekir ew di wê hecê de bi gazîkeran re şand Minayê ku bidin zanîn ku piştî wê salê tu muşrik hecê nake û tu kes bi tazî tewafa Mala Xwedê nake. Paşê Pêxember ʿElî şand ku Beraetê ragihîne, û ʿElî heman tişt di nav xelkê Minayê de ragihand."
+  },
+  "370": {
+   "matn": "ʿEbdulʿezîzê kurê ʿEbdullah ji me re ragihand, got: Îbn Ebil-Mewalî ji min re ragihand, ji Muhemmedê kurê Munkedir, got: „Ez çûm cem Cabirê kurê ʿEbdullah dema ku ew bi cilekî ku xwe tê de pêçabû nimêj dikir, û rîdaya wî danîbû aliyekî. Dema ew vegeriya, me got: Ebû ʿEbdullah, tu nimêj dikî û rîdaya te danî ye? Got: Erê, min xwest ku nezanên mîna we min bibînin. Min Pêxember, dirûd û silavên Xwedê lê bin, dît ku wiha nimêj dikir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj bê ridayê“ de datîne. Îbn Munkedir vedibêje ku wî Cabir dît ku bi cilekî pêçayî nimêj dike û rîdaya wî li aliyekî ye. Dema jê tê pirsîn, Cabir bersiv dide ku wî xwest nezan wî wiha bibînin û ku wî Pêxember bi heman awayî nimêj kirî dîtiye."
+  },
+  "371": {
+   "matn": "Yaʿqûbê kurê Îbrahîm ji me re ragihand, got: Îsmaʿîlê kurê ʿUleyye ji me re ragihand, got: ʿEbdulʿezîzê kurê Suheyb ji me re ragihand, ji Enes: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, çû şerê Xeyberê. Me li nêzîkî wê nimêja sibehê di tariyê de kir. Paşê Pêxemberê Xwedê, dirûd û silavên Xwedê lê bin, siwar bû, Ebû Talha jî siwar bû, û ez li pişt Ebû Talha siwar bûm. Pêxemberê Xwedê, dirûd û silavên Xwedê lê bin, heywana xwe bi lez xist kolana Xeyberê, û çoka min digihîşt ranê Pêxemberê Xwedê. Paşê izar ji ranê xwe vekişand, heta ku ez li spîtiya ranê Pêxemberê Xwedê dinêrim. Dema ket gund, got: Xwedê mezintir e, Xeyber wêran bû! Dema em li hewşa gelekî dadikevin, sibeha hişyarkirîyan xerab e! Sê caran got. Got: Û xelk derket ser karên xwe û got: Muhemmed! ʿEbdulʿezîz got: Û hinek ji hevalên me gotin: Û artêş – ango leşker. Got: Me ew bi zorê girt, û hêsîr hatin berhevkirin. Dihye hat û got: Pêxemberê Xwedê, ji hêsîran carîyekê bide min. Got: Here û carîyekê bigire. Wî Sefiyyeya keça Huyey girt. Zilamek hat cem Pêxember, dirûd û silavên Xwedê lê bin, û got: Pêxemberê Xwedê, te Sefiyyeya keça Huyey, xanima Qureyze û Nadîr, da Dihye; ew tenê ji te re maqûl e. Got: Wî bi wê re gazî bikin. Hat bi wê re, û dema Pêxember, dirûd û silavên Xwedê lê bin, li wê nêrî, got: Ji hêsîran carîyeke din bigire. Got: Pêxember ew azad kir û bi wê re zewicî. Sabit jê re got: Ebû Hemze, wî çi mehr da wê? Got: Xwe ya wê – wî ew azad kir û bi wê re zewicî. Heta ku di rê de bûn, Umm Suleym ew ji bo wî amade kir û şevê ew anî cem wî, û serê sibehê Pêxember zava bû. Got: Kesê ku tiştek li cem wî hebe bila bîne. Wî çermekî raxist, yekî bi xurme dihat, yekî din bi rûnê kerê dihat. Got: Û ez difikirim ku wî sewîq jî anî ziman. Got: Wan ji van hays çêkir, û ev şahiya zewacê ya Resûlê Xwedê, dirûd û silavên Xwedê lê bin, bû.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Tiştê ku li ser ranê tê gotin“ de datîne. Enes şerê Xeyberê vedibêje: dema di kolanê de siwar dibû, Pêxember izar ji ranê xwe vekişand û Enes spîtiya wê dît. Piştre girtina Xeyberê, dabeşkirin û azadkirina Sefiyyeya keça Huyey, zewaca wê bi Pêxember re û şahiya zewacê ya bi xurme, rûnê kerê û sewîqê tên vegotin. Zêdekirina derbarê „artêşê“ de wek gotina hin hevalên ragihêner tê nîşankirin."
+  },
+  "372": {
+   "matn": "Ebûl-Yeman ji me re ragihand, got: Şuʿeyb ji me re ragihand, ji Zuhrî, got: Urwe ji min re ragihand ku Aîşe got: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, nimêja sibehê dikir, û jinên bawermend bi wî re amade dibûn, di murûtên xwe de pêçayî; paşê ew vedigeriyan malên xwe û kesî ew nas nedikirin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Jin bi çend cilan nimêj dike“ de datîne. Aîşe vedibêje ku jinên bawermend bi Pêxember re nimêja sibehê dikirin, di murûtên xwe de pêçayî, û paşê vedigeriyan malên xwe bêyî ku kes wan nas bike."
+  },
+  "373": {
+   "matn": "Ehmedê kurê Yûnis ji me re ragihand, got: Îbrahîmê kurê Seʿd ji me re ragihand, got: Îbn Şîhab ji me re ragihand, ji Urwe, ji Aîşe: „Pêxember, dirûd û silavên Xwedê lê bin, bi xemîseyeke nexşkirî nimêj kir, û carekê li nexşên wê nêrî. Dema vegeriya, got: Vê xemîsa min bibin cem Ebû Cehm û enbîcaniya Ebû Cehm ji min re bînin; ji ber ku wê hema niha bala min ji nimêja min dûr xist.“ Û Hîşamê kurê Urwe got, ji bavê xwe, ji Aîşe: Pêxember, dirûd û silavên Xwedê lê bin, got: Dema ez di nimêjê de bûm min li nexşa wê dinêrî, û ez tirsiyam ku ew min bixapîne.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Heke bi cilekî nexşkirî nimêj bike û li nexşê binêre“ de datîne. Aîşe vedibêje ku Pêxember bi cilekî nexşkirî nimêj kir û li nexşên wî nêrî; paşê ew şand cem Ebû Cehm û enbîcaniya Ebû Cehm anî, ji ber ku bala wî ji nimêjê dûr xistibû. Rêyeke duyem a bi riya Hîşamê kurê Urwe bi „got“ tê girêdan."
+  },
+  "374": {
+   "matn": "Ebû Maʿmer ʿEbdullahê kurê ʿEmr ji me re ragihand, got: ʿEbdulwaris ji me re ragihand, got: ʿEbdulʿezîzê kurê Suheyb ji me re ragihand, ji Enes: „Aîşe perdeyek (qiram) hebû, wê aliyekî mala xwe pê girtibû. Pêxember, dirûd û silavên Xwedê lê bin, got: Vê perdeya xwe ji me dûr bixe, ji ber ku wêneyên wê di nimêja min de li ber çavên min dimînin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Gelo nimêj bi cilekî bi xaç an wêneyan xera dibe, û çi jê qedexe ye“ de datîne. Enes vedibêje ku Aîşe aliyekî mala xwe bi perdeyekê girtibû, û Pêxember jê xwest ku ew dûr bixe ji ber ku wêneyên wê di nimêjê de li ber çavên wî dimînin."
+  },
+  "375": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Leys ji me re ragihand, ji Yezîd, ji Ebûl-Xeyr, ji ʿUqbeyê kurê ʿÂmir, got: „Ji Pêxember re, dirûd û silavên Xwedê lê bin, ferrûcekî ji hevrîşmê wek diyarî hat dayîn; wî li xwe kir û tê de nimêj kir, paşê vegeriya û wî bi tundî jê kir, wek kesê ku jê hez nake, û got: Ev ji bo xwedêtirsan ne rewa ye.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Kesê ku bi qebayeke hevrîşmî ya pişt-qelişî nimêj dike paşê wê derdixe“ de datîne. ʿUqbe vedibêje ku ji Pêxember re qebayeke hevrîşmî ya pişt-qelişî (ferrûc) wek diyarî hat dayîn; wî tê de nimêj kir, paşê bi tundî jê kir wek kesê ku jê hez nake, û got ku ev ji bo xwedêtirsan ne rewa ye."
+  },
+  "376": {
+   "matn": "Muhemmedê kurê ʿArʿera ji me re ragihand, got: ʿUmerê kurê Ebî Zaîde ji min re ragihand, ji ʿEwnê kurê Ebî Cuhayfe, ji bavê xwe, got: „Min Resûlê Xwedê, dirûd û silavên Xwedê lê bin, di konê sor yê ji çerm de dît, û min Bilal dît ku avê destnimêja Resûlê Xwedê digire, û min dît ku mirov bi lez diçin ser wê avê; yê ku tiştek jê bi dest xist xwe pê mist, û yê ku tiştek bi dest nexist ji şilbûna destê hevalê xwe girt. Paşê min Bilal dît ku rim girt û di erdê de çikand, û Pêxember, dirûd û silavên Xwedê lê bin, bi cilekî sor derket, cilên xwe berhev kiribû, û bi mirovan re du rikat nimêj ber bi rimê kir; û min dît ku mirov û heywan ji ber rimê re derbas dibin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj bi cilekî sor“ de datîne. Ebû Cuhayfe vedibêje ku wî Pêxember di konê sor yê ji çerm de dît, Bilal dît ku avê destnimêja wî digire û mirov bi lez diçin ser wê. Paşê Pêxember bi cilekî sor bi mirovan re ber bi rimekî di erdê de çikandî ve du rikat nimêj kir, dema mirov û heywan ji ber rimê re derbas dibûn."
+  },
+  "377": {
+   "matn": "ʿElî kurê ʿEbdullah ji me re ragihand, got: Sufyan ji me re ragihand, got: Ebû Hazim ji me re ragihand, got: „Ji Sehlê kurê Seʿd pirsîn: Mînber ji çi hatiye çêkirin? Got: Di nav mirovan de kesek nemaye ku ji min bêtir bizane: ew ji dara tamarîsk a Xabeyê ye; filan, azadkirîyê filanê, ew ji bo Resûlê Xwedê, dirûd û silavên Xwedê lê bin, çêkir. Û Resûlê Xwedê, dirûd û silavên Xwedê lê bin, dema ew hat çêkirin û danîn li ser rawestiya, rû da Qiblê, tekbîr kir, û mirov li pişt wî rawestiyan; wî xwend û rikû kir, û mirovan li pişt wî rikû kir; paşê serê xwe bilind kir, paşê paşve vegeriya û li erdê secde kir; paşê vegeriya mînberê, rikû kir, serê xwe bilind kir, paşê paşve vegeriya heta ku li erdê secde kir. Ev bû rêbaza wî.“ Ebû ʿEbdullah got: ʿElî kurê ʿEbdullah got: Ehmedê kurê Henbel, rehma Xwedê lê be, ji min derbarê vê hedîsê pirsî û got: Min tenê xwest bibêjim ku Pêxember ji mirovan bilindtir bû; li gor vê hedîsê bi ya îmam ji mirovan bilindtir be tu zirar tune. Got: Min got: Sufyanê kurê Uyeyne gelek caran derbarê vê de dihat pirsîn, te ew ji wî nebihîst? Got: Na.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj li ser banan, mînberê û daran“ de datîne. Ebû Hazim vedibêje ku Sehlê kurê Seʿd, dema jê hat pirsîn mînber ji çi hatiye çêkirin, bersiv da ku ew ji dara tamarîsk a Xabeyê ye, û vegot ka Pêxember çawa li ser mînberê nimêj kir, rikû kir, paşve vegeriya û li erdê secde kir. Piştre agahiyeke ʿElî kurê ʿEbdullah derbarê axaftinekê bi Ehmedê kurê Henbel re tê, ku wek gotina zanayekî hatiye nîşankirin, ne wek gotina Pêxember."
+  },
+  "378": {
+   "matn": "Muhemmedê kurê ʿEbdurrehîm ji me re ragihand, got: Yezîdê kurê Harûn ji me re ragihand, got: Humeydê Tewîl ji me re ragihand, ji Enesê kurê Malik: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, ji hespê xwe ket, û lingê wî an milê wî xişand, û sond xwar ku mehekê ji jinên xwe dûr bimîne. Di jûreke xwe ya jor de rûnişt ku derenca wê ji qurmên xurmeyan bû. Hevalên wî hatin ku serdana wî bikin, û wî bi wan re rûniştî nimêj kir, dema ew li ser piyan bûn. Dema silav da, got: Îmam tenê hatiye danîn ku bê şopandin: dema tekbîr bike, hûn jî tekbîr bikin; dema rikû bike, hûn jî rikû bikin; dema secde bike, hûn jî secde bikin; û heke ew bi sekinî nimêj bike, hûn jî bi sekinî nimêj bikin. Di bîst û neyemîn de peya bû, û gotin: Ey Resûlê Xwedê, te ji bo mehekê sond xwaribû? Got: Meh bîst û neh e.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di heman beşa „Nimêj li ser banan, mînberê û daran“ de datîne. Enes vedibêje ku Pêxember ji hespê ket û lingê xwe an milê xwe xişand; wî bi rûniştî ji hevalên li ser piyan re nimêj kir û got ku îmam hatiye danîn ku bê şopandin. Di roja bîst û neyemîn de ji jûreya jor peya bû û got ku meh bîst û neh e. Ka ling bû an mil, di ragihandinê de vekirî maye."
+  },
+  "379": {
+   "matn": "Musedded ji me re ragihand, ji Xalid, got: Silêmanê Şeybanî ji me re ragihand, ji ʿEbdullahê kurê Şeddad, ji Meymûne, got: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, nimêj dikir û ez li hember wî bûm û xwîna mehane hebû, û carna dema wî secde dikir cilê wî li min diket. Got: Û wî li ser xumreyê nimêj dikir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Heke cilê nimêjker di secdeyê de li jina wî bikeve“ de datîne. Meymûne vedibêje ku Pêxember nimêj kir dema ew li hember wî bû û xwîna mehane hebû, û ku cilê wî carna dema secdeyê li wê ket; wî li ser xumreyê, ku cihnimêjeke biçûk e, nimêj kir."
+  },
+  "380": {
+   "matn": "ʿEbdullah ji me re ragihand, got: Malik ji me re ragihand, ji Îshaqê kurê ʿEbdullahê kurê Ebî Talha, ji Enesê kurê Malik: „Dapîra wî Mulayka Resûlê Xwedê, dirûd û silavên Xwedê lê bin, vexwend xwarinekê ku wê ji bo wî amade kiribû; wî jê xwar, paşê got: Rabin, ez ji bo we nimêj bikim. Enes got: Ez rabûm ber hesîrekî me yê ku ji bo bikaranîna dirêj reş bûbû û min av pê de reşand. Resûlê Xwedê rabû ser xwe; ez û sêwî li pişt wî û pîrejin li pişt me rawestiyan; û Resûlê Xwedê du rikat nimêj ji bo me kir, paşê zivirî.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj li ser hesîrê“ de datîne. Enes vedibêje ku dapîra wî Mulayka Pêxember vexwendiye xwarinekê. Piştî xwarinê Pêxember ew vexwendin nimêjê; Enes av li hesîrekî reşbûyî reşand, Pêxember li ser rawestiya, Enes û sêwî li pişt wî û pîrejin li pişt wan, û wî du rikat nimêj kir."
+  },
+  "381": {
+   "matn": "Ebûl-Welîd ji me re ragihand, got: Şuʿbe ji me re ragihand, got: Silêmanê Şeybanî ji me re ragihand, ji ʿEbdullahê kurê Şeddad, ji Meymûne, got: „Pêxember, dirûd û silavên Xwedê lê bin, li ser xumrayê nimêj dikir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj li ser xumrayê (berbanga biçûk)“ de datîne. Meymûne bi gotineke kurt vedibêje ku Pêxember li ser xumrayê nimêj dikir."
+  },
+  "382": {
+   "matn": "Îsmaʿîl ji me re ragihand, got: Malik ji min re ragihand, ji Ebûn-Nadr, azadkirîyê ʿUmerê kurê ʿUbeydullah, ji Ebû Seleme kurê ʿEbdurrehman, ji Aîşe jina Pêxember, ku got: „Ez li ber Resûlê Xwedê, dirûd û silavên Xwedê lê bin, radiketim, lingên min di qiblaya wî de bûn; gava wî secde dikir, ew li min dixist û min lingên xwe dicivandin, û gava rabûya, min ew dirêj dikirin. Got: Û xanî wê demê çira tê de tunebûn.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj li ser nivînan“ de datîne. Aîşe vedibêje ku ew li ber Pêxember radiketiye, lingên wê di qiblaya wî de bûne; gava wî secde dikir, ew li wê dixist û wê lingên xwe dicivandin, gava rabûya wê dîsa dirêj dikirin. Ew lê zêde dike ku wê demê di xaniyan de çira tunebûn."
+  },
+  "383": {
+   "matn": "Yehya kurê Bukeyr ji me re ragihand, got: Leys ji me re ragihand, ji ʿUqeyl, ji Ibn Şihab, got: ʿUrwe ji min re ragihand: Aîşe jê re ragihand ku Resûlê Xwedê, dirûd û silavên Xwedê lê bin, „nimêj dikir dema ew di navbera wî û qiblayê de bû, li ser nivînên malbata wî, bi pehnayî razayî wek cenaze.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj li ser nivînan“ de datîne. Aîşe vedibêje ku Pêxember li ser nivînên malbata xwe nimêj dikir, dema ew bi pehnayî razayî di navbera wî û qiblayê de bû, wek ku cenaze bi pehnayî tê danîn."
+  },
+  "384": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Leys ji me re ragihand, ji Yezîd, ji ʿIraq, ji ʿUrwe: ku Pêxember, dirûd û silavên Xwedê lê bin, „nimêj dikir dema Aîşe bi pehnayî razayî di navbera wî û qiblayê de bû, li ser nivînên ku herdu li ser radiketin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj li ser nivînan“ de datîne. ʿUrwe vedibêje ku Pêxember nimêj dikir dema Aîşe bi pehnayî razayî di navbera wî û qiblayê de bû, li ser nivînên ku herdu li ser radiketin. Di zincîrê de piştî ʿUrwe rasterast Pêxember tê; ravîyekî navbeynê nayê navkirin."
+  },
+  "385": {
+   "matn": "Ebûl-Welîd Hişamê kurê ʿEbdulmelik ji me re ragihand, got: Bişrê kurê Mufeddel ji me re ragihand, got: Xalibê Qettan ji min re ragihand, ji Bekrê kurê ʿEbdullah, ji Enesê kurê Malik, got: „Me bi Pêxember re, dirûd û silavên Xwedê lê bin, nimêj dikir, û yekî ji me ji ber germa dijwar quncikê cil danî cihê secdeyê.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Secde li ser cil di germa dijwar de“ de datîne. Enes vedibêje ku wan bi Pêxember re nimêj dikir û yekî ji wan ji ber germa dijwar quncikê cilê xwe danî cihê secdeyê."
+  },
+  "386": {
+   "matn": "Âdemê kurê Ebî Iyas ji me re ragihand, got: Şuʿbe ji me re ragihand, got: Ebû Meslemeyê Seʿîdê kurê Yezîd el-Ezdî ji me re ragihand, got: „Min ji Enesê kurê Malik pirsî: Gelo Pêxember bi solên xwe nimêj dikir? Got: Erê.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj bi solan“ de datîne. Seʿîdê kurê Yezîd ji Enes dipirse gelo Pêxember bi solên xwe nimêj dikir, û Enes bi erê bersiv dide."
+  },
+  "387": {
+   "matn": "Âdem ji me re ragihand, got: Şuʿbe ji me re ragihand, ji Eʿmeş, got: Min bihîst ku Îbrahîm ji Hemmamê kurê Hêris vedigot, got: „Min Cerîrê kurê ʿEbdullah dît ku mîz kir, paşê destnimêj girt û li ser mestên xwe mesh kir, paşê rabû û nimêj kir. Jê hat pirsîn û got: Min Pêxember, dirûd û silavên Xwedê lê bin, dît ku wek vê kir.“ Îbrahîm got: Ev li wan xweş dihat, ji ber ku Cerîr ji yên dawî bû ku misilman bûn.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj bi mestan“ de datîne. Hemmam vedibêje ku Cerîr piştî mîzkirinê destnimêj girt, li ser mestên xwe mesh kir û nimêj kir; gava jê hat pirsîn, got ku wî Pêxember dîtiye ku wek vê kiriye. Gotina dawî ya li ser misilmanbûna dereng a Cerîr ji Îbrahîm e, ku ravîyekî di zincîrê de ye, û ne gotina Pêxember e."
+  },
+  "388": {
+   "matn": "Îshaqê kurê Nasr ji me re ragihand, got: Ebû Usame ji me re ragihand, ji Eʿmeş, ji Muslim, ji Mesrûq, ji Muxîreyê kurê Şuʿbe, got: „Min di destnimêja Pêxember, dirûd û silavên Xwedê lê bin, de alîkarî da; wî li ser mestên xwe mesh kir û nimêj kir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj bi mestan“ de datîne. Muxîre vedibêje ku wî di destnimêja Pêxember de alîkarî daye; Pêxember li ser mestên xwe mesh kiriye û nimêj kiriye."
+  },
+  "389": {
+   "matn": "Siltê kurê Muhemmed ji me re ragihand: Mehdî ji me re ragihand, ji Wasil, ji Ebû Wail, ji Huzeyfe: „Wî zilamek dît ku ruku û secdeya xwe temam nedikir. Gava wî nimêja xwe qedand, Huzeyfe jê re got: Te nimêj nekiriye. Got – û ez dihizirim ku got: – Heke tu bimirî, tu ê li ser sunneta Muhemmed, dirûd û silavên Xwedê lê bin, nemirî.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Heke secdeyê temam neke“ de datîne. Huzeyfe zilamekî dibîne ku ruku û secdeya xwe temam nake û piştî nimêjê jê re dibêje ku wî nimêj nekiriye. Gotina „û ez dihizirim ku got“ nezelaliya ravî di derbarê peyvên hevoka piştî wê de nîşan dide."
+  },
+  "390": {
+   "matn": "Yehyayê kurê Bukeyr ji me re ragihand: Bekrê kurê Mudar ji me re ragihand, ji Ceʿfer, ji Îbn Hurmuz, ji ʿEbdullahê kurê Malik kurê Buheyne: ku Pêxember, dirûd û silavên Xwedê lê bin, „gava nimêj dikir, milên xwe ji hev vedikir heta ku spîtiya binê milên wî xuya dibû.“ Û Leys got: Ceʿferê kurê Rebîʿe ji min re wek wê ragihand.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Vekirina milan û dûrxistina wan ji laş di secdeyê de“ de datîne. Îbn Buheyne vedibêje ku Pêxember di nimêjê de milên xwe ji hev vedikir heta ku spîtiya binê milên wî xuya dibû. Lêzêdekirina „Û Leys got …“ muʿelleq e, ango bê zincîreke temam tê gotin."
+  },
+  "391": {
+   "matn": "ʿEmrê kurê ʿEbbas ji me re ragihand, got: Îbn el-Mehdî ji me re ragihand, got: Mensûrê kurê Seʿd ji me re ragihand, ji Meymûnê kurê Siyah, ji Enesê kurê Malik, got: Resûlê Xwedê, dirûd û silavên Xwedê lê bin, got: „Kesê ku nimêja me bike, rû bike qibleya me û goştê serjêkirî yê me bixwe, ew misilmanê ye ku ji aliyê Xwedê û Resûlê Wî ve di bin parastinê de ye; ji ber vê yekê Xwedê di parastina Wî de nexapînin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Fezîleta rûkirina qibleyê“ de datîne. Enes gotineke Pêxember vedibêje: kesê ku nimêja misilmanan dike, rû dike qibleya wan û goştê wan ê serjêkirî dixwe, di bin parastina Xwedê û Resûlê Wî de ye, û ev parastin nabe ku were binpêkirin."
+  },
+  "392": {
+   "matn": "Nuʿeym ji me re ragihand, got: Îbn Mubarek ji me re ragihand, ji Humeydê Tawîl, ji Enesê kurê Malik, got: Resûlê Xwedê, dirûd û silavên Xwedê lê bin, got: „Ji min re hat ferman kirin ku ez bi mirovan re şer bikim heta ku bêjin: Tu xwedayekî din ji bilî Xwedê tune. Gava wê bêjin, nimêja me bikin, rû bikin qibleya me û wek em serjê dikin serjê bikin, xwîn û malê wan li ser me qedexe dibe, ji bilî bi heqê wê, û hesabê wan li ba Xwedê ye.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Fezîleta rûkirina qibleyê“ de datîne. Enes gotineke Pêxember vedibêje: jê re hatiye ferman kirin ku bi mirovan re şer bike heta ku şahidiyê bînin; kesê ku wê bêje, nimêja misilmanan bike, rû bike qibleya wan û wek wan serjê bike, xwîn û malê wî parastî ye, ji bilî bi heqî, û hesabê wî li ba Xwedê ye."
+  },
+  "393": {
+   "matn": "Îbn Ebî Meryem got: Yehya ji me re ragihand: Humeyd ji me re ragihand: Enes ji me re ragihand, ji Pêxember, dirûd û silavên Xwedê lê bin.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî vê zincîrê di beşa „Fezîleta rûkirina qibleyê“ de datîne. Ew bi formula „Îbn Ebî Meryem got“ tê gotin û tenê zincîra heta Pêxember dihewîne, bê gotina xwe."
+  },
+  "393.2": {
+   "matn": "Û ʿElî kurê ʿEbdullah got: Xalidê kurê Hêris ji me re ragihand, got: Humeyd ji me re ragihand, got: „Meymûnê kurê Siyah ji Enesê kurê Malik pirsî û got: Ey Ebû Hemze, çi xwîn û malê bendeyekî qedexe dike? Got: Kesê ku şahidiyê bide ku xwedayekî din ji bilî Xwedê tune ye, rû bike qibleya me, nimêja me bike û goştê serjêkirî yê me bixwe, ew misilman e; ya ku misilman heye wî jî heye, û ya ku li ser misilman e li ser wî jî ye.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî ev rewayet di beşa „Fezîleta rûkirina qibleyê“ de bi şêweya „Û ʿElî kurê ʿEbdullah got“ datîne. Meymûn ji Enes dipirse çi xwîn û malê mirov qedexe dike; Enes bersiv dide ku kesê ku şahidiyê bide, rû bike qibleyê, nimêjê bike û goştê serjêkirî bixwe, misilmanek e bi heman maf û erkan."
+  },
+  "394": {
+   "matn": "ʿElî kurê ʿEbdullah ji me re ragihand, got: Sufyan ji me re ragihand, got: Zuhrî ji me re ragihand, ji ʿEtaʾê kurê Yezîd, ji Ebû Eyûbê Ensarî: ku Pêxember, dirûd û silavên Xwedê lê bin, got: „Gava hûn diçin cihê hewcedariyê, rû nekin qibleyê û pişta xwe nedin wê, lê rû bikin rojhilat an rojava. Ebû Eyûb got: Em hatin Şamê û me avdestxaneyên ber bi qibleyê hatine avakirin dîtin; me xwe li alî dizivirand û me ji Xwedayê Bilind lêborîn dixwest.“ Û ji Zuhrî, ji ʿEtaʾ, got: Min bihîst ku Ebû Eyûb ji Pêxember, dirûd û silavên Xwedê lê bin, wek wê vedigot.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Qibleya xelkê Medîneyê û Şamê“ de datîne. Ebû Eyûb gotina Pêxember vedibêje ku dema mirov hewcedariya xwe tîne cih, nabe ku rû bike qibleyê an pişta xwe bide wê, lê divê rû bike rojhilat an rojava. Ragihandina li dû wê ya li ser avdestxaneyên Şamê daxuyaniya hevalê Pêxember Ebû Eyûb e li ser tevgera xwe. Di dawiyê de zincîreke duyem a Zuhrî bi riya ʿEtaʾ tê, bi metneke wekhev."
+  },
+  "395": {
+   "matn": "Humeydî ji me re ragihand, got: Sufyan ji me re ragihand, got: ʿEmrê kurê Dînar ji me re ragihand, got: „Me ji Îbn ʿUmer pirsî derbarê zilamekî ku ji bo ʿUmrê Mala Pîroz dor lê girtibû lê di navbera Sefa û Merwe de neçûbû: Gelo dikare here cem jina xwe? Got: Pêxember, dirûd û silavên Xwedê lê bin, hat, heft caran li dora Malê gerriya, li pişt Meqamê du rikat nimêj kir û di navbera Sefa û Merwe de çû; û di Resûlê Xwedê de ji we re mînakeke baş heye.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Gotina Xwedê: «Û ji Meqamê Îbrahîm cihê nimêjê bigirin»“ de datîne. Îbn ʿUmer bersiva pirsek li ser ʿUmrê dide û tîne bîra me ku Pêxember heft caran li dora Malê gerriya, li pişt Meqamê Îbrahîm du rikat nimêj kir û di navbera Sefa û Merwe de çû; di dawiyê de berê dide mînaka Resûlê Xwedê."
+  },
+  "396": {
+   "matn": "Û me ji Cabirê kurê ʿEbdullah pirsî û got: „Nêzîkî wê nebe heta ku di navbera Sefa û Merwe de here.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî ev gotin di bin heman beşê de datîne. Ew bê zincîra xwe wek berdewamiya raporta berê tê: Cabirê kurê ʿEbdullah bersiva heman pirsê dide ku nabe mirov nêzîkî jina xwe bibe heta ku di navbera Sefa û Merwe de neçe."
+  },
+  "397": {
+   "matn": "Musedded ji me re ragihand, got: Yehya ji me re ragihand, ji Seyf, got: Min bihîst ku Mucahid got: „Hat cem Îbn ʿUmer û jê re hat gotin: Va ye Resûlê Xwedê, dirûd û silavên Xwedê lê bin, ket Kabeyê.“ Îbn ʿUmer got: Ez çûm, û Pêxember, dirûd û silavên Xwedê lê bin, jixwe derketibû, û min Bilal li navbera du deran rawestiyayî dît. Min ji Bilal pirsî û got: Gelo Pêxember li Kabeyê nimêj kir? Got: Erê, du rikat di navbera du stûnan de yên ku gava tu dikevî li milê wî yê çepê bûn; paşê derket û li ber Kabeyê du rikat nimêj kir.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Gotina Xwedê: «Û ji Meqamê Îbrahîm cihê nimêjê bigirin»“ de datîne. Mucahid vedibêje ku bi Îbn ʿUmer re hat gotin ku Pêxember ketiye Kabeyê. Îbn ʿUmer ji Bilal dipirse, û ew piştrast dike ku Pêxember du rikat di navbera du stûnên li milê çepê yê kesê ku dikeve de nimêj kiriye, paşê jî du rikatên din li ber Kabeyê."
+  },
+  "398": {
+   "matn": "Îshaqê kurê Nasr ji me re ragihand, got: ʿEbdurrezzaq ji me re ragihand: Îbn Cureyc ji me re ragihand, ji ʿEtaʾ, got: Min bihîst ku Îbn ʿEbbas got: „Gava Pêxember, dirûd û silavên Xwedê lê bin, ket Malê, di hemû quncikên wê de dua kir û nimêj nekir heta ku jê derket. Gava derket, li ber Kabeyê du rikat nimêj kir û got: Ev qible ye.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di bin heman beşê de datîne. Îbn ʿEbbas vedibêje ku Pêxember gava ket Malê di hemû quncikên wê de dua kir û tenê piştî derketinê li ber Kabeyê du rikat nimêj kir; got ku ev qible ye."
+  },
+  "399": {
+   "matn": "ʿEbdullahê kurê Reca ji me re ragihand, got: Îsraîl ji me re ragihand, ji Ebû Îshaq, ji Berayê kurê ʿAzib, Xwedê ji herduyan razî be, got: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, şanzdeh an hefdeh mehan ber bi Beyt el-Meqdisê ve nimêj kir, û Resûlê Xwedê, dirûd û silavên Xwedê lê bin, dixwest ku ber bi Kabeyê ve bê zivirandin. Wê gavê Xwedê wehî kir: ‚Em dibînin ku tu rûyê xwe di ezmên de vedizivirînî‘, û ew ber bi Kabeyê ve zivirî. Û bêaqilên mirovan, ango Cihû, gotin: ‚Çi wan ji qibleya wan a ku li ser bûn zivirand?‘ Bêje: ‚Rojhilat û rojava ya Xwedê ne; Ew yê bixwaze li rêyeke rast rê dike.‘ Piştre zilamek bi Pêxember, dirûd û silavên Xwedê lê bin, re nimêj kir û piştî nimêjê derket û li ber komek ji Ensaran derbas bû ku nimêja êvarê (ʿEsr) ber bi Beyt el-Meqdisê ve dikirin. Wî bi şahidî got ku bi Resûlê Xwedê, dirûd û silavên Xwedê lê bin, re nimêj kiriye û ew ber bi Kabeyê ve zivirî ye. Wê gavê mirov zivirîn heta ku ber bi Kabeyê ve bûn.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Rûkirina qibleyê li ku derê be“ de datîne. Beray vedibêje ku Pêxember şanzdeh an hefdeh mehan ber bi Beyt el-Meqdisê ve nimêj kir, paşê ayeta Qurʾanê ya li ser zivirandina rûyê wî di ezmên de hat xwarê û ew ber bi Kabeyê ve zivirî. Zilamekî ku bi Pêxember re nimêj kiribû di nimêja êvarê (ʿEsr) de ev yek ji komek Ensaran re got, û ew ber bi Kabeyê ve zivirîn. Nezelaliya „şanzdeh an hefdeh“ ji rewayetê tê."
+  },
+  "400": {
+   "matn": "Muslim ji me re ragihand, got: Hişam ji me re ragihand, got: Yehyayê kurê Ebî Kesîr ji me re ragihand, ji Muhemmedê kurê ʿEbdurrehman, ji Cabir, got: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, li ser heywanê xwe yê siwarbûnê nimêj dikir her ku ber bi ku ve bizivirî; lê gava wî nimêja ferz bixwesta, dadiket û rû dikir qibleyê.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Rûkirina qibleyê li ku derê be“ de datîne. Cabir vedibêje ku Pêxember li ser heywanê xwe yê siwarbûnê ber bi her aliyê ku heywan lê bû nimêj dikir; ji bo nimêja ferz dadiket û rû dikir qibleyê."
+  },
+  "401": {
+   "matn": "Osman ji me re ragihand, got: Cerîr ji me re ragihand, ji Mensûr, ji Îbrahîm, ji ʿElqeme, got: ʿEbdullah got: „Pêxember, dirûd û silavên Xwedê lê bin, nimêj kir – Îbrahîm got: Ez nizanim gelo lê zêde kir an kêm kir –, û gava wî silav da, jê re hat gotin: Ey Resûlê Xwedê, gelo di nimêjê de tiştekî nû qewimî? Got: Ew çi ye? Gotin: Te wiha û wiha nimêj kir. Wê gavê wî lingên xwe civand, rû kir qibleyê, du secde kir û paşê silav da. Gava wî bi rûyê xwe berê xwe da me, got: Ger di nimêjê de tiştekî nû qewimî bûya, min ê ew ji we re bigota; lê ez tenê mirovek im wek we, ez ji bîr dikim çawa ku hûn ji bîr dikin. Gava ez ji bîr bikim, min bîne bîra min; û ger yekî ji we di nimêja xwe de şik bike, bila li rastiyê bigere, li ser wê temam bike, paşê silav bide, paşê du secdeyan bike.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Rûkirina qibleyê li ku derê be“ de datîne. ʿEbdullah vedibêje ku Pêxember nimêj kir; gava jê hat pirsîn gelo di nimêjê de tiştekî nû qewimî û jê re hat gotin ku wî wiha û wiha nimêj kiriye, rû kir qibleyê, du secde kir û silav da. Paşê got ku ew mirovek e wek wan û ji bîr dike, ku wî bînin bîra wî, û ku kesê di nimêjê de şik bike divê li rastiyê bigere. Nezelaliya ravî Îbrahîm ku gelo Pêxember zêde nimêj kiriye an kêm, di peyvan de hatiye parastin."
+  },
+  "402": {
+   "matn": "ʿEmrê kurê ʿEwn ji me re ragihand, got: Huşeym ji me re ragihand, ji Humeyd, ji Enes, got: ʿUmer got: „Ez di sê tiştan de bi Xwedayê xwe re li hev hatim: Min got: Ey Resûlê Xwedê, xwezî me Meqamê Îbrahîm kiriba cihê nimêjê! Wê gavê hat daxistin: ‚Û ji Meqamê Îbrahîm cihê nimêjê bigirin.‘ Û ayeta hîcabê: Min got: Ey Resûlê Xwedê, xwezî te ji jinên xwe re bigota ku xwe bipêçin, ji ber ku qenc û xerab bi wan re diaxivin! Wê gavê ayeta hîcabê hat daxistin. Û jinên Pêxember, dirûd û silavên Xwedê lê bin, di çavnebariyê de li ser wî yek bûn; min ji wan re got: ‚Belkî Xwedayê wî, ger we berde, li şûna we jinên ji we çêtir bide wî.‘ Wê gavê ev ayet hat daxistin.“ Îbn Ebî Meryem ji me re ragihand, got: Yehyayê kurê Eyûb ji me re ragihand, got: Humeyd ji min re ragihand, got: Min bihîst ku Enes ev got.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Tiştê ku li ser qibleyê hatiye“ de datîne. Enes gotineke ʿUmer vedibêje ku ew di sê tiştan de bi Xwedayê xwe re li hev hatiye: Meqamê Îbrahîm wek cihê nimêjê, ayeta hîcabê û ayeta li ser jinên Pêxember, ya ku piştî gotinên wî hat daxistin. Piştre zincîreke duyem a bi riya Îbn Ebî Meryem tê, ku tê de Humeyd dibêje ku wî ev ji Enes bihîstiye."
+  },
+  "403": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malikê kurê Enes ji me re ragihand, ji ʿEbdullahê kurê Dînar, ji ʿEbdullahê kurê ʿUmer, got: „Gava mirov li Qubaʾê di nimêja sibê de bûn, kesek hat cem wan û got: Şeva borî Qurʾan ji Resûlê Xwedê, dirûd û silavên Xwedê lê bin, hat daxistin û jê re hat ferman kirin ku rû bike Kabeyê; hûn jî rû bikin wê. Rûyên wan ber bi Şamê bûn, û ew ber bi Kabeyê zivirîn.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Tiştê ku li ser qibleyê hatiye“ de datîne. Îbn ʿUmer vedibêje ku xelkê Qubaʾê di nimêja sibê de fêr bû ku ji Pêxember re hatiye ferman kirin ku rû bike Kabeyê; ew ên ku ber bi Şamê bûn wê gavê ber bi Kabeyê zivirîn."
+  },
+  "404": {
+   "matn": "Musedded ji me re ragihand, got: Yehya ji me re ragihand, ji Şuʿbe, ji Hekem, ji Îbrahîm, ji ʿElqeme, ji ʿEbdullah, got: „Pêxember, dirûd û silavên Xwedê lê bin, nimêja nîvro bi pênc rikatan kir. Gotin: Gelo nimêj zêde bûye? Got: Ew çi ye? Gotin: Te pênc kirin. Wê gavê wî lingên xwe civand û du secde kir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Tiştê ku li ser qibleyê hatiye“ de datîne. ʿEbdullah vedibêje ku Pêxember nimêja nîvro bi pênc rikatan kir; gava jê hat pirsîn gelo nimêj zêde bûye û jê re hat gotin ku wî pênc kiriye, lingên xwe civand û du secde kir."
+  },
+  "405": {
+   "matn": "Quteybe ji me re ragihand, got: Îsmaʿîlê kurê Ceʿfer ji me re ragihand, ji Humeyd, ji Enes: ku Pêxember, dirûd û silavên Xwedê lê bin, „di aliyê qibleyê de tifeke stûr dît, û ev li wî giran hat, heta ku di rûyê wî de hat dîtin; rabû û wî bi destê xwe ew xişand. Paşê got: Gava yekî ji we di nimêja xwe de radiweste, ew bi nepenî bi Xwedayê xwe re diaxive – an: Xwedayê wî di navbera wî û qibleyê de ye –; ji ber vê yekê bila yek ji we ber bi qibleya xwe tif neke, lê li çepê an di bin lingên xwe de. Paşê quncikê ridayê xwe girt, tê de tif kir, parçeyek avêt ser parçeyê din û got: An jî bila wiha bike.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Xişandina tifê bi destan ji mizgeftê“ de datîne. Enes vedibêje ku Pêxember di aliyê qibleyê de tifeke stûr dît, bi eşkere pê xemgîn bû û bi destê xwe ew xişand. Paşê got ku yê di nimêjê de radiweste bi nepenî bi Xwedayê xwe re diaxive û divê ber bi qibleyê ve tif neke, lê li çepê an di bin lingan de; wî bi xwe jî di quncikê ridayê xwe de tif kir. Alternatîfa „an: Xwedayê wî di navbera wî û qibleyê de ye“ nezelaliya ravî di derbarê peyvan de nîşan dide."
+  },
+  "406": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malik ji me re ragihand, ji Nafiʿ, ji ʿEbdullahê kurê ʿUmer: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, tif li dîwarê qibleyê dît û ew xişand. Paşê berê xwe da mirovan û got: Gava yekî ji we nimêj dike, bila li ber rûyê xwe tif neke, ji ber ku gava ew nimêj dike Xwedê li ber rûyê wî ye.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di bin heman beşê de datîne. Îbn ʿUmer vedibêje ku Pêxember tif li dîwarê qibleyê dît û ew xişand; paşê ji mirovan re got ku yê nimêj dike divê li ber rûyê xwe tif neke, ji ber ku gava ew nimêj dike Xwedê li ber rûyê wî ye."
+  },
+  "407": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malik ji me re ragihand, ji Hişamê kurê ʿUrwe, ji bavê xwe, ji Aîşe, diya bawermendan: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, li dîwarê qibleyê çilm, an tif, an tifeke stûr dît û ew xişand.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di bin heman beşê de datîne. Aîşe vedibêje ku Pêxember li dîwarê qibleyê çilm, tif an tifeke stûr dît û ew xişand; rewayet her sê îmkanan li kêleka hev dihewîne, bêyî ku yekê diyar bike."
+  },
+  "408": {
+   "matn": "Mûsayê kurê Îsmaʿîl ji me re ragihand, got: Îbrahîmê kurê Seʿd ji me re ragihand: Îbn Şihab ji me re ragihand, ji Humeydê kurê ʿEbdurrehman, ku Ebû Hureyre û Ebû Seʿîd jê re vegotin: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, li dîwarê mizgeftê tifeke stûr dît, kevirekî biçûk girt û ew xişand. Paşê got: Gava yekî ji we tifeke stûr ji sîngê derdixe, bila li ber rûyê xwe û li rastê nede; bila li çepê an di bin lingê xwe yê çepê de tif bike.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Rakirina çilmê bi xîzikan ji mizgeftê“ de datîne. Ebû Hureyre û Ebû Seʿîd vedibêjin ku Pêxember li dîwarê mizgeftê tifeke stûr dît û bi kevirekî biçûk ew xişand. Got ku nabe li ber rû û li rastê tif bê kirin, lê li çepê an di bin lingê çepê de."
+  },
+  "410": {
+   "matn": "Yehyayê kurê Bukeyr ji me re ragihand, got: Leys ji me re ragihand, ji ʿUqeyl, ji Îbn Şihab, ji Humeydê kurê ʿEbdurrehman, ku Ebû Hureyre û Ebû Seʿîd jê re ragihandin: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, li dîwarê mizgeftê tifeke stûr dît; Resûlê Xwedê kevirekî biçûk girt û ew pê paqij kir. Paşê got: Gava yekî ji we tifeke stûr ji sîngê derdixe, bila li ber rûyê xwe û li rastê nede; bila li çepê an di bin lingê xwe yê çepê de tif bike.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Di nimêjê de li aliyê rastê nayê tif kirin“ de datîne. Ebû Hureyre û Ebû Seʿîd vedibêjin ku Pêxember li dîwarê mizgeftê tifeke stûr dît û bi kevirekî biçûk ew pê paqij kir; got ku nabe li ber rû û li rastê tif bê kirin, lê li çepê an di bin lingê çepê de."
+  },
+  "412": {
+   "matn": "Hefsê kurê Omer ji me re ragihand, got: Şuʿbe ji me re ragihand, got: Katade ji min re ragihand, got: Min bihîst ku Enes got: Pêxember, dirûd û silavên Xwedê lê bin, got: „Bila yek ji we li ber xwe û li rastê tif neke, lê li çepê an di bin lingê xwe de.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di bin heman beşê de datîne. Enes gotineke kurt a Pêxember bêyî çarçoveya vegotinê vedibêje: nabe ku mirov li ber xwe û li rastê tif bike, lê li çepê an di bin lingê xwe de."
+  },
+  "413": {
+   "matn": "Âdem ji me re ragihand, got: Şuʿbe ji me re ragihand, got: Katade ji me re ragihand, got: Min bihîst ku Enesê kurê Malik got: Pêxember, dirûd û silavên Xwedê lê bin, got: „Gava bawermend di nimêjê de ye, ew bi nepenî bi Xwedayê xwe re diaxive; ji ber vê yekê bila li ber xwe û li rastê tif neke, lê li çepê an di bin lingê xwe de.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Bila li aliyê çepê an di bin lingê çepê de tif bike“ de datîne. Enes ji Pêxember vedibêje ku bawermendê di nimêjê de bi nepenî bi Xwedayê xwe re diaxive û ji ber vê yekê nabe li ber xwe û li rastê tif bike, lê li çepê an di bin lingê xwe de."
+  },
+  "414": {
+   "matn": "Elî ji me re ragihand, got: Sufyan ji me re ragihand: Zuhrî ji me re ragihand, ji Humeydê kurê ʿEbdurrehman, ji Ebû Seʿîd: „ku Pêxember, dirûd û silavên Xwedê lê bin, li qibleya mizgeftê tifeke stûr dît û ew bi kevirekî biçûk xişand. Paşê li zilamekî qedexe kir ku li ber xwe an li rastê tif bike, lê li çepê an di bin lingê çepê de.“ Û ji Zuhrî, wî Humeyd bihîst, ji Ebû Seʿîd: bi vî rengî.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di bin heman beşê de datîne. Ebû Seʿîd vedibêje ku Pêxember li qibleya mizgeftê tifeke stûr dît û bi kevirekî biçûk ew xişand; paşê tifkirina li ber xwe an li rastê qedexe kir û li şûna wê çep an bin lingê çepê nîşan da. Di dawiyê de zincîreyeke duyemîn ji Zuhrî bi riya Humeyd û Ebû Seʿîd bi gotina „bi vî rengî“ heye."
+  },
+  "415": {
+   "matn": "Âdem ji me re ragihand, got: Şuʿbe ji me re ragihand, got: Katade ji me re ragihand, got: Min bihîst ku Enesê kurê Malik got: Pêxember, dirûd û silavên Xwedê lê bin, got: „Tifkirin di mizgeftê de guneh e, û kefareta wê veşartina wê ye.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Kefareta tifkirinê di mizgeftê de“ de datîne. Enes ji Pêxember vedibêje ku tifkirin di mizgeftê de guneh e û kefareta wê veşartina wê ye."
+  },
+  "416": {
+   "matn": "Îshaqê kurê Nasr ji me re ragihand, got: ʿEbdurrezzaq ji me re ragihand, ji Meʿmer, ji Hemmam, wî Ebû Hureyre bihîst, ji Pêxember, dirûd û silavên Xwedê lê bin, got: „Gava yekî ji we ji bo nimêjê radibe, bila li ber xwe tif neke, ji ber ku heta di cihê nimêja xwe de ye, bi nepenî bi Xwedê re diaxive; û li rastê jî ne, ji ber ku li rastê wî milyaketek heye. Bila li çepê an di bin lingê xwe de tif bike û wê veşêre.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Veşartina belxemê di mizgeftê de“ de datîne. Ebû Hureyre ji Pêxember vedibêje: yê ku ji bo nimêjê radibe, bila li ber xwe tif neke, ji ber ku bi nepenî bi Xwedê re diaxive, û li rastê jî ne, ji ber ku li wir milyaketek heye; bila li çepê an di bin lingê xwe de tif bike û paşê wê veşêre."
+  },
+  "417": {
+   "matn": "Malikê kurê Îsmaîl ji me re ragihand, got: Zuheyr ji me re ragihand, got: Humeyd ji me re ragihand, ji Enes: „ku Pêxember, dirûd û silavên Xwedê lê bin, di qibleyê de tifeke stûr dît û ew bi destê xwe xişand; di wî de nerazîbûn hat dîtin – an: nerazîbûna wî ya ji vê yekê û tundiya wî li dijî wê hat dîtin. Û got: Gava yekî ji we di nimêja xwe de radiweste, ew bi nepenî bi Xwedayê xwe re diaxive – an: Xwedayê wî di navbera wî û qibleya wî de ye –; ji ber vê yekê bila di qibleya xwe de tif neke, lê li çepê an di bin lingê xwe de. Paşê quncikê ridayê xwe girt, tê de tif kir û parçeyek avêt ser parçeyê din. Got: An jî bila wiha bike.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Heke tif bi lez bê, bila bi devê cilê xwe bigire“ de datîne. Enes vedibêje ku Pêxember di qibleyê de tifeke stûr dît û ew bi destê xwe xişand; paşê got ku nabe di qibleyê de tif bê kirin, lê li çepê an di bin lingê xwe de, û wî bi xwe jî di quncikê ridayê xwe de tif kir. Rewayet ji bo nerazîbûnê du forman û ji bo axaftina bi nepenî du forman dide („an: Xwedayê wî di navbera wî û qibleya wî de ye“); ev nezelaliya ravî di derbarê peyvan de nîşan dide."
+  },
+  "418": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malik ji me re ragihand, ji Ebû ez-Zinad, ji el-Aʿrec, ji Ebû Hureyre: Resûlê Xwedê, dirûd û silavên Xwedê lê bin, got: „Hûn qibleya min li vir dibînin? Bi Xwedê, ne xuşûʿa we û ne rukûʿa we ji min nayê veşartin; ez bi rastî we ji pişt xwe dibînim.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Îmam mirovan şîret dike ku nimêjê temam bikin û qibleyê bi bîr tîne“ de datîne. Ebû Hureyre vedibêje ku Pêxember ji cemaetê pirsî gelo qibleya wî li vir dibînin, paşê tekez kir ku ne xuşûʿa wan û ne rukûʿa wan jê nayê veşartin, ji ber ku ew ji pişt xwe dibîne."
+  },
+  "419": {
+   "matn": "Yehyayê kurê Salih ji me re ragihand, got: Feleyhê kurê Silêman ji me re ragihand, ji Hîlalê kurê ʿElî, ji Enesê kurê Malik, got: „Pêxember, dirûd û silavên Xwedê lê bin, nimêjek ji me re kir, paşê derket ser minberê û derbarê nimêjê û rukûʿê de peyivî: Ez bi rastî we li pişt xwe dibînim, çawa ku ez we dibînim.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di bin heman beşê de datîne. Enes vedibêje ku Pêxember piştî nimêjê ji minberê derbarê nimêjê û rukûʿê de peyivî û got ku ew wan li pişt xwe dibîne, çawa ku niha wan dibîne."
+  },
+  "420": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malik ji me re ragihand, ji Nafiʿ, ji ʿEbdullahê kurê ʿUmer: „ku Resûlê Xwedê, dirûd û silavên Xwedê lê bin, di navbera hespên ku hatibûn rahênan de, ji Hefyayê, pêşbaziyek li dar xist; dawiya wan Seniyyet el-Weda bû, û di navbera hespên ku nehatibûn rahênan de, ji Seniyyeyê heta mizgefta Benî Zureyq; û ʿEbdullahê kurê ʿUmer di nav wan kesan de bû ku bi wan re bazdan.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Gelo tê gotin «mizgefta Benû filan»?“ de datîne. Îbn ʿUmer pêşbaziyeke hespan vedibêje ku Pêxember di navbera hespên rahênayî û yên nerahênayî de li dar xist, ji her komê re rêyeke taybet; rêya hespên nerahênayî li mizgefta Benî Zureyq diqediya. Wî bi xwe jî beşdarî pêşbaziyê bû."
+  },
+  "421": {
+   "matn": "Û Îbrahîm got, ji ʿEbdulezîzê kurê Suheyb, ji Enes, Xwedê jê razî be, got: Ji Pêxember, dirûd û silavên Xwedê lê bin, re mal ji Behreynê hat anîn û got: „Wê di mizgeftê de belav bikin.“ Ev mala herî zêde bû ku ji Resûlê Xwedê re hatibû anîn. Resûlê Xwedê ji bo nimêjê derket û berê xwe neda wê. Gava nimêj qedand, hat û li ber malê rûnişt û her kesê ku didît jê re dida. Paşê ʿEbbas hat cem wî û got: „Ey Resûlê Xwedê, bide min, ji ber ku min xwe û ʿEqîl azad kir.“ Resûlê Xwedê jê re got: „Bigire.“ Wî mal bi mist avêt nav cilê xwe, paşê xwest wê rake lê nekarî. Got: „Ey Resûlê Xwedê, ferman bike hinekan ku wê ji min re rakin.“ Got: „Na.“ Got: „Wê demê tu wê ji min re rake.“ Got: „Na.“ Wî beşek jê rijand, paşê dîsa xwest wê rake û got: „Ey Resûlê Xwedê, ferman bike hinekan ku wê ji min re rakin.“ Got: „Na.“ Got: „Wê demê tu wê ji min re rake.“ Got: „Na.“ Wî dîsa beşek jê rijand, paşê ew hilda, avêt ser milê xwe û çû. Resûlê Xwedê bi çavan li pey wî dinihêrî heta ji me veşart, ji hewesa wî şaş mabû. Û Resûlê Xwedê ranebû heta ku dirhemek jê nema.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî vê nivîsê bê zincîreke xwe ya temam (mu‘elleq) bi gotina „Îbrahîm got“ di beşa „Parvekirin û daleqandina gûşiyên xurmeyan di mizgeftê de“ de tîne. Enes vedibêje ku mala ji Behreynê di mizgeftê de hat belavkirin û Pêxember piştî nimêjê da her kesê ku dît. ʿEbbas ji bo xwe û ʿEqîl par xwest, ji ya ku dikaribû hilgire zêdetir hilda û neçar ma du caran beşek jê birijîne, ji ber ku Pêxember nehişt kes alîkariya wî bike. Pêxember tenê gava rabû ku dirhemek jê nema."
+  },
+  "422": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand: Malik ji me re ragihand, ji Îshaqê kurê ʿEbdullah, wî Enes bihîst, got: „Min Pêxember, dirûd û silavên Xwedê lê bin, di mizgeftê de dît, mirov li cem wî bûn. Ez rabûm û wî ji min re got: Ma Ebû Telhayê tu şandî? Min got: Erê. Got: Ji bo xwarinê? Min got: Erê. Paşê wî ji yên li cem xwe re got: Rabin. Ew meşiya û ez li pêşiya wan meşiyam.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Kesê ku di mizgeftê de bo xwarinê vexwendinê dike û yê ku li wir bersivê dide“ de datîne. Enes Pêxember bi mirovan re di mizgeftê de dibîne û bersiva pirsên wî dide ku Ebû Telhayê ew ji bo xwarinê şandiye. Pêxember ji hevalên xwe re dibêje ku rabin û ew dikevin rê, Enes li pêş wan."
+  },
+  "423": {
+   "matn": "Yehya ji me re ragihand, got: ʿEbdurrezzaq ji me re ragihand, got: Îbn Cureyc ji me re ragihand, got: Îbn Şihab ji min re ragihand, ji Sehlê kurê Seʿd: „ku zilamek got: Ey Resûlê Xwedê, tu li ser zilamê ku zilamekî din bi jina xwe re dibîne çi dibêjî, gelo ew wî bikuje? Paşê her duyan di mizgeftê de lî’an kirin û ez şahid bûm.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Dadkirin û lî'an di mizgeftê de di navbera mêr û jinan de“ de datîne. Sehlê kurê Seʿd pirsa zilamekî derbarê kesê ku zilamekî din bi jina xwe re dibîne vedibêje, û paşê ku her duyan di mizgeftê de bi hebûna wî lî’an kirin. Nivîs kurt e û ti hûrgiliyên din nade."
+  },
+  "424": {
+   "matn": "ʿEbdullahê kurê Mesleme ji me re ragihand, got: Îbrahîmê kurê Seʿd ji me re ragihand, ji Îbn Şihab, ji Mehmûdê kurê Rebîʿ, ji ʿItbanê kurê Malik: „ku Pêxember, dirûd û silavên Xwedê lê bin, hat mala wî û got: Tu dixwazî ez li ku derê di mala te de ji bo te nimêj bikim? Got: Min cihek nîşanî wî da. Paşê Pêxember tekbîr kir, em li pişt wî rêz bûn û wî du rikat nimêj kir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Kesê ku dikeve malekê li ku bixwaze an li ku jê re bê gotin nimêj dike û sîxuriyê nake“ de datîne. ʿItban vedibêje ku Pêxember hat mala wî û pirsî ku li ku nimêj bike; ʿItban cihek nîşanî wî da û Pêxember li wir du rikat nimêj kir dema ku ew li pişt wî rêz bûn."
+  },
+  "425": {
+   "matn": "Seîdê kurê Ufeyr ji me re ragihand, got: Leys ji min re ragihand, got: ʿUqeyl ji min re ragihand, ji Îbn Şihab, got: Mehmûdê kurê Rebîʿ el-Ensarî ji min re ragihand: „ku ʿItbanê kurê Malik – ew ji hevalên Resûlê Xwedê, dirûd û silavên Xwedê lê bin, û ji Ensaran bû ku li Bedrê amade bûn – hat cem Resûlê Xwedê û got: Ey Resûlê Xwedê, çavê min lawaz bûye û ez nimêjê ji bo gelê xwe pêşengî dikim. Gava baran dibare, newala di navbera min û wan de tijî dibe û ez nikarim biçim mizgefta wan da ku bi wan re nimêj bikim. Ez dixwazim, ey Resûlê Xwedê, tu werî cem min û di mala min de nimêj bikî, da ku ez wê bikim cihê nimêjê. Got: Resûlê Xwedê jê re got: Ez ê bikim, eger Xwedê bixwaze. ʿItban got: Resûlê Xwedê û Ebû Bekr zû hatin, gava roj bilind bû. Resûlê Xwedê destûr xwest û min destûr da wî. Ew nenişt heta ku ket malê, paşê got: Tu dixwazî ez di mala te de li ku derê nimêj bikim? Min quncikekî malê nîşanî wî da. Resûlê Xwedê rabû, tekbîr kir, em rabûn û rêz bûn û wî du rikat nimêj kir û paşê selam da. Got: Me ew ji bo xezîreyekê, xwarineke ku me jê re çêkiribû, rawestand. Paşê di malê de çend zilam ji mirovên taxê kom bûn, bi hejmareke baş. Yekî ji wan got: Malikê kurê Dûxeyşin li ku ye – an: kurê Dûxşûn? Hinekan ji wan got: Ew munafiqek e ku ne Xwedê û ne Resûlê Wî hez dike. Resûlê Xwedê got: Wiha nebêje. Tu nabînî ku wî got: Xwedayek ji bilî Xwedê tune, û bi vê yekê rûyê Xwedê dixwaze? Got: Xwedê û Resûlê Wî çêtir dizanin. Got: Em rûyê wî û şîreta wî ber bi munafiqan ve dibînin. Resûlê Xwedê got: Xwedê Agir li ser kesê ku dibêje: Xwedayek ji bilî Xwedê tune, û bi vê yekê rûyê Xwedê dixwaze, heram kiriye.“ Îbn Şihab got: Paşê min ji Huseynê kurê Muhammed el-Ensarî – ew ji Benî Salim e û ji mezinên wan e – derbarê hedîsa Mehmûdê kurê Rebîʿ pirsî û wî ew piştrast kir.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Mizgeftên di malan de“ de datîne. ʿItban, yê ku li Bedrê amade bû û çavê wî lawaz bûye, ji Pêxember dixwaze ku bê mala wî û li wir nimêj bike, da ku ew cih bike cihê nimêjê, ji ber ku newal dema baran dibare rêya mizgeftê digire. Pêxember bi Ebû Bekr re tê, li cihê nîşankirî du rikat nimêj dike û ji bo xwarinê dimîne. Gava yek li ser Malikê kurê Dûxşûn dipirse û yên din wî munafiq bi nav dikin, Pêxember bersiv dide ku Xwedê Agir li ser kesê ku dibêje „Xwedayek ji bilî Xwedê tune“ û bi vê rûyê Xwedê dixwaze heram kiriye. Navê zilam bi nezelalî hatiye rewandin (Dûxeyşin an Dûxşûn). Di dawiyê de Huseynê kurê Muhammed bi vegotina Mehmûdê kurê Rebîʿ re li hev tê."
+  },
+  "426": {
+   "matn": "Silêmanê kurê Herb ji me re ragihand, got: Şuʿbe ji me re ragihand, ji Eşʿesê kurê Suleym, ji bavê xwe, ji Mesrûq, ji Aîşe, got: „Pêxember, dirûd û silavên Xwedê lê bin, hez dikir ku heta ku bikaribe di hemû karên xwe de ji rastê dest pê bike: di paqijiya xwe de, di şanekirinê de û di lixwekirina nalên xwe de.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Destpêkirina bi aliyê rastê di ketina mizgeftê û tiştên din de“ de datîne. Aîşe vedibêje ku Pêxember hez dikir ku heta ku bikaribe di hemû karên xwe de ji rastê dest pê bike, û paqijiyê, şanekirinê û lixwekirina nalan dihejmêre."
+  },
+  "427": {
+   "matn": "Muhemmedê kurê Musenna ji me re ragihand, got: Yehya ji me re ragihand, ji Hîşam, got: Bavê min ji min re ragihand, ji Aîşe: „ku Umm Habîbe û Umm Seleme dêrek bi bîr anîn ku wan li Habeşistanê dîtibû û tê de wêne hebûn. Wan ev ji Pêxember, dirûd û silavên Xwedê lê bin, re gotin û wî got: Gava di nav wan de zilamekî saleh hebû û mir, wan li ser gora wî mizgeftek ava kirin û tê de ew wêne xêz kirin. Ev ên herî xerab ên afirandinê ne li cem Xwedê di roja qiyametê de.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Gelo gorên muşrikên cahiliyetê tên vekirin û li şûna wan mizgeft tên avakirin?“ de datîne. Aîşe vedibêje ku Umm Habîbe û Umm Seleme ji Pêxember re derbarê dêrekê de li Habeşistanê ya bi wêne gotin; wî got ku ew mirov li ser gora zilamekî saleh mizgeftek ava kiribûn û tê de wêne danîbûn, û ew wek ên herî xerab ên afirandinê li cem Xwedê di roja qiyametê de binav kir."
+  },
+  "428": {
+   "matn": "Musedded ji me re ragihand, got: ʿEbdulwaris ji me re ragihand, ji Ebû t-Teyyah, ji Enes, got: „Pêxember, dirûd û silavên Xwedê lê bin, hat Medîneyê û li beşa jorîn a Medîneyê, di taxeke ku xelkê wê Benî ʿEmr kurê ʿEwf tên gotin, daket. Pêxember çardeh şevan di nav wan de ma, paşê ji Benî Neccar re kes şand û ew şûr li xwe girêdayî hatin. Mîna ku ez Pêxember li ser siwarê wî dibînim, Ebû Bekr li pişt wî û Benî Neccar li dora wî, heta ku li hewşa Ebû Eyûb daket. Wî hez dikir li ku derê dema nimêjê pê bigihîje li wir nimêj bike, û di axurên pezan de jî nimêj dikir. Paşê fermana avakirina mizgeftê da û ji komeke Benî Neccar re kes şand û got: Ey Benî Neccar, bihayê vê baxçeyê xwe ji min re bibêjin. Gotin: Na, bi Xwedê, em bihayê wî tenê ji Xwedê dixwazin. Enes got: Tê de ya ku ez ji we re dibêjim hebû: gorên muşrikan, wêranî û darxurme. Pêxember ferman da ku gorên muşrikan bên vekirin, wêranî bên bi erdê re kirin û darxurme bên birîn. Wan jî stûnên darxurmeyan li rêzê kirin wekî qibleya mizgeftê û du stûnên deriyê wê ji kevir çêkirin. Wan zinar hildigirtin û rec‘ dixwendin, û Pêxember bi wan re bû û digot: Xwedêyo, ji bilî qencîya axiretê qencî tune – ji ber vê yekê li Ensar û Muhacîran bibore.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di bin heman beşê de datîne. Enes hatina Pêxember a Medîneyê, mana wî li cem Benî ʿEmr kurê ʿEwf û kirîna erdê Benî Neccar ji bo mizgeftê vedibêje, ku wan bihayê wî tenê ji Xwedê xwestibû. Li ser erdê gorên muşrikan, wêranî û darxurme hebûn; Pêxember ferman da ku gor bên vekirin, wêranî bên bi erdê re kirin û darxurme bên birîn, û stûnên darxurmeyan wekî qible hatin rêzkirin. Dema keviran hildigirtin, rêz helbest xwendin û Pêxember tevlî wan bû: „Xwedêyo, ji bilî qencîya axiretê qencî tune.“"
+  },
+  "429": {
+   "matn": "Silêmanê kurê Herb ji me re ragihand, got: Şuʿbe ji me re ragihand, ji Ebû t-Teyyah, ji Enes, got: „Pêxember, dirûd û silavên Xwedê lê bin, di axurên pezan de nimêj dikir.“ Paşê min paşê bihîst ku got: Berî ku mizgeft were avakirin, di axurên pezan de nimêj dikir.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj li axurên pezan“ de datîne. Enes vedibêje ku Pêxember di axurên pezan de nimêj dikir; di gotineke paşê de diyar dike ku ev berî avakirina mizgeftê bû."
+  },
+  "430": {
+   "matn": "Sedeqeyê kurê Fedl ji me re ragihand, got: Silêmanê kurê Heyyan ji me re ragihand, got: ʿUbeydullah ji me re ragihand, ji Nafiʿ, got: „Min Îbn ʿUmer dît ku ber bi deveya xwe ve nimêj dikir û got: Min Pêxember, dirûd û silavên Xwedê lê bin, dît ku wiha dikir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj li cihên deveyan“ de datîne. Nafiʿ vedibêje ku wî Îbn ʿUmer dît ku ber bi deveya xwe ve nimêj dikir; Îbn ʿUmer got ku wî Pêxember jî dît ku heman tişt dikir."
+  },
+  "431": {
+   "matn": "ʿEbdullahê kurê Mesleme ji me re ragihand, ji Malik, ji Zeydê kurê Eslem, ji Ataê kurê Yesar, ji ʿEbdullahê kurê ʿEbbas, got: „Roj girtî bû û Resûlê Xwedê, dirûd û silavên Xwedê lê bin, nimêj kir. Paşê got: Agir nîşanî min hat dayîn û min qet dîmenek wekî îro nedîtiye, tiştekî tirsnaktir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Kesê ku nimêj dike dema ku li pêşiya wî tenûr, agir an tiştekî tê perestin heye“ de datîne. Îbn ʿEbbas vedibêje ku roj girtî bû û Pêxember nimêj kir; paşê got ku Agir nîşanî wî hatiye dayîn û wî qet dîmenekî tirsnaktir nedîtiye."
+  },
+  "432": {
+   "matn": "Musedded ji me re ragihand, got: Yehya ji me re ragihand, ji ʿUbeydullah, got: Nafiʿ ji min re ragihand, ji Îbn ʿUmer, ji Pêxember, dirûd û silavên Xwedê lê bin, got: „Beşekî ji nimêja xwe di malên xwe de bikin û wan nekin gor.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nebaşiya nimêjê li goristanan“ de datîne. Îbn ʿUmer ji Pêxember şîreta kirina beşekî ji nimêjê di malan de û nekirina wan gor vedibêje."
+  },
+  "433": {
+   "matn": "Îsmaîlê kurê ʿEbdullah ji me re ragihand, got: Malik ji min re ragihand, ji ʿEbdullahê kurê Dînar, ji ʿEbdullahê kurê ʿUmer, Xwedê ji herduyan razî be: ku Resûlê Xwedê, dirûd û silavên Xwedê lê bin, got: „Nekevin cihên van cezakirîyan, ji bilî bi girî. Heke hûn negirîn, nekevin cem wan, da ku ya li wan hat nehê serê we.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj li cihên binerdbûn û ezabê“ de datîne. Îbn ʿUmer vedibêje ku Pêxember hişyar kir ku bi tenê bi girî bikevin cihên cezakirîyan, da ku ya li wan hat nehê serê mirov."
+  },
+  "434": {
+   "matn": "Muhemmed ji me re ragihand, got: ʿEbde ji me re ragihand, ji Hişamê kurê ʿUrwe, ji bavê xwe, ji Aîşe: „ku Umm Seleme ji Resûlê Xwedê, dirûd û silavên Xwedê lê bin, re dêrek bi bîr anî ya ku wê li welatê Habeşistanê dîtibû û jê re Mariye digotin. Wê wêneyên ku tê de dîtibûn jê re gotin. Resûlê Xwedê, dirûd û silavên Xwedê lê bin, got: Ev gel in ku gava di nav wan de bendeyê saleh – an: zilamê saleh – dimir, wan li ser gora wî mizgeftek ava dikir û tê de ew wêne xêz dikirin. Ev ên herî xerab ên afirandinê ne li cem Xwedê.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj di dêrê de“ de datîne. Aîşe vedibêje ku Umm Seleme ji Pêxember re derbarê dêreke Habeşistanê ya bi navê Mariye û wêneyên wê de gotiye; wî got ku ew mirov li ser gora bendeyê xwe yê saleh mizgeftek ava kiribûn û wêne tê de danîbûn, û ew wek ên herî xerab ên afirandinê li cem Xwedê binav kir. „Bende“ an „zilam“ nezelaliya ravî di derbarê peyvan de ye."
+  },
+  "435": {
+   "matn": "Ebûl-Yeman ji me re ragihand, got: Şuʿeyb ji me re ragihand, ji Zuhrî: ʿUbeydullahê kurê ʿEbdullahê kurê ʿUtbe ji min re ragihand: ku Aîşe û ʿEbdullahê kurê ʿEbbas gotin: „Gava Resûlê Xwedê, dirûd û silavên Xwedê lê bin, di berdewamiya mirinê de bû, dest pê kir ku kirasekî xwe bavêje ser rûyê xwe; gava di bin de ji nefesê ket, ew ji ser rûyê xwe vekir. Û di wê rewşê de got: Lanetên Xwedê li ser Cihû û Xiristiyanan be: wan gorên pêxemberên xwe kirin mizgeft.“ Wî hişyarî dida ji ya ku wan kiribû.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşekê de datîne ku çavkanî tenê jê re „Beş“ dibêje, bê sernav. Aîşe û Îbn ʿEbbas vedibêjin ku Pêxember di nexweşiya xwe ya dawî de kirasek avêt ser rûyê xwe û dîsa vekir, û got ku lanetên Xwedê li ser Cihû û Xiristiyanên ku gorên pêxemberên xwe kirine mizgeft e; nivîs zêde dike ku wî hişyarî dida ji ya ku wan kiribû."
+  },
+  "437": {
+   "matn": "ʿEbdullahê kurê Mesleme ji me re ragihand, ji Malik, ji Îbn Şihab, ji Seîdê kurê Museyyeb, ji Ebû Hureyre: ku Resûlê Xwedê, dirûd û silavên Xwedê lê bin, got: „Xwedê bi Cihûyan re şer bike: wan gorên pêxemberên xwe kirin mizgeft.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di bin heman beşa bê sernav de datîne. Ebû Hureyre ji Pêxember gotina „Xwedê bi Cihûyan re şer bike“ vedibêje, ji ber ku wan gorên pêxemberên xwe kirine mizgeft."
+  },
+  "438": {
+   "matn": "Muhemmedê kurê Sinan ji me re ragihand, got: Huşeym ji me re ragihand, got: Seyyar – ew Ebûl-Hekem e – ji me re ragihand, got: Yezîdê Feqîr ji me re ragihand, got: Cabirê kurê ʿEbdullah ji me re ragihand, got: Resûlê Xwedê, dirûd û silavên Xwedê lê bin, got: „Pênc tişt ji min re hatin dayîn ku ji tu pêxemberê beriya min re nehatibûn dayîn: Ez bi tirsê li mesafeya rêya mehekê hatim piştgirîkirin; erd ji min re bû cihê nimêjê û paqijker; her zilamê ji ummeta min ku dema nimêjê pê bigihîje, bila nimêj bike; xenîmet ji min re helal bû; her pêxember tenê ji bo gelê xwe dihat şandin, lê ez ji bo hemû mirovan hatim şandin; û şefaet ji min re hat dayîn.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa gotina Pêxember de datîne ku erd jê re bûye cihê nimêjê û paqijker. Cabir pênc tiştan vedibêje ku ji Pêxember re hatine dayîn û ji tu pêxemberê beriya wî re nehatine dayîn: piştgirîkirina bi tirsê li mesafeya mehekê, erd wekî cihê nimêjê û paqijkirinê, xenîmeta helal, şandin ji bo hemû mirovan û ne tenê gelê xwe, û şefaet. Her wiha tê gotin ku her kesê ji ummeta wî divê li ku dema nimêjê pê bigihîje li wir nimêj bike."
+  },
+  "439": {
+   "matn": "ʿUbeydê kurê Îsmaîl ji me re ragihand, got: Ebû Usame ji me re ragihand, ji Hîşam, ji bavê xwe, ji Aîşe: „ku keniza reş a yekî ji eşîreke ereb bû; wan ew azad kir û ew li cem wan ma. Got: Keçikeke wan derket, kembereke sor ji rîsên çermî li wê bû. Got: Wê ew danî – an: ji wê ket –; teyrekî nêçîrvan derbas bû dema ku ew li wir bû, wî ew bi goşt zanî û girt. Got: Wan lê geriyan û nedîtin. Got: Wan ez ji ber wî gumanbar kirim. Got: Wan dest bi lêgerîna min kir, heta ku wan şûna wê ya veşartî jî lêgerîn. Got: Bi Xwedê, ez li cem wan sekinî bûm gava teyrê nêçîrvan derbas bû û ew avêt; ew di nav wan de ket. Got: Min got: Ev ew e ya ku we ez pê gumanbar kirim – we ev îdîa kir û ez ji wê bêguneh bûm –, û li vir e! Got: Paşê ew hat cem Resûlê Xwedê, dirûd û silavên Xwedê lê bin, û misilman bû. Aîşe got: Wê konek di mizgeftê de an hucreyeke biçûk hebû. Got: Ew dihat cem min û li cem min diaxivî. Got: Ew qet li cem min nedinişt ku nebêje: Roja kemberê ji ecêbên Xwedayê me ye – lê bi rastî wî ez ji welatê kufrê rizgar kirim. Aîşe got: Min jê re got: Çi bi te hatiye, tu qet li cem min nadinêşî ku vê nebêjî? Got: Paşê wê ev çîrok ji min re got.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Razana jinê di mizgeftê de“ de datîne. Aîşe çîroka keniza reş a azadkirî vedibêje, ya ku ji ber girtina kembereke sor a çermî hat gumankirin û hat lêgerîn heta ku teyrekî nêçîrvan ew avêt. Ew hat cem Pêxember, misilman bû û piştre konek an hucreyeke biçûk di mizgeftê de hebû; li cem Aîşe her carê beytek derbarê roja kemberê de digot û di dawiyê de çîrok got."
+  },
+  "440": {
+   "matn": "Musedded ji me re ragihand, got: Yehya ji me re ragihand, ji ʿUbeydullah, got: Nafiʿ ji min re ragihand, got: ʿEbdullah ji min re xeber da: „ku ew wekî ciwanekî nezewicî û bê malbat di mizgefta Pêxember, dirûd û silavên Xwedê lê bin, de radiza.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Razana mêran di mizgeftê de“ de datîne. Îbn ʿUmer vedibêje ku ew wekî ciwanekî nezewicî û bê malbat di mizgefta Pêxember de radiza."
+  },
+  "441": {
+   "matn": "Quteybeyê kurê Seʿîd ji me re ragihand, got: ʿEbdulezîzê kurê Ebî Hazim ji me re ragihand, ji Ebû Hazim, ji Sehlê kurê Seʿd, got: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, hat mala Fatîmeyê û ʿElî li malê nedît. Got: Kurê mamê te li ku ye? Got: Di navbera min û wî de tiştek qewimî û ew ji min aciz bû, derket û li cem min nîvroyê nexew. Resûlê Xwedê, dirûd û silavên Xwedê lê bin, ji kesekî re got: Binêre ew li ku ye. Ew hat û got: Ey Resûlê Xwedê, ew di mizgeftê de ye, radizê. Resûlê Xwedê hat û ew li ser milekî raketibû, ridayê wî ji milê wî ketibû û ax li wî ketibû. Resûlê Xwedê dest pê kir ku ew ji ser wî paqij bike û got: Rabe, Ebû Turab, rabe, Ebû Turab.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di bin heman beşê de datîne. Sehl vedibêje ku Pêxember ʿElî li mala Fatîmeyê nedît ji ber ku piştî nakokiyekê derketibû, û ew di mizgeftê de radizayî dît, ridayê wî ketibû û bi ax bûbû; Pêxember ax ji ser wî paqij kir û jê re got „Ebû Turab“."
+  },
+  "442": {
+   "matn": "Yûsifê kurê Îsa ji me re ragihand, got: Îbn Fudeyl ji me re ragihand, ji bavê xwe, ji Ebû Hazim, ji Ebû Hureyre, got: „Min heftê kes ji Ehlê Suffeyê dîtin; yek ji wan ridayek tunebû, tenê an îzarek an kincekî bû, ku wan li stûyê xwe girêdabûn. Ya hinekan digihîşt nîvê lingê, ya hinekan digihîşt heta ber pêyan, û wî ew bi destê xwe digirt, nedixwest ku şermgeha wî bê dîtin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di bin heman beşê de datîne. Ebû Hureyre vedibêje ku wî heftê kes ji Ehlê Suffeyê dîtin ku ridayek tunebû, tenê îzarek an kincek li stûyê girêdayî ku digihîşt dirêjahiyên cuda; yê ku li xwe dikir wî ew bi destê xwe digirt da ku şermgeha wî neyê dîtin."
+  },
+  "443": {
+   "matn": "Xelladê kurê Yehya ji me re ragihand, got: Misʿar ji me re ragihand, got: Muharibê kurê Disar ji me re ragihand, ji Cabirê kurê ʿEbdullah, got: „Ez hatim cem Pêxember, dirûd û silavên Xwedê lê bin, dema ew di mizgeftê de bû – Misʿar got: Ez dibêjim ku wî got: berî nîvro. Wî got: Du rekatan nimêj bike. Û deynekî min ê li ser wî hebû; wî ew da min û zêdetir jî lê zêde kir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj dema ji rêwîtiyê vedigere“ de datîne. Cabir vedibêje ku ew di mizgeftê de hatiye cem Pêxember; ragihînerê wî Misʿar ne piştrast e ka ev berî nîvro bû. Pêxember jê re got du rekatan nimêj bike û deynê ku li ser wî bû bi zêdeyî da wî."
+  },
+  "444": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malik ji me re xeber da, ji ʿAmirê kurê ʿEbdullahê kurê Zubeyr, ji ʿEmrê kurê Suleym ê Zureqî, ji Ebû Qetadeyê Suleymî: „ku Resûlê Xwedê, dirûd û silavên Xwedê lê bin, got: Dema yek ji we dikeve mizgeftê, bila beriya ku rûne du rekatan nimêj bike.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj dema ji rêwîtiyê vedigere“ de datîne. Ebû Qetade ji Pêxember vedibêje ku yê ku dikeve mizgeftê divê beriya rûniştinê du rekatan nimêj bike."
+  },
+  "445": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malik ji me re xeber da, ji Ebû Zinad, ji Eʿrec, ji Ebû Hureyre: „ku Resûlê Xwedê, dirûd û silavên Xwedê lê bin, got: Milyaket ji bo yek ji we dua dikin heya ku ew li cihê nimêja xwe yê ku lê nimêj kiriye dimîne, heya ku destnimêja xwe nebijirandiye. Dibêjin: Xwedêyo, li wî bibihure! Xwedêyo, rehmê li wî bike!“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Şikandina destnimêjê di mizgeftê de“ de datîne. Ebû Hureyre ji Pêxember vedibêje ku milyaket ji bo nimêjkerî dua dikin heya ku ew li cihê nimêja xwe dimîne û destnimêja xwe naşkîne; dibêjin: „Xwedêyo, li wî bibihure, Xwedêyo, rehmê li wî bike.“"
+  },
+  "446": {
+   "matn": "ʿElîyê kurê ʿEbdullah ji me re ragihand, got: Yaʿqûbê kurê Îbrahîm kurê Saʿd ji me re ragihand, got: Bavê min ji min re ragihand, ji Salihê kurê Keysan, got: Nafiʿ ji me re ragihand: ku ʿEbdullah jê re xeber da: „ku mizgeft di dema Resûlê Xwedê, dirûd û silavên Xwedê lê bin, de ji kerpîç hatibû çêkirin, banê wê ji çiqilên xurmeyan, û stûnên wê ji gozên xurmeyan bûn. Ebû Bekr tiştek lê zêde nekir, lê ʿUmer lê zêde kir: wî ew li ser avahiya wê ya dema Resûlê Xwedê, dirûd û silavên Xwedê lê bin, bi kerpîç û çiqilên xurmeyan ava kir û stûnên wê ji nû ve ji dar çêkir. Paşê Osman ew guhert û gelek lê zêde kir: dîwarê wê bi keviran ên şûştî û bi şikir (el-qassa) ava kir, stûnên wê ji keviran ên şûştî çêkir û banê wê ji dara tîkê.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Avakirina mizgeftê“ de datîne. Îbn ʿUmer mizgefta Pêxember wekî ji kerpîç, bi banê çiqilên xurmeyan û stûnên gozên xurmeyan vedibêje. Ebû Bekr tiştek lê zêde nekir; ʿUmer ew bi heman rengî ji nû ve ava kir û stûn bi darê guhertin; Osman ew pir mezin kir û kevirên şûştî, şikir û dara tîkê bi kar anî."
+  },
+  "447": {
+   "matn": "Musedded ji me re ragihand, got: ʿEbdulʿezîzê kurê Muxtar ji me re ragihand, got: Xalidê Hezza ji me re ragihand, ji ʿIkrime: Îbn Ebbas ji min û kurê xwe ʿElî re got: „Herin cem Ebû Seʿîd û hedîsa wî bibihîzin. Em çûn, û ew di baxçeyekî de bû û wî rast dikir. Wî cilê xwe girt û çok xwe pê girêdan rûnişt, paşê dest bi ji me re gotinê kir, heya gihîşt behsa avakirina mizgeftê. Got: Me kerpîçek kerpîçek hildigirt, lê ʿEmmar du kerpîçan du kerpîçan. Pêxember ew dît, ax ji ser wî raxist û got: Wey li ʿEmmar! [Koma serhildêr wê wî bikuje.] Ew wan vedixwîne bihiştê, û ew wî vedixwînin agir.“ Got: ʿEmmar dibêje: Ez ji fitneyan bi Xwedê ve digirim.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Alîkariya hev di avakirina mizgeftê de“ de datîne. Ebû Seʿîdê Xudrî vedibêje ku di avakirina mizgeftê de her kes kerpîçek hildigirt, lê ʿEmmar du, û ka Pêxember çawa ax ji ser wî raxist. Hevoka di nav kewanên çargoşe de di nivîsa erebî de bi vî rengî hatiye nîşankirin; ʿEmmar ji fitneyan xwe spart Xwedê."
+  },
+  "448": {
+   "matn": "Qutêbe ji me re ragihand, got: ʿEbdulʿezîz ji me re ragihand, ji Ebû Hazim, ji Sehl, got: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, ji jinekê re peyam şand: Ji xulamê xwe yê necar re bêje, ji min re derenceyên darîn çêke, ku ez li ser rûnim.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Alîkarîxwestin ji necar û hostayan ji bo darên mînberê û mizgeftê“ de datîne. Sehl vedibêje ku Pêxember ji jinekê re peyam şand ku ji xulamê xwe yê necar re bêje ji wî re derenceyên darîn çêke ku lê rûnê."
+  },
+  "449": {
+   "matn": "Xelladê kurê Yehya ji me re ragihand, got: ʿEbdulwahîdê kurê Eymen ji me re ragihand, ji bavê xwe, ji Cabir: „ku jinekê got: Ey Resûlê Xwedê, ma ez ji te re tiştekî çênekim ku li ser rûnê? Ji ber ku xulamekî min ê necar heye. Wî got: Eger bixwazî. Wê jî mînber çêkir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Alîkarîxwestin ji necar û hostayan ji bo darên mînberê û mizgeftê“ de datîne. Cabir vedibêje ku jinekê pêşniyar kir ku xulamê wê yê necar ji Pêxember re tiştekî çêke ku lê rûnê; wî qebûl kir û bi vî awayî mînber hat çêkirin."
+  },
+  "450": {
+   "matn": "Yehyayê kurê Suleyman ji me re ragihand: Îbn Wehb ji min re ragihand, got: ʿEmr ji min re xeber da ku Bukeyr jê re ragihand ku ʿAsimê kurê ʿUmerê kurê Qetade jê re ragihand ku wî ʿEbdullahê Xewlanî bihîst: „ku wî Osmanê kurê ʿEffan bihîst got, dema mirovan der barê wî de gotin ji ber ku wî mizgefta Resûl, dirûd û silavên Xwedê lê bin, ava kiribû: We pir gotin, û min Pêxember, dirûd û silavên Xwedê lê bin, bihîst got: Yê ku mizgeftekê ava bike – Bukeyr got: Ez dibêjim ku wî got: bi daxwaza rûyê Xwedê –, Xwedê wê di bihiştê de mîna wê jê re ava bike.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Kesê ku mizgeftekê ava dike“ de datîne. Osman bi hedîsa ku Xwedê ji bo yê mizgeftekê ava dike di bihiştê de mîna wê ava dike bersiva gotina mirovan der barê avakirina mizgefta Pêxember de dide. Ragihînerê wî Bukeyr ne piştrast e ka zêdekirina „bi daxwaza rûyê Xwedê“ hatiye gotin."
+  },
+  "451": {
+   "matn": "Qutêbeyê kurê Seʿîd ji me re ragihand, got: Sufyan ji me re ragihand, got: Min ji ʿEmr re got: Te Cabirê kurê ʿEbdullah bihîst got: „Zilamek bi tîran di mizgeftê re derbas bû, Resûlê Xwedê, dirûd û silavên Xwedê lê bin, jê re got: Wan ji serê wan bigire.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Girtina serê tîran dema di mizgeftê re derbas dibe“ de datîne. Ragihîner ji ʿEmr dipirse ka wî Cabir bihîstiye ku got: zilamek bi tîran di mizgeftê re derbas bû û Pêxember jê re got wan ji serê wan bigire."
+  },
+  "452": {
+   "matn": "Mûsayê kurê Îsmaʿîl ji me re ragihand, got: ʿEbdulwahîd ji me re ragihand, got: Ebû Burdeyê kurê ʿEbdullah ji me re ragihand, got: Min Ebû Burde bihîst, ji bavê wî, ji Pêxember, dirûd û silavên Xwedê lê bin, ku got: „Yê ku bi tîran di yek ji mizgeftên me an bazarên me re derbas bibe, bila wan ji serê wan bigire, da ku bi destê xwe misilmanekî birîndar neke.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Derbasbûna di mizgeftê re“ de datîne. Pêxember emir dike ku yê bi tîran di mizgeft an bazaran re derbas dibe, wan ji serê wan bigire, da ku bi dest misilmanekî birîndar neke."
+  },
+  "453": {
+   "matn": "Ebûl-Yemanê Hekemê kurê Nafiʿ ji me re ragihand, got: Şuʿeyb ji me re xeber da, ji Zuhrî, got: Ebû Selemeyê kurê ʿEbdurrehmanê kurê ʿEwf ji min re xeber da: „ku wî bihîst Hassanê kurê Sabitê Ensarî Ebû Hureyre dike şahid: Ez te bi Xwedê dispêrim, te Pêxember, dirûd û silavên Xwedê lê bin, bihîst got: Ey Hassan, bi navê Resûlê Xwedê, dirûd û silavên Xwedê lê bin, bersivê bide. Xwedêyo, wî bi Ruhê Pîroz (Rûhulqudus) piştgirî bike! Ebû Hureyre got: Erê.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Helbest di mizgeftê de“ de datîne. Hassanê kurê Sabit Ebû Hureyre li ber Xwedê dike şahid ka wî Pêxember bihîstiye ku got: „Ey Hassan, bi navê Resûlê Xwedê bersivê bide; Xwedêyo, wî bi Ruhê Pîroz piştgirî bike.“ Ebû Hureyre vê bi gotina „Erê“ piştrast dike."
+  },
+  "454": {
+   "matn": "ʿEbdulʿezîzê kurê ʿEbdullah ji me re ragihand, got: Îbrahîmê kurê Saʿd ji me re ragihand, ji Salih, ji Îbn Şihab, got: ʿUrweyê kurê Zubeyr ji min re xeber da ku ʿAîşe got: „Min rojekê Resûlê Xwedê, dirûd û silavên Xwedê lê bin, li ber deriyê hucreya xwe dît, dema Habeşî di mizgeftê de dilîstin, û Resûlê Xwedê, dirûd û silavên Xwedê lê bin, ez bi cilê xwe vedişartim; min li lîstika wan dinêrî.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Rimbazên di mizgeftê de“ de datîne. ʿAîşe vedibêje ku wê Pêxember li ber deriyê hucreya xwe dît dema Habeşî di mizgeftê de dilîstin; wî ew bi cilê xwe vegirt û wê li lîstika wan nêrî."
+  },
+  "455": {
+   "matn": "Îbrahîmê kurê Munzir zêde kir: Îbn Wehb ji me re ragihand: Yûnus ji min re xeber da, ji Îbn Şihab, ji ʿUrwe, ji ʿAîşe, got: „Min Pêxember, dirûd û silavên Xwedê lê bin, dît dema Habeşî bi rimên xwe dilîstin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî vê ragihandinê di beşa „Rimbazên di mizgeftê de“ de datîne. Ew zêdekirinek a Îbrahîmê kurê Munzir e bi zincîreya xwe ya heta ʿAîşe, û bi şêweyekî kurttir vedibêje ku wê Pêxember dît dema Habeşî bi rimên xwe dilîstin."
+  },
+  "456": {
+   "matn": "ʿElîyê kurê ʿEbdullah ji me re ragihand, got: Sufyan ji me re ragihand, ji Yehya, ji ʿEmre, ji ʿAîşe, got: „Berîre hat cem wê û di mijara peymana azadkirina xwe de alîkarî jê xwest. Wê got: Eger bixwazî, ez wê ji xwedîyên te re bidim, û welaʾ (mafê yê ku azad dike li ser azadkirî) wê ya min be. Xwedîyên wê jî got: Eger bixwazî, ya mayî bide wê – û Sufyan carekê got: Eger bixwazî, wê bikire û azad bike, û welaʾ wê yê me be. Dema Resûlê Xwedê, dirûd û silavên Xwedê lê bin, hat, min ev jê re got. Wî got: Wê bikire û azad bike, ji ber ku welaʾ yê yê ku azad dike ye. Paşê Resûlê Xwedê, dirûd û silavên Xwedê lê bin, li ser mînberê rabû – û Sufyan carekê got: Resûlê Xwedê, dirûd û silavên Xwedê lê bin, derket ser mînberê – û got: Ji bo mirovên ku şertan datînin yên ku di Pirtûka Xwedê de nînin çi ye? Yê ku şertekî deyne ku di Pirtûka Xwedê de nîne, ew ê wî nebe, heta ku sed caran deyne jî.“ ʿElî got: Yehya û ʿEbdulwehhab gotin: ji Yehya, ji ʿEmre; û Caʿfer kurê ʿEwn got, ji Yehya, got: Min ʿEmre bihîst got: Min ʿAîşe bihîst. Malik ew ji Yehya, ji ʿEmre ragihand: ku Berîre – û wî behsa „derket ser mînberê“ nekir.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Behskirina kirîn û firotinê li ser mînberê di mizgeftê de“ de datîne. ʿAîşe peymana azadkirina Berîre vedibêje: Pêxember dibêje welaʾ yê yê ku azad dike ye, paşê ji ser mînberê li dijî şertên ku di Pirtûka Xwedê de nînin daxive. Nivîs cudahiyên di gotina Sufyan de û zincîreyên cuda destnîşan dike; Malik bûyerê bê behskirina mînberê vedibêje."
+  },
+  "457": {
+   "matn": "ʿEbdullahê kurê Muhemmed ji me re ragihand, got: Osmanê kurê ʿUmer ji me re ragihand, got: Yûnus ji me re xeber da, ji Zuhrî, ji ʿEbdullahê kurê Kaʿbê kurê Malik, ji Kaʿb: „ku wî di mizgeftê de deynekî ku li ser Îbn Ebî Hedred hebû jê xwest; dengên wan bilind bûn, heta Resûlê Xwedê, dirûd û silavên Xwedê lê bin, ew di mala xwe de bihîstin. Ew ber bi wan derket, heta perdeya hucreya xwe rakir, û gazî kir: Ey Kaʿb! Got: Li ber destê te me, ey Resûlê Xwedê! Got: Beşek ji vî deynê xwe bihêle. Û jê re îşaret kir: yanî nîvê wê. Got: Min kir, ey Resûlê Xwedê. Got: Rabe û bidê.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Daxwazkirina deyn û pêgirtina deyndar di mizgeftê de“ de datîne. Kaʿb vedibêje ku wî di mizgeftê de deynekî ji Îbn Ebî Hedred xwest; dengên wan bilind bûn, û Pêxember derket û ji Kaʿb xwest nîvê wê bihêle, ku wî kir. Paşê Pêxember ji deyndar re got ya mayî bide."
+  },
+  "458": {
+   "matn": "Suleymanê kurê Herb ji me re ragihand, got: Hemmadê kurê Zeyd ji me re ragihand, ji Sabit, ji Ebû Rafiʿ, ji Ebû Hureyre: „ku zilamekî reş an jinikeke reş mizgeft dimalî û mir. Pêxember, dirûd û silavên Xwedê lê bin, li ser wî/wê pirsî, û wan got: Mir. Got: Ma we nedikarî ez agahdar bikira? Gora wî nîşanî min bidin – an jî got: gora wê. Ew hat ser gora wî/wê û li ser wê nimêj kir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Malîna mizgeftê û berhevkirina perçe, gemar û daran“ de datîne. Ebû Hureyre zilamekî reş an jinikeke reş vedibêje ku mizgeft dimalî û mir. Pêxember li ser wî kesî pirsî, xwest ku gor were nîşandan û li wir li ser wê nimêj kir. Di nivîsê de ne diyar e ka zilam bû an jin."
+  },
+  "459": {
+   "matn": "ʿEbdan ji me re ragihand, ji Ebû Hemze, ji Eʿmeş, ji Muslim, ji Mesrûq, ji ʿAîşe, got: „Dema ayetên Sûreya Beqerê yên der barê rîbayê de hatin xwarê, Pêxember, dirûd û silavên Xwedê lê bin, derket mizgeftê û ew ji mirovan re xwend; paşê bazirganiya meyê qedexe kir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Qedexekirina bazirganiya meyê, di mizgeftê de hate ragihandin“ de datîne. ʿAîşe vedibêje ku piştî ayetên Sûreya Beqerê yên der barê rîbayê de hatin xwarê, Pêxember derket mizgeftê, ew ji mirovan re xwend û paşê bazirganiya meyê qedexe kir."
+  },
+  "460": {
+   "matn": "Ehmedê kurê Waqid ji me re ragihand, got: Hemmad ji me re ragihand, ji Sabit, ji Ebû Rafiʿ, ji Ebû Hureyre: „ku jinek an zilamek mizgeft dimalî – û ez nabêjim ku ew ji bilî jinekê bû –; paşê wî hedîsa Pêxember, dirûd û silavên Xwedê lê bin, anî ziman: ku wî li ser gora wî/wê nimêj kir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Xizmetkarên mizgeftê“ de datîne. Ebû Hureyre der barê jinek an zilamek de vedibêje ku mizgeft dimalî; ragihîner ber bi „jin“ ve diçe. Ew behsa ragihandinê dike ku Pêxember li ser gora wî kesî nimêj kir."
+  },
+  "461": {
+   "matn": "Îshaqê kurê Îbrahîm ji me re ragihand, got: Rewh û Muhemmedê kurê Caʿfer ji me re xeber dan, ji Şuʿbe, ji Muhemmedê kurê Ziyad, ji Ebû Hureyre, ji Pêxember, dirûd û silavên Xwedê lê bin, ku got: „Îfrîtekî ji cinan şeva borî xwe avêt ser min – an jî gotinek mîna wê got – da ku nimêja min bibire. Xwedê hêz da min li ser wî, û min xwest ez wî bi yek ji stûnên mizgeftê ve girêdim da ku sibê hûn hemû li wî binêrin. Paşê min gotina birayê xwe Suleyman anî bîra xwe: «Xudayê min, padîşahiyekê bide min ku piştî min ji tu kesî re nebe.»“ Rewh got: „Wî jî ew bi riswayî vegerand.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Dîl an deyndar di mizgeftê de tê girêdan“ de datîne. Ebû Hureyre ji Pêxember vedibêje ku îfrîtekî ji cinan şevê xwe avêt ser wî da ku nimêja wî bibire û Xwedê hêz da wî li ser wî. Wî xwest ew bi stûnekê ve girêde, lê duaya Suleyman anî bîra xwe û ew bi riswayî vegerand, wekî ku Rewh lê zêde dike."
+  },
+  "462": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Leys ji me re ragihand, got: Seʿîdê kurê Ebû Seʿîd ji me re ragihand ku wî Ebû Hureyre bihîstiye got: „Pêxember, dirûd û silavên Xwedê lê bin, siwarî şand ber bi Necdê ve; wan zilamekî ji Benî Henîfe ku jê re digotin Sumamê kurê Usal anî û bi yek ji stûnên mizgeftê ve girêdan. Pêxember, dirûd û silavên Xwedê lê bin, ber bi wî derket û got: Sumame vekin. Ew çû nav darxurmeyên nêzîkî mizgeftê, xwe şûşt, paşê ket mizgeftê û got: Ez şahidiyê didim ku ji bilî Xwedê tu xwedayê din nîne û Muhemmed Resûlê Xwedê ye.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Serşuştin dema misilman dibe û girêdana dîl di mizgeftê de“ de datîne. Ebû Hureyre vedibêje ku siwarên Pêxember Sumamê kurê Usal ê Benî Henîfe anîn û bi stûnekê ve girêdan. Bi fermana Pêxember hat vekirin, li ber darxurmeyên nêzîkî mizgeftê xwe şûşt û di mizgeftê de şahidî da."
+  },
+  "463": {
+   "matn": "Zekerîyayê kurê Yehya ji me re ragihand, got: ʿEbdullahê kurê Numeyr ji me re ragihand, got: Hişam ji me re ragihand, ji bavê xwe, ji ʿAîşe, got: „Seʿd roja Xendekê li ser rehika milê (el-ekhel) hat birîndarkirin. Pêxember, dirûd û silavên Xwedê lê bin, li mizgeftê konek vedan da ku ji nêzîk serdana wî bike. Û ya ku ew tirsandin – di mizgeftê de konekî Benî Xifar hebû – tenê xwîn bû ku ber bi wan ve diherikî. Wan got: Ey ahlê konê, ev çi ye ku ji aliyê we ve tê ba me? Meriv dît ku ew Seʿd e, birîna wî xwîn dibarand, û ew di wê de mir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Kon di mizgeftê de ji bo nexweşan û yên din“ de datîne. ʿAîşe vedibêje ku Seʿd roja Xendekê li ser rehika milê hat birîndarkirin û Pêxember ji bo wî li mizgeftê konek vedan da ku ji nêzîk serdana wî bike. Gava xwîn ber bi konê Benî Xifar ve herikî, derket ku ew ji birîna Seʿd tê; ew di konê de mir. Nivîs tenê „Seʿd“ dibêje."
+  },
+  "464": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malik ji me re xeber da, ji Muhemmedê kurê ʿEbdurrehmanê kurê Newfel, ji ʿUrwe, ji Zeyneba keça Ebû Seleme, ji Ûmmû Seleme, got: „Min ji Resûlê Xwedê, dirûd û silavên Xwedê lê bin, giliyî kir ku ez nexweş im. Wî got: Li pişt mirovan tewafê bike dema tu siwar î. Min tewaf kir û Resûlê Xwedê, dirûd û silavên Xwedê lê bin, li kêleka Malê nimêj dikir û Sûreya Tûrê dixwend: «Û bi Pirtûkeke nivîsandî.»“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Anîna deveyê nav mizgeftê ji ber sedemekê“ de datîne. Ûmmû Seleme vedibêje ku wê ji Pêxember giliyî kir ku nexweş e; wî jê re got siwar li pişt mirovan tewafê bike, dema ew bi xwe li kêleka Malê nimêj dikir û Sûreya Tûrê dixwend."
+  },
+  "465": {
+   "matn": "Muhemmedê kurê Mûsenna ji me re ragihand, got: Muʿazê kurê Hişam ji me re ragihand, got: Bavê min ji min re ragihand, ji Qetade, got: Eness ji me re ragihand: „ku du zilam ji hevalên Pêxember, dirûd û silavên Xwedê lê bin, di şevekê tarî de ji cem Pêxember, dirûd û silavên Xwedê lê bin, derketin û bi wan re mîna du çirayan hebû ku li ber wan ronî dikirin. Gava ji hev qetiyan, bi her yekî re yek ma heta gihîşt malbata xwe.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Anîna deveyê nav mizgeftê ji ber sedemekê“ de datîne. Eness vedibêje ku du hevalan di şevekê tarî de ji cem Pêxember derketin û du ronahiyên mîna çirayan li ber wan ronî dikirin; gava ji hev qetiyan, bi her yekî re yek ma heta gihîşt malbata xwe."
+  },
+  "466": {
+   "matn": "Muhemmedê kurê Sinan ji me re ragihand, got: Fuleyh ji me re ragihand, got: Ebûn-Nedr ji me re ragihand, ji ʿUbeydê kurê Huneyn, ji Busrê kurê Seʿîd, ji Ebû Seʿîdê Xudrî, got: „Pêxember, dirûd û silavên Xwedê lê bin, xutbe da û got: Xwedê ji xulamekî re mafê hilbijartinê da di navbera vê dinyayê û tiştê li cem Wî de, û wî tiştê li cem Xwedê hilbijart. Ebû Bekr girî, Xwedê jê razî be. Min di dilê xwe de got: Çima ev pîrê dizî digirî? Eger Xwedê ji xulamekî re mafê hilbijartinê da di navbera vê dinyayê û tiştê li cem Wî de û wî tiştê li cem Xwedê hilbijart – ew xulam Resûlê Xwedê bû, û Ebû Bekr ji me hemûyan zanatir bû. Got: Ey Ebû Bekr, negirî! Yê ji mirovan di hevaltî û malê xwe de ji min re herî comerd Ebû Bekr e. Û eger ez ji ummeta xwe dostekî nêzîk (xelîl) bigirta, min ê Ebû Bekr bigirta; lê biratiya Îslamê û hezkirina wê heye. Di mizgeftê de tu derî nemîne ku nehatibe girtin, ji bilî deriyê Ebû Bekr.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Deriyê biçûk û rêya derbasbûnê di mizgeftê de“ de datîne. Ebû Seʿîd xutbeya Pêxember vedibêje der barê xulamekî de ku mafê hilbijartinê di navbera dinyayê û tiştê li cem Xwedê de jê re hat dayîn; Ebû Bekr girî, û Ebû Seʿîd têgihîşt ku mebesta wê Pêxember bi xwe bû. Pêxember hevaltî û malê Ebû Bekr pesend kir û emir kir ku hemû deriyên mizgeftê ji bilî yê Ebû Bekr bên girtin."
+  },
+  "467": {
+   "matn": "ʿEbdullahê kurê Muhemmed Cuʿfî ji me re ragihand, got: Wehbê kurê Cerîr ji me re ragihand, got: Bavê min ji me re ragihand, got: Min Yaʿlayê kurê Hekîm bihîst, ji ʿIkrime, ji Îbn Ebbas, got: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, di nexweşiya xwe ya ku tê de mir de derket, serê wî bi perçeyek qumaşî girêdayî bû, li ser mînberê rûnişt, Xwedê pesinand û şa kir, paşê got: Di nav mirovan de tu kes bi canê xwe û bi malê xwe ji Ebû Bekrê kurê Ebû Quhafe zêdetir ji min re comerd nebû. Û eger ez ji mirovan dostekî nêzîk (xelîl) bigirta, min ê Ebû Bekr wekî dostê nêzîk bigirta; lê hevaltiya Îslamê çêtir e. Ji bo min her deriyê biçûk (xewxe) yê vê mizgeftê bigirin ji bilî deriyê biçûk yê Ebû Bekr.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Deriyê biçûk û rêya derbasbûnê di mizgeftê de“ de datîne. Îbn Ebbas vedibêje ku Pêxember di nexweşiya xwe ya dawî de bi serê girêdayî derket ser mînberê, Xwedê pesinand û comerdiya Ebû Bekr bi can û mal bi lêv kir. Wî emir kir ku hemû deriyên biçûk yên mizgeftê ji bilî yê Ebû Bekr bên girtin."
+  },
+  "468": {
+   "matn": "Ebûn-Nuʿman û Qutêbe ji me re ragihandin, gotin: Hemmad ji me re ragihand, ji Eyyûb, ji Nafiʿ, ji Îbn ʿUmer: „ku Pêxember, dirûd û silavên Xwedê lê bin, hat Mekkeyê û gazî ʿOsmanê kurê Telha kir, ew derî vekir; Pêxember, dirûd û silavên Xwedê lê bin, Bilal, Usameyê kurê Zeyd û ʿOsmanê kurê Telha çûn hundir, paşê derî hat girtin. Ew demekê tê de ma, paşê derketin. Îbn ʿUmer got: Ez bilez çûm û ji Bilal pirsî. Wî got: Tê de nimêj kir. Min got: Di kîjan cihî de? Got: Di navbera du stûnan de. Îbn ʿUmer got: Ji bîra min çû ku ez jê bipirsim çiqas nimêj kir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Derî û qufil ji bo Kabeyê û mizgeftan“ de datîne. Îbn ʿUmer vedibêje ku Pêxember li Mekkeyê bi Bilal, Usameyê kurê Zeyd û ʿOsmanê kurê Telha re ket Kabeyê û derî hat girtin. Li gorî Bilal, wî tê de di navbera du stûnan de nimêj kir; Îbn ʿUmer ji bîr kir ku bipirse çiqas nimêj kir."
+  },
+  "469": {
+   "matn": "Qutêbe ji me re ragihand, got: Leys ji me re ragihand, ji Seʿîdê kurê Ebû Seʿîd, ku wî Ebû Hureyre bihîstiye got: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, siwarî şand ber bi Necdê ve; wan zilamekî ji Benî Henîfe ku jê re digotin Sumamê kurê Usal anî û bi yek ji stûnên mizgeftê ve girêdan.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Ketina muşrik bo mizgeftê“ de datîne. Ebû Hureyre di versiyona kurt de vedibêje ku siwarên ku Pêxember şandibûn Sumamê kurê Usal ê Benî Henîfe anîn û bi stûnekê ve girêdan."
+  },
+  "470": {
+   "matn": "ʿElîyê kurê ʿEbdullah ji me re ragihand, got: Yehyayê kurê Seʿîd ji me re ragihand, got: Cuʿeydê kurê ʿEbdurrehman ji me re ragihand, got: Yezîdê kurê Xusayfe ji min re ragihand, ji Saʾibê kurê Yezîd, got: „Ez di mizgeftê de li ser piyan bûm ku zilamek zinarokek avêt min. Min nêrî, ew ʿUmerê kurê Xetab bû. Got: Here û van her duyan bîne cem min. Min ew anîn cem wî. Got: Hûn kî ne, an ji ku ne? Gotin: Ji xelkê Taîfê. Got: Eger hûn ji xelkê vî bajarî bûna, min ê we bi êş ceza bikira – hûn dengê xwe di mizgefta Resûlê Xwedê, dirûd û silavên Xwedê lê bin, de bilind dikin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Bilindkirina dengê di mizgeftan de“ de datîne. Saʾibê kurê Yezîd vedibêje ku ʿUmer bi zinarokekê baldariya wî kişand û du zilamên ji Taîfê ku di mizgeftê de dengê xwe bilind kiribûn anîn. ʿUmer got ku eger ew ji bajêr bûna wî ê wan bi êş ceza bikira."
+  },
+  "471": {
+   "matn": "Ehmed ji me re ragihand, got: Îbn Wehb ji me re ragihand, got: Yûnisê kurê Yezîd ji min re xeber da, ji Îbn Şihab: ʿEbdullahê kurê Kaʿbê kurê Malik ji min re ragihand ku Kaʿbê kurê Malik jê re xeber da: „ku di dema Resûlê Xwedê, dirûd û silavên Xwedê lê bin, de wî di mizgeftê de deynekî ku li ser Îbn Ebî Hedred hebû jê xwest; dengên wan bilind bûn heta Resûlê Xwedê, dirûd û silavên Xwedê lê bin, ew di mala xwe de bihîstin. Resûlê Xwedê, dirûd û silavên Xwedê lê bin, ber bi wan derket heta perdeya hucreya xwe rakir û gazî kir: Ey Kaʿbê kurê Malik! Ey Kaʿb! Got: Li ber destê te me, ey Resûlê Xwedê! Wî jî bi destê xwe îşaret kir ku nîvê deynê xwe bihêle. Kaʿb got: Min kir, ey Resûlê Xwedê. Resûlê Xwedê, dirûd û silavên Xwedê lê bin, got: Rabe û bidê.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Bilindkirina dengê di mizgeftan de“ de datîne. Kaʿbê kurê Malik vedibêje ku dema wî di mizgeftê de deynekî ji Îbn Ebî Hedred xwest, dengên wan bilind bûn; Pêxember derket, îşaret kir ku nîv bê hiştin û paşê ji deyndar re got ya mayî bide."
+  },
+  "472": {
+   "matn": "Musedded ji me re ragihand, got: Bişrê kurê Mufeddel ji me re ragihand, ji ʿUbeydullah, ji Nafiʿ, ji Îbn ʿUmer, got: „Zilamekî ji Pêxember, dirûd û silavên Xwedê lê bin, pirsî dema ew li ser mînberê bû: Tu der barê nimêja şevê de çi dibêjî? Got: Du du; û eger kes ji sibê bitirse, yekê nimêj dike, ew ya ku nimêj kiriye ji bo wî teq dike (witr).“ Û digot: „Witrê bikin dawiya nimêja xwe, çimkî Pêxember emir pê kiriye.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Xeleqe û rûniştin di mizgeftê de“ de datîne. Îbn ʿUmer vedibêje ku Pêxember dema der barê nimêja şevê de hat pirsîn ji ser mînberê bersiv da: du du, û eger ji sibê bitirsin, yek rekat wekî witr. Îbn ʿUmer lê zêde dike ku divê witr bibe dawiya nimêjê."
+  },
+  "473": {
+   "matn": "Ebûn-Nuʿman ji me re ragihand, got: Hemmad ji me re ragihand, ji Eyyûb, ji Nafiʿ, ji Îbn ʿUmer: „ku zilamek hat cem Pêxember, dirûd û silavên Xwedê lê bin, dema ew xutbe dida, û got: Nimêja şevê çawa ye? Got: Du du; û eger ji sibê bitirsî, bi yekê witrê bike; ew ya te kiriye teq dike.“ Welîdê kurê Kesîr got: ʿUbeydullahê kurê ʿEbdullah ji min re ragihand: Îbn ʿUmer ji wan re ragihand: ku zilamek gazî Pêxember kir, dirûd û silavên Xwedê lê bin, dema ew di mizgeftê de bû.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Xeleqe û rûniştin di mizgeftê de“ de datîne. Îbn ʿUmer bersiva Pêxember a li ser pirsa nimêja şevê vedibêje: du du, û eger ji sibê bitirsin, yek wekî witr. Zêdekirina Welîdê kurê Kesîr bi zincîreya xwe ya cuda destnîşan dike ku zilam di mizgeftê de gazî Pêxember kir."
+  },
+  "474": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malik ji me re xeber da, ji Îshaqê kurê ʿEbdullahê kurê Ebû Telha: ku Ebû Murre, azadkirîyê ʿEqîlê kurê Ebû Talib, jê re xeber da, ji Ebû Waqidê Leysî, got: „Dema Resûlê Xwedê, dirûd û silavên Xwedê lê bin, di mizgeftê de bû, sê kes hatin; du ber bi Resûlê Xwedê, dirûd û silavên Xwedê lê bin, hatin û yek çû. Yek ji wan her duyan valahiyek dît û rûnişt; yê din li pişt wan rûnişt. Gava Resûlê Xwedê, dirûd û silavên Xwedê lê bin, xelas bû, got: Ma ez der barê van sêyan de nebêjim we? Yekî xwe spart Xwedê, Xwedê jî pena da wî; yê din şerm kir, Xwedê jî ji wî şerm kir; yê din rû werand, Xwedê jî rû ji wî werand.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Xeleqe û rûniştin di mizgeftê de“ de datîne. Ebû Waqid sê kesan vedibêje ku hatin civîna Pêxember a di mizgeftê de: yek di valahiyekê de rûnişt, yek li pişt yên din, yek çû. Pêxember rave kir ku Xwedê pena da yê yekem, ji yê duyem şerm kir û rû ji yê sêyem werand."
+  },
+  "475": {
+   "matn": "ʿEbdullahê kurê Meslime ji me re ragihand, ji Malik, ji Îbn Şihab, ji ʿEbbadê kurê Temîm, ji apê xwe, ku wî „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, di mizgeftê de li ser pişta xwe dirêjbûyî dît, lingekî xwe li ser yê din danîbû.“ Û ji Îbn Şihab, ji Seʿîdê kurê Musayyeb, got: ʿUmer û ʿOsman wisa dikirin.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Li ser pişta xwe dirêjbûn di mizgeftê de û dirêjkirina lingê“ de datîne. ʿEbbadê kurê Temîm ji apê xwe vedibêje ku wî Pêxember di mizgeftê de li ser pişta xwe dirêjbûyî dît, lingek li ser yê din. Beşa duyem, bi riya Seʿîdê kurê Musayyeb, gotinek e der barê kirina ʿUmer û ʿOsman de û ne gotina Pêxember e."
+  },
+  "476": {
+   "matn": "Yehyayê kurê Bukeyr ji me re ragihand, got: Leys ji me re ragihand, ji ʿUqeyl, ji Îbn Şihab, got: ʿUrweyê kurê Zubeyr ji min re xeber da ku ʿAîşe, jina Pêxember, dirûd û silavên Xwedê lê bin, got: „Ji dema ku ez dê û bavê xwe nas dikim, ew li ser ola (dîn) xwe bûn, û rojek li ser me derbas nebû ku Resûlê Xwedê, dirûd û silavên Xwedê lê bin, du aliyên rojê, sibê û êvarê, neyê cem me. Paşê hat bîra Ebû Bekr û wî li hewşa mala xwe cihê nimêjê (mizgeft) ava kir; wî tê de nimêj dikir û Quranê dixwend. Jinên muşrikan û zarokên wan li ber wî disekinîn, ji wî şaş dibûn û lê dinêrîn. Ebû Bekr zilamekî gelek digirî bû; dema wî Quran dixwend, nikaribû çavên xwe bigire. Ev yek rewşenbîrên Qureyşê yên muşrik tirsand.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Mizgefta li ser rê bêyî zirarê bo mirovan“ de datîne. ʿAîşe vedibêje ku Ebû Bekr li hewşa mala xwe cihê nimêjê ava kir, ku tê de nimêj dikir û Quran dixwend; jin û zarokên muşrikan lê dinêrîn, û wî di xwendinê de gelek digirî, ku rewşenbîrên Qureyşê tirsand."
+  },
+  "477": {
+   "matn": "Musedded ji me re ragihand, got: Ebû Muʿawiye ji me re ragihand, ji Eʿmeş, ji Ebû Salih, ji Ebû Hureyre, ji Pêxember, dirûd û silavên Xwedê lê bin, ku got: „Nimêja bi cemaetê ji nimêja wî ya di mala wî de û nimêja wî ya di bazara wî de bi bîst û pênc pileyan derbas dibe. Çimkî gava yek ji we destnimêj bigire û baş bike, paşê bi tenê ji bo nimêjê were mizgeftê, ew gavekê navêje ku Xwedê bi wê gavê pileyekê wî bilind neke û gunehekî jê neke, heta ku dikeve mizgeftê. Û gava ew dikeve mizgeftê, heta nimêj wî digire ew di nimêjê de ye; û milyaket – yanî ji bo wî – heta ew li cihê rûniştina xwe yê ku lê nimêj dike dimîne dua dikin: Xwedêyo, li wî bibihure, Xwedêyo, rehmê li wî bike, heta ew tê de destnimêja xwe naşkîne.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj di mizgefta bazarê de“ de datîne. Ebû Hureyre ji Pêxember vedibêje ku nimêja bi cemaetê ji nimêja di mal û bazarê de bi bîst û pênc pileyan derbas dibe, ku her gavek ber bi mizgeftê ve pileyekê bilind dike û gunehekî jê dike, û ku milyaket ji bo yê rûniştî dua dikin heta destnimêja xwe naşkîne."
+  },
+  "478": {
+   "matn": "Hamidê kurê ʿUmer ji me re ragihand, ji Bişr, got: ʿAsim ji me re ragihand, got: Waqid ji me re ragihand, ji bavê xwe, ji Îbn ʿUmer an Îbn ʿEmr: „Pêxember, dirûd û silavên Xwedê lê bin, tilîyên xwe tevlihev kirin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Tevlihevkirina tiliyan di mizgeftê de û cihên din“ de datîne. Nivîs bi kurtî vedibêje ku Pêxember tilîyên xwe tevlihev kirin. Ragihîner ne piştrast e ka heval Îbn ʿUmer bû an Îbn ʿEmr."
+  },
+  "480": {
+   "matn": "Û ʿAsimê kurê ʿElî got: ʿAsimê kurê Muhemmed ji me re ragihand: Min ev hedîs ji bavê xwe bihîst lê min ew ji ber nekir; paşê Waqid ew ji min re rast kir, ji bavê xwe, got: Min bavê xwe bihîst got: ʿEbdullah got: Resûlê Xwedê, dirûd û silavên Xwedê lê bin, got: „Ey ʿEbdullahê kurê ʿEmr, gava tu di nav gemara mirovan de bimînî dê halê te çawa be?“ – bi vê (gotinê).",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî vê ragihandinê di beşa „Tevlihevkirina tiliyan di mizgeftê de û cihên din“ de datîne. Ew bi „û ʿAsimê kurê ʿElî got“ dest pê dike û tenê wekî perçeyek tê dayîn: Pêxember ji ʿEbdullahê kurê ʿEmr dipirse ka dema ew di nav gemara mirovan de bimîne dê halê wî çawa be. Mayîna gotinê di nivîsê de nayê dayîn."
+  },
+  "481": {
+   "matn": "Xelladê kurê Yehya ji me re ragihand, got: Sufyan ji me re ragihand, ji Ebû Burdeyê kurê ʿEbdullahê kurê Ebû Burde, ji bapîrê xwe, ji Ebû Mûsa, ji Pêxember, dirûd û silavên Xwedê lê bin, ku got: „Bawermend ji bawermend re mîna avahiyekê ye ku beşên wê piştgiriya hev dikin.“ Û wî tilîyên xwe tevlihev kirin.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Tevlihevkirina tiliyan di mizgeftê de û cihên din“ de datîne. Ebû Mûsa mînaka Pêxember vedibêje: bawermend ji bawermend re mîna avahiyekê ye ku beşên wê piştgiriya hev dikin; Pêxember di gotina wê de tilîyên xwe tevlihev kirin."
+  },
+  "482": {
+   "matn": "Îshaq ji me re ragihand, got: Îbn Şumeyl ji me re ragihand: Îbn ʿEwn ji me re xeber da, ji Îbn Sîrîn, ji Ebû Hureyre, got: „Resûlê Xwedê, dirûd û silavên Xwedê lê bin, em di yek ji du nimêjên piştînîvro de pêşeng kirin – Îbn Sîrîn got: Ebû Hureyre nav lê kir, lê min ji bîr kir –, got: Wî du rekat bi me re nimêj kir, paşê silav da, çû ber darekî ku li mizgeftê berepaş danîbû, xwe lê da û mîna hêrsbûyî bû, destê xwe yê rastê danî ser yê çepê, tilîyên xwe tevlihev kirin û rûyê xwe yê rastê danî ser pişta destê xwe yê çepê. Yên bilez ji deriyên mizgeftê derketin û gotin: Nimêj kurt bû? Di nav mirovan de Ebû Bekr û ʿUmer hebûn, lê ji bo ku bi wî re bipeyivin tirsiyan. Di nav mirovan de zilamek hebû ku destên wî dirêj bûn ku jê re digotin Zûlyedeyn. Got: Ey Resûlê Xwedê, te ji bîr kir, an nimêj kurt bû? Got: Min ji bîr nekir, û ew kurt nebû. Paşê got: Ma wekî Zûlyedeyn dibêje ye? Gotin: Erê. Ew pêşve çû, ya ku hiştibû nimêj kir, paşê silav da, paşê tekbîr kir û mîna secda xwe an dirêjtir secde kir, paşê serê xwe rakir û tekbîr kir, paşê tekbîr kir û mîna secda xwe an dirêjtir secde kir, paşê serê xwe rakir û tekbîr kir.“ Carinan jê dipirsîn: „Paşê silav da?“ Wî digot: „Ji min re hat gotin ku ʿImranê kurê Huseyn got: Paşê silav da.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Tevlihevkirina tiliyan di mizgeftê de û cihên din“ de datîne. Ebû Hureyre vedibêje ku Pêxember piştî du rekatan silav da, xwe da ber darekî û tilîyên xwe tevlihev kirin; Zûlyedeyn jê pirsî ka wî ji bîr kiriye an nimêj kurt bûye. Piştî ku amadebûyan piştrast kir, Pêxember ya hiştî nimêj kir û du caran secde kir. Gotina dawî ya der barê silavê de gotina Îbn Sîrîn e ku ji wî re ji ʿImranê kurê Huseyn hatiye gotin."
+  },
+  "483": {
+   "matn": "Muhemmedê kurê Ebû Bekrê Muqeddemî ji me re ragihand, got: Fudeylê kurê Silêman ji me re ragihand, got: Mûsayê kurê ʿUqbe ji me re ragihand, got: „Min Salimê kurê ʿEbdullah dît ku li ser rê li hin cihan digere û li wir nimêj dike; digot ku bavê wî li wir nimêj dikir û ku wî Pêxember ﷺ li wan cihan nimêj dike dîtiye. Û Nafiʿ ji Îbn ʿUmer ji min re ragihand ku wî li wan cihan nimêj dikir. Min ji Salim pirsî, û ez tenê dizanim ku wî di hemû cihan de bi Nafiʿ re lihev kir, ji bilî ku her du li ser mizgeftekê li Şerefa Rewhayê nakok bûn.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Mizgeftên li ser rêyên Medîneyê û cihên ku Pêxember ﷺ lê nimêj kiriye“ de datîne. Mûsayê kurê ʿUqbe ragihîne ku Salimê kurê ʿEbdullah li ser rê li hin cihan digeriya da ku li wir nimêj bike, ji ber ku bavê wî li wir nimêj kiriye û Pêxember li wir nimêj kirin dîtiye; Nafiʿ heman tişt ji Îbn ʿUmer ragihîne. Li gorî Mûsa, her du ji bilî mizgeftekê li Şerefa Rewhayê li hev kirin."
+  },
+  "484": {
+   "matn": "Îbrahîmê kurê Munzir ji me re ragihand, got: Enesê kurê ʿÎyad ji me re ragihand, got: Mûsayê kurê ʿUqbe ji me re ragihand, ji Nafiʿ: ʿEbdullah jê re got ku Resûlê Xwedê ﷺ „gava ʿumre dikir li Zu l-Huleyfe, û di hecê de gava hec dikir, di bin darekî semure de li cihê mizgeftê ya ku li Zu l-Huleyfe ye, dima. Û gava ji xezayekê – di wê rêyê de – an ji hecê an ji ʿumreyê vedigeriya, ji binê newalekê dadiket, û gava ji binê newalê derdiket, deveya xwe li Bethayê ya ku li kêlekeke rojhilatê ya newalê ye dixist çokan û heta sibê li wir şev derbas dikir – ne li mizgefta ji kevir û ne li ser girê ku mizgeft lê ye. Li wir kanalek hebû ku ʿEbdullah li kêleka wî nimêj dikir; di binê wî de komên qûmê hebûn, û Resûlê Xwedê ﷺ li wir nimêj dikir. Paşê lehiyê Bethayê tê de belav kir heta ew cihê ku ʿEbdullah lê nimêj dikir hat veşartin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Mizgeftên li ser rêyên Medîneyê û cihên ku Pêxember ﷺ lê nimêj kiriye“ de datîne. Îbn ʿUmer vedibêje Pêxember li Zu l-Huleyfe di bin darekî semure de li ku dima û di vegerê de li Bethayê şev li ku derbas dikir. Nivîs her wiha behs dike ku lehiyê cihekî ku ʿEbdullah lê nimêj dikir veşart."
+  },
+  "485": {
+   "matn": "Û ku ʿEbdullahê kurê ʿUmer jê re ragihand: „Pêxember ﷺ li cihê ku mizgefta biçûk lê ye, ya ku berî mizgefta Şerefa Rewhayê ye, nimêj kir.“ ʿEbdullah cihê ku Pêxember ﷺ lê nimêj kiriye dizanî û digot: „Paşê li aliyê te yê rastê, gava tu di mizgeftê de ji bo nimêjê radiwestî. Ew mizgeft li kêleka rastê ya rêyê ye, gava tu diçî Mekkeyê; di navbera wê û mizgefta mezintir de avêtina kevirekî an li dora wê heye.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî vê ragihandinê di beşa „Mizgeftên li ser rêyên Medîneyê û cihên ku Pêxember ﷺ lê nimêj kiriye“ de datîne. Ew bi „û ku“ dest pê dike û bi vî awayî berdewamiya ya berê ye. Îbn ʿUmer mizgefta biçûk a berî mizgefta Şerefa Rewhayê wekî cihê nimêja Pêxember destnîşan dike û cihê wê li kêleka rastê ya rêya Mekkeyê vedibêje."
+  },
+  "486": {
+   "matn": "„Û ku Îbn ʿUmer berê xwe dida ʿIrqê ya ku li Munsarafa Rewhayê ye û nimêj dikir. Dawiya kêleka wê ʿIrqê digihîje kêleka rêyê, berî mizgefta ku di navbera wê û Munsarafê de ye, gava tu diçî Mekkeyê. Li wir mizgeftek hatibû çêkirin, lê ʿEbdullah li wê mizgeftê nimêj nedikir; wî ew li aliyê çepê û li pişt xwe dihişt û li pêşiya wê heta ʿIrqê bi xwe nimêj dikir. Û ʿEbdullah ji Rewhayê rê dikir û nimêja nîvroyê nedikir heta digihîşt wî cihî, û li wir nimêja nîvroyê dikir. Û gava ji Mekkeyê dihat, eger saetekê berî sibê an di dawiya şevê de di wir re derbas bibûya, li wir dima heta li wir nimêja sibê bikira.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî vê ragihandinê di beşa „Mizgeftên li ser rêyên Medîneyê û cihên ku Pêxember ﷺ lê nimêj kiriye“ de datîne. Ew bê destpêka silsileyê bi „û ku“ dest pê dike û bi vî awayî berdewamiya yên berê ye. Ew vedibêje Îbn ʿUmer li ʿIrqê nêzîkî Rewhayê li ku nimêj dikir û ku wî ji mizgefta li wir hatî çêkirin dûr dikir."
+  },
+  "487": {
+   "matn": "Û ku ʿEbdullah jê re ragihand: „Pêxember ﷺ di bin darekî mezin de, berî Ruweyseyê, li aliyê rastê yê rêyê û li ber rêyê, li cihekî rast û nerm, dima, heta ku ji girekî tê ku du mîl berî Berîdê Ruweyseyê ye. Serê wê şikestî bû û di navendê de tewandî bû, lê ew li ser kunderekî radiweste, û li ser kunderê wê komên qûmê yên pir hene.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî vê ragihandinê di beşa „Mizgeftên li ser rêyên Medîneyê û cihên ku Pêxember ﷺ lê nimêj kiriye“ de datîne. Îbn ʿUmer cihê bêhnvedana Pêxember di bin darekî mezin de berî Ruweyseyê vedibêje. Nivîs tenê nîşaneyên cihan û danasîna darê dihewîne."
+  },
+  "488": {
+   "matn": "Û ku ʿEbdullahê kurê ʿUmer jê re ragihand: „Pêxember ﷺ li kêleka telʿeyekê li pişt ʿEricê nimêj kir, gava tu diçî bilindahiyekê. Li nêzî wê mizgeftê du an sê gor hene; li ser goran komeke kevir heye, li aliyê rastê yê rêyê, li ber Selematên rê, di nav wan Selematan de. ʿEbdullah ji ʿEricê rê dikir, piştî ku rojê di germa nîvroyê de xwe xwar kiriba, û di wê mizgeftê de nimêja nîvroyê dikir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî vê ragihandinê di beşa „Mizgeftên li ser rêyên Medîneyê û cihên ku Pêxember ﷺ lê nimêj kiriye“ de datîne. Ew bi „û ku“ dest pê dike û bi vî awayî berdewamiya yên berê ye. Îbn ʿUmer cihekî nimêja Pêxember li pişt ʿEricê destnîşan dike û cihê wî vedibêje; nivîs tenê nîşaneyên cihan dihewîne."
+  },
+  "489": {
+   "matn": "Û ku ʿEbdullahê kurê ʿUmer jê re ragihand: „Resûlê Xwedê ﷺ li ber çend daran mezin, li aliyê çepê yê rêyê, di avrêjekê de berî Herşayê, dima. Ew avrêj bi Kuraʿa Herşayê ve zeliqî ye; di navbera wê û rêyê de nêzîkî avêtina tîrekê heye. Û ʿEbdullah berê xwe dida darekê û nimêj dikir, ku ji van daran herî nêzîkî rêyê û ji hemûyan herî dirêj e.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî vê ragihandinê di beşa „Mizgeftên li ser rêyên Medîneyê û cihên ku Pêxember ﷺ lê nimêj kiriye“ de datîne. Îbn ʿUmer cihê bêhnvedana Pêxember li ber daran mezin berî Herşayê û darê ku ʿEbdullah berê xwe dida wê vedibêje. Nivîs tenê nîşaneyên cihan dihewîne."
+  },
+  "490": {
+   "matn": "Û ku ʿEbdullahê kurê ʿUmer jê re ragihand: „Pêxember ﷺ di avrêja ku di beşa nêziktir a Merr ez-Zehranê de, berî Medîneyê, ye dima, gava ji Es-Sefrawatê dadiket. Ew di binê wê avrêjê de, li aliyê çepê yê rêyê, dima, gava tu diçî Mekkeyê; di navbera cihê bêhnvedana Resûlê Xwedê ﷺ û rêyê de tenê avêtina kevirekî heye.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî vê ragihandinê di beşa „Mizgeftên li ser rêyên Medîneyê û cihên ku Pêxember ﷺ lê nimêj kiriye“ de datîne. Îbn ʿUmer cihê bêhnvedana Pêxember di avrêjekê de li Merr ez-Zehranê vedibêje. Nivîs tenê nîşaneyên cihan dihewîne."
+  },
+  "491": {
+   "matn": "Û ku ʿEbdullahê kurê ʿUmer jê re ragihand: „Pêxember ﷺ li Zû Tiwayê dima û heta sibê li wir şev derbas dikir; gava digihîşt Mekkeyê nimêja sibê dikir. Ew cihê nimêjê yê Resûlê Xwedê ﷺ li ser girekî hişk e, ne di mizgefta ku li wir hatiye çêkirin, lê ji wê nizmtir li ser girekî hişk e.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî vê ragihandinê di beşa „Mizgeftên li ser rêyên Medîneyê û cihên ku Pêxember ﷺ lê nimêj kiriye“ de datîne. Îbn ʿUmer ragihîne ku Pêxember li Zû Tiwayê dima, li wir şev derbas dikir û gava digihîşt Mekkeyê nimêja sibê dikir, û cihê nimêjê li gorî mizgefta li wir hatî çêkirin vedibêje."
+  },
+  "492": {
+   "matn": "Û ku ʿEbdullah jê re ragihand: „Pêxember ﷺ berê xwe da du şikestîyên çiyayê ku di navbera wî û çiyayê dirêj de ber bi Kebeyê ve ye; wî mizgefta ku li wir hatibû çêkirin kir aliyê çepê yê mizgefta li kêleka girê. Cihê nimêjê yê Pêxember ﷺ ji wê nizmtir li ser girê reş e; tu deh zirʿ ji girê dihêlî an jî nêzîkî wê qasê, paşê tu nimêj dikî û berê xwe didî du şikestîyên çiyayê ku di navbera te û Kebeyê de ye.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî vê ragihandinê di beşa „Mizgeftên li ser rêyên Medîneyê û cihên ku Pêxember ﷺ lê nimêj kiriye“ de datîne. Îbn ʿUmer cihê nimêjê yê Pêxember bi nîşaneyên cihan dide: li hember du şikestîyên çiyayekî ber bi Kebeyê ve, li ser girê reş. Nivîs tenê nîşaneyên cihan dihewîne."
+  },
+  "493": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malik ji me re xeber da, ji Îbn Şîhab, ji ʿUbeydullahê kurê ʿEbdullahê kurê ʿUtbe, ji ʿEbdullahê kurê ʿEbbas, ku got: „Ez li ser kereke mê siwar hatim, û wê demê ez nêzîkî gihîştinê bûm; Resûlê Xwedê ﷺ li Minayê mirov di nimêjê de pêşeng dikir, bê ku berê xwe bide dîwarekî. Ez ji ber beşekî ji refê derbas bûm, peya bûm, kera mê berdam ku biçêre û ketim nav refê; û tu kesî li hember vê îtîraz nekir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Sutreya îmam sutreya yên li pişt wî ye“ de datîne. Îbn ʿEbbas ragihîne ku wî wekî ciwanek li ser kereke mê ji ber beşekî ji refê derbas bû dema Pêxember li Minayê nimêj pêşeng dikir û ku tu kesî li hember vê îtîraz nekir."
+  },
+  "494": {
+   "matn": "Îshaq ji me re ragihand, got: ʿEbdullahê kurê Numeyr ji me re ragihand, got: ʿUbeydullah ji me re ragihand, ji Nafiʿ, ji Îbn ʿUmer: Resûlê Xwedê ﷺ „gava roja cejnê derdiket, fermana rimê dida, û ew li ber wî dihat danîn; paşê ber bi wê ve nimêj dikir û mirov li pişt wî bûn. Û wî ev di rêwîtiyê de jî dikir; ji wir mîran ew girtin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Sutreya îmam sutreya yên li pişt wî ye“ de datîne. Îbn ʿUmer ragihîne ku Pêxember roja cejnê rimek li ber xwe dida danîn û ber bi wê ve nimêj dikir, mirov li pişt wî bûn, û ku wî ev di rêwîtiyê de jî dikir. Gotina ku mîran ew ji wir girtin di nivîsê de heye."
+  },
+  "495": {
+   "matn": "Ebûl-Welîd ji me re ragihand, got: Şuʿbe ji me re ragihand, ji ʿEwnê kurê Ebû Cuhayfe, got: Min bavê xwe bihîst: Pêxember ﷺ „li Bethayê, bi ʿenezeyek li pêşiya xwe, nimêj pêşeng kir: nimêja nîvroyê du rekat û nimêja piştînîvroyê du rekat; jin û ker li ber wî derbas dibûn.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Sutreya îmam sutreya yên li pişt wî ye“ de datîne. Ragihîner vedibêje ku Pêxember li Bethayê bi ʿenezeyek li pêşiya xwe nimêja nîvroyê û ya piştînîvroyê, her yek du rekat, pêşeng kir û ku jinek û kerek li ber wî derbas dibûn."
+  },
+  "496": {
+   "matn": "ʿEmrê kurê Zurare ji me re ragihand, got: ʿEbdulʿezîzê kurê Ebû Hazim ji me re xeber da, ji bavê xwe, ji Sehl, got: „Di navbera cihê nimêjê yê Resûlê Xwedê ﷺ û dîwar de derbasbûna mihekê hebû.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Divê çiqas navber di navbera nimêjker û sutreyê de hebe“ de datîne. Sehl navbera cihê nimêjê yê Pêxember û dîwar wekî derbasbûna mihekê vedibêje. Nivîs pîvaneke rast nade."
+  },
+  "497": {
+   "matn": "Mekkî ji me re ragihand, got: Yezîdê kurê Ebû ʿUbeyd ji me re ragihand, ji Seleme, got: „Dîwarê mizgeftê li ber minberê – mihek bi zor dikarî ji wir derbas bibe.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Divê çiqas navber di navbera nimêjker û sutreyê de hebe“ de datîne. Seleme cihê teng li ber dîwarê mizgeftê li ber minberê vedibêje, ku mihek bi zor dikarî ji wir derbas bibe. Nivîs pîvaneke rast nade."
+  },
+  "498": {
+   "matn": "Musedded ji me re ragihand, got: Yehya ji me re ragihand, ji ʿUbeydullah: Nafiʿ ji min re xeber da, ji ʿEbdullah: Pêxember ﷺ „rim ji bo wî dida çikandin û ber bi wê ve nimêj dikir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj ber bi rimekê“ de datîne. Îbn ʿUmer ragihîne ku ji bo Pêxember rimek di erdê de dihat çikandin û wî ber bi wê ve nimêj dikir."
+  },
+  "499": {
+   "matn": "Adem ji me re ragihand, got: Şuʿbe ji me re ragihand, got: ʿEwnê kurê Ebû Cuhayfe ji me re ragihand, got: Min bavê xwe bihîst, got: „Resûlê Xwedê ﷺ di germa nîvroyê de ji me re derket; ava destnimêjê anîn û wî destnimêj girt. Paşê wî nimêja nîvroyê û ya piştînîvroyê ji me re pêşeng kir, bi ʿenezeyek li pêşiya xwe, dema jin û ker li pişt wê derbas dibûn.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj ber bi ʿenezeyê“ de datîne. Ragihîner vedibêje ku Pêxember piştî destnimêjê nimêja nîvroyê û ya piştînîvroyê bi ʿenezeyek li pêşiya xwe pêşeng kir û ku jin û ker li pişt ʿenezeyê derbas dibûn."
+  },
+  "500": {
+   "matn": "Muhemmedê kurê Hatimê kurê Buzeyʿ ji me re ragihand, got: Şazan ji me re ragihand, ji Şuʿbe, ji ʿEtayê kurê Ebû Meymûne, got: Min Enesê kurê Malik bihîst digot: „Gava Pêxember ﷺ ji bo pêdiviya xwe derdiket, ez û lawikek li pey wî diçûn, û bi me re çiqilek (ʿukkaze) – an dar an ʿeneze – û bi me re firaxeke avê (îdave) hebû; û gava pêdiviya xwe xelas dikir, me firaxa avê dida wî.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj ber bi ʿenezeyê“ de datîne. Enes ragihîne ku ew û lawikek li pey Pêxember diçûn gava ew ji bo pêdiviya xwe derdiket, bi darekê an ʿenezeyekê û firaxeke avê. Di vê nivîsê de behsa nimêjê nayê kirin."
+  },
+  "501": {
+   "matn": "Silêmanê kurê Herb ji me re ragihand, got: Şuʿbe ji me re ragihand, ji El-Hekem, ji Ebû Cuhayfe, got: „Resûlê Xwedê ﷺ di germa nîvroyê de derket û li Bethayê nimêja nîvroyê û ya piştînîvroyê, her yek du rekat, kir; ʿenezeyek li pêşiya xwe çikand û destnimêj girt, û mirov bi ava destnimêja wî destên xwe bi ser xwe de anîn.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Sutre li Mekkeyê û cihên din“ de datîne. Ebû Cuhayfe ragihîne ku Pêxember li Bethayê nimêja nîvroyê û ya piştînîvroyê, her yek du rekat, kir, ʿenezeyek li pêşiya xwe çikand, û ku mirov bi ava destnimêja wî destên xwe bi ser xwe de anîn."
+  },
+  "502": {
+   "matn": "El-Mekkîyê kurê Îbrahîm ji me re ragihand, got: Yezîdê kurê Ebû ʿUbeyd ji me re ragihand, got: „Ez bi Selemeyê kurê El-Ekwaʿ re dihatim, û wî li ber stûna ku li ber mushefê ye nimêj dikir. Min got: Ey Ebû Muslim, ez dibînim ku tu bi mebest nimêjê li ber vê stûnê digerî? Got: Min Pêxember ﷺ dît ku bi mebest li ber wê nimêjê digere.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj ber bi stûnekê“ de datîne. Yezîd ragihîne ku Selemeyê kurê El-Ekwaʿ li ber stûneke diyarkirî nimêj dikir û wekî sedem got ku wî Pêxember dîtiye ku bi mebest li wir nimêj dike."
+  },
+  "503": {
+   "matn": "Qebîse ji me re ragihand, got: Sufyan ji me re ragihand, ji ʿEmrê kurê ʿAmir, ji Enes, got: „Min hevalên mezin ên Pêxember ﷺ dîtin ku di nimêja Mexribê de bi lez diçûn ber stûnan.“ Û Şuʿbe zêde kir, ji ʿEmr, ji Enes: „heta Pêxember ﷺ derket.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj ber bi stûnekê“ de datîne. Enes ragihîne ku hevalên mezin di nimêja Mexribê de bi lez diçûn ber stûnan. Zêdekirina „heta Pêxember derket“ di ragihandina bi riya Şuʿbe de tê gotin."
+  },
+  "504": {
+   "matn": "Mûsayê kurê Îsmaʿîl ji me re ragihand, got: Cuweyriye ji me re ragihand, ji Nafiʿ, ji Îbn ʿUmer, got: „Pêxember ﷺ ket Malê, û bi wî re Usameyê kurê Zeyd, Osmanê kurê Telha û Bilal; wî demeke dirêj li wir ma, paşê derket. Ez ji mirovan yê yekem bûm ku piştî wî ket hundir. Min ji Bilal pirsî: Wî li ku nimêj kir? Got: Di navbera du stûnên pêşîn de.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj di navbera stûnan de li derveyî cemaetê“ de datîne. Îbn ʿUmer ragihîne ku wî ji Bilal pirsî Pêxember di Malê de li ku nimêj kiriye û ku Bilal bersiv da: di navbera du stûnên pêşîn de."
+  },
+  "505": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malik ji me re xeber da, ji Nafiʿ, ji ʿEbdullahê kurê ʿUmer: „Resûlê Xwedê ﷺ ket Kebeyê, û bi wî re Usameyê kurê Zeyd, Bilal û Osmanê kurê Telha El-Hecebî; li pişt wî hat girtin, û ew tê de ma. Gava Bilal derket min jê pirsî: Pêxember ﷺ çi kir? Got: Stûnek li aliyê çepê, stûnek li aliyê rastê û sê stûn li pişt xwe danî – Mal wê demê li ser şeş stûnan bû –, paşê nimêj kir.“ Û Îsmaʿîl ji me re got: Malik ji min re ragihand û got: „du stûn li aliyê wî yê rastê.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj di navbera stûnan de li derveyî cemaetê“ de datîne. Îbn ʿUmer gotina Bilal li ser awayê rawestîna Pêxember li hember stûnan gava ew di Kebeyê de nimêj kir vedibêje. Di dawiyê de nivîs bi riya Îsmaʿîl gotineke cuda dide: du stûn li aliyê wî yê rastê."
+  },
+  "506": {
+   "matn": "Îbrahîmê kurê Munzir ji me re ragihand, got: Ebû Damre ji me re ragihand, got: Mûsayê kurê ʿUqbe ji me re ragihand, ji Nafiʿ: „Gava ʿEbdullah dikete Kebeyê, dema diket rasterast ber bi pêş ve diçû“, û derî li pişta xwe dihişt; diçû heta di navbera wî û dîwarê li ber rûyê wî de nêzîkî sê zirʿ diman, û li wir nimêj dikir; wî li cihê ku Bilal jê re gotibû Pêxember ﷺ lê nimêj kiriye digeriya. Got: Û ji me yekî re tawan tune ye eger li kîjan beşa Malê bixwaze nimêj bike.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj di navbera stûnan de li derveyî cemaetê“ de datîne. Nafiʿ vedibêje ku ʿEbdullahê kurê ʿUmer di Kebeyê de li cihê ku Bilal wekî cihê nimêja Pêxember gotibû digeriya. Di dawiyê de nivîs dibêje ku ji yekî ji wan re tawan tune ye ku li her beşa Malê nimêj bike."
+  },
+  "507": {
+   "matn": "Muhemmedê kurê Ebû Bekrê Muqeddemî ji me re ragihand, Muʿtemir ji me re ragihand, ji ʿUbeydullah, ji Nafiʿ, ji Îbn ʿUmer, ji Pêxember ﷺ: Ew „heywanê xwe yê siwarbûnê bi pehnayî datanî û ber bi wî ve nimêj dikir. Min got: Tu çi dibêjî eger heywanên siwarbûnê bitirsin? Got: Wî ev zîn digirt, rast dikir û ber bi paşiya wê ve nimêj dikir – an jî got: ber bi paşiya wê ya paşîn. Û Îbn ʿUmer, Xwedê jê razî be, ev dikir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj ber bi siwarî, deve, dar û zînê“ de datîne. Îbn ʿUmer ragihîne ku Pêxember heywanê xwe yê siwarbûnê bi pehnayî datanî û ber bi wî ve nimêj dikir; gava hat pirsîn ku heywan bitirsin çi dibe, zîna rastkirî tîne ziman. Nivîs tomar dike ku Îbn ʿUmer jî heman tişt dikir."
+  },
+  "508": {
+   "matn": "ʿOsmanê kurê Ebû Şeybe ji me re ragihand, got: Cerîr ji me re ragihand, ji Mensûr, ji Îbrahîm, ji El-Eswed, ji Aîşe, got: „Hûn me bi seg û kerê re yeksan kirin? Min xwe dît ku li ser nivînê razayî me, û Pêxember ﷺ dihat, li nîvê nivînê radiwesta û nimêj dikir; min nedixwest ku bikevim pêşiya wî, ji ber vê ez ji aliyê lingên nivînê ve diqeliqîm, heta ku ji lihêfa xwe derdiketim.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj ber bi textekî“ de datîne. Aîşe yeksankirina jinê bi seg û kerê red dike û ragihîne ku ew li ser nivînê razayî bû dema Pêxember li ber wê nimêj dikir, û ku ew ji lihêfê derdiket da ku nekeve pêşiya wî."
+  },
+  "509": {
+   "matn": "Ebû Maʿmer ji me re ragihand, got: ʿEbdulwaris ji me re ragihand, got: Yûnus ji me re ragihand, ji Humeydê kurê Hilal, ji Ebû Salih: Ebû Seʿîd got: Pêxember ﷺ got. Û Adem kurê Ebû Îyas ji me re ragihand, got: Silêmanê kurê El-Mugîre ji me re ragihand, got: Humeydê kurê Hilalê ʿEdewî ji me re ragihand, got: Ebû Salihê Semman ji me re ragihand, got: „Min Ebû Seʿîdê Xudrî roja înê dît ku ber bi tiştekî ve nimêj dike ku wî ji mirovan vedişêre. Ciwanek ji Benî Ebû Muʿeyt xwest ku li pêşiya wî derbas bibe, û Ebû Seʿîd li sîngê wî da. Ciwan nêrî û ji bilî pêşiya wî derbasbûnek nedît; vegeriya ku derbas bibe, û Ebû Seʿîd ji cara yekem hêztir ew paşve da. Wê gavê wî heqaret li Ebû Seʿîd kir, paşê çû ba Mervan û ji wî re gazinc kir ji tiştê ku ji Ebû Seʿîd dîtibû. Û Ebû Seʿîd li pey wî çû ba Mervan. Wî got: Çi heye di navbera te û kurê birayê te de, Ebû Seʿîd? Got: Min Pêxember ﷺ bihîst digot: Gava yek ji we ber bi tiştekî ve nimêj dike ku wî ji mirovan vedişêre, û yek dixwaze li pêşiya wî derbas bibe, bila wî paşve bide; eger red bike, bila pê re şer bike, ji ber ku ew şeytan e.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêjker kesê ku di ber wî re derbas dibe paş ve dide“ de datîne. Silsileya yekem bi „Pêxember got“ diqede bê gotineke din; ya duyem tevahiya bûyerê dihewîne. Ebû Salih ragihîne ku Ebû Seʿîd ciwanekî ku xwest li pêşiya wî derbas bibe paşve da, û li ba Mervan fermana Pêxember a li ser vê vedibêje."
+  },
+  "510": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malik ji me re xeber da, ji Ebûn-Nedr, azadkirîyê ʿUmerê kurê ʿUbeydullah, ji Busrê kurê Seʿîd: „Zeydê kurê Xalid ew şande ba Ebû Cuheym da ku bipirse: Wî ji Resûlê Xwedê ﷺ li ser yê ku li pêşiya nimêjkerî derbas dibe çi bihîst? Ebû Cuheym got: Resûlê Xwedê ﷺ got: Eger yê ku li pêşiya nimêjkerî derbas dibe bizanibûya ka çi li ser wî ye, ji bo wî çêtir bûya ku çil raweste ji wê ku li pêşiya wî derbas bibe.“ Ebûn-Nedr got: Ez nizanim gelo wî got çil roj, an meh, an sal.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Gunehê kesê ku di ber nimêjker re derbas dibe“ de datîne. Nivîs wekî hişyarî dibêje ku rawestana „çil“ ji derbasbûnê çêtir e; yeke nezelal e, ji ber ku Ebûn-Nedr nizane gelo roj, meh an sal hatiye gotin."
+  },
+  "511": {
+   "matn": "Îsmaʿîlê kurê Xelîl ji me re ragihand, ʿEliyê kurê Mushir ji me re ragihand, ji El-Eʿmeş, ji Muslim – ango Îbn Subeyh –, ji Mesrûq, ji Aîşe: „Li ba wê behsa tiştên nimêjê diqetînin hat kirin. Gotin: Seg, ker û jin wê diqetînin. Wê got: We em kirin seg! Min Pêxember, silav li wî be, dît ku nimêj dike, dema ez di navbera wî û qiblê de li ser nivînê dirêjkirî bûm. Gava pêdiviyek min hebûya, min nedixwest berê xwe bidim wî, û ez bi bêdengî diqeliqîm.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Mêr di nimêja xwe de rûyê xwe dide hevalê xwe an yekî din“ de datîne. Aîşe li hember gotina ku seg, ker û jin nimêjê diqetînin radiweste û ragihîne ku ew di navbera Pêxemberê nimêjkar û qiblê de dirêjkirî bû û gava pêdivî hebûya bi bêdengî diqeliqî."
+  },
+  "511.2": {
+   "matn": "Û ji El-Eʿmeş, ji Îbrahîm, ji El-Eswed, ji Aîşe: mîna wê.",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî vê silsileya zêde di beşa „Mêr di nimêja xwe de rûyê xwe dide hevalê xwe an yekî din“ de datîne. Ew gotineke xwe nade, lê bi „mîna wê“ vedigere hedîsa berê ya Aîşe."
+  },
+  "512": {
+   "matn": "Musedded ji me re ragihand, got: Yehya ji me re ragihand, got: Hişam ji me re ragihand, got: Bavê min ji min re ragihand, ji Aîşe, got: „Pêxember ﷺ nimêj dikir û ez li ser nivîna wî bi pehnayî radizam; gava wî dixwest witr bike, ew min şiyar dikir û min jî witr dikir.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêj li pişt kesekî razayî“ de datîne. Aîşe ragihîne ku ew li ser nivîna Pêxember bi pehnayî radizam dema ew nimêj dikir û ku ew ji bo witrê wê şiyar dikir."
+  },
+  "513": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malik ji me re xeber da, ji Ebûn-Nedr, azadkirîyê ʿUmerê kurê ʿUbeydullah, ji Ebû Selemeyê kurê ʿEbdurrehman, ji Aîşe, jina Pêxember ﷺ, ku got: „Ez li ber Resûlê Xwedê ﷺ radizam, û lingên min di qibleya wî de bûn. Gava wî secde dikir, ew bi tiliyê li min dixist û min lingên xwe dicivandin; gava radibû, min ew dirêj dikirin. Got: Û wê demê di xaniyan de çira tunebûn.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Nimêja sunnet li pişt jinekê“ de datîne. Aîşe ragihîne ku ew li ber Pêxemberê nimêjkar radizam, gava wî secde dikir û li wê dixist lingên xwe dicivandin, û gava rabû wan dirêj dikir; ew zêde dike ku wê demê di xaniyan de çira tunebûn."
+  },
+  "514": {
+   "matn": "ʿUmerê kurê Hafs ji me re ragihand, got: Bavê min ji me re ragihand, got: El-Eʿmeş ji me re ragihand, got: Îbrahîm ji me re ragihand, ji El-Eswed, ji Aîşe. El-Eʿmeş got: Û Muslim ji min re ragihand, ji Mesrûq, ji Aîşe: „Li ba wê behsa tiştên nimêjê diqetînin hat kirin: seg, ker û jin. Wê got: We em bi ker û segan re kirin yek! Bi Xwedê, min Pêxember ﷺ dît ku nimêj dike, dema ez li ser nivînê di navbera wî û qiblê de dirêjkirî bûm. Pêdiviyek bi min hat, û min nedixwest rûnim û bi vî awayî Pêxember ﷺ aciz bikim, ji ber vê ez ji ber lingên wî diqeliqîm.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Kesê ku dibêje tu tişt nimêjê nabire“ de datîne. Aîşe yeksankirina jinan bi ker û segan red dike û ragihîne ku ew di navbera Pêxemberê nimêjkar û qiblê de dirêjkirî bû û gava pêdivî hebûya diqeliqî da ku wî aciz neke."
+  },
+  "515": {
+   "matn": "Îshaq ji me re ragihand, got: Yaʿqûbê kurê Îbrahîm ji me re xeber da, got: Kurê birayê Îbn Şîhab ji min re ragihand: Wî ji apê xwe pirsî gelo tiştek nimêjê diqetîne? Got: Tiştek wê naqetîne. ʿUrweyê kurê Zubeyr ji min re xeber da ku Aîşe, jina Pêxember ﷺ, got: „Resûlê Xwedê ﷺ şevê radibû û nimêj dikir, û ez li ser nivîna malbata wî di navbera wî û qiblê de bi pehnayî dirêjkirî bûm.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Kesê ku dibêje tu tişt nimêjê nabire“ de datîne. Gava Îbn Şîhab tê pirsîn gelo tiştek nimêjê diqetîne, bersiv dide „Tiştek wê naqetîne“ û vê bi ragihandina Aîşe piştrast dike ku ew bi pehnayî di navbera Pêxemberê şevê nimêjkar û qiblê de dirêjkirî bû."
+  },
+  "516": {
+   "matn": "ʿEbdullahê kurê Yûsif ji me re ragihand, got: Malik ji me re xeber da, ji ʿAmirê kurê ʿEbdullahê kurê Zubeyr, ji ʿEmrê kurê Silêm Zurqî, ji Ebû Qetadeyê Ensarî: Resûlê Xwedê ﷺ „Umameyê keça Zeyneb, keça Resûlê Xwedê ﷺ – û ya Ebû l-ʿAsê kurê Rebîʿeyê kurê ʿEbdu Şems – hildigirt û nimêj dikir; gava secde dikir wê datanî, û gava radibû wê hildigirt.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Heke di nimêjê de keçeke biçûk li stûyê xwe hilgire“ de datîne. Ebû Qetade ragihîne ku Pêxember di nimêjê de neviya xwe Umame hildigirt, di secdeyê de datanî û gava radibû dîsa hildigirt."
+  },
+  "517": {
+   "matn": "ʿEmrê kurê Zurare ji me re ragihand, got: Huşeym ji me re xeber da, ji Şeybanî, ji ʿEbdullahê kurê Şeddadê kurê El-Had, got: Xaltîka min Meymûneya keça Hâris ji min re got, got: „Nivîna min li hember cihê nimêjê yê Pêxember ﷺ bû, û carna kincê wî li ser min dikeve dema ez li ser nivîna xwe bûm.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Heke ber bi nivînekê ku jineke di heyzê de li ser e nimêj bike“ de datîne. Meymûne ragihîne ku nivîna wê li hember cihê nimêjê yê Pêxember bû û kincê wî carna li ser wê diket."
+  },
+  "518": {
+   "matn": "Ebûn-Nuʿman ji me re ragihand, got: ʿEbdulwahid kurê Ziyad ji me re ragihand, got: Şeybanî – Silêman – ji me re ragihand, got: ʿEbdullahê kurê Şeddad ji me re ragihand, got: Min Meymûne bihîst digot: „Pêxember ﷺ nimêj dikir û ez li kêleka wî radizam; gava wî secde dikir, kincê wî li min diket dema ez di heyzê de bûm.“ Û Musedded ji Xalid zêde kir: Silêman Şeybanî ji me re ragihand: „dema ez di heyzê de bûm.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Heke ber bi nivînekê ku jineke di heyzê de li ser e nimêj bike“ de datîne. Meymûne ragihîne ku ew di heyzê de li kêleka Pêxemberê nimêjkar radizam û kincê wî gava wî secde dikir li wê diket. Zêdekirina „dema ez di heyzê de bûm“ bi riya Musedded jî tê dayîn."
+  },
+  "519": {
+   "matn": "ʿEmrê kurê ʿElî ji me re ragihand, got: Yehya ji me re ragihand, got: ʿUbeydullah ji me re ragihand, got: El-Qasim ji me re ragihand, ji Aîşe, Xwedê jê razî be, got: „Çiqas xirab e ku we em bi seg û kerê re yeksan kirin! Min xwe dît dema Resûlê Xwedê ﷺ nimêj dikir û ez di navbera wî û qiblê de dirêjkirî bûm; gava wî dixwest secde bike, lingên min dihejandin û min ew dicivandin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Gelo mêr dikare di secdeyê de jina xwe bitepisîne da ku secde bike?“ de datîne. Aîşe yeksankirina bi seg û kerê bi tundî red dike û ragihîne ku Pêxember gava dixwest secde bike lingên wê dihejandin û wê ew dicivandin."
+  },
+  "520": {
+   "matn": "Ehmedê kurê Îshaq El-Surmarî ji me re ragihand, got: ʿUbeydullahê kurê Mûsa ji me re ragihand, got: Îsraîl ji me re ragihand, ji Ebû Îshaq, ji ʿEmrê kurê Meymûn, ji ʿEbdullah, got: „Dema Resûlê Xwedê ﷺ li ber Kebeyê bi ser lingan nimêj dikir û civata Qureyşê di rûniştinên xwe de bû, yekî ji wan got: We ev yê ku ji bo xwenîşandanê dike nabînin? Kî ji we here ba deveya serjêkirinê ya malbata filan, naveroka zikê wê, xwîna wê û perdeya zarokê wê hilde, bîne, bihêle heta ew secde bike, paşê wê bi ser navbera milên wî de deyne? Wê gavê yê herî bêbext ji wan rabû. Gava Resûlê Xwedê ﷺ secde kir, wî ew danî navbera milên wî, û Pêxember ﷺ di secdeyê de ma. Wan ewqas kenî ku hinek ji wan ji kenê li ser hev ketin. Paşê yekî bi lez çû ba Fatimeyê, silav li wê be – ew keçikek bû –; ew bi lez hat, û Pêxember ﷺ di secdeyê de ma heta wê ew ji ser wî rakir; paşê ew berê xwe da wan û heqaret li wan kir. Gava Resûlê Xwedê ﷺ nimêj xelas kir, got: Xwedêyo, Qureyşê bigire! Xwedêyo, Qureyşê bigire! Xwedêyo, Qureyşê bigire! Paşê wî nav anîn: Xwedêyo, ʿEmrê kurê Hişam, ʿUtbeyê kurê Rebîʿe, Şeybeyê kurê Rebîʿe, El-Welîdê kurê ʿUtbe, Umeyyeyê kurê Xelef, ʿUqbeyê kurê Ebû Muʿeyt û ʿUmareyê kurê El-Welîd bigire! ʿEbdullah got: Bi Xwedê, min ew roja Bedrê li erdê raxistî dîtin; paşê ew ber bi bîrê, bîra Bedrê ve hatin kişandin. Paşê Resûlê Xwedê ﷺ got: Li pey xelkê bîrê lanet hat şandin.“",
+   "sharh": "Kurteya jîrekê çêkirî, bê hejmara rûpelê ya çêkirî: Buxarî hedîsê di beşa „Jin tiştekî eziyetdar ji nimêjker dûr dixe“ de datîne. ʿEbdullah ragihîne ku zilamên Qureyşê di dema secdeyê de pîsî xistin navbera milên Pêxemberê nimêjkar li ber Kebeyê û ku Fatime ew rakir. Pêxember paşê Xwedê li dijî Qureyşê gazî kir û heft zilam bi nav anîn; ʿEbdullah dibêje wî ew li Bedrê li erdê raxistî dîtine."
+  }
+ }
+}
