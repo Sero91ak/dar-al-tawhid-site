@@ -31,6 +31,9 @@ for(const file of shells){
   }
   assert.match(html,/\/kids\/kids-fonts-v1\.css/);
   assert.match(html,/\/kids\/kids-parent-gate-v1\.js/);
+  assert.match(html,/\/kids\/kids-quran-audio-v1\.js/);
+  assert.match(html,/window\.DARKidsQuranAudio\.url\(/,file+" must use the shared /quran-audio source");
+  assert.ok(!html.includes("/kids/assets/quran-ayat/"),file+" still uses hosted ayah copies");
   assert.match(html,/\/kids\/kids-local-geocode-v1\.js/);
   const blocks=[...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
   for(const b of blocks){
@@ -39,6 +42,11 @@ for(const file of shells){
   }
 }
 for(const f of ["kids/kids-parent-gate-v1.js","kids/kids-local-geocode-v1.js","kids/kids-fonts-v1.css","kids/datenschutz.html"])assert.ok(fs.existsSync(f),f+" missing");
+for(const f of ["kids/dua-hub-v1219.js","kids/akademie/index.html","kids/kids-quran-audio-v1.js"]){
+  const src=fs.readFileSync(f,"utf8");
+  assert.ok(!src.includes("everyayah.com"),f+" still references everyayah.com");
+}
+assert.ok(!fs.existsSync("kids/assets/quran-ayat"),"hosted ayah copies must stay removed");
 const css=fs.readFileSync("kids/section-heroes-v1095.css","utf8");
 assert.ok(!css.includes("cloudfront.net"),"expired third-party art must stay removed");
 const privacy=fs.readFileSync("kids/datenschutz.html","utf8");
